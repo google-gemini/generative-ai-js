@@ -1,6 +1,6 @@
 {
   "name": "generativeai-js-wrapper",
-  "description": "Wrapper for Google AI JavaScript SDK repo",
+  "description": "Wrapper for Google AI JavaScript SDK monorepo",
   "private": true,
   "engines": {
     "node": ">=18.0.0"
