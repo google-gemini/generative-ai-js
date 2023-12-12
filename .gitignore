@@ -1,0 +1,6 @@
+node_modules
+packages/**/dist/
+packages/**/temp/
+*.tgz
+.DS_Store
+testfiles

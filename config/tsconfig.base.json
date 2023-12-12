@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "module": "es2020",
+    "target": "es2020",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "declaration": true
+  }
+}

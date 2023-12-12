@@ -1,0 +1,43 @@
+{
+  "name": "@google/generative-ai",
+  "version": "0.0.4",
+  "description": "Node client for Google Generative AI",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "typings": "dist/generative-ai.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/generative-ai.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c && yarn api-report",
+    "test": "yarn lint && yarn test:node:unit",
+    "test:web:integration": "yarn build && yarn web-test-runner",
+    "test:node:unit": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha \"src/**/*.test.ts\"",
+    "test:node:integration": "yarn build && TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha \"test-integration/node/**/*.test.ts\"",
+    "lint": "eslint -c .eslintrc.js '**/*.ts' --ignore-path '../../.gitignore'",
+    "api-report": "api-extractor run --local --verbose",
+    "docs": "yarn build && yarn api-documenter markdown -i ./temp -o ../../docs/reference/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/google/generative-ai-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/google/generative-ai-js/issues"
+  },
+  "homepage": "https://github.com/google/generative-ai-js#readme"
+}
