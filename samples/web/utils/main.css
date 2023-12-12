@@ -106,7 +106,7 @@ blockquote {
   padding: 0 8px 0 0;
 }
 
-.history-item.assistant-role {
+.history-item.model-role {
   background: rgba(127, 127, 127, 0.1);
 }
 

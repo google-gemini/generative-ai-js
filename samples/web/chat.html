@@ -76,14 +76,14 @@
             <div class="name">User</div>
             <blockquote>${userMessage}</blockquote>
           </div>
-          <div class="history-item assistant-role">
+          <div class="history-item model-role">
             <div class="name">Model</div>
             <blockquote></blockquote>
           </div>`;
 
           scrollToDocumentBottom();
           const resultEls = document.querySelectorAll(
-            ".assistant-role > blockquote",
+            ".model-role > blockquote",
           );
           await updateUI(
             resultEls[resultEls.length - 1],
