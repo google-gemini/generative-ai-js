@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { GoogleGenerativeAI } from "/node_modules/@google/generative-ai/dist/index.mjs"; // "https://esm.run/@google/generative-ai-node";
+import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai-node";
 import { marked } from "https://esm.run/marked";
 
 /**
