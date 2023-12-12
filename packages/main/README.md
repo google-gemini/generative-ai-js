@@ -14,7 +14,7 @@ For Node.js:
 ```
 const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
 
-const prompt = "What is this?";
+const prompt = "Does this look store-bought or homemade?";
 const image = {
   inlineData: {
     data: Buffer.from(fs.readFileSync("cookie.png")).toString("base64"),
@@ -30,7 +30,7 @@ For web:
 ```
 const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
 
-const prompt = "What is this?";
+const prompt = "Does this look store-bought or homemade?";
 const image = {
   inlineData: {
     data: base64EncodedImage /* see JavaScript quickstart for details */,
