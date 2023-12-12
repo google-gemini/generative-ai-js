@@ -82,4 +82,6 @@ http
   })
   .listen(parseInt(PORT));
 
-console.log(`Server listening: http://localhost:${PORT}`);
+console.log(
+  `Server listening. Pages:\n - http://localhost:${PORT}\n - http://localhost:${PORT}/chat.html`,
+);
