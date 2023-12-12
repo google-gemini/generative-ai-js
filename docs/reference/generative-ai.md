@@ -16,7 +16,7 @@
 
 |  Enumeration | Description |
 |  --- | --- |
-|  [BlockReason](./generative-ai.blockedreason.md) | Reason that a prompt was blocked. |
+|  [BlockReason](./generative-ai.blockreason.md) | Reason that a prompt was blocked. |
 |  [FinishReason](./generative-ai.finishreason.md) | Reason that a candidate finished. |
 |  [HarmBlockThreshold](./generative-ai.harmblockthreshold.md) | Threshhold above which a prompt or candidate will be blocked. |
 |  [HarmCategory](./generative-ai.harmcategory.md) | Harm categories that would cause prompts or candidates to be blocked. |

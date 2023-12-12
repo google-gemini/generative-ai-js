@@ -16,7 +16,7 @@ export interface PromptFeedback
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [blockReason](./generative-ai.promptfeedback.blockreason.md) |  | [BlockReason](./generative-ai.blockedreason.md) |  |
+|  [blockReason](./generative-ai.promptfeedback.blockreason.md) |  | [BlockReason](./generative-ai.blockreason.md) |  |
 |  [blockReasonMessage?](./generative-ai.promptfeedback.blockreasonmessage.md) |  | string | _(Optional)_ |
 |  [safetyRatings](./generative-ai.promptfeedback.safetyratings.md) |  | [SafetyRating](./generative-ai.safetyrating.md)<!-- -->\[\] |  |
 
