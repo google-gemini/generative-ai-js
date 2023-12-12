@@ -1,7 +1,7 @@
 {
   "name": "@google/generative-ai",
-  "version": "0.0.4",
-  "description": "Node client for Google Generative AI",
+  "version": "0.1.0",
+  "description": "Google AI JavaScript SDK",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "typings": "dist/generative-ai.d.ts",
