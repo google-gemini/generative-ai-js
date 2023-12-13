@@ -27,18 +27,22 @@ async function run() {
   const model = genAI.getGenerativeModel({
     model: "gemini-pro-vision",
     generationConfig: {
-      temperature: 0.9,
+      temperature: 0,
     },
   });
 
-  const prompt = " Give me the recipe for these, keto-friendly.";
+  const prompt =
+    "What do you see? Use lists. Start with a headline for each image.";
 
   // Note: The only accepted mime types are some image types, image/*.
-  const imageParts = [fileToGenerativePart("./utils/scones.jpg", "image/jpeg")];
+  const imageParts = [
+    fileToGenerativePart("./utils/cat.jpg", "image/jpeg"),
+    fileToGenerativePart("./utils/scones.jpg", "image/jpeg"),
+  ];
 
-  displayTokenCount(model, [...imageParts, prompt]);
+  displayTokenCount(model, [prompt, ...imageParts]);
 
-  const result = await model.generateContentStream([...imageParts, prompt]);
+  const result = await model.generateContentStream([prompt, ...imageParts]);
 
   // Stream the first candidate text
   await streamToStdout(result.stream);
