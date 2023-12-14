@@ -1,7 +1,7 @@
 # @google/generative-ai
 
-## 0.1.2
+## 0.1.1
 
 ### Patch Changes
 
-- Test
+- Update README to released version and bump to publish new README to npm.
