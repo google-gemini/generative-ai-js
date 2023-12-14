@@ -1,0 +1,37 @@
+name: Publish Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Publish Release
+    runs-on: ubuntu-latest
+    if: ${{ startsWith(github.event.head_commit.message, 'Version Packages') }}
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@master
+        with:
+          node-version: 18.x
+
+      - name: Install Dependencies & build
+        run: yarn && yarn build
+
+      - name: Create .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //wombat-dressing-room.appspot.com/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish
+        run: yarn changesets publish
