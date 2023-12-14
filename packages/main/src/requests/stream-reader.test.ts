@@ -57,7 +57,7 @@ describe("processStream", () => {
     expect(aggregatedResponse.text()).to.include("**Cats:**");
     expect(aggregatedResponse.text()).to.include("to their owners.");
   });
-  it.only("streaming response - utf8", async () => {
+  it("streaming response - utf8", async () => {
     const fakeResponse = getMockResponseStreaming("streaming-success-utf8.txt");
     const result = processStream(fakeResponse as Response);
     for await (const response of result.stream) {
