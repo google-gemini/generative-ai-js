@@ -80,6 +80,7 @@ function readFromReader(
   let currentText = "";
   const reader = new ReadableStream<Uint8Array>({
     start(controller) {
+      return pump();
       function pump(): Promise<(() => Promise<void>) | undefined> {
         return bodyReader.read().then(({ value, done }) => {
           if (done) {
@@ -90,7 +91,6 @@ function readFromReader(
           return pump();
         });
       }
-      pump();
     },
   })
     .pipeThrough(new TextDecoderStream())
@@ -107,6 +107,7 @@ function readFromReader(
           }
           currentText += value;
           const match = currentText.match(responseLineRE);
+          // TODO: This needs to be refactored
           if (match) {
             let parsedResponse: GenerateContentResponse;
             try {
