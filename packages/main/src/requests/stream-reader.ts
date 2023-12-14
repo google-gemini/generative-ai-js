@@ -75,9 +75,27 @@ export function processStream(response: Response): GenerateContentStreamResult {
  * GenerateContentResponse in each iteration.
  */
 function readFromReader(
-  reader: ReadableStreamDefaultReader,
+  bodyReader: ReadableStreamDefaultReader,
 ): ReadableStream<GenerateContentResponse> {
   let currentText = "";
+  const reader = new ReadableStream<Uint8Array>({
+    start(controller) {
+      function pump(): Promise<(() => Promise<void>) | undefined> {
+        return bodyReader.read().then(({ value, done }) => {
+          if (done) {
+            controller.close();
+            return;
+          }
+          controller.enqueue(value);
+          return pump();
+        });
+      }
+      pump();
+    },
+  })
+    .pipeThrough(new TextDecoderStream())
+    .getReader();
+
   const stream = new ReadableStream<GenerateContentResponse>({
     start(controller) {
       return pump();
@@ -87,20 +105,19 @@ function readFromReader(
             controller.close();
             return;
           }
-          const chunk = new TextDecoder().decode(value);
-          currentText += chunk;
+          currentText += value;
           const match = currentText.match(responseLineRE);
           if (match) {
             let parsedResponse: GenerateContentResponse;
             try {
               parsedResponse = JSON.parse(match[1]);
+              controller.enqueue(parsedResponse);
+              currentText = "";
             } catch (e) {
               throw new GoogleGenerativeAIError(
                 `Error parsing JSON response: "${match[1]}"`,
               );
             }
-            currentText = "";
-            controller.enqueue(parsedResponse);
           }
           return pump();
         });

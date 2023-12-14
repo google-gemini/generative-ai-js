@@ -28,6 +28,7 @@ export function getMockResponseStreaming(filename: string): Partial<Response> {
   let fullText = fs.readFileSync(join(mockResponseDir, filename), "utf-8");
   fullText = fullText.replace(/\r\n\r\n/g, "\r\n");
   let currentChunkStart = 0;
+  const encoder = new TextEncoder();
 
   async function mockRead(): Promise<ReadableStreamReadResult<Uint8Array>> {
     if (currentChunkStart >= fullText.length) {
@@ -40,9 +41,7 @@ export function getMockResponseStreaming(filename: string): Partial<Response> {
     if (substring.includes("\r\n")) {
       substring = substring.split("\r\n")[0] + "\r\n";
     }
-    const chunk = Uint8Array.from(
-      Array.from(substring).map((letter) => letter.charCodeAt(0)),
-    );
+    const chunk = encoder.encode(substring);
     currentChunkStart += substring.length;
     return {
       value: chunk,
