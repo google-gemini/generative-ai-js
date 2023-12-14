@@ -10,6 +10,7 @@ jobs:
     name: Publish Release
     runs-on: ubuntu-latest
     if: ${{ startsWith(github.event.head_commit.message, 'Version Packages') }}
+    permissions: write-all
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
@@ -35,3 +36,6 @@ jobs:
 
       - name: Publish
         run: yarn changesets publish
+
+      - name: Git tags
+        run: git push --follow-tags
