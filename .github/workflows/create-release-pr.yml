@@ -12,31 +12,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: run-tests
+name: Create Release PR
 
 on:
-  pull_request:
   push:
-    branches: main
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  test:
+  release:
+    name: Create Release PR
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: ['18.x', '20.x']
+    if: ${{ !startsWith(github.event.head_commit.message, 'Version Packages') }}
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Checkout Repo
+        uses: actions/checkout@v3
 
-    - name: yarn install
-      run: yarn
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: run formatting and license check
-      run: yarn format:check
+      - name: Install Dependencies
+        run: yarn
 
-    - name: run unit tests (includes lint)
-      run: yarn test
+      - name: Create Release Pull Request
+        uses: changesets/action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

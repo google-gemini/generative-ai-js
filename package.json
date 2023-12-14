@@ -13,6 +13,7 @@
     "format:check": "yarn ts-node scripts/check-format.ts"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@microsoft/api-documenter": "^7.23.12",
     "@microsoft/api-extractor": "^7.38.2",
