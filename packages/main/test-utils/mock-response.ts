@@ -34,13 +34,10 @@ export function getMockResponseStreaming(filename: string): Partial<Response> {
     if (currentChunkStart >= fullText.length) {
       return { done: true };
     }
-    let substring = fullText.slice(currentChunkStart, currentChunkStart + 20);
-    if (substring.endsWith("\r")) {
-      substring = fullText.slice(currentChunkStart, currentChunkStart + 21);
-    }
-    if (substring.includes("\r\n")) {
-      substring = substring.split("\r\n")[0] + "\r\n";
-    }
+    const substring = fullText.slice(
+      currentChunkStart,
+      currentChunkStart + Math.floor(100 * Math.random()),
+    );
     const chunk = encoder.encode(substring);
     currentChunkStart += substring.length;
     return {

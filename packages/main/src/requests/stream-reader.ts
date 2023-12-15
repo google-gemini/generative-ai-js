@@ -113,7 +113,9 @@ function readFromReader(
             try {
               parsedResponse = JSON.parse(match[1]);
               controller.enqueue(parsedResponse);
-              currentText = "";
+              currentText = currentText.slice(
+                "data: ".length + match[1].length + "\r\n".length,
+              );
             } catch (e) {
               throw new GoogleGenerativeAIError(
                 `Error parsing JSON response: "${match[1]}"`,
