@@ -101,33 +101,51 @@ function readFromReader(
       return pump();
       function pump(): Promise<(() => Promise<void>) | undefined> {
         return reader.read().then(({ value, done }) => {
-          if (done) {
+          if (done && !currentText) {
             controller.close();
             return;
           }
-          currentText += value;
-          const match = currentText.match(responseLineRE);
-          // TODO: This needs to be refactored
-          if (match) {
-            let parsedResponse: GenerateContentResponse;
-            try {
-              parsedResponse = JSON.parse(match[1]);
-              controller.enqueue(parsedResponse);
-              currentText = currentText.slice(
-                "data: ".length + match[1].length + "\r\n".length,
-              );
-            } catch (e) {
-              throw new GoogleGenerativeAIError(
-                `Error parsing JSON response: "${match[1]}"`,
-              );
-            }
+
+          if (done) {
+            const { parsedResponse } = tryParse(currentText);
+            controller.enqueue(parsedResponse);
+            controller.close();
+            return;
           }
+
+          currentText += value;
+          const { leftText, parsedResponse } = tryParse(currentText);
+          controller.enqueue(parsedResponse);
+          currentText = leftText;
+
           return pump();
         });
       }
     },
   });
   return stream;
+}
+
+function tryParse(currentText: string) {
+  // TODO: This needs to be refactored
+  const match = currentText.match(responseLineRE);
+  if (match) {
+    let parsedResponse: GenerateContentResponse;
+    try {
+      parsedResponse = JSON.parse(match[1]);
+      const leftText = currentText.slice(
+        "data: ".length + match[1].length + "\r\n".length,
+      );
+      return {
+        parsedResponse,
+        leftText,
+      };
+    } catch (e) {
+      throw new GoogleGenerativeAIError(
+        `Error parsing JSON response: "${match[1]}"`,
+      );
+    }
+  }
 }
 
 /**
