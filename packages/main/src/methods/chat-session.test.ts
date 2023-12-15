@@ -19,30 +19,12 @@ import { expect, use } from "chai";
 import { match, restore, stub, useFakeTimers } from "sinon";
 import * as sinonChai from "sinon-chai";
 import * as chaiAsPromised from "chai-as-promised";
-import * as request from "../requests/request";
 import * as generateContentMethods from "./generate-content";
-import {
-  GenerateContentStreamResult,
-  HarmBlockThreshold,
-  HarmCategory,
-} from "../../types";
+import { GenerateContentStreamResult } from "../../types";
 import { ChatSession } from "./chat-session";
 
 use(sinonChai);
 use(chaiAsPromised);
-
-const fakeRequestParams = {
-  contents: [{ parts: [{ text: "hello" }], role: "user" }],
-  generateConfig: {
-    topK: 16,
-  },
-  safetySettings: [
-    {
-      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-      threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-    },
-  ],
-};
 
 describe("ChatSession", () => {
   afterEach(() => {
