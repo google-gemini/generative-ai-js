@@ -100,12 +100,12 @@ function readFromReader(
           }
 
           currentText += value;
-          const { leftText, parsedResponse } = tryParse(currentText);
+          const { remainingText, parsedResponse } = tryParse(currentText);
           if (!parsedResponse) {
             return pump();
           }
           controller.enqueue(parsedResponse);
-          currentText = leftText;
+          currentText = remainingText;
 
           return pump();
         });
@@ -116,14 +116,14 @@ function readFromReader(
 }
 
 function tryParse(currentText: string): {
-  leftText: string;
+  remainingText: string;
   parsedResponse: GenerateContentResponse;
 } {
   // TODO: This needs to be refactored
   const match = currentText.match(responseLineRE);
   if (!match) {
     return {
-      leftText: currentText,
+      remainingText: currentText,
       parsedResponse: null,
     };
   }
@@ -131,12 +131,12 @@ function tryParse(currentText: string): {
     let parsedResponse: GenerateContentResponse;
     try {
       parsedResponse = JSON.parse(match[1]);
-      const leftText = currentText.slice(
+      const remainingText = currentText.slice(
         "data: ".length + match[1].length + "\r\n".length,
       );
       return {
         parsedResponse,
-        leftText,
+        remainingText,
       };
     } catch (e) {
       throw new GoogleGenerativeAIError(
