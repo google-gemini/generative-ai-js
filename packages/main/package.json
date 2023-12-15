@@ -1,5 +1,5 @@
 {
-  "name": "@google/generative-ai",
+  "name": "@fuyun/generative-ai",
   "version": "0.1.1",
   "description": "Google AI JavaScript SDK",
   "main": "dist/index.js",
@@ -32,12 +32,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/google/generative-ai-js.git"
+    "url": "git+https://github.com/ifuyun/generative-ai-js.git"
   },
   "author": "",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/google/generative-ai-js/issues"
+    "url": "https://github.com/ifuyun/generative-ai-js/issues"
   },
-  "homepage": "https://github.com/google/generative-ai-js#readme"
+  "homepage": "https://github.com/ifuyun/generative-ai-js#readme"
 }

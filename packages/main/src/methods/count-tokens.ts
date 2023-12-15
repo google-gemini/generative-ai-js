@@ -21,9 +21,10 @@ import { Task, getUrl, makeRequest } from "../requests/request";
 export async function countTokens(
   apiKey: string,
   model: string,
+  baseURL: string,
   params: CountTokensRequest,
 ): Promise<CountTokensResponse> {
-  const url = getUrl(model, Task.COUNT_TOKENS, apiKey, false);
+  const url = getUrl(model, Task.COUNT_TOKENS, apiKey, false, baseURL);
   const response = await makeRequest(url, JSON.stringify({ ...params, model }));
   return response.json();
 }

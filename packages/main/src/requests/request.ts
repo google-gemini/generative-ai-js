@@ -17,8 +17,6 @@
 
 import { GoogleGenerativeAIError } from "../errors";
 
-const BASE_URL = "https://generativelanguage.googleapis.com";
-
 const API_VERSION = "v1";
 
 /**
@@ -41,8 +39,9 @@ export function getUrl(
   task: Task,
   apiKey: string,
   stream: boolean,
+  baseURL: string
 ): string {
-  let url = `${BASE_URL}/${API_VERSION}/models/${model}:${task}?key=${apiKey}`;
+  let url = `${baseURL}/${API_VERSION}/models/${model}:${task}?key=${apiKey}`;
   if (stream) {
     url += "&alt=sse";
   }

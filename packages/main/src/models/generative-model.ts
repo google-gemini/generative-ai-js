@@ -55,6 +55,7 @@ export class GenerativeModel {
   constructor(
     public apiKey: string,
     modelParams: ModelParams,
+    public baseURL?: string
   ) {
     if (modelParams.model.startsWith("models/")) {
       this.model = modelParams.model.split("models/")?.[1];
@@ -63,6 +64,7 @@ export class GenerativeModel {
     }
     this.generationConfig = modelParams.generationConfig || {};
     this.safetySettings = modelParams.safetySettings || [];
+    this.baseURL = baseURL || 'https://generativelanguage.googleapis.com';
   }
 
   /**
@@ -77,7 +79,7 @@ export class GenerativeModel {
       generationConfig: this.generationConfig,
       safetySettings: this.safetySettings,
       ...formattedParams,
-    });
+    }, this.baseURL);
   }
 
   /**
@@ -94,7 +96,7 @@ export class GenerativeModel {
       generationConfig: this.generationConfig,
       safetySettings: this.safetySettings,
       ...formattedParams,
-    });
+    }, this.baseURL);
   }
 
   /**
@@ -102,7 +104,7 @@ export class GenerativeModel {
    * multi-turn chats.
    */
   startChat(startChatParams?: StartChatParams): ChatSession {
-    return new ChatSession(this.apiKey, this.model, startChatParams);
+    return new ChatSession(this.apiKey, this.model, this.baseURL, startChatParams);
   }
 
   /**
@@ -112,7 +114,7 @@ export class GenerativeModel {
     request: CountTokensRequest | string | Array<string | Part>,
   ): Promise<CountTokensResponse> {
     const formattedParams = formatGenerateContentInput(request);
-    return countTokens(this.apiKey, this.model, formattedParams);
+    return countTokens(this.apiKey, this.model, this.baseURL, formattedParams);
   }
 
   /**
@@ -122,7 +124,7 @@ export class GenerativeModel {
     request: EmbedContentRequest | string | Array<string | Part>,
   ): Promise<EmbedContentResponse> {
     const formattedParams = formatEmbedContentInput(request);
-    return embedContent(this.apiKey, this.model, formattedParams);
+    return embedContent(this.apiKey, this.model, this.baseURL, formattedParams);
   }
 
   /**
@@ -134,6 +136,7 @@ export class GenerativeModel {
     return batchEmbedContents(
       this.apiKey,
       this.model,
+      this.baseURL,
       batchEmbedContentRequest,
     );
   }

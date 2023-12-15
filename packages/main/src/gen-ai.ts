@@ -27,7 +27,7 @@ export { GenerativeModel };
  * @public
  */
 export class GoogleGenerativeAI {
-  constructor(public apiKey: string) {}
+  constructor(public apiKey: string, public baseURL?: string) {}
 
   /**
    * Gets a {@link GenerativeModel} instance for the provided model name.
@@ -39,6 +39,6 @@ export class GoogleGenerativeAI {
           `Example: genai.getGenerativeModel({ model: 'my-model-name' })`,
       );
     }
-    return new GenerativeModel(this.apiKey, modelParams);
+    return new GenerativeModel(this.apiKey, modelParams, this.baseURL);
   }
 }

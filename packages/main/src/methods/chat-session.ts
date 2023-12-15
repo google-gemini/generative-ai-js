@@ -41,7 +41,8 @@ export class ChatSession {
   constructor(
     apiKey: string,
     public model: string,
-    public params?: StartChatParams,
+    public baseURL: string,
+    public params?: StartChatParams
   ) {
     this._apiKey = apiKey;
     if (params?.history) {
@@ -84,7 +85,7 @@ export class ChatSession {
     // Add onto the chain.
     this._sendPromise = this._sendPromise
       .then(() =>
-        generateContent(this._apiKey, this.model, generateContentRequest),
+        generateContent(this._apiKey, this.model, generateContentRequest, this.baseURL),
       )
       .then((result) => {
         if (
@@ -132,6 +133,7 @@ export class ChatSession {
       this._apiKey,
       this.model,
       generateContentRequest,
+      this.baseURL
     );
 
     // Add onto the chain.
