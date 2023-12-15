@@ -43,17 +43,12 @@ export class RequestUrl {
     public apiKey: string,
     public stream: boolean,
   ) {}
-  toString(apiKeyInUrl = this.apiKey): string {
-    let url =
-      `${BASE_URL}/${API_VERSION}` +
-      `/models/${this.model}:${this.task}?key=${apiKeyInUrl}`;
+  toString(): string {
+    let url = `${BASE_URL}/${API_VERSION}/models/${this.model}:${this.task}`;
     if (this.stream) {
-      url += "&alt=sse";
+      url += "?alt=sse";
     }
     return url;
-  }
-  toObscuredString(): string {
-    return this.toString("__API_KEY__");
   }
 }
 
@@ -75,6 +70,7 @@ export async function makeRequest(
       headers: {
         "Content-Type": "application/json",
         "x-goog-api-client": getClientHeaders(),
+        "x-goog-api-key": url.apiKey,
       },
       body,
     });
@@ -93,7 +89,7 @@ export async function makeRequest(
     }
   } catch (e) {
     const err = new GoogleGenerativeAIError(
-      `Error fetching from ${url.toObscuredString()}: ${e.message}`,
+      `Error fetching from ${url.toString()}: ${e.message}`,
     );
     err.stack = e.stack;
     throw err;
