@@ -21,14 +21,14 @@ import {
   EmbedContentRequest,
   EmbedContentResponse,
 } from "../../types";
-import { Task, getUrl, makeRequest } from "../requests/request";
+import { RequestUrl, Task, makeRequest } from "../requests/request";
 
 export async function embedContent(
   apiKey: string,
   model: string,
   params: EmbedContentRequest,
 ): Promise<EmbedContentResponse> {
-  const url = getUrl(model, Task.EMBED_CONTENT, apiKey, false);
+  const url = new RequestUrl(model, Task.EMBED_CONTENT, apiKey, false);
   const response = await makeRequest(url, JSON.stringify(params));
   return response.json();
 }
@@ -38,7 +38,7 @@ export async function batchEmbedContents(
   model: string,
   params: BatchEmbedContentsRequest,
 ): Promise<BatchEmbedContentsResponse> {
-  const url = getUrl(model, Task.BATCH_EMBED_CONTENTS, apiKey, false);
+  const url = new RequestUrl(model, Task.BATCH_EMBED_CONTENTS, apiKey, false);
   const requestsWithModel: EmbedContentRequest[] = params.requests.map(
     (request) => {
       return { ...request, model: `models/${model}` };
