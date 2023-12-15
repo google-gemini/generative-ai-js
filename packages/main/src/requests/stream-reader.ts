@@ -35,7 +35,9 @@ const responseLineRE = /^data\: (.*)\r\n/;
  * @param response - Response from a fetch call
  */
 export function processStream(response: Response): GenerateContentStreamResult {
-  const reader = response.body!.getReader();
+  const reader = response
+    .body!.pipeThrough(new TextDecoderStream("utf8", { fatal: true }))
+    .getReader();
   const responseStream = readFromReader(reader);
   const [stream1, stream2] = responseStream.tee();
   const reader1 = stream1.getReader();
@@ -68,34 +70,15 @@ export function processStream(response: Response): GenerateContentStreamResult {
     response: responsePromise,
   };
 }
-
 /**
  * Reads a raw stream from the fetch response and join incomplete
  * chunks, returning a new stream that provides a single complete
  * GenerateContentResponse in each iteration.
  */
 function readFromReader(
-  bodyReader: ReadableStreamDefaultReader,
+  reader: ReadableStreamDefaultReader,
 ): ReadableStream<GenerateContentResponse> {
   let currentText = "";
-  const reader = new ReadableStream<Uint8Array>({
-    start(controller) {
-      return pump();
-      function pump(): Promise<(() => Promise<void>) | undefined> {
-        return bodyReader.read().then(({ value, done }) => {
-          if (done) {
-            controller.close();
-            return;
-          }
-          controller.enqueue(value);
-          return pump();
-        });
-      }
-    },
-  })
-    .pipeThrough(new TextDecoderStream())
-    .getReader();
-
   const stream = new ReadableStream<GenerateContentResponse>({
     start(controller) {
       return pump();
