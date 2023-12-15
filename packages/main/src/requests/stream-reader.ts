@@ -108,13 +108,19 @@ function readFromReader(
 
           if (done) {
             const { parsedResponse } = tryParse(currentText);
-            controller.enqueue(parsedResponse);
+            if (parsedResponse) {
+              controller.enqueue(parsedResponse);
+            }
+
             controller.close();
             return;
           }
 
           currentText += value;
           const { leftText, parsedResponse } = tryParse(currentText);
+          if (!parsedResponse) {
+            return pump();
+          }
           controller.enqueue(parsedResponse);
           currentText = leftText;
 
@@ -126,9 +132,18 @@ function readFromReader(
   return stream;
 }
 
-function tryParse(currentText: string) {
+function tryParse(currentText: string): {
+  leftText: string;
+  parsedResponse: GenerateContentResponse;
+} {
   // TODO: This needs to be refactored
   const match = currentText.match(responseLineRE);
+  if (!match) {
+    return {
+      leftText: currentText,
+      parsedResponse: null,
+    };
+  }
   if (match) {
     let parsedResponse: GenerateContentResponse;
     try {
