@@ -57,6 +57,16 @@ describe("processStream", () => {
     expect(aggregatedResponse.text()).to.include("**Cats:**");
     expect(aggregatedResponse.text()).to.include("to their owners.");
   });
+  it("streaming response - utf8", async () => {
+    const fakeResponse = getMockResponseStreaming("streaming-success-utf8.txt");
+    const result = processStream(fakeResponse as Response);
+    for await (const response of result.stream) {
+      expect(response.text()).to.not.be.empty;
+    }
+    const aggregatedResponse = await result.response;
+    expect(aggregatedResponse.text()).to.include("秋风瑟瑟，叶落纷纷");
+    expect(aggregatedResponse.text()).to.include("家人围坐在一起");
+  });
   it("candidate had finishReason", async () => {
     const fakeResponse = getMockResponseStreaming(
       "streaming-failure-finish-reason-safety.txt",

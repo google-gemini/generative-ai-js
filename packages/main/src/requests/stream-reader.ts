@@ -35,7 +35,9 @@ const responseLineRE = /^data\: (.*)\r\n/;
  * @param response - Response from a fetch call
  */
 export function processStream(response: Response): GenerateContentStreamResult {
-  const reader = response.body!.getReader();
+  const reader = response
+    .body!.pipeThrough(new TextDecoderStream("utf8", { fatal: true }))
+    .getReader();
   const responseStream = readFromReader(reader);
   const [stream1, stream2] = responseStream.tee();
   const reader1 = stream1.getReader();
@@ -68,7 +70,6 @@ export function processStream(response: Response): GenerateContentStreamResult {
     response: responsePromise,
   };
 }
-
 /**
  * Reads a raw stream from the fetch response and join incomplete
  * chunks, returning a new stream that provides a single complete
@@ -83,31 +84,66 @@ function readFromReader(
       return pump();
       function pump(): Promise<(() => Promise<void>) | undefined> {
         return reader.read().then(({ value, done }) => {
-          if (done) {
+          if (done && !currentText) {
             controller.close();
             return;
           }
-          const chunk = new TextDecoder().decode(value);
-          currentText += chunk;
-          const match = currentText.match(responseLineRE);
-          if (match) {
-            let parsedResponse: GenerateContentResponse;
-            try {
-              parsedResponse = JSON.parse(match[1]);
-            } catch (e) {
-              throw new GoogleGenerativeAIError(
-                `Error parsing JSON response: "${match[1]}"`,
-              );
+
+          if (done) {
+            const { parsedResponse } = tryParse(currentText);
+            if (parsedResponse) {
+              controller.enqueue(parsedResponse);
             }
-            currentText = "";
-            controller.enqueue(parsedResponse);
+
+            controller.close();
+            return;
           }
+
+          currentText += value;
+          const { remainingText, parsedResponse } = tryParse(currentText);
+          if (!parsedResponse) {
+            return pump();
+          }
+          controller.enqueue(parsedResponse);
+          currentText = remainingText;
+
           return pump();
         });
       }
     },
   });
   return stream;
+}
+
+function tryParse(currentText: string): {
+  remainingText: string;
+  parsedResponse: GenerateContentResponse;
+} {
+  // TODO: This needs to be refactored
+  const match = currentText.match(responseLineRE);
+  if (!match) {
+    return {
+      remainingText: currentText,
+      parsedResponse: null,
+    };
+  }
+  if (match) {
+    let parsedResponse: GenerateContentResponse;
+    try {
+      parsedResponse = JSON.parse(match[1]);
+      const remainingText = currentText.slice(
+        "data: ".length + match[1].length + "\r\n".length,
+      );
+      return {
+        parsedResponse,
+        remainingText,
+      };
+    } catch (e) {
+      throw new GoogleGenerativeAIError(
+        `Error parsing JSON response: "${match[1]}"`,
+      );
+    }
+  }
 }
 
 /**

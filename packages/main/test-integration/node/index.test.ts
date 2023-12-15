@@ -33,7 +33,9 @@ use(chaiAsPromised);
  * Integration tests against live backend.
  */
 
-describe("generateContent", () => {
+describe("generateContent", function () {
+  this.timeout(60e3);
+  this.slow(10e3);
   it("stream true, blocked", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
@@ -136,7 +138,9 @@ describe("generateContent", () => {
   });
 });
 
-describe("startChat", () => {
+describe("startChat", function () {
+  this.timeout(60e3);
+  this.slow(10e3);
   it("stream false", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
@@ -289,7 +293,9 @@ describe("startChat", () => {
   });
 });
 
-describe("countTokens", () => {
+describe("countTokens", function () {
+  this.timeout(60e3);
+  this.slow(10e3);
   it("counts tokens right", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
@@ -310,7 +316,9 @@ describe("countTokens", () => {
   });
 });
 
-describe("embedContent", () => {
+describe("embedContent", function () {
+  this.timeout(60e3);
+  this.slow(10e3);
   it("embeds a single Content object", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
@@ -325,7 +333,9 @@ describe("embedContent", () => {
   });
 });
 
-describe("batchEmbedContents", () => {
+describe("batchEmbedContents", function () {
+  this.timeout(60e3);
+  this.slow(10e3);
   it("embeds multiple requests", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
