@@ -34,18 +34,26 @@ export enum Task {
   BATCH_EMBED_CONTENTS = "batchEmbedContents",
 }
 
-export function getUrl(
-  model: string,
-  task: Task,
-  apiKey: string,
-  stream: boolean,
-  baseURL: string
-): string {
-  let url = `${baseURL}/${API_VERSION}/models/${model}:${task}?key=${apiKey}`;
-  if (stream) {
-    url += "&alt=sse";
+export class RequestUrl {
+  constructor(
+    public model: string,
+    public task: Task,
+    public apiKey: string,
+    public stream: boolean,
+    public baseURL: string
+  ) {}
+  toString(apiKeyInUrl = this.apiKey): string {
+    let url =
+      `${this.baseURL}/${API_VERSION}` +
+      `/models/${this.model}:${this.task}?key=${apiKeyInUrl}`;
+    if (this.stream) {
+      url += "&alt=sse";
+    }
+    return url;
   }
-  return url;
+  toObscuredString(): string {
+    return this.toString("__API_KEY__");
+  }
 }
 
 /**
@@ -56,12 +64,12 @@ function getClientHeaders(): string {
 }
 
 export async function makeRequest(
-  url: string,
+  url: RequestUrl,
   body: string,
 ): Promise<Response> {
   let response;
   try {
-    response = await fetch(url, {
+    response = await fetch(url.toString(), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -84,7 +92,7 @@ export async function makeRequest(
     }
   } catch (e) {
     const err = new GoogleGenerativeAIError(
-      `Error fetching from ${url}: ${e.message}`,
+      `Error fetching from ${url.toObscuredString()}: ${e.message}`,
     );
     err.stack = e.stack;
     throw err;

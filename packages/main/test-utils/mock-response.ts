@@ -24,37 +24,38 @@ const mockResponseDir = join(__dirname, "mock-responses");
  * Mock native Response.getReader().read()
  * Streams contents of json file in 20 character chunks
  */
-export function getMockResponseStreaming(filename: string): Partial<Response> {
-  let fullText = fs.readFileSync(join(mockResponseDir, filename), "utf-8");
-  fullText = fullText.replace(/\r\n\r\n/g, "\r\n");
+export function getMockResponseStreaming(
+  filename: string,
+  chunkLength: number = 20,
+): Partial<Response> {
+  const fullText = fs
+    .readFileSync(join(mockResponseDir, filename), "utf-8")
+    .replace(/\r\n\r\n/g, "\r\n");
+  const encoder = new TextEncoder();
   let currentChunkStart = 0;
 
-  async function mockRead(): Promise<ReadableStreamReadResult<Uint8Array>> {
-    if (currentChunkStart >= fullText.length) {
-      return { done: true };
-    }
-    let substring = fullText.slice(currentChunkStart, currentChunkStart + 20);
-    if (substring.endsWith("\r")) {
-      substring = fullText.slice(currentChunkStart, currentChunkStart + 21);
-    }
-    if (substring.includes("\r\n")) {
-      substring = substring.split("\r\n")[0] + "\r\n";
-    }
-    const chunk = Uint8Array.from(
-      Array.from(substring).map((letter) => letter.charCodeAt(0)),
-    );
-    currentChunkStart += substring.length;
-    return {
-      value: chunk,
-      done: false,
-    };
-  }
+  const body = new ReadableStream<Uint8Array>({
+    start(controller) {
+      return pump();
+      function pump(): Promise<(() => Promise<void>) | undefined> {
+        if (currentChunkStart >= fullText.length) {
+          controller.close();
+          return;
+        }
+        const substring = fullText.slice(
+          currentChunkStart,
+          currentChunkStart + chunkLength,
+        );
+        currentChunkStart += substring.length;
+        const chunk = encoder.encode(substring);
+        controller.enqueue(chunk);
+        return pump();
+      }
+    },
+  });
 
   return {
-    body: {
-      // @ts-ignore This mock isn't a perfect match for getReader()
-      getReader: () => ({ read: mockRead }),
-    },
+    body,
   };
 }
 
