@@ -36,6 +36,35 @@ use(chaiAsPromised);
 describe("generateContent", function () {
   this.timeout(60e3);
   this.slow(10e3);
+  // This test can be flaky
+  // eslint-disable-next-line no-restricted-properties
+  it.skip("streaming - count numbers", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({
+      model: "gemini-pro",
+      generationConfig: {
+        temperature: 0,
+        candidateCount: 1,
+      },
+    });
+    const result = await model.generateContentStream({
+      contents: [
+        {
+          role: "user",
+          parts: [
+            {
+              text: "Count from 1 to 10, put each number into square brackets and on a separate line",
+            },
+          ],
+        },
+      ],
+    });
+    const finalResponse = await result.response;
+    expect(finalResponse.candidates.length).to.be.equal(1);
+    const text = finalResponse.text();
+    expect(text).to.include("[1]");
+    expect(text).to.include("[10]");
+  });
   it("stream true, blocked", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
