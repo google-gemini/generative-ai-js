@@ -43,13 +43,14 @@ jobs:
       - name: Create .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
+            @google:registry=https://wombat-dressing-room.appspot.com
             //wombat-dressing-room.appspot.com/:_authToken=$NPM_TOKEN
           EOF
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish
-        run: yarn changesets publish
+        run: yarn changeset publish
 
       - name: Git tags
         run: git push --follow-tags
