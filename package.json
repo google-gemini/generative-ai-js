@@ -10,7 +10,8 @@
     "test": "lerna run test",
     "docs": "lerna run docs",
     "format": "yarn ts-node scripts/run-format.ts",
-    "format:check": "yarn ts-node scripts/check-format.ts"
+    "format:check": "yarn ts-node scripts/check-format.ts",
+    "release": "changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Publish Release
+name: Release
 
 on:
   push:
@@ -21,9 +21,8 @@ on:
 
 jobs:
   release:
-    name: Publish Release
+    name: Release
     runs-on: ubuntu-latest
-    if: ${{ startsWith(github.event.head_commit.message, 'Version Packages') }}
     permissions: write-all
     steps:
       - name: Checkout Repo
@@ -49,8 +48,10 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish
-        run: yarn changeset publish
-
-      - name: Git tags
-        run: git push --follow-tags
+      - name: Create Release Pull Request or publish to npm
+        uses: changesets/action@v1
+        with:
+          publish: yarn release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
