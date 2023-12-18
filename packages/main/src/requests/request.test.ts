@@ -44,6 +44,7 @@ describe("request methods", () => {
         true,
       );
       expect(url.toString()).to.include("generateContent");
+      expect(url.toString()).to.not.include("key");
       expect(url.toString()).to.include("alt=sse");
     });
     it("non-stream", async () => {
@@ -54,17 +55,8 @@ describe("request methods", () => {
         false,
       );
       expect(url.toString()).to.include("generateContent");
-      expect(url.toString()).to.include("key=key");
+      expect(url.toString()).to.not.include("key");
       expect(url.toString()).to.not.include("alt=sse");
-    });
-    it("obscured", async () => {
-      const url = new RequestUrl(
-        "model-name",
-        Task.GENERATE_CONTENT,
-        "key",
-        false,
-      );
-      expect(url.toObscuredString()).to.include("key=__API_KEY__");
     });
   });
   describe("makeRequest", () => {
@@ -83,7 +75,7 @@ describe("request methods", () => {
         statusText: "Server Error",
       } as Response);
       await expect(makeRequest(fakeRequestUrl, "")).to.be.rejectedWith(
-        /key=__API_KEY__.*500 Server Error/,
+        /500 Server Error/,
       );
       expect(fetchStub).to.be.calledOnce;
     });
@@ -95,7 +87,7 @@ describe("request methods", () => {
         json: () => Promise.resolve({ error: { message: "extra info" } }),
       } as Response);
       await expect(makeRequest(fakeRequestUrl, "")).to.be.rejectedWith(
-        /key=__API_KEY__.*500 Server Error.*extra info/,
+        /500 Server Error.*extra info/,
       );
       expect(fetchStub).to.be.calledOnce;
     });
