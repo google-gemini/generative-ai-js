@@ -1,5 +1,12 @@
 # @google/generative-ai
 
+## 0.1.3
+
+### Patch Changes
+
+- 54839f2: Send API key in header instead of query param.
+- 6a4c9c2: Fixed stream hanging
+
 ## 0.1.2
 
 ### Patch Changes
