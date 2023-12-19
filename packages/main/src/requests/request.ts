@@ -59,17 +59,20 @@ function getClientHeaders(): string {
 export async function makeRequest(
   url: string,
   body: string,
+  requestInit?: RequestInit
 ): Promise<Response> {
   let response;
   try {
     response = await fetch(url, {
+      ...requestInit,
+      ...{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "x-goog-api-client": getClientHeaders(),
       },
       body,
-    });
+    }});
     if (!response.ok) {
       let message = "";
       try {

@@ -49,6 +49,20 @@ describe("request methods", () => {
       expect(fetchStub).to.be.calledOnce;
       expect(response.ok).to.be.true;
     });
+    it("error with timeout", async () => {
+      const fetchStub = stub(globalThis, "fetch").resolves({
+        ok: false,
+        status: 500,
+        statusText: "AbortError",
+      } as Response);
+
+      const abortController = new AbortController();
+      setImmediate(() => abortController.abort());
+      await expect(makeRequest("url", "", {
+        signal: abortController.signal
+      })).to.be.rejectedWith("500 AbortError");
+      expect(fetchStub).to.be.calledOnce;
+    });
     it("Network error, no response.json()", async () => {
       const fetchStub = stub(globalThis, "fetch").resolves({
         ok: false,

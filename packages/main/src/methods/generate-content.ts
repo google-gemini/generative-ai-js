@@ -29,6 +29,7 @@ export async function generateContentStream(
   apiKey: string,
   model: string,
   params: GenerateContentRequest,
+  requestInit?: RequestInit
 ): Promise<GenerateContentStreamResult> {
   const url = getUrl(
     model,
@@ -36,7 +37,7 @@ export async function generateContentStream(
     apiKey,
     /* stream */ true,
   );
-  const response = await makeRequest(url, JSON.stringify(params));
+  const response = await makeRequest(url, JSON.stringify(params), requestInit);
   return processStream(response);
 }
 
@@ -44,9 +45,10 @@ export async function generateContent(
   apiKey: string,
   model: string,
   params: GenerateContentRequest,
+  requestInit?: RequestInit
 ): Promise<GenerateContentResult> {
   const url = getUrl(model, Task.GENERATE_CONTENT, apiKey, /* stream */ false);
-  const response = await makeRequest(url, JSON.stringify(params));
+  const response = await makeRequest(url, JSON.stringify(params), requestInit);
   const responseJson: GenerateContentResponse = await response.json();
   const enhancedResponse = addHelpers(responseJson);
   return {

@@ -27,9 +27,10 @@ export async function embedContent(
   apiKey: string,
   model: string,
   params: EmbedContentRequest,
+  requestInit?: RequestInit
 ): Promise<EmbedContentResponse> {
   const url = getUrl(model, Task.EMBED_CONTENT, apiKey, false);
-  const response = await makeRequest(url, JSON.stringify(params));
+  const response = await makeRequest(url, JSON.stringify(params), requestInit);
   return response.json();
 }
 
@@ -37,6 +38,7 @@ export async function batchEmbedContents(
   apiKey: string,
   model: string,
   params: BatchEmbedContentsRequest,
+  requestInit?: RequestInit
 ): Promise<BatchEmbedContentsResponse> {
   const url = getUrl(model, Task.BATCH_EMBED_CONTENTS, apiKey, false);
   const requestsWithModel: EmbedContentRequest[] = params.requests.map(
@@ -47,6 +49,7 @@ export async function batchEmbedContents(
   const response = await makeRequest(
     url,
     JSON.stringify({ requests: requestsWithModel }),
+    requestInit,
   );
   return response.json();
 }
