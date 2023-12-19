@@ -77,9 +77,11 @@ describe("request methods", () => {
 
       const abortController = new AbortController();
       setImmediate(() => abortController.abort());
-      await expect(makeRequest(fakeRequestUrl, "", {
-        signal: abortController.signal
-      })).to.be.rejectedWith("500 AbortError");
+      await expect(
+        makeRequest(fakeRequestUrl, "", {
+          signal: abortController.signal,
+        }),
+      ).to.be.rejectedWith("500 AbortError");
       expect(fetchStub).to.be.calledOnce;
     });
     it("Network error, no response.json()", async () => {

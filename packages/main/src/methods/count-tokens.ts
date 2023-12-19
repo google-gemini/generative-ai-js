@@ -22,9 +22,13 @@ export async function countTokens(
   apiKey: string,
   model: string,
   params: CountTokensRequest,
-  requestInit?: RequestInit
+  requestInit?: RequestInit,
 ): Promise<CountTokensResponse> {
   const url = new RequestUrl(model, Task.COUNT_TOKENS, apiKey, false);
-  const response = await makeRequest(url, JSON.stringify({ ...params, model }), requestInit);
+  const response = await makeRequest(
+    url,
+    JSON.stringify({ ...params, model }),
+    requestInit,
+  );
   return response.json();
 }

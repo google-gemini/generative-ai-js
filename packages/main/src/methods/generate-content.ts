@@ -29,7 +29,7 @@ export async function generateContentStream(
   apiKey: string,
   model: string,
   params: GenerateContentRequest,
-  requestInit?: RequestInit
+  requestInit?: RequestInit,
 ): Promise<GenerateContentStreamResult> {
   const url = new RequestUrl(
     model,
@@ -45,7 +45,7 @@ export async function generateContent(
   apiKey: string,
   model: string,
   params: GenerateContentRequest,
-  requestInit?: RequestInit
+  requestInit?: RequestInit,
 ): Promise<GenerateContentResult> {
   const url = new RequestUrl(
     model,
