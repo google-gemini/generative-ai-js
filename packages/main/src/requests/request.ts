@@ -62,12 +62,12 @@ function getClientHeaders(): string {
 export async function makeRequest(
   url: RequestUrl,
   body: string,
-  requestInit?: RequestInit,
+  fetchOptions?: RequestInit,
 ): Promise<Response> {
   let response;
   try {
     response = await fetch(url.toString(), {
-      ...requestInit,
+      ...fetchOptions,
       method: "POST",
       headers: {
         "Content-Type": "application/json",
