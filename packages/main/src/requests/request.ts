@@ -68,15 +68,13 @@ export async function makeRequest(
   try {
     response = await fetch(url.toString(), {
       ...requestInit,
-      ...{
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-client": getClientHeaders(),
-          "x-goog-api-key": url.apiKey,
-        },
-        body,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-goog-api-client": getClientHeaders(),
+        "x-goog-api-key": url.apiKey,
       },
+      body,
     });
     if (!response.ok) {
       let message = "";
