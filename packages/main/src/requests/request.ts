@@ -36,17 +36,20 @@ export enum Task {
   BATCH_EMBED_CONTENTS = "batchEmbedContents",
 }
 
-export function getUrl(
-  model: string,
-  task: Task,
-  apiKey: string,
-  stream: boolean,
-): string {
-  let url = `${BASE_URL}/${API_VERSION}/models/${model}:${task}?key=${apiKey}`;
-  if (stream) {
-    url += "&alt=sse";
+export class RequestUrl {
+  constructor(
+    public model: string,
+    public task: Task,
+    public apiKey: string,
+    public stream: boolean,
+  ) {}
+  toString(): string {
+    let url = `${BASE_URL}/${API_VERSION}/models/${this.model}:${this.task}`;
+    if (this.stream) {
+      url += "?alt=sse";
+    }
+    return url;
   }
-  return url;
 }
 
 /**
@@ -57,19 +60,20 @@ function getClientHeaders(): string {
 }
 
 export async function makeRequest(
-  url: string,
+  url: RequestUrl,
   body: string,
   requestInit?: RequestInit
 ): Promise<Response> {
   let response;
   try {
-    response = await fetch(url, {
+    response = await fetch(url.toString(), {
       ...requestInit,
       ...{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "x-goog-api-client": getClientHeaders(),
+        "x-goog-api-key": url.apiKey,
       },
       body,
     }});
@@ -88,7 +92,7 @@ export async function makeRequest(
     }
   } catch (e) {
     const err = new GoogleGenerativeAIError(
-      `Error fetching from ${url}: ${e.message}`,
+      `Error fetching from ${url.toString()}: ${e.message}`,
     );
     err.stack = e.stack;
     throw err;

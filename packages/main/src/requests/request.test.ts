@@ -19,25 +19,44 @@ import { expect, use } from "chai";
 import { restore, stub } from "sinon";
 import * as sinonChai from "sinon-chai";
 import * as chaiAsPromised from "chai-as-promised";
-import { Task, getUrl, makeRequest } from "./request";
+import { RequestUrl, Task, makeRequest } from "./request";
 
 use(sinonChai);
 use(chaiAsPromised);
+
+const fakeRequestUrl = new RequestUrl(
+  "model-name",
+  Task.GENERATE_CONTENT,
+  "key",
+  true,
+);
 
 describe("request methods", () => {
   afterEach(() => {
     restore();
   });
-  describe("getUrl", () => {
+  describe("RequestUrl", () => {
     it("stream", async () => {
-      const url = getUrl("model-name", Task.GENERATE_CONTENT, "key", true);
-      expect(url).to.include("generateContent");
-      expect(url).to.include("alt=sse");
+      const url = new RequestUrl(
+        "model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        true,
+      );
+      expect(url.toString()).to.include("generateContent");
+      expect(url.toString()).to.not.include("key");
+      expect(url.toString()).to.include("alt=sse");
     });
     it("non-stream", async () => {
-      const url = getUrl("model-name", Task.GENERATE_CONTENT, "key", false);
-      expect(url).to.include("generateContent");
-      expect(url).to.not.include("alt=sse");
+      const url = new RequestUrl(
+        "model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        false,
+      );
+      expect(url.toString()).to.include("generateContent");
+      expect(url.toString()).to.not.include("key");
+      expect(url.toString()).to.not.include("alt=sse");
     });
   });
   describe("makeRequest", () => {
@@ -45,7 +64,7 @@ describe("request methods", () => {
       const fetchStub = stub(globalThis, "fetch").resolves({
         ok: true,
       } as Response);
-      const response = await makeRequest("url", "");
+      const response = await makeRequest(fakeRequestUrl, "");
       expect(fetchStub).to.be.calledOnce;
       expect(response.ok).to.be.true;
     });
@@ -69,8 +88,8 @@ describe("request methods", () => {
         status: 500,
         statusText: "Server Error",
       } as Response);
-      await expect(makeRequest("url", "")).to.be.rejectedWith(
-        "500 Server Error",
+      await expect(makeRequest(fakeRequestUrl, "")).to.be.rejectedWith(
+        /500 Server Error/,
       );
       expect(fetchStub).to.be.calledOnce;
     });
@@ -81,7 +100,7 @@ describe("request methods", () => {
         statusText: "Server Error",
         json: () => Promise.resolve({ error: { message: "extra info" } }),
       } as Response);
-      await expect(makeRequest("url", "")).to.be.rejectedWith(
+      await expect(makeRequest(fakeRequestUrl, "")).to.be.rejectedWith(
         /500 Server Error.*extra info/,
       );
       expect(fetchStub).to.be.calledOnce;
@@ -105,7 +124,7 @@ describe("request methods", () => {
             },
           }),
       } as Response);
-      await expect(makeRequest("url", "")).to.be.rejectedWith(
+      await expect(makeRequest(fakeRequestUrl, "")).to.be.rejectedWith(
         /500 Server Error.*extra info.*generic::invalid_argument/,
       );
       expect(fetchStub).to.be.calledOnce;

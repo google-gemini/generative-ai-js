@@ -11,7 +11,7 @@ You can use this JavaScript SDK for applications built with Node.js or for web a
 For example, with just a few lines of code, you can access Gemini's multimodal capabilities to generate text from text-and-image input.
 
 For Node.js:
-```
+```js
 const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
 
 const prompt = "Does this look store-bought or homemade?";
@@ -27,7 +27,7 @@ console.log(result.response.text());
 ```
 
 For web:
-```
+```js
 const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
 
 const prompt = "Does this look store-bought or homemade?";

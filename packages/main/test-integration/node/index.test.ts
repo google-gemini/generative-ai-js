@@ -33,7 +33,38 @@ use(chaiAsPromised);
  * Integration tests against live backend.
  */
 
-describe("generateContent", () => {
+describe("generateContent", function () {
+  this.timeout(60e3);
+  this.slow(10e3);
+  // This test can be flaky
+  // eslint-disable-next-line no-restricted-properties
+  it.skip("streaming - count numbers", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({
+      model: "gemini-pro",
+      generationConfig: {
+        temperature: 0,
+        candidateCount: 1,
+      },
+    });
+    const result = await model.generateContentStream({
+      contents: [
+        {
+          role: "user",
+          parts: [
+            {
+              text: "Count from 1 to 10, put each number into square brackets and on a separate line",
+            },
+          ],
+        },
+      ],
+    });
+    const finalResponse = await result.response;
+    expect(finalResponse.candidates.length).to.be.equal(1);
+    const text = finalResponse.text();
+    expect(text).to.include("[1]");
+    expect(text).to.include("[10]");
+  });
   it("stream true, blocked", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
@@ -136,7 +167,9 @@ describe("generateContent", () => {
   });
 });
 
-describe("startChat", () => {
+describe("startChat", function () {
+  this.timeout(60e3);
+  this.slow(10e3);
   it("stream false", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
@@ -289,7 +322,9 @@ describe("startChat", () => {
   });
 });
 
-describe("countTokens", () => {
+describe("countTokens", function () {
+  this.timeout(60e3);
+  this.slow(10e3);
   it("counts tokens right", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
@@ -310,7 +345,9 @@ describe("countTokens", () => {
   });
 });
 
-describe("embedContent", () => {
+describe("embedContent", function () {
+  this.timeout(60e3);
+  this.slow(10e3);
   it("embeds a single Content object", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
@@ -325,7 +362,9 @@ describe("embedContent", () => {
   });
 });
 
-describe("batchEmbedContents", () => {
+describe("batchEmbedContents", function () {
+  this.timeout(60e3);
+  this.slow(10e3);
   it("embeds multiple requests", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({

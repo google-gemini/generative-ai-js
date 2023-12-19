@@ -21,7 +21,7 @@ import {
   GenerateContentResult,
   GenerateContentStreamResult,
 } from "../../types";
-import { Task, getUrl, makeRequest } from "../requests/request";
+import { RequestUrl, Task, makeRequest } from "../requests/request";
 import { addHelpers } from "../requests/response-helpers";
 import { processStream } from "../requests/stream-reader";
 
@@ -31,7 +31,7 @@ export async function generateContentStream(
   params: GenerateContentRequest,
   requestInit?: RequestInit
 ): Promise<GenerateContentStreamResult> {
-  const url = getUrl(
+  const url = new RequestUrl(
     model,
     Task.STREAM_GENERATE_CONTENT,
     apiKey,
@@ -47,7 +47,12 @@ export async function generateContent(
   params: GenerateContentRequest,
   requestInit?: RequestInit
 ): Promise<GenerateContentResult> {
-  const url = getUrl(model, Task.GENERATE_CONTENT, apiKey, /* stream */ false);
+  const url = new RequestUrl(
+    model,
+    Task.GENERATE_CONTENT,
+    apiKey,
+    /* stream */ false,
+  );
   const response = await makeRequest(url, JSON.stringify(params), requestInit);
   const responseJson: GenerateContentResponse = await response.json();
   const enhancedResponse = addHelpers(responseJson);

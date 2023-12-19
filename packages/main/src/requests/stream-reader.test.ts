@@ -15,11 +15,18 @@
  * limitations under the License.
  */
 
-import { aggregateResponses, processStream } from "./stream-reader";
+import {
+  aggregateResponses,
+  getResponseStream,
+  processStream,
+} from "./stream-reader";
 import { expect, use } from "chai";
 import { restore } from "sinon";
 import * as sinonChai from "sinon-chai";
-import { getMockResponseStreaming } from "../../test-utils/mock-response";
+import {
+  getChunkedStream,
+  getMockResponseStreaming,
+} from "../../test-utils/mock-response";
 import {
   BlockReason,
   FinishReason,
@@ -29,6 +36,32 @@ import {
 } from "../../types";
 
 use(sinonChai);
+
+describe("getResponseStream", () => {
+  afterEach(() => {
+    restore();
+  });
+  it("two lines", async () => {
+    const src = [{ text: "A" }, { text: "B" }];
+    const inputStream = getChunkedStream(
+      src
+        .map((v) => JSON.stringify(v))
+        .map((v) => "data: " + v + "\r\n\r\n")
+        .join(""),
+    ).pipeThrough(new TextDecoderStream("utf8", { fatal: true }));
+    const responseStream = getResponseStream<{ text: string }>(inputStream);
+    const reader = responseStream.getReader();
+    const responses: Array<{ text: string }> = [];
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) {
+        break;
+      }
+      responses.push(value);
+    }
+    expect(responses).to.deep.equal(src);
+  });
+});
 
 describe("processStream", () => {
   afterEach(() => {
@@ -56,6 +89,29 @@ describe("processStream", () => {
     const aggregatedResponse = await result.response;
     expect(aggregatedResponse.text()).to.include("**Cats:**");
     expect(aggregatedResponse.text()).to.include("to their owners.");
+  });
+  it("streaming response - long - big chunk", async () => {
+    const fakeResponse = getMockResponseStreaming(
+      "streaming-success-basic-reply-long.txt",
+      1e6,
+    );
+    const result = processStream(fakeResponse as Response);
+    for await (const response of result.stream) {
+      expect(response.text()).to.not.be.empty;
+    }
+    const aggregatedResponse = await result.response;
+    expect(aggregatedResponse.text()).to.include("**Cats:**");
+    expect(aggregatedResponse.text()).to.include("to their owners.");
+  });
+  it("streaming response - utf8", async () => {
+    const fakeResponse = getMockResponseStreaming("streaming-success-utf8.txt");
+    const result = processStream(fakeResponse as Response);
+    for await (const response of result.stream) {
+      expect(response.text()).to.not.be.empty;
+    }
+    const aggregatedResponse = await result.response;
+    expect(aggregatedResponse.text()).to.include("秋风瑟瑟，叶落纷纷");
+    expect(aggregatedResponse.text()).to.include("家人围坐在一起");
   });
   it("candidate had finishReason", async () => {
     const fakeResponse = getMockResponseStreaming(

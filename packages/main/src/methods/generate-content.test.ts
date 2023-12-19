@@ -54,7 +54,7 @@ describe("generateContent()", () => {
     const result = await generateContent("key", "model", fakeRequestParams);
     expect(result.response.text()).to.include("Helena");
     expect(makeRequestStub).to.be.calledWith(
-      match.string,
+      match.instanceOf(request.RequestUrl),
       match((value) => {
         return value.includes("contents");
       }),
@@ -68,7 +68,10 @@ describe("generateContent()", () => {
     const result = await generateContent("key", "model", fakeRequestParams);
     expect(result.response.text()).to.include("Use Freshly Ground Coffee");
     expect(result.response.text()).to.include("30 minutes of brewing");
-    expect(makeRequestStub).to.be.calledWith(match.string, match.any);
+    expect(makeRequestStub).to.be.calledWith(
+      match.instanceOf(request.RequestUrl),
+      match.any,
+    );
   });
   it("citations", async () => {
     const mockResponse = getMockResponse("unary-success-citations.json");
@@ -80,7 +83,10 @@ describe("generateContent()", () => {
     expect(
       result.response.candidates[0].citationMetadata.citationSources.length,
     ).to.equal(1);
-    expect(makeRequestStub).to.be.calledWith(match.string, match.any);
+    expect(makeRequestStub).to.be.calledWith(
+      match.instanceOf(request.RequestUrl),
+      match.any,
+    );
   });
   it("blocked prompt", async () => {
     const mockResponse = getMockResponse(
@@ -91,7 +97,10 @@ describe("generateContent()", () => {
     );
     const result = await generateContent("key", "model", fakeRequestParams);
     expect(result.response.text).to.throw("SAFETY");
-    expect(makeRequestStub).to.be.calledWith(match.string, match.any);
+    expect(makeRequestStub).to.be.calledWith(
+      match.instanceOf(request.RequestUrl),
+      match.any,
+    );
   });
   it("finishReason safety", async () => {
     const mockResponse = getMockResponse(
@@ -102,7 +111,10 @@ describe("generateContent()", () => {
     );
     const result = await generateContent("key", "model", fakeRequestParams);
     expect(result.response.text).to.throw("SAFETY");
-    expect(makeRequestStub).to.be.calledWith(match.string, match.any);
+    expect(makeRequestStub).to.be.calledWith(
+      match.instanceOf(request.RequestUrl),
+      match.any,
+    );
   });
   it("empty content", async () => {
     const mockResponse = getMockResponse("unary-failure-empty-content.json");
@@ -111,7 +123,10 @@ describe("generateContent()", () => {
     );
     const result = await generateContent("key", "model", fakeRequestParams);
     expect(result.response.text()).to.equal("");
-    expect(makeRequestStub).to.be.calledWith(match.string, match.any);
+    expect(makeRequestStub).to.be.calledWith(
+      match.instanceOf(request.RequestUrl),
+      match.any,
+    );
   });
   it("unknown enum - should ignore", async () => {
     const mockResponse = getMockResponse("unary-unknown-enum.json");
@@ -120,7 +135,10 @@ describe("generateContent()", () => {
     );
     const result = await generateContent("key", "model", fakeRequestParams);
     expect(result.response.text()).to.include("30 minutes of brewing");
-    expect(makeRequestStub).to.be.calledWith(match.string, match.any);
+    expect(makeRequestStub).to.be.calledWith(
+      match.instanceOf(request.RequestUrl),
+      match.any,
+    );
   });
   it("image rejected (400)", async () => {
     const mockResponse = getMockResponse("unary-failure-image-rejected.json");

@@ -24,7 +24,7 @@ import {
 import { GoogleGenerativeAIError } from "../errors";
 import { addHelpers } from "./response-helpers";
 
-const responseLineRE = /^data\: (.*)\r\n/;
+const responseLineRE = /^data\: (.*)(?:\n\n|\r\r|\r\n\r\n)/;
 
 /**
  * Process a response.body stream from the backend and return an
@@ -35,38 +35,43 @@ const responseLineRE = /^data\: (.*)\r\n/;
  * @param response - Response from a fetch call
  */
 export function processStream(response: Response): GenerateContentStreamResult {
-  const reader = response.body!.getReader();
-  const responseStream = readFromReader(reader);
-  const [stream1, stream2] = responseStream.tee();
-  const reader1 = stream1.getReader();
-  const reader2 = stream2.getReader();
-  const allResponses: GenerateContentResponse[] = [];
-  const responsePromise = new Promise<EnhancedGenerateContentResponse>(
-    async (resolve) => {
-      while (true) {
-        const { value, done } = await reader1.read();
-        if (done) {
-          const aggregatedResponse = aggregateResponses(allResponses);
-          resolve(addHelpers(aggregatedResponse));
-          return;
-        }
-        allResponses.push(value);
-      }
-    },
+  const inputStream = response.body!.pipeThrough(
+    new TextDecoderStream("utf8", { fatal: true }),
   );
-  async function* generateResponseSequence(): AsyncGenerator<EnhancedGenerateContentResponse> {
-    while (true) {
-      const { value, done } = await reader2.read();
-      if (done) {
-        break;
-      }
-      yield addHelpers(value);
-    }
-  }
+  const responseStream =
+    getResponseStream<GenerateContentResponse>(inputStream);
+  const [stream1, stream2] = responseStream.tee();
   return {
-    stream: generateResponseSequence(),
-    response: responsePromise,
+    stream: generateResponseSequence(stream1),
+    response: getResponsePromise(stream2),
   };
+}
+
+async function getResponsePromise(
+  stream: ReadableStream<GenerateContentResponse>,
+): Promise<EnhancedGenerateContentResponse> {
+  const allResponses: GenerateContentResponse[] = [];
+  const reader = stream.getReader();
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) {
+      return addHelpers(aggregateResponses(allResponses));
+    }
+    allResponses.push(value);
+  }
+}
+
+async function* generateResponseSequence(
+  stream: ReadableStream<GenerateContentResponse>,
+): AsyncGenerator<EnhancedGenerateContentResponse> {
+  const reader = stream.getReader();
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) {
+      break;
+    }
+    yield addHelpers(value);
+  }
 }
 
 /**
@@ -74,33 +79,44 @@ export function processStream(response: Response): GenerateContentStreamResult {
  * chunks, returning a new stream that provides a single complete
  * GenerateContentResponse in each iteration.
  */
-function readFromReader(
-  reader: ReadableStreamDefaultReader,
-): ReadableStream<GenerateContentResponse> {
-  let currentText = "";
-  const stream = new ReadableStream<GenerateContentResponse>({
+export function getResponseStream<T>(
+  inputStream: ReadableStream<string>,
+): ReadableStream<T> {
+  const reader = inputStream.getReader();
+  const stream = new ReadableStream<T>({
     start(controller) {
+      let currentText = "";
       return pump();
       function pump(): Promise<(() => Promise<void>) | undefined> {
         return reader.read().then(({ value, done }) => {
           if (done) {
+            if (currentText.trim()) {
+              controller.error(
+                new GoogleGenerativeAIError("Failed to parse stream"),
+              );
+              return;
+            }
             controller.close();
             return;
           }
-          const chunk = new TextDecoder().decode(value);
-          currentText += chunk;
-          const match = currentText.match(responseLineRE);
-          if (match) {
-            let parsedResponse: GenerateContentResponse;
+
+          currentText += value;
+          let match = currentText.match(responseLineRE);
+          let parsedResponse: T;
+          while (match) {
             try {
               parsedResponse = JSON.parse(match[1]);
             } catch (e) {
-              throw new GoogleGenerativeAIError(
-                `Error parsing JSON response: "${match[1]}"`,
+              controller.error(
+                new GoogleGenerativeAIError(
+                  `Error parsing JSON response: "${match[1]}"`,
+                ),
               );
+              return;
             }
-            currentText = "";
             controller.enqueue(parsedResponse);
+            currentText = currentText.substring(match[0].length);
+            match = currentText.match(responseLineRE);
           }
           return pump();
         });
