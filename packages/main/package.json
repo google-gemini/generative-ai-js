@@ -28,7 +28,7 @@
     "test:node:integration": "yarn build && TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha \"test-integration/node/**/*.test.ts\"",
     "lint": "eslint -c .eslintrc.js '**/*.ts' --ignore-path '../../.gitignore'",
     "api-report": "api-extractor run --local --verbose",
-    "docs": "yarn build && yarn api-documenter markdown -i ./temp -o ../../docs/reference/"
+    "docs": "yarn build && npx api-documenter markdown -i ./temp -o ../../docs/reference/"
   },
   "repository": {
     "type": "git",

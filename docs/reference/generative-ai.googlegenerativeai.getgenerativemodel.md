@@ -9,7 +9,7 @@ Gets a [GenerativeModel](./generative-ai.generativemodel.md) instance for the pr
 **Signature:**
 
 ```typescript
-getGenerativeModel(modelParams: ModelParams): GenerativeModel;
+getGenerativeModel(modelParams: ModelParams, requestOptions?: RequestOptions): GenerativeModel;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ getGenerativeModel(modelParams: ModelParams): GenerativeModel;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  modelParams | [ModelParams](./generative-ai.modelparams.md) |  |
+|  requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 
