@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+import { RequestOptions } from "../../types";
 import { GoogleGenerativeAIError } from "../errors";
 
 const BASE_URL = "https://generativelanguage.googleapis.com";
@@ -62,12 +63,12 @@ function getClientHeaders(): string {
 export async function makeRequest(
   url: RequestUrl,
   body: string,
-  fetchOptions?: RequestInit,
+  requestOptions?: RequestOptions,
 ): Promise<Response> {
   let response;
   try {
     response = await fetch(url.toString(), {
-      ...fetchOptions,
+      ...buildFetchOptions(requestOptions),
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -97,4 +98,20 @@ export async function makeRequest(
     throw err;
   }
   return response;
+}
+
+/**
+ * Generates the request options to be passed to the fetch API.
+ * @param requestOptions - The user-defined request options.
+ * @returns The generated request options.
+ */
+function buildFetchOptions(requestOptions?: RequestOptions): RequestInit {
+  const fetchOptions = {} as RequestInit;
+  if (requestOptions?.timeout >= 0) {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+    setTimeout(() => abortController.abort(), requestOptions.timeout);
+    fetchOptions.signal = signal;
+  }
+  return fetchOptions;
 }

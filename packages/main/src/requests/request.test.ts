@@ -75,11 +75,9 @@ describe("request methods", () => {
         statusText: "AbortError",
       } as Response);
 
-      const abortController = new AbortController();
-      setImmediate(() => abortController.abort());
       await expect(
         makeRequest(fakeRequestUrl, "", {
-          signal: abortController.signal,
+          timeout: 0,
         }),
       ).to.be.rejectedWith("500 AbortError");
       expect(fetchStub).to.be.calledOnce;

@@ -16,7 +16,7 @@
  */
 
 import { GoogleGenerativeAIError } from "./errors";
-import { ModelParams } from "../types";
+import { ModelParams, RequestOptions } from "../types";
 import { GenerativeModel } from "./models/generative-model";
 
 export { ChatSession } from "./methods/chat-session";
@@ -32,13 +32,16 @@ export class GoogleGenerativeAI {
   /**
    * Gets a {@link GenerativeModel} instance for the provided model name.
    */
-  getGenerativeModel(modelParams: ModelParams): GenerativeModel {
+  getGenerativeModel(
+    modelParams: ModelParams,
+    requestOptions?: RequestOptions,
+  ): GenerativeModel {
     if (!modelParams.model) {
       throw new GoogleGenerativeAIError(
         `Must provide a model name. ` +
           `Example: genai.getGenerativeModel({ model: 'my-model-name' })`,
       );
     }
-    return new GenerativeModel(this.apiKey, modelParams);
+    return new GenerativeModel(this.apiKey, modelParams, requestOptions);
   }
 }
