@@ -14,6 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import fetch from 'node-fetch';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 
 import { GoogleGenerativeAIError } from "../errors";
 
@@ -58,13 +60,18 @@ export class RequestUrl {
 function getClientHeaders(): string {
   return `${PACKAGE_LOG_HEADER}/${PACKAGE_VERSION}`;
 }
-
 export async function makeRequest(
   url: RequestUrl,
   body: string,
-): Promise<Response> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): Promise<any> {
   let response;
   try {
+    let agent;
+    if (process.env.http_proxy) {
+      agent = new HttpsProxyAgent(process.env.http_proxy);
+    }
+
     response = await fetch(url.toString(), {
       method: "POST",
       headers: {
@@ -73,11 +80,13 @@ export async function makeRequest(
         "x-goog-api-key": url.apiKey,
       },
       body,
+      agent
     });
     if (!response.ok) {
       let message = "";
       try {
-        const json = await response.json();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const json:any = await response.json();
         message = json.error.message;
         if (json.error.details) {
           message += ` ${JSON.stringify(json.error.details)}`;

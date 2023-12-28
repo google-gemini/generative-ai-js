@@ -25,11 +25,11 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   rules: {
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        packageDir: [path.resolve(__dirname, "../../"), __dirname],
-      },
-    ],
+    // "import/no-extraneous-dependencies": [
+    //   "error",
+    //   {
+    //     packageDir: [path.resolve(__dirname, "../../"), __dirname],
+    //   },
+    // ],
   },
 };

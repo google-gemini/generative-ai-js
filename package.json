@@ -51,5 +51,9 @@
   "workspaces": [
     "packages/*"
   ],
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "dependencies": {
+    "https-proxy-agent": "^7.0.0",
+    "node-fetch": "^3.3.2"
+  }
 }
