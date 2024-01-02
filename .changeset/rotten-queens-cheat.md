@@ -1,5 +1,5 @@
 ---
-"@google/generative-ai": patch
+"@google/generative-ai": minor
 ---
 
 add request timeout configuration
