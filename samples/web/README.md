@@ -22,4 +22,4 @@ This sample showcases the following API capablilites:
 
 ## Documentation
 
-- [Quickstart: Get started with the Gemini API in web apps](https://googledevai.google.com/tutorials/web_quickstart)
+- [Quickstart: Get started with the Gemini API in web apps](https://ai.google.dev/tutorials/web_quickstart)
