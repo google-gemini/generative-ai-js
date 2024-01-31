@@ -20,6 +20,7 @@ import {
   GenerateContentResponse,
   GenerateContentResult,
   GenerateContentStreamResult,
+  RequestOptions,
 } from "../../types";
 import { RequestUrl, Task, makeRequest } from "../requests/request";
 import { addHelpers } from "../requests/response-helpers";
@@ -29,6 +30,7 @@ export async function generateContentStream(
   apiKey: string,
   model: string,
   params: GenerateContentRequest,
+  requestOptions?: RequestOptions,
 ): Promise<GenerateContentStreamResult> {
   const url = new RequestUrl(
     model,
@@ -36,7 +38,11 @@ export async function generateContentStream(
     apiKey,
     /* stream */ true,
   );
-  const response = await makeRequest(url, JSON.stringify(params));
+  const response = await makeRequest(
+    url,
+    JSON.stringify(params),
+    requestOptions,
+  );
   return processStream(response);
 }
 
@@ -44,6 +50,7 @@ export async function generateContent(
   apiKey: string,
   model: string,
   params: GenerateContentRequest,
+  requestOptions?: RequestOptions,
 ): Promise<GenerateContentResult> {
   const url = new RequestUrl(
     model,
@@ -51,7 +58,11 @@ export async function generateContent(
     apiKey,
     /* stream */ false,
   );
-  const response = await makeRequest(url, JSON.stringify(params));
+  const response = await makeRequest(
+    url,
+    JSON.stringify(params),
+    requestOptions,
+  );
   const responseJson: GenerateContentResponse = await response.json();
   const enhancedResponse = addHelpers(responseJson);
   return {

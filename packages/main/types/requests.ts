@@ -98,3 +98,11 @@ export interface EmbedContentRequest {
 export interface BatchEmbedContentsRequest {
   requests: EmbedContentRequest[];
 }
+
+/**
+ * Params passed to {@link GoogleGenerativeAI.getGenerativeModel}.
+ * @public
+ */
+export interface RequestOptions {
+  timeout?: number;
+}

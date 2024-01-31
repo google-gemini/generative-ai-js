@@ -32,6 +32,7 @@ import {
   GenerationConfig,
   ModelParams,
   Part,
+  RequestOptions,
   SafetySetting,
   StartChatParams,
 } from "../../types";
@@ -51,10 +52,12 @@ export class GenerativeModel {
   model: string;
   generationConfig: GenerationConfig;
   safetySettings: SafetySetting[];
+  requestOptions: RequestOptions;
 
   constructor(
     public apiKey: string,
     modelParams: ModelParams,
+    requestOptions?: RequestOptions,
   ) {
     if (modelParams.model.startsWith("models/")) {
       this.model = modelParams.model.split("models/")?.[1];
@@ -63,6 +66,7 @@ export class GenerativeModel {
     }
     this.generationConfig = modelParams.generationConfig || {};
     this.safetySettings = modelParams.safetySettings || [];
+    this.requestOptions = requestOptions || {};
   }
 
   /**
@@ -73,11 +77,16 @@ export class GenerativeModel {
     request: GenerateContentRequest | string | Array<string | Part>,
   ): Promise<GenerateContentResult> {
     const formattedParams = formatGenerateContentInput(request);
-    return generateContent(this.apiKey, this.model, {
-      generationConfig: this.generationConfig,
-      safetySettings: this.safetySettings,
-      ...formattedParams,
-    });
+    return generateContent(
+      this.apiKey,
+      this.model,
+      {
+        generationConfig: this.generationConfig,
+        safetySettings: this.safetySettings,
+        ...formattedParams,
+      },
+      this.requestOptions,
+    );
   }
 
   /**
@@ -90,11 +99,16 @@ export class GenerativeModel {
     request: GenerateContentRequest | string | Array<string | Part>,
   ): Promise<GenerateContentStreamResult> {
     const formattedParams = formatGenerateContentInput(request);
-    return generateContentStream(this.apiKey, this.model, {
-      generationConfig: this.generationConfig,
-      safetySettings: this.safetySettings,
-      ...formattedParams,
-    });
+    return generateContentStream(
+      this.apiKey,
+      this.model,
+      {
+        generationConfig: this.generationConfig,
+        safetySettings: this.safetySettings,
+        ...formattedParams,
+      },
+      this.requestOptions,
+    );
   }
 
   /**
@@ -102,7 +116,12 @@ export class GenerativeModel {
    * multi-turn chats.
    */
   startChat(startChatParams?: StartChatParams): ChatSession {
-    return new ChatSession(this.apiKey, this.model, startChatParams);
+    return new ChatSession(
+      this.apiKey,
+      this.model,
+      startChatParams,
+      this.requestOptions,
+    );
   }
 
   /**
@@ -135,6 +154,7 @@ export class GenerativeModel {
       this.apiKey,
       this.model,
       batchEmbedContentRequest,
+      this.requestOptions,
     );
   }
 }
