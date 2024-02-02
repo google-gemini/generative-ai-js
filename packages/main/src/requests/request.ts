@@ -107,6 +107,9 @@ export async function makeRequest(
  */
 function buildFetchOptions(requestOptions?: RequestOptions): RequestInit {
   const fetchOptions = {} as RequestInit;
+  if (requestOptions?.signal) {
+    fetchOptions.signal = requestOptions?.signal;
+  }
   if (requestOptions?.timeout >= 0) {
     const abortController = new AbortController();
     const signal = abortController.signal;

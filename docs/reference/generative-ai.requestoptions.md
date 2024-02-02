@@ -16,5 +16,6 @@ export interface RequestOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [signal?](./generative-ai.requestoptions.signal.md) |  | AbortSignal | _(Optional)_ |
 |  [timeout?](./generative-ai.requestoptions.timeout.md) |  | number | _(Optional)_ |
 

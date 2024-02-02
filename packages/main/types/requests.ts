@@ -104,5 +104,6 @@ export interface BatchEmbedContentsRequest {
  * @public
  */
 export interface RequestOptions {
+  signal?: AbortSignal;
   timeout?: number;
 }
