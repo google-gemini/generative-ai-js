@@ -28,5 +28,5 @@ export declare class GoogleGenerativeAI
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [getGenerativeModel(modelParams)](./generative-ai.googlegenerativeai.getgenerativemodel.md) |  | Gets a [GenerativeModel](./generative-ai.generativemodel.md) instance for the provided model name. |
+|  [getGenerativeModel(modelParams, requestOptions)](./generative-ai.googlegenerativeai.getgenerativemodel.md) |  | Gets a [GenerativeModel](./generative-ai.generativemodel.md) instance for the provided model name. |
 

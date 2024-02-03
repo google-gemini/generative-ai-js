@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+import { RequestOptions } from "../../types";
 import { GoogleGenerativeAIError } from "../errors";
 
 const API_VERSION = "v1";
@@ -40,10 +41,11 @@ export class RequestUrl {
     public task: Task,
     public apiKey: string,
     public stream: boolean,
-    public baseURL: string
+    public requestOptions: RequestOptions
   ) {}
   toString(): string {
-    let url = `${this.baseURL}/${API_VERSION}/models/${this.model}:${this.task}`;
+    const baseURL = this.requestOptions.baseURL || 'https://generativelanguage.googleapis.com';
+    let url = `${baseURL}/${API_VERSION}/models/${this.model}:${this.task}`;
     if (this.stream) {
       url += "?alt=sse";
     }
@@ -61,10 +63,12 @@ function getClientHeaders(): string {
 export async function makeRequest(
   url: RequestUrl,
   body: string,
+  requestOptions?: RequestOptions,
 ): Promise<Response> {
   let response;
   try {
     response = await fetch(url.toString(), {
+      ...buildFetchOptions(requestOptions),
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -94,4 +98,20 @@ export async function makeRequest(
     throw err;
   }
   return response;
+}
+
+/**
+ * Generates the request options to be passed to the fetch API.
+ * @param requestOptions - The user-defined request options.
+ * @returns The generated request options.
+ */
+function buildFetchOptions(requestOptions?: RequestOptions): RequestInit {
+  const fetchOptions = {} as RequestInit;
+  if (requestOptions?.timeout >= 0) {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+    setTimeout(() => abortController.abort(), requestOptions.timeout);
+    fetchOptions.signal = signal;
+  }
+  return fetchOptions;
 }

@@ -16,7 +16,7 @@ export declare class ChatSession
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(apiKey, model, params)](./generative-ai.chatsession._constructor_.md) |  | Constructs a new instance of the <code>ChatSession</code> class |
+|  [(constructor)(apiKey, model, params, requestOptions)](./generative-ai.chatsession._constructor_.md) |  | Constructs a new instance of the <code>ChatSession</code> class |
 
 ## Properties
 
@@ -24,6 +24,7 @@ export declare class ChatSession
 |  --- | --- | --- | --- |
 |  [model](./generative-ai.chatsession.model.md) |  | string |  |
 |  [params?](./generative-ai.chatsession.params.md) |  | [StartChatParams](./generative-ai.startchatparams.md) | _(Optional)_ |
+|  [requestOptions?](./generative-ai.chatsession.requestoptions.md) |  | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
 
 ## Methods
 

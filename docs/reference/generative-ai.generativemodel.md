@@ -16,7 +16,7 @@ export declare class GenerativeModel
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(apiKey, modelParams)](./generative-ai.generativemodel._constructor_.md) |  | Constructs a new instance of the <code>GenerativeModel</code> class |
+|  [(constructor)(apiKey, modelParams, requestOptions)](./generative-ai.generativemodel._constructor_.md) |  | Constructs a new instance of the <code>GenerativeModel</code> class |
 
 ## Properties
 
@@ -25,6 +25,7 @@ export declare class GenerativeModel
 |  [apiKey](./generative-ai.generativemodel.apikey.md) |  | string |  |
 |  [generationConfig](./generative-ai.generativemodel.generationconfig.md) |  | [GenerationConfig](./generative-ai.generationconfig.md) |  |
 |  [model](./generative-ai.generativemodel.model.md) |  | string |  |
+|  [requestOptions](./generative-ai.generativemodel.requestoptions.md) |  | [RequestOptions](./generative-ai.requestoptions.md) |  |
 |  [safetySettings](./generative-ai.generativemodel.safetysettings.md) |  | [SafetySetting](./generative-ai.safetysetting.md)<!-- -->\[\] |  |
 
 ## Methods

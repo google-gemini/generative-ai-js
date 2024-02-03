@@ -21,6 +21,7 @@ import {
   GenerateContentResult,
   GenerateContentStreamResult,
   Part,
+  RequestOptions,
   StartChatParams,
 } from "../../types";
 import { formatNewContent } from "../requests/request-helpers";
@@ -46,8 +47,8 @@ export class ChatSession {
   constructor(
     apiKey: string,
     public model: string,
-    public baseURL: string,
-    public params?: StartChatParams
+    public params?: StartChatParams,
+    public requestOptions?: RequestOptions,
   ) {
     this._apiKey = apiKey;
     if (params?.history) {
@@ -90,7 +91,12 @@ export class ChatSession {
     // Add onto the chain.
     this._sendPromise = this._sendPromise
       .then(() =>
-        generateContent(this._apiKey, this.model, generateContentRequest, this.baseURL),
+        generateContent(
+          this._apiKey,
+          this.model,
+          generateContentRequest,
+          this.requestOptions,
+        ),
       )
       .then((result) => {
         if (
@@ -138,7 +144,7 @@ export class ChatSession {
       this._apiKey,
       this.model,
       generateContentRequest,
-      this.baseURL
+      this.requestOptions,
     );
 
     // Add onto the chain.

@@ -15,16 +15,24 @@
  * limitations under the License.
  */
 
-import { CountTokensRequest, CountTokensResponse } from "../../types";
+import {
+  CountTokensRequest,
+  CountTokensResponse,
+  RequestOptions,
+} from "../../types";
 import { RequestUrl, Task, makeRequest } from "../requests/request";
 
 export async function countTokens(
   apiKey: string,
   model: string,
-  baseURL: string,
   params: CountTokensRequest,
+  requestOptions: RequestOptions,
 ): Promise<CountTokensResponse> {
-  const url = new RequestUrl(model, Task.COUNT_TOKENS, apiKey, false, baseURL);
-  const response = await makeRequest(url, JSON.stringify({ ...params, model }));
+  const url = new RequestUrl(model, Task.COUNT_TOKENS, apiKey, false, requestOptions);
+  const response = await makeRequest(
+    url,
+    JSON.stringify({ ...params, model }),
+    requestOptions,
+  );
   return response.json();
 }

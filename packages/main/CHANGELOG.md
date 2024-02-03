@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.2.0
+
+### Minor Changes
+
+- c64fca1: add request timeout configuration
+
 ## 0.1.3
 
 ### Patch Changes

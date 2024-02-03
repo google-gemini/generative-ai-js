@@ -32,6 +32,7 @@ import {
   GenerationConfig,
   ModelParams,
   Part,
+  RequestOptions,
   SafetySetting,
   StartChatParams,
 } from "../../types";
@@ -51,11 +52,12 @@ export class GenerativeModel {
   model: string;
   generationConfig: GenerationConfig;
   safetySettings: SafetySetting[];
+  requestOptions: RequestOptions;
 
   constructor(
     public apiKey: string,
     modelParams: ModelParams,
-    public baseURL?: string
+    requestOptions?: RequestOptions,
   ) {
     if (modelParams.model.startsWith("models/")) {
       this.model = modelParams.model.split("models/")?.[1];
@@ -64,7 +66,7 @@ export class GenerativeModel {
     }
     this.generationConfig = modelParams.generationConfig || {};
     this.safetySettings = modelParams.safetySettings || [];
-    this.baseURL = baseURL || 'https://generativelanguage.googleapis.com';
+    this.requestOptions = requestOptions || {};
   }
 
   /**
@@ -75,11 +77,16 @@ export class GenerativeModel {
     request: GenerateContentRequest | string | Array<string | Part>,
   ): Promise<GenerateContentResult> {
     const formattedParams = formatGenerateContentInput(request);
-    return generateContent(this.apiKey, this.model, {
-      generationConfig: this.generationConfig,
-      safetySettings: this.safetySettings,
-      ...formattedParams,
-    }, this.baseURL);
+    return generateContent(
+      this.apiKey,
+      this.model,
+      {
+        generationConfig: this.generationConfig,
+        safetySettings: this.safetySettings,
+        ...formattedParams,
+      },
+      this.requestOptions,
+    );
   }
 
   /**
@@ -92,11 +99,16 @@ export class GenerativeModel {
     request: GenerateContentRequest | string | Array<string | Part>,
   ): Promise<GenerateContentStreamResult> {
     const formattedParams = formatGenerateContentInput(request);
-    return generateContentStream(this.apiKey, this.model, {
-      generationConfig: this.generationConfig,
-      safetySettings: this.safetySettings,
-      ...formattedParams,
-    }, this.baseURL);
+    return generateContentStream(
+      this.apiKey,
+      this.model,
+      {
+        generationConfig: this.generationConfig,
+        safetySettings: this.safetySettings,
+        ...formattedParams,
+      },
+      this.requestOptions,
+    );
   }
 
   /**
@@ -104,7 +116,12 @@ export class GenerativeModel {
    * multi-turn chats.
    */
   startChat(startChatParams?: StartChatParams): ChatSession {
-    return new ChatSession(this.apiKey, this.model, this.baseURL, startChatParams);
+    return new ChatSession(
+      this.apiKey,
+      this.model,
+      startChatParams,
+      this.requestOptions,
+    );
   }
 
   /**
@@ -114,7 +131,7 @@ export class GenerativeModel {
     request: CountTokensRequest | string | Array<string | Part>,
   ): Promise<CountTokensResponse> {
     const formattedParams = formatGenerateContentInput(request);
-    return countTokens(this.apiKey, this.model, this.baseURL, formattedParams);
+    return countTokens(this.apiKey, this.model, formattedParams, this.requestOptions);
   }
 
   /**
@@ -124,7 +141,7 @@ export class GenerativeModel {
     request: EmbedContentRequest | string | Array<string | Part>,
   ): Promise<EmbedContentResponse> {
     const formattedParams = formatEmbedContentInput(request);
-    return embedContent(this.apiKey, this.model, this.baseURL, formattedParams);
+    return embedContent(this.apiKey, this.model, formattedParams, this.requestOptions);
   }
 
   /**
@@ -136,8 +153,8 @@ export class GenerativeModel {
     return batchEmbedContents(
       this.apiKey,
       this.model,
-      this.baseURL,
       batchEmbedContentRequest,
+      this.requestOptions,
     );
   }
 }

@@ -32,4 +32,4 @@ This sample assumes that you're providing an `API_KEY` environment variable.
 
 ## Documentation
 
-- [Quickstart: Get started with the Gemini API in Node.js applications](https://googledevai.google.com/tutorials/node_quickstart)
+- [Quickstart: Get started with the Gemini API in Node.js applications](https://ai.google.dev/tutorials/node_quickstart)

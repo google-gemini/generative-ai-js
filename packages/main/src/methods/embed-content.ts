@@ -20,27 +20,32 @@ import {
   BatchEmbedContentsResponse,
   EmbedContentRequest,
   EmbedContentResponse,
+  RequestOptions,
 } from "../../types";
 import { RequestUrl, Task, makeRequest } from "../requests/request";
 
 export async function embedContent(
   apiKey: string,
   model: string,
-  baseURL: string,
   params: EmbedContentRequest,
+  requestOptions?: RequestOptions,
 ): Promise<EmbedContentResponse> {
-  const url = new RequestUrl(model, Task.EMBED_CONTENT, apiKey, false, baseURL);
-  const response = await makeRequest(url, JSON.stringify(params));
+  const url = new RequestUrl(model, Task.EMBED_CONTENT, apiKey, false, requestOptions);
+  const response = await makeRequest(
+    url,
+    JSON.stringify(params),
+    requestOptions,
+  );
   return response.json();
 }
 
 export async function batchEmbedContents(
   apiKey: string,
   model: string,
-  baseURL: string,
   params: BatchEmbedContentsRequest,
+  requestOptions?: RequestOptions,
 ): Promise<BatchEmbedContentsResponse> {
-  const url = new RequestUrl(model, Task.BATCH_EMBED_CONTENTS, apiKey, false, baseURL);
+  const url = new RequestUrl(model, Task.BATCH_EMBED_CONTENTS, apiKey, false, requestOptions);
   const requestsWithModel: EmbedContentRequest[] = params.requests.map(
     (request) => {
       return { ...request, model: `models/${model}` };
@@ -49,6 +54,7 @@ export async function batchEmbedContents(
   const response = await makeRequest(
     url,
     JSON.stringify({ requests: requestsWithModel }),
+    requestOptions,
   );
   return response.json();
 }
