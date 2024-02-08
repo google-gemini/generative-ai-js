@@ -28,4 +28,10 @@ describe("GenerativeModel", () => {
     });
     expect(genModel.model).to.equal("models/my-model");
   });
+  it("handles prefixed tuned model name", () => {
+    const genModel = new GenerativeModel("apiKey", {
+      model: "tunedModels/my-model",
+    });
+    expect(genModel.model).to.equal("tunedModels/my-model");
+  });
 });
