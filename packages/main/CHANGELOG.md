@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.2.1
+
+### Patch Changes
+
+- 2b0c955: Handle different model prefixes (such as tunedModels/).
+
 ## 0.2.0
 
 ### Minor Changes
