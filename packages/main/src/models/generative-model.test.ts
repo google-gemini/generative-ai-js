@@ -20,12 +20,18 @@ import { GenerativeModel } from "./generative-model";
 describe("GenerativeModel", () => {
   it("handles plain model name", () => {
     const genModel = new GenerativeModel("apiKey", { model: "my-model" });
-    expect(genModel.model).to.equal("my-model");
+    expect(genModel.model).to.equal("models/my-model");
   });
   it("handles prefixed model name", () => {
     const genModel = new GenerativeModel("apiKey", {
       model: "models/my-model",
     });
-    expect(genModel.model).to.equal("my-model");
+    expect(genModel.model).to.equal("models/my-model");
+  });
+  it("handles prefixed tuned model name", () => {
+    const genModel = new GenerativeModel("apiKey", {
+      model: "tunedModels/my-model",
+    });
+    expect(genModel.model).to.equal("tunedModels/my-model");
   });
 });

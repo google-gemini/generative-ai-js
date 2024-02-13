@@ -29,6 +29,6 @@ describe("GoogleGenerativeAI", () => {
     const genAI = new GoogleGenerativeAI("apikey");
     const genModel = genAI.getGenerativeModel({ model: "my-model" });
     expect(genModel).to.be.an.instanceOf(GenerativeModel);
-    expect(genModel.model).to.equal("my-model");
+    expect(genModel.model).to.equal("models/my-model");
   });
 });

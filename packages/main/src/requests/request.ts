@@ -45,7 +45,7 @@ export class RequestUrl {
     public stream: boolean,
   ) {}
   toString(): string {
-    let url = `${BASE_URL}/${API_VERSION}/models/${this.model}:${this.task}`;
+    let url = `${BASE_URL}/${API_VERSION}/${this.model}:${this.task}`;
     if (this.stream) {
       url += "?alt=sse";
     }

@@ -247,11 +247,7 @@ describe("startChat", function () {
     const question1 = "What is the capital of Oregon?";
     const question2 = "How many people live there?";
     const question3 = "What is the closest river?";
-    const chat = model.startChat({
-      generationConfig: {
-        maxOutputTokens: 100,
-      },
-    });
+    const chat = model.startChat();
     const result1 = await chat.sendMessageStream(question1);
     const response1 = await result1.response;
     expect(response1.text()).to.not.be.empty;
@@ -287,11 +283,7 @@ describe("startChat", function () {
     const question1 = "What are the most interesting cities in Oregon?";
     const question2 = "How many people live there?";
     const question3 = "What is the closest river?";
-    const chat = model.startChat({
-      generationConfig: {
-        maxOutputTokens: 100,
-      },
-    });
+    const chat = model.startChat();
     const promise1 = chat.sendMessageStream(question1).then(async (result1) => {
       for await (const response of result1.stream) {
         expect(response.text()).to.not.be.empty;

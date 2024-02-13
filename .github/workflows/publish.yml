@@ -53,4 +53,7 @@ jobs:
         run: yarn changeset publish
 
       - name: Git tags
-        run: git push --follow-tags
+        # list tags then try to push them
+        run: |
+          git for-each-ref refs/tags
+          git push --follow-tags

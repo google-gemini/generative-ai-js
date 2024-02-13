@@ -48,7 +48,7 @@ export async function batchEmbedContents(
   const url = new RequestUrl(model, Task.BATCH_EMBED_CONTENTS, apiKey, false);
   const requestsWithModel: EmbedContentRequest[] = params.requests.map(
     (request) => {
-      return { ...request, model: `models/${model}` };
+      return { ...request, model };
     },
   );
   const response = await makeRequest(
