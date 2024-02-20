@@ -41,10 +41,12 @@ export class RequestUrl {
     public task: Task,
     public apiKey: string,
     public stream: boolean,
-    public requestOptions: RequestOptions
+    public requestOptions: RequestOptions,
   ) {}
   toString(): string {
-    const baseURL = this.requestOptions.baseURL || 'https://generativelanguage.googleapis.com';
+    const baseURL =
+      this.requestOptions?.baseURL ||
+      "https://generativelanguage.googleapis.com";
     let url = `${baseURL}/${API_VERSION}/${this.model}:${this.task}`;
     if (this.stream) {
       url += "?alt=sse";

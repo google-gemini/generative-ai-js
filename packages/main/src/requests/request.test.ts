@@ -29,6 +29,7 @@ const fakeRequestUrl = new RequestUrl(
   Task.GENERATE_CONTENT,
   "key",
   true,
+  {},
 );
 
 describe("request methods", () => {
@@ -42,6 +43,7 @@ describe("request methods", () => {
         Task.GENERATE_CONTENT,
         "key",
         true,
+        {},
       );
       expect(url.toString()).to.include("models/model-name:generateContent");
       expect(url.toString()).to.not.include("key");
@@ -53,6 +55,7 @@ describe("request methods", () => {
         Task.GENERATE_CONTENT,
         "key",
         false,
+        {},
       );
       expect(url.toString()).to.include("models/model-name:generateContent");
       expect(url.toString()).to.not.include("key");
@@ -64,6 +67,7 @@ describe("request methods", () => {
         Task.GENERATE_CONTENT,
         "key",
         false,
+        {},
       );
       expect(url.toString()).to.include(
         "tunedModels/model-name:generateContent",

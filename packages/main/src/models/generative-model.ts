@@ -133,7 +133,12 @@ export class GenerativeModel {
     request: CountTokensRequest | string | Array<string | Part>,
   ): Promise<CountTokensResponse> {
     const formattedParams = formatGenerateContentInput(request);
-    return countTokens(this.apiKey, this.model, formattedParams, this.requestOptions);
+    return countTokens(
+      this.apiKey,
+      this.model,
+      formattedParams,
+      this.requestOptions,
+    );
   }
 
   /**
@@ -143,7 +148,12 @@ export class GenerativeModel {
     request: EmbedContentRequest | string | Array<string | Part>,
   ): Promise<EmbedContentResponse> {
     const formattedParams = formatEmbedContentInput(request);
-    return embedContent(this.apiKey, this.model, formattedParams, this.requestOptions);
+    return embedContent(
+      this.apiKey,
+      this.model,
+      formattedParams,
+      this.requestOptions,
+    );
   }
 
   /**

@@ -4,3 +4,4 @@ packages/**/temp/
 *.tgz
 .DS_Store
 testfiles
+.idea
