@@ -1,5 +1,5 @@
 {
-  "name": "@fuyun/generative-ai",
+  "name": "@google/generative-ai",
   "version": "0.2.1",
   "description": "Google AI JavaScript SDK",
   "main": "dist/index.js",

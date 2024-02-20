@@ -8,5 +8,5 @@
 
 |  Package | Description |
 |  --- | --- |
-|  [@fuyun/generative-ai](./generative-ai.md) |  |
+|  [@google/generative-ai](./generative-ai.md) |  |
 
