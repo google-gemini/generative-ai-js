@@ -59,10 +59,12 @@ export class GenerativeModel {
     modelParams: ModelParams,
     requestOptions?: RequestOptions,
   ) {
-    if (modelParams.model.startsWith("models/")) {
-      this.model = modelParams.model.split("models/")?.[1];
-    } else {
+    if (modelParams.model.includes("/")) {
+      // Models may be named "models/model-name" or "tunedModels/model-name"
       this.model = modelParams.model;
+    } else {
+      // If path is not included, assume it's a non-tuned model.
+      this.model = `models/${modelParams.model}`;
     }
     this.generationConfig = modelParams.generationConfig || {};
     this.safetySettings = modelParams.safetySettings || [];

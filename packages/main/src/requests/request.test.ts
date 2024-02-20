@@ -38,23 +38,36 @@ describe("request methods", () => {
   describe("RequestUrl", () => {
     it("stream", async () => {
       const url = new RequestUrl(
-        "model-name",
+        "models/model-name",
         Task.GENERATE_CONTENT,
         "key",
         true,
       );
-      expect(url.toString()).to.include("generateContent");
+      expect(url.toString()).to.include("models/model-name:generateContent");
       expect(url.toString()).to.not.include("key");
       expect(url.toString()).to.include("alt=sse");
     });
     it("non-stream", async () => {
       const url = new RequestUrl(
-        "model-name",
+        "models/model-name",
         Task.GENERATE_CONTENT,
         "key",
         false,
       );
-      expect(url.toString()).to.include("generateContent");
+      expect(url.toString()).to.include("models/model-name:generateContent");
+      expect(url.toString()).to.not.include("key");
+      expect(url.toString()).to.not.include("alt=sse");
+    });
+    it("non-stream - tunedModels/", async () => {
+      const url = new RequestUrl(
+        "tunedModels/model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        false,
+      );
+      expect(url.toString()).to.include(
+        "tunedModels/model-name:generateContent",
+      );
       expect(url.toString()).to.not.include("key");
       expect(url.toString()).to.not.include("alt=sse");
     });
