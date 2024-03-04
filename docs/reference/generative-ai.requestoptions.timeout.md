@@ -4,6 +4,8 @@
 
 ## RequestOptions.timeout property
 
+Request timeout in milliseconds.
+
 **Signature:**
 
 ```typescript

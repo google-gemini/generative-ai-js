@@ -4,7 +4,7 @@
 
 ## HarmBlockThreshold enum
 
-Threshhold above which a prompt or candidate will be blocked.
+Threshold above which a prompt or candidate will be blocked.
 
 **Signature:**
 
