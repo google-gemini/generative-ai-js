@@ -109,7 +109,8 @@ export interface RequestOptions {
    */
   timeout?: number;
   /**
-   * Version of API endpoint to call (e.g. "v1" or "v1beta")
+   * Version of API endpoint to call (e.g. "v1" or "v1beta"). If not specified,
+   * defaults to latest stable version.
    */
   apiVersion?: string;
 }
