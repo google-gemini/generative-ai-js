@@ -104,5 +104,13 @@ export interface BatchEmbedContentsRequest {
  * @public
  */
 export interface RequestOptions {
+  /**
+   * Request timeout in milliseconds.
+   */
   timeout?: number;
+  /**
+   * Version of API endpoint to call (e.g. "v1" or "v1beta"). If not specified,
+   * defaults to latest stable version.
+   */
+  apiVersion?: string;
 }

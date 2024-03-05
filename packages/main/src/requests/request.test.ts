@@ -19,7 +19,7 @@ import { expect, use } from "chai";
 import { restore, stub } from "sinon";
 import * as sinonChai from "sinon-chai";
 import * as chaiAsPromised from "chai-as-promised";
-import { RequestUrl, Task, makeRequest } from "./request";
+import { DEFAULT_API_VERSION, RequestUrl, Task, makeRequest } from "./request";
 
 use(sinonChai);
 use(chaiAsPromised);
@@ -29,6 +29,7 @@ const fakeRequestUrl = new RequestUrl(
   Task.GENERATE_CONTENT,
   "key",
   true,
+  {},
 );
 
 describe("request methods", () => {
@@ -42,6 +43,7 @@ describe("request methods", () => {
         Task.GENERATE_CONTENT,
         "key",
         true,
+        {},
       );
       expect(url.toString()).to.include("models/model-name:generateContent");
       expect(url.toString()).to.not.include("key");
@@ -53,10 +55,31 @@ describe("request methods", () => {
         Task.GENERATE_CONTENT,
         "key",
         false,
+        {},
       );
       expect(url.toString()).to.include("models/model-name:generateContent");
       expect(url.toString()).to.not.include("key");
       expect(url.toString()).to.not.include("alt=sse");
+    });
+    it("default apiVersion", async () => {
+      const url = new RequestUrl(
+        "models/model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        false,
+        {},
+      );
+      expect(url.toString()).to.include(DEFAULT_API_VERSION);
+    });
+    it("custom apiVersion", async () => {
+      const url = new RequestUrl(
+        "models/model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        false,
+        { apiVersion: "v2beta" },
+      );
+      expect(url.toString()).to.include("/v2beta/models/model-name");
     });
     it("non-stream - tunedModels/", async () => {
       const url = new RequestUrl(
@@ -64,6 +87,7 @@ describe("request methods", () => {
         Task.GENERATE_CONTENT,
         "key",
         false,
+        {},
       );
       expect(url.toString()).to.include(
         "tunedModels/model-name:generateContent",

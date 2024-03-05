@@ -37,6 +37,7 @@ export async function generateContentStream(
     Task.STREAM_GENERATE_CONTENT,
     apiKey,
     /* stream */ true,
+    requestOptions,
   );
   const response = await makeRequest(
     url,
@@ -57,6 +58,7 @@ export async function generateContent(
     Task.GENERATE_CONTENT,
     apiKey,
     /* stream */ false,
+    requestOptions,
   );
   const response = await makeRequest(
     url,

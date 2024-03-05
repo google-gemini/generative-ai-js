@@ -20,7 +20,7 @@ import { GoogleGenerativeAIError } from "../errors";
 
 const BASE_URL = "https://generativelanguage.googleapis.com";
 
-const API_VERSION = "v1";
+export const DEFAULT_API_VERSION = "v1";
 
 /**
  * We can't `require` package.json if this runs on web. We will use rollup to
@@ -43,9 +43,11 @@ export class RequestUrl {
     public task: Task,
     public apiKey: string,
     public stream: boolean,
+    public requestOptions: RequestOptions,
   ) {}
   toString(): string {
-    let url = `${BASE_URL}/${API_VERSION}/${this.model}:${this.task}`;
+    const apiVersion = this.requestOptions?.apiVersion || DEFAULT_API_VERSION;
+    let url = `${BASE_URL}/${apiVersion}/${this.model}:${this.task}`;
     if (this.stream) {
       url += "?alt=sse";
     }

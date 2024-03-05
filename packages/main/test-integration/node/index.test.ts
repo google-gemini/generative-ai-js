@@ -131,6 +131,24 @@ describe("generateContent", function () {
     const response = result.response;
     expect(response.text()).to.not.be.empty;
   });
+  it("non-streaming, simple interface, custom API version", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel(
+      {
+        model: "gemini-pro",
+        safetySettings: [
+          {
+            category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+            threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
+          },
+        ],
+      },
+      { apiVersion: "v1beta" },
+    );
+    const result = await model.generateContent("What do cats eat?");
+    const response = result.response;
+    expect(response.text()).to.not.be.empty;
+  });
   it("non-streaming, image buffer provided", async () => {
     const imageBuffer = fs.readFileSync(
       join(__dirname, "../../test-utils/cat.png"),
