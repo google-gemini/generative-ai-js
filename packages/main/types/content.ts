@@ -36,7 +36,11 @@ export interface InputContent {
  * Content part - includes text or image part types.
  * @public
  */
-export type Part = TextPart | InlineDataPart;
+export type Part =
+  | TextPart
+  | InlineDataPart
+  | FunctionCallPart
+  | FunctionResponsePart;
 
 /**
  * Content part interface if the part represents a text string.
@@ -45,6 +49,8 @@ export type Part = TextPart | InlineDataPart;
 export interface TextPart {
   text: string;
   inlineData?: never;
+  functionCall?: never;
+  functionResponse?: never;
 }
 
 /**
@@ -54,6 +60,55 @@ export interface TextPart {
 export interface InlineDataPart {
   text?: never;
   inlineData: GenerativeContentBlob;
+  functionCall?: never;
+  functionResponse?: never;
+}
+
+/**
+ * Content part interface if the part represents FunctionResponse.
+ * @public
+ */
+export interface FunctionCallPart {
+  text?: never;
+  inlineData?: never;
+  functionCall: FunctionCall;
+  functionResponse?: never;
+}
+
+/**
+ * Content part interface if the part represents FunctionResponse.
+ * @public
+ */
+export interface FunctionResponsePart {
+  text?: never;
+  inlineData?: never;
+  functionCall?: never;
+  functionResponse: FunctionResponse;
+}
+
+/**
+ * A predicted [FunctionCall] returned from the model
+ * that contains a string representing the [FunctionDeclaration.name]
+ * and a structured JSON object containing the parameters and their values.
+ * @public
+ */
+export interface FunctionCall {
+  name: string;
+  args: object;
+}
+
+/**
+ * The result output from a [FunctionCall] that contains a string
+ * representing the [FunctionDeclaration.name]
+ * and a structured JSON object containing any output
+ * from the function is used as context to the model.
+ * This should contain the result of a [FunctionCall]
+ * made based on model prediction.
+ * @public
+ */
+export interface FunctionResponse {
+  name: string;
+  response: object;
 }
 
 /**
