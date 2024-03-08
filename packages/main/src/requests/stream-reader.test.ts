@@ -113,6 +113,25 @@ describe("processStream", () => {
     expect(aggregatedResponse.text()).to.include("秋风瑟瑟，叶落纷纷");
     expect(aggregatedResponse.text()).to.include("家人围坐在一起");
   });
+  it("streaming response - functioncall", async () => {
+    const fakeResponse = getMockResponseStreaming(
+      "streaming-success-function-call-short.txt",
+    );
+    const result = processStream(fakeResponse as Response);
+    for await (const response of result.stream) {
+      expect(response.text()).to.be.empty;
+      expect(response.functionCall()).to.be.deep.equal({
+        name: "getTemperature",
+        args: { city: "San Jose" },
+      });
+    }
+    const aggregatedResponse = await result.response;
+    expect(aggregatedResponse.text()).to.be.empty;
+    expect(aggregatedResponse.functionCall()).to.be.deep.equal({
+      name: "getTemperature",
+      args: { city: "San Jose" },
+    });
+  });
   it("candidate had finishReason", async () => {
     const fakeResponse = getMockResponseStreaming(
       "streaming-failure-finish-reason-safety.txt",
@@ -335,9 +354,9 @@ describe("aggregateResponses", () => {
 
     it("aggregates text across responses", () => {
       expect(response.candidates.length).to.equal(1);
-      expect(response.candidates[0].content.parts[0].text).to.equal(
-        "hello.angry stuff...more stuff",
-      );
+      expect(
+        response.candidates[0].content.parts.map(({ text }) => text),
+      ).to.deep.equal(["hello.", "angry stuff", "...more stuff"]);
     });
 
     it("takes the last response's promptFeedback", () => {

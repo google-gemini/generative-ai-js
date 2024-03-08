@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { Content } from "./content";
+import { Content, FunctionCall } from "./content";
 import {
   BlockReason,
   FinishReason,
@@ -57,6 +57,7 @@ export interface EnhancedGenerateContentResponse
    * Throws if the prompt or candidate was blocked.
    */
   text: () => string;
+  functionCall: () => FunctionCall | undefined;
 }
 
 /**

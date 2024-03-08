@@ -16,6 +16,16 @@
  */
 
 /**
+ * Role is the producer of the content.
+ * @public
+ */
+export enum Role {
+  USER = "user",
+  MODEL = "model",
+  FUNCTION = "function",
+}
+
+/**
  * Harm categories that would cause prompts or candidates to be blocked.
  * @public
  */

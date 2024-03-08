@@ -28,7 +28,7 @@ use(chaiAsPromised);
  * Integration tests against live backend.
  */
 
-describe("generateContent", function () {
+describe("generateContent - multimodal", function () {
   this.timeout(60e3);
   this.slow(10e3);
   it("non-streaming, image buffer provided", async () => {

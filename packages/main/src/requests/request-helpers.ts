@@ -20,11 +20,12 @@ import {
   EmbedContentRequest,
   GenerateContentRequest,
   Part,
+  Role,
 } from "../../types";
+import { GoogleGenerativeAIError } from "../errors";
 
 export function formatNewContent(
   request: string | Array<string | Part>,
-  role: string,
 ): Content {
   let newParts: Part[] = [];
   if (typeof request === "string") {
@@ -38,7 +39,52 @@ export function formatNewContent(
       }
     }
   }
-  return { role, parts: newParts };
+  // return { role, parts: newParts };
+  return assignRoleToPartsAndValidateSendMessageRequest(newParts);
+}
+
+/**
+ * When multiple Part types (i.e. FunctionResponsePart and TextPart) are
+ * passed in a single Part array, we may need to assign different roles to each
+ * part. Currently only FunctionResponsePart requires a role other than 'user'.
+ * @private
+ * @param parts Array of parts to pass to the model
+ * @returns Array of content items
+ */
+function assignRoleToPartsAndValidateSendMessageRequest(
+  parts: Part[],
+): Content {
+  const userContent: Content = { role: Role.USER, parts: [] };
+  const functionContent: Content = { role: Role.FUNCTION, parts: [] };
+  let hasUserContent = false;
+  let hasFunctionContent = false;
+  for (const part of parts) {
+    if ("functionResponse" in part) {
+      functionContent.parts.push(part);
+      hasFunctionContent = true;
+    } else {
+      userContent.parts.push(part);
+      hasUserContent = true;
+    }
+  }
+
+  if (hasUserContent && hasFunctionContent) {
+    throw new GoogleGenerativeAIError(
+      "Within a single message, FunctionResponse cannot be mixed with other type of part in the request for sending chat message.",
+    );
+  }
+
+  if (!hasUserContent && !hasFunctionContent) {
+    throw new GoogleGenerativeAIError(
+      "Within a single message, FunctionResponse cannot be mixed with other type of part in the request for sending chat message.",
+    );
+  }
+
+  if (hasUserContent) {
+    return userContent;
+  }
+
+  return functionContent;
 }
 
 export function formatGenerateContentInput(
@@ -47,10 +93,7 @@ export function formatGenerateContentInput(
   if ((params as GenerateContentRequest).contents) {
     return params as GenerateContentRequest;
   } else {
-    const content = formatNewContent(
-      params as string | Array<string | Part>,
-      "user",
-    );
+    const content = formatNewContent(params as string | Array<string | Part>);
     return { contents: [content] };
   }
 }
@@ -59,7 +102,7 @@ export function formatEmbedContentInput(
   params: EmbedContentRequest | string | Array<string | Part>,
 ): EmbedContentRequest {
   if (typeof params === "string" || Array.isArray(params)) {
-    const content = formatNewContent(params, "user");
+    const content = formatNewContent(params);
     return { content };
   }
   return params;

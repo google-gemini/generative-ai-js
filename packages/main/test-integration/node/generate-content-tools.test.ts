@@ -18,6 +18,7 @@
 import { expect, use } from "chai";
 import * as chaiAsPromised from "chai-as-promised";
 import { FunctionDeclarationSchemaType, GoogleGenerativeAI } from "../..";
+import { Content } from "../../types";
 
 use(chaiAsPromised);
 
@@ -25,7 +26,7 @@ use(chaiAsPromised);
  * Integration tests against live backend.
  */
 
-describe("generateContent", function () {
+describe("generateContent - tools", function () {
   this.timeout(60e3);
   this.slow(10e3);
   // This test can be flaky
@@ -164,10 +165,10 @@ describe("generateContent", function () {
       ],
     };
 
-    const result1 = await model.generateContent({
+    const result1 = await model.generateContentStream({
       contents: [src1],
     });
-    const response1 = result1.response;
+    const response1 = await result1.response;
     expect(response1.candidates.length).to.equal(1);
     expect(response1.candidates[0].content.role).to.equal("model");
     expect(response1.candidates[0].content.parts.length).to.equal(1);
@@ -179,5 +180,86 @@ describe("generateContent", function () {
     const response3 = result3.response;
     expect(response3.text()).include("AMC Mountain View 16");
     expect(response3.text()).include("Regal Edwards 14");
+  });
+  it("streaming, tools usage", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel(
+      {
+        model: "gemini-pro",
+        tools: [
+          {
+            functionDeclarations: [
+              {
+                name: "getTemperature",
+                description:
+                  "Get current temperature in degrees Celsius in a given city",
+                parameters: {
+                  type: FunctionDeclarationSchemaType.OBJECT,
+                  properties: {
+                    city: { type: FunctionDeclarationSchemaType.STRING },
+                  },
+                  required: ["city"],
+                },
+              },
+            ],
+          },
+        ],
+      },
+      { apiVersion: "v1beta" },
+    );
+
+    const src1: Content = {
+      role: "user",
+      parts: [
+        {
+          text: "Is the temperature the same in New York and San Jose right now?",
+        },
+      ],
+    };
+    const src2: Content = {
+      role: "model",
+      parts: [
+        {
+          functionCall: {
+            name: "getTemperature",
+            args: { city: "New York" },
+          },
+        },
+      ],
+    };
+    const src3: Content = {
+      role: "model",
+      parts: [
+        {
+          functionCall: {
+            name: "getTemperature",
+            args: { city: "San Jose" },
+          },
+        },
+      ],
+    };
+    const fn1 = {
+      role: "function",
+      parts: [
+        {
+          functionResponse: {
+            name: "getTemperature",
+            response: {
+              name: "getTemperature",
+              content: {
+                temperature: "30",
+              },
+            },
+          },
+        },
+      ],
+    };
+
+    const result = await model.generateContentStream({
+      contents: [src1, src2, fn1, src3, fn1],
+    });
+    const response = await result.response;
+    console.log(response.text());
+    expect(response.text()).to.match(/(\bsame\b|\byes\b)/i);
   });
 });

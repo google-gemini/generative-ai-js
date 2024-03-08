@@ -58,7 +58,7 @@ export class ChatSession {
             "Missing role for history item: " + JSON.stringify(content),
           );
         }
-        return formatNewContent(content.parts, content.role);
+        return formatNewContent(content.parts);
       });
     }
   }
@@ -81,10 +81,11 @@ export class ChatSession {
     request: string | Array<string | Part>,
   ): Promise<GenerateContentResult> {
     await this._sendPromise;
-    const newContent = formatNewContent(request, "user");
+    const newContent = formatNewContent(request);
     const generateContentRequest: GenerateContentRequest = {
       safetySettings: this.params?.safetySettings,
       generationConfig: this.params?.generationConfig,
+      tools: this.params?.tools,
       contents: [...this._history, newContent],
     };
     let finalResult;
@@ -134,10 +135,11 @@ export class ChatSession {
     request: string | Array<string | Part>,
   ): Promise<GenerateContentStreamResult> {
     await this._sendPromise;
-    const newContent = formatNewContent(request, "user");
+    const newContent = formatNewContent(request);
     const generateContentRequest: GenerateContentRequest = {
       safetySettings: this.params?.safetySettings,
       generationConfig: this.params?.generationConfig,
+      tools: this.params?.tools,
       contents: [...this._history, newContent],
     };
     const streamPromise = generateContentStream(
