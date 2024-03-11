@@ -15,21 +15,15 @@
  * limitations under the License.
  */
 
+import { Role } from "./enums";
+
 /**
  * Content type for both prompts and response candidates.
  * @public
  */
-export interface Content extends InputContent {
+export interface Content {
+  role: Role;
   parts: Part[];
-}
-
-/**
- * Content that can be provided as history input to startChat().
- * @public
- */
-export interface InputContent {
-  parts: string | Array<string | Part>;
-  role: string;
 }
 
 /**

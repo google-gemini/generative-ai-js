@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { Content, InputContent } from "./content";
+import { Content } from "./content";
 import { HarmBlockThreshold, HarmCategory, TaskType } from "./enums";
 
 /**
@@ -72,7 +72,7 @@ export interface GenerationConfig {
  * @public
  */
 export interface StartChatParams extends BaseParams {
-  history?: InputContent[];
+  history?: Content[];
   tools?: Tool[];
 }
 

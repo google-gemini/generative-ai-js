@@ -22,6 +22,7 @@ import {
   GenerateContentStreamResult,
   Part,
   RequestOptions,
+  Role,
   StartChatParams,
 } from "../../types";
 import { formatNewContent } from "../requests/request-helpers";
@@ -52,14 +53,7 @@ export class ChatSession {
   ) {
     this._apiKey = apiKey;
     if (params?.history) {
-      this._history = params.history.map((content) => {
-        if (!content.role) {
-          throw new Error(
-            "Missing role for history item: " + JSON.stringify(content),
-          );
-        }
-        return formatNewContent(content.parts);
-      });
+      this._history = params.history;
     }
   }
 
@@ -164,7 +158,7 @@ export class ChatSession {
           const responseContent = { ...response.candidates[0].content };
           // Response seems to come back without a role set.
           if (!responseContent.role) {
-            responseContent.role = "model";
+            responseContent.role = Role.MODEL;
           }
           this._history.push(responseContent);
         } else {
