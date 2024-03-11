@@ -65,7 +65,7 @@ async function run() {
     contents: [prompt],
   });
   const response = result.response;
-  console.dir(response, {depth: null});
+  console.dir(response, { depth: null });
 
   if (response.candidates.length === 0) {
     throw new Error("No candidates");
@@ -76,7 +76,7 @@ async function run() {
     throw new Error("No parts");
   }
   const fc = content.parts[0].functionCall;
-  const text = content.parts.map((({ text }) => text)).join("");
+  const text = content.parts.map(({ text }) => text).join("");
   if (fc) {
     const { name, args } = fc;
     const fn = functions[name];
@@ -98,10 +98,10 @@ async function run() {
       ],
     };
     const request2 = {
-      contents: [prompt, content, fr]
-    }
+      contents: [prompt, content, fr],
+    };
     const response2 = await model.generateContent(request2);
-    const result2 = response2.response
+    const result2 = response2.response;
     console.log(result2.text());
   } else if (text) {
     console.log(text);

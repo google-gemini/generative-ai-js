@@ -60,7 +60,7 @@ export function addHelpers(
       if (response.candidates.length > 1) {
         console.warn(
           `This response had ${response.candidates.length} ` +
-            `candidates. Returning text from the first candidate only. ` +
+            `candidates. Returning function call from the first candidate only. ` +
             `Access response.candidates directly to use the other candidates.`,
         );
       }
@@ -73,7 +73,7 @@ export function addHelpers(
       return getFunctionCall(response);
     } else if (response.promptFeedback) {
       throw new GoogleGenerativeAIResponseError<GenerateContentResponse>(
-        `Text not available. ${formatBlockErrorMessage(response)}`,
+        `Function call not available. ${formatBlockErrorMessage(response)}`,
         response,
       );
     }
