@@ -22,11 +22,11 @@ import {
   GenerateContentStreamResult,
   Part,
   RequestOptions,
-  Role,
   StartChatParams,
 } from "../../types";
 import { formatNewContent } from "../requests/request-helpers";
 import { formatBlockErrorMessage } from "../requests/response-helpers";
+import { validateChatHistory } from "./chat-session-helpers";
 import { generateContent, generateContentStream } from "./generate-content";
 
 /**
@@ -53,6 +53,7 @@ export class ChatSession {
   ) {
     this._apiKey = apiKey;
     if (params?.history) {
+      validateChatHistory(params.history);
       this._history = params.history;
     }
   }
@@ -158,7 +159,7 @@ export class ChatSession {
           const responseContent = { ...response.candidates[0].content };
           // Response seems to come back without a role set.
           if (!responseContent.role) {
-            responseContent.role = Role.MODEL;
+            responseContent.role = "model";
           }
           this._history.push(responseContent);
         } else {

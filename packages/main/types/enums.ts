@@ -19,11 +19,13 @@
  * Role is the producer of the content.
  * @public
  */
-export enum Role {
-  USER = "user",
-  MODEL = "model",
-  FUNCTION = "function",
-}
+export type Role = (typeof POSSIBLE_ROLES)[number];
+
+/**
+ * Possible roles.
+ * @public
+ */
+export const POSSIBLE_ROLES = ["user", "model", "function"] as const;
 
 /**
  * Harm categories that would cause prompts or candidates to be blocked.

@@ -20,7 +20,6 @@ import {
   EmbedContentRequest,
   GenerateContentRequest,
   Part,
-  Role,
 } from "../../types";
 import { GoogleGenerativeAIError } from "../errors";
 
@@ -54,8 +53,8 @@ export function formatNewContent(
 function assignRoleToPartsAndValidateSendMessageRequest(
   parts: Part[],
 ): Content {
-  const userContent: Content = { role: Role.USER, parts: [] };
-  const functionContent: Content = { role: Role.FUNCTION, parts: [] };
+  const userContent: Content = { role: "user", parts: [] };
+  const functionContent: Content = { role: "function", parts: [] };
   let hasUserContent = false;
   let hasFunctionContent = false;
   for (const part of parts) {
@@ -76,7 +75,7 @@ function assignRoleToPartsAndValidateSendMessageRequest(
 
   if (!hasUserContent && !hasFunctionContent) {
     throw new GoogleGenerativeAIError(
-      "Within a single message, FunctionResponse cannot be mixed with other type of part in the request for sending chat message.",
+      "No content is provided for sending chat message.",
     );
   }
 
