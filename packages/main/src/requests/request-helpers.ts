@@ -38,7 +38,6 @@ export function formatNewContent(
       }
     }
   }
-  // return { role, parts: newParts };
   return assignRoleToPartsAndValidateSendMessageRequest(newParts);
 }
 
