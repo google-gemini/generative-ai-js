@@ -18,6 +18,7 @@
 |  --- | --- |
 |  [BlockReason](./generative-ai.blockreason.md) | Reason that a prompt was blocked. |
 |  [FinishReason](./generative-ai.finishreason.md) | Reason that a candidate finished. |
+|  [FunctionDeclarationSchemaType](./generative-ai.functiondeclarationschematype.md) | Contains the list of OpenAPI data types as defined by https://swagger.io/docs/specification/data-models/data-types/ |
 |  [HarmBlockThreshold](./generative-ai.harmblockthreshold.md) | Threshold above which a prompt or candidate will be blocked. |
 |  [HarmCategory](./generative-ai.harmcategory.md) | Harm categories that would cause prompts or candidates to be blocked. |
 |  [HarmProbability](./generative-ai.harmprobability.md) | Probability that a prompt or candidate matches a harm category. |
@@ -39,6 +40,14 @@
 |  [EmbedContentRequest](./generative-ai.embedcontentrequest.md) | Params for calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md) |
 |  [EmbedContentResponse](./generative-ai.embedcontentresponse.md) | Response from calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md)<!-- -->. |
 |  [EnhancedGenerateContentResponse](./generative-ai.enhancedgeneratecontentresponse.md) | Response object wrapped with helper methods. |
+|  [FunctionCall](./generative-ai.functioncall.md) | A predicted \[FunctionCall\] returned from the model that contains a string representing the \[FunctionDeclaration.name\] and a structured JSON object containing the parameters and their values. |
+|  [FunctionCallPart](./generative-ai.functioncallpart.md) | Content part interface if the part represents FunctionResponse. |
+|  [FunctionDeclaration](./generative-ai.functiondeclaration.md) | Structured representation of a function declaration as defined by the \[OpenAPI 3.0 specification\](https://spec.openapis.org/oas/v3.0.3). Included in this declaration are the function name and parameters. This FunctionDeclaration is a representation of a block of code that can be used as a Tool by the model and executed by the client. |
+|  [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md) | Schema for parameters passed to [FunctionDeclaration.parameters](./generative-ai.functiondeclaration.parameters.md)<!-- -->. |
+|  [FunctionDeclarationSchemaProperty](./generative-ai.functiondeclarationschemaproperty.md) | Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed. |
+|  [FunctionDeclarationsTool](./generative-ai.functiondeclarationstool.md) | A FunctionDeclarationsTool is a piece of code that enables the system to interact with external systems to perform an action, or set of actions, outside of knowledge and scope of the model. |
+|  [FunctionResponse](./generative-ai.functionresponse.md) | The result output from a \[FunctionCall\] that contains a string representing the \[FunctionDeclaration.name\] and a structured JSON object containing any output from the function is used as context to the model. This should contain the result of a \[FunctionCall\] made based on model prediction. |
+|  [FunctionResponsePart](./generative-ai.functionresponsepart.md) | Content part interface if the part represents FunctionResponse. |
 |  [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md) | A candidate returned as part of a [GenerateContentResponse](./generative-ai.generatecontentresponse.md)<!-- -->. |
 |  [GenerateContentRequest](./generative-ai.generatecontentrequest.md) | Request sent to <code>generateContent</code> endpoint. |
 |  [GenerateContentResponse](./generative-ai.generatecontentresponse.md) | Individual response from [GenerativeModel.generateContent()](./generative-ai.generativemodel.generatecontent.md) and [GenerativeModel.generateContentStream()](./generative-ai.generativemodel.generatecontentstream.md)<!-- -->. <code>generateContentStream()</code> will return one in each chunk until the stream is done. |
@@ -47,7 +56,6 @@
 |  [GenerationConfig](./generative-ai.generationconfig.md) | Config options for content-related requests |
 |  [GenerativeContentBlob](./generative-ai.generativecontentblob.md) | Interface for sending an image. |
 |  [InlineDataPart](./generative-ai.inlinedatapart.md) | Content part interface if the part represents an image. |
-|  [InputContent](./generative-ai.inputcontent.md) | Content that can be provided as history input to startChat(). |
 |  [ModelParams](./generative-ai.modelparams.md) | Params passed to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->. |
 |  [PromptFeedback](./generative-ai.promptfeedback.md) | If the prompt was blocked, this will be populated with <code>blockReason</code> and the relevant <code>safetyRatings</code>. |
 |  [RequestOptions](./generative-ai.requestoptions.md) | Params passed to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->. |
@@ -56,9 +64,17 @@
 |  [StartChatParams](./generative-ai.startchatparams.md) | Params for [GenerativeModel.startChat()](./generative-ai.generativemodel.startchat.md)<!-- -->. |
 |  [TextPart](./generative-ai.textpart.md) | Content part interface if the part represents a text string. |
 
+## Variables
+
+|  Variable | Description |
+|  --- | --- |
+|  [POSSIBLE\_ROLES](./generative-ai.possible_roles.md) | Possible roles. |
+
 ## Type Aliases
 
 |  Type Alias | Description |
 |  --- | --- |
 |  [Part](./generative-ai.part.md) | Content part - includes text or image part types. |
+|  [Role](./generative-ai.role.md) | Role is the producer of the content. |
+|  [Tool](./generative-ai.tool.md) | Defines a tool that model can call to access external knowledge. |
 

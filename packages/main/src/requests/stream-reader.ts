@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2023 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import {
   GenerateContentCandidate,
   GenerateContentResponse,
   GenerateContentStreamResult,
+  Part,
 } from "../../types";
 import { GoogleGenerativeAIError } from "../errors";
 import { addHelpers } from "./response-helpers";
@@ -166,14 +167,23 @@ export function aggregateResponses(
           if (!aggregatedResponse.candidates[i].content) {
             aggregatedResponse.candidates[i].content = {
               role: candidate.content.role || "user",
-              parts: [{ text: "" }],
+              parts: [],
             };
           }
+          const newPart: Partial<Part> = {};
           for (const part of candidate.content.parts) {
             if (part.text) {
-              aggregatedResponse.candidates[i].content.parts[0].text +=
-                part.text;
+              newPart.text = part.text;
             }
+            if (part.functionCall) {
+              newPart.functionCall = part.functionCall;
+            }
+            if (Object.keys(newPart).length === 0) {
+              newPart.text = "";
+            }
+            aggregatedResponse.candidates[i].content.parts.push(
+              newPart as Part,
+            );
           }
         }
       }

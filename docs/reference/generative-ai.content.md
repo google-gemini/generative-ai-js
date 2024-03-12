@@ -9,13 +9,13 @@ Content type for both prompts and response candidates.
 **Signature:**
 
 ```typescript
-export interface Content extends InputContent 
+export interface Content 
 ```
-**Extends:** [InputContent](./generative-ai.inputcontent.md)
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [parts](./generative-ai.content.parts.md) |  | [Part](./generative-ai.part.md)<!-- -->\[\] |  |
+|  [role](./generative-ai.content.role.md) |  | [Role](./generative-ai.role.md) |  |
 

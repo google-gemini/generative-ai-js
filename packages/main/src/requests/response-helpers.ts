@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2023 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 import {
   EnhancedGenerateContentResponse,
   FinishReason,
+  FunctionCall,
   GenerateContentCandidate,
   GenerateContentResponse,
 } from "../../types";
@@ -54,6 +55,30 @@ export function addHelpers(
     }
     return "";
   };
+  (response as EnhancedGenerateContentResponse).functionCall = () => {
+    if (response.candidates && response.candidates.length > 0) {
+      if (response.candidates.length > 1) {
+        console.warn(
+          `This response had ${response.candidates.length} ` +
+            `candidates. Returning function call from the first candidate only. ` +
+            `Access response.candidates directly to use the other candidates.`,
+        );
+      }
+      if (hadBadFinishReason(response.candidates[0])) {
+        throw new GoogleGenerativeAIResponseError<GenerateContentResponse>(
+          `${formatBlockErrorMessage(response)}`,
+          response,
+        );
+      }
+      return getFunctionCall(response);
+    } else if (response.promptFeedback) {
+      throw new GoogleGenerativeAIResponseError<GenerateContentResponse>(
+        `Function call not available. ${formatBlockErrorMessage(response)}`,
+        response,
+      );
+    }
+    return undefined;
+  };
   return response as EnhancedGenerateContentResponse;
 }
 
@@ -62,10 +87,21 @@ export function addHelpers(
  */
 export function getText(response: GenerateContentResponse): string {
   if (response.candidates?.[0].content?.parts?.[0]?.text) {
-    return response.candidates[0].content.parts[0].text;
+    return response.candidates[0].content.parts
+      .map(({ text }) => text)
+      .join("");
   } else {
     return "";
   }
+}
+
+/**
+ * Returns functionCall of first candidate.
+ */
+export function getFunctionCall(
+  response: GenerateContentResponse,
+): FunctionCall {
+  return response.candidates?.[0].content?.parts?.[0]?.functionCall;
 }
 
 const badFinishReasons = [FinishReason.RECITATION, FinishReason.SAFETY];

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2023 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,14 +22,18 @@ import * as chaiAsPromised from "chai-as-promised";
 import { getMockResponse } from "../../test-utils/mock-response";
 import * as request from "../requests/request";
 import { generateContent } from "./generate-content";
-import { HarmBlockThreshold, HarmCategory } from "../../types";
+import {
+  GenerateContentRequest,
+  HarmBlockThreshold,
+  HarmCategory,
+} from "../../types";
 
 use(sinonChai);
 use(chaiAsPromised);
 
-const fakeRequestParams = {
+const fakeRequestParams: GenerateContentRequest = {
   contents: [{ parts: [{ text: "hello" }], role: "user" }],
-  generateConfig: {
+  generationConfig: {
     topK: 16,
   },
   safetySettings: [
@@ -55,7 +59,7 @@ describe("generateContent()", () => {
     expect(result.response.text()).to.include("Helena");
     expect(makeRequestStub).to.be.calledWith(
       match.instanceOf(request.RequestUrl),
-      match((value) => {
+      match((value: string) => {
         return value.includes("contents");
       }),
     );

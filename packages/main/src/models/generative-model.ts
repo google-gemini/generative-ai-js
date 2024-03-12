@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2023 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ import {
   RequestOptions,
   SafetySetting,
   StartChatParams,
+  Tool,
 } from "../../types";
 import { ChatSession } from "../methods/chat-session";
 import { countTokens } from "../methods/count-tokens";
@@ -53,6 +54,7 @@ export class GenerativeModel {
   generationConfig: GenerationConfig;
   safetySettings: SafetySetting[];
   requestOptions: RequestOptions;
+  tools?: Tool[];
 
   constructor(
     public apiKey: string,
@@ -68,6 +70,7 @@ export class GenerativeModel {
     }
     this.generationConfig = modelParams.generationConfig || {};
     this.safetySettings = modelParams.safetySettings || [];
+    this.tools = modelParams.tools;
     this.requestOptions = requestOptions || {};
   }
 
@@ -85,6 +88,7 @@ export class GenerativeModel {
       {
         generationConfig: this.generationConfig,
         safetySettings: this.safetySettings,
+        tools: this.tools,
         ...formattedParams,
       },
       this.requestOptions,
@@ -107,6 +111,7 @@ export class GenerativeModel {
       {
         generationConfig: this.generationConfig,
         safetySettings: this.safetySettings,
+        tools: this.tools,
         ...formattedParams,
       },
       this.requestOptions,
@@ -121,7 +126,10 @@ export class GenerativeModel {
     return new ChatSession(
       this.apiKey,
       this.model,
-      startChatParams,
+      {
+        tools: this.tools,
+        ...startChatParams,
+      },
       this.requestOptions,
     );
   }

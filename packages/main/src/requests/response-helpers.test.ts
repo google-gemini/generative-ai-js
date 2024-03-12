@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2023 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,13 +28,34 @@ import {
 
 use(sinonChai);
 
-const fakeResponse: GenerateContentResponse = {
+const fakeResponseText: GenerateContentResponse = {
   candidates: [
     {
       index: 0,
       content: {
         role: "model",
-        parts: [{ text: "Some text" }],
+        parts: [{ text: "Some text" }, { text: " and some more text" }],
+      },
+    },
+  ],
+};
+const fakeResponseFunctionCall: GenerateContentResponse = {
+  candidates: [
+    {
+      index: 0,
+      content: {
+        role: "model",
+        parts: [
+          {
+            functionCall: {
+              name: "find_theaters",
+              args: {
+                location: "Mountain View, CA",
+                movie: "Barbie",
+              },
+            },
+          },
+        ],
       },
     },
   ],
@@ -52,11 +73,17 @@ describe("response-helpers methods", () => {
     restore();
   });
   describe("addHelpers", () => {
-    it("good response", async () => {
-      const enhancedResponse = addHelpers(fakeResponse);
-      expect(enhancedResponse.text()).to.equal("Some text");
+    it("good response text", async () => {
+      const enhancedResponse = addHelpers(fakeResponseText);
+      expect(enhancedResponse.text()).to.equal("Some text and some more text");
     });
-    it("bad response", async () => {
+    it("good response functionCall", async () => {
+      const enhancedResponse = addHelpers(fakeResponseFunctionCall);
+      expect(enhancedResponse.functionCall()).to.deep.equal(
+        fakeResponseFunctionCall.candidates[0].content.parts[0].functionCall,
+      );
+    });
+    it("bad response safety", async () => {
       const enhancedResponse = addHelpers(badFakeResponse);
       expect(enhancedResponse.text).to.throw("SAFETY");
     });

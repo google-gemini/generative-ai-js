@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2023 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * Role is the producer of the content.
+ * @public
+ */
+export type Role = (typeof POSSIBLE_ROLES)[number];
+
+/**
+ * Possible roles.
+ * @public
+ */
+export const POSSIBLE_ROLES = ["user", "model", "function"] as const;
 
 /**
  * Harm categories that would cause prompts or candidates to be blocked.

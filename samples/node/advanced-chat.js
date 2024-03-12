@@ -29,11 +29,11 @@ async function run() {
     history: [
       {
         role: "user",
-        parts: "Hello, I have 2 dogs in my house.",
+        parts: [{text: "Hello, I have 2 dogs in my house."}],
       },
       {
         role: "model",
-        parts: "Great to meet you. What would you like to know?",
+        parts: [{text: "Great to meet you. What would you like to know?"}],
       },
     ],
     generationConfig: {
