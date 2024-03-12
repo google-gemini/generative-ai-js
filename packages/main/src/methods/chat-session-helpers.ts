@@ -18,7 +18,6 @@
 import { Content, POSSIBLE_ROLES, Part, Role } from "../../types";
 import { GoogleGenerativeAIError } from "../errors";
 
-
 // https://ai.google.dev/api/rest/v1beta/Content#part
 
 const VALID_PART_FIELDS: Array<keyof Part> = [
@@ -46,11 +45,15 @@ export function validateChatHistory(history: Content[]): void {
     const { role, parts } = currContent;
     if (!prevContent && role !== "user") {
       throw new GoogleGenerativeAIError(
-        "First content should be with role 'user'",
+        `First content should be with role 'user', got ${role}`,
       );
     }
     if (!POSSIBLE_ROLES.includes(role)) {
-      throw new GoogleGenerativeAIError("Each item should include role field");
+      throw new GoogleGenerativeAIError(
+        `Each item should include role field. Got ${role} but valid roles are: ${JSON.stringify(
+          POSSIBLE_ROLES,
+        )}`,
+      );
     }
 
     if (parts.length === 0) {
