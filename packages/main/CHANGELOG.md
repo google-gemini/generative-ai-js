@@ -1,5 +1,12 @@
 # @google/generative-ai
 
+## 0.3.0
+
+### Minor Changes
+
+- 932e1be: Add `apiVersion` property to `RequestOptions` to allow user to choose API endpoint version.
+- 9887465: Added support for function calling
+
 ## 0.2.1
 
 ### Patch Changes
