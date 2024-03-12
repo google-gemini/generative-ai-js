@@ -17,5 +17,6 @@ export interface EnhancedGenerateContentResponse extends GenerateContentResponse
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [functionCall](./generative-ai.enhancedgeneratecontentresponse.functioncall.md) |  | () =&gt; [FunctionCall](./generative-ai.functioncall.md) \| undefined |  |
 |  [text](./generative-ai.enhancedgeneratecontentresponse.text.md) |  | () =&gt; string | Returns the text string from the response, if available. Throws if the prompt or candidate was blocked. |
 

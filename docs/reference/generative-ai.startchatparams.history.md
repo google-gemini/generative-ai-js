@@ -7,5 +7,5 @@
 **Signature:**
 
 ```typescript
-history?: InputContent[];
+history?: Content[];
 ```

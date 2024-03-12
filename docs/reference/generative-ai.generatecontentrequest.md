@@ -18,4 +18,5 @@ export interface GenerateContentRequest extends BaseParams
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [contents](./generative-ai.generatecontentrequest.contents.md) |  | [Content](./generative-ai.content.md)<!-- -->\[\] |  |
+|  [tools?](./generative-ai.generatecontentrequest.tools.md) |  | [Tool](./generative-ai.tool.md)<!-- -->\[\] | _(Optional)_ |
 

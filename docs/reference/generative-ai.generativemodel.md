@@ -27,6 +27,7 @@ export declare class GenerativeModel
 |  [model](./generative-ai.generativemodel.model.md) |  | string |  |
 |  [requestOptions](./generative-ai.generativemodel.requestoptions.md) |  | [RequestOptions](./generative-ai.requestoptions.md) |  |
 |  [safetySettings](./generative-ai.generativemodel.safetysettings.md) |  | [SafetySetting](./generative-ai.safetysetting.md)<!-- -->\[\] |  |
+|  [tools?](./generative-ai.generativemodel.tools.md) |  | [Tool](./generative-ai.tool.md)<!-- -->\[\] | _(Optional)_ |
 
 ## Methods
 
