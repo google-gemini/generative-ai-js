@@ -18,6 +18,9 @@
 import { Content, POSSIBLE_ROLES, Part, Role } from "../../types";
 import { GoogleGenerativeAIError } from "../errors";
 
+
+// https://ai.google.dev/api/rest/v1beta/Content#part
+
 const VALID_PART_FIELDS: Array<keyof Part> = [
   "text",
   "inlineData",
