@@ -22,10 +22,7 @@ import {
   EmbedContentResponse,
   RequestOptions,
 } from "../types";
-import {
-  Task,
-  makeRequest,
-} from "../../../googleai/src/requests/request";
+import { Task, makeRequest } from "../../../googleai/src/requests/request";
 
 export async function embedContent(
   apiKey: string,

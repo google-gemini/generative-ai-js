@@ -36,7 +36,9 @@ describe("ChatSession", () => {
         generateContentMethods,
         "generateContent",
       ).rejects("generateContent failed");
-      const chatSession = new ChatSession("MY_API_KEY", "a-model", () => Promise.resolve({} as Response));
+      const chatSession = new ChatSession("MY_API_KEY", "a-model", () =>
+        Promise.resolve({} as Response),
+      );
       await expect(chatSession.sendMessage("hello")).to.be.rejected;
       expect(generateContentStub).to.be.calledWith(
         "MY_API_KEY",
@@ -53,7 +55,9 @@ describe("ChatSession", () => {
         generateContentMethods,
         "generateContentStream",
       ).rejects("generateContentStream failed");
-      const chatSession = new ChatSession("MY_API_KEY", "a-model", () => Promise.resolve({} as Response));
+      const chatSession = new ChatSession("MY_API_KEY", "a-model", () =>
+        Promise.resolve({} as Response),
+      );
       await expect(chatSession.sendMessageStream("hello")).to.be.rejected;
       expect(generateContentStreamStub).to.be.calledWith(
         "MY_API_KEY",
@@ -72,7 +76,9 @@ describe("ChatSession", () => {
         generateContentMethods,
         "generateContentStream",
       ).resolves({ candidates: 3 } as unknown as GenerateContentStreamResult);
-      const chatSession = new ChatSession("MY_API_KEY", "a-model", () => Promise.resolve({} as Response));
+      const chatSession = new ChatSession("MY_API_KEY", "a-model", () =>
+        Promise.resolve({} as Response),
+      );
       await chatSession.sendMessageStream("hello");
       expect(generateContentStreamStub).to.be.calledWith(
         "MY_API_KEY",

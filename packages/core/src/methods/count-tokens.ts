@@ -20,10 +20,7 @@ import {
   CountTokensResponse,
   RequestOptions,
 } from "../types";
-import {
-  Task,
-  makeRequest,
-} from "../../../googleai/src/requests/request";
+import { Task, makeRequest } from "../../../googleai/src/requests/request";
 
 export async function countTokens(
   apiKey: string,

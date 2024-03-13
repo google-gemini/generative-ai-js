@@ -22,6 +22,7 @@
 |  [HarmBlockThreshold](./generative-ai.harmblockthreshold.md) | Threshold above which a prompt or candidate will be blocked. |
 |  [HarmCategory](./generative-ai.harmcategory.md) | Harm categories that would cause prompts or candidates to be blocked. |
 |  [HarmProbability](./generative-ai.harmprobability.md) | Probability that a prompt or candidate matches a harm category. |
+|  [Task](./generative-ai.task.md) |  |
 |  [TaskType](./generative-ai.tasktype.md) | Task type for embedding content. |
 
 ## Interfaces
@@ -74,6 +75,7 @@
 
 |  Type Alias | Description |
 |  --- | --- |
+|  [MakeRequestFunction](./generative-ai.makerequestfunction.md) |  |
 |  [Part](./generative-ai.part.md) | Content part - includes text or image part types. |
 |  [Role](./generative-ai.role.md) | Role is the producer of the content. |
 |  [Tool](./generative-ai.tool.md) | Defines a tool that model can call to access external knowledge. |

@@ -20,12 +20,12 @@ import { match, restore, stub } from "sinon";
 import * as sinonChai from "sinon-chai";
 import * as chaiAsPromised from "chai-as-promised";
 import { getMockResponse } from "../../test-utils/mock-response";
-import * as request from "../../../googleai/src/requests/request";
 import { generateContent } from "./generate-content";
 import {
   GenerateContentRequest,
   HarmBlockThreshold,
   HarmCategory,
+  Task,
 } from "../types";
 
 use(sinonChai);
@@ -52,13 +52,21 @@ describe("generateContent()", () => {
     const mockResponse = getMockResponse(
       "unary-success-basic-reply-short.json",
     );
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub().resolves(
       mockResponse as Response,
     );
-    const result = await generateContent("key", "model", fakeRequestParams);
+    const result = await generateContent(
+      "key",
+      "model",
+      fakeRequestParams,
+      makeRequestStub,
+    );
     expect(result.response.text()).to.include("Helena");
     expect(makeRequestStub).to.be.calledWith(
-      match.instanceOf(request.RequestUrl),
+      'model',
+      Task.GENERATE_CONTENT,
+      'key',
+      false,
       match((value: string) => {
         return value.includes("contents");
       }),
@@ -66,29 +74,45 @@ describe("generateContent()", () => {
   });
   it("long response", async () => {
     const mockResponse = getMockResponse("unary-success-basic-reply-long.json");
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub().resolves(
       mockResponse as Response,
     );
-    const result = await generateContent("key", "model", fakeRequestParams);
+    const result = await generateContent(
+      "key",
+      "model",
+      fakeRequestParams,
+      makeRequestStub,
+    );
     expect(result.response.text()).to.include("Use Freshly Ground Coffee");
     expect(result.response.text()).to.include("30 minutes of brewing");
     expect(makeRequestStub).to.be.calledWith(
-      match.instanceOf(request.RequestUrl),
+      'model',
+      Task.GENERATE_CONTENT,
+      'key',
+      false,
       match.any,
     );
   });
   it("citations", async () => {
     const mockResponse = getMockResponse("unary-success-citations.json");
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub().resolves(
       mockResponse as Response,
     );
-    const result = await generateContent("key", "model", fakeRequestParams);
+    const result = await generateContent(
+      "key",
+      "model",
+      fakeRequestParams,
+      makeRequestStub,
+    );
     expect(result.response.text()).to.include("Quantum mechanics is");
     expect(
       result.response.candidates[0].citationMetadata.citationSources.length,
     ).to.equal(1);
     expect(makeRequestStub).to.be.calledWith(
-      match.instanceOf(request.RequestUrl),
+      'model',
+      Task.GENERATE_CONTENT,
+      'key',
+      false,
       match.any,
     );
   });
@@ -96,13 +120,21 @@ describe("generateContent()", () => {
     const mockResponse = getMockResponse(
       "unary-failure-prompt-blocked-safety.json",
     );
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub().resolves(
       mockResponse as Response,
     );
-    const result = await generateContent("key", "model", fakeRequestParams);
+    const result = await generateContent(
+      "key",
+      "model",
+      fakeRequestParams,
+      makeRequestStub,
+    );
     expect(result.response.text).to.throw("SAFETY");
     expect(makeRequestStub).to.be.calledWith(
-      match.instanceOf(request.RequestUrl),
+      'model',
+      Task.GENERATE_CONTENT,
+      'key',
+      false,
       match.any,
     );
   });
@@ -110,50 +142,71 @@ describe("generateContent()", () => {
     const mockResponse = getMockResponse(
       "unary-failure-finish-reason-safety.json",
     );
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub().resolves(
       mockResponse as Response,
     );
-    const result = await generateContent("key", "model", fakeRequestParams);
+    const result = await generateContent(
+      "key",
+      "model",
+      fakeRequestParams,
+      makeRequestStub,
+    );
     expect(result.response.text).to.throw("SAFETY");
     expect(makeRequestStub).to.be.calledWith(
-      match.instanceOf(request.RequestUrl),
+      'model',
+      Task.GENERATE_CONTENT,
+      'key',
+      false,
       match.any,
     );
   });
   it("empty content", async () => {
     const mockResponse = getMockResponse("unary-failure-empty-content.json");
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub().resolves(
       mockResponse as Response,
     );
-    const result = await generateContent("key", "model", fakeRequestParams);
+    const result = await generateContent(
+      "key",
+      "model",
+      fakeRequestParams,
+      makeRequestStub,
+    );
     expect(result.response.text()).to.equal("");
     expect(makeRequestStub).to.be.calledWith(
-      match.instanceOf(request.RequestUrl),
+      'model',
+      Task.GENERATE_CONTENT,
+      'key',
+      false,
       match.any,
     );
   });
   it("unknown enum - should ignore", async () => {
     const mockResponse = getMockResponse("unary-unknown-enum.json");
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub().resolves(
       mockResponse as Response,
     );
-    const result = await generateContent("key", "model", fakeRequestParams);
+    const result = await generateContent(
+      "key",
+      "model",
+      fakeRequestParams,
+      makeRequestStub,
+    );
     expect(result.response.text()).to.include("30 minutes of brewing");
     expect(makeRequestStub).to.be.calledWith(
-      match.instanceOf(request.RequestUrl),
+      'model',
+      Task.GENERATE_CONTENT,
+      'key',
+      false,
       match.any,
     );
   });
   it("image rejected (400)", async () => {
     const mockResponse = getMockResponse("unary-failure-image-rejected.json");
-    const mockFetch = stub(globalThis, "fetch").resolves({
-      ok: false,
-      status: 400,
-      json: mockResponse.json,
-    } as Response);
+    const mockResponseBody = await mockResponse.json();
+    const makeRequestStub = stub().rejects(Error(mockResponseBody.error.message));
     await expect(
-      generateContent("key", "model", fakeRequestParams),
-    ).to.be.rejectedWith(/400.*invalid argument/);
-    expect(mockFetch).to.be.called;
+      generateContent("key", "model", fakeRequestParams, makeRequestStub),
+    ).to.be.rejectedWith(/invalid argument/);
+    expect(makeRequestStub).to.be.called;
   });
 });
