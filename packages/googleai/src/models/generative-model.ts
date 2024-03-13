@@ -23,15 +23,12 @@ import {
   BatchEmbedContentsRequest,
   BatchEmbedContentsResponse,
   ChatSession,
-  CountTokensRequest,
   CountTokensResponse,
-  EmbedContentRequest,
   EmbedContentResponse,
   GenerateContentRequest,
   GenerateContentResult,
   GenerateContentStreamResult,
   GenerationConfig,
-  ModelParams,
   Part,
   RequestOptions,
   SafetySetting,
@@ -46,6 +43,7 @@ import {
   formatGenerateContentInput,
 } from "../requests/input-formatters";
 import { makeRequest } from "../requests/request";
+import { CountTokensRequest, EmbedContentRequest, ModelParams } from "../types";
 
 /**
  * Class for generative model APIs.

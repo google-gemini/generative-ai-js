@@ -28,15 +28,6 @@ export interface BaseParams {
 }
 
 /**
- * Params passed to {@link GoogleGenerativeAI.getGenerativeModel}.
- * @public
- */
-export interface ModelParams extends BaseParams {
-  model: string;
-  tools?: Tool[];
-}
-
-/**
  * Request sent to `generateContent` endpoint.
  * @public
  */
@@ -68,7 +59,7 @@ export interface GenerationConfig {
 }
 
 /**
- * Params for {@link GenerativeModel.startChat}.
+ * Params for startChat.
  * @public
  */
 export interface StartChatParams extends BaseParams {
@@ -77,7 +68,7 @@ export interface StartChatParams extends BaseParams {
 }
 
 /**
- * Params for calling {@link GenerativeModel.countTokens}
+ * Params for calling countTokens functions
  * @public
  */
 export interface CountTokensRequest {
@@ -85,7 +76,7 @@ export interface CountTokensRequest {
 }
 
 /**
- * Params for calling {@link GenerativeModel.embedContent}
+ * Params for calling embedContent functions
  * @public
  */
 export interface EmbedContentRequest {
@@ -95,7 +86,7 @@ export interface EmbedContentRequest {
 }
 
 /**
- * Params for calling  {@link GenerativeModel.batchEmbedContents}
+ * Params for calling batchEmbedContents functions
  * @public
  */
 export interface BatchEmbedContentsRequest {
@@ -103,7 +94,7 @@ export interface BatchEmbedContentsRequest {
 }
 
 /**
- * Params passed to {@link GoogleGenerativeAI.getGenerativeModel}.
+ * Params passed to the model.
  * @public
  */
 export interface RequestOptions {
@@ -251,6 +242,10 @@ export interface FunctionDeclarationSchemaProperty {
   example?: unknown;
 }
 
+/**
+ * Possible endpoint tasks.
+ * @internal
+ */
 export enum Task {
   GENERATE_CONTENT = "generateContent",
   STREAM_GENERATE_CONTENT = "streamGenerateContent",
@@ -259,6 +254,10 @@ export enum Task {
   BATCH_EMBED_CONTENTS = "batchEmbedContents",
 }
 
+/**
+ * Function for making a request to the endpoint given the parameters.
+ * @internal
+ */
 export type MakeRequestFunction = (
   model: string,
   task: Task,

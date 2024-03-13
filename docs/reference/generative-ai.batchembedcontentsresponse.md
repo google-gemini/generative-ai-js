@@ -4,7 +4,7 @@
 
 ## BatchEmbedContentsResponse interface
 
-Response from calling [GenerativeModel.batchEmbedContents()](./generative-ai.generativemodel.batchembedcontents.md)<!-- -->.
+Response from calling batchEmbedContents.
 
 **Signature:**
 

@@ -4,7 +4,7 @@
 
 ## BatchEmbedContentsRequest interface
 
-Params for calling [GenerativeModel.batchEmbedContents()](./generative-ai.generativemodel.batchembedcontents.md)
+Params for calling batchEmbedContents functions
 
 **Signature:**
 

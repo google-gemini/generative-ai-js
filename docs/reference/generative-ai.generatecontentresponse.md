@@ -4,7 +4,7 @@
 
 ## GenerateContentResponse interface
 
-Individual response from [GenerativeModel.generateContent()](./generative-ai.generativemodel.generatecontent.md) and [GenerativeModel.generateContentStream()](./generative-ai.generativemodel.generatecontentstream.md)<!-- -->. `generateContentStream()` will return one in each chunk until the stream is done.
+Individual response from generateContent and generateContentStream. `generateContentStream()` will return one in each chunk until the stream is done.
 
 **Signature:**
 

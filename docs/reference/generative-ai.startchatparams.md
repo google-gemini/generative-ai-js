@@ -4,7 +4,7 @@
 
 ## StartChatParams interface
 
-Params for [GenerativeModel.startChat()](./generative-ai.generativemodel.startchat.md)<!-- -->.
+Params for startChat.
 
 **Signature:**
 

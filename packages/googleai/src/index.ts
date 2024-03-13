@@ -15,5 +15,11 @@
  * limitations under the License.
  */
 
-export * from "../../core/src/types";
+export {
+  ChatSession,
+  GenerationConfig,
+  SafetySetting,
+  Tool,
+} from "../../core/src";
 export * from "./gen-ai";
+export * from "./types";

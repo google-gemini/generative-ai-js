@@ -4,7 +4,7 @@
 
 ## CountTokensRequest interface
 
-Params for calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)
+Params for calling countTokens functions
 
 **Signature:**
 

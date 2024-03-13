@@ -4,7 +4,7 @@
 
 ## EmbedContentResponse interface
 
-Response from calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md)<!-- -->.
+Response from calling embedContent.
 
 **Signature:**
 

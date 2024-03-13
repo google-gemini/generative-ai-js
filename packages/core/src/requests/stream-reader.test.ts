@@ -26,7 +26,7 @@ import * as sinonChai from "sinon-chai";
 import {
   getChunkedStream,
   getMockResponseStreaming,
-} from "../../test-utils/mock-response";
+} from "../../../shared/test-utils/mock-response";
 import {
   BlockReason,
   FinishReason,

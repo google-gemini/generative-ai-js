@@ -18,7 +18,7 @@ constructor(apiKey: string, model: string, _makeRequest: MakeRequestFunction, pa
 |  --- | --- | --- |
 |  apiKey | string |  |
 |  model | string |  |
-|  \_makeRequest | [MakeRequestFunction](./generative-ai.makerequestfunction.md) |  |
+|  \_makeRequest | MakeRequestFunction |  |
 |  params | [StartChatParams](./generative-ai.startchatparams.md) | _(Optional)_ |
 |  requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
 

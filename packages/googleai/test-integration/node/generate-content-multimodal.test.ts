@@ -33,7 +33,7 @@ describe("generateContent - multimodal", function () {
   this.slow(10e3);
   it("non-streaming, image buffer provided", async () => {
     const imageBuffer = fs.readFileSync(
-      join(__dirname, "../../test-utils/cat.png"),
+      join(__dirname, "../../../shared/test-utils/cat.png"),
     );
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const base64Image = imageBuffer.toString("base64");

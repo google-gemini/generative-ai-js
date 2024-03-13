@@ -115,7 +115,7 @@ describe("generateContent - tools", function () {
       { apiVersion: "v1beta" },
     );
 
-    const src1 = {
+    const src1: Content = {
       role: "user",
       parts: [
         {
@@ -123,7 +123,7 @@ describe("generateContent - tools", function () {
         },
       ],
     };
-    const exp1 = {
+    const exp1: Content = {
       role: "model",
       parts: [
         {
@@ -138,7 +138,7 @@ describe("generateContent - tools", function () {
       ],
     };
 
-    const src2 = {
+    const src2: Content = {
       role: "function",
       parts: [
         {
@@ -238,7 +238,7 @@ describe("generateContent - tools", function () {
         },
       ],
     };
-    const fn1 = {
+    const fn1: Content = {
       role: "function",
       parts: [
         {

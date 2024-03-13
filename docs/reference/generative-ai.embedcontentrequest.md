@@ -4,7 +4,7 @@
 
 ## EmbedContentRequest interface
 
-Params for calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md)
+Params for calling embedContent functions
 
 **Signature:**
 

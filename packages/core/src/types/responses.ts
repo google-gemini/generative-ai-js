@@ -61,8 +61,8 @@ export interface EnhancedGenerateContentResponse
 }
 
 /**
- * Individual response from {@link GenerativeModel.generateContent} and
- * {@link GenerativeModel.generateContentStream}.
+ * Individual response from generateContent and
+ * generateContentStream.
  * `generateContentStream()` will return one in each chunk until
  * the stream is done.
  * @public
@@ -125,7 +125,7 @@ export interface SafetyRating {
 }
 
 /**
- * Response from calling {@link GenerativeModel.countTokens}.
+ * Response from calling countTokens.
  * @public
  */
 export interface CountTokensResponse {
@@ -133,7 +133,7 @@ export interface CountTokensResponse {
 }
 
 /**
- * Response from calling {@link GenerativeModel.embedContent}.
+ * Response from calling embedContent.
  * @public
  */
 export interface EmbedContentResponse {
@@ -141,7 +141,7 @@ export interface EmbedContentResponse {
 }
 
 /**
- * Response from calling {@link GenerativeModel.batchEmbedContents}.
+ * Response from calling batchEmbedContents.
  * @public
  */
 export interface BatchEmbedContentsResponse {

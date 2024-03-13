@@ -4,7 +4,7 @@
 
 ## CountTokensResponse interface
 
-Response from calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)<!-- -->.
+Response from calling countTokens.
 
 **Signature:**
 
