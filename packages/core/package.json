@@ -1,0 +1,40 @@
+{
+  "name": "@google/genai-core",
+  "version": "0.0.1",
+  "description": "Core functions for internal use by Google AI SDKs",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "typings": "dist/genai-core.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/genai-core.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c && yarn api-report",
+    "test": "yarn lint && yarn test:node:unit",
+    "test:node:unit": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha \"src/**/*.test.ts\"",
+    "lint": "eslint -c .eslintrc.js '**/*.ts' --ignore-path '../../.gitignore'",
+    "api-report": "api-extractor run --local --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/google/generative-ai-js.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/google/generative-ai-js/issues"
+  },
+  "homepage": "https://github.com/google/generative-ai-js#readme"
+}
