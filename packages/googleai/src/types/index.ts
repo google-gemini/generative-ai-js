@@ -31,6 +31,9 @@ export interface ModelParams extends BaseParams {
  */
 export {
   BaseParams,
+  GenerationConfig,
+  SafetySetting,
+  Tool,
   RequestOptions,
   CountTokensRequest,
   EmbedContentRequest,
@@ -52,7 +55,7 @@ export {
   EmbedContentResponse,
   BatchEmbedContentsResponse,
   StartChatParams,
-  MakeRequestFunction,
+  _MakeRequestFunction,
   Content,
   TextPart,
   InlineDataPart,
@@ -72,6 +75,6 @@ export {
   CitationSource,
   FunctionDeclarationSchemaProperty,
   FunctionDeclarationSchemaType,
-  Task,
-  POSSIBLE_ROLES
+  _Task,
+  POSSIBLE_ROLES,
 } from "../../../core/src";

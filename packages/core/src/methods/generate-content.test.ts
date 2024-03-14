@@ -25,7 +25,7 @@ import {
   GenerateContentRequest,
   HarmBlockThreshold,
   HarmCategory,
-  Task,
+  _Task,
 } from "../types";
 
 use(sinonChai);
@@ -62,7 +62,7 @@ describe("generateContent()", () => {
     expect(result.response.text()).to.include("Helena");
     expect(makeRequestStub).to.be.calledWith(
       "model",
-      Task.GENERATE_CONTENT,
+      _Task.GENERATE_CONTENT,
       "key",
       false,
       match((value: string) => {
@@ -83,7 +83,7 @@ describe("generateContent()", () => {
     expect(result.response.text()).to.include("30 minutes of brewing");
     expect(makeRequestStub).to.be.calledWith(
       "model",
-      Task.GENERATE_CONTENT,
+      _Task.GENERATE_CONTENT,
       "key",
       false,
       match.any,
@@ -104,7 +104,7 @@ describe("generateContent()", () => {
     ).to.equal(1);
     expect(makeRequestStub).to.be.calledWith(
       "model",
-      Task.GENERATE_CONTENT,
+      _Task.GENERATE_CONTENT,
       "key",
       false,
       match.any,
@@ -124,7 +124,7 @@ describe("generateContent()", () => {
     expect(result.response.text).to.throw("SAFETY");
     expect(makeRequestStub).to.be.calledWith(
       "model",
-      Task.GENERATE_CONTENT,
+      _Task.GENERATE_CONTENT,
       "key",
       false,
       match.any,
@@ -144,7 +144,7 @@ describe("generateContent()", () => {
     expect(result.response.text).to.throw("SAFETY");
     expect(makeRequestStub).to.be.calledWith(
       "model",
-      Task.GENERATE_CONTENT,
+      _Task.GENERATE_CONTENT,
       "key",
       false,
       match.any,
@@ -162,7 +162,7 @@ describe("generateContent()", () => {
     expect(result.response.text()).to.equal("");
     expect(makeRequestStub).to.be.calledWith(
       "model",
-      Task.GENERATE_CONTENT,
+      _Task.GENERATE_CONTENT,
       "key",
       false,
       match.any,
@@ -180,7 +180,7 @@ describe("generateContent()", () => {
     expect(result.response.text()).to.include("30 minutes of brewing");
     expect(makeRequestStub).to.be.calledWith(
       "model",
-      Task.GENERATE_CONTENT,
+      _Task.GENERATE_CONTENT,
       "key",
       false,
       match.any,

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { RequestOptions, Task } from "../../../core/src/types";
+import { RequestOptions, _Task } from "../../../core/src/types";
 import { GoogleGenerativeAIError } from "../../../core/src/errors";
 
 const BASE_URL = "https://generativelanguage.googleapis.com";
@@ -32,7 +32,7 @@ const PACKAGE_LOG_HEADER = "genai-js";
 export class RequestUrl {
   constructor(
     public model: string,
-    public task: Task,
+    public task: _Task,
     public apiKey: string,
     public stream: boolean,
     public requestOptions: RequestOptions,
@@ -56,7 +56,7 @@ function getClientHeaders(): string {
 
 export async function makeRequest(
   model: string,
-  task: Task,
+  task: _Task,
   apiKey: string,
   stream: boolean,
   body: string,
@@ -113,4 +113,4 @@ function buildFetchOptions(requestOptions?: RequestOptions): RequestInit {
   }
   return fetchOptions;
 }
-export { Task };
+export { _Task as Task };

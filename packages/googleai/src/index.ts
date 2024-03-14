@@ -15,11 +15,6 @@
  * limitations under the License.
  */
 
-export {
-  ChatSession,
-  GenerationConfig,
-  SafetySetting,
-  Tool,
-} from "../../core/src";
+export { ChatSession } from "../../core/src";
 export * from "./gen-ai";
 export * from "./types";

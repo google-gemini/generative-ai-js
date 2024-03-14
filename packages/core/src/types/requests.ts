@@ -246,7 +246,7 @@ export interface FunctionDeclarationSchemaProperty {
  * Possible endpoint tasks.
  * @internal
  */
-export enum Task {
+export enum _Task {
   GENERATE_CONTENT = "generateContent",
   STREAM_GENERATE_CONTENT = "streamGenerateContent",
   COUNT_TOKENS = "countTokens",
@@ -258,9 +258,9 @@ export enum Task {
  * Function for making a request to the endpoint given the parameters.
  * @internal
  */
-export type MakeRequestFunction = (
+export type _MakeRequestFunction = (
   model: string,
-  task: Task,
+  task: _Task,
   apiKey: string,
   stream: boolean,
   body: string,

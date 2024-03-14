@@ -12,11 +12,9 @@ ChatSession class that enables sending chat messages and stores history of sent 
 export declare class ChatSession 
 ```
 
-## Constructors
+## Remarks
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(apiKey, model, \_makeRequest, params, requestOptions)](./generative-ai.chatsession._constructor_.md) |  | Constructs a new instance of the <code>ChatSession</code> class |
+The constructor for this class is marked as internal. Third-party code should not call the constructor directly or create subclasses that extend the `ChatSession` class.
 
 ## Properties
 

@@ -19,7 +19,6 @@ import { GoogleGenerativeAIError, RequestOptions } from "../../core/src";
 import { GenerativeModel } from "./models/generative-model";
 import { ModelParams } from "./types";
 
-export { ChatSession } from "../../core/src";
 export { GenerativeModel };
 
 /**

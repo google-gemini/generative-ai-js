@@ -20,9 +20,9 @@ import {
   GenerateContentResponse,
   GenerateContentResult,
   GenerateContentStreamResult,
-  MakeRequestFunction,
   RequestOptions,
-  Task,
+  _MakeRequestFunction,
+  _Task,
 } from "../types";
 import { addHelpers } from "../requests/response-helpers";
 import { processStream } from "../requests/stream-reader";
@@ -31,12 +31,12 @@ export async function generateContentStream(
   apiKey: string,
   model: string,
   params: GenerateContentRequest,
-  makeRequest: MakeRequestFunction,
+  makeRequest: _MakeRequestFunction,
   requestOptions?: RequestOptions,
 ): Promise<GenerateContentStreamResult> {
   const response = await makeRequest(
     model,
-    Task.STREAM_GENERATE_CONTENT,
+    _Task.STREAM_GENERATE_CONTENT,
     apiKey,
     /* stream */ true,
     JSON.stringify(params),
@@ -51,7 +51,7 @@ export async function generateContent(
   params: GenerateContentRequest,
   makeRequest: (
     model: string,
-    task: Task,
+    task: _Task,
     apiKey: string,
     stream: boolean,
     body: string,
@@ -61,7 +61,7 @@ export async function generateContent(
 ): Promise<GenerateContentResult> {
   const response = await makeRequest(
     model,
-    Task.GENERATE_CONTENT,
+    _Task.GENERATE_CONTENT,
     apiKey,
     /* stream */ false,
     JSON.stringify(params),

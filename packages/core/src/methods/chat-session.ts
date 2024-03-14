@@ -20,10 +20,10 @@ import {
   GenerateContentRequest,
   GenerateContentResult,
   GenerateContentStreamResult,
-  MakeRequestFunction,
   Part,
   RequestOptions,
   StartChatParams,
+  _MakeRequestFunction,
 } from "../types";
 import { formatNewContent } from "../requests/request-helpers";
 import { formatBlockErrorMessage } from "../requests/response-helpers";
@@ -47,10 +47,15 @@ export class ChatSession {
   private _history: Content[] = [];
   private _sendPromise: Promise<void> = Promise.resolve();
 
+  /**
+   * Prevents the constructor, and _makeRequest, from going into public docs.
+   * Users should not be calling this constructor directly anyway.
+   * @internal
+   */
   constructor(
     apiKey: string,
     public model: string,
-    private _makeRequest: MakeRequestFunction,
+    private _makeRequest: _MakeRequestFunction,
     public params?: StartChatParams,
     public requestOptions?: RequestOptions,
   ) {

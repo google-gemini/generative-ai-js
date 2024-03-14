@@ -36,8 +36,8 @@ export enum BlockReason {
 
 // @public
 export class ChatSession {
-    // Warning: (ae-incompatible-release-tags) The symbol "__constructor" is marked as @public, but its signature references "MakeRequestFunction" which is marked as @internal
-    constructor(apiKey: string, model: string, _makeRequest: MakeRequestFunction, params?: StartChatParams, requestOptions?: RequestOptions);
+    // @internal
+    constructor(apiKey: string, model: string, _makeRequest: _MakeRequestFunction, params?: StartChatParams, requestOptions?: RequestOptions);
     getHistory(): Promise<Content[]>;
     // (undocumented)
     model: string;
@@ -373,10 +373,8 @@ export interface InlineDataPart {
     text?: never;
 }
 
-// Warning: (ae-internal-missing-underscore) The name "MakeRequestFunction" should be prefixed with an underscore because the declaration is marked as @internal
-//
 // @internal
-export type MakeRequestFunction = (model: string, task: Task, apiKey: string, stream: boolean, body: string, requestOptions?: RequestOptions) => Promise<Response>;
+export type _MakeRequestFunction = (model: string, task: _Task, apiKey: string, stream: boolean, body: string, requestOptions?: RequestOptions) => Promise<Response>;
 
 // @public
 export interface ModelParams extends BaseParams {
@@ -435,10 +433,8 @@ export interface StartChatParams extends BaseParams {
     tools?: Tool[];
 }
 
-// Warning: (ae-internal-missing-underscore) The name "Task" should be prefixed with an underscore because the declaration is marked as @internal
-//
 // @internal
-export enum Task {
+export enum _Task {
     // (undocumented)
     BATCH_EMBED_CONTENTS = "batchEmbedContents",
     // (undocumented)

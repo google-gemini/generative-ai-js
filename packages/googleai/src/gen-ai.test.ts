@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ModelParams } from "../../core/src/types";
+import { ModelParams } from "./types";
 import { GenerativeModel, GoogleGenerativeAI } from "./gen-ai";
 import { expect } from "chai";
 
