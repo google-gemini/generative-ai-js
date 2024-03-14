@@ -2,4 +2,4 @@
 "@google/generative-ai": patch
 ---
 
-validateChatHistory is now checking that 'parts' propery is an array
+validateChatHistory is now checking that 'parts' property is an array
