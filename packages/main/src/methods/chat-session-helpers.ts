@@ -56,6 +56,12 @@ export function validateChatHistory(history: Content[]): void {
       );
     }
 
+    if (!Array.isArray(parts)) {
+      throw new GoogleGenerativeAIError(
+        "Content should have 'parts' property with an array of Parts",
+      );
+    }
+
     if (parts.length === 0) {
       throw new GoogleGenerativeAIError(
         "Each Content should have at least one part",
@@ -89,7 +95,11 @@ export function validateChatHistory(history: Content[]): void {
       const validPreviousContentRoles = VALID_PREVIOUS_CONTENT_ROLES[role];
       if (!validPreviousContentRoles.includes(prevContent.role)) {
         throw new GoogleGenerativeAIError(
-          `Content with role '${role}' can't follow '${prevContent.role}'`,
+          `Content with role '${role}' can't follow '${
+            prevContent.role
+          }'. Valid previous roles: ${JSON.stringify(
+            VALID_PREVIOUS_CONTENT_ROLES,
+          )}`,
         );
       }
     }

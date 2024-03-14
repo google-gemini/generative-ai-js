@@ -103,6 +103,16 @@ describe("chat-session-helpers", () => {
         isValid: true,
       },
       {
+        //@ts-expect-error
+        history: [{ role: "user", parts: "" }],
+        isValid: false,
+      },
+      {
+        //@ts-expect-error
+        history: [{ role: "user" }],
+        isValid: false,
+      },
+      {
         history: [{ role: "user", parts: [] }],
         isValid: false,
       },
