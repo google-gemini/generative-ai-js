@@ -28,7 +28,13 @@ export async function countTokens(
   params: CountTokensRequest,
   requestOptions?: RequestOptions,
 ): Promise<CountTokensResponse> {
-  const url = new RequestUrl(model, Task.COUNT_TOKENS, apiKey, false, {});
+  const url = new RequestUrl(
+    model,
+    Task.COUNT_TOKENS,
+    apiKey,
+    false,
+    requestOptions,
+  );
   const response = await makeRequest(
     url,
     JSON.stringify({ ...params, model }),
