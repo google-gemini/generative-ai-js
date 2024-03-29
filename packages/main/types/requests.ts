@@ -116,7 +116,12 @@ export interface RequestOptions {
    * defaults to latest stable version.
    */
   apiVersion?: string;
+  /**
+   * Base endpoint url. Defaults to "https://generativelanguage.googleapis.com"
+   */
+  baseUrl?: string;
 }
+
 /**
  * Defines a tool that model can call to access external knowledge.
  * @public
