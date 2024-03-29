@@ -7,5 +7,5 @@
 **Signature:**
 
 ```typescript
-role: Role;
+role: string;
 ```
