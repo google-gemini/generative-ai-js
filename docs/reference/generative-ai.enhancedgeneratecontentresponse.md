@@ -17,6 +17,7 @@ export interface EnhancedGenerateContentResponse extends GenerateContentResponse
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [functionCall](./generative-ai.enhancedgeneratecontentresponse.functioncall.md) |  | () =&gt; [FunctionCall](./generative-ai.functioncall.md) \| undefined |  |
-|  [text](./generative-ai.enhancedgeneratecontentresponse.text.md) |  | () =&gt; string | Returns the text string from the response, if available. Throws if the prompt or candidate was blocked. |
+|  [functionCall](./generative-ai.enhancedgeneratecontentresponse.functioncall.md) |  | () =&gt; [FunctionCall](./generative-ai.functioncall.md) \| undefined | Deprecated: use <code>functionCalls()</code> instead. |
+|  [functionCalls](./generative-ai.enhancedgeneratecontentresponse.functioncalls.md) |  | () =&gt; [FunctionCall](./generative-ai.functioncall.md)<!-- -->\[\] \| undefined | Returns function calls found in any <code>Part</code>s of the first candidate of the response, if available. Throws if the prompt or candidate was blocked. |
+|  [text](./generative-ai.enhancedgeneratecontentresponse.text.md) |  | () =&gt; string | Returns the text string assembled from all <code>Part</code>s of the first candidate of the response, if available. Throws if the prompt or candidate was blocked. |
 

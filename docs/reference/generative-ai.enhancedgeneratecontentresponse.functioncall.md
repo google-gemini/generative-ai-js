@@ -4,6 +4,12 @@
 
 ## EnhancedGenerateContentResponse.functionCall property
 
+> Warning: This API is now obsolete.
+> 
+> 
+
+Deprecated: use `functionCalls()` instead.
+
 **Signature:**
 
 ```typescript

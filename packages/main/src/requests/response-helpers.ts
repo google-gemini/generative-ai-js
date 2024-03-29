@@ -55,12 +55,15 @@ export function addHelpers(
     }
     return "";
   };
+  /**
+   * TODO: remove at next major version
+   */
   (response as EnhancedGenerateContentResponse).functionCall = () => {
     if (response.candidates && response.candidates.length > 0) {
       if (response.candidates.length > 1) {
         console.warn(
           `This response had ${response.candidates.length} ` +
-            `candidates. Returning function call from the first candidate only. ` +
+            `candidates. Returning function calls from the first candidate only. ` +
             `Access response.candidates directly to use the other candidates.`,
         );
       }
@@ -70,7 +73,35 @@ export function addHelpers(
           response,
         );
       }
-      return getFunctionCall(response);
+      console.warn(
+        `response.functionCall() is deprecated. ` +
+          `Use response.functionCalls() instead.`,
+      );
+      return getFunctionCalls(response)[0];
+    } else if (response.promptFeedback) {
+      throw new GoogleGenerativeAIResponseError<GenerateContentResponse>(
+        `Function call not available. ${formatBlockErrorMessage(response)}`,
+        response,
+      );
+    }
+    return undefined;
+  };
+  (response as EnhancedGenerateContentResponse).functionCalls = () => {
+    if (response.candidates && response.candidates.length > 0) {
+      if (response.candidates.length > 1) {
+        console.warn(
+          `This response had ${response.candidates.length} ` +
+            `candidates. Returning function calls from the first candidate only. ` +
+            `Access response.candidates directly to use the other candidates.`,
+        );
+      }
+      if (hadBadFinishReason(response.candidates[0])) {
+        throw new GoogleGenerativeAIResponseError<GenerateContentResponse>(
+          `${formatBlockErrorMessage(response)}`,
+          response,
+        );
+      }
+      return getFunctionCalls(response);
     } else if (response.promptFeedback) {
       throw new GoogleGenerativeAIResponseError<GenerateContentResponse>(
         `Function call not available. ${formatBlockErrorMessage(response)}`,
@@ -98,10 +129,22 @@ export function getText(response: GenerateContentResponse): string {
 /**
  * Returns functionCall of first candidate.
  */
-export function getFunctionCall(
+export function getFunctionCalls(
   response: GenerateContentResponse,
-): FunctionCall {
-  return response.candidates?.[0].content?.parts?.[0]?.functionCall;
+): FunctionCall[] {
+  const functionCalls: FunctionCall[] = [];
+  if (response.candidates?.[0].content?.parts) {
+    for (const part of response.candidates?.[0].content?.parts) {
+      if (part.functionCall) {
+        functionCalls.push(part.functionCall);
+      }
+    }
+  }
+  if (functionCalls.length > 0) {
+    return functionCalls;
+  } else {
+    return undefined;
+  }
 }
 
 const badFinishReasons = [FinishReason.RECITATION, FinishReason.SAFETY];
