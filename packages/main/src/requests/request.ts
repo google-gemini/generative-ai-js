@@ -59,7 +59,9 @@ export class RequestUrl {
  * Simple, but may become more complex if we add more versions to log.
  */
 function getClientHeaders(apiClient?: string): string {
-  return `${apiClient ? apiClient + ' ' : ''}${PACKAGE_LOG_HEADER}/${PACKAGE_VERSION}`;
+  return `${
+    apiClient ? apiClient + " " : ""
+  }${PACKAGE_LOG_HEADER}/${PACKAGE_VERSION}`;
 }
 
 export async function makeRequest(
