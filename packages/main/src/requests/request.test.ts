@@ -19,7 +19,13 @@ import { expect, use } from "chai";
 import { restore, stub } from "sinon";
 import * as sinonChai from "sinon-chai";
 import * as chaiAsPromised from "chai-as-promised";
-import { DEFAULT_API_VERSION, RequestUrl, Task, makeRequest } from "./request";
+import {
+  DEFAULT_API_VERSION,
+  DEFAULT_BASE_URL,
+  RequestUrl,
+  Task,
+  makeRequest,
+} from "./request";
 
 use(sinonChai);
 use(chaiAsPromised);
@@ -61,7 +67,7 @@ describe("request methods", () => {
       expect(url.toString()).to.not.include("key");
       expect(url.toString()).to.not.include("alt=sse");
     });
-    it("default apiVersion", async () => {
+    it("default apiVersion and baseUrl", async () => {
       const url = new RequestUrl(
         "models/model-name",
         Task.GENERATE_CONTENT,
@@ -70,6 +76,7 @@ describe("request methods", () => {
         {},
       );
       expect(url.toString()).to.include(DEFAULT_API_VERSION);
+      expect(url.toString()).to.include(DEFAULT_BASE_URL);
     });
     it("custom apiVersion", async () => {
       const url = new RequestUrl(
@@ -80,6 +87,16 @@ describe("request methods", () => {
         { apiVersion: "v2beta" },
       );
       expect(url.toString()).to.include("/v2beta/models/model-name");
+    });
+    it("custom baseUrl", async () => {
+      const url = new RequestUrl(
+        "models/model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        false,
+        { baseUrl: "http://my.staging.website" },
+      );
+      expect(url.toString()).to.include("http://my.staging.website");
     });
     it("non-stream - tunedModels/", async () => {
       const url = new RequestUrl(
