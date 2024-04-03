@@ -75,6 +75,5 @@
 |  Type Alias | Description |
 |  --- | --- |
 |  [Part](./generative-ai.part.md) | Content part - includes text or image part types. |
-|  [Role](./generative-ai.role.md) | Role is the producer of the content. |
 |  [Tool](./generative-ai.tool.md) | Defines a tool that model can call to access external knowledge. |
 

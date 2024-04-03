@@ -17,5 +17,5 @@ export interface Content
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [parts](./generative-ai.content.parts.md) |  | [Part](./generative-ai.part.md)<!-- -->\[\] |  |
-|  [role](./generative-ai.content.role.md) |  | [Role](./generative-ai.role.md) |  |
+|  [role](./generative-ai.content.role.md) |  | string |  |
 

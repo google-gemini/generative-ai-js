@@ -15,14 +15,12 @@
  * limitations under the License.
  */
 
-import { Role } from "./enums";
-
 /**
  * Content type for both prompts and response candidates.
  * @public
  */
 export interface Content {
-  role: Role;
+  role: string;
   parts: Part[];
 }
 

@@ -16,12 +16,6 @@
  */
 
 /**
- * Role is the producer of the content.
- * @public
- */
-export type Role = (typeof POSSIBLE_ROLES)[number];
-
-/**
  * Possible roles.
  * @public
  */
