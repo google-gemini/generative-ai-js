@@ -53,11 +53,22 @@ export interface GenerateContentStreamResult {
 export interface EnhancedGenerateContentResponse
   extends GenerateContentResponse {
   /**
-   * Returns the text string from the response, if available.
+   * Returns the text string assembled from all `Part`s of the first candidate
+   * of the response, if available.
    * Throws if the prompt or candidate was blocked.
    */
   text: () => string;
+  /**
+   * Deprecated: use `functionCalls()` instead.
+   * @deprecated
+   */
   functionCall: () => FunctionCall | undefined;
+  /**
+   * Returns function calls found in any `Part`s of the first candidate
+   * of the response, if available.
+   * Throws if the prompt or candidate was blocked.
+   */
+  functionCalls: () => FunctionCall[] | undefined;
 }
 
 /**

@@ -4,7 +4,7 @@
 
 ## EnhancedGenerateContentResponse.text property
 
-Returns the text string from the response, if available. Throws if the prompt or candidate was blocked.
+Returns the text string assembled from all `Part`<!-- -->s of the first candidate of the response, if available. Throws if the prompt or candidate was blocked.
 
 **Signature:**
 
