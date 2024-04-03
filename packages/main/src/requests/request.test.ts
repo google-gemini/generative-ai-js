@@ -141,7 +141,7 @@ describe("request methods", () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-goog-api-client": "genai-js/__PACKAGE_VERSION__ client/version",
+          "x-goog-api-client": "client/version genai-js/__PACKAGE_VERSION__",
           "x-goog-api-key": fakeRequestUrl.apiKey,
         },
         body: "",
