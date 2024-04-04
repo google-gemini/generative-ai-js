@@ -59,8 +59,13 @@ export class RequestUrl {
 /**
  * Simple, but may become more complex if we add more versions to log.
  */
-function getClientHeaders(): string {
-  return `${PACKAGE_LOG_HEADER}/${PACKAGE_VERSION}`;
+export function getClientHeaders(requestOptions: RequestOptions): string {
+  const clientHeaders = [];
+  if (requestOptions?.apiClient) {
+    clientHeaders.push(requestOptions.apiClient);
+  }
+  clientHeaders.push(`${PACKAGE_LOG_HEADER}/${PACKAGE_VERSION}`);
+  return clientHeaders.join(" ");
 }
 
 export async function makeRequest(
@@ -75,7 +80,7 @@ export async function makeRequest(
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-goog-api-client": getClientHeaders(),
+        "x-goog-api-client": getClientHeaders(requestOptions),
         "x-goog-api-key": url.apiKey,
       },
       body,

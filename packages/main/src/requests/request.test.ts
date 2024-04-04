@@ -119,7 +119,33 @@ describe("request methods", () => {
         ok: true,
       } as Response);
       const response = await makeRequest(fakeRequestUrl, "");
-      expect(fetchStub).to.be.calledOnce;
+      expect(fetchStub).to.be.calledWith(fakeRequestUrl.toString(), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-client": "genai-js/__PACKAGE_VERSION__",
+          "x-goog-api-key": fakeRequestUrl.apiKey,
+        },
+        body: "",
+      });
+      expect(response.ok).to.be.true;
+    });
+    it("passes apiClient", async () => {
+      const fetchStub = stub(globalThis, "fetch").resolves({
+        ok: true,
+      } as Response);
+      const response = await makeRequest(fakeRequestUrl, "", {
+        apiClient: "client/version",
+      });
+      expect(fetchStub).to.be.calledWith(fakeRequestUrl.toString(), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-client": "client/version genai-js/__PACKAGE_VERSION__",
+          "x-goog-api-key": fakeRequestUrl.apiKey,
+        },
+        body: "",
+      });
       expect(response.ok).to.be.true;
     });
     it("error with timeout", async () => {
