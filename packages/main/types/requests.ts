@@ -117,6 +117,11 @@ export interface RequestOptions {
    */
   apiVersion?: string;
   /**
+   * Additional attribution information to include in the x-goog-api-client header.
+   * Used by wrapper SDKs.
+   */
+  apiClient?: string;
+  /**
    * Base endpoint url. Defaults to "https://generativelanguage.googleapis.com"
    */
   baseUrl?: string;

@@ -16,6 +16,7 @@ export interface RequestOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [apiClient?](./generative-ai.requestoptions.apiclient.md) |  | string | _(Optional)_ Additional attribution information to include in the x-goog-api-client header. Used by wrapper SDKs. |
 |  [apiVersion?](./generative-ai.requestoptions.apiversion.md) |  | string | _(Optional)_ Version of API endpoint to call (e.g. "v1" or "v1beta"). If not specified, defaults to latest stable version. |
 |  [baseUrl?](./generative-ai.requestoptions.baseurl.md) |  | string | _(Optional)_ Base endpoint url. Defaults to "https://generativelanguage.googleapis.com" |
 |  [timeout?](./generative-ai.requestoptions.timeout.md) |  | number | _(Optional)_ Request timeout in milliseconds. |

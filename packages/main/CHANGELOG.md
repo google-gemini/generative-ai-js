@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.5.0
+
+### Minor Changes
+
+- 658a0da: Add `apiClient` configuration option to `RequestOptions`.
+
 ## 0.4.0
 
 ### Minor Changes
