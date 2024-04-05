@@ -16,7 +16,7 @@
  */
 
 import { expect, use } from "chai";
-import { restore, stub } from "sinon";
+import { match, restore, stub } from "sinon";
 import * as sinonChai from "sinon-chai";
 import * as chaiAsPromised from "chai-as-promised";
 import {
@@ -24,19 +24,12 @@ import {
   DEFAULT_BASE_URL,
   RequestUrl,
   Task,
-  makeRequest,
+  _makeRequestInternal,
+  constructRequest,
 } from "./request";
 
 use(sinonChai);
 use(chaiAsPromised);
-
-const fakeRequestUrl = new RequestUrl(
-  "model-name",
-  Task.GENERATE_CONTENT,
-  "key",
-  true,
-  {},
-);
 
 describe("request methods", () => {
   afterEach(() => {
@@ -113,13 +106,37 @@ describe("request methods", () => {
       expect(url.toString()).to.not.include("alt=sse");
     });
   });
-  describe("makeRequest", () => {
+  describe("constructRequest", () => {
+    it("passes apiClient", async () => {
+      const request = await constructRequest(
+        "model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        true, "", {
+        apiClient: "client/version"
+      });
+      expect((request.fetchOptions.headers as Headers).get('x-goog-api-client')).to.equal("client/version genai-js/__PACKAGE_VERSION__");
+    });
+  });
+  describe("_makeRequestInternal", () => {
     it("no error", async () => {
       const fetchStub = stub(globalThis, "fetch").resolves({
         ok: true,
       } as Response);
-      const response = await makeRequest(fakeRequestUrl, "");
-      expect(fetchStub).to.be.calledOnce;
+      const response = await _makeRequestInternal(
+        "model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        true, "", {}, fetchStub as typeof fetch);
+      expect(fetchStub).to.be.calledWith(match.string, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-client": "genai-js/__PACKAGE_VERSION__",
+          "x-goog-api-key": 'key',
+        },
+        body: "",
+      });
       expect(response.ok).to.be.true;
     });
     it("error with timeout", async () => {
@@ -130,9 +147,13 @@ describe("request methods", () => {
       } as Response);
 
       await expect(
-        makeRequest(fakeRequestUrl, "", {
-          timeout: 0,
-        }),
+        _makeRequestInternal(
+          "model-name",
+          Task.GENERATE_CONTENT,
+          "key",
+          true, "", {
+          timeout: 0
+        }, fetchStub as typeof fetch),
       ).to.be.rejectedWith("500 AbortError");
       expect(fetchStub).to.be.calledOnce;
     });
@@ -142,9 +163,13 @@ describe("request methods", () => {
         status: 500,
         statusText: "Server Error",
       } as Response);
-      await expect(makeRequest(fakeRequestUrl, "")).to.be.rejectedWith(
-        /500 Server Error/,
-      );
+      await expect(_makeRequestInternal(
+        "model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        true, "", {})).to.be.rejectedWith(
+          /500 Server Error/,
+        );
       expect(fetchStub).to.be.calledOnce;
     });
     it("Network error, includes response.json()", async () => {
@@ -154,9 +179,13 @@ describe("request methods", () => {
         statusText: "Server Error",
         json: () => Promise.resolve({ error: { message: "extra info" } }),
       } as Response);
-      await expect(makeRequest(fakeRequestUrl, "")).to.be.rejectedWith(
-        /500 Server Error.*extra info/,
-      );
+      await expect(_makeRequestInternal(
+        "model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        true, "", {}, fetchStub as typeof fetch)).to.be.rejectedWith(
+          /500 Server Error.*extra info/,
+        );
       expect(fetchStub).to.be.calledOnce;
     });
     it("Network error, includes response.json() and details", async () => {
@@ -178,9 +207,13 @@ describe("request methods", () => {
             },
           }),
       } as Response);
-      await expect(makeRequest(fakeRequestUrl, "")).to.be.rejectedWith(
-        /500 Server Error.*extra info.*generic::invalid_argument/,
-      );
+      await expect(_makeRequestInternal(
+        "model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        true, "", {}, fetchStub as typeof fetch)).to.be.rejectedWith(
+          /500 Server Error.*extra info.*generic::invalid_argument/,
+        );
       expect(fetchStub).to.be.calledOnce;
     });
   });
