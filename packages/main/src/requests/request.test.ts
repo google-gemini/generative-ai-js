@@ -212,7 +212,7 @@ describe("request methods", () => {
           true,
           "",
           {},
-          fetchStub as typeof fetch
+          fetchStub as typeof fetch,
         ),
       ).to.be.rejectedWith(/500 Server Error/);
       expect(fetchStub).to.be.calledOnce;

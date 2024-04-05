@@ -168,7 +168,8 @@ describe("generateContent()", () => {
   it("image rejected (400)", async () => {
     const mockResponse = getMockResponse("unary-failure-image-rejected.json");
     const errorJson = await mockResponse.json();
-    const makeRequestStub = stub(request, "makeRequest").rejects(new Error(`[400 ] ${errorJson.error.message}`)
+    const makeRequestStub = stub(request, "makeRequest").rejects(
+      new Error(`[400 ] ${errorJson.error.message}`),
     );
     await expect(
       generateContent("key", "model", fakeRequestParams),
