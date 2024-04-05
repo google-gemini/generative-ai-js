@@ -107,40 +107,77 @@ describe("request methods", () => {
     });
   });
   describe("constructRequest", () => {
+    it("handles basic request", async () => {
+      const request = await constructRequest(
+        "model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        true,
+        "",
+        {},
+      );
+      expect(
+        (request.fetchOptions.headers as Headers).get("x-goog-api-client"),
+      ).to.equal("genai-js/__PACKAGE_VERSION__");
+      expect(
+        (request.fetchOptions.headers as Headers).get("x-goog-api-key"),
+      ).to.equal("key");
+      expect(
+        (request.fetchOptions.headers as Headers).get("Content-Type"),
+      ).to.equal("application/json");
+    });
     it("passes apiClient", async () => {
       const request = await constructRequest(
         "model-name",
         Task.GENERATE_CONTENT,
         "key",
-        true, "", {
-        apiClient: "client/version"
-      });
-      expect((request.fetchOptions.headers as Headers).get('x-goog-api-client')).to.equal("client/version genai-js/__PACKAGE_VERSION__");
+        true,
+        "",
+        {
+          apiClient: "client/version",
+        },
+      );
+      expect(
+        (request.fetchOptions.headers as Headers).get("x-goog-api-client"),
+      ).to.equal("client/version genai-js/__PACKAGE_VERSION__");
+    });
+    it("passes timeout", async () => {
+      const request = await constructRequest(
+        "model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        true,
+        "",
+        {
+          timeout: 5000,
+        },
+      );
+      expect(request.fetchOptions.signal).to.be.instanceOf(AbortSignal);
     });
   });
   describe("_makeRequestInternal", () => {
     it("no error", async () => {
-      const fetchStub = stub(globalThis, "fetch").resolves({
+      const fetchStub = stub().resolves({
         ok: true,
       } as Response);
       const response = await _makeRequestInternal(
         "model-name",
         Task.GENERATE_CONTENT,
         "key",
-        true, "", {}, fetchStub as typeof fetch);
+        true,
+        "",
+        {},
+        fetchStub as typeof fetch,
+      );
       expect(fetchStub).to.be.calledWith(match.string, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-client": "genai-js/__PACKAGE_VERSION__",
-          "x-goog-api-key": 'key',
-        },
+        headers: match.instanceOf(Headers),
         body: "",
       });
       expect(response.ok).to.be.true;
     });
     it("error with timeout", async () => {
-      const fetchStub = stub(globalThis, "fetch").resolves({
+      const fetchStub = stub().resolves({
         ok: false,
         status: 500,
         statusText: "AbortError",
@@ -151,45 +188,57 @@ describe("request methods", () => {
           "model-name",
           Task.GENERATE_CONTENT,
           "key",
-          true, "", {
-          timeout: 0
-        }, fetchStub as typeof fetch),
+          true,
+          "",
+          {
+            timeout: 0,
+          },
+          fetchStub as typeof fetch,
+        ),
       ).to.be.rejectedWith("500 AbortError");
       expect(fetchStub).to.be.calledOnce;
     });
     it("Network error, no response.json()", async () => {
-      const fetchStub = stub(globalThis, "fetch").resolves({
+      const fetchStub = stub().resolves({
         ok: false,
         status: 500,
         statusText: "Server Error",
       } as Response);
-      await expect(_makeRequestInternal(
-        "model-name",
-        Task.GENERATE_CONTENT,
-        "key",
-        true, "", {})).to.be.rejectedWith(
-          /500 Server Error/,
-        );
+      await expect(
+        _makeRequestInternal(
+          "model-name",
+          Task.GENERATE_CONTENT,
+          "key",
+          true,
+          "",
+          {},
+          fetchStub as typeof fetch
+        ),
+      ).to.be.rejectedWith(/500 Server Error/);
       expect(fetchStub).to.be.calledOnce;
     });
     it("Network error, includes response.json()", async () => {
-      const fetchStub = stub(globalThis, "fetch").resolves({
+      const fetchStub = stub().resolves({
         ok: false,
         status: 500,
         statusText: "Server Error",
         json: () => Promise.resolve({ error: { message: "extra info" } }),
       } as Response);
-      await expect(_makeRequestInternal(
-        "model-name",
-        Task.GENERATE_CONTENT,
-        "key",
-        true, "", {}, fetchStub as typeof fetch)).to.be.rejectedWith(
-          /500 Server Error.*extra info/,
-        );
+      await expect(
+        _makeRequestInternal(
+          "model-name",
+          Task.GENERATE_CONTENT,
+          "key",
+          true,
+          "",
+          {},
+          fetchStub as typeof fetch,
+        ),
+      ).to.be.rejectedWith(/500 Server Error.*extra info/);
       expect(fetchStub).to.be.calledOnce;
     });
     it("Network error, includes response.json() and details", async () => {
-      const fetchStub = stub(globalThis, "fetch").resolves({
+      const fetchStub = stub().resolves({
         ok: false,
         status: 500,
         statusText: "Server Error",
@@ -207,13 +256,19 @@ describe("request methods", () => {
             },
           }),
       } as Response);
-      await expect(_makeRequestInternal(
-        "model-name",
-        Task.GENERATE_CONTENT,
-        "key",
-        true, "", {}, fetchStub as typeof fetch)).to.be.rejectedWith(
-          /500 Server Error.*extra info.*generic::invalid_argument/,
-        );
+      await expect(
+        _makeRequestInternal(
+          "model-name",
+          Task.GENERATE_CONTENT,
+          "key",
+          true,
+          "",
+          {},
+          fetchStub as typeof fetch,
+        ),
+      ).to.be.rejectedWith(
+        /500 Server Error.*extra info.*generic::invalid_argument/,
+      );
       expect(fetchStub).to.be.calledOnce;
     });
   });

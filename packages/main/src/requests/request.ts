@@ -70,9 +70,9 @@ export function getClientHeaders(requestOptions: RequestOptions): string {
 
 export async function getHeaders(url: RequestUrl): Promise<Headers> {
   const headers = new Headers();
-  headers.append('Content-Type', 'application/json');
-  headers.append('x-goog-api-client', getClientHeaders(url.requestOptions));
-  headers.append('x-goog-api-key', url.apiKey);
+  headers.append("Content-Type", "application/json");
+  headers.append("x-goog-api-client", getClientHeaders(url.requestOptions));
+  headers.append("x-goog-api-key", url.apiKey);
   return headers;
 }
 
@@ -82,17 +82,17 @@ export async function constructRequest(
   apiKey: string,
   stream: boolean,
   body: string,
-  requestOptions?: RequestOptions
+  requestOptions?: RequestOptions,
 ): Promise<{ url: string; fetchOptions: RequestInit }> {
   const url = new RequestUrl(model, task, apiKey, stream, requestOptions);
   return {
     url: url.toString(),
     fetchOptions: {
       ...buildFetchOptions(requestOptions),
-      method: 'POST',
+      method: "POST",
       headers: await getHeaders(url),
-      body
-    }
+      body,
+    },
   };
 }
 
@@ -106,9 +106,18 @@ export async function makeRequest(
   apiKey: string,
   stream: boolean,
   body: string,
-  requestOptions?: RequestOptions): Promise<Response> {
-    return _makeRequestInternal(model, task, apiKey, stream, body, requestOptions, fetch);
-  }
+  requestOptions?: RequestOptions,
+): Promise<Response> {
+  return _makeRequestInternal(
+    model,
+    task,
+    apiKey,
+    stream,
+    body,
+    requestOptions,
+    fetch,
+  );
+}
 
 export async function _makeRequestInternal(
   model: string,
@@ -118,7 +127,7 @@ export async function _makeRequestInternal(
   body: string,
   requestOptions?: RequestOptions,
   // Allows this to be stubbed for tests
-  fetchFn = fetch
+  fetchFn = fetch,
 ): Promise<Response> {
   const url = new RequestUrl(model, task, apiKey, stream, requestOptions);
   let response;
@@ -129,7 +138,7 @@ export async function _makeRequestInternal(
       apiKey,
       stream,
       body,
-      requestOptions
+      requestOptions,
     );
     response = await fetchFn(request.url, request.fetchOptions);
     if (!response.ok) {
