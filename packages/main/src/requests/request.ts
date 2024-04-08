@@ -68,23 +68,79 @@ export function getClientHeaders(requestOptions: RequestOptions): string {
   return clientHeaders.join(" ");
 }
 
+export async function getHeaders(url: RequestUrl): Promise<Headers> {
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json");
+  headers.append("x-goog-api-client", getClientHeaders(url.requestOptions));
+  headers.append("x-goog-api-key", url.apiKey);
+  return headers;
+}
+
+export async function constructRequest(
+  model: string,
+  task: Task,
+  apiKey: string,
+  stream: boolean,
+  body: string,
+  requestOptions?: RequestOptions,
+): Promise<{ url: string; fetchOptions: RequestInit }> {
+  const url = new RequestUrl(model, task, apiKey, stream, requestOptions);
+  return {
+    url: url.toString(),
+    fetchOptions: {
+      ...buildFetchOptions(requestOptions),
+      method: "POST",
+      headers: await getHeaders(url),
+      body,
+    },
+  };
+}
+
+/**
+ * Wrapper for _makeRequestInternal that automatically uses native fetch,
+ * allowing _makeRequestInternal to be tested with a mocked fetch function.
+ */
 export async function makeRequest(
-  url: RequestUrl,
+  model: string,
+  task: Task,
+  apiKey: string,
+  stream: boolean,
   body: string,
   requestOptions?: RequestOptions,
 ): Promise<Response> {
+  return _makeRequestInternal(
+    model,
+    task,
+    apiKey,
+    stream,
+    body,
+    requestOptions,
+    fetch,
+  );
+}
+
+export async function _makeRequestInternal(
+  model: string,
+  task: Task,
+  apiKey: string,
+  stream: boolean,
+  body: string,
+  requestOptions?: RequestOptions,
+  // Allows this to be stubbed for tests
+  fetchFn = fetch,
+): Promise<Response> {
+  const url = new RequestUrl(model, task, apiKey, stream, requestOptions);
   let response;
   try {
-    response = await fetch(url.toString(), {
-      ...buildFetchOptions(requestOptions),
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-goog-api-client": getClientHeaders(requestOptions),
-        "x-goog-api-key": url.apiKey,
-      },
+    const request = await constructRequest(
+      model,
+      task,
+      apiKey,
+      stream,
       body,
-    });
+      requestOptions,
+    );
+    response = await fetchFn(request.url, request.fetchOptions);
     if (!response.ok) {
       let message = "";
       try {

@@ -58,7 +58,10 @@ describe("generateContent()", () => {
     const result = await generateContent("key", "model", fakeRequestParams);
     expect(result.response.text()).to.include("Helena");
     expect(makeRequestStub).to.be.calledWith(
-      match.instanceOf(request.RequestUrl),
+      "model",
+      request.Task.GENERATE_CONTENT,
+      "key",
+      false,
       match((value: string) => {
         return value.includes("contents");
       }),
@@ -73,7 +76,10 @@ describe("generateContent()", () => {
     expect(result.response.text()).to.include("Use Freshly Ground Coffee");
     expect(result.response.text()).to.include("30 minutes of brewing");
     expect(makeRequestStub).to.be.calledWith(
-      match.instanceOf(request.RequestUrl),
+      "model",
+      request.Task.GENERATE_CONTENT,
+      "key",
+      false,
       match.any,
     );
   });
@@ -88,7 +94,10 @@ describe("generateContent()", () => {
       result.response.candidates[0].citationMetadata.citationSources.length,
     ).to.equal(1);
     expect(makeRequestStub).to.be.calledWith(
-      match.instanceOf(request.RequestUrl),
+      "model",
+      request.Task.GENERATE_CONTENT,
+      "key",
+      false,
       match.any,
     );
   });
@@ -102,7 +111,10 @@ describe("generateContent()", () => {
     const result = await generateContent("key", "model", fakeRequestParams);
     expect(result.response.text).to.throw("SAFETY");
     expect(makeRequestStub).to.be.calledWith(
-      match.instanceOf(request.RequestUrl),
+      "model",
+      request.Task.GENERATE_CONTENT,
+      "key",
+      false,
       match.any,
     );
   });
@@ -116,7 +128,10 @@ describe("generateContent()", () => {
     const result = await generateContent("key", "model", fakeRequestParams);
     expect(result.response.text).to.throw("SAFETY");
     expect(makeRequestStub).to.be.calledWith(
-      match.instanceOf(request.RequestUrl),
+      "model",
+      request.Task.GENERATE_CONTENT,
+      "key",
+      false,
       match.any,
     );
   });
@@ -128,7 +143,10 @@ describe("generateContent()", () => {
     const result = await generateContent("key", "model", fakeRequestParams);
     expect(result.response.text()).to.equal("");
     expect(makeRequestStub).to.be.calledWith(
-      match.instanceOf(request.RequestUrl),
+      "model",
+      request.Task.GENERATE_CONTENT,
+      "key",
+      false,
       match.any,
     );
   });
@@ -140,20 +158,22 @@ describe("generateContent()", () => {
     const result = await generateContent("key", "model", fakeRequestParams);
     expect(result.response.text()).to.include("30 minutes of brewing");
     expect(makeRequestStub).to.be.calledWith(
-      match.instanceOf(request.RequestUrl),
+      "model",
+      request.Task.GENERATE_CONTENT,
+      "key",
+      false,
       match.any,
     );
   });
   it("image rejected (400)", async () => {
     const mockResponse = getMockResponse("unary-failure-image-rejected.json");
-    const mockFetch = stub(globalThis, "fetch").resolves({
-      ok: false,
-      status: 400,
-      json: mockResponse.json,
-    } as Response);
+    const errorJson = await mockResponse.json();
+    const makeRequestStub = stub(request, "makeRequest").rejects(
+      new Error(`[400 ] ${errorJson.error.message}`),
+    );
     await expect(
       generateContent("key", "model", fakeRequestParams),
     ).to.be.rejectedWith(/400.*invalid argument/);
-    expect(mockFetch).to.be.called;
+    expect(makeRequestStub).to.be.called;
   });
 });
