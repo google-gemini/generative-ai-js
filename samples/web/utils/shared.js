@@ -79,7 +79,7 @@ export async function updateUI(resultEl, getResult, streaming) {
         // Get first candidate's current text chunk
         const chunkText = chunk.text();
         text += chunkText;
-        resultEl.innerHTML = marked.parse(text);
+        resultEl.innerText = marked.parse(text);
         scrollToDocumentBottom();
       }
     } else {
