@@ -68,7 +68,7 @@
         thumbnailsEl.innerHTML = "";
         for (const file of fileInputEl.files) {
           const url = URL.createObjectURL(file);
-          thumbnailsEl.innerHTML += `<img class="thumb" src="${url}" onload="window.URL.revokeObjectURL(this.src)" />`;
+          thumbnailsEl.innerHTML += `<img class="thumb" src="${encodeURIComponent(url)}" onload="window.URL.revokeObjectURL(this.src)" />`;
         }
       });
 
