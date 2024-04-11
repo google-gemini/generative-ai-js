@@ -20,7 +20,7 @@ import { GoogleGenerativeAIError } from "../errors";
 
 export const DEFAULT_BASE_URL = "https://generativelanguage.googleapis.com";
 
-export const DEFAULT_API_VERSION = "v1";
+export const DEFAULT_API_VERSION = "v1beta";
 
 /**
  * We can't `require` package.json if this runs on web. We will use rollup to
