@@ -9,5 +9,5 @@ Possible roles.
 **Signature:**
 
 ```typescript
-POSSIBLE_ROLES: readonly ["user", "model", "function"]
+POSSIBLE_ROLES: readonly ["user", "model", "function", "system"]
 ```

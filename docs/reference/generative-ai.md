@@ -18,6 +18,7 @@
 |  --- | --- |
 |  [BlockReason](./generative-ai.blockreason.md) | Reason that a prompt was blocked. |
 |  [FinishReason](./generative-ai.finishreason.md) | Reason that a candidate finished. |
+|  [FunctionCallingMode](./generative-ai.functioncallingmode.md) |  |
 |  [FunctionDeclarationSchemaType](./generative-ai.functiondeclarationschematype.md) | Contains the list of OpenAPI data types as defined by https://swagger.io/docs/specification/data-models/data-types/ |
 |  [HarmBlockThreshold](./generative-ai.harmblockthreshold.md) | Threshold above which a prompt or candidate will be blocked. |
 |  [HarmCategory](./generative-ai.harmcategory.md) | Harm categories that would cause prompts or candidates to be blocked. |
@@ -41,6 +42,7 @@
 |  [EmbedContentResponse](./generative-ai.embedcontentresponse.md) | Response from calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md)<!-- -->. |
 |  [EnhancedGenerateContentResponse](./generative-ai.enhancedgeneratecontentresponse.md) | Response object wrapped with helper methods. |
 |  [FunctionCall](./generative-ai.functioncall.md) | A predicted \[FunctionCall\] returned from the model that contains a string representing the \[FunctionDeclaration.name\] and a structured JSON object containing the parameters and their values. |
+|  [FunctionCallingConfig](./generative-ai.functioncallingconfig.md) |  |
 |  [FunctionCallPart](./generative-ai.functioncallpart.md) | Content part interface if the part represents FunctionResponse. |
 |  [FunctionDeclaration](./generative-ai.functiondeclaration.md) | Structured representation of a function declaration as defined by the \[OpenAPI 3.0 specification\](https://spec.openapis.org/oas/v3.0.3). Included in this declaration are the function name and parameters. This FunctionDeclaration is a representation of a block of code that can be used as a Tool by the model and executed by the client. |
 |  [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md) | Schema for parameters passed to [FunctionDeclaration.parameters](./generative-ai.functiondeclaration.parameters.md)<!-- -->. |
@@ -63,6 +65,7 @@
 |  [SafetySetting](./generative-ai.safetysetting.md) | Safety setting that can be sent as part of request parameters. |
 |  [StartChatParams](./generative-ai.startchatparams.md) | Params for [GenerativeModel.startChat()](./generative-ai.generativemodel.startchat.md)<!-- -->. |
 |  [TextPart](./generative-ai.textpart.md) | Content part interface if the part represents a text string. |
+|  [ToolConfig](./generative-ai.toolconfig.md) | Tool config. This config is shared for all tools provided in the request. |
 
 ## Variables
 
