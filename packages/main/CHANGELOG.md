@@ -1,5 +1,15 @@
 # @google/generative-ai
 
+## 0.6.0
+
+### Minor Changes
+
+- 2a1f97c: Add `systemInstruction` feature and forced function calling feature (using `toolConfig`).
+
+### Patch Changes
+
+- 0931d2c: Refactor makeRequest to make fetch mockable.
+
 ## 0.5.0
 
 ### Minor Changes
