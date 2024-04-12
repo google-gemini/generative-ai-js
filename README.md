@@ -92,6 +92,9 @@ https://ai.google.dev/docs
 
 Find reference docs for this SDK [here in the repo](/docs/reference/generative-ai.md).
 
+## Changelog
+- `@google/generative-ai` - [CHANGELOG.md](/main/packages/main/CHANGELOG.md)
+
 ## Contributing
 
 See [Contributing](/docs/contributing.md) for more information on contributing to the Google AI JavaScript SDK.
