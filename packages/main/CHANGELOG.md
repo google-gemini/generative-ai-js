@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.7.0
+
+### Minor Changes
+
+- 79b7651: Set default API version to "v1beta" to match Go and Python.
+
 ## 0.6.0
 
 ### Minor Changes
