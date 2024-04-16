@@ -45,6 +45,7 @@ export class GoogleAIFileManager {
     );
     const uploadHeaders = getHeaders(url);
     uploadHeaders.append("Content-Type", metadata.mimeType);
+    // TODO: do multipart upload?
     return makeFilesRequest(url, uploadHeaders, file);
   }
 
@@ -76,7 +77,7 @@ export class GoogleAIFileManager {
       this.apiKey,
       this._requestOptions,
     );
-    url.appendPath(fileId);
+    url.appendPath(parseFileId(fileId));
     const uploadHeaders = getHeaders(url);
     return makeFilesRequest(url, uploadHeaders);
   }
@@ -90,8 +91,18 @@ export class GoogleAIFileManager {
       this.apiKey,
       this._requestOptions,
     );
-    url.appendPath(fileId);
+    url.appendPath(parseFileId(fileId));
     const uploadHeaders = getHeaders(url);
     return makeFilesRequest(url, uploadHeaders);
   }
+}
+
+/**
+ * If fileId is prepended with "files/", remove prefix
+ */
+function parseFileId(fileId: string): string {
+  if (fileId.startsWith('files/')) {
+    return fileId.split('files/')[1];
+  }
+  return fileId;
 }
