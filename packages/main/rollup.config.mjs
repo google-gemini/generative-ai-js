@@ -20,10 +20,7 @@ import typescriptPlugin from "rollup-plugin-typescript2";
 import typescript from "typescript";
 import json from "@rollup/plugin-json";
 import pkg from "./package.json" assert { type: "json" };
-
-const deps = Object.keys(
-  Object.assign({}, pkg.peerDependencies, pkg.dependencies),
-);
+import filePkg from "./files/package.json" assert { type: "json" };
 
 const es2017BuildPlugins = [
   typescriptPlugin({
@@ -51,8 +48,7 @@ const esmBuilds = [
       format: "es",
       sourcemap: true,
     },
-    external: (id) =>
-      deps.some((dep) => id === dep || id.startsWith(`${dep}/`)),
+    external: ["fs"],
     plugins: [...es2017BuildPlugins],
   },
 ];
@@ -61,11 +57,25 @@ const cjsBuilds = [
   {
     input: "src/index.ts",
     output: [{ file: pkg.main, format: "cjs", sourcemap: true }],
-    external: (id) =>
-      deps.some((dep) => id === dep || id.startsWith(`${dep}/`)),
+    external: ["fs"],
+    plugins: [...es2017BuildPlugins],
+  },
+];
+
+const filesBuilds = [
+  {
+    input: "files/index.ts",
+    output: [{ file: filePkg.module, format: "es", sourcemap: true }],
+    external: ["fs"],
+    plugins: [...es2017BuildPlugins],
+  },
+  {
+    input: "files/index.ts",
+    output: [{ file: filePkg.main, format: "cjs", sourcemap: true }],
+    external: ["fs"],
     plugins: [...es2017BuildPlugins],
   },
 ];
 
 // eslint-disable-next-line import/no-default-export
-export default [...esmBuilds, ...cjsBuilds];
+export default [...esmBuilds, ...cjsBuilds, ...filesBuilds];
