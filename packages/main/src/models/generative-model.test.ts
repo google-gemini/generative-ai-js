@@ -46,21 +46,27 @@ describe("GenerativeModel", () => {
     expect(genModel.model).to.equal("tunedModels/my-model");
   });
   it("passes params through to generateContent", async () => {
-    const genModel = new GenerativeModel("apiKey", {
-      model: "my-model",
-      generationConfig: { temperature: 0 },
-      safetySettings: [
-        {
-          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-          threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+    const genModel = new GenerativeModel(
+      "apiKey",
+      {
+        model: "my-model",
+        generationConfig: { temperature: 0 },
+        safetySettings: [
+          {
+            category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+            threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+          },
+        ],
+        tools: [{ functionDeclarations: [{ name: "myfunc" }] }],
+        toolConfig: {
+          functionCallingConfig: { mode: FunctionCallingMode.NONE },
         },
-      ],
-      tools: [{ functionDeclarations: [{ name: "myfunc" }] }],
-      toolConfig: { functionCallingConfig: { mode: FunctionCallingMode.NONE } },
-      systemInstruction: { role: "system", parts: [{ text: "be friendly" }] },
-    }, {
-      apiVersion: 'v6'
-    });
+        systemInstruction: { role: "system", parts: [{ text: "be friendly" }] },
+      },
+      {
+        apiVersion: "v6",
+      },
+    );
     expect(genModel.generationConfig?.temperature).to.equal(0);
     expect(genModel.safetySettings?.length).to.equal(1);
     expect(genModel.tools?.length).to.equal(1);
@@ -90,7 +96,7 @@ describe("GenerativeModel", () => {
         );
       }),
       match((value) => {
-        return value.apiVersion === 'v6';
+        return value.apiVersion === "v6";
       }),
     );
     restore();
@@ -156,11 +162,15 @@ describe("GenerativeModel", () => {
     restore();
   });
   it("passes requestOptions through to countTokens", async () => {
-    const genModel = new GenerativeModel("apiKey", {
-      model: "my-model",
-    }, {
-      apiVersion: 'v2000'
-    });
+    const genModel = new GenerativeModel(
+      "apiKey",
+      {
+        model: "my-model",
+      },
+      {
+        apiVersion: "v2000",
+      },
+    );
     const mockResponse = getMockResponse(
       "unary-success-basic-reply-short.json",
     );
@@ -176,7 +186,7 @@ describe("GenerativeModel", () => {
       false,
       match.any,
       match((value) => {
-        return value.apiVersion === 'v2000';
+        return value.apiVersion === "v2000";
       }),
     );
     restore();
