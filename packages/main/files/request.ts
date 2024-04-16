@@ -1,6 +1,28 @@
-import { DEFAULT_API_VERSION, DEFAULT_BASE_URL } from "../src/requests/request";
+/**
+ * @license
+ * Copyright 2024 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { GoogleGenerativeAIError } from "../src/errors";
+import {
+  DEFAULT_API_VERSION,
+  DEFAULT_BASE_URL,
+  getClientHeaders,
+} from "../src/requests/request";
 import { RequestOptions } from "../types";
-import { FilesTask } from "./types";
+import { FilesTask } from "./constants";
 
 const taskToMethod = {
   [FilesTask.UPLOAD]: "POST",
@@ -42,7 +64,7 @@ export class FilesRequestUrl {
 
 export function getHeaders(url: FilesRequestUrl): Headers {
   const headers = new Headers();
-  // headers.append("x-goog-api-client", getClientHeaders(url.requestOptions));
+  headers.append("x-goog-api-client", getClientHeaders(url.requestOptions));
   headers.append("x-goog-api-key", url.apiKey);
   return headers;
 }
@@ -50,15 +72,58 @@ export function getHeaders(url: FilesRequestUrl): Headers {
 export async function makeFilesRequest(
   url: FilesRequestUrl,
   headers: Headers,
-  body?: string | Buffer,
+  body?: Blob,
 ): Promise<Response> {
   const requestInit: RequestInit = {
     method: taskToMethod[url.task],
     headers,
   };
+
   if (body) {
     requestInit.body = body;
   }
-  const response = await fetch(url.toString(), requestInit);
-  return response;
+
+  const signal = getSignal(url.requestOptions);
+  if (signal) {
+    requestInit.signal = signal;
+  }
+
+  try {
+    const response = await fetch(url.toString(), requestInit);
+    if (!response.ok) {
+      let message = "";
+      try {
+        const json = await response.json();
+        message = json.error.message;
+        if (json.error.details) {
+          message += ` ${JSON.stringify(json.error.details)}`;
+        }
+      } catch (e) {
+        // ignored
+      }
+      throw new Error(`[${response.status} ${response.statusText}] ${message}`);
+    } else {
+      return response;
+    }
+  } catch (e) {
+    const err = new GoogleGenerativeAIError(
+      `Error on task type: ${url.task} fetching from ${url.toString()}: ${
+        e.message
+      }`,
+    );
+    err.stack = e.stack;
+    throw err;
+  }
+}
+
+/**
+ * Get AbortSignal if timeout is specified
+ */
+function getSignal(requestOptions?: RequestOptions): AbortSignal | null {
+  if (requestOptions?.timeout >= 0) {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+    setTimeout(() => abortController.abort(), requestOptions.timeout);
+    return signal;
+  }
 }

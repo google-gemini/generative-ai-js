@@ -32,7 +32,8 @@ export type Part =
   | TextPart
   | InlineDataPart
   | FunctionCallPart
-  | FunctionResponsePart;
+  | FunctionResponsePart
+  | FileDataPart;
 
 /**
  * Content part interface if the part represents a text string.
@@ -43,6 +44,7 @@ export interface TextPart {
   inlineData?: never;
   functionCall?: never;
   functionResponse?: never;
+  fileData?: never;
 }
 
 /**
@@ -54,6 +56,7 @@ export interface InlineDataPart {
   inlineData: GenerativeContentBlob;
   functionCall?: never;
   functionResponse?: never;
+  fileData?: never;
 }
 
 /**
@@ -65,6 +68,7 @@ export interface FunctionCallPart {
   inlineData?: never;
   functionCall: FunctionCall;
   functionResponse?: never;
+  fileData?: never;
 }
 
 /**
@@ -76,6 +80,7 @@ export interface FunctionResponsePart {
   inlineData?: never;
   functionCall?: never;
   functionResponse: FunctionResponse;
+  fileData?: never;
 }
 
 /**
@@ -113,4 +118,25 @@ export interface GenerativeContentBlob {
    * Image as a base64 string.
    */
   data: string;
+}
+
+/**
+ * Content part interface if the part represents FunctionResponse.
+ * @public
+ */
+export interface FileDataPart {
+  text?: never;
+  inlineData?: never;
+  functionCall?: never;
+  functionResponse?: never;
+  fileData: FileData;
+}
+
+/**
+ * Data pointing to a file uploaded with the Files API.
+ * @public
+ */
+export interface FileData {
+  mimeType: string;
+  fileUri: string;
 }

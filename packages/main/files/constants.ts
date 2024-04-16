@@ -14,7 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-export { GoogleAIFileManager } from "./file-manager";
-export * from "./types";
-export { RequestOptions } from "../types";
+export enum FilesTask {
+  UPLOAD = "upload",
+  LIST = "list",
+  GET = "get",
+  DELETE = "delete",
+}
