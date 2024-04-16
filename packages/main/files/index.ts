@@ -44,8 +44,19 @@ export class GoogleAIFileManager {
       this._requestOptions,
     );
     const uploadHeaders = getHeaders(url);
-    uploadHeaders.append("Content-Type", metadata.mimeType);
-    // TODO: do multipart upload?
+    const boundary = genBoundary();
+    // uploadHeaders.append("Content-Type", metadata.mimeType);
+    uploadHeaders.append("X-Goog-Upload-Protocol", 'multipart');
+    uploadHeaders.append("Content-Type", `multipart/related; boundary=${boundary}`);
+
+    const uploadMetadata: Record<string, string> = {};
+    if (metadata.displayName) {
+      uploadMetadata.displayName = metadata.displayName;
+    }
+    const metadataString = JSON.stringify(uploadMetadata);
+
+
+    
     return makeFilesRequest(url, uploadHeaders, file);
   }
 
@@ -105,4 +116,12 @@ function parseFileId(fileId: string): string {
     return fileId.split('files/')[1];
   }
   return fileId;
+}
+
+function genBoundary(): string {
+  let str = '';
+  for (let i = 0; i < 2; i++) {
+    str = str + Math.random().toString().slice(2);
+  }
+  return str;
 }

@@ -5,6 +5,7 @@ export interface ListData {
 
 export interface FileMetadata {
   name?: string;
+  displayName?: string;
   mimeType: string;
 }
 
