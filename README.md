@@ -93,7 +93,7 @@ https://ai.google.dev/docs
 Find reference docs for this SDK [here in the repo](/docs/reference/main/generative-ai.md).
 
 ## Changelog
-- `@google/generative-ai` - [CHANGELOG.md](/main/packages/main/CHANGELOG.md)
+- `@google/generative-ai` - [CHANGELOG.md](/packages/main/CHANGELOG.md)
 
 ## Contributing
 
