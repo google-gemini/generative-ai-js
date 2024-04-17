@@ -15,6 +15,15 @@
  * limitations under the License.
  */
 
+/**
+ * Example of uploading a file and referencing it in a call to
+ * generateContent().
+ * 
+ * NOTE: The Files API is only available for use in Node.
+ * Importing from `@google/generative-ai/files` will crash in the
+ * browser.
+ */
+
 import { GoogleAIFileManager } from "@google/generative-ai/files";
 import { genAI } from "./utils/common.js";
 
