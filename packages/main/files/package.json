@@ -4,5 +4,5 @@
   "main": "./dist/files/index.js",
   "browser": "./dist/files/index.mjs",
   "module": "./dist/files/index.mjs",
-  "typings": "./dist/files/index.files.d.ts"
+  "typings": "./dist/files/files.d.ts"
 }

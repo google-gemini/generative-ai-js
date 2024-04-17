@@ -15,13 +15,13 @@
  * limitations under the License.
  */
 
-import { GoogleGenerativeAIError } from "../src/errors";
+import { GoogleGenerativeAIError } from "../errors";
 import {
   DEFAULT_API_VERSION,
   DEFAULT_BASE_URL,
   getClientHeaders,
-} from "../src/requests/request";
-import { RequestOptions } from "../types";
+} from "../requests/request";
+import { RequestOptions } from "../../types";
 import { FilesTask } from "./constants";
 
 const taskToMethod = {
@@ -37,7 +37,7 @@ export class FilesRequestUrl {
   constructor(
     public task: FilesTask,
     public apiKey: string,
-    public requestOptions: RequestOptions,
+    public requestOptions?: RequestOptions,
   ) {
     const apiVersion = this.requestOptions?.apiVersion || DEFAULT_API_VERSION;
     const baseUrl = this.requestOptions?.baseUrl || DEFAULT_BASE_URL;
@@ -73,6 +73,7 @@ export async function makeFilesRequest(
   url: FilesRequestUrl,
   headers: Headers,
   body?: Blob,
+  fetchFn: typeof fetch = fetch,
 ): Promise<Response> {
   const requestInit: RequestInit = {
     method: taskToMethod[url.task],
@@ -89,7 +90,7 @@ export async function makeFilesRequest(
   }
 
   try {
-    const response = await fetch(url.toString(), requestInit);
+    const response = await fetchFn(url.toString(), requestInit);
     if (!response.ok) {
       let message = "";
       try {

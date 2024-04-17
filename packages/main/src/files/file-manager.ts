@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { RequestOptions } from "../types";
+import { RequestOptions } from "../../types";
 import { readFileSync } from "fs";
 import { FilesRequestUrl, getHeaders, makeFilesRequest } from "./request";
 import {

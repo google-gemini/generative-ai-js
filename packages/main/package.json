@@ -13,7 +13,7 @@
       "default": "./dist/index.js"
     },
     "./files": {
-      "types": "./dist/files/index.d.ts",
+      "types": "./dist/files/files.d.ts",
       "require": "./dist/files/index.js",
       "import": "./dist/files/index.mjs",
       "default": "./dist/files/index.js"
