@@ -26,6 +26,7 @@ import {
   UploadFileResponse,
 } from "./types";
 import { FilesTask } from "./constants";
+import { GoogleGenerativeAIError } from "../errors";
 
 // Internal type, metadata sent in the upload
 export interface UploadMetadata {
@@ -58,7 +59,7 @@ export class GoogleAIFileManager {
     );
 
     const uploadHeaders = getHeaders(url);
-    const boundary = genBoundary();
+    const boundary = generateBoundary();
     uploadHeaders.append("X-Goog-Upload-Protocol", "multipart");
     uploadHeaders.append(
       "Content-Type",
@@ -67,6 +68,10 @@ export class GoogleAIFileManager {
 
     const uploadMetadata: FileMetadata = {
       mimeType: fileMetadata.mimeType,
+      displayName: fileMetadata.displayName,
+      name: fileMetadata.name?.includes("/")
+        ? `files/${fileMetadata.name}`
+        : fileMetadata.name,
     };
     uploadMetadata.displayName = fileMetadata.displayName;
     uploadMetadata.name = fileMetadata.name;
@@ -152,10 +157,17 @@ function parseFileId(fileId: string): string {
   if (fileId.startsWith("files/")) {
     return fileId.split("files/")[1];
   }
+  if (!fileId) {
+    throw new GoogleGenerativeAIError(
+      `Invalid fileId ${fileId}. ` +
+        `Must be in the format "files/filename" or "filename"`,
+    );
+  }
+
   return fileId;
 }
 
-function genBoundary(): string {
+function generateBoundary(): string {
   let str = "";
   for (let i = 0; i < 2; i++) {
     str = str + Math.random().toString().slice(2);

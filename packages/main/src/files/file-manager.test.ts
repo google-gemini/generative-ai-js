@@ -17,12 +17,14 @@
 import { expect, use } from "chai";
 import { GoogleAIFileManager } from "./file-manager";
 import * as sinonChai from "sinon-chai";
+import * as chaiAsPromised from "chai-as-promised";
 import { restore, stub } from "sinon";
 import * as request from "./request";
 import { FilesTask } from "./constants";
 import { DEFAULT_API_VERSION } from "../requests/request";
 
 use(sinonChai);
+use(chaiAsPromised);
 
 const FAKE_URI = "https://yourfile.here/filename";
 const fakeUploadJson: () => Promise<{}> = () =>
@@ -207,6 +209,14 @@ describe("GoogleAIFileManager", () => {
       /^http:\/\/mysite\.com/,
     );
   });
+  it("getFile throws on bad fileId", async () => {
+    stub(request, "makeFilesRequest").resolves({
+      ok: true,
+      json: () => Promise.resolve({ uri: FAKE_URI }),
+    } as Response);
+    const fileManager = new GoogleAIFileManager("apiKey");
+    await expect(fileManager.getFile("")).to.be.rejectedWith("Invalid fileId");
+  });
   it("passes deleteFile request info", async () => {
     const makeRequestStub = stub(request, "makeFilesRequest").resolves({
       ok: true,
@@ -232,6 +242,16 @@ describe("GoogleAIFileManager", () => {
     expect(makeRequestStub.args[0][0].toString()).to.include("v3000/files");
     expect(makeRequestStub.args[0][0].toString()).to.match(
       /^http:\/\/mysite\.com/,
+    );
+  });
+  it("deleteFile throws on bad fileId", async () => {
+    stub(request, "makeFilesRequest").resolves({
+      ok: true,
+      json: () => Promise.resolve({}),
+    } as Response);
+    const fileManager = new GoogleAIFileManager("apiKey");
+    await expect(fileManager.deleteFile("")).to.be.rejectedWith(
+      "Invalid fileId",
     );
   });
 });
