@@ -36,6 +36,7 @@ async function run() {
 
   const fileResult = await fileManager.uploadFile("./utils/cat.jpg", {
     mimeType: "image/jpeg",
+    // It will also add the necessary "files/" prefix if not provided
     name: "files/catname",
     displayName: "mrcat",
   });
