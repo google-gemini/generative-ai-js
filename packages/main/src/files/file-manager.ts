@@ -70,7 +70,7 @@ export class GoogleAIFileManager {
     };
     uploadMetadata.displayName = fileMetadata.displayName;
     uploadMetadata.name = fileMetadata.name;
-    if (!uploadMetadata.name?.includes("files/")) {
+    if (!uploadMetadata.name?.includes("/")) {
       uploadMetadata.name = `files/${uploadMetadata.name}`;
     }
 
