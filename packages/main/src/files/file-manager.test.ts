@@ -20,8 +20,13 @@ import * as sinonChai from "sinon-chai";
 import { restore, stub } from "sinon";
 import * as request from "./request";
 import { FilesTask } from "./constants";
+import { DEFAULT_API_VERSION } from "../requests/request";
 
 use(sinonChai);
+
+const FAKE_URI = "https://yourfile.here/filename";
+const fakeUploadJson: () => Promise<{}> = () =>
+  Promise.resolve({ file: { uri: FAKE_URI } });
 
 describe("GoogleAIFileManager", () => {
   afterEach(() => {
@@ -35,13 +40,13 @@ describe("GoogleAIFileManager", () => {
   it("passes uploadFile request info", async () => {
     const makeRequestStub = stub(request, "makeFilesRequest").resolves({
       ok: true,
-      json: () => Promise.resolve({ file: { name: "uploadedfilename" } }),
+      json: fakeUploadJson,
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey");
     const result = await fileManager.uploadFile("./test-utils/cat.png", {
       mimeType: "image/png",
     });
-    expect(result.file.name).to.equal("uploadedfilename");
+    expect(result.file.uri).to.equal(FAKE_URI);
     expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.UPLOAD);
     expect(makeRequestStub.args[0][0].toString()).to.include("/upload/");
     expect(makeRequestStub.args[0][1]).to.be.instanceOf(Headers);
@@ -56,28 +61,41 @@ describe("GoogleAIFileManager", () => {
   it("passes uploadFile request info and metadata", async () => {
     const makeRequestStub = stub(request, "makeFilesRequest").resolves({
       ok: true,
-      json: () => Promise.resolve({ file: { name: "uploadedfilename" } }),
+      json: fakeUploadJson,
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey");
     const result = await fileManager.uploadFile("./test-utils/cat.png", {
       mimeType: "image/png",
-      name: "customname",
+      name: "files/customname",
       displayName: "mydisplayname",
     });
-    // This should match what was sent but we're faking the response
-    // so it won't.
-    expect(result.file.name).to.equal("uploadedfilename");
+    expect(result.file.uri).to.equal(FAKE_URI);
     expect(makeRequestStub.args[0][2]).to.be.instanceOf(Blob);
     const bodyBlob = makeRequestStub.args[0][2];
     const blobText = await bodyBlob.text();
     expect(blobText).to.include("Content-Type: image/png");
-    expect(blobText).to.include("customname");
+    expect(blobText).to.include("files/customname");
     expect(blobText).to.include("mydisplayname");
+  });
+  it("passes uploadFile metadata and formats file name", async () => {
+    const makeRequestStub = stub(request, "makeFilesRequest").resolves({
+      ok: true,
+      json: fakeUploadJson,
+    } as Response);
+    const fileManager = new GoogleAIFileManager("apiKey");
+    await fileManager.uploadFile("./test-utils/cat.png", {
+      mimeType: "image/png",
+      name: "customname",
+      displayName: "mydisplayname",
+    });
+    const bodyBlob = makeRequestStub.args[0][2];
+    const blobText = await bodyBlob.text();
+    expect(blobText).to.include("files/customname");
   });
   it("passes uploadFile request info (with options)", async () => {
     const makeRequestStub = stub(request, "makeFilesRequest").resolves({
       ok: true,
-      json: () => Promise.resolve({ file: { name: "uploadedfilename" } }),
+      json: fakeUploadJson,
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey", {
       apiVersion: "v3000",
@@ -86,7 +104,7 @@ describe("GoogleAIFileManager", () => {
     const result = await fileManager.uploadFile("./test-utils/cat.png", {
       mimeType: "image/png",
     });
-    expect(result.file.name).to.equal("uploadedfilename");
+    expect(result.file.uri).to.equal(FAKE_URI);
     expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.UPLOAD);
     expect(makeRequestStub.args[0][0].toString()).to.include("/upload/");
     expect(makeRequestStub.args[0][1]).to.be.instanceOf(Headers);
@@ -105,25 +123,25 @@ describe("GoogleAIFileManager", () => {
   it("passes listFiles request info", async () => {
     const makeRequestStub = stub(request, "makeFilesRequest").resolves({
       ok: true,
-      json: () => Promise.resolve({ files: [{ name: "afilename" }] }),
+      json: () => Promise.resolve({ files: [{ uri: FAKE_URI }] }),
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey");
     const result = await fileManager.listFiles();
-    expect(result.files[0].name).to.equal("afilename");
+    expect(result.files[0].uri).to.equal(FAKE_URI);
     expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.LIST);
     expect(makeRequestStub.args[0][0].toString()).to.match(/\/files$/);
   });
   it("passes listFiles request info with params", async () => {
     const makeRequestStub = stub(request, "makeFilesRequest").resolves({
       ok: true,
-      json: () => Promise.resolve({ files: [{ name: "afilename" }] }),
+      json: () => Promise.resolve({ files: [{ uri: FAKE_URI }] }),
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey");
     const result = await fileManager.listFiles({
       pageSize: 3,
       pageToken: "abc",
     });
-    expect(result.files[0].name).to.equal("afilename");
+    expect(result.files[0].uri).to.equal(FAKE_URI);
     expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.LIST);
     expect(makeRequestStub.args[0][0].toString()).to.include("pageSize=3");
     expect(makeRequestStub.args[0][0].toString()).to.include("pageToken=abc");
@@ -131,14 +149,14 @@ describe("GoogleAIFileManager", () => {
   it("passes listFiles request info with options", async () => {
     const makeRequestStub = stub(request, "makeFilesRequest").resolves({
       ok: true,
-      json: () => Promise.resolve({ files: [{ name: "afilename" }] }),
+      json: () => Promise.resolve({ files: [{ uri: FAKE_URI }] }),
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey", {
       apiVersion: "v3000",
       baseUrl: "http://mysite.com",
     });
     const result = await fileManager.listFiles();
-    expect(result.files[0].name).to.equal("afilename");
+    expect(result.files[0].uri).to.equal(FAKE_URI);
     expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.LIST);
     expect(makeRequestStub.args[0][0].toString()).to.match(/\/files$/);
     expect(makeRequestStub.args[0][0].toString()).to.include("v3000/files");
@@ -149,25 +167,39 @@ describe("GoogleAIFileManager", () => {
   it("passes getFile request info", async () => {
     const makeRequestStub = stub(request, "makeFilesRequest").resolves({
       ok: true,
-      json: () => Promise.resolve({ name: "myfilename" }),
+      json: () => Promise.resolve({ uri: FAKE_URI }),
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey");
     const result = await fileManager.getFile("nameoffile");
-    expect(result.name).to.equal("myfilename");
+    expect(result.uri).to.equal(FAKE_URI);
     expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.GET);
-    expect(makeRequestStub.args[0][0].toString()).to.include("/nameoffile");
+    expect(makeRequestStub.args[0][0].toString()).to.include(
+      `${DEFAULT_API_VERSION}/files/nameoffile`,
+    );
+  });
+  it("passes getFile request info", async () => {
+    const makeRequestStub = stub(request, "makeFilesRequest").resolves({
+      ok: true,
+      json: () => Promise.resolve({ uri: FAKE_URI }),
+    } as Response);
+    const fileManager = new GoogleAIFileManager("apiKey");
+    await fileManager.getFile("files/nameoffile");
+    expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.GET);
+    expect(makeRequestStub.args[0][0].toString()).to.include(
+      `${DEFAULT_API_VERSION}/files/nameoffile`,
+    );
   });
   it("passes getFile request info (with options)", async () => {
     const makeRequestStub = stub(request, "makeFilesRequest").resolves({
       ok: true,
-      json: () => Promise.resolve({ name: "myfilename" }),
+      json: () => Promise.resolve({ uri: FAKE_URI }),
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey", {
       apiVersion: "v3000",
       baseUrl: "http://mysite.com",
     });
     const result = await fileManager.getFile("nameoffile");
-    expect(result.name).to.equal("myfilename");
+    expect(result.uri).to.equal(FAKE_URI);
     expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.GET);
     expect(makeRequestStub.args[0][0].toString()).to.include("/nameoffile");
     expect(makeRequestStub.args[0][0].toString()).to.include("v3000/files");
@@ -178,7 +210,7 @@ describe("GoogleAIFileManager", () => {
   it("passes deleteFile request info", async () => {
     const makeRequestStub = stub(request, "makeFilesRequest").resolves({
       ok: true,
-      json: () => Promise.resolve({ name: "myfilename" }),
+      json: () => Promise.resolve({}),
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey");
     await fileManager.deleteFile("nameoffile");
@@ -188,7 +220,7 @@ describe("GoogleAIFileManager", () => {
   it("passes deleteFile request info (with options)", async () => {
     const makeRequestStub = stub(request, "makeFilesRequest").resolves({
       ok: true,
-      json: () => Promise.resolve({ name: "myfilename" }),
+      json: () => Promise.resolve({}),
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey", {
       apiVersion: "v3000",

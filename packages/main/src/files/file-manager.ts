@@ -27,6 +27,12 @@ import {
 } from "./types";
 import { FilesTask } from "./constants";
 
+// Internal type, metadata sent in the upload
+export interface UploadMetadata {
+  name?: string;
+  ["display_name"]?: string;
+}
+
 /**
  * Class for managing GoogleAI file uploads.
  * @public
@@ -59,9 +65,16 @@ export class GoogleAIFileManager {
       `multipart/related; boundary=${boundary}`,
     );
 
-    const uploadMetadata: Record<string, string> = {};
-    uploadMetadata["display_name"] = fileMetadata.displayName;
-    uploadMetadata["name"] = fileMetadata.name;
+    const uploadMetadata: FileMetadata = {
+      mimeType: fileMetadata.mimeType,
+    };
+    uploadMetadata.displayName = fileMetadata.displayName;
+    uploadMetadata.name = fileMetadata.name;
+    if (!uploadMetadata.name?.includes("files/")) {
+      uploadMetadata.name = `files/${uploadMetadata.name}`;
+    }
+
+    // Multipart formatting code taken from @firebase/storage
     const metadataString = JSON.stringify({ file: uploadMetadata });
     const preBlobPart =
       "--" +
