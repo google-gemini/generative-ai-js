@@ -90,7 +90,7 @@ These quickstarts describe how to add your API key and the SDK to your app, init
 Find complete documentation for the Google AI SDKs and the Gemini model in the Google documentation:\
 https://ai.google.dev/docs
 
-Find reference docs for this SDK [here in the repo](/docs/reference/generative-ai.md).
+Find reference docs for this SDK [here in the repo](/docs/reference/main/generative-ai.md).
 
 ## Changelog
 - `@google/generative-ai` - [CHANGELOG.md](/main/packages/main/CHANGELOG.md)

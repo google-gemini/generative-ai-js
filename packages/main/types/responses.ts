@@ -60,7 +60,7 @@ export interface EnhancedGenerateContentResponse
   text: () => string;
   /**
    * Deprecated: use `functionCalls()` instead.
-   * @deprecated
+   * @deprecated - use `functionCalls()` instead
    */
   functionCall: () => FunctionCall | undefined;
   /**

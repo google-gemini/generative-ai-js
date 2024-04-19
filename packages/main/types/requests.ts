@@ -114,7 +114,7 @@ export interface BatchEmbedContentsRequest {
 }
 
 /**
- * Params passed to {@link GoogleGenerativeAI.getGenerativeModel}.
+ * Params passed to getGenerativeModel() or GoogleAIFileManager().
  * @public
  */
 export interface RequestOptions {

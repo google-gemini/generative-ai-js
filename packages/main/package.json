@@ -12,13 +12,20 @@
       "import": "./dist/index.mjs",
       "default": "./dist/index.js"
     },
+    "./files": {
+      "types": "./dist/files/files.d.ts",
+      "require": "./dist/files/index.js",
+      "import": "./dist/files/index.mjs",
+      "default": "./dist/files/index.js"
+    },
     "./package.json": "./package.json"
   },
   "engines": {
     "node": ">=18.0.0"
   },
   "files": [
-    "dist"
+    "dist",
+    "files/package.json"
   ],
   "scripts": {
     "build": "rollup -c && yarn api-report",
@@ -27,8 +34,8 @@
     "test:node:unit": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha \"src/**/*.test.ts\"",
     "test:node:integration": "yarn build && TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha \"test-integration/node/**/*.test.ts\"",
     "lint": "eslint -c .eslintrc.js '**/*.ts' --ignore-path '../../.gitignore'",
-    "api-report": "api-extractor run --local --verbose",
-    "docs": "yarn build && yarn api-documenter markdown -i ./temp -o ../../docs/reference/"
+    "api-report": "api-extractor run --local --verbose && api-extractor run -c api-extractor.files.json --local --verbose",
+    "docs": "yarn build && yarn api-documenter markdown -i ./temp/main -o ../../docs/reference/main && yarn api-documenter markdown -i ./temp/files -o ../../docs/reference/files"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,12 @@
+{
+  "extends": "../../config/api-extractor.json",
+  "mainEntryPointFilePath": "<projectFolder>/dist/files/src/files/index.d.ts",
+  "dtsRollup": {
+    "enabled": true,
+    "untrimmedFilePath": "<projectFolder>/dist/files/files.d.ts"
+  },
+  "docModel": {
+    "enabled": true,
+    "apiJsonFilePath": "<projectFolder>/temp/files/<unscopedPackageName>-files.api.json"
+  }
+}
