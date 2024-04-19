@@ -70,14 +70,9 @@ export class GoogleAIFileManager {
       mimeType: fileMetadata.mimeType,
       displayName: fileMetadata.displayName,
       name: fileMetadata.name?.includes("/")
-        ? `files/${fileMetadata.name}`
-        : fileMetadata.name,
+        ? fileMetadata.name
+        : `files/${fileMetadata.name}`,
     };
-    uploadMetadata.displayName = fileMetadata.displayName;
-    uploadMetadata.name = fileMetadata.name;
-    if (!uploadMetadata.name?.includes("/")) {
-      uploadMetadata.name = `files/${uploadMetadata.name}`;
-    }
 
     // Multipart formatting code taken from @firebase/storage
     const metadataString = JSON.stringify({ file: uploadMetadata });
