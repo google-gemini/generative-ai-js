@@ -16,6 +16,7 @@ export interface FunctionResponsePart
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [fileData?](./generative-ai.functionresponsepart.filedata.md) |  | never | _(Optional)_ |
 |  [functionCall?](./generative-ai.functionresponsepart.functioncall.md) |  | never | _(Optional)_ |
 |  [functionResponse](./generative-ai.functionresponsepart.functionresponse.md) |  | [FunctionResponse](./generative-ai.functionresponse.md) |  |
 |  [inlineData?](./generative-ai.functionresponsepart.inlinedata.md) |  | never | _(Optional)_ |

@@ -4,7 +4,7 @@
 
 ## RequestOptions interface
 
-Params passed to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.
+Params passed to getGenerativeModel() or GoogleAIFileManager().
 
 **Signature:**
 

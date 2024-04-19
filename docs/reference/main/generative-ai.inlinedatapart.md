@@ -16,6 +16,7 @@ export interface InlineDataPart
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [fileData?](./generative-ai.inlinedatapart.filedata.md) |  | never | _(Optional)_ |
 |  [functionCall?](./generative-ai.inlinedatapart.functioncall.md) |  | never | _(Optional)_ |
 |  [functionResponse?](./generative-ai.inlinedatapart.functionresponse.md) |  | never | _(Optional)_ |
 |  [inlineData](./generative-ai.inlinedatapart.inlinedata.md) |  | [GenerativeContentBlob](./generative-ai.generativecontentblob.md) |  |

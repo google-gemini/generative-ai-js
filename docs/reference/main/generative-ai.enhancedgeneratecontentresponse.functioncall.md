@@ -6,6 +6,7 @@
 
 > Warning: This API is now obsolete.
 > 
+> - use `functionCalls()` instead
 > 
 
 Deprecated: use `functionCalls()` instead.

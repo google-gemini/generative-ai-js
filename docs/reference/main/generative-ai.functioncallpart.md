@@ -16,6 +16,7 @@ export interface FunctionCallPart
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [fileData?](./generative-ai.functioncallpart.filedata.md) |  | never | _(Optional)_ |
 |  [functionCall](./generative-ai.functioncallpart.functioncall.md) |  | [FunctionCall](./generative-ai.functioncall.md) |  |
 |  [functionResponse?](./generative-ai.functioncallpart.functionresponse.md) |  | never | _(Optional)_ |
 |  [inlineData?](./generative-ai.functioncallpart.inlinedata.md) |  | never | _(Optional)_ |
