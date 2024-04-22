@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.8.0
+
+### Minor Changes
+
+- a89d427: Add GoogleAIFileManager for file uploads.
+
 ## 0.7.1
 
 ### Patch Changes
