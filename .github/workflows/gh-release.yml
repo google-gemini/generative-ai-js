@@ -17,7 +17,7 @@ name: Create Github release
 on:
   push:
     tags:
-      - '@google/generative-ai@*'
+      - '*'
 
 permissions:
   contents: write
@@ -25,6 +25,7 @@ permissions:
 jobs:
   release:
     name: Release pushed tag
+    if: ${{ contains(github.ref_name, 'google/generative-ai') }}
     runs-on: ubuntu-latest
     steps:
       - name: Create Github release
@@ -35,5 +36,5 @@ jobs:
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="$tag" \
-              --generate-notes
+              --generate-notes \
               --verify-tag
