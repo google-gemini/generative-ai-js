@@ -1,4 +1,12 @@
-# Google AI JavaScript SDK
+# Google AI SDK for JavaScript
+
+> [!CAUTION]
+> **Using the Google AI SDK for JavaScript directly from a client-side app is
+> recommended for prototyping only.** If you plan to enable billing, we strongly
+> recommend that you call the Google AI Gemini API only server-side to keep your
+> API key safe. You risk potentially exposing your API key to malicious actors
+> if you embed your API key directly in your JavaScript app or fetch it remotely
+> at runtime.
 
 The Google AI JavaScript SDK enables developers to use Google's state-of-the-art generative AI models (like Gemini) to build AI-powered features and applications. This SDK supports use cases like:
 - Generate text from text-only input
