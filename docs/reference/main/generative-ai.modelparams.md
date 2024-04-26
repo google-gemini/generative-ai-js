@@ -18,7 +18,7 @@ export interface ModelParams extends BaseParams
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [model](./generative-ai.modelparams.model.md) |  | string |  |
-|  [systemInstruction?](./generative-ai.modelparams.systeminstruction.md) |  | [Content](./generative-ai.content.md) | _(Optional)_ |
+|  [systemInstruction?](./generative-ai.modelparams.systeminstruction.md) |  | string \| [Part](./generative-ai.part.md) \| [Content](./generative-ai.content.md) | _(Optional)_ |
 |  [toolConfig?](./generative-ai.modelparams.toolconfig.md) |  | [ToolConfig](./generative-ai.toolconfig.md) | _(Optional)_ |
 |  [tools?](./generative-ai.modelparams.tools.md) |  | [Tool](./generative-ai.tool.md)<!-- -->\[\] | _(Optional)_ |
 
