@@ -22,7 +22,6 @@ import * as chaiAsPromised from "chai-as-promised";
 import { DEFAULT_API_VERSION, DEFAULT_BASE_URL } from "../requests/request";
 import { FilesRequestUrl, makeFilesRequest } from "./request";
 import { FilesTask } from "./constants";
-import { GoogleGenerativeAIFetchError } from "../errors";
 
 use(sinonChai);
 use(chaiAsPromised);
@@ -98,22 +97,9 @@ describe("Files API - request methods", () => {
 
       const url = new FilesRequestUrl(FilesTask.GET, "key", { timeout: 0 });
       const headers = new Headers();
-      try {
-        await makeFilesRequest(
-          url,
-          headers,
-          new Blob(),
-          fetchStub as typeof fetch,
-        );
-      } catch (e) {
-        expect((e as GoogleGenerativeAIFetchError).message).to.include(
-          "500 AbortError",
-        );
-        expect((e as GoogleGenerativeAIFetchError).status).to.equal(500);
-        expect((e as GoogleGenerativeAIFetchError).statusText).to.equal(
-          "AbortError",
-        );
-      }
+      await expect(
+        makeFilesRequest(url, headers, new Blob(), fetchStub as typeof fetch),
+      ).to.be.rejectedWith("500 AbortError");
       expect(fetchStub).to.be.calledOnce;
     });
     it("Network error, no response.json()", async () => {
@@ -124,22 +110,9 @@ describe("Files API - request methods", () => {
       } as Response);
       const url = new FilesRequestUrl(FilesTask.GET, "key");
       const headers = new Headers();
-      try {
-        await makeFilesRequest(
-          url,
-          headers,
-          new Blob(),
-          fetchStub as typeof fetch,
-        );
-      } catch (e) {
-        expect((e as GoogleGenerativeAIFetchError).message).to.include(
-          "500 Server Error",
-        );
-        expect((e as GoogleGenerativeAIFetchError).status).to.equal(500);
-        expect((e as GoogleGenerativeAIFetchError).statusText).to.equal(
-          "Server Error",
-        );
-      }
+      await expect(
+        makeFilesRequest(url, headers, new Blob(), fetchStub as typeof fetch),
+      ).to.be.rejectedWith(/500 Server Error/);
       expect(fetchStub).to.be.calledOnce;
     });
     it("Network error, includes response.json()", async () => {
@@ -151,22 +124,9 @@ describe("Files API - request methods", () => {
       } as Response);
       const url = new FilesRequestUrl(FilesTask.GET, "key");
       const headers = new Headers();
-      try {
-        await makeFilesRequest(
-          url,
-          headers,
-          new Blob(),
-          fetchStub as typeof fetch,
-        );
-      } catch (e) {
-        expect((e as GoogleGenerativeAIFetchError).message).to.match(
-          /500 Server Error.+extra info/,
-        );
-        expect((e as GoogleGenerativeAIFetchError).status).to.equal(500);
-        expect((e as GoogleGenerativeAIFetchError).statusText).to.equal(
-          "Server Error",
-        );
-      }
+      await expect(
+        makeFilesRequest(url, headers, new Blob(), fetchStub as typeof fetch),
+      ).to.be.rejectedWith(/500 Server Error.*extra info/);
       expect(fetchStub).to.be.calledOnce;
     });
     it("Network error, includes response.json() and details", async () => {
@@ -190,25 +150,11 @@ describe("Files API - request methods", () => {
       } as Response);
       const url = new FilesRequestUrl(FilesTask.GET, "key");
       const headers = new Headers();
-      try {
-        await makeFilesRequest(
-          url,
-          headers,
-          new Blob(),
-          fetchStub as typeof fetch,
-        );
-      } catch (e) {
-        expect((e as GoogleGenerativeAIFetchError).message).to.match(
-          /500 Server Error.*extra info.*generic::invalid_argument/,
-        );
-        expect((e as GoogleGenerativeAIFetchError).status).to.equal(500);
-        expect((e as GoogleGenerativeAIFetchError).statusText).to.equal(
-          "Server Error",
-        );
-        expect(
-          (e as GoogleGenerativeAIFetchError).errorDetails[0].detail,
-        ).to.include("generic::invalid_argument");
-      }
+      await expect(
+        makeFilesRequest(url, headers, new Blob(), fetchStub as typeof fetch),
+      ).to.be.rejectedWith(
+        /500 Server Error.*extra info.*generic::invalid_argument/,
+      );
       expect(fetchStub).to.be.calledOnce;
     });
   });

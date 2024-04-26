@@ -16,10 +16,7 @@
  */
 
 import { RequestOptions } from "../../types";
-import {
-  GoogleGenerativeAIError,
-  GoogleGenerativeAIFetchError,
-} from "../errors";
+import { GoogleGenerativeAIError } from "../errors";
 
 export const DEFAULT_BASE_URL = "https://generativelanguage.googleapis.com";
 
@@ -146,34 +143,22 @@ export async function _makeRequestInternal(
     response = await fetchFn(request.url, request.fetchOptions);
     if (!response.ok) {
       let message = "";
-      let errorDetails;
       try {
         const json = await response.json();
         message = json.error.message;
         if (json.error.details) {
           message += ` ${JSON.stringify(json.error.details)}`;
-          errorDetails = json.error.details;
         }
       } catch (e) {
         // ignored
       }
-      throw new GoogleGenerativeAIFetchError(
-        `Error fetching from ${url.toString()}: [${response.status} ${
-          response.statusText
-        }] ${message}`,
-        response.status,
-        response.statusText,
-        errorDetails,
-      );
+      throw new Error(`[${response.status} ${response.statusText}] ${message}`);
     }
   } catch (e) {
-    let err = e;
-    if (!(e instanceof GoogleGenerativeAIFetchError)) {
-      err = new GoogleGenerativeAIError(
-        `Error fetching from ${url.toString()}: ${e.message}`,
-      );
-      err.stack = e.stack;
-    }
+    const err = new GoogleGenerativeAIError(
+      `Error fetching from ${url.toString()}: ${e.message}`,
+    );
+    err.stack = e.stack;
     throw err;
   }
   return response;

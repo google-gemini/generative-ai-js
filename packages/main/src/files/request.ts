@@ -15,10 +15,7 @@
  * limitations under the License.
  */
 
-import {
-  GoogleGenerativeAIError,
-  GoogleGenerativeAIFetchError,
-} from "../errors";
+import { GoogleGenerativeAIError } from "../errors";
 import {
   DEFAULT_API_VERSION,
   DEFAULT_BASE_URL,
@@ -96,36 +93,26 @@ export async function makeFilesRequest(
     const response = await fetchFn(url.toString(), requestInit);
     if (!response.ok) {
       let message = "";
-      let errorDetails;
       try {
         const json = await response.json();
         message = json.error.message;
         if (json.error.details) {
           message += ` ${JSON.stringify(json.error.details)}`;
-          errorDetails = json.error.details;
         }
       } catch (e) {
         // ignored
       }
-      throw new GoogleGenerativeAIFetchError(
-        `Error fetching from ${url.toString()}: [${response.status} ${
-          response.statusText
-        }] ${message}`,
-        response.status,
-        response.statusText,
-        errorDetails,
-      );
+      throw new Error(`[${response.status} ${response.statusText}] ${message}`);
     } else {
       return response;
     }
   } catch (e) {
-    let err = e;
-    if (!(e instanceof GoogleGenerativeAIFetchError)) {
-      err = new GoogleGenerativeAIError(
-        `Error fetching from ${url.toString()}: ${e.message}`,
-      );
-      err.stack = e.stack;
-    }
+    const err = new GoogleGenerativeAIError(
+      `Error on task type: ${url.task} fetching from ${url.toString()}: ${
+        e.message
+      }`,
+    );
+    err.stack = e.stack;
     throw err;
   }
 }

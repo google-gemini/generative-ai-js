@@ -7,5 +7,5 @@
 **Signature:**
 
 ```typescript
-systemInstruction?: string | Part | Content;
+systemInstruction?: Content;
 ```
