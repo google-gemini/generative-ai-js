@@ -31,3 +31,23 @@ export class GoogleGenerativeAIResponseError<
     super(message);
   }
 }
+
+export class GoogleGenerativeAIFetchError extends GoogleGenerativeAIError {
+  constructor(
+    message: string,
+    public status?: number,
+    public statusText?: string,
+    public errorDetails?: ErrorDetails[],
+  ) {
+    super(message);
+  }
+}
+
+interface ErrorDetails {
+  "@type"?: string;
+  reason?: string;
+  domain?: string;
+  metadata?: Record<string, unknown>;
+  details?: Record<string, unknown>;
+  [key: string]: unknown;
+}
