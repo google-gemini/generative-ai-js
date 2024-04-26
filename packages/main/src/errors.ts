@@ -48,6 +48,5 @@ interface ErrorDetails {
   reason?: string;
   domain?: string;
   metadata?: Record<string, unknown>;
-  details?: Record<string, unknown>;
   [key: string]: unknown;
 }
