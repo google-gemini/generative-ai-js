@@ -17,4 +17,3 @@
 
 export * from "../types";
 export * from "./gen-ai";
-export * from "./errors";

@@ -4,8 +4,6 @@
 
 ## GoogleGenerativeAIResponseError class
 
-Errors in the contents of a response from the model. This includes parsing errors, or responses including a safety block reason.
-
 **Signature:**
 
 ```typescript
