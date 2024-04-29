@@ -1,5 +1,12 @@
 # @google/generative-ai
 
+## 0.9.0
+
+### Minor Changes
+
+- ca62400: Allow text-only systemInstruction as well as Part and Content.
+- 111e970: Export error classes and add more properties to fetch errors.
+
 ## 0.8.0
 
 ### Minor Changes
