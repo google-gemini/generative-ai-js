@@ -45,6 +45,7 @@ import { batchEmbedContents, embedContent } from "../methods/embed-content";
 import {
   formatEmbedContentInput,
   formatGenerateContentInput,
+  formatSystemInstruction,
 } from "../requests/request-helpers";
 
 /**
@@ -76,7 +77,9 @@ export class GenerativeModel {
     this.safetySettings = modelParams.safetySettings || [];
     this.tools = modelParams.tools;
     this.toolConfig = modelParams.toolConfig;
-    this.systemInstruction = modelParams.systemInstruction;
+    this.systemInstruction = formatSystemInstruction(
+      modelParams.systemInstruction,
+    );
     this.requestOptions = requestOptions || {};
   }
 
