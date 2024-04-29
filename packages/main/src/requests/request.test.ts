@@ -27,6 +27,7 @@ import {
   _makeRequestInternal,
   constructRequest,
 } from "./request";
+import { GoogleGenerativeAIFetchError } from "../errors";
 
 use(sinonChai);
 use(chaiAsPromised);
@@ -183,8 +184,8 @@ describe("request methods", () => {
         statusText: "AbortError",
       } as Response);
 
-      await expect(
-        _makeRequestInternal(
+      try {
+        await _makeRequestInternal(
           "model-name",
           Task.GENERATE_CONTENT,
           "key",
@@ -194,8 +195,16 @@ describe("request methods", () => {
             timeout: 0,
           },
           fetchStub as typeof fetch,
-        ),
-      ).to.be.rejectedWith("500 AbortError");
+        );
+      } catch (e) {
+        expect((e as GoogleGenerativeAIFetchError).status).to.equal(500);
+        expect((e as GoogleGenerativeAIFetchError).statusText).to.equal(
+          "AbortError",
+        );
+        expect((e as GoogleGenerativeAIFetchError).message).to.include(
+          "500 AbortError",
+        );
+      }
       expect(fetchStub).to.be.calledOnce;
     });
     it("Network error, no response.json()", async () => {
@@ -204,8 +213,8 @@ describe("request methods", () => {
         status: 500,
         statusText: "Server Error",
       } as Response);
-      await expect(
-        _makeRequestInternal(
+      try {
+        await _makeRequestInternal(
           "model-name",
           Task.GENERATE_CONTENT,
           "key",
@@ -213,8 +222,16 @@ describe("request methods", () => {
           "",
           {},
           fetchStub as typeof fetch,
-        ),
-      ).to.be.rejectedWith(/500 Server Error/);
+        );
+      } catch (e) {
+        expect((e as GoogleGenerativeAIFetchError).status).to.equal(500);
+        expect((e as GoogleGenerativeAIFetchError).statusText).to.equal(
+          "Server Error",
+        );
+        expect((e as GoogleGenerativeAIFetchError).message).to.include(
+          "500 Server Error",
+        );
+      }
       expect(fetchStub).to.be.calledOnce;
     });
     it("Network error, includes response.json()", async () => {
@@ -224,8 +241,9 @@ describe("request methods", () => {
         statusText: "Server Error",
         json: () => Promise.resolve({ error: { message: "extra info" } }),
       } as Response);
-      await expect(
-        _makeRequestInternal(
+
+      try {
+        await _makeRequestInternal(
           "model-name",
           Task.GENERATE_CONTENT,
           "key",
@@ -233,8 +251,16 @@ describe("request methods", () => {
           "",
           {},
           fetchStub as typeof fetch,
-        ),
-      ).to.be.rejectedWith(/500 Server Error.*extra info/);
+        );
+      } catch (e) {
+        expect((e as GoogleGenerativeAIFetchError).status).to.equal(500);
+        expect((e as GoogleGenerativeAIFetchError).statusText).to.equal(
+          "Server Error",
+        );
+        expect((e as GoogleGenerativeAIFetchError).message).to.match(
+          /500 Server Error.*extra info/,
+        );
+      }
       expect(fetchStub).to.be.calledOnce;
     });
     it("Network error, includes response.json() and details", async () => {
@@ -256,8 +282,9 @@ describe("request methods", () => {
             },
           }),
       } as Response);
-      await expect(
-        _makeRequestInternal(
+
+      try {
+        await _makeRequestInternal(
           "model-name",
           Task.GENERATE_CONTENT,
           "key",
@@ -265,10 +292,21 @@ describe("request methods", () => {
           "",
           {},
           fetchStub as typeof fetch,
-        ),
-      ).to.be.rejectedWith(
-        /500 Server Error.*extra info.*generic::invalid_argument/,
-      );
+        );
+      } catch (e) {
+        expect((e as GoogleGenerativeAIFetchError).status).to.equal(500);
+        expect((e as GoogleGenerativeAIFetchError).statusText).to.equal(
+          "Server Error",
+        );
+        expect(
+          (e as GoogleGenerativeAIFetchError).errorDetails[0].detail,
+        ).to.equal(
+          "[ORIGINAL ERROR] generic::invalid_argument: invalid status photos.thumbnailer.Status.Code::5: Source image 0 too short",
+        );
+        expect((e as GoogleGenerativeAIFetchError).message).to.match(
+          /500 Server Error.*extra info.*generic::invalid_argument/,
+        );
+      }
       expect(fetchStub).to.be.calledOnce;
     });
   });
