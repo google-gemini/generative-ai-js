@@ -42,7 +42,7 @@ export class GoogleGenerativeAIResponseError<
 }
 
 /**
- * Error class covering http errors when calling the server. Includes http
+ * Error class covering HTTP errors when calling the server. Includes HTTP
  * status, statusText, and optional details, if provided in the server response.
  */
 export class GoogleGenerativeAIFetchError extends GoogleGenerativeAIError {

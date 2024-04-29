@@ -4,7 +4,7 @@
 
 ## GoogleGenerativeAIFetchError class
 
-Error class covering http errors when calling the server. Includes http status, statusText, and optional details, if provided in the server response.
+Error class covering HTTP errors when calling the server. Includes HTTP status, statusText, and optional details, if provided in the server response.
 
 **Signature:**
 
