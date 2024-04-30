@@ -54,7 +54,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Publish
+      - name: NPM publish
         run: yarn changeset publish
 
       - name: Git tags
@@ -62,3 +62,14 @@ jobs:
         run: |
           git for-each-ref refs/tags
           git push --follow-tags
+
+      - name: Create Github release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NEWEST_TAG=$(git describe --tags --abbrev=0)
+          gh release create "$NEWEST_TAG" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="$NEWEST_TAG" \
+              --generate-notes \
+              --verify-tag
