@@ -16,6 +16,8 @@ name: Create Github release
 
 on:
   push:
+    branches:
+      - 'main'
     tags:
       - '*'
 
