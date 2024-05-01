@@ -139,7 +139,7 @@ export interface RequestOptions {
   /**
    * Custom HTTP request headers.
    */
-  customHeaders?: Headers;
+  customHeaders?: Headers | Record<string, string>;
 }
 
 /**

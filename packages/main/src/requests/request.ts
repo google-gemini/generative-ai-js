@@ -77,11 +77,21 @@ export async function getHeaders(url: RequestUrl): Promise<Headers> {
   headers.append("x-goog-api-client", getClientHeaders(url.requestOptions));
   headers.append("x-goog-api-key", url.apiKey);
 
-  if (url.requestOptions.customHeaders) {
-    for (const [
-      headerName,
-      headerValue,
-    ] of url.requestOptions.customHeaders.entries()) {
+  let customHeaders = url.requestOptions.customHeaders;
+  if (customHeaders) {
+    if (!(customHeaders instanceof Headers)) {
+      try {
+        customHeaders = new Headers(customHeaders);
+      } catch (e) {
+        throw new GoogleGenerativeAIError(
+          `unable to convert customHeaders value ${JSON.stringify(
+            customHeaders,
+          )} to Headers: ${e.message}`,
+        );
+      }
+    }
+
+    for (const [headerName, headerValue] of customHeaders.entries()) {
       headers.append(headerName, headerValue);
     }
   }
