@@ -155,6 +155,56 @@ describe("request methods", () => {
       );
       expect(request.fetchOptions.signal).to.be.instanceOf(AbortSignal);
     });
+    it("passes custom headers", async () => {
+      const request = await constructRequest(
+        "model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        true,
+        "",
+        {
+          customHeaders: new Headers({ customerHeader: "customerHeaderValue" }),
+        },
+      );
+      expect(
+        (request.fetchOptions.headers as Headers).get("customerHeader"),
+      ).to.equal("customerHeaderValue");
+    });
+    it("passes custom x-goog-api-client header", async () => {
+      const request = await constructRequest(
+        "model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        true,
+        "",
+        {
+          customHeaders: new Headers({ "x-goog-api-client": "client/version" }),
+        },
+      );
+      expect(
+        (request.fetchOptions.headers as Headers).get("x-goog-api-client"),
+      ).to.equal("genai-js/__PACKAGE_VERSION__, client/version");
+    });
+    it("passes apiClient and custom x-goog-api-client header", async () => {
+      const request = await constructRequest(
+        "model-name",
+        Task.GENERATE_CONTENT,
+        "key",
+        true,
+        "",
+        {
+          apiClient: "client/version",
+          customHeaders: new Headers({
+            "x-goog-api-client": "client/version2",
+          }),
+        },
+      );
+      expect(
+        (request.fetchOptions.headers as Headers).get("x-goog-api-client"),
+      ).to.equal(
+        "client/version genai-js/__PACKAGE_VERSION__, client/version2",
+      );
+    });
   });
   describe("_makeRequestInternal", () => {
     it("no error", async () => {

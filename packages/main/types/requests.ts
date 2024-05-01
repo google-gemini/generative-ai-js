@@ -136,6 +136,10 @@ export interface RequestOptions {
    * Base endpoint url. Defaults to "https://generativelanguage.googleapis.com"
    */
   baseUrl?: string;
+  /**
+   * Custom HTTP request headers.
+   */
+  customHeaders?: Headers;
 }
 
 /**

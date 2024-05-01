@@ -76,6 +76,16 @@ export async function getHeaders(url: RequestUrl): Promise<Headers> {
   headers.append("Content-Type", "application/json");
   headers.append("x-goog-api-client", getClientHeaders(url.requestOptions));
   headers.append("x-goog-api-key", url.apiKey);
+
+  if (url.requestOptions.customHeaders) {
+    for (const [
+      headerName,
+      headerValue,
+    ] of url.requestOptions.customHeaders.entries()) {
+      headers.append(headerName, headerValue);
+    }
+  }
+
   return headers;
 }
 
