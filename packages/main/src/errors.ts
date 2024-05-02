@@ -57,6 +57,10 @@ export class GoogleGenerativeAIFetchError extends GoogleGenerativeAIError {
 }
 
 /**
+ */
+export class GoogleGenerativeAIRequestInputError extends GoogleGenerativeAIError {}
+
+/**
  * Details object that may be included in an error response.
  * @public
  */

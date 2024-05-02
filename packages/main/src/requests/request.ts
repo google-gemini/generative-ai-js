@@ -19,6 +19,7 @@ import { RequestOptions } from "../../types";
 import {
   GoogleGenerativeAIError,
   GoogleGenerativeAIFetchError,
+  GoogleGenerativeAIRequestInputError,
 } from "../errors";
 
 export const DEFAULT_BASE_URL = "https://generativelanguage.googleapis.com";
@@ -83,7 +84,7 @@ export async function getHeaders(url: RequestUrl): Promise<Headers> {
       try {
         customHeaders = new Headers(customHeaders);
       } catch (e) {
-        throw new GoogleGenerativeAIError(
+        throw new GoogleGenerativeAIRequestInputError(
           `unable to convert customHeaders value ${JSON.stringify(
             customHeaders,
           )} to Headers: ${e.message}`,
@@ -92,6 +93,15 @@ export async function getHeaders(url: RequestUrl): Promise<Headers> {
     }
 
     for (const [headerName, headerValue] of customHeaders.entries()) {
+      if (
+        headerName === "x-goog-api-client" ||
+        headerName === "x-goog-api-key"
+      ) {
+        throw new GoogleGenerativeAIRequestInputError(
+          `cannot set reserved header name ${headerName}`,
+        );
+      }
+
       headers.append(headerName, headerValue);
     }
   }
@@ -188,7 +198,12 @@ export async function _makeRequestInternal(
     }
   } catch (e) {
     let err = e;
-    if (!(e instanceof GoogleGenerativeAIFetchError)) {
+    if (
+      !(
+        e instanceof GoogleGenerativeAIFetchError ||
+        e instanceof GoogleGenerativeAIRequestInputError
+      )
+    ) {
       err = new GoogleGenerativeAIError(
         `Error fetching from ${url.toString()}: ${e.message}`,
       );

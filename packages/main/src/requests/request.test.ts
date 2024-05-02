@@ -27,7 +27,10 @@ import {
   _makeRequestInternal,
   constructRequest,
 } from "./request";
-import { GoogleGenerativeAIFetchError } from "../errors";
+import {
+  GoogleGenerativeAIFetchError,
+  GoogleGenerativeAIRequestInputError,
+} from "../errors";
 
 use(sinonChai);
 use(chaiAsPromised);
@@ -171,39 +174,23 @@ describe("request methods", () => {
       ).to.equal("customerHeaderValue");
     });
     it("passes custom x-goog-api-client header", async () => {
-      const request = await constructRequest(
-        "model-name",
-        Task.GENERATE_CONTENT,
-        "key",
-        true,
-        "",
-        {
-          customHeaders: new Headers({ "x-goog-api-client": "client/version" }),
-        },
-      );
-      expect(
-        (request.fetchOptions.headers as Headers).get("x-goog-api-client"),
-      ).to.equal("genai-js/__PACKAGE_VERSION__, client/version");
+      await expect(
+        constructRequest("model-name", Task.GENERATE_CONTENT, "key", true, "", {
+          customHeaders: new Headers({
+            "x-goog-api-client": "client/version",
+          }),
+        }),
+      ).to.be.rejectedWith(GoogleGenerativeAIRequestInputError);
     });
     it("passes apiClient and custom x-goog-api-client header", async () => {
-      const request = await constructRequest(
-        "model-name",
-        Task.GENERATE_CONTENT,
-        "key",
-        true,
-        "",
-        {
+      await expect(
+        constructRequest("model-name", Task.GENERATE_CONTENT, "key", true, "", {
           apiClient: "client/version",
           customHeaders: new Headers({
             "x-goog-api-client": "client/version2",
           }),
-        },
-      );
-      expect(
-        (request.fetchOptions.headers as Headers).get("x-goog-api-client"),
-      ).to.equal(
-        "client/version genai-js/__PACKAGE_VERSION__, client/version2",
-      );
+        }),
+      ).to.be.rejectedWith(GoogleGenerativeAIRequestInputError);
     });
   });
   describe("_makeRequestInternal", () => {
@@ -358,6 +345,24 @@ describe("request methods", () => {
         );
       }
       expect(fetchStub).to.be.calledOnce;
+    });
+    it("has invalid custom header", async () => {
+      const fetchStub = stub();
+      await expect(
+        _makeRequestInternal(
+          "model-name",
+          Task.GENERATE_CONTENT,
+          "key",
+          true,
+          "",
+          {
+            customHeaders: new Headers({
+              "x-goog-api-client": "client/version",
+            }),
+          },
+          fetchStub as typeof fetch,
+        ),
+      ).to.be.rejectedWith(GoogleGenerativeAIRequestInputError);
     });
   });
 });
