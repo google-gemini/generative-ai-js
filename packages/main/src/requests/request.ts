@@ -93,12 +93,13 @@ export async function getHeaders(url: RequestUrl): Promise<Headers> {
     }
 
     for (const [headerName, headerValue] of customHeaders.entries()) {
-      if (
-        headerName === "x-goog-api-client" ||
-        headerName === "x-goog-api-key"
-      ) {
+      if (headerName === "x-goog-api-key") {
         throw new GoogleGenerativeAIRequestInputError(
-          `cannot set reserved header name ${headerName}`,
+          `Cannot set reserved header name ${headerName}`,
+        );
+      } else if (headerName === "x-goog-api-client") {
+        throw new GoogleGenerativeAIRequestInputError(
+          `Header name ${headerName} can only be set using the apiClient field`,
         );
       }
 
