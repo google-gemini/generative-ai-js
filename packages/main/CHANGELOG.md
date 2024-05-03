@@ -1,5 +1,12 @@
 # @google/generative-ai
 
+## 0.10.0
+
+### Minor Changes
+
+- 657799a: Added UsageMetadata to GenerateContentResponses.
+- 4562366: Add a request option for custom headers
+
 ## 0.9.0
 
 ### Minor Changes
