@@ -81,13 +81,11 @@ export interface EnhancedGenerateContentResponse
 export interface GenerateContentResponse {
   /** Candidate responses from the model. */
   candidates?: GenerateContentCandidate[];
-
   /**
    * A set of the feedback metadata the prompt specified in
-   * `GenerateContentRequest.content`.
+   * {@link GenerateContentRequest.content}.
    */
   promptFeedback?: PromptFeedback;
-
   /** Metadata on the generation request's token usage. */
   usageMetadata?: UsageMetadata;
 }
