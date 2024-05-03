@@ -81,6 +81,17 @@ export interface EnhancedGenerateContentResponse
 export interface GenerateContentResponse {
   candidates?: GenerateContentCandidate[];
   promptFeedback?: PromptFeedback;
+  usageMetadata?: UsageMetadata;
+}
+
+/**
+ * Metadata on the generation request's token usage.
+ * @public
+ */
+export interface UsageMetadata {
+  promptTokenCount: number;
+  candidatesTokenCount: number;
+  totalTokenCount: number;
 }
 
 /**
