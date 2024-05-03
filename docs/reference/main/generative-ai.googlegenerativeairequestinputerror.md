@@ -4,6 +4,8 @@
 
 ## GoogleGenerativeAIRequestInputError class
 
+Errors in the contents of a request originating from user input.
+
 **Signature:**
 
 ```typescript
