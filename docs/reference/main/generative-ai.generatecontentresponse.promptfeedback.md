@@ -4,7 +4,7 @@
 
 ## GenerateContentResponse.promptFeedback property
 
-A set of the feedback metadata the prompt specified in .
+The prompt's feedback related to the content filters.
 
 **Signature:**
 

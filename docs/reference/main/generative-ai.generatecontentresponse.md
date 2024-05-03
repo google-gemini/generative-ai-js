@@ -17,6 +17,6 @@ export interface GenerateContentResponse
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [candidates?](./generative-ai.generatecontentresponse.candidates.md) |  | [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md)<!-- -->\[\] | _(Optional)_ Candidate responses from the model. |
-|  [promptFeedback?](./generative-ai.generatecontentresponse.promptfeedback.md) |  | [PromptFeedback](./generative-ai.promptfeedback.md) | _(Optional)_ A set of the feedback metadata the prompt specified in . |
+|  [promptFeedback?](./generative-ai.generatecontentresponse.promptfeedback.md) |  | [PromptFeedback](./generative-ai.promptfeedback.md) | _(Optional)_ The prompt's feedback related to the content filters. |
 |  [usageMetadata?](./generative-ai.generatecontentresponse.usagemetadata.md) |  | [UsageMetadata](./generative-ai.usagemetadata.md) | _(Optional)_ Metadata on the generation request's token usage. |
 
