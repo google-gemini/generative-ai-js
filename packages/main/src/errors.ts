@@ -44,6 +44,7 @@ export class GoogleGenerativeAIResponseError<
 /**
  * Error class covering HTTP errors when calling the server. Includes HTTP
  * status, statusText, and optional details, if provided in the server response.
+ * @public
  */
 export class GoogleGenerativeAIFetchError extends GoogleGenerativeAIError {
   constructor(
@@ -57,6 +58,8 @@ export class GoogleGenerativeAIFetchError extends GoogleGenerativeAIError {
 }
 
 /**
+ * Errors in the contents of a request originating from user input.
+ * @public
  */
 export class GoogleGenerativeAIRequestInputError extends GoogleGenerativeAIError {}
 
