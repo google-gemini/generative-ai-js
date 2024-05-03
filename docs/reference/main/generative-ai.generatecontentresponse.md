@@ -18,4 +18,5 @@ export interface GenerateContentResponse
 |  --- | --- | --- | --- |
 |  [candidates?](./generative-ai.generatecontentresponse.candidates.md) |  | [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md)<!-- -->\[\] | _(Optional)_ |
 |  [promptFeedback?](./generative-ai.generatecontentresponse.promptfeedback.md) |  | [PromptFeedback](./generative-ai.promptfeedback.md) | _(Optional)_ |
+|  [usageMetadata?](./generative-ai.generatecontentresponse.usagemetadata.md) |  | [UsageMetadata](./generative-ai.usagemetadata.md) | _(Optional)_ |
 
