@@ -13,6 +13,7 @@
 |  [GoogleGenerativeAI](./generative-ai.googlegenerativeai.md) | Top-level class for this SDK |
 |  [GoogleGenerativeAIError](./generative-ai.googlegenerativeaierror.md) | Basic error type for this SDK. |
 |  [GoogleGenerativeAIFetchError](./generative-ai.googlegenerativeaifetcherror.md) | Error class covering HTTP errors when calling the server. Includes HTTP status, statusText, and optional details, if provided in the server response. |
+|  [GoogleGenerativeAIRequestInputError](./generative-ai.googlegenerativeairequestinputerror.md) |  |
 |  [GoogleGenerativeAIResponseError](./generative-ai.googlegenerativeairesponseerror.md) | Errors in the contents of a response from the model. This includes parsing errors, or responses including a safety block reason. |
 
 ## Enumerations
