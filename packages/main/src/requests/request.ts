@@ -19,6 +19,7 @@ import { RequestOptions } from "../../types";
 import {
   GoogleGenerativeAIError,
   GoogleGenerativeAIFetchError,
+  GoogleGenerativeAIRequestInputError,
 } from "../errors";
 
 export const DEFAULT_BASE_URL = "https://generativelanguage.googleapis.com";
@@ -76,6 +77,36 @@ export async function getHeaders(url: RequestUrl): Promise<Headers> {
   headers.append("Content-Type", "application/json");
   headers.append("x-goog-api-client", getClientHeaders(url.requestOptions));
   headers.append("x-goog-api-key", url.apiKey);
+
+  let customHeaders = url.requestOptions.customHeaders;
+  if (customHeaders) {
+    if (!(customHeaders instanceof Headers)) {
+      try {
+        customHeaders = new Headers(customHeaders);
+      } catch (e) {
+        throw new GoogleGenerativeAIRequestInputError(
+          `unable to convert customHeaders value ${JSON.stringify(
+            customHeaders,
+          )} to Headers: ${e.message}`,
+        );
+      }
+    }
+
+    for (const [headerName, headerValue] of customHeaders.entries()) {
+      if (headerName === "x-goog-api-key") {
+        throw new GoogleGenerativeAIRequestInputError(
+          `Cannot set reserved header name ${headerName}`,
+        );
+      } else if (headerName === "x-goog-api-client") {
+        throw new GoogleGenerativeAIRequestInputError(
+          `Header name ${headerName} can only be set using the apiClient field`,
+        );
+      }
+
+      headers.append(headerName, headerValue);
+    }
+  }
+
   return headers;
 }
 
@@ -168,7 +199,12 @@ export async function _makeRequestInternal(
     }
   } catch (e) {
     let err = e;
-    if (!(e instanceof GoogleGenerativeAIFetchError)) {
+    if (
+      !(
+        e instanceof GoogleGenerativeAIFetchError ||
+        e instanceof GoogleGenerativeAIRequestInputError
+      )
+    ) {
       err = new GoogleGenerativeAIError(
         `Error fetching from ${url.toString()}: ${e.message}`,
       );
