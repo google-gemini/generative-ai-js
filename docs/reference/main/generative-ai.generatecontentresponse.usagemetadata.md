@@ -4,6 +4,8 @@
 
 ## GenerateContentResponse.usageMetadata property
 
+Metadata on the generation request's token usage.
+
 **Signature:**
 
 ```typescript

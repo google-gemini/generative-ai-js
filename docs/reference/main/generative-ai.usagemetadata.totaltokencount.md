@@ -4,6 +4,8 @@
 
 ## UsageMetadata.totalTokenCount property
 
+Total token count for the generation request (prompt + candidates).
+
 **Signature:**
 
 ```typescript

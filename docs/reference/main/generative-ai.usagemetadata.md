@@ -16,7 +16,7 @@ export interface UsageMetadata
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [candidatesTokenCount](./generative-ai.usagemetadata.candidatestokencount.md) |  | number |  |
-|  [promptTokenCount](./generative-ai.usagemetadata.prompttokencount.md) |  | number |  |
-|  [totalTokenCount](./generative-ai.usagemetadata.totaltokencount.md) |  | number |  |
+|  [candidatesTokenCount](./generative-ai.usagemetadata.candidatestokencount.md) |  | number | Total number of tokens across the generated candidates. |
+|  [promptTokenCount](./generative-ai.usagemetadata.prompttokencount.md) |  | number | Number of tokens in the prompt. |
+|  [totalTokenCount](./generative-ai.usagemetadata.totaltokencount.md) |  | number | Total token count for the generation request (prompt + candidates). |
 

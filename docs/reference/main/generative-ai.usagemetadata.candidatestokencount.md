@@ -4,6 +4,8 @@
 
 ## UsageMetadata.candidatesTokenCount property
 
+Total number of tokens across the generated candidates.
+
 **Signature:**
 
 ```typescript

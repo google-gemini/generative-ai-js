@@ -4,6 +4,8 @@
 
 ## UsageMetadata.promptTokenCount property
 
+Number of tokens in the prompt.
+
 **Signature:**
 
 ```typescript

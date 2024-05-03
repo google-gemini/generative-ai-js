@@ -4,6 +4,8 @@
 
 ## GenerateContentResponse.promptFeedback property
 
+A set of the feedback metadata the prompt specified in `GenerateContentRequest.content`<!-- -->.
+
 **Signature:**
 
 ```typescript
