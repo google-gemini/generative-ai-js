@@ -4,6 +4,8 @@
 
 ## GenerateContentResponse.promptFeedback property
 
+The prompt's feedback related to the content filters.
+
 **Signature:**
 
 ```typescript

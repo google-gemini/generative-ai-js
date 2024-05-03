@@ -72,6 +72,7 @@
 |  [StartChatParams](./generative-ai.startchatparams.md) | Params for [GenerativeModel.startChat()](./generative-ai.generativemodel.startchat.md)<!-- -->. |
 |  [TextPart](./generative-ai.textpart.md) | Content part interface if the part represents a text string. |
 |  [ToolConfig](./generative-ai.toolconfig.md) | Tool config. This config is shared for all tools provided in the request. |
+|  [UsageMetadata](./generative-ai.usagemetadata.md) | Metadata on the generation request's token usage. |
 
 ## Variables
 

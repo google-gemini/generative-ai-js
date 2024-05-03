@@ -4,6 +4,8 @@
 
 ## GenerateContentResponse.candidates property
 
+Candidate responses from the model.
+
 **Signature:**
 
 ```typescript

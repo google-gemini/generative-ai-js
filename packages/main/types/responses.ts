@@ -79,8 +79,25 @@ export interface EnhancedGenerateContentResponse
  * @public
  */
 export interface GenerateContentResponse {
+  /** Candidate responses from the model. */
   candidates?: GenerateContentCandidate[];
+  /** The prompt's feedback related to the content filters. */
   promptFeedback?: PromptFeedback;
+  /** Metadata on the generation request's token usage. */
+  usageMetadata?: UsageMetadata;
+}
+
+/**
+ * Metadata on the generation request's token usage.
+ * @public
+ */
+export interface UsageMetadata {
+  /** Number of tokens in the prompt. */
+  promptTokenCount: number;
+  /** Total number of tokens across the generated candidates. */
+  candidatesTokenCount: number;
+  /** Total token count for the generation request (prompt + candidates). */
+  totalTokenCount: number;
 }
 
 /**
