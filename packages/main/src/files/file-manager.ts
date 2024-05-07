@@ -39,10 +39,14 @@ export interface UploadMetadata {
  * @public
  */
 export class GoogleAIFileManager {
+  private _requestOptions: RequestOptions;
   constructor(
     public apiKey: string,
-    private _requestOptions?: RequestOptions,
-  ) {}
+    requestOptions?: RequestOptions,
+  ) {
+    Object.assign(this._requestOptions, requestOptions);
+    delete this._requestOptions.abortSignal;
+  }
 
   /**
    * Upload a file
@@ -50,12 +54,19 @@ export class GoogleAIFileManager {
   async uploadFile(
     filePath: string,
     fileMetadata: FileMetadata,
+    requestOptions?: RequestOptions,
   ): Promise<UploadFileResponse> {
     const file = readFileSync(filePath);
+    let filesRequestOptions = {};
+    Object.assign(
+      filesRequestOptions,
+      this._requestOptions || {},
+      requestOptions || {},
+    );
     const url = new FilesRequestUrl(
       FilesTask.UPLOAD,
       this.apiKey,
-      this._requestOptions,
+      filesRequestOptions,
     );
 
     const uploadHeaders = getHeaders(url);
@@ -98,11 +109,20 @@ export class GoogleAIFileManager {
   /**
    * List all uploaded files
    */
-  async listFiles(listParams?: ListParams): Promise<ListFilesResponse> {
+  async listFiles(
+    listParams?: ListParams,
+    requestOptions?: RequestOptions,
+  ): Promise<ListFilesResponse> {
+    let filesRequestOptions = {};
+    Object.assign(
+      filesRequestOptions,
+      this._requestOptions || {},
+      requestOptions || {},
+    );
     const url = new FilesRequestUrl(
       FilesTask.LIST,
       this.apiKey,
-      this._requestOptions,
+      filesRequestOptions,
     );
     if (listParams?.pageSize) {
       url.appendParam("pageSize", listParams.pageSize.toString());
@@ -118,11 +138,20 @@ export class GoogleAIFileManager {
   /**
    * Get metadata for file with given ID
    */
-  async getFile(fileId: string): Promise<FileMetadataResponse> {
+  async getFile(
+    fileId: string,
+    requestOptions?: RequestOptions,
+  ): Promise<FileMetadataResponse> {
+    let filesRequestOptions = {};
+    Object.assign(
+      filesRequestOptions,
+      this._requestOptions || {},
+      requestOptions || {},
+    );
     const url = new FilesRequestUrl(
       FilesTask.GET,
       this.apiKey,
-      this._requestOptions,
+      filesRequestOptions,
     );
     url.appendPath(parseFileId(fileId));
     const uploadHeaders = getHeaders(url);
@@ -133,11 +162,20 @@ export class GoogleAIFileManager {
   /**
    * Delete file with given ID
    */
-  async deleteFile(fileId: string): Promise<void> {
+  async deleteFile(
+    fileId: string,
+    requestOptions?: RequestOptions,
+  ): Promise<void> {
+    let filesRequestOptions = {};
+    Object.assign(
+      filesRequestOptions,
+      this._requestOptions || {},
+      requestOptions || {},
+    );
     const url = new FilesRequestUrl(
       FilesTask.DELETE,
       this.apiKey,
-      this._requestOptions,
+      filesRequestOptions,
     );
     url.appendPath(parseFileId(fileId));
     const uploadHeaders = getHeaders(url);

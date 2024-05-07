@@ -140,6 +140,11 @@ export interface RequestOptions {
    * Custom HTTP request headers.
    */
   customHeaders?: Headers | Record<string, string>;
+  /**
+   * An object that may be used to abort aynchronous requests. This is only available on
+   * a per request basis, and is ignored by models constructed with a RequestOptions object.
+   */
+  abortSignal?: AbortSignal;
 }
 
 /**

@@ -131,13 +131,23 @@ export async function makeFilesRequest(
 }
 
 /**
- * Get AbortSignal if timeout is specified
+ * Create an AbortSignal based on the timeout and abortSignal in the
+ * RequestOptions.
  */
 function getSignal(requestOptions?: RequestOptions): AbortSignal | null {
-  if (requestOptions?.timeout >= 0) {
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-    setTimeout(() => abortController.abort(), requestOptions.timeout);
-    return signal;
+  if (
+    requestOptions.abortSignal !== undefined ||
+    requestOptions?.timeout >= 0
+  ) {
+    const controller = new AbortController();
+    if (requestOptions?.timeout >= 0) {
+      setTimeout(() => controller.abort(), requestOptions.timeout);
+    }
+    if (requestOptions.abortSignal) {
+      requestOptions.abortSignal.addEventListener("abort", () => {
+        controller.abort();
+      });
+    }
+    return controller.signal;
   }
 }
