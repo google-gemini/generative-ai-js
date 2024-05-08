@@ -74,6 +74,7 @@ export interface GenerationConfig {
   temperature?: number;
   topP?: number;
   topK?: number;
+  responseMimeType?: string;
 }
 
 /**

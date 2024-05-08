@@ -18,6 +18,7 @@ export interface GenerationConfig
 |  --- | --- | --- | --- |
 |  [candidateCount?](./generative-ai.generationconfig.candidatecount.md) |  | number | _(Optional)_ |
 |  [maxOutputTokens?](./generative-ai.generationconfig.maxoutputtokens.md) |  | number | _(Optional)_ |
+|  [responseMimeType?](./generative-ai.generationconfig.responsemimetype.md) |  | string | _(Optional)_ |
 |  [stopSequences?](./generative-ai.generationconfig.stopsequences.md) |  | string\[\] | _(Optional)_ |
 |  [temperature?](./generative-ai.generationconfig.temperature.md) |  | number | _(Optional)_ |
 |  [topK?](./generative-ai.generationconfig.topk.md) |  | number | _(Optional)_ |
