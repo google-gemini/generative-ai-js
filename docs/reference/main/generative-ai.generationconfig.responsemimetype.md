@@ -4,6 +4,8 @@
 
 ## GenerationConfig.responseMimeType property
 
+Output response mimetype of the generated candidate text. Supported mimetype: `text/plain`<!-- -->: (default) Text output. `application/json`<!-- -->: JSON response in the candidates.
+
 **Signature:**
 
 ```typescript
