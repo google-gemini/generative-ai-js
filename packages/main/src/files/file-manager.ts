@@ -51,7 +51,11 @@ export class GoogleAIFileManager {
     filePath: string,
     fileMetadata: FileMetadata,
   ): Promise<UploadFileResponse> {
-    const file = readFileSync(filePath);
+    let filePathOrUrl: URL | string = filePath;
+    if (filePath.startsWith("file://")) {
+      filePathOrUrl = new URL(filePath);
+    }
+    const file = readFileSync(filePathOrUrl);
     const url = new FilesRequestUrl(
       FilesTask.UPLOAD,
       this.apiKey,
