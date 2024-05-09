@@ -26,7 +26,10 @@ import {
   UploadFileResponse,
 } from "./types";
 import { FilesTask } from "./constants";
-import { GoogleGenerativeAIError, GoogleGenerativeAIRequestInputError } from "../errors";
+import {
+  GoogleGenerativeAIError,
+  GoogleGenerativeAIRequestInputError,
+} from "../errors";
 
 // Internal type, metadata sent in the upload
 export interface UploadMetadata {
@@ -166,11 +169,11 @@ function generateBoundary(): string {
 
 export function getUploadMetadata(inputMetadata: FileMetadata): FileMetadata {
   if (!inputMetadata.mimeType) {
-    throw new GoogleGenerativeAIRequestInputError('Must provide a mimeType.');
+    throw new GoogleGenerativeAIRequestInputError("Must provide a mimeType.");
   }
   const uploadMetadata: FileMetadata = {
     mimeType: inputMetadata.mimeType,
-    displayName: inputMetadata.displayName
+    displayName: inputMetadata.displayName,
   };
 
   if (inputMetadata.name) {
