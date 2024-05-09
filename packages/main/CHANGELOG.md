@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.11.1
+
+### Patch Changes
+
+- 819501f: Fix a bug that caused file uploads to be named "undefined" if no file name is provided.
+
 ## 0.11.0
 
 ### Minor Changes
