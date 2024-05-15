@@ -138,13 +138,20 @@ describe("chat-session-helpers", () => {
           { role: "user", parts: [{ text: "hi" }] },
           { role: "user", parts: [{ text: "hi" }] },
         ],
-        isValid: false,
+        isValid: true,
       },
       {
         history: [
           { role: "user", parts: [{ text: "hi" }] },
           { role: "model", parts: [{ text: "hi" }] },
           { role: "model", parts: [{ text: "hi" }] },
+        ],
+        isValid: true,
+      },
+      {
+        history: [
+          { role: "model", parts: [{ text: "hi" }] },
+          { role: "user", parts: [{ text: "hi" }] },
         ],
         isValid: false,
       },
