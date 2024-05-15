@@ -26,7 +26,10 @@ import {
   UploadFileResponse,
 } from "./types";
 import { FilesTask } from "./constants";
-import { GoogleGenerativeAIError } from "../errors";
+import {
+  GoogleGenerativeAIError,
+  GoogleGenerativeAIRequestInputError,
+} from "../errors";
 
 // Internal type, metadata sent in the upload
 export interface UploadMetadata {
@@ -77,13 +80,7 @@ export class GoogleAIFileManager {
       `multipart/related; boundary=${boundary}`,
     );
 
-    const uploadMetadata: FileMetadata = {
-      mimeType: fileMetadata.mimeType,
-      displayName: fileMetadata.displayName,
-      name: fileMetadata.name?.includes("/")
-        ? fileMetadata.name
-        : `files/${fileMetadata.name}`,
-    };
+    const uploadMetadata = getUploadMetadata(fileMetadata);
 
     // Multipart formatting code taken from @firebase/storage
     const metadataString = JSON.stringify({ file: uploadMetadata });
@@ -206,4 +203,21 @@ function generateBoundary(): string {
     str = str + Math.random().toString().slice(2);
   }
   return str;
+}
+
+export function getUploadMetadata(inputMetadata: FileMetadata): FileMetadata {
+  if (!inputMetadata.mimeType) {
+    throw new GoogleGenerativeAIRequestInputError("Must provide a mimeType.");
+  }
+  const uploadMetadata: FileMetadata = {
+    mimeType: inputMetadata.mimeType,
+    displayName: inputMetadata.displayName,
+  };
+
+  if (inputMetadata.name) {
+    uploadMetadata.name = inputMetadata.name.includes("/")
+      ? inputMetadata.name
+      : `files/${inputMetadata.name}`;
+  }
+  return uploadMetadata;
 }

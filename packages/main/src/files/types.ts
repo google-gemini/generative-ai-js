@@ -48,6 +48,7 @@ export interface FileMetadataResponse {
   expirationTime: string;
   sha256Hash: string;
   uri: string;
+  state: FileState;
 }
 
 /**
@@ -65,4 +66,19 @@ export interface ListFilesResponse {
  */
 export interface UploadFileResponse {
   file: FileMetadataResponse;
+}
+
+/**
+ * Processing state of the `File`.
+ * @public
+ */
+export enum FileState {
+  // The default value. This value is used if the state is omitted.
+  STATE_UNSPECIFIED = 0,
+  // File is being processed and cannot be used for inference yet.
+  PROCESSING = 1,
+  // File is processed and available for inference.
+  ACTIVE = 2,
+  // File failed processing.
+  FAILED = 10,
 }

@@ -10,6 +10,12 @@
 |  --- | --- |
 |  [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) | Class for managing GoogleAI file uploads. |
 
+## Enumerations
+
+|  Enumeration | Description |
+|  --- | --- |
+|  [FileState](./generative-ai.filestate.md) | Processing state of the <code>File</code>. |
+
 ## Interfaces
 
 |  Interface | Description |

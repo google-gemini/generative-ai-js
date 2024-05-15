@@ -15,13 +15,14 @@
  * limitations under the License.
  */
 import { expect, use } from "chai";
-import { GoogleAIFileManager } from "./file-manager";
+import { GoogleAIFileManager, getUploadMetadata } from "./file-manager";
 import * as sinonChai from "sinon-chai";
 import * as chaiAsPromised from "chai-as-promised";
 import { restore, stub } from "sinon";
 import * as request from "./request";
 import { FilesTask } from "./constants";
 import { DEFAULT_API_VERSION } from "../requests/request";
+import { FileMetadata } from "./types";
 
 use(sinonChai);
 use(chaiAsPromised);
@@ -253,5 +254,39 @@ describe("GoogleAIFileManager", () => {
     await expect(fileManager.deleteFile("")).to.be.rejectedWith(
       "Invalid fileId",
     );
+  });
+
+  describe("getUploadMetadata", () => {
+    it("getUploadMetadata with only mimeType", () => {
+      const uploadMetadata = getUploadMetadata({ mimeType: "image/jpeg" });
+      expect(uploadMetadata.mimeType).to.equal("image/jpeg");
+      expect(uploadMetadata.displayName).be.undefined;
+      expect(uploadMetadata.name).be.undefined;
+    });
+    it("getUploadMetadata with no mimeType", () => {
+      expect(() => getUploadMetadata({} as FileMetadata)).to.throw(
+        "Must provide a mimeType.",
+      );
+    });
+    it("getUploadMetadata with all fields defined", () => {
+      const uploadMetadata = getUploadMetadata({
+        mimeType: "image/jpeg",
+        displayName: "display name",
+        name: "filename",
+      });
+      expect(uploadMetadata.mimeType).to.equal("image/jpeg");
+      expect(uploadMetadata.displayName).to.equal("display name");
+      expect(uploadMetadata.name).to.equal("files/filename");
+    });
+    it("getUploadMetadata with full file path", () => {
+      const uploadMetadata = getUploadMetadata({
+        mimeType: "image/jpeg",
+        displayName: "display name",
+        name: "custom/path/filename",
+      });
+      expect(uploadMetadata.mimeType).to.equal("image/jpeg");
+      expect(uploadMetadata.displayName).to.equal("display name");
+      expect(uploadMetadata.name).to.equal("custom/path/filename");
+    });
   });
 });

@@ -23,6 +23,7 @@ export interface FileMetadataResponse
 |  [name](./generative-ai.filemetadataresponse.name.md) |  | string |  |
 |  [sha256Hash](./generative-ai.filemetadataresponse.sha256hash.md) |  | string |  |
 |  [sizeBytes](./generative-ai.filemetadataresponse.sizebytes.md) |  | string |  |
+|  [state](./generative-ai.filemetadataresponse.state.md) |  | [FileState](./generative-ai.filestate.md) |  |
 |  [updateTime](./generative-ai.filemetadataresponse.updatetime.md) |  | string |  |
 |  [uri](./generative-ai.filemetadataresponse.uri.md) |  | string |  |
 

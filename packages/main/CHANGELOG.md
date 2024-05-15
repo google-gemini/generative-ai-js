@@ -1,5 +1,21 @@
 # @google/generative-ai
 
+## 0.11.1
+
+### Patch Changes
+
+- 819501f: Fix a bug that caused file uploads to be named "undefined" if no file name is provided.
+
+## 0.11.0
+
+### Minor Changes
+
+- 58ab777: Added responseMimeType to GenerationConfig to allow for JSON formatted responses.
+
+### Patch Changes
+
+- c39015c: Fixed a bug where `text()` did not handle multiple `TextPart`s in a single candidate. Added `state` field to `FileMetadataResponse`.
+
 ## 0.10.0
 
 ### Minor Changes
