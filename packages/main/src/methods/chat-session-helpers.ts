@@ -37,16 +37,8 @@ const VALID_PARTS_PER_ROLE: { [key in Role]: Array<keyof Part> } = {
   system: ["text"],
 };
 
-const VALID_PREVIOUS_CONTENT_ROLES: { [key in Role]: Role[] } = {
-  user: ["model"],
-  function: ["model"],
-  model: ["user", "function"],
-  // System instructions shouldn't be in history.
-  system: [],
-};
-
 export function validateChatHistory(history: Content[]): void {
-  let prevContent: Content;
+  let prevContent = false;
   for (const currContent of history) {
     const { role, parts } = currContent as { role: Role; parts: Part[] };
     if (!prevContent && role !== "user") {
@@ -98,18 +90,6 @@ export function validateChatHistory(history: Content[]): void {
       }
     }
 
-    if (prevContent) {
-      const validPreviousContentRoles = VALID_PREVIOUS_CONTENT_ROLES[role];
-      if (!validPreviousContentRoles.includes(prevContent.role as Role)) {
-        throw new GoogleGenerativeAIError(
-          `Content with role '${role}' can't follow '${
-            prevContent.role
-          }'. Valid previous roles: ${JSON.stringify(
-            VALID_PREVIOUS_CONTENT_ROLES,
-          )}`,
-        );
-      }
-    }
-    prevContent = currContent;
+    prevContent = true;
   }
 }
