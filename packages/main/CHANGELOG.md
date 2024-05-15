@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.11.2
+
+### Patch Changes
+
+- cefa8f2: Lifted a restriction in chat sessions that required a specific order of content roles.
+
 ## 0.11.1
 
 ### Patch Changes
