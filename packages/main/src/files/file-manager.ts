@@ -47,7 +47,7 @@ export class GoogleAIFileManager {
     public apiKey: string,
     requestOptions?: RequestOptions,
   ) {
-    this._requestOptions = { };
+    this._requestOptions = {};
     if (requestOptions) {
       Object.assign(this._requestOptions, requestOptions);
       delete this._requestOptions.abortSignal;
