@@ -47,8 +47,11 @@ export class GoogleAIFileManager {
     public apiKey: string,
     requestOptions?: RequestOptions,
   ) {
-    Object.assign(this._requestOptions, requestOptions);
-    delete this._requestOptions.abortSignal;
+    this._requestOptions = { };
+    if (requestOptions) {
+      Object.assign(this._requestOptions, requestOptions);
+      delete this._requestOptions.abortSignal;
+    }
   }
 
   /**
@@ -60,12 +63,13 @@ export class GoogleAIFileManager {
     requestOptions?: RequestOptions,
   ): Promise<UploadFileResponse> {
     const file = readFileSync(filePath);
-    let filesRequestOptions = {};
-    Object.assign(
-      filesRequestOptions,
-      this._requestOptions || {},
-      requestOptions || {},
-    );
+    const filesRequestOptions = Object.create(this._requestOptions);
+    if (requestOptions) {
+      Object.assign(filesRequestOptions, requestOptions);
+    }
+
+    console.error("DEDB requestOptions: ", filesRequestOptions);
+
     const url = new FilesRequestUrl(
       FilesTask.UPLOAD,
       this.apiKey,
@@ -110,12 +114,10 @@ export class GoogleAIFileManager {
     listParams?: ListParams,
     requestOptions?: RequestOptions,
   ): Promise<ListFilesResponse> {
-    let filesRequestOptions = {};
-    Object.assign(
-      filesRequestOptions,
-      this._requestOptions || {},
-      requestOptions || {},
-    );
+    const filesRequestOptions = Object.create(this._requestOptions);
+    if (requestOptions) {
+      Object.assign(filesRequestOptions, requestOptions);
+    }
     const url = new FilesRequestUrl(
       FilesTask.LIST,
       this.apiKey,
@@ -139,12 +141,10 @@ export class GoogleAIFileManager {
     fileId: string,
     requestOptions?: RequestOptions,
   ): Promise<FileMetadataResponse> {
-    let filesRequestOptions = {};
-    Object.assign(
-      filesRequestOptions,
-      this._requestOptions || {},
-      requestOptions || {},
-    );
+    const filesRequestOptions = Object.create(this._requestOptions);
+    if (requestOptions) {
+      Object.assign(filesRequestOptions, requestOptions);
+    }
     const url = new FilesRequestUrl(
       FilesTask.GET,
       this.apiKey,
@@ -163,12 +163,10 @@ export class GoogleAIFileManager {
     fileId: string,
     requestOptions?: RequestOptions,
   ): Promise<void> {
-    let filesRequestOptions = {};
-    Object.assign(
-      filesRequestOptions,
-      this._requestOptions || {},
-      requestOptions || {},
-    );
+    const filesRequestOptions = Object.create(this._requestOptions);
+    if (requestOptions) {
+      Object.assign(filesRequestOptions, requestOptions);
+    }
     const url = new FilesRequestUrl(
       FilesTask.DELETE,
       this.apiKey,

@@ -136,7 +136,7 @@ export async function makeFilesRequest(
  */
 function getSignal(requestOptions?: RequestOptions): AbortSignal | null {
   if (
-    requestOptions.abortSignal !== undefined ||
+    requestOptions?.abortSignal !== undefined ||
     requestOptions?.timeout >= 0
   ) {
     const controller = new AbortController();
