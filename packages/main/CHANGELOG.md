@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.11.3
+
+### Patch Changes
+
+- c7c0b50: Fixed `FileState` enum values to be strings.
+
 ## 0.11.2
 
 ### Patch Changes
