@@ -74,11 +74,11 @@ export interface UploadFileResponse {
  */
 export enum FileState {
   // The default value. This value is used if the state is omitted.
-  STATE_UNSPECIFIED = 0,
+  STATE_UNSPECIFIED = 'STATE_UNSPECIFIED',
   // File is being processed and cannot be used for inference yet.
-  PROCESSING = 1,
+  PROCESSING = 'PROCESSING',
   // File is processed and available for inference.
-  ACTIVE = 2,
+  ACTIVE = 'ACTIVE',
   // File failed processing.
-  FAILED = 10,
+  FAILED = 'FAILED',
 }
