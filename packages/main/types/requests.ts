@@ -155,7 +155,7 @@ export interface RequestOptions {
  */
 export interface SingleRequestOptions extends RequestOptions {
   /**
-   * An object that may be used to abort aynchronous requests. The request may
+   * An object that may be used to abort asynchronous requests. The request may
    * also be aborted due to the expiration of the timeout value, if provided,
    * and if the timeout occurs first.
    */

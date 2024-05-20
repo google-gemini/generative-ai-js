@@ -4,7 +4,7 @@
 
 ## SingleRequestOptions.abortSignal property
 
-An object that may be used to abort aynchronous requests. The request may also be aborted due to the expiration of the timeout value, if provided, and if the timeout occurs first.
+An object that may be used to abort asynchronous requests. The request may also be aborted due to the expiration of the timeout value, if provided, and if the timeout occurs first.
 
 **Signature:**
 
