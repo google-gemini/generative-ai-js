@@ -19,9 +19,8 @@ import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import { genAI, displayTokenCount, streamToStdout } from "./utils/common.js";
 
 async function run() {
-  // For text-only inputs, use the gemini-pro model
   const model = genAI.getGenerativeModel({
-    model: "gemini-pro",
+    model: "gemini-1.5-flash-latest",
     safetySettings: [
       {
         category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,

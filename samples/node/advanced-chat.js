@@ -22,8 +22,7 @@ import {
 } from "./utils/common.js";
 
 async function run() {
-  // For dialog language tasks (like chat), use the gemini-pro model
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
   const chat = model.startChat({
     history: [

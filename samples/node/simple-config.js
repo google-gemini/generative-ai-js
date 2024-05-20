@@ -18,8 +18,7 @@
 import { genAI } from "./utils/common.js";
 
 async function run(options = {}) {
-  // For text-only inputs, use the gemini-pro model
-  const model = genAI.getGenerativeModel({ model: "gemini-pro", ...options });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest", ...options });
 
   const prompt = "One, two, three, ";
 

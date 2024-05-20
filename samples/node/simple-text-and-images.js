@@ -18,8 +18,7 @@
 import { genAI, fileToGenerativePart, streamToStdout } from "./utils/common.js";
 
 async function run() {
-  // For text-and-images inputs (multimodal), use the gemini-pro-vision model
-  const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
   const prompt = "What do you see?";
 

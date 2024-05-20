@@ -23,9 +23,8 @@ import {
 } from "./utils/common.js";
 
 async function run() {
-  // For text-and-images inputs (multimodal), use the gemini-pro-vision model
   const model = genAI.getGenerativeModel({
-    model: "gemini-pro-vision",
+    model: "gemini-1.5-flash-latest",
     generationConfig: {
       temperature: 0,
     },

@@ -46,9 +46,8 @@ async function run() {
     },
   ];
 
-  // For text-only inputs, use the gemini-pro model
   const model = genAI.getGenerativeModel(
-    { model: "gemini-pro", tools },
+    { model: "gemini-1.5-flash-latest", tools },
     { apiVersion: "v1beta" },
   );
 
