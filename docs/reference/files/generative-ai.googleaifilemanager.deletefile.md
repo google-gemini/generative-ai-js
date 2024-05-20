@@ -9,7 +9,7 @@ Delete file with given ID
 **Signature:**
 
 ```typescript
-deleteFile(fileId: string): Promise<void>;
+deleteFile(fileId: string, requestOptions?: RequestOptions): Promise<void>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ deleteFile(fileId: string): Promise<void>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  fileId | string |  |
+|  requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

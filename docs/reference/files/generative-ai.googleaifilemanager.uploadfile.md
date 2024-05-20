@@ -9,7 +9,7 @@ Upload a file
 **Signature:**
 
 ```typescript
-uploadFile(filePath: string, fileMetadata: FileMetadata): Promise<UploadFileResponse>;
+uploadFile(filePath: string, fileMetadata: FileMetadata, requestOptions?: RequestOptions): Promise<UploadFileResponse>;
 ```
 
 ## Parameters
@@ -18,6 +18,7 @@ uploadFile(filePath: string, fileMetadata: FileMetadata): Promise<UploadFileResp
 |  --- | --- | --- |
 |  filePath | string |  |
 |  fileMetadata | [FileMetadata](./generative-ai.filemetadata.md) |  |
+|  requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

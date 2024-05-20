@@ -9,7 +9,7 @@ Get metadata for file with given ID
 **Signature:**
 
 ```typescript
-getFile(fileId: string): Promise<FileMetadataResponse>;
+getFile(fileId: string, requestOptions?: RequestOptions): Promise<FileMetadataResponse>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ getFile(fileId: string): Promise<FileMetadataResponse>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  fileId | string |  |
+|  requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

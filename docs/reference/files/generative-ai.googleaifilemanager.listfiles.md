@@ -9,7 +9,7 @@ List all uploaded files
 **Signature:**
 
 ```typescript
-listFiles(listParams?: ListParams): Promise<ListFilesResponse>;
+listFiles(listParams?: ListParams, requestOptions?: RequestOptions): Promise<ListFilesResponse>;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ listFiles(listParams?: ListParams): Promise<ListFilesResponse>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  listParams | [ListParams](./generative-ai.listparams.md) | _(Optional)_ |
+|  requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

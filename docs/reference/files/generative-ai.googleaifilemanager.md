@@ -16,7 +16,7 @@ export declare class GoogleAIFileManager
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(apiKey, \_requestOptions)](./generative-ai.googleaifilemanager._constructor_.md) |  | Constructs a new instance of the <code>GoogleAIFileManager</code> class |
+|  [(constructor)(apiKey, requestOptions)](./generative-ai.googleaifilemanager._constructor_.md) |  | Constructs a new instance of the <code>GoogleAIFileManager</code> class |
 
 ## Properties
 
@@ -28,8 +28,8 @@ export declare class GoogleAIFileManager
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [deleteFile(fileId)](./generative-ai.googleaifilemanager.deletefile.md) |  | Delete file with given ID |
-|  [getFile(fileId)](./generative-ai.googleaifilemanager.getfile.md) |  | Get metadata for file with given ID |
-|  [listFiles(listParams)](./generative-ai.googleaifilemanager.listfiles.md) |  | List all uploaded files |
-|  [uploadFile(filePath, fileMetadata)](./generative-ai.googleaifilemanager.uploadfile.md) |  | Upload a file |
+|  [deleteFile(fileId, requestOptions)](./generative-ai.googleaifilemanager.deletefile.md) |  | Delete file with given ID |
+|  [getFile(fileId, requestOptions)](./generative-ai.googleaifilemanager.getfile.md) |  | Get metadata for file with given ID |
+|  [listFiles(listParams, requestOptions)](./generative-ai.googleaifilemanager.listfiles.md) |  | List all uploaded files |
+|  [uploadFile(filePath, fileMetadata, requestOptions)](./generative-ai.googleaifilemanager.uploadfile.md) |  | Upload a file |
 
