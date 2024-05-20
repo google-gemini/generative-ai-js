@@ -68,8 +68,6 @@ export class GoogleAIFileManager {
       Object.assign(filesRequestOptions, requestOptions);
     }
 
-    console.error("DEDB requestOptions: ", filesRequestOptions);
-
     const url = new FilesRequestUrl(
       FilesTask.UPLOAD,
       this.apiKey,
