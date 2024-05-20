@@ -38,7 +38,7 @@ describe("generateContent - multimodal", function () {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const base64Image = imageBuffer.toString("base64");
     const model = genAI.getGenerativeModel({
-      model: "gemini-pro-vision",
+      model: "gemini-1.5-flash-latest",
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,

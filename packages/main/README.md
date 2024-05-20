@@ -20,7 +20,7 @@ For example, with just a few lines of code, you can access Gemini's multimodal c
 
 For Node.js:
 ```
-const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
 const prompt = "Does this look store-bought or homemade?";
 const image = {
@@ -36,7 +36,7 @@ console.log(result.response.text());
 
 For web:
 ```
-const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
 const prompt = "Does this look store-bought or homemade?";
 const image = {

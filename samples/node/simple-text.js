@@ -18,8 +18,7 @@
 import { genAI } from "./utils/common.js";
 
 async function run() {
-  // For text-only inputs, use the gemini-pro model
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
   const prompt = "Write a story about a magic backpack.";
 
