@@ -60,13 +60,10 @@ export class GoogleAIFileManager {
   async uploadFile(
     filePath: string,
     fileMetadata: FileMetadata,
-    requestOptions?: RequestOptions,
+    requestOptions: RequestOptions = {},
   ): Promise<UploadFileResponse> {
     const file = readFileSync(filePath);
-    const filesRequestOptions = Object.create(this._requestOptions);
-    if (requestOptions) {
-      Object.assign(filesRequestOptions, requestOptions);
-    }
+    const filesRequestOptions = { ...this._requestOptions, ...requestOptions };
 
     const url = new FilesRequestUrl(
       FilesTask.UPLOAD,
@@ -110,12 +107,9 @@ export class GoogleAIFileManager {
    */
   async listFiles(
     listParams?: ListParams,
-    requestOptions?: RequestOptions,
+    requestOptions: RequestOptions = {},
   ): Promise<ListFilesResponse> {
-    const filesRequestOptions = Object.create(this._requestOptions);
-    if (requestOptions) {
-      Object.assign(filesRequestOptions, requestOptions);
-    }
+    const filesRequestOptions = { ...this._requestOptions, ...requestOptions };
     const url = new FilesRequestUrl(
       FilesTask.LIST,
       this.apiKey,
@@ -137,12 +131,9 @@ export class GoogleAIFileManager {
    */
   async getFile(
     fileId: string,
-    requestOptions?: RequestOptions,
+    requestOptions: RequestOptions = {},
   ): Promise<FileMetadataResponse> {
-    const filesRequestOptions = Object.create(this._requestOptions);
-    if (requestOptions) {
-      Object.assign(filesRequestOptions, requestOptions);
-    }
+    const filesRequestOptions = { ...this._requestOptions, ...requestOptions };
     const url = new FilesRequestUrl(
       FilesTask.GET,
       this.apiKey,
@@ -159,12 +150,9 @@ export class GoogleAIFileManager {
    */
   async deleteFile(
     fileId: string,
-    requestOptions?: RequestOptions,
+    requestOptions: RequestOptions = {},
   ): Promise<void> {
-    const filesRequestOptions = Object.create(this._requestOptions);
-    if (requestOptions) {
-      Object.assign(filesRequestOptions, requestOptions);
-    }
+    const filesRequestOptions = { ...this._requestOptions, ...requestOptions };
     const url = new FilesRequestUrl(
       FilesTask.DELETE,
       this.apiKey,

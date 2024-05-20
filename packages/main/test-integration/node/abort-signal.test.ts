@@ -40,7 +40,7 @@ describe("abortSignal", function () {
 
     const abortSignal = AbortSignal.timeout(1);
     const promise = fileManager.uploadFile(
-      "test-integration/resources/cat.jpg",
+      "test-utils/cat.jpeg",
       {
         mimeType: "image/jpeg",
         name: filePathInService,
