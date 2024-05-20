@@ -40,6 +40,7 @@ describe("countTokens", function () {
       ],
     });
     const response1 = await model.countTokens("count me");
+    const response2 = await model.countTokens({
       contents: [{ role: "user", parts: [{ text: "count me" }] }],
     });
     expect(response1.totalTokens).to.equal(3);
