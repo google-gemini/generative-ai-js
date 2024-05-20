@@ -147,9 +147,17 @@ export interface RequestOptions {
    * Custom HTTP request headers.
    */
   customHeaders?: Headers | Record<string, string>;
+}
+
+/**
+ * Params passed to atomic asynchronous operations.
+ * @public
+ */
+export interface SingleRequestOptions extends RequestOptions {
   /**
-   * An object that may be used to abort aynchronous requests. This is only available on
-   * a per request basis, and is ignored by models constructed with a RequestOptions object.
+   * An object that may be used to abort aynchronous requests. The request may
+   * also be aborted due to the expiration of the timeout value, if provided,
+   * and if the timeout occurs first.
    */
   abortSignal?: AbortSignal;
 }

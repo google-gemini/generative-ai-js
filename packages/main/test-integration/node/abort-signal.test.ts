@@ -17,7 +17,7 @@
 
 import { expect, use } from "chai";
 import * as chaiAsPromised from "chai-as-promised";
-import { RequestOptions } from "../..";
+import { SingleRequestOptions } from "../..";
 import { GoogleAIFileManager } from "../../dist/files";
 
 use(chaiAsPromised);
@@ -54,21 +54,21 @@ describe("abortSignal", function () {
   it("file manager listFiles abort test", async () => {
     const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
     const abortSignal = AbortSignal.timeout(1);
-    const requestOptions: RequestOptions = { abortSignal };
+    const requestOptions: SingleRequestOptions = { abortSignal };
     const promise = fileManager.listFiles(/* listParams= */ {}, requestOptions);
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });
   it("file manager getFile abort test", async () => {
     const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
     const abortSignal = AbortSignal.timeout(1);
-    const requestOptions: RequestOptions = { abortSignal };
+    const requestOptions: SingleRequestOptions = { abortSignal };
     const promise = fileManager.getFile("abortSignal.jpg", requestOptions);
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });
   it("file manager deleteFile abort test", async () => {
     const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
     const abortSignal = AbortSignal.timeout(1);
-    const requestOptions: RequestOptions = { abortSignal };
+    const requestOptions: SingleRequestOptions = { abortSignal };
     const promise = fileManager.deleteFile("abortSignal.jpg", requestOptions);
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });

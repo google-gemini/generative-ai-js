@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { RequestOptions } from "../../types";
+import { RequestOptions, SingleRequestOptions } from "../../types";
 import { readFileSync } from "fs";
 import { FilesRequestUrl, getHeaders, makeFilesRequest } from "./request";
 import {
@@ -42,28 +42,28 @@ export interface UploadMetadata {
  * @public
  */
 export class GoogleAIFileManager {
-  private _requestOptions: RequestOptions;
   constructor(
     public apiKey: string,
-    requestOptions?: RequestOptions,
-  ) {
-    this._requestOptions = {};
-    if (requestOptions) {
-      Object.assign(this._requestOptions, requestOptions);
-      delete this._requestOptions.abortSignal;
-    }
-  }
+    private _requestOptions: RequestOptions = {},
+  ) {}
 
   /**
-   * Upload a file
+   * Upload a file.
+   *
+   * Any fields set in the optional {@link SingleRequestOptions} parameter will take
+   * predendence over the {@link RequestOptions} values provided at the time of the
+   * {@link GoogleAIFileManager} initialization.
    */
   async uploadFile(
     filePath: string,
     fileMetadata: FileMetadata,
-    requestOptions: RequestOptions = {},
+    requestOptions: SingleRequestOptions = {},
   ): Promise<UploadFileResponse> {
     const file = readFileSync(filePath);
-    const filesRequestOptions = { ...this._requestOptions, ...requestOptions };
+    const filesRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
 
     const url = new FilesRequestUrl(
       FilesTask.UPLOAD,
@@ -103,13 +103,20 @@ export class GoogleAIFileManager {
   }
 
   /**
-   * List all uploaded files
+   * List all uploaded files.
+   *
+   * Any fields set in the optional {@link SingleRequestOptions} parameter will take
+   * predendence over the {@link RequestOptions} values provided at the time of the
+   * {@link GoogleAIFileManager} initialization.
    */
   async listFiles(
     listParams?: ListParams,
-    requestOptions: RequestOptions = {},
+    requestOptions: SingleRequestOptions = {},
   ): Promise<ListFilesResponse> {
-    const filesRequestOptions = { ...this._requestOptions, ...requestOptions };
+    const filesRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
     const url = new FilesRequestUrl(
       FilesTask.LIST,
       this.apiKey,
@@ -127,13 +134,20 @@ export class GoogleAIFileManager {
   }
 
   /**
-   * Get metadata for file with given ID
+   * Get metadata for file with given ID.
+   *
+   * Any fields set in the optional {@link SingleRequestOptions} parameter will take
+   * predendence over the {@link RequestOptions} values provided at the time of the
+   * {@link GoogleAIFileManager} initialization.
    */
   async getFile(
     fileId: string,
-    requestOptions: RequestOptions = {},
+    requestOptions: SingleRequestOptions = {},
   ): Promise<FileMetadataResponse> {
-    const filesRequestOptions = { ...this._requestOptions, ...requestOptions };
+    const filesRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
     const url = new FilesRequestUrl(
       FilesTask.GET,
       this.apiKey,
@@ -146,13 +160,20 @@ export class GoogleAIFileManager {
   }
 
   /**
-   * Delete file with given ID
+   * Delete file with given ID.
+   *
+   * Any fields set in the optional {@link SingleRequestOptions} parameter will take
+   * predendence over the {@link RequestOptions} values provided at the time of the
+   * {@link GoogleAIFileManager} initialization.
    */
   async deleteFile(
     fileId: string,
-    requestOptions: RequestOptions = {},
+    requestOptions: SingleRequestOptions = {},
   ): Promise<void> {
-    const filesRequestOptions = { ...this._requestOptions, ...requestOptions };
+    const filesRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
     const url = new FilesRequestUrl(
       FilesTask.DELETE,
       this.apiKey,

@@ -69,6 +69,7 @@
 |  [RequestOptions](./generative-ai.requestoptions.md) | Params passed to getGenerativeModel() or GoogleAIFileManager(). |
 |  [SafetyRating](./generative-ai.safetyrating.md) | A safety rating associated with a [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md) |
 |  [SafetySetting](./generative-ai.safetysetting.md) | Safety setting that can be sent as part of request parameters. |
+|  [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | Params passed to atomic asynchronous operations. |
 |  [StartChatParams](./generative-ai.startchatparams.md) | Params for [GenerativeModel.startChat()](./generative-ai.generativemodel.startchat.md)<!-- -->. |
 |  [TextPart](./generative-ai.textpart.md) | Content part interface if the part represents a text string. |
 |  [ToolConfig](./generative-ai.toolconfig.md) | Tool config. This config is shared for all tools provided in the request. |

@@ -9,7 +9,7 @@ Constructs a new instance of the `GoogleAIFileManager` class
 **Signature:**
 
 ```typescript
-constructor(apiKey: string, requestOptions?: RequestOptions);
+constructor(apiKey: string, _requestOptions?: RequestOptions);
 ```
 
 ## Parameters
@@ -17,5 +17,5 @@ constructor(apiKey: string, requestOptions?: RequestOptions);
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  apiKey | string |  |
-|  requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
+|  \_requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
 

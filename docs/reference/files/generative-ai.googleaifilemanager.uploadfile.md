@@ -4,12 +4,14 @@
 
 ## GoogleAIFileManager.uploadFile() method
 
-Upload a file
+Upload a file.
+
+Any fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take predendence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) initialization.
 
 **Signature:**
 
 ```typescript
-uploadFile(filePath: string, fileMetadata: FileMetadata, requestOptions?: RequestOptions): Promise<UploadFileResponse>;
+uploadFile(filePath: string, fileMetadata: FileMetadata, requestOptions?: SingleRequestOptions): Promise<UploadFileResponse>;
 ```
 
 ## Parameters
@@ -18,7 +20,7 @@ uploadFile(filePath: string, fileMetadata: FileMetadata, requestOptions?: Reques
 |  --- | --- | --- |
 |  filePath | string |  |
 |  fileMetadata | [FileMetadata](./generative-ai.filemetadata.md) |  |
-|  requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
+|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

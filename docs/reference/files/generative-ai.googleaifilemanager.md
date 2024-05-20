@@ -16,7 +16,7 @@ export declare class GoogleAIFileManager
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(apiKey, requestOptions)](./generative-ai.googleaifilemanager._constructor_.md) |  | Constructs a new instance of the <code>GoogleAIFileManager</code> class |
+|  [(constructor)(apiKey, \_requestOptions)](./generative-ai.googleaifilemanager._constructor_.md) |  | Constructs a new instance of the <code>GoogleAIFileManager</code> class |
 
 ## Properties
 
@@ -28,8 +28,8 @@ export declare class GoogleAIFileManager
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [deleteFile(fileId, requestOptions)](./generative-ai.googleaifilemanager.deletefile.md) |  | Delete file with given ID |
-|  [getFile(fileId, requestOptions)](./generative-ai.googleaifilemanager.getfile.md) |  | Get metadata for file with given ID |
-|  [listFiles(listParams, requestOptions)](./generative-ai.googleaifilemanager.listfiles.md) |  | List all uploaded files |
-|  [uploadFile(filePath, fileMetadata, requestOptions)](./generative-ai.googleaifilemanager.uploadfile.md) |  | Upload a file |
+|  [deleteFile(fileId, requestOptions)](./generative-ai.googleaifilemanager.deletefile.md) |  | <p>Delete file with given ID.</p><p>Any fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take predendence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) initialization.</p> |
+|  [getFile(fileId, requestOptions)](./generative-ai.googleaifilemanager.getfile.md) |  | <p>Get metadata for file with given ID.</p><p>Any fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take predendence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) initialization.</p> |
+|  [listFiles(listParams, requestOptions)](./generative-ai.googleaifilemanager.listfiles.md) |  | <p>List all uploaded files.</p><p>Any fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take predendence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) initialization.</p> |
+|  [uploadFile(filePath, fileMetadata, requestOptions)](./generative-ai.googleaifilemanager.uploadfile.md) |  | <p>Upload a file.</p><p>Any fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take predendence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) initialization.</p> |
 

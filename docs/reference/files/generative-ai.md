@@ -25,5 +25,6 @@
 |  [ListFilesResponse](./generative-ai.listfilesresponse.md) | Response from calling [GoogleAIFileManager.listFiles()](./generative-ai.googleaifilemanager.listfiles.md) |
 |  [ListParams](./generative-ai.listparams.md) | Params to pass to [GoogleAIFileManager.listFiles()](./generative-ai.googleaifilemanager.listfiles.md) |
 |  [RequestOptions](./generative-ai.requestoptions.md) | Params passed to getGenerativeModel() or GoogleAIFileManager(). |
+|  [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | Params passed to atomic asynchronous operations. |
 |  [UploadFileResponse](./generative-ai.uploadfileresponse.md) | Response from calling [GoogleAIFileManager.uploadFile()](./generative-ai.googleaifilemanager.uploadfile.md) |
 

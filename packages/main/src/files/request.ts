@@ -24,7 +24,7 @@ import {
   DEFAULT_BASE_URL,
   getClientHeaders,
 } from "../requests/request";
-import { RequestOptions } from "../../types";
+import { SingleRequestOptions } from "../../types";
 import { FilesTask } from "./constants";
 
 const taskToMethod = {
@@ -40,7 +40,7 @@ export class FilesRequestUrl {
   constructor(
     public task: FilesTask,
     public apiKey: string,
-    public requestOptions?: RequestOptions,
+    public requestOptions?: SingleRequestOptions,
   ) {
     const apiVersion = this.requestOptions?.apiVersion || DEFAULT_API_VERSION;
     const baseUrl = this.requestOptions?.baseUrl || DEFAULT_BASE_URL;
@@ -134,7 +134,7 @@ export async function makeFilesRequest(
  * Create an AbortSignal based on the timeout and abortSignal in the
  * RequestOptions.
  */
-function getSignal(requestOptions?: RequestOptions): AbortSignal | null {
+function getSignal(requestOptions?: SingleRequestOptions): AbortSignal | null {
   if (
     requestOptions?.abortSignal !== undefined ||
     requestOptions?.timeout >= 0
