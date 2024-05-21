@@ -49,6 +49,14 @@ export interface FileMetadataResponse {
   sha256Hash: string;
   uri: string;
   state: FileState;
+  /**
+   * Error populated if file processing has failed.
+   */
+  error?: RpcStatus;
+  /**
+   * Video metadata populated after processing is complete.
+   */
+  videoMetadata?: VideoMetadata;
 }
 
 /**
@@ -81,4 +89,44 @@ export enum FileState {
   ACTIVE = "ACTIVE",
   // File failed processing.
   FAILED = "FAILED",
+}
+
+/**
+ * Standard RPC error status object.
+ * @public
+ */
+export interface RpcStatus {
+  /**
+   * Error status code
+   */
+  code: number;
+  /**
+   * A developer-facing error message.
+   */
+  message: string;
+  /**
+   * A list of messages that carry the error details.
+   */
+  details?: ErrorDetail[];
+}
+
+/**
+ * Optional additional error details.
+ * @public
+ */
+export interface ErrorDetail {
+  "@type"?: string;
+  [key: string]: unknown;
+}
+
+/**
+ * Metadata populated when video has been processed.
+ * @public
+ */
+export interface VideoMetadata {
+  /**
+   * The video duration in
+   * protobuf {@link https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-v1/latest/Google-Protobuf-Duration#json-mapping | Duration} format.
+   */
+  videoDuration: string;
 }
