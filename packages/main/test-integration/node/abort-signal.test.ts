@@ -25,20 +25,20 @@ use(chaiAsPromised);
 /**
  * Integration tests against live backend.
  */
-describe("abortSignal", function () {
+describe("signal", function () {
   this.timeout(60e3);
   this.slow(10e3);
   it("file manager uploadFile abort test", async () => {
     const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
-    const filePathInService = "abortsignal.jpg";
+    const filePathInService = "signal.jpg";
 
     // This delete step should cleanup the state of the service for this and
     // future executions.
     try {
-      await fileManager.deleteFile("files/abortsignal");
+      await fileManager.deleteFile("files/signal");
     } catch (error) {}
 
-    const abortSignal = AbortSignal.timeout(1);
+    const signal = AbortSignal.timeout(1);
     const promise = fileManager.uploadFile(
       "test-utils/cat.jpeg",
       {
@@ -46,30 +46,30 @@ describe("abortSignal", function () {
         name: filePathInService,
       },
       {
-        abortSignal,
+        signal,
       },
     );
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });
   it("file manager listFiles abort test", async () => {
     const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
-    const abortSignal = AbortSignal.timeout(1);
-    const requestOptions: SingleRequestOptions = { abortSignal };
+    const signal = AbortSignal.timeout(1);
+    const requestOptions: SingleRequestOptions = { signal };
     const promise = fileManager.listFiles(/* listParams= */ {}, requestOptions);
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });
   it("file manager getFile abort test", async () => {
     const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
-    const abortSignal = AbortSignal.timeout(1);
-    const requestOptions: SingleRequestOptions = { abortSignal };
-    const promise = fileManager.getFile("abortSignal.jpg", requestOptions);
+    const signal = AbortSignal.timeout(1);
+    const requestOptions: SingleRequestOptions = { signal };
+    const promise = fileManager.getFile("signal.jpg", requestOptions);
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });
   it("file manager deleteFile abort test", async () => {
     const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
-    const abortSignal = AbortSignal.timeout(1);
-    const requestOptions: SingleRequestOptions = { abortSignal };
-    const promise = fileManager.deleteFile("abortSignal.jpg", requestOptions);
+    const signal = AbortSignal.timeout(1);
+    const requestOptions: SingleRequestOptions = { signal };
+    const promise = fileManager.deleteFile("signal.jpg", requestOptions);
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });
 });

@@ -159,7 +159,7 @@ export interface SingleRequestOptions extends RequestOptions {
    * also be aborted due to the expiration of the timeout value, if provided,
    * and if the timeout occurs first.
    */
-  abortSignal?: AbortSignal;
+  signal?: AbortSignal;
 }
 
 /**
