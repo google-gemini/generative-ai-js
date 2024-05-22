@@ -51,25 +51,55 @@ describe("signal", function () {
     );
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });
-  it("file manager listFiles abort test", async () => {
+  it("file manager listFiles aborted", async () => {
     const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
     const signal = AbortSignal.timeout(1);
     const requestOptions: SingleRequestOptions = { signal };
     const promise = fileManager.listFiles(/* listParams= */ {}, requestOptions);
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });
-  it("file manager getFile abort test", async () => {
+  it("file manager getFile aborted", async () => {
     const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
     const signal = AbortSignal.timeout(1);
     const requestOptions: SingleRequestOptions = { signal };
     const promise = fileManager.getFile("signal.jpg", requestOptions);
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });
-  it("file manager deleteFile abort test", async () => {
+  it("file manager deleteFile aborted", async () => {
     const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
     const signal = AbortSignal.timeout(1);
     const requestOptions: SingleRequestOptions = { signal };
     const promise = fileManager.deleteFile("signal.jpg", requestOptions);
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+  it("file manager getFile timeout without abort signal", async () => {
+    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
+    // Ensure the file isn't hosted on the service.
+    try {
+      await fileManager.deleteFile("files/signal");
+    } catch (error) {}
+    const requestOptions: SingleRequestOptions = { timeout: 1 };
+    // Use getFile, which should fail with a fetch error since the file
+    // doesn't exist. This should let us discern if the error was
+    // a timeout abort, or the fetch failure in our expect() below.
+    const promise = fileManager.getFile("signal.jpg", requestOptions);
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+  it("file manager getFile timeout before singal aborts", async () => {
+    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
+    // Ensure the file isn't hosted on the service.
+    try {
+      await fileManager.deleteFile("files/signal");
+    } catch (error) {}
+    // The AbortSignal timeout is longer than the operation itself, so
+    // the expected abort should come from the timeout parameter of
+    // requestOptions. Additionally, regardless of timeouts, this operation
+    // would normally fail as the file should not be hosted in the service.
+    // If the timeouts don't work properly then we'd get a fetch error, not
+    // and abort error.
+    const signal = AbortSignal.timeout(9000);
+    const requestOptions: SingleRequestOptions = { timeout: 1, signal };
+    const promise = fileManager.getFile("signal.jpg", requestOptions);
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });
 });
