@@ -17,6 +17,7 @@
 
 import {
   Content,
+  CountTokensRequest,
   EmbedContentRequest,
   GenerateContentRequest,
   Part,
@@ -102,6 +103,20 @@ function assignRoleToPartsAndValidateSendMessageRequest(
   }
 
   return functionContent;
+}
+
+export function formatCountTokensInput(
+  params: CountTokensRequest | string | Array<string | Part>,
+): CountTokensRequest {
+  let formattedRequest: CountTokensRequest;
+  if ((params as CountTokensRequest).contents) {
+    if ((params as CountTokensRequest).generateContentRequest) {
+      throw new GoogleGenerativeAIError(
+        "CountTokensRequest must have one of contents or generateContentRequest, not both.",
+      );
+    }
+  }
+  return formattedRequest;
 }
 
 export function formatGenerateContentInput(

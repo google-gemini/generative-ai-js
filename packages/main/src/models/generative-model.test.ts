@@ -18,6 +18,7 @@ import { expect, use } from "chai";
 import { GenerativeModel } from "./generative-model";
 import * as sinonChai from "sinon-chai";
 import {
+  CountTokensRequest,
   FunctionCallingMode,
   HarmBlockThreshold,
   HarmCategory,
@@ -317,6 +318,36 @@ describe("GenerativeModel", () => {
       }),
       {},
     );
+    restore();
+  });
+  it("countTokens errors if contents and generateContentRequest are both defined", async () => {
+    const genModel = new GenerativeModel(
+      "apiKey",
+      {
+        model: "my-model",
+      },
+      {
+        apiVersion: "v2000",
+      },
+    );
+    const mockResponse = getMockResponse(
+      "unary-success-basic-reply-short.json",
+    );
+    const makeRequestStub = stub(request, "makeRequest").resolves(
+      mockResponse as Response,
+    );
+    const countTokensRequest: CountTokensRequest = {
+      contents: [{ role: "user", parts: [{ text: "hello" }] }],
+      generateContentRequest: {
+        contents: [{ role: "user", parts: [{ text: "hello" }] }],
+      },
+    };
+    await expect(
+      genModel.countTokens(countTokensRequest),
+    ).to.eventually.be.rejectedWith(
+      "CountTokensRequest must have one of contents or generateContentRequest, not both.",
+    );
+    expect(makeRequestStub).to.not.be.called;
     restore();
   });
 });

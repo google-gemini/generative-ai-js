@@ -16,5 +16,6 @@ export interface CountTokensRequest
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [contents](./generative-ai.counttokensrequest.contents.md) |  | [Content](./generative-ai.content.md)<!-- -->\[\] |  |
+|  [contents?](./generative-ai.counttokensrequest.contents.md) |  | [Content](./generative-ai.content.md)<!-- -->\[\] | _(Optional)_ |
+|  [generateContentRequest?](./generative-ai.counttokensrequest.generatecontentrequest.md) |  | [GenerateContentRequest](./generative-ai.generatecontentrequest.md) | _(Optional)_ |
 

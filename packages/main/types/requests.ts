@@ -99,7 +99,8 @@ export interface StartChatParams extends BaseParams {
  * @public
  */
 export interface CountTokensRequest {
-  contents: Content[];
+  generateContentRequest?: GenerateContentRequest;
+  contents?: Content[];
 }
 
 /**

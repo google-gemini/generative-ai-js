@@ -43,6 +43,7 @@ import { ChatSession } from "../methods/chat-session";
 import { countTokens } from "../methods/count-tokens";
 import { batchEmbedContents, embedContent } from "../methods/embed-content";
 import {
+  formatCountTokensInput,
   formatEmbedContentInput,
   formatGenerateContentInput,
   formatSystemInstruction,
@@ -157,7 +158,8 @@ export class GenerativeModel {
   async countTokens(
     request: CountTokensRequest | string | Array<string | Part>,
   ): Promise<CountTokensResponse> {
-    const formattedParams = formatGenerateContentInput(request);
+    const formattedParams = formatCountTokensInput(request);
+    // countTokens() appends the model to the CountTokensRequest proto.
     return countTokens(
       this.apiKey,
       this.model,
