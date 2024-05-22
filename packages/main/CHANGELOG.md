@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.11.4
+
+### Patch Changes
+
+- ee02ff0: Add additional properties `videoMetadata` and `error` to `FileMetadataResponse` type.
+
 ## 0.11.3
 
 ### Patch Changes
