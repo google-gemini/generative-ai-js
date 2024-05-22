@@ -18,6 +18,7 @@ export interface FileMetadataResponse
 |  --- | --- | --- | --- |
 |  [createTime](./generative-ai.filemetadataresponse.createtime.md) |  | string |  |
 |  [displayName?](./generative-ai.filemetadataresponse.displayname.md) |  | string | _(Optional)_ |
+|  [error?](./generative-ai.filemetadataresponse.error.md) |  | [RpcStatus](./generative-ai.rpcstatus.md) | _(Optional)_ Error populated if file processing has failed. |
 |  [expirationTime](./generative-ai.filemetadataresponse.expirationtime.md) |  | string |  |
 |  [mimeType](./generative-ai.filemetadataresponse.mimetype.md) |  | string |  |
 |  [name](./generative-ai.filemetadataresponse.name.md) |  | string |  |
@@ -26,4 +27,5 @@ export interface FileMetadataResponse
 |  [state](./generative-ai.filemetadataresponse.state.md) |  | [FileState](./generative-ai.filestate.md) |  |
 |  [updateTime](./generative-ai.filemetadataresponse.updatetime.md) |  | string |  |
 |  [uri](./generative-ai.filemetadataresponse.uri.md) |  | string |  |
+|  [videoMetadata?](./generative-ai.filemetadataresponse.videometadata.md) |  | [VideoMetadata](./generative-ai.videometadata.md) | _(Optional)_ Video metadata populated after processing is complete. |
 

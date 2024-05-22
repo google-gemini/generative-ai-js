@@ -183,3 +183,15 @@ export interface BatchEmbedContentsResponse {
 export interface ContentEmbedding {
   values: number[];
 }
+
+/**
+ * Details object that may be included in an error response.
+ * @public
+ */
+export interface ErrorDetails {
+  "@type"?: string;
+  reason?: string;
+  domain?: string;
+  metadata?: Record<string, unknown>;
+  [key: string]: unknown;
+}

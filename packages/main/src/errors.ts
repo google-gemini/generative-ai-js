@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+import { ErrorDetails } from "../types";
+
 /**
  * Basic error type for this SDK.
  * @public
@@ -62,15 +64,3 @@ export class GoogleGenerativeAIFetchError extends GoogleGenerativeAIError {
  * @public
  */
 export class GoogleGenerativeAIRequestInputError extends GoogleGenerativeAIError {}
-
-/**
- * Details object that may be included in an error response.
- * @public
- */
-interface ErrorDetails {
-  "@type"?: string;
-  reason?: string;
-  domain?: string;
-  metadata?: Record<string, unknown>;
-  [key: string]: unknown;
-}
