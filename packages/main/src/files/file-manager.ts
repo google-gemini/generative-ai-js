@@ -51,7 +51,7 @@ export class GoogleAIFileManager {
    * Upload a file.
    *
    * Any fields set in the optional {@link SingleRequestOptions} parameter will take
-   * predendence over the {@link RequestOptions} values provided at the time of the
+   * precedence over the {@link RequestOptions} values provided at the time of the
    * {@link GoogleAIFileManager} initialization.
    */
   async uploadFile(
@@ -106,7 +106,7 @@ export class GoogleAIFileManager {
    * List all uploaded files.
    *
    * Any fields set in the optional {@link SingleRequestOptions} parameter will take
-   * predendence over the {@link RequestOptions} values provided at the time of the
+   * precedence over the {@link RequestOptions} values provided at the time of the
    * {@link GoogleAIFileManager} initialization.
    */
   async listFiles(
@@ -137,7 +137,7 @@ export class GoogleAIFileManager {
    * Get metadata for file with given ID.
    *
    * Any fields set in the optional {@link SingleRequestOptions} parameter will take
-   * predendence over the {@link RequestOptions} values provided at the time of the
+   * precedence over the {@link RequestOptions} values provided at the time of the
    * {@link GoogleAIFileManager} initialization.
    */
   async getFile(
@@ -163,7 +163,7 @@ export class GoogleAIFileManager {
    * Delete file with given ID.
    *
    * Any fields set in the optional {@link SingleRequestOptions} parameter will take
-   * predendence over the {@link RequestOptions} values provided at the time of the
+   * precedence over the {@link RequestOptions} values provided at the time of the
    * {@link GoogleAIFileManager} initialization.
    */
   async deleteFile(
