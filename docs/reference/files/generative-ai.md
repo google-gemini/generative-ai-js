@@ -20,7 +20,7 @@
 
 |  Interface | Description |
 |  --- | --- |
-|  [ErrorDetail](./generative-ai.errordetail.md) | Optional additional error details. |
+|  [ErrorDetails](./generative-ai.errordetails.md) | Details object that may be included in an error response. |
 |  [FileMetadata](./generative-ai.filemetadata.md) | Metadata to provide alongside a file upload |
 |  [FileMetadataResponse](./generative-ai.filemetadataresponse.md) | File metadata response from server. |
 |  [ListFilesResponse](./generative-ai.listfilesresponse.md) | Response from calling [GoogleAIFileManager.listFiles()](./generative-ai.googleaifilemanager.listfiles.md) |

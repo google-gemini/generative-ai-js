@@ -9,5 +9,5 @@ A list of messages that carry the error details.
 **Signature:**
 
 ```typescript
-details?: ErrorDetail[];
+details?: ErrorDetails[];
 ```

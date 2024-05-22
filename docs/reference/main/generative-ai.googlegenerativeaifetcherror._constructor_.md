@@ -19,5 +19,5 @@ constructor(message: string, status?: number, statusText?: string, errorDetails?
 |  message | string |  |
 |  status | number | _(Optional)_ |
 |  statusText | string | _(Optional)_ |
-|  errorDetails | ErrorDetails\[\] | _(Optional)_ |
+|  errorDetails | [ErrorDetails](./generative-ai.errordetails.md)<!-- -->\[\] | _(Optional)_ |
 

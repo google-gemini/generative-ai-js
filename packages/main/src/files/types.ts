@@ -15,6 +15,10 @@
  * limitations under the License.
  */
 
+import { ErrorDetails } from "../../types";
+
+export { ErrorDetails };
+
 /**
  * Params to pass to {@link GoogleAIFileManager.listFiles}
  * @public
@@ -107,16 +111,7 @@ export interface RpcStatus {
   /**
    * A list of messages that carry the error details.
    */
-  details?: ErrorDetail[];
-}
-
-/**
- * Optional additional error details.
- * @public
- */
-export interface ErrorDetail {
-  "@type"?: string;
-  [key: string]: unknown;
+  details?: ErrorDetails[];
 }
 
 /**

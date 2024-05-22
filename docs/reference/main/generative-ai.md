@@ -45,6 +45,7 @@
 |  [EmbedContentRequest](./generative-ai.embedcontentrequest.md) | Params for calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md) |
 |  [EmbedContentResponse](./generative-ai.embedcontentresponse.md) | Response from calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md)<!-- -->. |
 |  [EnhancedGenerateContentResponse](./generative-ai.enhancedgeneratecontentresponse.md) | Response object wrapped with helper methods. |
+|  [ErrorDetails](./generative-ai.errordetails.md) | Details object that may be included in an error response. |
 |  [FileData](./generative-ai.filedata.md) | Data pointing to a file uploaded with the Files API. |
 |  [FileDataPart](./generative-ai.filedatapart.md) | Content part interface if the part represents FunctionResponse. |
 |  [FunctionCall](./generative-ai.functioncall.md) | A predicted \[FunctionCall\] returned from the model that contains a string representing the \[FunctionDeclaration.name\] and a structured JSON object containing the parameters and their values. |

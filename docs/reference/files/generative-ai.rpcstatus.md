@@ -17,6 +17,6 @@ export interface RpcStatus
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [code](./generative-ai.rpcstatus.code.md) |  | number | Error status code |
-|  [details?](./generative-ai.rpcstatus.details.md) |  | [ErrorDetail](./generative-ai.errordetail.md)<!-- -->\[\] | _(Optional)_ A list of messages that carry the error details. |
+|  [details?](./generative-ai.rpcstatus.details.md) |  | [ErrorDetails](./generative-ai.errordetails.md)<!-- -->\[\] | _(Optional)_ A list of messages that carry the error details. |
 |  [message](./generative-ai.rpcstatus.message.md) |  | string | A developer-facing error message. |
 
