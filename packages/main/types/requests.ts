@@ -55,6 +55,14 @@ export interface GenerateContentRequest extends BaseParams {
 }
 
 /**
+ * Request sent to `generateContent` endpoint.
+ * @internal
+ */
+export interface GenerateContentRequestInternal extends GenerateContentRequest {
+  model?: string;
+}
+
+/**
  * Safety setting that can be sent as part of request parameters.
  * @public
  */
@@ -100,6 +108,15 @@ export interface StartChatParams extends BaseParams {
  */
 export interface CountTokensRequest {
   generateContentRequest?: GenerateContentRequest;
+  contents?: Content[];
+}
+
+/**
+ * Params for calling {@link GenerativeModel.countTokens}
+ * @internal
+ */
+export interface CountTokensRequestInternal {
+  generateContentRequest?: GenerateContentRequestInternal;
   contents?: Content[];
 }
 

@@ -18,6 +18,7 @@
 import {
   Content,
   CountTokensRequest,
+  CountTokensRequestInternal,
   EmbedContentRequest,
   GenerateContentRequest,
   Part,
@@ -107,14 +108,25 @@ function assignRoleToPartsAndValidateSendMessageRequest(
 
 export function formatCountTokensInput(
   params: CountTokensRequest | string | Array<string | Part>,
-): CountTokensRequest {
-  let formattedRequest: CountTokensRequest;
+  model: string,
+): CountTokensRequestInternal {
+  let formattedRequest: CountTokensRequestInternal = {};
+  const containsGenerateContentRequest =
+    (params as CountTokensRequest).generateContentRequest !== undefined;
   if ((params as CountTokensRequest).contents) {
-    if ((params as CountTokensRequest).generateContentRequest) {
+    if (containsGenerateContentRequest) {
       throw new GoogleGenerativeAIError(
         "CountTokensRequest must have one of contents or generateContentRequest, not both.",
       );
     }
+    formattedRequest = { ...(params as CountTokensRequest) };
+  } else if (containsGenerateContentRequest) {
+    formattedRequest = { ...(params as CountTokensRequest) };
+    formattedRequest.generateContentRequest.model = model;
+  } else {
+    // Array or string
+    const content = formatNewContent(params as string | Array<string | Part>);
+    formattedRequest.contents = [content];
   }
   return formattedRequest;
 }
