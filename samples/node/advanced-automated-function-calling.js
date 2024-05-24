@@ -76,6 +76,7 @@ async function run() {
   );
 
   const chat = model.startChat({
+    functions,
     history: [
       {
         role: "user",
@@ -102,45 +103,45 @@ async function run() {
   // Display the last aggregated response
   const response = await result.response;
   //console.log(JSON.stringify(response, null, 2));
-  //console.dir(response, { depth: null });
+  console.dir(response, { depth: null });
 
-  if (response.candidates.length === 0) {
-    throw new Error("No candidates");
-  }
+  // if (response.candidates.length === 0) {
+  //   throw new Error("No candidates");
+  // }
 
-  const content = response.candidates[0].content;
-  if (content.parts.length === 0) {
-    throw new Error("No parts");
-  }
+  // const content = response.candidates[0].content;
+  // if (content.parts.length === 0) {
+  //   throw new Error("No parts");
+  // }
 
-  const fc = content.parts[0].functionCall;
-  const text = content.parts.map(({ text }) => text).join("");
+  // const fc = content.parts[0].functionCall;
+  // const text = content.parts.map(({ text }) => text).join("");
 
-  console.dir(fc, { depth: null });
-  console.dir(text, { depth: null });
+  // console.dir(fc, { depth: null });
+  // console.dir(text, { depth: null });
 
-  if (fc) {
-    const { name, args } = fc;
-    const fn = functions[name];
-    if (!fn) {
-      throw new Error(`Unknown function "${name}"`);
-    }
-    const fr = {
-      functionResponse: {
-        name,
-        response: {
-          name,
-          content: functions[name](args),
-        },
-      },
-    };
+  // if (fc) {
+  //   const { name, args } = fc;
+  //   const fn = functions[name];
+  //   if (!fn) {
+  //     throw new Error(`Unknown function "${name}"`);
+  //   }
+  //   const fr = {
+  //     functionResponse: {
+  //       name,
+  //       response: {
+  //         name,
+  //         content: functions[name](args),
+  //       },
+  //     },
+  //   };
 
-    const result2 = await chat.sendMessageStream([fr]);
-    const response2 = await result2.response;
-    console.log(response2.text());
-  } else if (text) {
-    console.log(text);
-  }
+  //   const result2 = await chat.sendMessageStream([fr]);
+  //   const response2 = await result2.response;
+  //   console.log(response2.text());
+  // } else if (text) {
+  //   console.log(text);
+  // }
 }
 
 run();

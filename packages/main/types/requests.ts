@@ -88,6 +88,7 @@ export interface GenerationConfig {
  * @public
  */
 export interface StartChatParams extends BaseParams {
+  functions?: Record<string, (...args: unknown[]) => unknown>;
   history?: Content[];
   tools?: Tool[];
   toolConfig?: ToolConfig;
@@ -147,6 +148,8 @@ export interface RequestOptions {
    * Custom HTTP request headers.
    */
   customHeaders?: Headers | Record<string, string>;
+
+  disableAutomaticFunctionCalling?: boolean;
 }
 
 /**
