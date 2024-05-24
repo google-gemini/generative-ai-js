@@ -136,7 +136,7 @@ export class ChatSession {
     if (response.candidates.length === 0) {
       throw new Error("No candidates");
     }
-  
+
     const content = response.candidates[0].content;
     if (content.parts.length === 0) {
       throw new Error("No parts");

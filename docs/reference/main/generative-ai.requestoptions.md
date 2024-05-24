@@ -20,5 +20,6 @@ export interface RequestOptions
 |  [apiVersion?](./generative-ai.requestoptions.apiversion.md) |  | string | _(Optional)_ Version of API endpoint to call (e.g. "v1" or "v1beta"). If not specified, defaults to latest stable version. |
 |  [baseUrl?](./generative-ai.requestoptions.baseurl.md) |  | string | _(Optional)_ Base endpoint url. Defaults to "https://generativelanguage.googleapis.com" |
 |  [customHeaders?](./generative-ai.requestoptions.customheaders.md) |  | Headers \| Record&lt;string, string&gt; | _(Optional)_ Custom HTTP request headers. |
+|  [disableAutomaticFunctionCalling?](./generative-ai.requestoptions.disableautomaticfunctioncalling.md) |  | boolean | _(Optional)_ |
 |  [timeout?](./generative-ai.requestoptions.timeout.md) |  | number | _(Optional)_ Request timeout in milliseconds. |
 
