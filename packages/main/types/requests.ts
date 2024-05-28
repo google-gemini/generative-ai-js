@@ -81,6 +81,12 @@ export interface GenerationConfig {
    *   `application/json`: JSON response in the candidates.
    */
   responseMimeType?: string;
+  /**
+   * Output response schema of the generated candidate text.
+   * Note: This only applies when the specified `responseMIMEType` supports a schema; currently
+   * this is limited to `application/json`.
+   */
+  responseSchema?: ResponseSchema;
 }
 
 /**
@@ -239,27 +245,12 @@ export enum FunctionDeclarationSchemaType {
 }
 
 /**
- * Schema for parameters passed to {@link FunctionDeclaration.parameters}.
- * @public
- */
-export interface FunctionDeclarationSchema {
-  /** The type of the parameter. */
-  type: FunctionDeclarationSchemaType;
-  /** The format of the parameter. */
-  properties: { [k: string]: FunctionDeclarationSchemaProperty };
-  /** Optional. Description of the parameter. */
-  description?: string;
-  /** Optional. Array of required parameters. */
-  required?: string[];
-}
-
-/**
  * Schema is used to define the format of input/output data.
  * Represents a select subset of an OpenAPI 3.0 schema object.
  * More fields may be added in the future as needed.
  * @public
  */
-export interface FunctionDeclarationSchemaProperty {
+export interface Schema {
   /**
    * Optional. The type of the property. {@link
    * FunctionDeclarationSchemaType}.
@@ -282,6 +273,33 @@ export interface FunctionDeclarationSchemaProperty {
   /** Optional. The example of the property. */
   example?: unknown;
 }
+
+/**
+ * Schema for parameters passed to {@link FunctionDeclaration.parameters}.
+ * @public
+ */
+export interface FunctionDeclarationSchema {
+  /** The type of the parameter. */
+  type: FunctionDeclarationSchemaType;
+  /** The format of the parameter. */
+  properties: { [k: string]: FunctionDeclarationSchemaProperty };
+  /** Optional. Description of the parameter. */
+  description?: string;
+  /** Optional. Array of required parameters. */
+  required?: string[];
+}
+
+/**
+ * Schema for top-level function declaration
+ * @public
+ */
+export interface FunctionDeclarationSchemaProperty extends Schema {}
+
+/**
+ * Schema passed to {@link GenerationConfig.responseSchema}
+ * @public
+ */
+export interface ResponseSchema extends Schema {}
 
 /**
  * Tool config. This config is shared for all tools provided in the request.
