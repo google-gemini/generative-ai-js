@@ -64,13 +64,17 @@ const cjsBuilds = [
 const filesBuilds = [
   {
     input: "src/files/index.ts",
-    output: [{ file: pkg.exports['./files'].import, format: "es", sourcemap: true }],
+    output: [
+      { file: pkg.exports["./files"].import, format: "es", sourcemap: true },
+    ],
     external: ["fs"],
     plugins: [...es2017BuildPlugins],
   },
   {
     input: "src/files/index.ts",
-    output: [{ file: pkg.exports['./files'].require, format: "cjs", sourcemap: true }],
+    output: [
+      { file: pkg.exports["./files"].require, format: "cjs", sourcemap: true },
+    ],
     external: ["fs"],
     plugins: [...es2017BuildPlugins],
   },
