@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.11.5
+
+### Patch Changes
+
+- 42ba6ca: Fix paths to @google/generative-ai/files.
+
 ## 0.11.4
 
 ### Patch Changes
