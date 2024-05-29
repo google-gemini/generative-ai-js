@@ -317,7 +317,8 @@ describe("GenerativeModel", () => {
       systemInstruction: { role: "system", parts: [{ text: "be friendly" }] },
     });
     expect(genModel.systemInstruction?.parts[0].text).to.equal("be friendly");
-    expect(genModel.generationConfig.responseSchema.properties.testField).to.exist;
+    expect(genModel.generationConfig.responseSchema.properties.testField).to
+      .exist;
     const mockResponse = getMockResponse(
       "unary-success-basic-reply-short.json",
     );
@@ -357,7 +358,8 @@ describe("GenerativeModel", () => {
       toolConfig: { functionCallingConfig: { mode: FunctionCallingMode.NONE } },
       systemInstruction: { role: "system", parts: [{ text: "be friendly" }] },
     });
-    expect(genModel.generationConfig.responseSchema.properties.testField).to.exist;
+    expect(genModel.generationConfig.responseSchema.properties.testField).to
+      .exist;
     expect(genModel.tools?.length).to.equal(1);
     expect(genModel.toolConfig?.functionCallingConfig.mode).to.equal(
       FunctionCallingMode.NONE,
