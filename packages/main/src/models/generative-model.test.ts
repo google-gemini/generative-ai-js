@@ -19,6 +19,7 @@ import { GenerativeModel } from "./generative-model";
 import * as sinonChai from "sinon-chai";
 import {
   FunctionCallingMode,
+  FunctionDeclarationSchemaType,
   HarmBlockThreshold,
   HarmCategory,
 } from "../../types";
@@ -50,7 +51,19 @@ describe("GenerativeModel", () => {
       "apiKey",
       {
         model: "my-model",
-        generationConfig: { temperature: 0 },
+        generationConfig: {
+          temperature: 0,
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: FunctionDeclarationSchemaType.OBJECT,
+            properties: {
+              testField: {
+                type: FunctionDeclarationSchemaType.STRING,
+                properties: {},
+              },
+            },
+          },
+        },
         safetySettings: [
           {
             category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
@@ -68,6 +81,15 @@ describe("GenerativeModel", () => {
       },
     );
     expect(genModel.generationConfig?.temperature).to.equal(0);
+    expect(genModel.generationConfig?.responseMimeType).to.equal(
+      "application/json",
+    );
+    expect(genModel.generationConfig?.responseSchema.type).to.equal(
+      FunctionDeclarationSchemaType.OBJECT,
+    );
+    expect(
+      genModel.generationConfig?.responseSchema.properties.testField.type,
+    ).to.equal(FunctionDeclarationSchemaType.STRING);
     expect(genModel.safetySettings?.length).to.equal(1);
     expect(genModel.tools?.length).to.equal(1);
     expect(genModel.toolConfig?.functionCallingConfig.mode).to.equal(
