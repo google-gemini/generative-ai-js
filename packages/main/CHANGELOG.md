@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.12.0
+
+### Minor Changes
+
+- 85ff2c4: Added `responseSchema` to `GenerationConfig` to allow user to provide a JSON schema when `responseMimeType` is set to JSON.
+
 ## 0.11.5
 
 ### Patch Changes
