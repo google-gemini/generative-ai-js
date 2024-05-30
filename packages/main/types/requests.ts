@@ -103,7 +103,12 @@ export interface StartChatParams extends BaseParams {
 }
 
 /**
- * Params for calling {@link GenerativeModel.countTokens}
+ * Params for calling {@link GenerativeModel.countTokens}.
+ *
+ * The request must contain either a {@link Content} array or a
+ * {@link GenerateContentRequest}, but not both. If both are provided
+ * then a {@link GoogleGenerativeAIRequestInputError} is thrown.
+ *
  * @public
  */
 export interface CountTokensRequest {

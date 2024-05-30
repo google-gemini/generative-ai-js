@@ -23,7 +23,10 @@ import {
   GenerateContentRequest,
   Part,
 } from "../../types";
-import { GoogleGenerativeAIError } from "../errors";
+import {
+  GoogleGenerativeAIError,
+  GoogleGenerativeAIRequestInputError,
+} from "../errors";
 
 export function formatSystemInstruction(
   input?: string | Part | Content,
@@ -112,10 +115,10 @@ export function formatCountTokensInput(
 ): CountTokensRequestInternal {
   let formattedRequest: CountTokensRequestInternal = {};
   const containsGenerateContentRequest =
-    (params as CountTokensRequest).generateContentRequest !== undefined;
+    (params as CountTokensRequest).generateContentRequest != null;
   if ((params as CountTokensRequest).contents) {
     if (containsGenerateContentRequest) {
-      throw new GoogleGenerativeAIError(
+      throw new GoogleGenerativeAIRequestInputError(
         "CountTokensRequest must have one of contents or generateContentRequest, not both.",
       );
     }

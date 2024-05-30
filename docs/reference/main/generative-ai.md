@@ -40,7 +40,7 @@
 |  [CitationSource](./generative-ai.citationsource.md) | A single citation source. |
 |  [Content](./generative-ai.content.md) | Content type for both prompts and response candidates. |
 |  [ContentEmbedding](./generative-ai.contentembedding.md) | A single content embedding. |
-|  [CountTokensRequest](./generative-ai.counttokensrequest.md) | Params for calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md) |
+|  [CountTokensRequest](./generative-ai.counttokensrequest.md) | <p>Params for calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)<!-- -->.</p><p>The request must contain either a [Content](./generative-ai.content.md) array or a [GenerateContentRequest](./generative-ai.generatecontentrequest.md)<!-- -->, but not both. If both are provided then a [GoogleGenerativeAIRequestInputError](./generative-ai.googlegenerativeairequestinputerror.md) is thrown.</p> |
 |  [CountTokensResponse](./generative-ai.counttokensresponse.md) | Response from calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)<!-- -->. |
 |  [EmbedContentRequest](./generative-ai.embedcontentrequest.md) | Params for calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md) |
 |  [EmbedContentResponse](./generative-ai.embedcontentresponse.md) | Response from calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md)<!-- -->. |
