@@ -4,25 +4,12 @@
 
 ## FunctionDeclarationSchemaProperty interface
 
-Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed.
+Schema for top-level function declaration
 
 **Signature:**
 
 ```typescript
-export interface FunctionDeclarationSchemaProperty 
+export interface FunctionDeclarationSchemaProperty extends Schema 
 ```
-
-## Properties
-
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [description?](./generative-ai.functiondeclarationschemaproperty.description.md) |  | string | _(Optional)_ Optional. The description of the property. |
-|  [enum?](./generative-ai.functiondeclarationschemaproperty.enum.md) |  | string\[\] | _(Optional)_ Optional. The enum of the property. |
-|  [example?](./generative-ai.functiondeclarationschemaproperty.example.md) |  | unknown | _(Optional)_ Optional. The example of the property. |
-|  [format?](./generative-ai.functiondeclarationschemaproperty.format.md) |  | string | _(Optional)_ Optional. The format of the property. |
-|  [items?](./generative-ai.functiondeclarationschemaproperty.items.md) |  | [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md) | _(Optional)_ Optional. The items of the property. [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md) |
-|  [nullable?](./generative-ai.functiondeclarationschemaproperty.nullable.md) |  | boolean | _(Optional)_ Optional. Whether the property is nullable. |
-|  [properties?](./generative-ai.functiondeclarationschemaproperty.properties.md) |  | { \[k: string\]: [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md)<!-- -->; } | _(Optional)_ Optional. Map of [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md)<!-- -->. |
-|  [required?](./generative-ai.functiondeclarationschemaproperty.required.md) |  | string\[\] | _(Optional)_ Optional. Array of required property. |
-|  [type?](./generative-ai.functiondeclarationschemaproperty.type.md) |  | [FunctionDeclarationSchemaType](./generative-ai.functiondeclarationschematype.md) | _(Optional)_ Optional. The type of the property. [FunctionDeclarationSchemaType](./generative-ai.functiondeclarationschematype.md)<!-- -->. |
+**Extends:** [Schema](./generative-ai.schema.md)
 
