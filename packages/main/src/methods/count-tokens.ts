@@ -33,7 +33,7 @@ export async function countTokens(
     Task.COUNT_TOKENS,
     apiKey,
     false,
-    JSON.stringify({ ...params, model }),
+    JSON.stringify(params),
     requestOptions,
   );
   return response.json();
