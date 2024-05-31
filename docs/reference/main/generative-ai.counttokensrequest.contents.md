@@ -7,5 +7,5 @@
 **Signature:**
 
 ```typescript
-contents: Content[];
+contents?: Content[];
 ```

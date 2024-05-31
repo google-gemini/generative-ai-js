@@ -4,7 +4,9 @@
 
 ## CountTokensRequest interface
 
-Params for calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)
+Params for calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)<!-- -->.
+
+The request must contain either a [Content](./generative-ai.content.md) array or a [GenerateContentRequest](./generative-ai.generatecontentrequest.md)<!-- -->, but not both. If both are provided then a [GoogleGenerativeAIRequestInputError](./generative-ai.googlegenerativeairequestinputerror.md) is thrown.
 
 **Signature:**
 
@@ -16,5 +18,6 @@ export interface CountTokensRequest
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [contents](./generative-ai.counttokensrequest.contents.md) |  | [Content](./generative-ai.content.md)<!-- -->\[\] |  |
+|  [contents?](./generative-ai.counttokensrequest.contents.md) |  | [Content](./generative-ai.content.md)<!-- -->\[\] | _(Optional)_ |
+|  [generateContentRequest?](./generative-ai.counttokensrequest.generatecontentrequest.md) |  | [GenerateContentRequest](./generative-ai.generatecontentrequest.md) | _(Optional)_ |
 

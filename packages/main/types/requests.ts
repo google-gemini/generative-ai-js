@@ -55,6 +55,14 @@ export interface GenerateContentRequest extends BaseParams {
 }
 
 /**
+ * Request sent to `generateContent` endpoint.
+ * @internal
+ */
+export interface GenerateContentRequestInternal extends GenerateContentRequest {
+  model?: string;
+}
+
+/**
  * Safety setting that can be sent as part of request parameters.
  * @public
  */
@@ -101,11 +109,26 @@ export interface StartChatParams extends BaseParams {
 }
 
 /**
- * Params for calling {@link GenerativeModel.countTokens}
+ * Params for calling {@link GenerativeModel.countTokens}.
+ *
+ * The request must contain either a {@link Content} array or a
+ * {@link GenerateContentRequest}, but not both. If both are provided
+ * then a {@link GoogleGenerativeAIRequestInputError} is thrown.
+ *
  * @public
  */
 export interface CountTokensRequest {
-  contents: Content[];
+  generateContentRequest?: GenerateContentRequest;
+  contents?: Content[];
+}
+
+/**
+ * Params for calling {@link GenerativeModel.countTokens}
+ * @internal
+ */
+export interface CountTokensRequestInternal {
+  generateContentRequest?: GenerateContentRequestInternal;
+  contents?: Content[];
 }
 
 /**
