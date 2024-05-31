@@ -79,7 +79,12 @@ describe("countTokens", function () {
     });
     const countTokensRequest: CountTokensRequest = {
       generateContentRequest: {
-        contents: [{ role: "user", parts: [{ text: "count me again with a different result" }] }],
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: "count me again with a different result" }],
+          },
+        ],
       },
     };
     const response = await model.countTokens(countTokensRequest);
