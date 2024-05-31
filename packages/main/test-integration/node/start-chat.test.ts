@@ -40,7 +40,7 @@ describe("startChat", function () {
       ],
     });
     const question1 = "What is the capital of Oregon?";
-    const question2 = "How many people live there?";
+    const question2 = "How many people live in that city?";
     const chat = model.startChat();
     const result1 = await chat.sendMessage(question1);
     expect(result1.response.text()).to.not.be.empty;
@@ -103,7 +103,7 @@ describe("startChat", function () {
       ],
     });
     const question1 = "What is the capital of Oregon?";
-    const question2 = "How many people live there?";
+    const question2 = "How many people live in that city?";
     const question3 = "What is the closest river?";
     const chat = model.startChat();
     const result1 = await chat.sendMessageStream(question1);
@@ -139,7 +139,7 @@ describe("startChat", function () {
       ],
     });
     const question1 = "What are the most interesting cities in Oregon?";
-    const question2 = "How many people live there?";
+    const question2 = "How many people live in that city?";
     const question3 = "What is the closest river?";
     const chat = model.startChat();
     const promise1 = chat.sendMessageStream(question1).then(async (result1) => {
