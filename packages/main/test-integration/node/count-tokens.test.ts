@@ -66,4 +66,28 @@ describe("countTokens", function () {
     const response = await model.countTokens(countTokensRequest);
     expect(response.totalTokens).to.equal(3);
   });
+  it("counts tokens with GenerateContentRequest", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-latest",
+      safetySettings: [
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
+        },
+      ],
+    });
+    const countTokensRequest: CountTokensRequest = {
+      generateContentRequest: {
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: "count me again with a different result" }],
+          },
+        ],
+      },
+    };
+    const response = await model.countTokens(countTokensRequest);
+    expect(response.totalTokens).to.equal(8);
+  });
 });
