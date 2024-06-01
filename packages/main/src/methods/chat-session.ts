@@ -131,6 +131,46 @@ export class ChatSession {
   async sendMessageStream(
     request: string | Array<string | Part>,
   ): Promise<GenerateContentStreamResult> {
+    const result = await this.sendMessageStreamExec(request);
+    const response = await result.response;
+    if (response.candidates.length === 0) {
+      throw new Error("No candidates");
+    }
+
+    const content = response.candidates[0].content;
+    if (content.parts.length === 0) {
+      throw new Error("No parts");
+    }
+    const fc = content.parts[0].functionCall;
+    if (fc) {
+      const { name, args } = fc;
+      const fn = this.params?.functions[name];
+      if (!fn) {
+        throw new Error(`Unknown function "${name}"`);
+      }
+      const fr = {
+        functionResponse: {
+          name,
+          response: {
+            name,
+            content: fn(args),
+          },
+        },
+      };
+      const r = await this.sendMessageStream([fr]);
+      return r;
+    }
+    return result;
+  }
+
+  /**
+   * Sends a chat message and receives the response as a
+   * {@link GenerateContentStreamResult} containing an iterable stream
+   * and a response promise.
+   */
+  private async sendMessageStreamExec(
+    request: string | Array<string | Part>,
+  ): Promise<GenerateContentStreamResult> {
     await this._sendPromise;
     const newContent = formatNewContent(request);
     const generateContentRequest: GenerateContentRequest = {

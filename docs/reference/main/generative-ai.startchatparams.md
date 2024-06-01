@@ -17,6 +17,7 @@ export interface StartChatParams extends BaseParams
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [functions?](./generative-ai.startchatparams.functions.md) |  | Record&lt;string, (...args: unknown\[\]) =&gt; unknown&gt; | _(Optional)_ |
 |  [history?](./generative-ai.startchatparams.history.md) |  | [Content](./generative-ai.content.md)<!-- -->\[\] | _(Optional)_ |
 |  [systemInstruction?](./generative-ai.startchatparams.systeminstruction.md) |  | string \| [Part](./generative-ai.part.md) \| [Content](./generative-ai.content.md) | _(Optional)_ |
 |  [toolConfig?](./generative-ai.startchatparams.toolconfig.md) |  | [ToolConfig](./generative-ai.toolconfig.md) | _(Optional)_ |
