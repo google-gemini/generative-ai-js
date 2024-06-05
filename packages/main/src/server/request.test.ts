@@ -20,8 +20,8 @@ import { match, restore, stub } from "sinon";
 import * as sinonChai from "sinon-chai";
 import * as chaiAsPromised from "chai-as-promised";
 import { DEFAULT_API_VERSION, DEFAULT_BASE_URL } from "../requests/request";
-import { FilesRequestUrl, makeFilesRequest } from "./request";
-import { FilesTask } from "./constants";
+import { FilesRequestUrl, makeServerRequest } from "./request";
+import { RpcTask } from "./constants";
 import { GoogleGenerativeAIFetchError } from "../errors";
 
 use(sinonChai);
@@ -33,38 +33,38 @@ describe("Files API - request methods", () => {
   });
   describe("FilesRequestUrl", () => {
     it("includes task, apiVersion, baseURL, upload if upload task", async () => {
-      const url = new FilesRequestUrl(FilesTask.UPLOAD, "key", {});
+      const url = new FilesRequestUrl(RpcTask.UPLOAD, "key", {});
       expect(url.toString()).to.include("/upload");
       expect(url.toString()).to.not.include("key");
       expect(url.toString()).to.include(DEFAULT_API_VERSION);
       expect(url.toString()).to.include(DEFAULT_BASE_URL);
     });
     it("includes task, apiVersion, baseURL, no upload if non-upload task", async () => {
-      const url = new FilesRequestUrl(FilesTask.GET, "key", {});
+      const url = new FilesRequestUrl(RpcTask.GET, "key", {});
       expect(url.toString()).to.not.include("/upload");
       expect(url.toString()).to.not.include("key");
       expect(url.toString()).to.include(DEFAULT_API_VERSION);
       expect(url.toString()).to.include(DEFAULT_BASE_URL);
     });
     it("gets custom apiVersion", async () => {
-      const url = new FilesRequestUrl(FilesTask.GET, "key", {
+      const url = new FilesRequestUrl(RpcTask.GET, "key", {
         apiVersion: "v2beta",
       });
       expect(url.toString()).to.include("/v2beta/files");
     });
     it("custom baseUrl", async () => {
-      const url = new FilesRequestUrl(FilesTask.GET, "key", {
+      const url = new FilesRequestUrl(RpcTask.GET, "key", {
         baseUrl: "http://my.staging.website",
       });
       expect(url.toString()).to.include("http://my.staging.website");
     });
     it("adds params", async () => {
-      const url = new FilesRequestUrl(FilesTask.GET, "key", {});
+      const url = new FilesRequestUrl(RpcTask.GET, "key", {});
       url.appendParam("param1", "value1");
       expect(url.toString()).to.include("?param1=value1");
     });
     it("adds path segments", async () => {
-      const url = new FilesRequestUrl(FilesTask.GET, "key", {});
+      const url = new FilesRequestUrl(RpcTask.GET, "key", {});
       url.appendPath("newpath");
       expect(url.toString()).to.match(/\/newpath$/);
     });
@@ -74,9 +74,9 @@ describe("Files API - request methods", () => {
       const fetchStub = stub().resolves({
         ok: true,
       } as Response);
-      const url = new FilesRequestUrl(FilesTask.UPLOAD, "key");
+      const url = new FilesRequestUrl(RpcTask.UPLOAD, "key");
       const headers = new Headers();
-      const response = await makeFilesRequest(
+      const response = await makeServerRequest(
         url,
         headers,
         new Blob(),
@@ -96,10 +96,10 @@ describe("Files API - request methods", () => {
         statusText: "AbortError",
       } as Response);
 
-      const url = new FilesRequestUrl(FilesTask.GET, "key", { timeout: 0 });
+      const url = new FilesRequestUrl(RpcTask.GET, "key", { timeout: 0 });
       const headers = new Headers();
       try {
-        await makeFilesRequest(
+        await makeServerRequest(
           url,
           headers,
           new Blob(),
@@ -122,10 +122,10 @@ describe("Files API - request methods", () => {
         status: 500,
         statusText: "Server Error",
       } as Response);
-      const url = new FilesRequestUrl(FilesTask.GET, "key");
+      const url = new FilesRequestUrl(RpcTask.GET, "key");
       const headers = new Headers();
       try {
-        await makeFilesRequest(
+        await makeServerRequest(
           url,
           headers,
           new Blob(),
@@ -149,10 +149,10 @@ describe("Files API - request methods", () => {
         statusText: "Server Error",
         json: () => Promise.resolve({ error: { message: "extra info" } }),
       } as Response);
-      const url = new FilesRequestUrl(FilesTask.GET, "key");
+      const url = new FilesRequestUrl(RpcTask.GET, "key");
       const headers = new Headers();
       try {
-        await makeFilesRequest(
+        await makeServerRequest(
           url,
           headers,
           new Blob(),
@@ -188,10 +188,10 @@ describe("Files API - request methods", () => {
             },
           }),
       } as Response);
-      const url = new FilesRequestUrl(FilesTask.GET, "key");
+      const url = new FilesRequestUrl(RpcTask.GET, "key");
       const headers = new Headers();
       try {
-        await makeFilesRequest(
+        await makeServerRequest(
           url,
           headers,
           new Blob(),

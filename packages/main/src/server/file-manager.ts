@@ -17,7 +17,7 @@
 
 import { RequestOptions } from "../../types";
 import { readFileSync } from "fs";
-import { FilesRequestUrl, getHeaders, makeFilesRequest } from "./request";
+import { FilesRequestUrl, getHeaders, makeServerRequest } from "./request";
 import {
   FileMetadata,
   FileMetadataResponse,
@@ -25,7 +25,7 @@ import {
   ListParams,
   UploadFileResponse,
 } from "./types";
-import { FilesTask } from "./constants";
+import { RpcTask } from "./constants";
 import {
   GoogleGenerativeAIError,
   GoogleGenerativeAIRequestInputError,
@@ -56,7 +56,7 @@ export class GoogleAIFileManager {
   ): Promise<UploadFileResponse> {
     const file = readFileSync(filePath);
     const url = new FilesRequestUrl(
-      FilesTask.UPLOAD,
+      RpcTask.UPLOAD,
       this.apiKey,
       this._requestOptions,
     );
@@ -88,7 +88,7 @@ export class GoogleAIFileManager {
     const postBlobPart = "\r\n--" + boundary + "--";
     const blob = new Blob([preBlobPart, file, postBlobPart]);
 
-    const response = await makeFilesRequest(url, uploadHeaders, blob);
+    const response = await makeServerRequest(url, uploadHeaders, blob);
     return response.json();
   }
 
@@ -97,7 +97,7 @@ export class GoogleAIFileManager {
    */
   async listFiles(listParams?: ListParams): Promise<ListFilesResponse> {
     const url = new FilesRequestUrl(
-      FilesTask.LIST,
+      RpcTask.LIST,
       this.apiKey,
       this._requestOptions,
     );
@@ -108,7 +108,7 @@ export class GoogleAIFileManager {
       url.appendParam("pageToken", listParams.pageToken);
     }
     const uploadHeaders = getHeaders(url);
-    const response = await makeFilesRequest(url, uploadHeaders);
+    const response = await makeServerRequest(url, uploadHeaders);
     return response.json();
   }
 
@@ -117,13 +117,13 @@ export class GoogleAIFileManager {
    */
   async getFile(fileId: string): Promise<FileMetadataResponse> {
     const url = new FilesRequestUrl(
-      FilesTask.GET,
+      RpcTask.GET,
       this.apiKey,
       this._requestOptions,
     );
     url.appendPath(parseFileId(fileId));
     const uploadHeaders = getHeaders(url);
-    const response = await makeFilesRequest(url, uploadHeaders);
+    const response = await makeServerRequest(url, uploadHeaders);
     return response.json();
   }
 
@@ -132,13 +132,13 @@ export class GoogleAIFileManager {
    */
   async deleteFile(fileId: string): Promise<void> {
     const url = new FilesRequestUrl(
-      FilesTask.DELETE,
+      RpcTask.DELETE,
       this.apiKey,
       this._requestOptions,
     );
     url.appendPath(parseFileId(fileId));
     const uploadHeaders = getHeaders(url);
-    await makeFilesRequest(url, uploadHeaders);
+    await makeServerRequest(url, uploadHeaders);
   }
 }
 

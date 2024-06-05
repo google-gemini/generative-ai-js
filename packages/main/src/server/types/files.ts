@@ -14,19 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import { ErrorDetails } from "../../types";
-
-export { ErrorDetails };
-
-/**
- * Params to pass to {@link GoogleAIFileManager.listFiles}
- * @public
- */
-export interface ListParams {
-  pageSize?: number;
-  pageToken?: string;
-}
+import { RpcStatus } from "./shared";
 
 /**
  * Metadata to provide alongside a file upload
@@ -93,25 +81,6 @@ export enum FileState {
   ACTIVE = "ACTIVE",
   // File failed processing.
   FAILED = "FAILED",
-}
-
-/**
- * Standard RPC error status object.
- * @public
- */
-export interface RpcStatus {
-  /**
-   * Error status code
-   */
-  code: number;
-  /**
-   * A developer-facing error message.
-   */
-  message: string;
-  /**
-   * A list of messages that carry the error details.
-   */
-  details?: ErrorDetails[];
 }
 
 /**

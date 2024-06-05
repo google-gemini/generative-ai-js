@@ -20,7 +20,7 @@ import * as sinonChai from "sinon-chai";
 import * as chaiAsPromised from "chai-as-promised";
 import { restore, stub } from "sinon";
 import * as request from "./request";
-import { FilesTask } from "./constants";
+import { RpcTask } from "./constants";
 import { DEFAULT_API_VERSION } from "../requests/request";
 import { FileMetadata } from "./types";
 
@@ -50,7 +50,7 @@ describe("GoogleAIFileManager", () => {
       mimeType: "image/png",
     });
     expect(result.file.uri).to.equal(FAKE_URI);
-    expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.UPLOAD);
+    expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.UPLOAD);
     expect(makeRequestStub.args[0][0].toString()).to.include("/upload/");
     expect(makeRequestStub.args[0][1]).to.be.instanceOf(Headers);
     expect(makeRequestStub.args[0][1].get("X-Goog-Upload-Protocol")).to.equal(
@@ -108,7 +108,7 @@ describe("GoogleAIFileManager", () => {
       mimeType: "image/png",
     });
     expect(result.file.uri).to.equal(FAKE_URI);
-    expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.UPLOAD);
+    expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.UPLOAD);
     expect(makeRequestStub.args[0][0].toString()).to.include("/upload/");
     expect(makeRequestStub.args[0][1]).to.be.instanceOf(Headers);
     expect(makeRequestStub.args[0][1].get("X-Goog-Upload-Protocol")).to.equal(
@@ -131,7 +131,7 @@ describe("GoogleAIFileManager", () => {
     const fileManager = new GoogleAIFileManager("apiKey");
     const result = await fileManager.listFiles();
     expect(result.files[0].uri).to.equal(FAKE_URI);
-    expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.LIST);
+    expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.LIST);
     expect(makeRequestStub.args[0][0].toString()).to.match(/\/files$/);
   });
   it("passes listFiles request info with params", async () => {
@@ -145,7 +145,7 @@ describe("GoogleAIFileManager", () => {
       pageToken: "abc",
     });
     expect(result.files[0].uri).to.equal(FAKE_URI);
-    expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.LIST);
+    expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.LIST);
     expect(makeRequestStub.args[0][0].toString()).to.include("pageSize=3");
     expect(makeRequestStub.args[0][0].toString()).to.include("pageToken=abc");
   });
@@ -160,7 +160,7 @@ describe("GoogleAIFileManager", () => {
     });
     const result = await fileManager.listFiles();
     expect(result.files[0].uri).to.equal(FAKE_URI);
-    expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.LIST);
+    expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.LIST);
     expect(makeRequestStub.args[0][0].toString()).to.match(/\/files$/);
     expect(makeRequestStub.args[0][0].toString()).to.include("v3000/files");
     expect(makeRequestStub.args[0][0].toString()).to.match(
@@ -175,7 +175,7 @@ describe("GoogleAIFileManager", () => {
     const fileManager = new GoogleAIFileManager("apiKey");
     const result = await fileManager.getFile("nameoffile");
     expect(result.uri).to.equal(FAKE_URI);
-    expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.GET);
+    expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.GET);
     expect(makeRequestStub.args[0][0].toString()).to.include(
       `${DEFAULT_API_VERSION}/files/nameoffile`,
     );
@@ -187,7 +187,7 @@ describe("GoogleAIFileManager", () => {
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey");
     await fileManager.getFile("files/nameoffile");
-    expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.GET);
+    expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.GET);
     expect(makeRequestStub.args[0][0].toString()).to.include(
       `${DEFAULT_API_VERSION}/files/nameoffile`,
     );
@@ -203,7 +203,7 @@ describe("GoogleAIFileManager", () => {
     });
     const result = await fileManager.getFile("nameoffile");
     expect(result.uri).to.equal(FAKE_URI);
-    expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.GET);
+    expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.GET);
     expect(makeRequestStub.args[0][0].toString()).to.include("/nameoffile");
     expect(makeRequestStub.args[0][0].toString()).to.include("v3000/files");
     expect(makeRequestStub.args[0][0].toString()).to.match(
@@ -225,7 +225,7 @@ describe("GoogleAIFileManager", () => {
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey");
     await fileManager.deleteFile("nameoffile");
-    expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.DELETE);
+    expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.DELETE);
     expect(makeRequestStub.args[0][0].toString()).to.include("/nameoffile");
   });
   it("passes deleteFile request info (with options)", async () => {
@@ -238,7 +238,7 @@ describe("GoogleAIFileManager", () => {
       baseUrl: "http://mysite.com",
     });
     await fileManager.deleteFile("nameoffile");
-    expect(makeRequestStub.args[0][0].task).to.equal(FilesTask.DELETE);
+    expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.DELETE);
     expect(makeRequestStub.args[0][0].toString()).to.include("/nameoffile");
     expect(makeRequestStub.args[0][0].toString()).to.include("v3000/files");
     expect(makeRequestStub.args[0][0].toString()).to.match(

@@ -14,9 +14,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export enum FilesTask {
-  UPLOAD = "upload",
-  LIST = "list",
-  GET = "get",
-  DELETE = "delete",
+
+import { ErrorDetails } from "../../../types";
+
+export { ErrorDetails };
+
+/**
+ * Standard RPC error status object.
+ * @public
+ */
+export interface RpcStatus {
+  /**
+   * Error status code
+   */
+  code: number;
+  /**
+   * A developer-facing error message.
+   */
+  message: string;
+  /**
+   * A list of messages that carry the error details.
+   */
+  details?: ErrorDetails[];
+}
+
+/**
+ * Params to pass to {@link GoogleAIFileManager.listFiles} or
+ * {@link CacheManager.list}
+ * @public
+ */
+export interface ListParams {
+  pageSize?: number;
+  pageToken?: string;
 }

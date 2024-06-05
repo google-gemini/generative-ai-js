@@ -110,7 +110,7 @@ export async function getHeaders(url: RequestUrl): Promise<Headers> {
   return headers;
 }
 
-export async function constructRequest(
+export async function constructModelRequest(
   model: string,
   task: Task,
   apiKey: string,
@@ -130,30 +130,7 @@ export async function constructRequest(
   };
 }
 
-/**
- * Wrapper for _makeRequestInternal that automatically uses native fetch,
- * allowing _makeRequestInternal to be tested with a mocked fetch function.
- */
-export async function makeRequest(
-  model: string,
-  task: Task,
-  apiKey: string,
-  stream: boolean,
-  body: string,
-  requestOptions?: RequestOptions,
-): Promise<Response> {
-  return _makeRequestInternal(
-    model,
-    task,
-    apiKey,
-    stream,
-    body,
-    requestOptions,
-    fetch,
-  );
-}
-
-export async function _makeRequestInternal(
+export async function makeModelRequest(
   model: string,
   task: Task,
   apiKey: string,
@@ -163,56 +140,76 @@ export async function _makeRequestInternal(
   // Allows this to be stubbed for tests
   fetchFn = fetch,
 ): Promise<Response> {
-  const url = new RequestUrl(model, task, apiKey, stream, requestOptions);
+  const { url, fetchOptions } = await constructModelRequest(
+    model,
+    task,
+    apiKey,
+    stream,
+    body,
+    requestOptions,
+  );
+  return makeRequest(url, fetchOptions, fetchFn);
+}
+
+export async function makeRequest(
+  url: string,
+  fetchOptions: RequestInit,
+  fetchFn = fetch,
+): Promise<Response> {
   let response;
   try {
-    const request = await constructRequest(
-      model,
-      task,
-      apiKey,
-      stream,
-      body,
-      requestOptions,
+    response = await fetchFn(url, fetchOptions);
+  } catch (e) {
+    handleResponseError(e, url);
+  }
+
+  if (!response.ok) {
+    await handleResponseNotOk(response, url);
+  }
+
+  return response;
+}
+
+export function handleResponseError(e: Error, url: string): void {
+  let err = e;
+  if (
+    !(
+      e instanceof GoogleGenerativeAIFetchError ||
+      e instanceof GoogleGenerativeAIRequestInputError
+    )
+  ) {
+    err = new GoogleGenerativeAIError(
+      `Error fetching from ${url.toString()}: ${e.message}`,
     );
-    response = await fetchFn(request.url, request.fetchOptions);
-    if (!response.ok) {
-      let message = "";
-      let errorDetails;
-      try {
-        const json = await response.json();
-        message = json.error.message;
-        if (json.error.details) {
-          message += ` ${JSON.stringify(json.error.details)}`;
-          errorDetails = json.error.details;
-        }
-      } catch (e) {
-        // ignored
-      }
-      throw new GoogleGenerativeAIFetchError(
-        `Error fetching from ${url.toString()}: [${response.status} ${
-          response.statusText
-        }] ${message}`,
-        response.status,
-        response.statusText,
-        errorDetails,
-      );
+    err.stack = e.stack;
+  }
+  throw err;
+}
+
+export async function handleResponseNotOk(
+  response: Response,
+  url: string,
+): Promise<void> {
+  let message = "";
+  let errorDetails;
+  try {
+    const json = await response.json();
+    message = json.error.message;
+    if (json.error.details) {
+      message += ` ${JSON.stringify(json.error.details)}`;
+      errorDetails = json.error.details;
     }
   } catch (e) {
-    let err = e;
-    if (
-      !(
-        e instanceof GoogleGenerativeAIFetchError ||
-        e instanceof GoogleGenerativeAIRequestInputError
-      )
-    ) {
-      err = new GoogleGenerativeAIError(
-        `Error fetching from ${url.toString()}: ${e.message}`,
-      );
-      err.stack = e.stack;
-    }
-    throw err;
+    // ignored
   }
-  return response;
+  throw new GoogleGenerativeAIFetchError(
+    `Error fetching from ${url.toString()}: [${response.status} ${
+      response.statusText
+    }] ${message}`,
+    response.status,
+    response.statusText,
+    errorDetails,
+  );
 }
 
 /**

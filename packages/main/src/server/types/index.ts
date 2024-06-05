@@ -15,26 +15,6 @@
  * limitations under the License.
  */
 
-import {
-  CountTokensRequest,
-  CountTokensResponse,
-  RequestOptions,
-} from "../../types";
-import { Task, makeModelRequest } from "../requests/request";
-
-export async function countTokens(
-  apiKey: string,
-  model: string,
-  params: CountTokensRequest,
-  requestOptions?: RequestOptions,
-): Promise<CountTokensResponse> {
-  const response = await makeModelRequest(
-    model,
-    Task.COUNT_TOKENS,
-    apiKey,
-    false,
-    JSON.stringify(params),
-    requestOptions,
-  );
-  return response.json();
-}
+export * from './files';
+export * from './caching';
+export * from './shared';

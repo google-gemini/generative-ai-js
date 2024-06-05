@@ -14,27 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {
-  CountTokensRequest,
-  CountTokensResponse,
-  RequestOptions,
-} from "../../types";
-import { Task, makeModelRequest } from "../requests/request";
-
-export async function countTokens(
-  apiKey: string,
-  model: string,
-  params: CountTokensRequest,
-  requestOptions?: RequestOptions,
-): Promise<CountTokensResponse> {
-  const response = await makeModelRequest(
-    model,
-    Task.COUNT_TOKENS,
-    apiKey,
-    false,
-    JSON.stringify(params),
-    requestOptions,
-  );
-  return response.json();
+export enum RpcTask {
+  UPLOAD = "upload",
+  LIST = "list",
+  GET = "get",
+  DELETE = "delete",
+  UPDATE = "update",
+  CREATE = "create"
 }

@@ -16,41 +16,30 @@
  */
 
 import {
-  GoogleGenerativeAIError,
-  GoogleGenerativeAIFetchError,
-} from "../errors";
-import {
   DEFAULT_API_VERSION,
   DEFAULT_BASE_URL,
   getClientHeaders,
+  makeRequest,
 } from "../requests/request";
 import { RequestOptions } from "../../types";
-import { FilesTask } from "./constants";
+import { RpcTask } from "./constants";
 
 const taskToMethod = {
-  [FilesTask.UPLOAD]: "POST",
-  [FilesTask.LIST]: "GET",
-  [FilesTask.GET]: "GET",
-  [FilesTask.DELETE]: "DELETE",
+  [RpcTask.UPLOAD]: "POST",
+  [RpcTask.LIST]: "GET",
+  [RpcTask.GET]: "GET",
+  [RpcTask.DELETE]: "DELETE",
+  [RpcTask.UPDATE]: "PATCH",
+  [RpcTask.CREATE]: "POST",
 };
 
-export class FilesRequestUrl {
-  private _url: URL;
-
+export class ServerRequestUrl {
+  protected _url: URL;
   constructor(
-    public task: FilesTask,
+    public task: RpcTask,
     public apiKey: string,
     public requestOptions?: RequestOptions,
-  ) {
-    const apiVersion = this.requestOptions?.apiVersion || DEFAULT_API_VERSION;
-    const baseUrl = this.requestOptions?.baseUrl || DEFAULT_BASE_URL;
-    let initialUrl = baseUrl;
-    if (this.task === FilesTask.UPLOAD) {
-      initialUrl += `/upload`;
-    }
-    initialUrl += `/${apiVersion}/files`;
-    this._url = new URL(initialUrl);
-  }
+  ) {}
 
   appendPath(path: string): void {
     this._url.pathname = this._url.pathname + `/${path}`;
@@ -65,17 +54,50 @@ export class FilesRequestUrl {
   }
 }
 
-export function getHeaders(url: FilesRequestUrl): Headers {
+export class CachedContentUrl extends ServerRequestUrl {
+  constructor(
+    public task: RpcTask,
+    public apiKey: string,
+    public requestOptions?: RequestOptions,
+  ) {
+    super(task, apiKey, requestOptions);
+    const apiVersion = this.requestOptions?.apiVersion || DEFAULT_API_VERSION;
+    const baseUrl = this.requestOptions?.baseUrl || DEFAULT_BASE_URL;
+    let initialUrl = baseUrl;
+    initialUrl += `/${apiVersion}/cachedContents`;
+    this._url = new URL(initialUrl);
+  }
+}
+
+export class FilesRequestUrl extends ServerRequestUrl {
+  constructor(
+    public task: RpcTask,
+    public apiKey: string,
+    public requestOptions?: RequestOptions,
+  ) {
+    super(task, apiKey, requestOptions);
+    const apiVersion = this.requestOptions?.apiVersion || DEFAULT_API_VERSION;
+    const baseUrl = this.requestOptions?.baseUrl || DEFAULT_BASE_URL;
+    let initialUrl = baseUrl;
+    if (this.task === RpcTask.UPLOAD) {
+      initialUrl += `/upload`;
+    }
+    initialUrl += `/${apiVersion}/files`;
+    this._url = new URL(initialUrl);
+  }
+}
+
+export function getHeaders(url: ServerRequestUrl): Headers {
   const headers = new Headers();
   headers.append("x-goog-api-client", getClientHeaders(url.requestOptions));
   headers.append("x-goog-api-key", url.apiKey);
   return headers;
 }
 
-export async function makeFilesRequest(
+export async function makeServerRequest(
   url: FilesRequestUrl,
   headers: Headers,
-  body?: Blob,
+  body?: Blob | string,
   fetchFn: typeof fetch = fetch,
 ): Promise<Response> {
   const requestInit: RequestInit = {
@@ -92,42 +114,7 @@ export async function makeFilesRequest(
     requestInit.signal = signal;
   }
 
-  try {
-    const response = await fetchFn(url.toString(), requestInit);
-    if (!response.ok) {
-      let message = "";
-      let errorDetails;
-      try {
-        const json = await response.json();
-        message = json.error.message;
-        if (json.error.details) {
-          message += ` ${JSON.stringify(json.error.details)}`;
-          errorDetails = json.error.details;
-        }
-      } catch (e) {
-        // ignored
-      }
-      throw new GoogleGenerativeAIFetchError(
-        `Error fetching from ${url.toString()}: [${response.status} ${
-          response.statusText
-        }] ${message}`,
-        response.status,
-        response.statusText,
-        errorDetails,
-      );
-    } else {
-      return response;
-    }
-  } catch (e) {
-    let err = e;
-    if (!(e instanceof GoogleGenerativeAIFetchError)) {
-      err = new GoogleGenerativeAIError(
-        `Error fetching from ${url.toString()}: ${e.message}`,
-      );
-      err.stack = e.stack;
-    }
-    throw err;
-  }
+  return makeRequest(url.toString(), requestInit, fetchFn);
 }
 
 /**
