@@ -16,9 +16,8 @@
  */
 
 import { GoogleGenerativeAIError } from "./errors";
-import { ModelParams, RequestOptions } from "../types";
+import { CachedContent, ModelParams, RequestOptions } from "../types";
 import { GenerativeModel } from "./models/generative-model";
-import { CachedContent } from "./server";
 
 export { ChatSession } from "./methods/chat-session";
 export { GenerativeModel };

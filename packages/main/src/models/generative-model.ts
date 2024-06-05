@@ -22,6 +22,7 @@ import {
 import {
   BatchEmbedContentsRequest,
   BatchEmbedContentsResponse,
+  CachedContent,
   Content,
   CountTokensRequest,
   CountTokensResponse,
@@ -48,7 +49,6 @@ import {
   formatGenerateContentInput,
   formatSystemInstruction,
 } from "../requests/request-helpers";
-import { CachedContent } from "../server";
 
 /**
  * Class for generative model APIs.

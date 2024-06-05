@@ -110,7 +110,7 @@
     /**
      * (REQUIRED) Whether to generate an API report.
      */
-    "enabled": false,
+    "enabled": true,
 
     /**
      * The filename for the API report files.  It will be combined with "reportFolder" or "reportTempFolder" to produce

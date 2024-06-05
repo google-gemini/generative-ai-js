@@ -15,7 +15,8 @@
  * limitations under the License.
  */
 
-import { Content, Part, RequestOptions, Tool, ToolConfig } from "../../types";
+import {
+  CachedContent, Content, Part, RequestOptions, Tool, ToolConfig } from "../../types";
 import {
   CachedContentUrl,
   FilesRequestUrl,
@@ -23,19 +24,18 @@ import {
   makeServerRequest,
 } from "./request";
 import {
-  CachedContent,
   CachedContentCreateParams,
   CachedContentUpdateParams,
   ListCacheResponse,
   ListParams,
-} from "./types";
+} from "../../types/server";
 import { RpcTask } from "./constants";
 
 /**
  * Class for managing GoogleAI file uploads.
  * @public
  */
-export class CacheManager {
+export class GoogleAICacheManager {
   model: string;
   ttl?: string;
   tools?: Tool[];

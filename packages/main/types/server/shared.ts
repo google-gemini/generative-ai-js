@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { ErrorDetails } from "../../../types";
+import { ErrorDetails } from "../responses";
 
 export { ErrorDetails };
 
@@ -40,7 +40,7 @@ export interface RpcStatus {
 
 /**
  * Params to pass to {@link GoogleAIFileManager.listFiles} or
- * {@link CacheManager.list}
+ * {@link GoogleAICacheManager.list}
  * @public
  */
 export interface ListParams {

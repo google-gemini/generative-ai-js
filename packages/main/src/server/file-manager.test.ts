@@ -22,7 +22,7 @@ import { restore, stub } from "sinon";
 import * as request from "./request";
 import { RpcTask } from "./constants";
 import { DEFAULT_API_VERSION } from "../requests/request";
-import { FileMetadata } from "./types";
+import { FileMetadata } from "../../types/server";
 
 use(sinonChai);
 use(chaiAsPromised);

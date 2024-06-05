@@ -15,18 +15,11 @@
  * limitations under the License.
  */
 
-import { Content, Part, Tool, ToolConfig } from "../../../types";
-
-export interface CachedContentBase {
-  model?: string;
-  contents: Content[];
-  tools?: Tool[];
-  toolConfig?: ToolConfig;
-  systemInstruction?: string | Part | Content;
-}
+import { CachedContent, CachedContentBase } from "../cached-content";
 
 /**
- * Params to pass to {@link CacheManager.create}
+ * Params to pass to {@link GoogleAICacheManager.create}
+ * @public
  */
 export interface CachedContentCreateParams extends CachedContentBase {
   // sent field needs to be protobuf Duration ("3.0001s")
@@ -34,7 +27,8 @@ export interface CachedContentCreateParams extends CachedContentBase {
 }
 
 /**
- * Params to pass to {@link CacheManager.update}
+ * Params to pass to {@link GoogleAICacheManager.update}
+ * @public
  */
 export interface CachedContentUpdateParams {
   cachedContent: CachedContentCreateParams;
@@ -45,17 +39,8 @@ export interface CachedContentUpdateParams {
 }
 
 /**
- * Describes CachedContent interface for sending to the server (if creating)
- * or received from the server (using getters or list methods).
+ * @public
  */
-export interface CachedContent extends CachedContentBase {
-  ttl?: string;
-  // ISO string
-  createTime?: string;
-  // ISO string
-  updateTime?: string;
-}
-
 export interface ListCacheResponse {
   cachedContents: CachedContent[];
   nextPageToken?: string;

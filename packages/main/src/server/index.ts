@@ -16,5 +16,6 @@
  */
 
 export { GoogleAIFileManager } from "./file-manager";
-export * from "./types";
-export { RequestOptions } from "../../types";
+export { GoogleAICacheManager } from "./cache-manager";
+
+export * from "../../types/server";

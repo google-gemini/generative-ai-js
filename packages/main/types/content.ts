@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+export * from './function-calling';
+
 /**
  * Content type for both prompts and response candidates.
  * @public

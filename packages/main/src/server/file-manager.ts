@@ -24,7 +24,7 @@ import {
   ListFilesResponse,
   ListParams,
   UploadFileResponse,
-} from "./types";
+} from "../../types/server";
 import { RpcTask } from "./constants";
 import {
   GoogleGenerativeAIError,

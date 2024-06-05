@@ -61,19 +61,19 @@ const cjsBuilds = [
   },
 ];
 
-const filesBuilds = [
+const serverBuilds = [
   {
-    input: "src/files/index.ts",
+    input: "src/server/index.ts",
     output: [
-      { file: pkg.exports["./files"].import, format: "es", sourcemap: true },
+      { file: pkg.exports["./server"].import, format: "es", sourcemap: true },
     ],
     external: ["fs"],
     plugins: [...es2017BuildPlugins],
   },
   {
-    input: "src/files/index.ts",
+    input: "src/server/index.ts",
     output: [
-      { file: pkg.exports["./files"].require, format: "cjs", sourcemap: true },
+      { file: pkg.exports["./server"].require, format: "cjs", sourcemap: true },
     ],
     external: ["fs"],
     plugins: [...es2017BuildPlugins],
@@ -81,4 +81,4 @@ const filesBuilds = [
 ];
 
 // eslint-disable-next-line import/no-default-export
-export default [...esmBuilds, ...cjsBuilds, ...filesBuilds];
+export default [...esmBuilds, ...cjsBuilds, ...serverBuilds];
