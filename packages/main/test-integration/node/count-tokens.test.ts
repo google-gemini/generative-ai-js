@@ -18,6 +18,7 @@
 import { expect, use } from "chai";
 import * as chaiAsPromised from "chai-as-promised";
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "../..";
+import { CountTokensRequest } from "../../types";
 
 use(chaiAsPromised);
 
@@ -31,7 +32,7 @@ describe("countTokens", function () {
   it("counts tokens right", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
+      model: "gemini-1.5-flash-latest",
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -45,5 +46,48 @@ describe("countTokens", function () {
     });
     expect(response1.totalTokens).to.equal(3);
     expect(response2.totalTokens).to.equal(3);
+  });
+  it("counts tokens with GenerateContentRequest", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-latest",
+      safetySettings: [
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
+        },
+      ],
+    });
+    const countTokensRequest: CountTokensRequest = {
+      generateContentRequest: {
+        contents: [{ role: "user", parts: [{ text: "count me" }] }],
+      },
+    };
+    const response = await model.countTokens(countTokensRequest);
+    expect(response.totalTokens).to.equal(3);
+  });
+  it("counts tokens with GenerateContentRequest", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-latest",
+      safetySettings: [
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
+        },
+      ],
+    });
+    const countTokensRequest: CountTokensRequest = {
+      generateContentRequest: {
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: "count me again with a different result" }],
+          },
+        ],
+      },
+    };
+    const response = await model.countTokens(countTokensRequest);
+    expect(response.totalTokens).to.equal(8);
   });
 });

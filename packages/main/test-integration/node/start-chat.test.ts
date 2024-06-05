@@ -31,7 +31,7 @@ describe("startChat", function () {
   it("stream false", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
+      model: "gemini-1.5-flash-latest",
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -40,7 +40,7 @@ describe("startChat", function () {
       ],
     });
     const question1 = "What is the capital of Oregon?";
-    const question2 = "How many people live there?";
+    const question2 = "How many people live in that city?";
     const chat = model.startChat();
     const result1 = await chat.sendMessage(question1);
     expect(result1.response.text()).to.not.be.empty;
@@ -51,50 +51,10 @@ describe("startChat", function () {
     expect(history[2].parts[0].text).to.equal(question2);
     expect(history.length).to.equal(4);
   });
-  it("stream true, blocked", async () => {
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
-    const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
-      safetySettings: [
-        {
-          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-          threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
-        },
-      ],
-    });
-    // Blockable question.
-    const question1 = "Should I push this guy out the window?";
-    // Non-blockable question, ensure chat is still usable after block.
-    const question2 = "Tell me an appropriate joke";
-    const chat = model.startChat({
-      generationConfig: {
-        maxOutputTokens: 100,
-      },
-    });
-    const result = await chat.sendMessageStream(question1);
-    const finalResponse = await result.response;
-    expect(finalResponse.candidates).to.be.undefined;
-    expect(finalResponse.promptFeedback?.blockReason).to.equal("SAFETY");
-    expect(finalResponse.text).to.throw(
-      "[GoogleGenerativeAI Error]: Text not available. " +
-        "Response was blocked due to SAFETY",
-    );
-    for await (const response of result.stream) {
-      expect(response.text).to.throw(
-        "[GoogleGenerativeAI Error]: Text not available. " +
-          "Response was blocked due to SAFETY",
-      );
-    }
-    expect((await chat.getHistory()).length).to.equal(0);
-    const result2 = await chat.sendMessageStream(question2);
-    const response2 = await result2.response;
-    expect(response2.text).to.not.throw;
-    expect((await chat.getHistory()).length).to.equal(2);
-  });
   it("stream true", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
+      model: "gemini-1.5-flash-latest",
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -103,7 +63,7 @@ describe("startChat", function () {
       ],
     });
     const question1 = "What is the capital of Oregon?";
-    const question2 = "How many people live there?";
+    const question2 = "How many people live in that city?";
     const question3 = "What is the closest river?";
     const chat = model.startChat();
     const result1 = await chat.sendMessageStream(question1);
@@ -130,7 +90,7 @@ describe("startChat", function () {
   it("stream true, try to send message before previous stream is done", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
+      model: "gemini-1.5-flash-latest",
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -139,7 +99,7 @@ describe("startChat", function () {
       ],
     });
     const question1 = "What are the most interesting cities in Oregon?";
-    const question2 = "How many people live there?";
+    const question2 = "How many people live in that city?";
     const question3 = "What is the closest river?";
     const chat = model.startChat();
     const promise1 = chat.sendMessageStream(question1).then(async (result1) => {

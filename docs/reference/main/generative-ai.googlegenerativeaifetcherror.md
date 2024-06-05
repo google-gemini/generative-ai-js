@@ -23,7 +23,7 @@ export declare class GoogleGenerativeAIFetchError extends GoogleGenerativeAIErro
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [errorDetails?](./generative-ai.googlegenerativeaifetcherror.errordetails.md) |  | ErrorDetails\[\] | _(Optional)_ |
+|  [errorDetails?](./generative-ai.googlegenerativeaifetcherror.errordetails.md) |  | [ErrorDetails](./generative-ai.errordetails.md)<!-- -->\[\] | _(Optional)_ |
 |  [status?](./generative-ai.googlegenerativeaifetcherror.status.md) |  | number | _(Optional)_ |
 |  [statusText?](./generative-ai.googlegenerativeaifetcherror.statustext.md) |  | string | _(Optional)_ |
 

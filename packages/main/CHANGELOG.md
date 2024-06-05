@@ -1,5 +1,35 @@
 # @google/generative-ai
 
+## 0.12.0
+
+### Minor Changes
+
+- 85ff2c4: Added `responseSchema` to `GenerationConfig` to allow user to provide a JSON schema when `responseMimeType` is set to JSON.
+
+## 0.11.5
+
+### Patch Changes
+
+- 42ba6ca: Fix paths to @google/generative-ai/files.
+
+## 0.11.4
+
+### Patch Changes
+
+- ee02ff0: Add additional properties `videoMetadata` and `error` to `FileMetadataResponse` type.
+
+## 0.11.3
+
+### Patch Changes
+
+- c7c0b50: Fixed `FileState` enum values to be strings.
+
+## 0.11.2
+
+### Patch Changes
+
+- cefa8f2: Lifted a restriction in chat sessions that required a specific order of content roles.
+
 ## 0.11.1
 
 ### Patch Changes

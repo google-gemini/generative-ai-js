@@ -16,8 +16,8 @@ export declare enum FileState
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  ACTIVE | <code>2</code> |  |
-|  FAILED | <code>10</code> |  |
-|  PROCESSING | <code>1</code> |  |
-|  STATE\_UNSPECIFIED | <code>0</code> |  |
+|  ACTIVE | <code>&quot;ACTIVE&quot;</code> |  |
+|  FAILED | <code>&quot;FAILED&quot;</code> |  |
+|  PROCESSING | <code>&quot;PROCESSING&quot;</code> |  |
+|  STATE\_UNSPECIFIED | <code>&quot;STATE_UNSPECIFIED&quot;</code> |  |
 

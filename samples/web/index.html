@@ -55,7 +55,7 @@
         );
 
         const model = await getGenerativeModel({
-          model: imageParts.length ? "gemini-pro-vision" : "gemini-pro",
+          model: "gemini-1.5-flash-latest",
         });
 
         return model.generateContentStream([...imageParts, prompt]);

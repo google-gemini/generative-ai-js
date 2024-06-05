@@ -17,8 +17,8 @@ This sample assumes that you're providing an `API_KEY` environment variable.
 
 ### Simple examples
 
-- `simple-text.js` - Text-only input, using the `gemini-pro` model
-- `simple-text-and-images.js` - Text-and-images input (multimodal), using the `gemini-pro-vision` model
+- `simple-text.js` - Text-only input
+- `simple-text-and-images.js` - Text-and-images input (multimodal)
 - `simple-chat.js` - Dialog language tasks, using `ChatSession` class
 - `simple-config.js` - Configuring model parameters
 - `simple-embedding.js` - Embeddings, using the `embedding-001` model

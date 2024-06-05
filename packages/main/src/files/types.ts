@@ -15,6 +15,10 @@
  * limitations under the License.
  */
 
+import { ErrorDetails } from "../../types";
+
+export { ErrorDetails };
+
 /**
  * Params to pass to {@link GoogleAIFileManager.listFiles}
  * @public
@@ -49,6 +53,14 @@ export interface FileMetadataResponse {
   sha256Hash: string;
   uri: string;
   state: FileState;
+  /**
+   * Error populated if file processing has failed.
+   */
+  error?: RpcStatus;
+  /**
+   * Video metadata populated after processing is complete.
+   */
+  videoMetadata?: VideoMetadata;
 }
 
 /**
@@ -74,11 +86,42 @@ export interface UploadFileResponse {
  */
 export enum FileState {
   // The default value. This value is used if the state is omitted.
-  STATE_UNSPECIFIED = 0,
+  STATE_UNSPECIFIED = "STATE_UNSPECIFIED",
   // File is being processed and cannot be used for inference yet.
-  PROCESSING = 1,
+  PROCESSING = "PROCESSING",
   // File is processed and available for inference.
-  ACTIVE = 2,
+  ACTIVE = "ACTIVE",
   // File failed processing.
-  FAILED = 10,
+  FAILED = "FAILED",
+}
+
+/**
+ * Standard RPC error status object.
+ * @public
+ */
+export interface RpcStatus {
+  /**
+   * Error status code
+   */
+  code: number;
+  /**
+   * A developer-facing error message.
+   */
+  message: string;
+  /**
+   * A list of messages that carry the error details.
+   */
+  details?: ErrorDetails[];
+}
+
+/**
+ * Metadata populated when video has been processed.
+ * @public
+ */
+export interface VideoMetadata {
+  /**
+   * The video duration in
+   * protobuf {@link https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-v1/latest/Google-Protobuf-Duration#json-mapping | Duration} format.
+   */
+  videoDuration: string;
 }

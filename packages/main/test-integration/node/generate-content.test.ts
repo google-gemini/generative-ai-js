@@ -38,7 +38,7 @@ describe("generateContent", function () {
   it.skip("streaming - count numbers", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
+      model: "gemini-1.5-flash-latest",
       generationConfig: {
         temperature: 0,
         candidateCount: 1,
@@ -65,7 +65,7 @@ describe("generateContent", function () {
   it("stream true, blocked", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
+      model: "gemini-1.5-flash-latest",
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -94,7 +94,7 @@ describe("generateContent", function () {
   it("stream true, invalid argument", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
+      model: "gemini-1.5-flash-latest",
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -116,7 +116,7 @@ describe("generateContent", function () {
   it("non-streaming, simple interface", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
+      model: "gemini-1.5-flash-latest",
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -132,7 +132,7 @@ describe("generateContent", function () {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel(
       {
-        model: "gemini-pro",
+        model: "gemini-1.5-flash-latest",
         safetySettings: [
           {
             category: HarmCategory.HARM_CATEGORY_HARASSMENT,

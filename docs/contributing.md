@@ -37,6 +37,7 @@ Steps to build locally:
 1. Run `yarn test` to run unit tests.
 1. Run `yarn docs` to generate any changes to reference docs (destination dir is docs/reference).
 1. Run `yarn format` to fix formatting and add license headers as needed.
+1. Run `yarn changeset` to generate the changeset summary.
 
 This repo has a monorepo structure to allow for easily adding additional packages. The `@google/generative-ai` package code is in `packages/main`.
 

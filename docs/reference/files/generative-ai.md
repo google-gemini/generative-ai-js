@@ -20,11 +20,13 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [ErrorDetails](./generative-ai.errordetails.md) | Details object that may be included in an error response. |
 |  [FileMetadata](./generative-ai.filemetadata.md) | Metadata to provide alongside a file upload |
 |  [FileMetadataResponse](./generative-ai.filemetadataresponse.md) | File metadata response from server. |
 |  [ListFilesResponse](./generative-ai.listfilesresponse.md) | Response from calling [GoogleAIFileManager.listFiles()](./generative-ai.googleaifilemanager.listfiles.md) |
 |  [ListParams](./generative-ai.listparams.md) | Params to pass to [GoogleAIFileManager.listFiles()](./generative-ai.googleaifilemanager.listfiles.md) |
 |  [RequestOptions](./generative-ai.requestoptions.md) | Params passed to getGenerativeModel() or GoogleAIFileManager(). |
-|  [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | Params passed to atomic asynchronous operations. |
+|  [RpcStatus](./generative-ai.rpcstatus.md) | Standard RPC error status object. |
 |  [UploadFileResponse](./generative-ai.uploadfileresponse.md) | Response from calling [GoogleAIFileManager.uploadFile()](./generative-ai.googleaifilemanager.uploadfile.md) |
+|  [VideoMetadata](./generative-ai.videometadata.md) | Metadata populated when video has been processed. |
 
