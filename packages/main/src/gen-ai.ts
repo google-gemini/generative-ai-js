@@ -18,6 +18,7 @@
 import { GoogleGenerativeAIError } from "./errors";
 import { ModelParams, RequestOptions } from "../types";
 import { GenerativeModel } from "./models/generative-model";
+import { CachedContent } from "./server";
 
 export { ChatSession } from "./methods/chat-session";
 export { GenerativeModel };
@@ -42,6 +43,23 @@ export class GoogleGenerativeAI {
           `Example: genai.getGenerativeModel({ model: 'my-model-name' })`,
       );
     }
+    return new GenerativeModel(this.apiKey, modelParams, requestOptions);
+  }
+
+  /**
+   * Creates a {@link GenerativeModel} instance from provided content cache.
+   */
+  getGenerativeModelFromCachedContent(
+    cachedContent: CachedContent,
+    requestOptions?: RequestOptions,
+  ): GenerativeModel {
+    const modelParams: ModelParams = {
+      model: cachedContent.model,
+      tools: cachedContent.tools,
+      toolConfig: cachedContent.toolConfig,
+      systemInstruction: cachedContent.systemInstruction,
+      cachedContent
+    };
     return new GenerativeModel(this.apiKey, modelParams, requestOptions);
   }
 }

@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+import { CachedContent } from "../src/server";
 import { Content, Part } from "./content";
 import {
   FunctionCallingMode,
@@ -41,6 +42,7 @@ export interface ModelParams extends BaseParams {
   tools?: Tool[];
   toolConfig?: ToolConfig;
   systemInstruction?: string | Part | Content;
+  cachedContent?: CachedContent;
 }
 
 /**
@@ -52,6 +54,7 @@ export interface GenerateContentRequest extends BaseParams {
   tools?: Tool[];
   toolConfig?: ToolConfig;
   systemInstruction?: string | Part | Content;
+  cachedContent?: CachedContent;
 }
 
 /**
@@ -106,6 +109,7 @@ export interface StartChatParams extends BaseParams {
   tools?: Tool[];
   toolConfig?: ToolConfig;
   systemInstruction?: string | Part | Content;
+  cachedContent?: CachedContent;
 }
 
 /**
