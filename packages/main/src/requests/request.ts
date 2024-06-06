@@ -78,7 +78,7 @@ export async function getHeaders(url: RequestUrl): Promise<Headers> {
   headers.append("x-goog-api-client", getClientHeaders(url.requestOptions));
   headers.append("x-goog-api-key", url.apiKey);
 
-  let customHeaders = url.requestOptions.customHeaders;
+  let customHeaders = url.requestOptions?.customHeaders;
   if (customHeaders) {
     if (!(customHeaders instanceof Headers)) {
       try {
