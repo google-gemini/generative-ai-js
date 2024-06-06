@@ -39,6 +39,8 @@ export interface CachedContent extends CachedContentBase {
     // (undocumented)
     createTime?: string;
     // (undocumented)
+    name?: string;
+    // (undocumented)
     ttl?: string;
     // (undocumented)
     updateTime?: string;
@@ -322,8 +324,7 @@ export interface GenerateContentCandidate {
 
 // @public
 export interface GenerateContentRequest extends BaseParams {
-    // (undocumented)
-    cachedContent?: CachedContent;
+    cachedContent?: string;
     // (undocumented)
     contents: Content[];
     // (undocumented)
@@ -585,8 +586,7 @@ export interface Schema {
 
 // @public
 export interface StartChatParams extends BaseParams {
-    // (undocumented)
-    cachedContent?: CachedContent;
+    cachedContent?: string;
     // (undocumented)
     history?: Content[];
     // (undocumented)

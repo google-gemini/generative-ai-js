@@ -41,6 +41,7 @@ const es2017BuildPlugins = [
 
 const esmBuilds = [
   {
+    clean: true,
     input: "src/index.ts",
     output: {
       file: pkg.module,
@@ -54,6 +55,7 @@ const esmBuilds = [
 
 const cjsBuilds = [
   {
+    clean: true,
     input: "src/index.ts",
     output: [{ file: pkg.main, format: "cjs", sourcemap: true }],
     external: ["fs"],
@@ -63,6 +65,7 @@ const cjsBuilds = [
 
 const serverBuilds = [
   {
+    clean: true,
     input: "src/server/index.ts",
     output: [
       { file: pkg.exports["./server"].import, format: "es", sourcemap: true },
@@ -71,6 +74,7 @@ const serverBuilds = [
     plugins: [...es2017BuildPlugins],
   },
   {
+    clean: true,
     input: "src/server/index.ts",
     output: [
       { file: pkg.exports["./server"].require, format: "cjs", sourcemap: true },

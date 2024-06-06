@@ -54,7 +54,10 @@ export interface GenerateContentRequest extends BaseParams {
   tools?: Tool[];
   toolConfig?: ToolConfig;
   systemInstruction?: string | Part | Content;
-  cachedContent?: CachedContent;
+  /**
+   * This is the name of a `CachedContent` and not the cache object itself.
+   */
+  cachedContent?: string;
 }
 
 /**
@@ -109,7 +112,10 @@ export interface StartChatParams extends BaseParams {
   tools?: Tool[];
   toolConfig?: ToolConfig;
   systemInstruction?: string | Part | Content;
-  cachedContent?: CachedContent;
+  /**
+   * This is the name of a `CachedContent` and not the cache object itself.
+   */
+  cachedContent?: string;
 }
 
 /**

@@ -52,13 +52,17 @@ export class GoogleGenerativeAI {
     cachedContent: CachedContent,
     requestOptions?: RequestOptions,
   ): GenerativeModel {
-    const modelParams: ModelParams = {
+    const modelParamsFromCache: ModelParams = {
       model: cachedContent.model,
       tools: cachedContent.tools,
       toolConfig: cachedContent.toolConfig,
       systemInstruction: cachedContent.systemInstruction,
-      cachedContent
+      cachedContent,
     };
-    return new GenerativeModel(this.apiKey, modelParams, requestOptions);
+    return new GenerativeModel(
+      this.apiKey,
+      modelParamsFromCache,
+      requestOptions,
+    );
   }
 }

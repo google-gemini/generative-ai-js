@@ -34,6 +34,7 @@ export interface CachedContentBase {
  * @public
  */
 export interface CachedContent extends CachedContentBase {
+  name?: string;
   ttl?: string;
   // ISO string
   createTime?: string;
