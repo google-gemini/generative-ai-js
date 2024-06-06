@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-export * from './function-calling';
+export * from "./function-calling";
 
 /**
  * Content type for both prompts and response candidates.

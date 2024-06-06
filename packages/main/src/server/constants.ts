@@ -20,5 +20,5 @@ export enum RpcTask {
   GET = "get",
   DELETE = "delete",
   UPDATE = "update",
-  CREATE = "create"
+  CREATE = "create",
 }

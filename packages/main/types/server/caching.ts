@@ -35,10 +35,22 @@ export interface CachedContentBase {
  */
 export interface CachedContent extends CachedContentBase {
   name?: string;
+  /**
+   * protobuf.Duration format (ex. "3.0001s"). Specify either this or
+   * `expireTime`.
+   */
   ttl?: string;
-  // ISO string
+  /**
+   * Expiration time in ISO string format. Specify either this or `ttl`.
+   */
+  expireTime?: string;
+  /**
+   * CachedContent creation time in ISO string format
+   */
   createTime?: string;
-  // ISO string
+  /**
+   * CachedContent update time in ISO string format
+   */
   updateTime?: string;
 }
 
@@ -47,7 +59,9 @@ export interface CachedContent extends CachedContentBase {
  * @public
  */
 export interface CachedContentCreateParams extends CachedContentBase {
-  // sent field needs to be protobuf Duration ("3.0001s")
+  /**
+   * CachedContent ttl in seconds.
+   */
   ttlSeconds?: number;
 }
 

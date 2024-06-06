@@ -17,11 +17,7 @@
 
 import { CachedContent } from "./server/caching";
 import { Content, Part } from "./content";
-import {
-  HarmBlockThreshold,
-  HarmCategory,
-  TaskType,
-} from "./enums";
+import { HarmBlockThreshold, HarmCategory, TaskType } from "./enums";
 import { ResponseSchema, Tool, ToolConfig } from "./function-calling";
 
 /**

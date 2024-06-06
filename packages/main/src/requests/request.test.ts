@@ -175,21 +175,35 @@ describe("request methods", () => {
     });
     it("passes custom x-goog-api-client header", async () => {
       await expect(
-        constructModelRequest("model-name", Task.GENERATE_CONTENT, "key", true, "", {
-          customHeaders: new Headers({
-            "x-goog-api-client": "client/version",
-          }),
-        }),
+        constructModelRequest(
+          "model-name",
+          Task.GENERATE_CONTENT,
+          "key",
+          true,
+          "",
+          {
+            customHeaders: new Headers({
+              "x-goog-api-client": "client/version",
+            }),
+          },
+        ),
       ).to.be.rejectedWith(GoogleGenerativeAIRequestInputError);
     });
     it("passes apiClient and custom x-goog-api-client header", async () => {
       await expect(
-        constructModelRequest("model-name", Task.GENERATE_CONTENT, "key", true, "", {
-          apiClient: "client/version",
-          customHeaders: new Headers({
-            "x-goog-api-client": "client/version2",
-          }),
-        }),
+        constructModelRequest(
+          "model-name",
+          Task.GENERATE_CONTENT,
+          "key",
+          true,
+          "",
+          {
+            apiClient: "client/version",
+            customHeaders: new Headers({
+              "x-goog-api-client": "client/version2",
+            }),
+          },
+        ),
       ).to.be.rejectedWith(GoogleGenerativeAIRequestInputError);
     });
   });

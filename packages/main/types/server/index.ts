@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-export * from './files';
-export * from './caching';
-export * from './shared';
+export * from "./files";
+export * from "./caching";
+export * from "./shared";
 
 export { RequestOptions } from "../../types/requests";
 export * from "../../types/content";
