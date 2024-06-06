@@ -62,6 +62,8 @@ jobs:
       run: yarn
 
     - name: run node iTests
+      env:
+        GEMINI_API_KEY: ${{secrets.GEMINI_API_KEY}}
       run: |
         cd packages/main
         yarn test:node:integration
@@ -84,6 +86,8 @@ jobs:
       run: yarn
 
     - name: run web iTests
+      env:
+        GEMINI_API_KEY: ${{secrets.GEMINI_API_KEY}}
       run: |
         cd packages/main
         yarn test:web:integration
