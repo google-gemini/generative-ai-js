@@ -14,8 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { Content, Part } from "../content";
+import { Tool, ToolConfig } from "../function-calling";
 
-import { CachedContent, CachedContentBase } from "../cached-content";
+/**
+ * @public
+ */
+export interface CachedContentBase {
+  model?: string;
+  contents: Content[];
+  tools?: Tool[];
+  toolConfig?: ToolConfig;
+  systemInstruction?: string | Part | Content;
+}
+
+/**
+ * Describes CachedContent interface for sending to the server (if creating)
+ * or received from the server (using getters or list methods).
+ * @public
+ */
+export interface CachedContent extends CachedContentBase {
+  ttl?: string;
+  // ISO string
+  createTime?: string;
+  // ISO string
+  updateTime?: string;
+}
 
 /**
  * Params to pass to {@link GoogleAICacheManager.create}

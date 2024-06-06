@@ -30,6 +30,7 @@ import {
   ListParams,
 } from "../../types/server";
 import { RpcTask } from "./constants";
+import { GoogleGenerativeAIError } from "../errors";
 
 /**
  * Class for managing GoogleAI file uploads.
@@ -57,6 +58,10 @@ export class GoogleAICacheManager {
     if (createOptions.ttlSeconds) {
       newCachedContent.ttl = createOptions.ttlSeconds.toString() + "s";
       delete (newCachedContent as CachedContentCreateParams).ttlSeconds;
+    }
+    if (!newCachedContent.model.includes("/")) {
+      // If path is not included, assume it's a non-tuned model.
+      newCachedContent.model = `models/${newCachedContent.model}`;
     }
     const url = new CachedContentUrl(
       RpcTask.UPLOAD,
@@ -103,7 +108,7 @@ export class GoogleAICacheManager {
       this.apiKey,
       this._requestOptions,
     );
-    url.appendPath(name);
+    url.appendPath(parseCacheName(name));
     const uploadHeaders = getHeaders(url);
     const response = await makeServerRequest(url, uploadHeaders);
     return response.json();
@@ -121,7 +126,7 @@ export class GoogleAICacheManager {
       this.apiKey,
       this._requestOptions,
     );
-    url.appendPath(name);
+    url.appendPath(parseCacheName(name));
     const uploadHeaders = getHeaders(url);
     const response = await makeServerRequest(
       url,
@@ -140,8 +145,25 @@ export class GoogleAICacheManager {
       this.apiKey,
       this._requestOptions,
     );
-    url.appendPath(name);
+    url.appendPath(parseCacheName(name));
     const uploadHeaders = getHeaders(url);
     await makeServerRequest(url, uploadHeaders);
   }
+}
+
+/**
+ * If fileId is prepended with "files/", remove prefix
+ */
+function parseCacheName(name: string): string {
+  if (name.startsWith("cachedContents/")) {
+    return name.split("cachedContents/")[1];
+  }
+  if (!name) {
+    throw new GoogleGenerativeAIError(
+      `Invalid name ${name}. ` +
+        `Must be in the format "cachedContents/name" or "name"`,
+    );
+  }
+
+  return name;
 }

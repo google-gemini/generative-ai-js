@@ -21,4 +21,3 @@ export * from './shared';
 
 export { RequestOptions } from "../../types/requests";
 export * from "../../types/content";
-export * from "../../types/cached-content";

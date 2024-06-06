@@ -19,4 +19,4 @@ export * from "./content";
 export * from "./enums";
 export * from "./requests";
 export * from "./responses";
-export * from './cached-content';
+export { CachedContent, CachedContentBase } from './server/caching';

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { CachedContent } from "./cached-content";
+import { CachedContent } from "./server/caching";
 import { Content, Part } from "./content";
 import {
   HarmBlockThreshold,
