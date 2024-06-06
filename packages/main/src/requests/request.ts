@@ -170,7 +170,7 @@ export async function makeRequest(
   return response;
 }
 
-export function handleResponseError(e: Error, url: string): void {
+function handleResponseError(e: Error, url: string): void {
   let err = e;
   if (
     !(
@@ -186,7 +186,7 @@ export function handleResponseError(e: Error, url: string): void {
   throw err;
 }
 
-export async function handleResponseNotOk(
+async function handleResponseNotOk(
   response: Response,
   url: string,
 ): Promise<void> {

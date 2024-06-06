@@ -36,13 +36,11 @@ export enum BlockReason {
 
 // @public
 export interface CachedContent extends CachedContentBase {
-    // (undocumented)
     createTime?: string;
+    expireTime?: string;
     // (undocumented)
     name?: string;
-    // (undocumented)
     ttl?: string;
-    // (undocumented)
     updateTime?: string;
 }
 

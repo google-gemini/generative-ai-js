@@ -36,10 +36,10 @@ import {
   ListParams,
 } from "../../types/server";
 import { RpcTask } from "./constants";
-import { GoogleGenerativeAIError } from "../errors";
+import { GoogleGenerativeAIError, GoogleGenerativeAIRequestInputError } from "../errors";
 
 /**
- * Class for managing GoogleAI file uploads.
+ * Class for managing GoogleAI content caches.
  * @public
  */
 export class GoogleAICacheManager {
@@ -65,6 +65,11 @@ export class GoogleAICacheManager {
       newCachedContent.ttl = createOptions.ttlSeconds.toString() + "s";
       delete (newCachedContent as CachedContentCreateParams).ttlSeconds;
     }
+    if (!newCachedContent.model) {
+      throw new GoogleGenerativeAIRequestInputError(
+        "Cached content must contain a `model` field.",
+      );
+    }
     if (!newCachedContent.model.includes("/")) {
       // If path is not included, assume it's a non-tuned model.
       newCachedContent.model = `models/${newCachedContent.model}`;
@@ -75,11 +80,11 @@ export class GoogleAICacheManager {
       this._requestOptions,
     );
 
-    const uploadHeaders = getHeaders(url);
+    const headers = getHeaders(url);
 
     const response = await makeServerRequest(
       url,
-      uploadHeaders,
+      headers,
       JSON.stringify(newCachedContent),
     );
     return response.json();
@@ -100,8 +105,8 @@ export class GoogleAICacheManager {
     if (listParams?.pageToken) {
       url.appendParam("pageToken", listParams.pageToken);
     }
-    const uploadHeaders = getHeaders(url);
-    const response = await makeServerRequest(url, uploadHeaders);
+    const headers = getHeaders(url);
+    const response = await makeServerRequest(url, headers);
     return response.json();
   }
 
@@ -115,8 +120,8 @@ export class GoogleAICacheManager {
       this._requestOptions,
     );
     url.appendPath(parseCacheName(name));
-    const uploadHeaders = getHeaders(url);
-    const response = await makeServerRequest(url, uploadHeaders);
+    const headers = getHeaders(url);
+    const response = await makeServerRequest(url, headers);
     return response.json();
   }
 
@@ -133,10 +138,10 @@ export class GoogleAICacheManager {
       this._requestOptions,
     );
     url.appendPath(parseCacheName(name));
-    const uploadHeaders = getHeaders(url);
+    const headers = getHeaders(url);
     const response = await makeServerRequest(
       url,
-      uploadHeaders,
+      headers,
       JSON.stringify(updateParams),
     );
     return response.json();
@@ -152,13 +157,13 @@ export class GoogleAICacheManager {
       this._requestOptions,
     );
     url.appendPath(parseCacheName(name));
-    const uploadHeaders = getHeaders(url);
-    await makeServerRequest(url, uploadHeaders);
+    const headers = getHeaders(url);
+    await makeServerRequest(url, headers);
   }
 }
 
 /**
- * If fileId is prepended with "files/", remove prefix
+ * If cache name is prepended with "cachedContents/", remove prefix
  */
 function parseCacheName(name: string): string {
   if (name.startsWith("cachedContents/")) {

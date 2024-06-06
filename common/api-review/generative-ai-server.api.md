@@ -6,13 +6,11 @@
 
 // @public
 export interface CachedContent extends CachedContentBase {
-    // (undocumented)
     createTime?: string;
+    expireTime?: string;
     // (undocumented)
     name?: string;
-    // (undocumented)
     ttl?: string;
-    // (undocumented)
     updateTime?: string;
 }
 
@@ -32,7 +30,6 @@ export interface CachedContentBase {
 
 // @public
 export interface CachedContentCreateParams extends CachedContentBase {
-    // (undocumented)
     ttlSeconds?: number;
 }
 
@@ -147,10 +144,20 @@ export interface FunctionCall {
 export interface FunctionCallingConfig {
     // (undocumented)
     allowedFunctionNames?: string[];
-    // Warning: (ae-forgotten-export) The symbol "FunctionCallingMode" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     mode?: FunctionCallingMode;
+}
+
+// @public (undocumented)
+export enum FunctionCallingMode {
+    // (undocumented)
+    ANY = "ANY",
+    // (undocumented)
+    AUTO = "AUTO",
+    // (undocumented)
+    MODE_UNSPECIFIED = "MODE_UNSPECIFIED",
+    // (undocumented)
+    NONE = "NONE"
 }
 
 // @public

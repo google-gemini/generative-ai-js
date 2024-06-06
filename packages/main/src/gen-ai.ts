@@ -15,7 +15,10 @@
  * limitations under the License.
  */
 
-import { GoogleGenerativeAIError } from "./errors";
+import {
+  GoogleGenerativeAIError,
+  GoogleGenerativeAIRequestInputError,
+} from "./errors";
 import { CachedContent, ModelParams, RequestOptions } from "../types";
 import { GenerativeModel } from "./models/generative-model";
 
@@ -52,6 +55,16 @@ export class GoogleGenerativeAI {
     cachedContent: CachedContent,
     requestOptions?: RequestOptions,
   ): GenerativeModel {
+    if (!cachedContent.name) {
+      throw new GoogleGenerativeAIRequestInputError(
+        "Cached content must contain a `name` field.",
+      );
+    }
+    if (!cachedContent.model) {
+      throw new GoogleGenerativeAIRequestInputError(
+        "Cached content must contain a `model` field.",
+      );
+    }
     const modelParamsFromCache: ModelParams = {
       model: cachedContent.model,
       tools: cachedContent.tools,
