@@ -24,8 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # lock version 20 for now as 20.12.0 makes global fetch unstubbable
-        # until we can rewrite tests to stub some other way
         node-version: ['18.x', '20.x']
     steps:
     - uses: actions/checkout@v4
@@ -48,8 +46,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # lock version 20 for now as 20.12.0 makes global fetch unstubbable
-        # until we can rewrite tests to stub some other way
         node-version: ['18.x', '20.x']
     steps:
     - uses: actions/checkout@v4
@@ -72,8 +68,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # lock version 20 for now as 20.12.0 makes global fetch unstubbable
-        # until we can rewrite tests to stub some other way
         node-version: ['18.x', '20.x']
     steps:
     - uses: actions/checkout@v4
