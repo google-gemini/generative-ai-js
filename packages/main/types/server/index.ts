@@ -21,4 +21,4 @@ export * from "./shared";
 
 export { RequestOptions } from "../../types/requests";
 export * from "../../types/content";
-export { FunctionCallingMode } from '../../types/enums';
+export { FunctionCallingMode } from "../../types/enums";
