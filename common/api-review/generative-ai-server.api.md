@@ -7,7 +7,6 @@
 // @public
 export interface CachedContent extends CachedContentBase {
     createTime?: string;
-    expireTime?: string;
     // (undocumented)
     name?: string;
     ttl?: string;
@@ -18,6 +17,7 @@ export interface CachedContent extends CachedContentBase {
 export interface CachedContentBase {
     // (undocumented)
     contents: Content[];
+    expireTime?: string;
     // (undocumented)
     model?: string;
     // (undocumented)
@@ -37,7 +37,16 @@ export interface CachedContentCreateParams extends CachedContentBase {
 export interface CachedContentUpdateParams {
     // (undocumented)
     cachedContent: CachedContentCreateParams;
-    updateMask: string[];
+    updateMask?: string[];
+}
+
+// Warning: (ae-internal-missing-underscore) The name "CachedContentUpdateRequest" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal
+export interface CachedContentUpdateRequest {
+    // (undocumented)
+    cachedContent: CachedContent;
+    updateMask?: string[];
 }
 
 // @public
@@ -241,7 +250,7 @@ export interface GenerativeContentBlob {
 
 // @public
 export class GoogleAICacheManager {
-    constructor(apiKey: string, _requestOptions: RequestOptions);
+    constructor(apiKey: string, _requestOptions?: RequestOptions);
     // (undocumented)
     apiKey: string;
     create(createOptions: CachedContentCreateParams): Promise<CachedContent>;

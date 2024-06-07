@@ -26,6 +26,10 @@ export interface CachedContentBase {
   tools?: Tool[];
   toolConfig?: ToolConfig;
   systemInstruction?: string | Part | Content;
+  /**
+   * Expiration time in ISO string format. Specify either this or `ttl`.
+   */
+  expireTime?: string;
 }
 
 /**
@@ -40,10 +44,6 @@ export interface CachedContent extends CachedContentBase {
    * `expireTime`.
    */
   ttl?: string;
-  /**
-   * Expiration time in ISO string format. Specify either this or `ttl`.
-   */
-  expireTime?: string;
   /**
    * CachedContent creation time in ISO string format
    */
@@ -74,7 +74,19 @@ export interface CachedContentUpdateParams {
   /**
    * protobuf FieldMask
    */
-  updateMask: string[];
+  updateMask?: string[];
+}
+
+/**
+ * Params as sent to the backend (ttl instead of ttlSeconds)
+ * @internal
+ */
+export interface CachedContentUpdateRequest {
+  cachedContent: CachedContent;
+  /**
+   * protobuf FieldMask
+   */
+  updateMask?: string[];
 }
 
 /**

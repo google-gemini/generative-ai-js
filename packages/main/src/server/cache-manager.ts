@@ -23,15 +23,11 @@ import {
   Tool,
   ToolConfig,
 } from "../../types";
-import {
-  CachedContentUrl,
-  FilesRequestUrl,
-  getHeaders,
-  makeServerRequest,
-} from "./request";
+import { CachedContentUrl, getHeaders, makeServerRequest } from "./request";
 import {
   CachedContentCreateParams,
   CachedContentUpdateParams,
+  CachedContentUpdateRequest,
   ListCacheResponse,
   ListParams,
 } from "../../types/server";
@@ -54,7 +50,7 @@ export class GoogleAICacheManager {
 
   constructor(
     public apiKey: string,
-    private _requestOptions: RequestOptions,
+    private _requestOptions?: RequestOptions,
   ) {}
 
   /**
@@ -65,6 +61,12 @@ export class GoogleAICacheManager {
   ): Promise<CachedContent> {
     const newCachedContent: CachedContent = { ...createOptions };
     if (createOptions.ttlSeconds) {
+      if (createOptions.expireTime) {
+        throw new GoogleGenerativeAIRequestInputError(
+          "You cannot specify both `ttlSeconds` and `expireTime` when creating" +
+            " a content cache. You must choose one.",
+        );
+      }
       newCachedContent.ttl = createOptions.ttlSeconds.toString() + "s";
       delete (newCachedContent as CachedContentCreateParams).ttlSeconds;
     }
@@ -78,7 +80,7 @@ export class GoogleAICacheManager {
       newCachedContent.model = `models/${newCachedContent.model}`;
     }
     const url = new CachedContentUrl(
-      RpcTask.UPLOAD,
+      RpcTask.CREATE,
       this.apiKey,
       this._requestOptions,
     );
@@ -142,10 +144,22 @@ export class GoogleAICacheManager {
     );
     url.appendPath(parseCacheName(name));
     const headers = getHeaders(url);
+    const formattedCachedContent: CachedContent = {
+      ...updateParams.cachedContent,
+    };
+    if (updateParams.cachedContent.ttlSeconds) {
+      formattedCachedContent.ttl =
+        updateParams.cachedContent.ttlSeconds.toString() + "s";
+      delete (formattedCachedContent as CachedContentCreateParams).ttlSeconds;
+    }
+    const updateRequest: CachedContentUpdateRequest = {
+      cachedContent: formattedCachedContent,
+      updateMask: updateParams.updateMask,
+    };
     const response = await makeServerRequest(
       url,
       headers,
-      JSON.stringify(updateParams),
+      JSON.stringify(updateRequest),
     );
     return response.json();
   }
@@ -154,7 +168,7 @@ export class GoogleAICacheManager {
    * Delete content cache with given name
    */
   async delete(name: string): Promise<void> {
-    const url = new FilesRequestUrl(
+    const url = new CachedContentUrl(
       RpcTask.DELETE,
       this.apiKey,
       this._requestOptions,
@@ -178,6 +192,5 @@ function parseCacheName(name: string): string {
         `Must be in the format "cachedContents/name" or "name"`,
     );
   }
-
   return name;
 }
