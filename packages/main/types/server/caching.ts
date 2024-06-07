@@ -66,15 +66,33 @@ export interface CachedContentCreateParams extends CachedContentBase {
 }
 
 /**
+ * Fields that can be updated in an existing content cache.
+ * @public
+ */
+export interface CachedContentUpdateInputFields {
+  ttlSeconds?: number;
+  expireTime?: string;
+}
+
+/**
  * Params to pass to {@link GoogleAICacheManager.update}
  * @public
  */
 export interface CachedContentUpdateParams {
-  cachedContent: CachedContentCreateParams;
+  cachedContent: CachedContentUpdateInputFields;
   /**
-   * protobuf FieldMask
+   * protobuf FieldMask. If not specified, updates all provided fields.
    */
   updateMask?: string[];
+}
+
+/**
+ * Fields that can be updated in an existing content cache.
+ * @internal
+ */
+export interface CachedContentUpdateRequestFields {
+  ttl?: string;
+  expireTime?: string;
 }
 
 /**
@@ -82,7 +100,7 @@ export interface CachedContentUpdateParams {
  * @internal
  */
 export interface CachedContentUpdateRequest {
-  cachedContent: CachedContent;
+  cachedContent: CachedContentUpdateRequestFields;
   /**
    * protobuf FieldMask
    */

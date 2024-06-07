@@ -15,19 +15,12 @@
  * limitations under the License.
  */
 
-import {
-  CachedContent,
-  Content,
-  Part,
-  RequestOptions,
-  Tool,
-  ToolConfig,
-} from "../../types";
+import { CachedContent, RequestOptions } from "../../types";
 import { CachedContentUrl, getHeaders, makeServerRequest } from "./request";
 import {
   CachedContentCreateParams,
   CachedContentUpdateParams,
-  CachedContentUpdateRequest,
+  CachedContentUpdateRequestFields,
   ListCacheResponse,
   ListParams,
 } from "../../types/server";
@@ -36,18 +29,13 @@ import {
   GoogleGenerativeAIError,
   GoogleGenerativeAIRequestInputError,
 } from "../errors";
+import { formatSystemInstruction } from "../requests/request-helpers";
 
 /**
  * Class for managing GoogleAI content caches.
  * @public
  */
 export class GoogleAICacheManager {
-  model: string;
-  ttl?: string;
-  tools?: Tool[];
-  toolConfig?: ToolConfig;
-  systemInstruction?: string | Part | Content;
-
   constructor(
     public apiKey: string,
     private _requestOptions?: RequestOptions,
@@ -65,6 +53,11 @@ export class GoogleAICacheManager {
         throw new GoogleGenerativeAIRequestInputError(
           "You cannot specify both `ttlSeconds` and `expireTime` when creating" +
             " a content cache. You must choose one.",
+        );
+      }
+      if (createOptions.systemInstruction) {
+        newCachedContent.systemInstruction = formatSystemInstruction(
+          createOptions.systemInstruction,
         );
       }
       newCachedContent.ttl = createOptions.ttlSeconds.toString() + "s";
@@ -144,7 +137,7 @@ export class GoogleAICacheManager {
     );
     url.appendPath(parseCacheName(name));
     const headers = getHeaders(url);
-    const formattedCachedContent: CachedContent = {
+    const formattedCachedContent: CachedContentUpdateRequestFields = {
       ...updateParams.cachedContent,
     };
     if (updateParams.cachedContent.ttlSeconds) {
@@ -152,14 +145,16 @@ export class GoogleAICacheManager {
         updateParams.cachedContent.ttlSeconds.toString() + "s";
       delete (formattedCachedContent as CachedContentCreateParams).ttlSeconds;
     }
-    const updateRequest: CachedContentUpdateRequest = {
-      cachedContent: formattedCachedContent,
-      updateMask: updateParams.updateMask,
-    };
+    if (updateParams.updateMask) {
+      url.appendParam(
+        "update_mask",
+        updateParams.updateMask.map((prop) => camelToSnake(prop)).join(","),
+      );
+    }
     const response = await makeServerRequest(
       url,
       headers,
-      JSON.stringify(updateRequest),
+      JSON.stringify(formattedCachedContent),
     );
     return response.json();
   }
@@ -193,4 +188,7 @@ function parseCacheName(name: string): string {
     );
   }
   return name;
+}
+function camelToSnake(str: string): string {
+  return str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 }

@@ -61,7 +61,9 @@ describe("GoogleAICacheManager", () => {
     expect(requestBody.model).to.equal("models/gemini-1.5-pro");
     expect(requestBody.contents).to.deep.equal(FAKE_CONTENTS);
     expect(requestBody.ttl).to.deep.equal("30s");
-    expect(requestBody.systemInstruction).to.deep.equal("talk like a cat");
+    expect(requestBody.systemInstruction.parts[0].text).to.equal(
+      "talk like a cat",
+    );
     expect(requestBody.tools[0].functionDeclarations[0].name).to.equal("myFn");
     expect(requestBody.toolConfig.functionCallingConfig).to.exist;
   });
@@ -127,25 +129,14 @@ describe("GoogleAICacheManager", () => {
     const cacheManager = new GoogleAICacheManager("apiKey");
     const result = await cacheManager.update(FAKE_CACHE_NAME, {
       cachedContent: {
-        model: "models/gemini-1.5-pro",
-        contents: FAKE_CONTENTS,
         ttlSeconds: 30,
-        systemInstruction: "talk like a cat",
-        tools: [{ functionDeclarations: [{ name: "myFn" }] }],
-        toolConfig: { functionCallingConfig: {} },
       },
     });
     expect(result.name).to.equal(FAKE_CACHE_NAME);
     expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.UPDATE);
     expect(makeRequestStub.args[0][1]).to.be.instanceOf(Headers);
     const requestBody = JSON.parse(makeRequestStub.args[0][2] as string);
-    const requestCache = requestBody.cachedContent;
-    expect(requestCache.model).to.equal("models/gemini-1.5-pro");
-    expect(requestCache.contents).to.deep.equal(FAKE_CONTENTS);
-    expect(requestCache.ttl).to.deep.equal("30s");
-    expect(requestCache.systemInstruction).to.deep.equal("talk like a cat");
-    expect(requestCache.tools[0].functionDeclarations[0].name).to.equal("myFn");
-    expect(requestCache.toolConfig.functionCallingConfig).to.exist;
+    expect(requestBody.ttl).to.deep.equal("30s");
   });
   it("passes list request info", async () => {
     const makeRequestStub = stub(request, "makeServerRequest").resolves({

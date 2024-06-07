@@ -34,9 +34,17 @@ export interface CachedContentCreateParams extends CachedContentBase {
 }
 
 // @public
+export interface CachedContentUpdateInputFields {
+    // (undocumented)
+    expireTime?: string;
+    // (undocumented)
+    ttlSeconds?: number;
+}
+
+// @public
 export interface CachedContentUpdateParams {
     // (undocumented)
-    cachedContent: CachedContentCreateParams;
+    cachedContent: CachedContentUpdateInputFields;
     updateMask?: string[];
 }
 
@@ -45,8 +53,18 @@ export interface CachedContentUpdateParams {
 // @internal
 export interface CachedContentUpdateRequest {
     // (undocumented)
-    cachedContent: CachedContent;
+    cachedContent: CachedContentUpdateRequestFields;
     updateMask?: string[];
+}
+
+// Warning: (ae-internal-missing-underscore) The name "CachedContentUpdateRequestFields" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal
+export interface CachedContentUpdateRequestFields {
+    // (undocumented)
+    expireTime?: string;
+    // (undocumented)
+    ttl?: string;
 }
 
 // @public
@@ -257,16 +275,6 @@ export class GoogleAICacheManager {
     delete(name: string): Promise<void>;
     get(name: string): Promise<CachedContent>;
     list(listParams?: ListParams): Promise<ListCacheResponse>;
-    // (undocumented)
-    model: string;
-    // (undocumented)
-    systemInstruction?: string | Part | Content;
-    // (undocumented)
-    toolConfig?: ToolConfig;
-    // (undocumented)
-    tools?: Tool[];
-    // (undocumented)
-    ttl?: string;
     update(name: string, updateParams: CachedContentUpdateParams): Promise<CachedContent>;
 }
 
