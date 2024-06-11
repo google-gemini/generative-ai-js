@@ -49,9 +49,7 @@ async function run() {
 
   const cache = await cacheManager.get(cacheResult.name);
 
-  const model = genAI.getGenerativeModelFromCachedContent({
-    cache,
-  });
+  const model = genAI.getGenerativeModelFromCachedContent(cache);
 
   const result = await model.generateContent({
     contents: [
