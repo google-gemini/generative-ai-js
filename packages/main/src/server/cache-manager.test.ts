@@ -53,6 +53,7 @@ describe("GoogleAICacheManager", () => {
       systemInstruction: "talk like a cat",
       tools: [{ functionDeclarations: [{ name: "myFn" }] }],
       toolConfig: { functionCallingConfig: {} },
+      displayName: "a display name.",
     });
     expect(result.name).to.equal(FAKE_CACHE_NAME);
     expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.CREATE);

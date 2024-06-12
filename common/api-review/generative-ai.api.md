@@ -47,6 +47,7 @@ export interface CachedContent extends CachedContentBase {
 export interface CachedContentBase {
     // (undocumented)
     contents: Content[];
+    displayName?: string;
     expireTime?: string;
     // (undocumented)
     model?: string;
