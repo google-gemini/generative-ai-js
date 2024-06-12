@@ -17,18 +17,18 @@ This sample assumes that you're providing an `API_KEY` environment variable.
 
 ### Simple examples
 
-- `simple-text.js` - Text-only input
-- `simple-text-and-images.js` - Text-and-images input (multimodal)
-- `simple-chat.js` - Dialog language tasks, using `ChatSession` class
-- `simple-config.js` - Configuring model parameters
-- `simple-embedding.js` - Embeddings, using the `embedding-001` model
+- [`simple-text.js`](simple-text.js) - Text-only input
+- [`simple-text-and-images.js`](simple-text-and-images.js) - Text-and-images input (multimodal)
+- [`simple-chat.js`](simple-chat.js) - Dialog language tasks, using `ChatSession` class
+- [`simple-config.js`](simple-config.js) - Configuring model parameters
+- [`simple-embedding.js`](simple-embedding.js) - Embeddings, using the `embedding-001` model
 
 ### More examples
 
-- `advanced-text.js` - Using `countTokens`, `safetySettings` and streaming with a text-only input
-- `advanced-text-and-images.js` - Using `countTokens`, `generationConfig` and streaming with multimodal input
-- `advanced-chat.js` - Using `countTokens`, `generationConfig` and streaming with multi-turn conversations
-- `advanced-embeddings.js` - Using `batchEmbedContents`
+- [`advanced-text.js`](advanced-text.js) - Using `countTokens`, `safetySettings` and streaming with a text-only input
+- [`advanced-text-and-images.js`](advanced-text-and-images.js) - Using `countTokens`, `generationConfig` and streaming with multimodal input
+- [`advanced-chat.js`](advanced-chat.js) - Using `countTokens`, `generationConfig` and streaming with multi-turn conversations
+- [`advanced-embeddings.js`](advanced-embeddings.js) - Using `batchEmbedContents`
 
 ## Documentation
 
