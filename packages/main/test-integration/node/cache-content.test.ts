@@ -29,11 +29,12 @@ use(chaiAsPromised);
 describe("cacheContent", function () {
   this.timeout(60e3);
   this.slow(10e3);
+  const model = "models/gemini-1.5-pro-001";
   let text: string = "";
   const endpointConfiguration = { /* remove at launch */ };
 
-  for (let i = 0; i < 1500; i++) {
-    text += "Purple cats drink gatorade.";
+  for (let i = 0; i < 1501; i++) {
+    text += "Purple cats drink chicken soup.";
     text += i % 8 === 7 ? "\n" : " ";
   }
   it("createCache", async () => {
@@ -46,15 +47,16 @@ describe("cacheContent", function () {
     );
     const createCacheResult = await cacheManager.create({
       ttlSeconds,
-      model: "models/gemini-1.5-pro",
+      model,
       contents: [
         {
           role: "user",
           parts: [{ text }],
         },
       ],
-      displayName,
+      displayName
     });
+    console.log("cache manager create returned");
     expect(createCacheResult.name).to.exist;
     expect(createCacheResult.model).to.exist;
     expect(createCacheResult.createTime).to.exist;
@@ -75,7 +77,7 @@ describe("cacheContent", function () {
     );
     const createCacheResult = await cacheManager.create({
       ttlSeconds: 5,
-      model: "models/gemini-1.5-pro",
+      model,
       contents: [
         {
           role: "user",
@@ -107,7 +109,7 @@ describe("cacheContent", function () {
     );
     const createCacheResult = await cacheManager.create({
       ttlSeconds: 5,
-      model: "models/gemini-1.5-pro",
+      model,
       contents: [
         {
           role: "user",
@@ -139,7 +141,7 @@ describe("cacheContent", function () {
     );
     const createCacheResult = await cacheManager.create({
       ttlSeconds: originalTtlSeconds,
-      model: "models/gemini-1.5-pro",
+      model,
       contents: [
         {
           role: "user",
@@ -190,7 +192,7 @@ describe("cacheContent", function () {
     );
     const createCacheResult = await cacheManager.create({
       ttlSeconds: 20,
-      model: "models/gemini-1.5-pro",
+      model,
       contents: [
         {
           role: "user",
@@ -231,7 +233,7 @@ describe("cacheContent", function () {
     );
     const createCacheResult = await cacheManager.create({
       ttlSeconds: 20,
-      model: "models/gemini-1.5-pro",
+      model,
       contents: [
         {
           role: "user",
@@ -248,11 +250,11 @@ describe("cacheContent", function () {
 
     // generate content.
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModelFromCachedContent(
+    const genAiModel = genAI.getGenerativeModelFromCachedContent(
       cache,
       endpointConfiguration,
     );
-    const result = await model.generateContent({
+    const result = await genAiModel.generateContent({
       contents: [
         {
           role: "user",
@@ -261,6 +263,6 @@ describe("cacheContent", function () {
       ],
     });
     const response = await result.response;
-    expect(response.text().toLowerCase().includes("gatorade")).to.be.true;
+    expect(response.text().toLowerCase().includes("chicken soup")).to.be.true;
   });
 });
