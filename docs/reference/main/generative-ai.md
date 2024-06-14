@@ -36,6 +36,8 @@
 |  [BaseParams](./generative-ai.baseparams.md) | Base parameters for a number of methods. |
 |  [BatchEmbedContentsRequest](./generative-ai.batchembedcontentsrequest.md) | Params for calling [GenerativeModel.batchEmbedContents()](./generative-ai.generativemodel.batchembedcontents.md) |
 |  [BatchEmbedContentsResponse](./generative-ai.batchembedcontentsresponse.md) | Response from calling [GenerativeModel.batchEmbedContents()](./generative-ai.generativemodel.batchembedcontents.md)<!-- -->. |
+|  [CachedContent](./generative-ai.cachedcontent.md) | Describes <code>CachedContent</code> interface for sending to the server (if creating) or received from the server (using getters or list methods). |
+|  [CachedContentBase](./generative-ai.cachedcontentbase.md) |  |
 |  [CitationMetadata](./generative-ai.citationmetadata.md) | Citation metadata that may be found on a [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md)<!-- -->. |
 |  [CitationSource](./generative-ai.citationsource.md) | A single citation source. |
 |  [Content](./generative-ai.content.md) | Content type for both prompts and response candidates. |
@@ -68,7 +70,7 @@
 |  [ModelParams](./generative-ai.modelparams.md) | Params passed to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->. |
 |  [PromptFeedback](./generative-ai.promptfeedback.md) | If the prompt was blocked, this will be populated with <code>blockReason</code> and the relevant <code>safetyRatings</code>. |
 |  [RequestOptions](./generative-ai.requestoptions.md) | Params passed to getGenerativeModel() or GoogleAIFileManager(). |
-|  [ResponseSchema](./generative-ai.responseschema.md) | Schema passed to [GenerationConfig.responseSchema](./generative-ai.generationconfig.responseschema.md) |
+|  [ResponseSchema](./generative-ai.responseschema.md) | Schema passed to <code>GenerationConfig.responseSchema</code> |
 |  [SafetyRating](./generative-ai.safetyrating.md) | A safety rating associated with a [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md) |
 |  [SafetySetting](./generative-ai.safetysetting.md) | Safety setting that can be sent as part of request parameters. |
 |  [Schema](./generative-ai.schema.md) | Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed. |

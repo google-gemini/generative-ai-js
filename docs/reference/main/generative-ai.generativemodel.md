@@ -23,6 +23,7 @@ export declare class GenerativeModel
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [apiKey](./generative-ai.generativemodel.apikey.md) |  | string |  |
+|  [cachedContent](./generative-ai.generativemodel.cachedcontent.md) |  | [CachedContent](./generative-ai.cachedcontent.md) |  |
 |  [generationConfig](./generative-ai.generativemodel.generationconfig.md) |  | [GenerationConfig](./generative-ai.generationconfig.md) |  |
 |  [model](./generative-ai.generativemodel.model.md) |  | string |  |
 |  [requestOptions](./generative-ai.generativemodel.requestoptions.md) |  | [RequestOptions](./generative-ai.requestoptions.md) |  |
