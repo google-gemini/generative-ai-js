@@ -31,7 +31,9 @@ describe("cacheContent", function () {
   this.slow(10e3);
   const model = "models/gemini-1.5-pro-001";
   let text: string = "";
-  const endpointConfiguration = { /* remove at launch */ };
+  const endpointConfiguration = {
+    /* remove at launch */
+  };
 
   for (let i = 0; i < 1501; i++) {
     text += "Purple cats drink chicken soup.";
@@ -54,7 +56,7 @@ describe("cacheContent", function () {
           parts: [{ text }],
         },
       ],
-      displayName
+      displayName,
     });
     console.log("cache manager create returned");
     expect(createCacheResult.name).to.exist;
