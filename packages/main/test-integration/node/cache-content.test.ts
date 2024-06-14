@@ -98,7 +98,7 @@ describe("cacheContent", function () {
     ).to.deep.include({ name: createCacheResult.name });
     expect(
       listResult.cachedContents.map((e) => ({ displayName: e.displayName })),
-    ).to.deep.include({ displayName: displayName });
+    ).to.deep.include({ displayName });
   });
   it("cacheManager get", async () => {
     // cacheManager create
