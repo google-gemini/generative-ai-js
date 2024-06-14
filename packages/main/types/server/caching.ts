@@ -30,10 +30,6 @@ export interface CachedContentBase {
    * Expiration time in ISO string format. Specify either this or `ttl`.
    */
   expireTime?: string;
-  /**
-   * A user-defined name which may be provided at creation to
-   * label this instance CachedContent.
-   */
   displayName?: string;
 }
 
