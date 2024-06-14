@@ -41,7 +41,6 @@ jobs:
     - name: run unit tests (includes lint)
       run: yarn test
 
-
   node-integration-test:
     runs-on: ubuntu-latest
     strategy:
@@ -53,16 +52,15 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+        cache: 'yarn'
 
     - name: yarn install
       run: yarn
 
     - name: run node iTests
       env:
-        GEMINI_API_KEY: ${{secrets.GEMINI_API_KEY}}
-      run: |
-        cd packages/main
-        yarn test:node:integration
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      run: yarn --cwd packages/main test:node:integration
 
   web-integration-test:
     runs-on: ubuntu-latest
@@ -75,13 +73,12 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+        cache: 'yarn'
 
     - name: yarn install
       run: yarn
 
     - name: run web iTests
       env:
-        GEMINI_API_KEY: ${{secrets.GEMINI_API_KEY}}
-      run: |
-        cd packages/main
-        yarn test:web:integration
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      run: yarn --cwd packages/main test:web:integration
