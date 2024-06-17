@@ -27,40 +27,42 @@ export interface CachedContentBase {
   toolConfig?: ToolConfig;
   systemInstruction?: string | Part | Content;
   /**
-   * Expiration time in ISO string format. Specify either this or `ttl`.
+   * Expiration time in ISO string format. Specify either this or `ttlSeconds`
+   * when creating a `CachedContent`.
    */
   expireTime?: string;
+  displayName?: string;
 }
 
 /**
- * Describes CachedContent interface for sending to the server (if creating)
+ * Describes `CachedContent` interface for sending to the server (if creating)
  * or received from the server (using getters or list methods).
  * @public
  */
 export interface CachedContent extends CachedContentBase {
   name?: string;
   /**
-   * protobuf.Duration format (ex. "3.0001s"). Specify either this or
-   * `expireTime`.
+   * protobuf.Duration format (ex. "3.0001s").
    */
   ttl?: string;
   /**
-   * CachedContent creation time in ISO string format
+   * `CachedContent` creation time in ISO string format.
    */
   createTime?: string;
   /**
-   * CachedContent update time in ISO string format
+   * `CachedContent` update time in ISO string format.
    */
   updateTime?: string;
 }
 
 /**
- * Params to pass to {@link GoogleAICacheManager.create}
+ * Params to pass to {@link GoogleAICacheManager.create}.
  * @public
  */
 export interface CachedContentCreateParams extends CachedContentBase {
   /**
-   * CachedContent ttl in seconds.
+   * `CachedContent` ttl in seconds. Specify either this or `expireTime`
+   * when creating a `CachedContent`.
    */
   ttlSeconds?: number;
 }
@@ -75,7 +77,7 @@ export interface CachedContentUpdateInputFields {
 }
 
 /**
- * Params to pass to {@link GoogleAICacheManager.update}
+ * Params to pass to {@link GoogleAICacheManager.update}.
  * @public
  */
 export interface CachedContentUpdateParams {
@@ -96,7 +98,7 @@ export interface CachedContentUpdateRequestFields {
 }
 
 /**
- * Params as sent to the backend (ttl instead of ttlSeconds)
+ * Params as sent to the backend (ttl instead of ttlSeconds).
  * @internal
  */
 export interface CachedContentUpdateRequest {

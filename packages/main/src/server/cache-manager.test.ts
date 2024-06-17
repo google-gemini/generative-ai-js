@@ -30,6 +30,7 @@ const FAKE_CONTENTS = [{ role: "user", parts: [{ text: "some text" }] }];
 const FAKE_CACHE_NAME = "cachedContents/hash1234";
 const fakeResponseJson: () => Promise<{}> = () =>
   Promise.resolve({ name: FAKE_CACHE_NAME });
+const model = "models/gemini-1.5-pro-001";
 
 describe("GoogleAICacheManager", () => {
   afterEach(() => {
@@ -41,26 +42,29 @@ describe("GoogleAICacheManager", () => {
     expect(cacheManager.apiKey).to.equal("apiKey");
   });
   it("passes create request info", async () => {
+    const displayName = "a display name.";
     const makeRequestStub = stub(request, "makeServerRequest").resolves({
       ok: true,
       json: fakeResponseJson,
     } as Response);
     const cacheManager = new GoogleAICacheManager("apiKey");
     const result = await cacheManager.create({
-      model: "models/gemini-1.5-pro",
+      model,
       contents: FAKE_CONTENTS,
       ttlSeconds: 30,
       systemInstruction: "talk like a cat",
       tools: [{ functionDeclarations: [{ name: "myFn" }] }],
       toolConfig: { functionCallingConfig: {} },
+      displayName,
     });
     expect(result.name).to.equal(FAKE_CACHE_NAME);
     expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.CREATE);
     expect(makeRequestStub.args[0][1]).to.be.instanceOf(Headers);
     const requestBody = JSON.parse(makeRequestStub.args[0][2] as string);
-    expect(requestBody.model).to.equal("models/gemini-1.5-pro");
+    expect(requestBody.model).to.equal(model);
     expect(requestBody.contents).to.deep.equal(FAKE_CONTENTS);
     expect(requestBody.ttl).to.deep.equal("30s");
+    expect(requestBody.displayName).to.equal(displayName);
     expect(requestBody.systemInstruction.parts[0].text).to.equal(
       "talk like a cat",
     );
@@ -74,11 +78,11 @@ describe("GoogleAICacheManager", () => {
     } as Response);
     const cacheManager = new GoogleAICacheManager("apiKey");
     await cacheManager.create({
-      model: "gemini-1.5-pro",
+      model,
       contents: FAKE_CONTENTS,
     });
     const requestBody = JSON.parse(makeRequestStub.args[0][2] as string);
-    expect(requestBody.model).to.equal("models/gemini-1.5-pro");
+    expect(requestBody.model).to.equal(model);
   });
   it("create() errors without a model name", async () => {
     const cacheManager = new GoogleAICacheManager("apiKey");
@@ -92,7 +96,7 @@ describe("GoogleAICacheManager", () => {
     const cacheManager = new GoogleAICacheManager("apiKey");
     await expect(
       cacheManager.create({
-        model: "gemini-1.5-pro",
+        model,
         contents: FAKE_CONTENTS,
         ttlSeconds: 40,
         expireTime: new Date().toISOString(),
@@ -109,7 +113,7 @@ describe("GoogleAICacheManager", () => {
       baseUrl: "http://mysite.com",
     });
     await cacheManager.create({
-      model: "gemini-1.5-pro",
+      model,
       contents: FAKE_CONTENTS,
     });
     expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.CREATE);
