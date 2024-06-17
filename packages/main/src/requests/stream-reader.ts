@@ -188,6 +188,9 @@ export function aggregateResponses(
         }
       }
     }
+    if (response.usageMetadata) {
+      aggregatedResponse.usageMetadata = response.usageMetadata;
+    }
   }
   return aggregatedResponse;
 }
