@@ -55,7 +55,6 @@ describe("cacheContent", function () {
       ],
       displayName,
     });
-    console.log("cache manager create returned");
     expect(createCacheResult.name).to.exist;
     expect(createCacheResult.model).to.exist;
     expect(createCacheResult.createTime).to.exist;
