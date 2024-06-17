@@ -38,7 +38,7 @@ async function run() {
 
   const cacheResult = await cacheManager.create({
     ttlSeconds: 600,
-    model: "models/gemini-1.5-pro",
+    model: "models/gemini-1.5-pro-001",
     contents: [
       {
         role: "user",
@@ -49,9 +49,7 @@ async function run() {
 
   const cache = await cacheManager.get(cacheResult.name);
 
-  const model = genAI.getGenerativeModelFromCachedContent({
-    cache,
-  });
+  const model = genAI.getGenerativeModelFromCachedContent(cache);
 
   const result = await model.generateContent({
     contents: [
