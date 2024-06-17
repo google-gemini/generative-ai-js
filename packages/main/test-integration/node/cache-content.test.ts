@@ -31,9 +31,6 @@ describe("cacheContent", function () {
   this.slow(10e3);
   const model = "models/gemini-1.5-pro-001";
   let text: string = "";
-  const endpointConfiguration = {
-    /* remove at launch */
-  };
 
   // Minimum cache size is 32768 tokens.
   for (let i = 0; i < 6554; i++) {
@@ -46,7 +43,6 @@ describe("cacheContent", function () {
     const displayName = "A display name.";
     const cacheManager = new GoogleAICacheManager(
       process.env.GEMINI_API_KEY || "",
-      endpointConfiguration,
     );
     const createCacheResult = await cacheManager.create({
       ttlSeconds,
@@ -76,7 +72,6 @@ describe("cacheContent", function () {
     const displayName = new Date().toISOString();
     const cacheManager = new GoogleAICacheManager(
       process.env.GEMINI_API_KEY || "",
-      endpointConfiguration,
     );
     const createCacheResult = await cacheManager.create({
       ttlSeconds: 5,
@@ -108,7 +103,6 @@ describe("cacheContent", function () {
     const displayName = new Date().toISOString();
     const cacheManager = new GoogleAICacheManager(
       process.env.GEMINI_API_KEY || "",
-      endpointConfiguration,
     );
     const createCacheResult = await cacheManager.create({
       ttlSeconds: 5,
@@ -140,7 +134,6 @@ describe("cacheContent", function () {
     const originalTtlSeconds = 20;
     const cacheManager = new GoogleAICacheManager(
       process.env.GEMINI_API_KEY || "",
-      endpointConfiguration,
     );
     const createCacheResult = await cacheManager.create({
       ttlSeconds: originalTtlSeconds,
@@ -191,7 +184,6 @@ describe("cacheContent", function () {
     // cacheManager create
     const cacheManager = new GoogleAICacheManager(
       process.env.GEMINI_API_KEY || "",
-      endpointConfiguration,
     );
     const createCacheResult = await cacheManager.create({
       ttlSeconds: 20,
@@ -232,7 +224,6 @@ describe("cacheContent", function () {
   it("generateContentWithCache", async () => {
     const cacheManager = new GoogleAICacheManager(
       process.env.GEMINI_API_KEY || "",
-      endpointConfiguration,
     );
     const createCacheResult = await cacheManager.create({
       ttlSeconds: 20,
@@ -253,10 +244,7 @@ describe("cacheContent", function () {
 
     // generate content.
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const genAiModel = genAI.getGenerativeModelFromCachedContent(
-      cache,
-      endpointConfiguration,
-    );
+    const genAiModel = genAI.getGenerativeModelFromCachedContent(cache);
     const result = await genAiModel.generateContent({
       contents: [
         {

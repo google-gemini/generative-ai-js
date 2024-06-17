@@ -38,7 +38,7 @@ async function run() {
 
   const cacheResult = await cacheManager.create({
     ttlSeconds: 600,
-    model: "models/gemini-1.5-pro",
+    model: "models/gemini-1.5-pro-001",
     contents: [
       {
         role: "user",
