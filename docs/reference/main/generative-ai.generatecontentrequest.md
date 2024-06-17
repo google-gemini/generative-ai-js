@@ -17,6 +17,7 @@ export interface GenerateContentRequest extends BaseParams
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [cachedContent?](./generative-ai.generatecontentrequest.cachedcontent.md) |  | string | _(Optional)_ This is the name of a <code>CachedContent</code> and not the cache object itself. |
 |  [contents](./generative-ai.generatecontentrequest.contents.md) |  | [Content](./generative-ai.content.md)<!-- -->\[\] |  |
 |  [systemInstruction?](./generative-ai.generatecontentrequest.systeminstruction.md) |  | string \| [Part](./generative-ai.part.md) \| [Content](./generative-ai.content.md) | _(Optional)_ |
 |  [toolConfig?](./generative-ai.generatecontentrequest.toolconfig.md) |  | [ToolConfig](./generative-ai.toolconfig.md) | _(Optional)_ |
