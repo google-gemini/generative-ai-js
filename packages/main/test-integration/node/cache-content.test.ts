@@ -35,7 +35,8 @@ describe("cacheContent", function () {
     /* remove at launch */
   };
 
-  for (let i = 0; i < 1501; i++) {
+  // Minimum cache size is 32768 tokens.
+  for (let i = 0; i < 6554; i++) {
     text += "Purple cats drink chicken soup.";
     text += i % 8 === 7 ? "\n" : " ";
   }
