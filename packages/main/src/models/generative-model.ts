@@ -22,6 +22,7 @@ import {
 import {
   BatchEmbedContentsRequest,
   BatchEmbedContentsResponse,
+  CachedContent,
   Content,
   CountTokensRequest,
   CountTokensResponse,
@@ -61,6 +62,7 @@ export class GenerativeModel {
   tools?: Tool[];
   toolConfig?: ToolConfig;
   systemInstruction?: Content;
+  cachedContent: CachedContent;
 
   constructor(
     public apiKey: string,
@@ -81,6 +83,7 @@ export class GenerativeModel {
     this.systemInstruction = formatSystemInstruction(
       modelParams.systemInstruction,
     );
+    this.cachedContent = modelParams.cachedContent;
     this.requestOptions = requestOptions || {};
   }
 
@@ -101,6 +104,7 @@ export class GenerativeModel {
         tools: this.tools,
         toolConfig: this.toolConfig,
         systemInstruction: this.systemInstruction,
+        cachedContent: this.cachedContent?.name,
         ...formattedParams,
       },
       this.requestOptions,
@@ -126,6 +130,7 @@ export class GenerativeModel {
         tools: this.tools,
         toolConfig: this.toolConfig,
         systemInstruction: this.systemInstruction,
+        cachedContent: this.cachedContent?.name,
         ...formattedParams,
       },
       this.requestOptions,
@@ -146,6 +151,7 @@ export class GenerativeModel {
         tools: this.tools,
         toolConfig: this.toolConfig,
         systemInstruction: this.systemInstruction,
+        cachedContent: this.cachedContent?.name,
         ...startChatParams,
       },
       this.requestOptions,

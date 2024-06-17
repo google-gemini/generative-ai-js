@@ -1,8 +1,0 @@
-{
-  "name": "@google/generative-ai-files",
-  "description": "GoogleAI file upload manager",
-  "main": "../dist/files/index.js",
-  "browser": "../dist/files/index.mjs",
-  "module": "../dist/files/index.mjs",
-  "typings": "../dist/files/files.d.ts"
-}

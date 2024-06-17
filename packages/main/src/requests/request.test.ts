@@ -24,8 +24,8 @@ import {
   DEFAULT_BASE_URL,
   RequestUrl,
   Task,
-  _makeRequestInternal,
-  constructRequest,
+  constructModelRequest,
+  makeModelRequest,
 } from "./request";
 import {
   GoogleGenerativeAIFetchError,
@@ -112,7 +112,7 @@ describe("request methods", () => {
   });
   describe("constructRequest", () => {
     it("handles basic request", async () => {
-      const request = await constructRequest(
+      const request = await constructModelRequest(
         "model-name",
         Task.GENERATE_CONTENT,
         "key",
@@ -131,7 +131,7 @@ describe("request methods", () => {
       ).to.equal("application/json");
     });
     it("passes apiClient", async () => {
-      const request = await constructRequest(
+      const request = await constructModelRequest(
         "model-name",
         Task.GENERATE_CONTENT,
         "key",
@@ -146,7 +146,7 @@ describe("request methods", () => {
       ).to.equal("client/version genai-js/__PACKAGE_VERSION__");
     });
     it("passes timeout", async () => {
-      const request = await constructRequest(
+      const request = await constructModelRequest(
         "model-name",
         Task.GENERATE_CONTENT,
         "key",
@@ -159,7 +159,7 @@ describe("request methods", () => {
       expect(request.fetchOptions.signal).to.be.instanceOf(AbortSignal);
     });
     it("passes custom headers", async () => {
-      const request = await constructRequest(
+      const request = await constructModelRequest(
         "model-name",
         Task.GENERATE_CONTENT,
         "key",
@@ -175,30 +175,44 @@ describe("request methods", () => {
     });
     it("passes custom x-goog-api-client header", async () => {
       await expect(
-        constructRequest("model-name", Task.GENERATE_CONTENT, "key", true, "", {
-          customHeaders: new Headers({
-            "x-goog-api-client": "client/version",
-          }),
-        }),
+        constructModelRequest(
+          "model-name",
+          Task.GENERATE_CONTENT,
+          "key",
+          true,
+          "",
+          {
+            customHeaders: new Headers({
+              "x-goog-api-client": "client/version",
+            }),
+          },
+        ),
       ).to.be.rejectedWith(GoogleGenerativeAIRequestInputError);
     });
     it("passes apiClient and custom x-goog-api-client header", async () => {
       await expect(
-        constructRequest("model-name", Task.GENERATE_CONTENT, "key", true, "", {
-          apiClient: "client/version",
-          customHeaders: new Headers({
-            "x-goog-api-client": "client/version2",
-          }),
-        }),
+        constructModelRequest(
+          "model-name",
+          Task.GENERATE_CONTENT,
+          "key",
+          true,
+          "",
+          {
+            apiClient: "client/version",
+            customHeaders: new Headers({
+              "x-goog-api-client": "client/version2",
+            }),
+          },
+        ),
       ).to.be.rejectedWith(GoogleGenerativeAIRequestInputError);
     });
   });
-  describe("_makeRequestInternal", () => {
+  describe("makeModelRequest", () => {
     it("no error", async () => {
       const fetchStub = stub().resolves({
         ok: true,
       } as Response);
-      const response = await _makeRequestInternal(
+      const response = await makeModelRequest(
         "model-name",
         Task.GENERATE_CONTENT,
         "key",
@@ -222,7 +236,7 @@ describe("request methods", () => {
       } as Response);
 
       try {
-        await _makeRequestInternal(
+        await makeModelRequest(
           "model-name",
           Task.GENERATE_CONTENT,
           "key",
@@ -251,7 +265,7 @@ describe("request methods", () => {
         statusText: "Server Error",
       } as Response);
       try {
-        await _makeRequestInternal(
+        await makeModelRequest(
           "model-name",
           Task.GENERATE_CONTENT,
           "key",
@@ -280,7 +294,7 @@ describe("request methods", () => {
       } as Response);
 
       try {
-        await _makeRequestInternal(
+        await makeModelRequest(
           "model-name",
           Task.GENERATE_CONTENT,
           "key",
@@ -321,7 +335,7 @@ describe("request methods", () => {
       } as Response);
 
       try {
-        await _makeRequestInternal(
+        await makeModelRequest(
           "model-name",
           Task.GENERATE_CONTENT,
           "key",
@@ -349,7 +363,7 @@ describe("request methods", () => {
     it("has invalid custom header", async () => {
       const fetchStub = stub();
       await expect(
-        _makeRequestInternal(
+        makeModelRequest(
           "model-name",
           Task.GENERATE_CONTENT,
           "key",

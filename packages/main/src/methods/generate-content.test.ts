@@ -52,7 +52,7 @@ describe("generateContent()", () => {
     const mockResponse = getMockResponse(
       "unary-success-basic-reply-short.json",
     );
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     const result = await generateContent("key", "model", fakeRequestParams);
@@ -69,7 +69,7 @@ describe("generateContent()", () => {
   });
   it("long response", async () => {
     const mockResponse = getMockResponse("unary-success-basic-reply-long.json");
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     const result = await generateContent("key", "model", fakeRequestParams);
@@ -85,7 +85,7 @@ describe("generateContent()", () => {
   });
   it("citations", async () => {
     const mockResponse = getMockResponse("unary-success-citations.json");
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     const result = await generateContent("key", "model", fakeRequestParams);
@@ -105,7 +105,7 @@ describe("generateContent()", () => {
     const mockResponse = getMockResponse(
       "unary-failure-prompt-blocked-safety.json",
     );
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     const result = await generateContent("key", "model", fakeRequestParams);
@@ -122,7 +122,7 @@ describe("generateContent()", () => {
     const mockResponse = getMockResponse(
       "unary-failure-finish-reason-safety.json",
     );
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     const result = await generateContent("key", "model", fakeRequestParams);
@@ -137,7 +137,7 @@ describe("generateContent()", () => {
   });
   it("empty content", async () => {
     const mockResponse = getMockResponse("unary-failure-empty-content.json");
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     const result = await generateContent("key", "model", fakeRequestParams);
@@ -152,7 +152,7 @@ describe("generateContent()", () => {
   });
   it("unknown enum - should ignore", async () => {
     const mockResponse = getMockResponse("unary-unknown-enum.json");
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     const result = await generateContent("key", "model", fakeRequestParams);
@@ -168,7 +168,7 @@ describe("generateContent()", () => {
   it("image rejected (400)", async () => {
     const mockResponse = getMockResponse("unary-failure-image-rejected.json");
     const errorJson = await mockResponse.json();
-    const makeRequestStub = stub(request, "makeRequest").rejects(
+    const makeRequestStub = stub(request, "makeModelRequest").rejects(
       new Error(`[400 ] ${errorJson.error.message}`),
     );
     await expect(

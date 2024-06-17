@@ -83,6 +83,7 @@ export class ChatSession {
       tools: this.params?.tools,
       toolConfig: this.params?.toolConfig,
       systemInstruction: this.params?.systemInstruction,
+      cachedContent: this.params?.cachedContent,
       contents: [...this._history, newContent],
     };
     let finalResult;
@@ -139,6 +140,7 @@ export class ChatSession {
       tools: this.params?.tools,
       toolConfig: this.params?.toolConfig,
       systemInstruction: this.params?.systemInstruction,
+      cachedContent: this.params?.cachedContent,
       contents: [...this._history, newContent],
     };
     const streamPromise = generateContentStream(

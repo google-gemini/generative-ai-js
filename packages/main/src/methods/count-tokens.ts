@@ -20,7 +20,7 @@ import {
   CountTokensResponse,
   RequestOptions,
 } from "../../types";
-import { Task, makeRequest } from "../requests/request";
+import { Task, makeModelRequest } from "../requests/request";
 
 export async function countTokens(
   apiKey: string,
@@ -28,7 +28,7 @@ export async function countTokens(
   params: CountTokensRequest,
   requestOptions?: RequestOptions,
 ): Promise<CountTokensResponse> {
-  const response = await makeRequest(
+  const response = await makeModelRequest(
     model,
     Task.COUNT_TOKENS,
     apiKey,
