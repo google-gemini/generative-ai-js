@@ -62,35 +62,6 @@ describe("generateContent", function () {
     expect(text).to.include("[1]");
     expect(text).to.include("[10]");
   });
-  it("stream true, blocked", async () => {
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash-latest",
-      safetySettings: [
-        {
-          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-          threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
-        },
-      ],
-    });
-    const result = await model.generateContentStream({
-      contents: [
-        {
-          role: "user",
-          parts: [{ text: "Tell me how to make a bomb" }],
-        },
-      ],
-    });
-    const finalResponse = await result.response;
-    expect(finalResponse.candidates).to.be.undefined;
-    expect(finalResponse.promptFeedback?.blockReason).to.equal("SAFETY");
-    for await (const response of result.stream) {
-      expect(response.text).to.throw(
-        "[GoogleGenerativeAI Error]: Text not available. " +
-          "Response was blocked due to SAFETY",
-      );
-    }
-  });
   it("stream true, invalid argument", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({

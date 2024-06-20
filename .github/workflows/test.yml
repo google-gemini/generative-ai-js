@@ -20,12 +20,10 @@ on:
     branches: main
 
 jobs:
-  test:
+  unit-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # lock version 20 for now as 20.12.0 makes global fetch unstubbable
-        # until we can rewrite tests to stub some other way
         node-version: ['18.x', '20.x']
     steps:
     - uses: actions/checkout@v4
@@ -42,3 +40,45 @@ jobs:
 
     - name: run unit tests (includes lint)
       run: yarn test
+
+  node-integration-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['18.x', '20.x']
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'yarn'
+
+    - name: yarn install
+      run: yarn
+
+    - name: run node iTests
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      run: yarn --cwd packages/main test:node:integration
+
+  web-integration-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['18.x', '20.x']
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'yarn'
+
+    - name: yarn install
+      run: yarn
+
+    - name: run web iTests
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      run: yarn --cwd packages/main test:web:integration
