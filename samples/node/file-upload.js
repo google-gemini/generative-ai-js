@@ -20,11 +20,11 @@
  * generateContent().
  * 
  * NOTE: The Files API is only available for use in Node.
- * Importing from `@google/generative-ai/files` will crash in the
+ * Importing GoogleAIFileManager will crash in the
  * browser.
  */
 
-import { GoogleAIFileManager } from "@google/generative-ai/files";
+import { GoogleAIFileManager } from "@google/generative-ai/server";
 import { genAI } from "./utils/common.js";
 
 async function run() {

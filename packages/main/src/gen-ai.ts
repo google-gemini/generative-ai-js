@@ -15,8 +15,11 @@
  * limitations under the License.
  */
 
-import { GoogleGenerativeAIError } from "./errors";
-import { ModelParams, RequestOptions } from "../types";
+import {
+  GoogleGenerativeAIError,
+  GoogleGenerativeAIRequestInputError,
+} from "./errors";
+import { CachedContent, ModelParams, RequestOptions } from "../types";
 import { GenerativeModel } from "./models/generative-model";
 
 export { ChatSession } from "./methods/chat-session";
@@ -43,5 +46,36 @@ export class GoogleGenerativeAI {
       );
     }
     return new GenerativeModel(this.apiKey, modelParams, requestOptions);
+  }
+
+  /**
+   * Creates a {@link GenerativeModel} instance from provided content cache.
+   */
+  getGenerativeModelFromCachedContent(
+    cachedContent: CachedContent,
+    requestOptions?: RequestOptions,
+  ): GenerativeModel {
+    if (!cachedContent.name) {
+      throw new GoogleGenerativeAIRequestInputError(
+        "Cached content must contain a `name` field.",
+      );
+    }
+    if (!cachedContent.model) {
+      throw new GoogleGenerativeAIRequestInputError(
+        "Cached content must contain a `model` field.",
+      );
+    }
+    const modelParamsFromCache: ModelParams = {
+      model: cachedContent.model,
+      tools: cachedContent.tools,
+      toolConfig: cachedContent.toolConfig,
+      systemInstruction: cachedContent.systemInstruction,
+      cachedContent,
+    };
+    return new GenerativeModel(
+      this.apiKey,
+      modelParamsFromCache,
+      requestOptions,
+    );
   }
 }
