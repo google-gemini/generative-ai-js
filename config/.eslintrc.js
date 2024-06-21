@@ -182,6 +182,7 @@ module.exports = {
           regex: "^I[A-Z]",
           match: false,
         },
+        leadingUnderscore: 'allow'
       },
     ],
     "@typescript-eslint/consistent-type-definitions": ["error", "interface"],

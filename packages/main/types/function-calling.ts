@@ -17,12 +17,6 @@
 import { FunctionCallingMode } from "./enums";
 
 /**
- * Defines a tool that model can call to access external knowledge.
- * @public
- */
-export declare type Tool = FunctionDeclarationsTool;
-
-/**
  * Structured representation of a function declaration as defined by the
  * [OpenAPI 3.0 specification](https://spec.openapis.org/oas/v3.0.3). Included
  * in this declaration are the function name and parameters. This

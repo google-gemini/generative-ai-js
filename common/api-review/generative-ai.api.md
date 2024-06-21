@@ -93,6 +93,36 @@ export interface CitationSource {
 }
 
 // @public
+export interface CodeExecutionResult {
+    outcome: Outcome;
+    output: string;
+}
+
+// @public
+export interface CodeExecutionResultPart {
+    // (undocumented)
+    codeExecutionResult: CodeExecutionResult;
+    // (undocumented)
+    executableCode?: never;
+    // (undocumented)
+    fileData?: never;
+    // (undocumented)
+    functionCall?: never;
+    // (undocumented)
+    functionResponse?: never;
+    // (undocumented)
+    inlineData?: never;
+    // (undocumented)
+    text?: never;
+}
+
+// @public
+export interface CodeExecutionTool {
+    // (undocumented)
+    codeExecution: {};
+}
+
+// @public
 export interface Content {
     // (undocumented)
     parts: Part[];
@@ -114,14 +144,12 @@ export interface CountTokensRequest {
     generateContentRequest?: GenerateContentRequest;
 }
 
-// Warning: (ae-internal-missing-underscore) The name "CountTokensRequestInternal" should be prefixed with an underscore because the declaration is marked as @internal
-//
 // @internal
-export interface CountTokensRequestInternal {
+export interface _CountTokensRequestInternal {
     // (undocumented)
     contents?: Content[];
     // (undocumented)
-    generateContentRequest?: GenerateContentRequestInternal;
+    generateContentRequest?: _GenerateContentRequestInternal;
 }
 
 // @public
@@ -169,6 +197,38 @@ export interface ErrorDetails {
 }
 
 // @public
+export interface ExecutableCode {
+    code: string;
+    language: ExecutableCodeLanguage;
+}
+
+// @public (undocumented)
+export enum ExecutableCodeLanguage {
+    // (undocumented)
+    LANGUAGE_UNSPECIFIED = "language_unspecified",
+    // (undocumented)
+    PYTHON = "python"
+}
+
+// @public
+export interface ExecutableCodePart {
+    // (undocumented)
+    codeExecutionResult?: never;
+    // (undocumented)
+    executableCode: ExecutableCode;
+    // (undocumented)
+    fileData?: never;
+    // (undocumented)
+    functionCall?: never;
+    // (undocumented)
+    functionResponse?: never;
+    // (undocumented)
+    inlineData?: never;
+    // (undocumented)
+    text?: never;
+}
+
+// @public
 export interface FileData {
     // (undocumented)
     fileUri: string;
@@ -178,6 +238,10 @@ export interface FileData {
 
 // @public
 export interface FileDataPart {
+    // (undocumented)
+    codeExecutionResult?: never;
+    // (undocumented)
+    executableCode?: never;
     // (undocumented)
     fileData: FileData;
     // (undocumented)
@@ -237,6 +301,10 @@ export enum FunctionCallingMode {
 // @public
 export interface FunctionCallPart {
     // (undocumented)
+    codeExecutionResult?: never;
+    // (undocumented)
+    executableCode?: never;
+    // (undocumented)
     fileData?: never;
     // (undocumented)
     functionCall: FunctionCall;
@@ -295,6 +363,10 @@ export interface FunctionResponse {
 // @public
 export interface FunctionResponsePart {
     // (undocumented)
+    codeExecutionResult?: never;
+    // (undocumented)
+    executableCode?: never;
+    // (undocumented)
     fileData?: never;
     // (undocumented)
     functionCall?: never;
@@ -335,10 +407,8 @@ export interface GenerateContentRequest extends BaseParams {
     tools?: Tool[];
 }
 
-// Warning: (ae-internal-missing-underscore) The name "GenerateContentRequestInternal" should be prefixed with an underscore because the declaration is marked as @internal
-//
 // @internal
-export interface GenerateContentRequestInternal extends GenerateContentRequest {
+export interface _GenerateContentRequestInternal extends GenerateContentRequest {
     // (undocumented)
     model?: string;
 }
@@ -499,6 +569,10 @@ export enum HarmProbability {
 // @public
 export interface InlineDataPart {
     // (undocumented)
+    codeExecutionResult?: never;
+    // (undocumented)
+    executableCode?: never;
+    // (undocumented)
     fileData?: never;
     // (undocumented)
     functionCall?: never;
@@ -525,7 +599,15 @@ export interface ModelParams extends BaseParams {
 }
 
 // @public
-export type Part = TextPart | InlineDataPart | FunctionCallPart | FunctionResponsePart | FileDataPart;
+export enum Outcome {
+    OUTCOME_DEADLINE_EXCEEDED = "outcome_deadline_exceeded",
+    OUTCOME_FAILED = "outcome_failed",
+    OUTCOME_OK = "outcome_ok",
+    OUTCOME_UNSPECIFIED = "outcome_unspecified"
+}
+
+// @public
+export type Part = TextPart | InlineDataPart | FunctionCallPart | FunctionResponsePart | FileDataPart | ExecutableCodePart | CodeExecutionResultPart;
 
 // @public
 export const POSSIBLE_ROLES: readonly ["user", "model", "function", "system"];
@@ -615,6 +697,10 @@ export enum TaskType {
 
 // @public
 export interface TextPart {
+    // (undocumented)
+    codeExecutionResult?: never;
+    // (undocumented)
+    executableCode?: never;
     // (undocumented)
     fileData?: never;
     // (undocumented)

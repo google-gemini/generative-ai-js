@@ -50,23 +50,43 @@ export interface CachedContentUpdateParams {
     updateMask?: string[];
 }
 
-// Warning: (ae-internal-missing-underscore) The name "CachedContentUpdateRequest" should be prefixed with an underscore because the declaration is marked as @internal
-//
 // @internal
-export interface CachedContentUpdateRequest {
+export interface _CachedContentUpdateRequest {
     // (undocumented)
-    cachedContent: CachedContentUpdateRequestFields;
+    cachedContent: _CachedContentUpdateRequestFields;
     updateMask?: string[];
 }
 
-// Warning: (ae-internal-missing-underscore) The name "CachedContentUpdateRequestFields" should be prefixed with an underscore because the declaration is marked as @internal
-//
 // @internal
-export interface CachedContentUpdateRequestFields {
+export interface _CachedContentUpdateRequestFields {
     // (undocumented)
     expireTime?: string;
     // (undocumented)
     ttl?: string;
+}
+
+// @public
+export interface CodeExecutionResult {
+    outcome: Outcome;
+    output: string;
+}
+
+// @public
+export interface CodeExecutionResultPart {
+    // (undocumented)
+    codeExecutionResult: CodeExecutionResult;
+    // (undocumented)
+    executableCode?: never;
+    // (undocumented)
+    fileData?: never;
+    // (undocumented)
+    functionCall?: never;
+    // (undocumented)
+    functionResponse?: never;
+    // (undocumented)
+    inlineData?: never;
+    // (undocumented)
+    text?: never;
 }
 
 // @public
@@ -92,6 +112,38 @@ export interface ErrorDetails {
 }
 
 // @public
+export interface ExecutableCode {
+    code: string;
+    language: ExecutableCodeLanguage;
+}
+
+// @public (undocumented)
+export enum ExecutableCodeLanguage {
+    // (undocumented)
+    LANGUAGE_UNSPECIFIED = "language_unspecified",
+    // (undocumented)
+    PYTHON = "python"
+}
+
+// @public
+export interface ExecutableCodePart {
+    // (undocumented)
+    codeExecutionResult?: never;
+    // (undocumented)
+    executableCode: ExecutableCode;
+    // (undocumented)
+    fileData?: never;
+    // (undocumented)
+    functionCall?: never;
+    // (undocumented)
+    functionResponse?: never;
+    // (undocumented)
+    inlineData?: never;
+    // (undocumented)
+    text?: never;
+}
+
+// @public
 export interface FileData {
     // (undocumented)
     fileUri: string;
@@ -101,6 +153,10 @@ export interface FileData {
 
 // @public
 export interface FileDataPart {
+    // (undocumented)
+    codeExecutionResult?: never;
+    // (undocumented)
+    executableCode?: never;
     // (undocumented)
     fileData: FileData;
     // (undocumented)
@@ -192,6 +248,10 @@ export enum FunctionCallingMode {
 // @public
 export interface FunctionCallPart {
     // (undocumented)
+    codeExecutionResult?: never;
+    // (undocumented)
+    executableCode?: never;
+    // (undocumented)
     fileData?: never;
     // (undocumented)
     functionCall: FunctionCall;
@@ -250,6 +310,10 @@ export interface FunctionResponse {
 // @public
 export interface FunctionResponsePart {
     // (undocumented)
+    codeExecutionResult?: never;
+    // (undocumented)
+    executableCode?: never;
+    // (undocumented)
     fileData?: never;
     // (undocumented)
     functionCall?: never;
@@ -294,6 +358,10 @@ export class GoogleAIFileManager {
 // @public
 export interface InlineDataPart {
     // (undocumented)
+    codeExecutionResult?: never;
+    // (undocumented)
+    executableCode?: never;
+    // (undocumented)
     fileData?: never;
     // (undocumented)
     functionCall?: never;
@@ -330,7 +398,15 @@ export interface ListParams {
 }
 
 // @public
-export type Part = TextPart | InlineDataPart | FunctionCallPart | FunctionResponsePart | FileDataPart;
+export enum Outcome {
+    OUTCOME_DEADLINE_EXCEEDED = "outcome_deadline_exceeded",
+    OUTCOME_FAILED = "outcome_failed",
+    OUTCOME_OK = "outcome_ok",
+    OUTCOME_UNSPECIFIED = "outcome_unspecified"
+}
+
+// @public
+export type Part = TextPart | InlineDataPart | FunctionCallPart | FunctionResponsePart | FileDataPart | ExecutableCodePart | CodeExecutionResultPart;
 
 // @public
 export interface RequestOptions {
@@ -369,6 +445,10 @@ export interface Schema {
 
 // @public
 export interface TextPart {
+    // (undocumented)
+    codeExecutionResult?: never;
+    // (undocumented)
+    executableCode?: never;
     // (undocumented)
     fileData?: never;
     // (undocumented)

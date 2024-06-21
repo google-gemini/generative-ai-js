@@ -18,7 +18,11 @@
 import { CachedContent } from "./server/caching";
 import { Content, Part } from "./content";
 import { HarmBlockThreshold, HarmCategory, TaskType } from "./enums";
-import { ResponseSchema, Tool, ToolConfig } from "./function-calling";
+import {
+  FunctionDeclarationsTool,
+  ResponseSchema,
+  ToolConfig,
+} from "./function-calling";
 
 /**
  * Base parameters for a number of methods.
@@ -60,7 +64,8 @@ export interface GenerateContentRequest extends BaseParams {
  * Request sent to `generateContent` endpoint.
  * @internal
  */
-export interface GenerateContentRequestInternal extends GenerateContentRequest {
+export interface _GenerateContentRequestInternal
+  extends GenerateContentRequest {
   model?: string;
 }
 
@@ -132,8 +137,8 @@ export interface CountTokensRequest {
  * Params for calling {@link GenerativeModel.countTokens}
  * @internal
  */
-export interface CountTokensRequestInternal {
-  generateContentRequest?: GenerateContentRequestInternal;
+export interface _CountTokensRequestInternal {
+  generateContentRequest?: _GenerateContentRequestInternal;
   contents?: Content[];
 }
 
@@ -182,4 +187,18 @@ export interface RequestOptions {
    * Custom HTTP request headers.
    */
   customHeaders?: Headers | Record<string, string>;
+}
+
+/**
+ * Defines a tool that model can call to access external knowledge.
+ * @public
+ */
+export declare type Tool = FunctionDeclarationsTool;
+
+/**
+ * Enables the model to execute code as part of generation.
+ * @public
+ */
+export interface CodeExecutionTool {
+  codeExecution: {};
 }

@@ -22,8 +22,10 @@ import * as sinonChai from "sinon-chai";
 import {
   BlockReason,
   Content,
+  ExecutableCodeLanguage,
   FinishReason,
   GenerateContentResponse,
+  Outcome,
 } from "../../types";
 
 use(sinonChai);
@@ -125,6 +127,32 @@ const fakeResponseMixed3: GenerateContentResponse = {
   ],
 };
 
+const fakeResponseCodeExecution: GenerateContentResponse = {
+  candidates: [
+    {
+      index: 0,
+      content: {
+        role: "model",
+        parts: [
+          { text: "here's how to print hello world" },
+          {
+            executableCode: {
+              language: ExecutableCodeLanguage.PYTHON,
+              code: 'print("hello world")',
+            },
+          },
+          {
+            codeExecutionResult: {
+              outcome: Outcome.OUTCOME_OK,
+              output: "hello world",
+            },
+          },
+        ],
+      },
+    },
+  ],
+};
+
 const badFakeResponse: GenerateContentResponse = {
   promptFeedback: {
     blockReason: BlockReason.SAFETY,
@@ -177,6 +205,14 @@ describe("response-helpers methods", () => {
         functionCallPart1.functionCall,
       ]);
       expect(enhancedResponse.text()).to.equal("some text and more text");
+    });
+    it("good response code execution", async () => {
+      const enhancedResponse = addHelpers(fakeResponseCodeExecution);
+      console.log(enhancedResponse.text());
+      expect(enhancedResponse.text()).to.equal(
+        'here\'s how to print hello world\n```python\nprint("hello world")\n```\n\n```\nhello world\n```\n',
+      );
+      expect(enhancedResponse.functionCalls()).to.be.undefined;
     });
     it("bad response safety", async () => {
       const enhancedResponse = addHelpers(badFakeResponse);
