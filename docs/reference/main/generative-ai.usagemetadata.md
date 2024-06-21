@@ -16,6 +16,7 @@ export interface UsageMetadata
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [cachedContentTokenCount](./generative-ai.usagemetadata.cachedcontenttokencount.md) |  | number | Total token count in the cached part of the prompt, i.e. in the cached content. |
 |  [candidatesTokenCount](./generative-ai.usagemetadata.candidatestokencount.md) |  | number | Total number of tokens across the generated candidates. |
 |  [promptTokenCount](./generative-ai.usagemetadata.prompttokencount.md) |  | number | Number of tokens in the prompt. |
 |  [totalTokenCount](./generative-ai.usagemetadata.totaltokencount.md) |  | number | Total token count for the generation request (prompt + candidates). |
