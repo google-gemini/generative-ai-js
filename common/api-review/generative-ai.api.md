@@ -638,7 +638,7 @@ export interface ToolConfig {
 
 // @public
 export interface UsageMetadata {
-    cachedContentTokenCount: number;
+    cachedContentTokenCount?: number;
     candidatesTokenCount: number;
     promptTokenCount: number;
     totalTokenCount: number;

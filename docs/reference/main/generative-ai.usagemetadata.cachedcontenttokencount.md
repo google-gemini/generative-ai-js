@@ -9,5 +9,5 @@ Total token count in the cached part of the prompt, i.e. in the cached content.
 **Signature:**
 
 ```typescript
-cachedContentTokenCount: number;
+cachedContentTokenCount?: number;
 ```
