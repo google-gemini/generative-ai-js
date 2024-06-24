@@ -68,7 +68,7 @@ export interface InlineDataPart {
 }
 
 /**
- * Content part interface if the part represents FunctionResponse.
+ * Content part interface if the part represents a FunctionCall.
  * @public
  */
 export interface FunctionCallPart {
@@ -96,7 +96,7 @@ export interface FunctionResponsePart {
 }
 
 /**
- * Content part interface if the part represents FunctionResponse.
+ * Content part interface if the part represents FileData.
  * @public
  */
 export interface FileDataPart {

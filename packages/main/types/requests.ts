@@ -200,5 +200,9 @@ export declare type Tool = FunctionDeclarationsTool;
  * @public
  */
 export interface CodeExecutionTool {
+  /**
+   * Provide an empty object to enable code execution. This field may have
+   * subfields added in the future.
+   */
   codeExecution: {};
 }
