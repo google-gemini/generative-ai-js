@@ -118,7 +118,6 @@ export interface CodeExecutionResultPart {
 
 // @public
 export interface CodeExecutionTool {
-    // (undocumented)
     codeExecution: {};
 }
 
