@@ -4,7 +4,7 @@
 
 ## FunctionCallPart interface
 
-Content part interface if the part represents FunctionResponse.
+Content part interface if the part represents a FunctionCall.
 
 **Signature:**
 
@@ -16,6 +16,8 @@ export interface FunctionCallPart
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [codeExecutionResult?](./generative-ai.functioncallpart.codeexecutionresult.md) |  | never | _(Optional)_ |
+|  [executableCode?](./generative-ai.functioncallpart.executablecode.md) |  | never | _(Optional)_ |
 |  [fileData?](./generative-ai.functioncallpart.filedata.md) |  | never | _(Optional)_ |
 |  [functionCall](./generative-ai.functioncallpart.functioncall.md) |  | [FunctionCall](./generative-ai.functioncall.md) |  |
 |  [functionResponse?](./generative-ai.functioncallpart.functionresponse.md) |  | never | _(Optional)_ |
