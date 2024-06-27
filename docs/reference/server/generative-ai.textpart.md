@@ -16,6 +16,8 @@ export interface TextPart
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [codeExecutionResult?](./generative-ai.textpart.codeexecutionresult.md) |  | never | _(Optional)_ |
+|  [executableCode?](./generative-ai.textpart.executablecode.md) |  | never | _(Optional)_ |
 |  [fileData?](./generative-ai.textpart.filedata.md) |  | never | _(Optional)_ |
 |  [functionCall?](./generative-ai.textpart.functioncall.md) |  | never | _(Optional)_ |
 |  [functionResponse?](./generative-ai.textpart.functionresponse.md) |  | never | _(Optional)_ |

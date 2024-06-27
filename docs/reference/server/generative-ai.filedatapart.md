@@ -4,7 +4,7 @@
 
 ## FileDataPart interface
 
-Content part interface if the part represents FunctionResponse.
+Content part interface if the part represents FileData.
 
 **Signature:**
 
@@ -16,6 +16,8 @@ export interface FileDataPart
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [codeExecutionResult?](./generative-ai.filedatapart.codeexecutionresult.md) |  | never | _(Optional)_ |
+|  [executableCode?](./generative-ai.filedatapart.executablecode.md) |  | never | _(Optional)_ |
 |  [fileData](./generative-ai.filedatapart.filedata.md) |  | [FileData](./generative-ai.filedata.md) |  |
 |  [functionCall?](./generative-ai.filedatapart.functioncall.md) |  | never | _(Optional)_ |
 |  [functionResponse?](./generative-ai.filedatapart.functionresponse.md) |  | never | _(Optional)_ |
