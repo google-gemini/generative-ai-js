@@ -178,6 +178,12 @@ export function aggregateResponses(
             if (part.functionCall) {
               newPart.functionCall = part.functionCall;
             }
+            if (part.executableCode) {
+              newPart.executableCode = part.executableCode;
+            }
+            if (part.codeExecutionResult) {
+              newPart.codeExecutionResult = part.codeExecutionResult;
+            }
             if (Object.keys(newPart).length === 0) {
               newPart.text = "";
             }

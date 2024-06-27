@@ -20,9 +20,9 @@ import { CachedContentUrl, getHeaders, makeServerRequest } from "./request";
 import {
   CachedContentCreateParams,
   CachedContentUpdateParams,
-  CachedContentUpdateRequestFields,
   ListCacheResponse,
   ListParams,
+  _CachedContentUpdateRequestFields,
 } from "../../types/server";
 import { RpcTask } from "./constants";
 import {
@@ -137,7 +137,7 @@ export class GoogleAICacheManager {
     );
     url.appendPath(parseCacheName(name));
     const headers = getHeaders(url);
-    const formattedCachedContent: CachedContentUpdateRequestFields = {
+    const formattedCachedContent: _CachedContentUpdateRequestFields = {
       ...updateParams.cachedContent,
     };
     if (updateParams.cachedContent.ttlSeconds) {

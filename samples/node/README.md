@@ -29,6 +29,10 @@ This sample assumes that you're providing an `API_KEY` environment variable.
 - [`advanced-text-and-images.js`](advanced-text-and-images.js) - Using `countTokens`, `generationConfig` and streaming with multimodal input
 - [`advanced-chat.js`](advanced-chat.js) - Using `countTokens`, `generationConfig` and streaming with multi-turn conversations
 - [`advanced-embeddings.js`](advanced-embeddings.js) - Using `batchEmbedContents`
+- [`advanced-function-calling.js`](advanced-function-calling.js) - Using function calling
+- [`advanced-code-execution.js`](advanced-code-execution.js) - Using the code execution feature
+- [`content-caching.js`](content-caching.js) - Using `GoogleAICacheManager`
+- [`file-upload.js`](file-upload.js) - Using `GoogleAIFileManager`
 
 ## Documentation
 

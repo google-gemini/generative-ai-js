@@ -15,7 +15,8 @@
  * limitations under the License.
  */
 import { Content, Part } from "../content";
-import { Tool, ToolConfig } from "../function-calling";
+import { ToolConfig } from "../function-calling";
+import { Tool } from "../requests";
 
 /**
  * @public
@@ -92,7 +93,7 @@ export interface CachedContentUpdateParams {
  * Fields that can be updated in an existing content cache.
  * @internal
  */
-export interface CachedContentUpdateRequestFields {
+export interface _CachedContentUpdateRequestFields {
   ttl?: string;
   expireTime?: string;
 }
@@ -101,8 +102,8 @@ export interface CachedContentUpdateRequestFields {
  * Params as sent to the backend (ttl instead of ttlSeconds).
  * @internal
  */
-export interface CachedContentUpdateRequest {
-  cachedContent: CachedContentUpdateRequestFields;
+export interface _CachedContentUpdateRequest {
+  cachedContent: _CachedContentUpdateRequestFields;
   /**
    * protobuf FieldMask
    */

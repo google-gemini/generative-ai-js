@@ -9,7 +9,7 @@ Content part - includes text or image part types.
 **Signature:**
 
 ```typescript
-export type Part = TextPart | InlineDataPart | FunctionCallPart | FunctionResponsePart | FileDataPart;
+export type Part = TextPart | InlineDataPart | FunctionCallPart | FunctionResponsePart | FileDataPart | ExecutableCodePart | CodeExecutionResultPart;
 ```
-**References:** [TextPart](./generative-ai.textpart.md)<!-- -->, [InlineDataPart](./generative-ai.inlinedatapart.md)<!-- -->, [FunctionCallPart](./generative-ai.functioncallpart.md)<!-- -->, [FunctionResponsePart](./generative-ai.functionresponsepart.md)<!-- -->, [FileDataPart](./generative-ai.filedatapart.md)
+**References:** [TextPart](./generative-ai.textpart.md)<!-- -->, [InlineDataPart](./generative-ai.inlinedatapart.md)<!-- -->, [FunctionCallPart](./generative-ai.functioncallpart.md)<!-- -->, [FunctionResponsePart](./generative-ai.functionresponsepart.md)<!-- -->, [FileDataPart](./generative-ai.filedatapart.md)<!-- -->, [ExecutableCodePart](./generative-ai.executablecodepart.md)<!-- -->, [CodeExecutionResultPart](./generative-ai.codeexecutionresultpart.md)
 

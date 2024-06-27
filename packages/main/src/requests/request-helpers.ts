@@ -18,10 +18,10 @@
 import {
   Content,
   CountTokensRequest,
-  CountTokensRequestInternal,
   EmbedContentRequest,
   GenerateContentRequest,
   Part,
+  _CountTokensRequestInternal,
 } from "../../types";
 import {
   GoogleGenerativeAIError,
@@ -112,8 +112,8 @@ function assignRoleToPartsAndValidateSendMessageRequest(
 export function formatCountTokensInput(
   params: CountTokensRequest | string | Array<string | Part>,
   model: string,
-): CountTokensRequestInternal {
-  let formattedRequest: CountTokensRequestInternal = {};
+): _CountTokensRequestInternal {
+  let formattedRequest: _CountTokensRequestInternal = {};
   const containsGenerateContentRequest =
     (params as CountTokensRequest).generateContentRequest != null;
   if ((params as CountTokensRequest).contents) {
