@@ -16,15 +16,12 @@ You can use this JavaScript SDK for applications built with Node.js or for web a
 1. Go to [Google AI Studio](https://aistudio.google.com/).
 2. Login with your Google account.
 3. [Create](https://aistudio.google.com/app/apikey) an API key. Note that in Europe the free tier is not available.
-4. Try one of the Javascript SDK quickstarts:
-- [Quickstart for Node.js](https://ai.google.dev/tutorials/node_quickstart)
-- [Quickstart for web apps](https://ai.google.dev/tutorials/web_quickstart)
+4. Try the [Node.js quickstart](https://ai.google.dev/tutorials/node_quickstart)
 
 
 ## Usage example
-See the [Node.js](https://ai.google.dev/tutorials/node_quickstart) or [Javascript](https://ai.google.dev/tutorials/web_quickstart) quickstarts for complete code.
+See the [Node.js quickstart](https://ai.google.dev/tutorials/node_quickstart) for complete code.
  
-### For Node.js
 1. Install the SDK package
 
 ```js
@@ -54,44 +51,6 @@ const result = await model.generateContent([prompt, image]);
 console.log(result.response.text());
 ```
 
-### Web
-1. Import the SDK
-```html
-<script type="importmap">
-  {
-    "imports": {
-      "@google/generative-ai": "https://esm.run/@google/generative-ai"
-    }
-  }
-</script>
-<script type="module">
-  import { GoogleGenerativeAI } from "@google/generative-ai";
-</script>
-```
-
-2. Initialize the model
-
-```js
-import { GoogleGenerativeAI } from "@google/generative-ai";
-const API_KEY = "..."; // Reminder: This should only be for local testing
-const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
-```
-
-3. Run a prompt
-```js
-const prompt = "Does this look store-bought or homemade?";
-const image = {
-  inlineData: {
-    data: base64EncodedImage /* see JavaScript quickstart for details */,
-    mimeType: "image/png",
-  },
-};
-
-const result = await model.generateContent([prompt, image]);
-console.log(result.response.text());
-```
-
 ## Try out a sample app
 
 This repository contains sample Node and web apps demonstrating how the SDK can access and utilize the Gemini model for various use cases.
@@ -108,32 +67,6 @@ This repository contains sample Node and web apps demonstrating how the SDK can 
 1.  Assign your API key to an environment variable: `export API_KEY=MY_API_KEY`.
 
 1.  Run the sample file you're interested in. Example: `node simple-text.js`.
-
-**To try out the sample web app, follow these steps:**
-
-1.  Check out this repository.\
-`git clone https://github.com/google/generative-ai-js`
-
-1.  [Obtain an API key](https://makersuite.google.com/app/apikey) to use with the Google AI SDKs.
-
-1.  cd into the `samples/web` folder and run `npm install`.
-
-1.  Assign your API key to an environment variable: `export API_KEY=MY_API_KEY`.
-
-1.  Serve your web app by running: `npm run http-server`. Open the displayed URL in a browser.
-
-## Installation and usage
-
-- For Node.js (or web projects using NPM), run `npm install @google/generative-ai`.
-- For web, add `import  { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai"`.
-
-For detailed instructions, you can find quickstarts for the Google AI JavaScript SDK in the Google documentation:
-
-
-- [Quickstart for Node.js](https://ai.google.dev/tutorials/node_quickstart)
-- [Quickstart for web apps](https://ai.google.dev/tutorials/web_quickstart)
-
-These quickstarts describe how to add your API key and the SDK to your app, initialize the model, and then call the API to access the model. It also describes some additional use cases and features, like streaming, counting tokens, and controlling responses. For Node.js, embedding is also available.
 
 ## Documentation
 
