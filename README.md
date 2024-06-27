@@ -11,15 +11,16 @@ The Google AI JavaScript SDK is the easiest way for JavaScript developers to bui
 > at runtime.
 
 ## Get started with the Gemini API
+
 1. Go to [Google AI Studio](https://aistudio.google.com/).
 2. Login with your Google account.
 3. [Create](https://aistudio.google.com/app/apikey) an API key. Note that in Europe the free tier is not available.
 4. Try the [Node.js quickstart](https://ai.google.dev/tutorials/node_quickstart)
 
-
 ## Usage example
+
 See the [Node.js quickstart](https://ai.google.dev/tutorials/node_quickstart) for complete code.
- 
+
 1. Install the SDK package
 
 ```js
@@ -27,6 +28,7 @@ npm install @google/generative-ai
 ```
 
 2. Initialize the model
+
 ```js
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
@@ -36,6 +38,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 ```
 
 3. Run a prompt
+
 ```js
 const prompt = "Does this look store-bought or homemade?";
 const image = {
@@ -55,16 +58,16 @@ This repository contains sample Node and web apps demonstrating how the SDK can 
 
 **To try out the sample Node app, follow these steps:**
 
-1.  Check out this repository.\
+1. Check out this repository.\
 `git clone https://github.com/google/generative-ai-js`
 
-1.  [Obtain an API key](https://makersuite.google.com/app/apikey) to use with the Google AI SDKs.
+1. [Obtain an API key](https://makersuite.google.com/app/apikey) to use with the Google AI SDKs.
 
-1.  cd into the `samples/node` folder and run `npm install`.
+1. cd into the `samples/node` folder and run `npm install`.
 
-1.  Assign your API key to an environment variable: `export API_KEY=MY_API_KEY`.
+1. Assign your API key to an environment variable: `export API_KEY=MY_API_KEY`.
 
-1.  Run the sample file you're interested in. Example: `node simple-text.js`.
+1. Run the sample file you're interested in. Example: `node simple-text.js`.
 
 ## Documentation
 
