@@ -1,5 +1,12 @@
 # @google/generative-ai
 
+## 0.14.0
+
+### Minor Changes
+
+- fb1c0f2: Add a `cachedContentTokenCount` field to the `UsageMetadata` interface returned by `generateContent` responses.
+- 06216be: Add code execution feature.
+
 ## 0.13.0
 
 ### Minor Changes
