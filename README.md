@@ -1,5 +1,7 @@
 # Google AI SDK for JavaScript
 
+The Google AI JavaScript SDK is the easiest way for JavaScript developers to build with the Gemini API. The Gemini API gives you access to Gemini [models](https://ai.google.dev/models/gemini) created by [Google DeepMind](https://deepmind.google/technologies/gemini/#introduction). Gemini models are built from the ground up to be multimodal, so you can reason seamlessly across text, images, and code.
+
 > [!CAUTION]
 > **Using the Google AI SDK for JavaScript directly from a client-side app is
 > recommended for prototyping only.** If you plan to enable billing, we strongly
@@ -7,10 +9,6 @@
 > API key safe. You risk potentially exposing your API key to malicious actors
 > if you embed your API key directly in your JavaScript app or fetch it remotely
 > at runtime.
-
-The Google AI JavaScript SDK is the easiest way for JavaScript developers to build with the Gemini API. The Gemini API gives you access to Gemini [models](https://ai.google.dev/models/gemini) created by [Google DeepMind](https://deepmind.google/technologies/gemini/#introduction). Gemini models are built from the ground up to be multimodal, so you can reason seamlessly across text, images, and code.
-
-You can use this JavaScript SDK for applications built with Node.js or for web apps (but be careful to secure your API key).
 
 ## Get started with the Gemini API
 1. Go to [Google AI Studio](https://aistudio.google.com/).
