@@ -14,7 +14,7 @@ The Google AI JavaScript SDK is the easiest way for JavaScript developers to bui
 
 1. Go to [Google AI Studio](https://aistudio.google.com/).
 2. Login with your Google account.
-3. [Create](https://aistudio.google.com/app/apikey) an API key. Note that in Europe the free tier is not available.
+3. [Create an API key](https://aistudio.google.com/app/apikey). Note that in Europe the free tier is not available.
 4. Try the [Node.js quickstart](https://ai.google.dev/tutorials/node_quickstart)
 
 ## Usage example
