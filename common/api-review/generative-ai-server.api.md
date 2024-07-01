@@ -461,8 +461,10 @@ export interface TextPart {
     text: string;
 }
 
+// Warning: (ae-forgotten-export) The symbol "CodeExecutionTool" needs to be exported by the entry point index.d.ts
+//
 // @public
-export type Tool = FunctionDeclarationsTool;
+export type Tool = FunctionDeclarationsTool | CodeExecutionTool;
 
 // @public
 export interface ToolConfig {

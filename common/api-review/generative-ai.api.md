@@ -713,7 +713,7 @@ export interface TextPart {
 }
 
 // @public
-export type Tool = FunctionDeclarationsTool;
+export type Tool = FunctionDeclarationsTool | CodeExecutionTool;
 
 // @public
 export interface ToolConfig {

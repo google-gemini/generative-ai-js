@@ -9,7 +9,7 @@ Defines a tool that model can call to access external knowledge.
 **Signature:**
 
 ```typescript
-export declare type Tool = FunctionDeclarationsTool;
+export declare type Tool = FunctionDeclarationsTool | CodeExecutionTool;
 ```
 **References:** [FunctionDeclarationsTool](./generative-ai.functiondeclarationstool.md)
 
