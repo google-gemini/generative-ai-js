@@ -90,6 +90,11 @@ export interface CodeExecutionResultPart {
 }
 
 // @public
+export interface CodeExecutionTool {
+    codeExecution: {};
+}
+
+// @public
 export interface Content {
     // (undocumented)
     parts: Part[];
@@ -461,8 +466,6 @@ export interface TextPart {
     text: string;
 }
 
-// Warning: (ae-forgotten-export) The symbol "CodeExecutionTool" needs to be exported by the entry point index.d.ts
-//
 // @public
 export type Tool = FunctionDeclarationsTool | CodeExecutionTool;
 

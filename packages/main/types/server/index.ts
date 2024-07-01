@@ -19,6 +19,6 @@ export * from "./files";
 export * from "./caching";
 export * from "./shared";
 
-export { RequestOptions, Tool } from "../../types/requests";
+export { RequestOptions, Tool, CodeExecutionTool } from "../../types/requests";
 export * from "../../types/content";
 export { FunctionCallingMode } from "../../types/enums";
