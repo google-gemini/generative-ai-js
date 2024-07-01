@@ -90,6 +90,11 @@ export interface CodeExecutionResultPart {
 }
 
 // @public
+export interface CodeExecutionTool {
+    codeExecution: {};
+}
+
+// @public
 export interface Content {
     // (undocumented)
     parts: Part[];
@@ -462,7 +467,7 @@ export interface TextPart {
 }
 
 // @public
-export type Tool = FunctionDeclarationsTool;
+export type Tool = FunctionDeclarationsTool | CodeExecutionTool;
 
 // @public
 export interface ToolConfig {

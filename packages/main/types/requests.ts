@@ -193,7 +193,7 @@ export interface RequestOptions {
  * Defines a tool that model can call to access external knowledge.
  * @public
  */
-export declare type Tool = FunctionDeclarationsTool;
+export declare type Tool = FunctionDeclarationsTool | CodeExecutionTool;
 
 /**
  * Enables the model to execute code as part of generation.
