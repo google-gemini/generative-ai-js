@@ -51,10 +51,16 @@ export class GoogleAIFileManager {
    * Upload a file
    */
   async uploadFile(
-    filePath: string,
+    fileInput: string | Buffer,
     fileMetadata: FileMetadata,
   ): Promise<UploadFileResponse> {
-    const file = readFileSync(filePath);
+    let file: Buffer;
+
+    if (typeof fileInput === "string") {
+      file = readFileSync(fileInput);
+    } else {
+      file = fileInput;
+    }
     const url = new FilesRequestUrl(
       RpcTask.UPLOAD,
       this.apiKey,

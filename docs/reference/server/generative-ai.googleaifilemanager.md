@@ -31,5 +31,5 @@ export declare class GoogleAIFileManager
 |  [deleteFile(fileId)](./generative-ai.googleaifilemanager.deletefile.md) |  | Delete file with given ID |
 |  [getFile(fileId)](./generative-ai.googleaifilemanager.getfile.md) |  | Get metadata for file with given ID |
 |  [listFiles(listParams)](./generative-ai.googleaifilemanager.listfiles.md) |  | List all uploaded files |
-|  [uploadFile(filePath, fileMetadata)](./generative-ai.googleaifilemanager.uploadfile.md) |  | Upload a file |
+|  [uploadFile(fileInput, fileMetadata)](./generative-ai.googleaifilemanager.uploadfile.md) |  | Upload a file |
 

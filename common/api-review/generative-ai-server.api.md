@@ -4,6 +4,8 @@
 
 ```ts
 
+/// <reference types="node" />
+
 // @public
 export interface CachedContent extends CachedContentBase {
     createTime?: string;
@@ -357,7 +359,7 @@ export class GoogleAIFileManager {
     deleteFile(fileId: string): Promise<void>;
     getFile(fileId: string): Promise<FileMetadataResponse>;
     listFiles(listParams?: ListParams): Promise<ListFilesResponse>;
-    uploadFile(filePath: string, fileMetadata: FileMetadata): Promise<UploadFileResponse>;
+    uploadFile(fileInput: string | Buffer, fileMetadata: FileMetadata): Promise<UploadFileResponse>;
 }
 
 // @public
