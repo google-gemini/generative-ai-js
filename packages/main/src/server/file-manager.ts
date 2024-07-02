@@ -16,7 +16,7 @@
  */
 
 import { RequestOptions } from "../../types";
-import { readFileSync } from "fs";
+import { readFile } from "fs/promises";
 import { FilesRequestUrl, getHeaders, makeServerRequest } from "./request";
 import {
   FileMetadata,
@@ -57,7 +57,7 @@ export class GoogleAIFileManager {
     let file: Buffer | string;
 
     if (typeof fileInput === "string") {
-      file = readFileSync(fileInput);
+      file = await readFile(fileInput);
     } else if (Buffer.isBuffer(fileInput)) {
       file = fileInput;
     } else {
