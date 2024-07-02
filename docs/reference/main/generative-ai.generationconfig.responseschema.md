@@ -9,5 +9,5 @@ Output response schema of the generated candidate text. Note: This only applies 
 **Signature:**
 
 ```typescript
-responseSchema?: ResponseSchema;
+responseSchema?: Schema;
 ```

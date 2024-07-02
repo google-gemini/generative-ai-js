@@ -59,8 +59,10 @@ describe("GenerativeModel", () => {
             type: FunctionDeclarationSchemaType.OBJECT,
             properties: {
               testField: {
-                type: FunctionDeclarationSchemaType.STRING,
-                properties: {},
+                type: FunctionDeclarationSchemaType.ARRAY,
+                items: {
+                  type: FunctionDeclarationSchemaType.STRING,
+                },
               },
             },
           },
@@ -90,6 +92,9 @@ describe("GenerativeModel", () => {
     );
     expect(
       genModel.generationConfig?.responseSchema.properties.testField.type,
+    ).to.equal(FunctionDeclarationSchemaType.ARRAY);
+    expect(
+      genModel.generationConfig?.responseSchema.properties.testField.items.type,
     ).to.equal(FunctionDeclarationSchemaType.STRING);
     expect(genModel.safetySettings?.length).to.equal(1);
     expect(genModel.tools?.length).to.equal(1);

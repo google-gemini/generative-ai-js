@@ -56,7 +56,7 @@ export declare interface FunctionDeclaration {
    *   - param1
    * ```
    */
-  parameters?: FunctionDeclarationSchema;
+  parameters?: Schema;
 }
 
 /**
@@ -117,44 +117,17 @@ export interface Schema {
   description?: string;
   /** Optional. Whether the property is nullable. */
   nullable?: boolean;
-  /** Optional. The items of the property. {@link FunctionDeclarationSchema} */
-  items?: FunctionDeclarationSchema;
+  /** Optional. The items of the property. */
+  items?: Schema;
   /** Optional. The enum of the property. */
   enum?: string[];
-  /** Optional. Map of {@link FunctionDeclarationSchema}. */
-  properties?: { [k: string]: FunctionDeclarationSchema };
+  /** Optional. Map of {@link Schema}. */
+  properties?: { [k: string]: Schema };
   /** Optional. Array of required property. */
   required?: string[];
   /** Optional. The example of the property. */
   example?: unknown;
 }
-
-/**
- * Schema for parameters passed to {@link FunctionDeclaration.parameters}.
- * @public
- */
-export interface FunctionDeclarationSchema {
-  /** The type of the parameter. */
-  type: FunctionDeclarationSchemaType;
-  /** The format of the parameter. */
-  properties: { [k: string]: FunctionDeclarationSchemaProperty };
-  /** Optional. Description of the parameter. */
-  description?: string;
-  /** Optional. Array of required parameters. */
-  required?: string[];
-}
-
-/**
- * Schema for top-level function declaration
- * @public
- */
-export interface FunctionDeclarationSchemaProperty extends Schema {}
-
-/**
- * Schema passed to `GenerationConfig.responseSchema`
- * @public
- */
-export interface ResponseSchema extends Schema {}
 
 /**
  * Tool config. This config is shared for all tools provided in the request.

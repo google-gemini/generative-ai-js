@@ -20,7 +20,7 @@ import { Content, Part } from "./content";
 import { HarmBlockThreshold, HarmCategory, TaskType } from "./enums";
 import {
   FunctionDeclarationsTool,
-  ResponseSchema,
+  Schema,
   ToolConfig,
 } from "./function-calling";
 
@@ -101,7 +101,7 @@ export interface GenerationConfig {
    * Note: This only applies when the specified `responseMIMEType` supports a schema; currently
    * this is limited to `application/json`.
    */
-  responseSchema?: ResponseSchema;
+  responseSchema?: Schema;
 }
 
 /**

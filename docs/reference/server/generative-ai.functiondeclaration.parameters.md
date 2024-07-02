@@ -9,7 +9,7 @@ Optional. Describes the parameters to this function in JSON Schema Object format
 **Signature:**
 
 ```typescript
-parameters?: FunctionDeclarationSchema;
+parameters?: Schema;
 ```
 
 ## Example
