@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2023 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,22 +15,23 @@
  * limitations under the License.
  */
 
-import { genAI } from "./utils/common.js";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-async function run(options = {}) {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest", ...options });
+async function systemInstruction() {
+  // [START system_instruction]
+  const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+  const model = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+    systemInstruction: "You are a cat. Your name is Neko.",
+  });
 
-  const prompt = "One, two, three, ";
+  const prompt = "Good morning! How are you?";
 
   const result = await model.generateContent(prompt);
-  console.log(options, "\n" + result.response.text() + "\n");
+  const response = result.response;
+  const text = response.text();
+  console.log(text);
+  // [END system_instruction]
 }
 
-async function runAll() {
-  await run();
-  await run({ generationConfig: { maxOutputTokens: 3 } });
-  await run({ generationConfig: { stopSequences: ["seven"] } });
-  await run({ generationConfig: { temperature: 0 } });
-}
-
-runAll();
+systemInstruction();
