@@ -163,24 +163,16 @@ export function getFunctionCalls(
   }
 }
 
-/**
- * Finish reasons that do NOT cause formatBlockErrorMessage to return a
- * message saying the response was blocked.
- */
-const successFinishReasons = [
-  // Shouldn't happen, but probably shouldn't show an error if it does.
-  FinishReason.FINISH_REASON_UNSPECIFIED,
-  FinishReason.STOP,
-  FinishReason.MAX_TOKENS,
-  // Not sure what circumstances might cause this, but we shouldn't
-  // automatically error.
-  FinishReason.OTHER,
+const badFinishReasons = [
+  FinishReason.RECITATION,
+  FinishReason.SAFETY,
+  FinishReason.LANGUAGE,
 ];
 
 function hadBadFinishReason(candidate: GenerateContentCandidate): boolean {
   return (
     !!candidate.finishReason &&
-    !successFinishReasons.includes(candidate.finishReason)
+    badFinishReasons.includes(candidate.finishReason)
   );
 }
 
