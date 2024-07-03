@@ -33,7 +33,7 @@ async function jsonControlledGeneration() {
         recipeName: {
           type: FunctionDeclarationSchemaType.STRING,
           description: "Name of the recipe",
-          nullable: false
+          nullable: false,
         },
       },
       required: ["recipeName"],
