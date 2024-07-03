@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2023 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,13 @@
  */
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleAIFileManager, FileState } from "@google/generative-ai/server";
+import fs from "fs";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const mediaPath = __dirname + "/media";
 
 async function textGenTextOnlyPrompt() {
   // [START text_gen_text_only_prompt]
@@ -40,7 +47,7 @@ async function textGenTextOnlyPromptStreaming() {
 
   const result = await model.generateContentStream(prompt);
 
-  // print text as it comes in
+  // Print text as it comes in.
   for await (const chunk of result.stream) {
     const chunkText = chunk.text();
     console.log(chunkText);
@@ -62,9 +69,12 @@ async function textGenMultimodalOneImagePrompt() {
     };
   }
 
-  const prompt = "Describe how this product might be manufactured";
+  const prompt = "Describe how this product might be manufactured.";
   // Note: The only accepted mime types are some image types, image/*.
-  const imagePart = fileToGenerativePart("./utils/jetpack.jpg", "image/jpeg");
+  const imagePart = fileToGenerativePart(
+    `${mediaPath}/jetpack.jpg`,
+    "image/jpeg",
+  );
 
   const result = await model.generateContent([prompt, imagePart]);
   const response = result.response;
@@ -87,13 +97,16 @@ async function textGenMultimodalOneImagePromptStreaming() {
     };
   }
 
-  const prompt = "Describe how this product might be manufactured";
+  const prompt = "Describe how this product might be manufactured.";
   // Note: The only accepted mime types are some image types, image/*.
-  const imagePart = fileToGenerativePart("./utils/jetpack.jpg", "image/jpeg");
+  const imagePart = fileToGenerativePart(
+    `${mediaPath}/jetpack.jpg`,
+    "image/jpeg",
+  );
 
   const result = await model.generateContentStream([prompt, imagePart]);
 
-  // print text as it comes in
+  // Print text as it comes in.
   for await (const chunk of result.stream) {
     const chunkText = chunk.text();
     console.log(chunkText);
@@ -121,9 +134,9 @@ async function textGenMultimodalMultiImagePrompt() {
 
   // Note: The only accepted mime types are some image types, image/*.
   const imageParts = [
-    fileToGenerativePart("./utils/jetpack.jpg", "image/jpeg"),
-    fileToGenerativePart("./utils/piranha.jpg", "image/jpeg"),
-    fileToGenerativePart("./utils/firefighter.jpg", "image/jpeg"),
+    fileToGenerativePart(`${mediaPath}/jetpack.jpg`, "image/jpeg"),
+    fileToGenerativePart(`${mediaPath}/piranha.jpg`, "image/jpeg"),
+    fileToGenerativePart(`${mediaPath}/firefighter.jpg`, "image/jpeg"),
   ];
 
   const result = await model.generateContent([prompt, ...imageParts]);
@@ -153,14 +166,14 @@ async function textGenMultimodalMultiImagePromptStreaming() {
 
   // Note: The only accepted mime types are some image types, image/*.
   const imageParts = [
-    fileToGenerativePart("./utils/jetpack.jpg", "image/jpeg"),
-    fileToGenerativePart("./utils/piranha.jpg", "image/jpeg"),
-    fileToGenerativePart("./utils/firefighter.jpg", "image/jpeg"),
+    fileToGenerativePart(`${mediaPath}/jetpack.jpg`, "image/jpeg"),
+    fileToGenerativePart(`${mediaPath}/piranha.jpg`, "image/jpeg"),
+    fileToGenerativePart(`${mediaPath}/firefighter.jpg`, "image/jpeg"),
   ];
 
   const result = await model.generateContentStream([prompt, ...imageParts]);
 
-  // print text as it comes in
+  // Print text as it comes in.
   for await (const chunk of result.stream) {
     const chunkText = chunk.text();
     console.log(chunkText);
@@ -184,7 +197,10 @@ async function textGenMultimodalAudio() {
 
   const prompt = "Give me a summary of this audio file.";
   // Note: The only accepted mime types are some image types, image/*.
-  const audioPart = fileToGenerativePart("./utils/sample.mp3", "audio/mp3");
+  const audioPart = fileToGenerativePart(
+    `${mediaPath}/samplesmall.mp3`,
+    "audio/mp3",
+  );
 
   const result = await model.generateContent([prompt, audioPart]);
   const response = result.response;
@@ -198,20 +214,35 @@ async function textGenMultimodalVideoPrompt() {
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-  function fileToGenerativePart(path, mimeType) {
-    return {
-      inlineData: {
-        data: Buffer.from(fs.readFileSync(path)).toString("base64"),
-        mimeType,
-      },
-    };
+  const fileManager = new GoogleAIFileManager(process.env.API_KEY);
+
+  const uploadResult = await fileManager.uploadFile(
+    `${mediaPath}/Big_Buck_Bunny.mp4`,
+    { mimeType: "video/mp4" },
+  );
+
+  let file = await fileManager.getFile(uploadResult.file.name);
+  while (file.state === FileState.PROCESSING) {
+    process.stdout.write(".");
+    // Sleep for 10 seconds
+    await new Promise((resolve) => setTimeout(resolve, 10_000));
+    // Fetch the file from the API again
+    file = await fileManager.getFile(uploadResult.file.name);
+  }
+
+  if (file.state === FileState.FAILED) {
+    throw new Error("Video processing failed.");
   }
 
   const prompt = "Describe this video clip";
-  // Note: The only accepted mime types are some image types, image/*.
-  const audioPart = fileToGenerativePart("./utils/Big_Buck_Bunny.mp4", "video/mp4");
+  const videoPart = {
+    fileData: {
+      fileUri: uploadResult.file.uri,
+      mimeType: uploadResult.file.mimeType,
+    },
+  };
 
-  const result = await model.generateContent([prompt, audioPart]);
+  const result = await model.generateContent([prompt, videoPart]);
   const response = result.response;
   const text = response.text();
   console.log(text);
@@ -223,20 +254,35 @@ async function textGenMultimodalVideoPromptStreaming() {
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-  function fileToGenerativePart(path, mimeType) {
-    return {
-      inlineData: {
-        data: Buffer.from(fs.readFileSync(path)).toString("base64"),
-        mimeType,
-      },
-    };
+  const fileManager = new GoogleAIFileManager(process.env.API_KEY);
+
+  const uploadResult = await fileManager.uploadFile(
+    `${mediaPath}/Big_Buck_Bunny.mp4`,
+    { mimeType: "video/mp4" },
+  );
+
+  let file = await fileManager.getFile(uploadResult.file.name);
+  while (file.state === FileState.PROCESSING) {
+    process.stdout.write(".");
+    // Sleep for 10 seconds
+    await new Promise((resolve) => setTimeout(resolve, 10_000));
+    // Fetch the file from the API again
+    file = await fileManager.getFile(uploadResult.file.name);
+  }
+
+  if (file.state === FileState.FAILED) {
+    throw new Error("Video processing failed.");
   }
 
   const prompt = "Describe this video clip";
-  // Note: The only accepted mime types are some image types, image/*.
-  const audioPart = fileToGenerativePart("./utils/Big_Buck_Bunny.mp4", "video/mp4");
+  const videoPart = {
+    fileData: {
+      fileUri: uploadResult.file.uri,
+      mimeType: uploadResult.file.mimeType,
+    },
+  };
 
-  const result = await model.generateContent([prompt, audioPart]);
+  const result = await model.generateContent([prompt, videoPart]);
   const response = result.response;
   const text = response.text();
   console.log(text);
@@ -244,6 +290,7 @@ async function textGenMultimodalVideoPromptStreaming() {
 }
 
 async function runAll() {
+  // Comment out or delete any sample cases you don't want to run.
   await textGenTextOnlyPrompt();
   await textGenTextOnlyPromptStreaming();
   await textGenMultimodalOneImagePrompt();
