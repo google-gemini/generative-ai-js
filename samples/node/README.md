@@ -13,27 +13,6 @@ It’s strongly recommended that you do not check an API key into your version c
 
 This sample assumes that you're providing an `API_KEY` environment variable.
 
-## Features
-
-### Simple examples
-
-- [`simple-text.js`](simple-text.js) - Text-only input
-- [`simple-text-and-images.js`](simple-text-and-images.js) - Text-and-images input (multimodal)
-- [`simple-chat.js`](simple-chat.js) - Dialog language tasks, using `ChatSession` class
-- [`simple-config.js`](simple-config.js) - Configuring model parameters
-- [`simple-embedding.js`](simple-embedding.js) - Embeddings, using the `embedding-001` model
-
-### More examples
-
-- [`advanced-text.js`](advanced-text.js) - Using `countTokens`, `safetySettings` and streaming with a text-only input
-- [`advanced-text-and-images.js`](advanced-text-and-images.js) - Using `countTokens`, `generationConfig` and streaming with multimodal input
-- [`advanced-chat.js`](advanced-chat.js) - Using `countTokens`, `generationConfig` and streaming with multi-turn conversations
-- [`advanced-embeddings.js`](advanced-embeddings.js) - Using `batchEmbedContents`
-- [`advanced-function-calling.js`](advanced-function-calling.js) - Using function calling
-- [`advanced-code-execution.js`](advanced-code-execution.js) - Using the code execution feature
-- [`content-caching.js`](content-caching.js) - Using `GoogleAICacheManager`
-- [`file-upload.js`](file-upload.js) - Using `GoogleAIFileManager`
-
 ## Documentation
 
 - [Quickstart: Get started with the Gemini API in Node.js applications](https://ai.google.dev/tutorials/node_quickstart)
