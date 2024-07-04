@@ -80,9 +80,14 @@ access and utilize the Gemini model for various use cases.
 
 ## Documentation
 
-See the
+Check out the docs for this SDK here in the repo and in particular
+[GoogleGenerativeAI](/docs/reference/main/generative-ai.md) and
+[GoogleAIFileManager](/docs/reference/files/generative-ai.googleaifilemanager.md).
+
+See also the
 [Gemini API Cookbook](https://github.com/google-gemini/gemini-api-cookbook/) or
-[ai.google.dev](https://ai.google.dev) for complete documentation.
+[ai.google.dev](https://ai.google.dev) for more generic documentation about the
+Gemini API.
 
 ## Contributing
 
