@@ -258,6 +258,8 @@ export enum FinishReason {
     // (undocumented)
     FINISH_REASON_UNSPECIFIED = "FINISH_REASON_UNSPECIFIED",
     // (undocumented)
+    LANGUAGE = "LANGUAGE",
+    // (undocumented)
     MAX_TOKENS = "MAX_TOKENS",
     // (undocumented)
     OTHER = "OTHER",
