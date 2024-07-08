@@ -36,7 +36,8 @@ async function safetySettings() {
 
   const unsafePrompt =
     "I support Martians Soccer Club and I think " +
-    "Jupiterians Football Club sucks! Write a ironic phrase about them.";
+    "Jupiterians Football Club sucks! Write an ironic phrase telling " +
+    "them how I feel about them.";
 
   const result = await model.generateContent(unsafePrompt);
 
@@ -68,7 +69,8 @@ async function safetySettingsMulti() {
 
   const unsafePrompt =
     "I support Martians Soccer Club and I think " +
-    "Jupiterians Football Club sucks! Write a ironic phrase about them.";
+    "Jupiterians Football Club sucks! Write an ironic phrase telling " +
+    "them how I feel about them.";
 
   const result = await model.generateContent(unsafePrompt);
 
@@ -82,7 +84,7 @@ async function safetySettingsMulti() {
 }
 
 async function run() {
-  // await safetySettings();
+  await safetySettings();
   await safetySettingsMulti();
 }
 
