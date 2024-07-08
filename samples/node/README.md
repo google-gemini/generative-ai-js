@@ -1,9 +1,9 @@
 # Google Generative AI Sample for Node.js (Javascript)
 
-This sample demonstrates how to use state-of-the-art
+These samples demonstrate how to use state-of-the-art
 generative AI models (like Gemini) to build AI-powered features and applications.
 
-To try out this sample, you'll need Node.js v18+.
+To try out these samples, you'll need Node.js v18+.
 
 ## Requirements
 
@@ -12,6 +12,18 @@ Follow the instructions on Google AI Studio [setup page](https://makersuite.goog
 It’s strongly recommended that you do not check an API key into your version control system. Instead, you should use a secrets store for your API key.
 
 This sample assumes that you're providing an `API_KEY` environment variable.
+
+## Instructions
+
+Each of these sample files can be run in Node.js from the command line, for
+example:
+
+```
+node function_calling.js
+```
+
+Some of these files run multiple example cases sequentially, and you may want
+to comment out cases you do not want to run.
 
 ## Documentation
 
