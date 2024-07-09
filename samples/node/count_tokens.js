@@ -42,9 +42,8 @@ async function tokensTextOnly() {
 
   console.log(countResult.totalTokens); // 11
   console.log(countResult.contentTokens[0]);
-  /**
-   * { partTokens: [ 10 ], roleTokens: 1 }
-   */
+  // { partTokens: [ 10 ], roleTokens: 1 }
+  
 
   // Retrieve token count data (including a count of tokens in response) after
   // text generation.
