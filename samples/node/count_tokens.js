@@ -205,7 +205,7 @@ async function tokensCachedContent() {
   const cacheManager = new GoogleAICacheManager(process.env.API_KEY);
   const cacheResult = await cacheManager.create({
     ttlSeconds: 600,
-    model: "models/gemini-1.5-pro-001",
+    model: "models/gemini-1.5-flash-001",
     contents: [
       {
         role: "user",
@@ -216,7 +216,7 @@ async function tokensCachedContent() {
 
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
-    model: "models/gemini-1.5-pro-001",
+    model: "models/gemini-1.5-flash",
   });
 
   const result = await model.countTokens({
@@ -302,14 +302,14 @@ async function tokensTools() {
 
 async function run() {
   // Comment out or delete any sample cases you don't want to run.
-  await tokensTextOnly();
-  await tokensChat();
-  await tokensMultimodalImageInline();
-  await tokensMultimodalImageFileApi();
-  await tokensMultimodalVideoAudioFileApi();
+  // await tokensTextOnly();
+  // await tokensChat();
+  // await tokensMultimodalImageInline();
+  // await tokensMultimodalImageFileApi();
+  // await tokensMultimodalVideoAudioFileApi();
   await tokensCachedContent();
-  await tokensSystemInstruction();
-  await tokensTools();
+  // await tokensSystemInstruction();
+  // await tokensTools();
 }
 
 run();
