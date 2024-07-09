@@ -74,6 +74,7 @@ async function jsonNoSchema() {
 }
 
 async function run() {
+  // Comment out or delete any sample cases you don't want to run.
   await jsonControlledGeneration();
   await jsonNoSchema();
 }

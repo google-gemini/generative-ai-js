@@ -302,6 +302,7 @@ async function tokensTools() {
 }
 
 async function run() {
+  // Comment out or delete any sample cases you don't want to run.
   await tokensTextOnly();
   await tokensChat();
   await tokensMultimodalImageInline();
