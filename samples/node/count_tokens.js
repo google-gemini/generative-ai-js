@@ -302,14 +302,14 @@ async function tokensTools() {
 
 async function run() {
   // Comment out or delete any sample cases you don't want to run.
-  // await tokensTextOnly();
-  // await tokensChat();
-  // await tokensMultimodalImageInline();
-  // await tokensMultimodalImageFileApi();
-  // await tokensMultimodalVideoAudioFileApi();
+  await tokensTextOnly();
+  await tokensChat();
+  await tokensMultimodalImageInline();
+  await tokensMultimodalImageFileApi();
+  await tokensMultimodalVideoAudioFileApi();
   await tokensCachedContent();
-  // await tokensSystemInstruction();
-  // await tokensTools();
+  await tokensSystemInstruction();
+  await tokensTools();
 }
 
 run();
