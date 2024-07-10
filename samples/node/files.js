@@ -228,13 +228,13 @@ async function filesDelete() {
 
 async function runAll() {
   // Comment out or delete any sample cases you don't want to run.
-  // await filesCreateImage();
-  // await filesCreateAudio();
-  // await filesCreateText();
-  // await filesCreateVideo();
-  // await filesList();
-  // await filesGet();
-  // await filesDelete();
+  await filesCreateImage();
+  await filesCreateAudio();
+  await filesCreateText();
+  await filesCreateVideo();
+  await filesList();
+  await filesGet();
+  await filesDelete();
 }
 
 runAll();
