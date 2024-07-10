@@ -46,6 +46,11 @@ function listRequiredImports(line) {
   return results;
 }
 
+/**
+ * Inserts comments describing the required imports for making the code
+ * sample work, since we cannot add actual import statements inside
+ * the samples.
+ */
 async function insertImportComments() {
   const files = fs.readdirSync(samplesDir);
   for (const filename of files) {
@@ -84,24 +89,27 @@ async function insertImportComments() {
           if (functions[fnName].requiredImports) {
             newFileLines.push(`  // Make sure to include these imports:`);
             for (const importPath in functions[fnName].requiredImports) {
-              const symbols = Array.from(functions[fnName].requiredImports[importPath]);
+              const symbols = Array.from(
+                functions[fnName].requiredImports[importPath],
+              );
               newFileLines.push(
-                `  // import { ${symbols.join(", ")} } from "${
-                  importPath
-                }";`,
+                `  // import { ${symbols.join(", ")} } from "${importPath}";`,
               );
             }
           }
         }
       }
-      fs.writeFileSync(join(samplesDir, filename), newFileLines.join('\n'));
+      fs.writeFileSync(join(samplesDir, filename), newFileLines.join("\n"));
     }
   }
 }
+
 function underscoreToCamelCase(underscoreName) {
   return underscoreName
-    .split('_')
-    .map((part, i) => i === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1))
+    .split("_")
+    .map((part, i) =>
+      i === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1),
+    )
     .join("");
 }
 

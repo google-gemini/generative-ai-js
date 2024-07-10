@@ -15,28 +15,43 @@
  * limitations under the License.
  */
 
-import { findFunctions, samplesDir } from './common.js';
+import { findFunctions, samplesDir } from "./common.js";
 import fs from "fs";
 import { join } from "path";
 
+/**
+ * Checks samples to make sure they have region tags and the tags match the
+ * function name.
+ */
 async function checkSamples() {
   const files = fs.readdirSync(samplesDir);
   for (const filename of files) {
-    if (filename.match(/.+\.js$/) && !filename.includes('-')) {
-      const file = fs.readFileSync(join(samplesDir, filename), 'utf-8');
+    if (filename.match(/.+\.js$/) && !filename.includes("-")) {
+      const file = fs.readFileSync(join(samplesDir, filename), "utf-8");
       const functions = findFunctions(file);
       for (const sampleFn in functions) {
-        if (sampleFn === 'runAll' || sampleFn === 'run') {
+        if (sampleFn === "runAll" || sampleFn === "run") {
           continue;
         }
         if (!functions[sampleFn].startTag || !functions[sampleFn].endTag) {
-          console.error(`[${filename}]: Start and end tag not found or not correct in function ${sampleFn}`);
+          console.error(
+            `[${filename}]: Start and end tag not found or not correct in function ${sampleFn}`,
+          );
         }
-        if (camelCaseToUnderscore(sampleFn) !== functions[sampleFn].startTag.tag) {
-          console.error(`[${filename}]: Region start tag ${functions[sampleFn].startTag.tag} doesn't match function name ${sampleFn}`);
+        if (
+          camelCaseToUnderscore(sampleFn) !== functions[sampleFn].startTag.tag
+        ) {
+          console.error(
+            `[${filename}]: Region start tag ${functions[sampleFn].startTag.tag} doesn't match function name ${sampleFn}`,
+          );
         }
-        if (functions[sampleFn].startTag.tag !== functions[sampleFn].endTag.tag || functions[sampleFn].endTag.line <= functions[sampleFn].startTag.line) {
-          console.error(`[${filename}]: Region end tag ${functions[sampleFn].endTag.tag} doesn't match start tag ${functions[sampleFn].startTag.tag}`);
+        if (
+          functions[sampleFn].startTag.tag !== functions[sampleFn].endTag.tag ||
+          functions[sampleFn].endTag.line <= functions[sampleFn].startTag.line
+        ) {
+          console.error(
+            `[${filename}]: Region end tag ${functions[sampleFn].endTag.tag} doesn't match start tag ${functions[sampleFn].startTag.tag}`,
+          );
         }
       }
     }
@@ -44,7 +59,10 @@ async function checkSamples() {
 }
 
 function camelCaseToUnderscore(camelCaseName) {
-  return camelCaseName.split(/\.?(?=[A-Z])/).join('_').toLowerCase();
+  return camelCaseName
+    .split(/\.?(?=[A-Z])/)
+    .join("_")
+    .toLowerCase();
 }
 
 checkSamples();

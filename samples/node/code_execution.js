@@ -19,6 +19,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 async function codeExecutionBasic() {
   // [START code_execution_basic]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
@@ -37,6 +39,8 @@ async function codeExecutionBasic() {
 
 async function codeExecutionRequestOverride() {
   // [START code_execution_request_override]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
@@ -65,6 +69,8 @@ async function codeExecutionRequestOverride() {
 
 async function codeExecutionChat() {
   // [START code_execution_chat]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",

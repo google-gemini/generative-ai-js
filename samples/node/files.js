@@ -25,6 +25,9 @@ const mediaPath = __dirname + "/media";
 
 async function filesCreateImage() {
   // [START files_create_image]
+  // Make sure to include these imports:
+  // import { GoogleAIFileManager } from "@google/generative-ai/server";
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
   const uploadResult = await fileManager.uploadFile(
@@ -56,6 +59,9 @@ async function filesCreateImage() {
 
 async function filesCreateAudio() {
   // [START files_create_audio]
+  // Make sure to include these imports:
+  // import { GoogleAIFileManager, FileState } from "@google/generative-ai/server";
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
   const uploadResult = await fileManager.uploadFile(
@@ -101,6 +107,9 @@ async function filesCreateAudio() {
 
 async function filesCreateText() {
   // [START files_create_text]
+  // Make sure to include these imports:
+  // import { GoogleAIFileManager } from "@google/generative-ai/server";
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
   const uploadResult = await fileManager.uploadFile(`${mediaPath}/a11.txt`, {
@@ -129,6 +138,9 @@ async function filesCreateText() {
 
 async function filesCreateVideo() {
   // [START files_create_video]
+  // Make sure to include these imports:
+  // import { GoogleAIFileManager, FileState } from "@google/generative-ai/server";
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
   const uploadResult = await fileManager.uploadFile(
@@ -174,6 +186,8 @@ async function filesCreateVideo() {
 
 async function filesList() {
   // [START files_list]
+  // Make sure to include these imports:
+  // import { GoogleAIFileManager } from "@google/generative-ai/server";
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
   const listFilesResponse = await fileManager.listFiles();
@@ -187,6 +201,8 @@ async function filesList() {
 
 async function filesGet() {
   // [START files_get]
+  // Make sure to include these imports:
+  // import { GoogleAIFileManager } from "@google/generative-ai/server";
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
   const uploadResponse = await fileManager.uploadFile(
@@ -209,6 +225,8 @@ async function filesGet() {
 
 async function filesDelete() {
   // [START files_delete]
+  // Make sure to include these imports:
+  // import { GoogleAIFileManager } from "@google/generative-ai/server";
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
   const uploadResult = await fileManager.uploadFile(
