@@ -32,9 +32,7 @@ async function textGenTextOnlyPrompt() {
   const prompt = "Write a story about a magic backpack.";
 
   const result = await model.generateContent(prompt);
-  const response = result.response;
-  const text = response.text();
-  console.log(text);
+  console.log(result.response.text());
   // [END text_gen_text_only_prompt]
 }
 
@@ -50,7 +48,7 @@ async function textGenTextOnlyPromptStreaming() {
   // Print text as it comes in.
   for await (const chunk of result.stream) {
     const chunkText = chunk.text();
-    console.log(chunkText);
+    process.stdout.write(chunkText);
   }
   // [END text_gen_text_only_prompt_streaming]
 }
@@ -77,9 +75,7 @@ async function textGenMultimodalOneImagePrompt() {
   );
 
   const result = await model.generateContent([prompt, imagePart]);
-  const response = result.response;
-  const text = response.text();
-  console.log(text);
+  console.log(result.response.text());
   // [END text_gen_multimodal_one_image_prompt]
 }
 
@@ -109,7 +105,7 @@ async function textGenMultimodalOneImagePromptStreaming() {
   // Print text as it comes in.
   for await (const chunk of result.stream) {
     const chunkText = chunk.text();
-    console.log(chunkText);
+    process.stdout.write(chunkText);
   }
   // [END text_gen_multimodal_one_image_prompt_streaming]
 }
@@ -140,9 +136,7 @@ async function textGenMultimodalMultiImagePrompt() {
   ];
 
   const result = await model.generateContent([prompt, ...imageParts]);
-  const response = result.response;
-  const text = response.text();
-  console.log(text);
+  console.log(result.response.text());
   // [END text_gen_multimodal_multi_image_prompt]
 }
 
@@ -176,7 +170,7 @@ async function textGenMultimodalMultiImagePromptStreaming() {
   // Print text as it comes in.
   for await (const chunk of result.stream) {
     const chunkText = chunk.text();
-    console.log(chunkText);
+    process.stdout.write(chunkText);
   }
   // [END text_gen_multimodal_multi_image_prompt_streaming]
 }
@@ -203,9 +197,7 @@ async function textGenMultimodalAudio() {
   );
 
   const result = await model.generateContent([prompt, audioPart]);
-  const response = result.response;
-  const text = response.text();
-  console.log(text);
+  console.log(result.response.text());
   // [END text_gen_multimodal_audio]
 }
 
@@ -243,10 +235,9 @@ async function textGenMultimodalVideoPrompt() {
   };
 
   const result = await model.generateContent([prompt, videoPart]);
-  const response = result.response;
-  const text = response.text();
-  console.log(text);
+  console.log(result.response.text());
   // [END text_gen_multimodal_video_prompt]
+  await fileManager.deleteFile(uploadResult.file.name);
 }
 
 async function textGenMultimodalVideoPromptStreaming() {
@@ -282,11 +273,14 @@ async function textGenMultimodalVideoPromptStreaming() {
     },
   };
 
-  const result = await model.generateContent([prompt, videoPart]);
-  const response = result.response;
-  const text = response.text();
-  console.log(text);
+  const result = await model.generateContentStream([prompt, videoPart]);
+  // Print text as it comes in.
+  for await (const chunk of result.stream) {
+    const chunkText = chunk.text();
+    process.stdout.write(chunkText);
+  }
   // [END text_gen_multimodal_video_prompt_streaming]
+  await fileManager.deleteFile(uploadResult.file.name);
 }
 
 async function runAll() {
