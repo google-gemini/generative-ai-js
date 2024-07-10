@@ -16,7 +16,6 @@
  */
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { GoogleAIFileManager, FileState } from "@google/generative-ai/server";
 import fs from "fs";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
