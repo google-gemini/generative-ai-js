@@ -4,6 +4,7 @@
     "@google/generative-ai": "*"
   },
   "scripts": {
-    "check-samples": "node ./utils/check-samples.js"
+    "check-samples": "node ./utils/check-samples.js",
+    "test": "yarn check-samples"
   }
 }
