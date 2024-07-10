@@ -37,6 +37,8 @@ export function findFunctions(fileText) {
     } else if (currentFunctionName) {
       const tagStartParts = line.match(/\/\/ \[START (.+)\]/);
       const tagEndParts = line.match(/\/\/ \[END (.+)\]/);
+      const importHead = line.match(/\/\/ Make sure to include/);
+      const importComment = line.match(/\/\/ import /);
       if (tagStartParts) {
         functions[currentFunctionName].startTag = {
           line: index,
@@ -47,6 +49,11 @@ export function findFunctions(fileText) {
           line: index,
           tag: tagEndParts[1],
         };
+      } else if (importHead || importComment) {
+        if (!functions[currentFunctionName].importComments) {
+          functions[currentFunctionName].importComments = [];
+        }
+        functions[currentFunctionName].importComments.push(line);
       } else {
         functions[currentFunctionName].body.push(line);
       }

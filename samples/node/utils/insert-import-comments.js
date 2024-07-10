@@ -15,26 +15,94 @@
  * limitations under the License.
  */
 
-import { findFunctions, samplesDir } from './common.js';
+import { findFunctions, samplesDir } from "./common.js";
 import fs from "fs";
 import { join } from "path";
+
+const requiredImports = [
+  {
+    importPath: "@google/generative-ai",
+    symbols: ["GoogleGenerativeAI", "HarmBlockThreshold", "HarmBlockCategory"],
+  },
+  {
+    importPath: "@google/generative-ai/server",
+    symbols: ["GoogleAIFileManager", "GoogleAICacheManager", "FileState"],
+  },
+];
+
+function listRequiredImports(line) {
+  const results = [];
+  for (const requiredImport of requiredImports) {
+    for (const symbol of requiredImport.symbols) {
+      if (line.includes(symbol)) {
+        if (!results[requiredImport.importPath]) {
+          results[requiredImport.importPath] = [];
+        }
+        results[requiredImport.importPath].push(symbol);
+        results.push({ symbol, importPath: requiredImport.importPath });
+      }
+    }
+  }
+  return results;
+}
 
 async function insertImportComments() {
   const files = fs.readdirSync(samplesDir);
   for (const filename of files) {
-    if (filename.match(/.+\.js$/) && !filename.includes('-')) {
-      const file = fs.readFileSync(join(samplesDir, filename), 'utf-8');
+    if (filename.match(/.+\.js$/) && !filename.includes("-")) {
+      const file = fs.readFileSync(join(samplesDir, filename), "utf-8");
       const functions = findFunctions(file);
       for (const fnName in functions) {
         const sampleFn = functions[fnName];
+        let results = [];
         for (const line of sampleFn.body) {
-          if (line.includes('GoogleAIFileManager')) {
-            console.log(fnName);
+          results = results.concat(listRequiredImports(line));
+        }
+        if (results.length > 0) {
+          functions[fnName].requiredImports = {};
+          for (const result of results) {
+            if (!functions[fnName].requiredImports[result.importPath]) {
+              functions[fnName].requiredImports[result.importPath] = new Set();
+            }
+            functions[fnName].requiredImports[result.importPath].add(
+              result.symbol,
+            );
           }
         }
       }
+      const fileLines = file.split("\n");
+      const newFileLines = [];
+      for (const fileLine of fileLines) {
+        const importHead = fileLine.match(/\/\/ Make sure to include/);
+        const importComment = fileLine.match(/\/\/ import /);
+        if (!importHead && !importComment) {
+          newFileLines.push(fileLine);
+        }
+        const tagStartParts = fileLine.match(/\/\/ \[START (.+)\]/);
+        if (tagStartParts) {
+          const fnName = underscoreToCamelCase(tagStartParts[1]);
+          if (functions[fnName].requiredImports) {
+            newFileLines.push(`  // Make sure to include these imports:`);
+            for (const importPath in functions[fnName].requiredImports) {
+              const symbols = Array.from(functions[fnName].requiredImports[importPath]);
+              newFileLines.push(
+                `  // import { ${symbols.join(", ")} } from "${
+                  importPath
+                }";`,
+              );
+            }
+          }
+        }
+      }
+      fs.writeFileSync(join(samplesDir, filename), newFileLines.join('\n'));
     }
   }
+}
+function underscoreToCamelCase(underscoreName) {
+  return underscoreName
+    .split('_')
+    .map((part, i) => i === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1))
+    .join("");
 }
 
 insertImportComments();
