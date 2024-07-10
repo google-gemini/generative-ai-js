@@ -83,10 +83,10 @@ async function safetySettingsMulti() {
   // [END safety_settings_multi]
 }
 
-async function run() {
+async function runAll() {
   // Comment out or delete any sample cases you don't want to run.
   await safetySettings();
   await safetySettingsMulti();
 }
 
-run();
+runAll();

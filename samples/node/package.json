@@ -2,5 +2,8 @@
   "type": "module",
   "dependencies": {
     "@google/generative-ai": "*"
+  },
+  "scripts": {
+    "check-samples": "node ./utils/check-samples.js"
   }
 }
