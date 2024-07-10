@@ -84,6 +84,7 @@ async function safetySettingsMulti() {
 }
 
 async function run() {
+  // Comment out or delete any sample cases you don't want to run.
   await safetySettings();
   await safetySettingsMulti();
 }
