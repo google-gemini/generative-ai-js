@@ -15,30 +15,9 @@
  * limitations under the License.
  */
 
+import { findFunctions, samplesDir } from './common.js';
 import fs from "fs";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const samplesDir = join(__dirname, '../')
-
-function findFunctions(fileText) {
-  const lines = fileText.split('\n');
-  const functions = {};
-  let currentFunctionName = '';
-  for (const line of lines) {
-    const functionStartParts = line.match(/^(async function|function) (.+)\(/);
-    if (functionStartParts) {
-      currentFunctionName = functionStartParts[2];
-      functions[currentFunctionName] = { body: [] };
-    } else if (line.match(/^}$/)) {
-      currentFunctionName = '';
-    } else if (currentFunctionName) {
-      functions[currentFunctionName].body.push(line);
-    }
-  }
-  return functions;
-}
+import { join } from "path";
 
 async function insertImportComments() {
   const files = fs.readdirSync(samplesDir);
@@ -46,11 +25,16 @@ async function insertImportComments() {
     if (filename.match(/.+\.js$/) && !filename.includes('-')) {
       const file = fs.readFileSync(join(samplesDir, filename), 'utf-8');
       const functions = findFunctions(file);
-      console.log(functions);
+      for (const fnName in functions) {
+        const sampleFn = functions[fnName];
+        for (const line of sampleFn.body) {
+          if (line.includes('GoogleAIFileManager')) {
+            console.log(fnName);
+          }
+        }
+      }
     }
   }
 }
-
-// findFunctions();
 
 insertImportComments();

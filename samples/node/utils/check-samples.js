@@ -15,48 +15,28 @@
  * limitations under the License.
  */
 
+import { findFunctions, samplesDir } from './common.js';
 import fs from "fs";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const samplesDir = join(__dirname, '../')
+import { join } from "path";
 
 async function checkSamples() {
   const files = fs.readdirSync(samplesDir);
   for (const filename of files) {
     if (filename.match(/.+\.js$/) && !filename.includes('-')) {
       const file = fs.readFileSync(join(samplesDir, filename), 'utf-8');
-      const lines = file.split('\n');
-      let currentFunctionName = '';
-      let currentStartTag = '';
-      let tagsOk = false;
-      for (const line of lines) {
-        const functionStartParts = line.match(/^(async function|function) (.+)\(/);
-        if (functionStartParts) {
-          currentFunctionName = functionStartParts[2];
+      const functions = findFunctions(file);
+      for (const sampleFn in functions) {
+        if (sampleFn === 'runAll' || sampleFn === 'run') {
+          continue;
         }
-        const tagStartParts = line.match(/\/\/ \[START (.+)\]/);
-        if (tagStartParts) {
-          currentStartTag = tagStartParts[1];
-          if (camelCaseToUnderscore(currentFunctionName) !== currentStartTag) {
-            console.error(`[${filename}]: Region start tag ${currentStartTag} doesn't match function name ${currentFunctionName}`);
-          }
+        if (!functions[sampleFn].startTag || !functions[sampleFn].endTag) {
+          console.error(`[${filename}]: Start and end tag not found or not correct in function ${sampleFn}`);
         }
-        const tagEndParts = line.match(/\/\/ \[END (.+)\]/);
-        if (tagEndParts) {
-          if (tagEndParts[1] !== currentStartTag) {
-            console.error(`[${filename}]: Region end tag ${currentEndTag} doesn't match start tag ${currentStartTag}`);
-          } else {
-            tagsOk = true;
-          }
+        if (camelCaseToUnderscore(sampleFn) !== functions[sampleFn].startTag.tag) {
+          console.error(`[${filename}]: Region start tag ${functions[sampleFn].startTag.tag} doesn't match function name ${sampleFn}`);
         }
-        if (line.match(/^}$/)) {
-          if (!tagsOk && currentFunctionName !== 'runAll') {
-            console.error(`[${filename}]: Start and end tag not found or not correct in function ${currentFunctionName}`);
-          }
-          currentFunctionName = '';
-          tagsOk = false;
+        if (functions[sampleFn].startTag.tag !== functions[sampleFn].endTag.tag || functions[sampleFn].endTag.line <= functions[sampleFn].startTag.line) {
+          console.error(`[${filename}]: Region end tag ${functions[sampleFn].endTag.tag} doesn't match start tag ${functions[sampleFn].startTag.tag}`);
         }
       }
     }
