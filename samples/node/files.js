@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleAIFileManager, FileState } from "@google/generative-ai/server";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -37,6 +38,19 @@ async function filesCreateImage() {
   console.log(
     `Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.file.uri}`,
   );
+
+  const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const result = await model.generateContent([
+    "Tell me about this image.",
+    {
+      fileData: {
+        fileUri: uploadResult.file.uri,
+        mimeType: uploadResult.file.mimeType,
+      },
+    },
+  ]);
+  console.log(result.response.text());
   // [END files_create_image]
 }
 
@@ -69,6 +83,19 @@ async function filesCreateAudio() {
   console.log(
     `Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.file.uri}`,
   );
+
+  const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const result = await model.generateContent([
+    "Tell me about this audio clip.",
+    {
+      fileData: {
+        fileUri: uploadResult.file.uri,
+        mimeType: uploadResult.file.mimeType,
+      },
+    },
+  ]);
+  console.log(result.response.text());
   // [END files_create_audio]
 }
 
@@ -76,17 +103,27 @@ async function filesCreateText() {
   // [START files_create_text]
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
-  const uploadResult = await fileManager.uploadFile(
-    `${mediaPath}/a11.txt`,
-    {
-      mimeType: "text/plain",
-      displayName: "Apollo 11",
-    },
-  );
+  const uploadResult = await fileManager.uploadFile(`${mediaPath}/a11.txt`, {
+    mimeType: "text/plain",
+    displayName: "Apollo 11",
+  });
   // View the response.
   console.log(
     `Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.file.uri}`,
   );
+
+  const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const result = await model.generateContent([
+    "Transcribe the first few sentences of this document.",
+    {
+      fileData: {
+        fileUri: uploadResult.file.uri,
+        mimeType: uploadResult.file.mimeType,
+      },
+    },
+  ]);
+  console.log(result.response.text());
   // [END files_create_text]
 }
 
@@ -119,6 +156,19 @@ async function filesCreateVideo() {
   console.log(
     `Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.file.uri}`,
   );
+
+  const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const result = await model.generateContent([
+    "Tell me about this video.",
+    {
+      fileData: {
+        fileUri: uploadResult.file.uri,
+        mimeType: uploadResult.file.mimeType,
+      },
+    },
+  ]);
+  console.log(result.response.text());
   // [END files_create_video]
 }
 
@@ -151,7 +201,9 @@ async function filesGet() {
   const getResponse = await fileManager.getFile(uploadResponse.file.name);
 
   // View the response.
-  console.log(`Retrieved file ${getResponse.displayName} as ${getResponse.uri}`);
+  console.log(
+    `Retrieved file ${getResponse.displayName} as ${getResponse.uri}`,
+  );
   // [END files_get]
 }
 
@@ -176,13 +228,13 @@ async function filesDelete() {
 
 async function runAll() {
   // Comment out or delete any sample cases you don't want to run.
-  await filesCreateImage();
-  await filesCreateAudio();
-  await filesCreateText();
-  await filesCreateVideo();
-  await filesList();
-  await filesGet();
-  await filesDelete();
+  // await filesCreateImage();
+  // await filesCreateAudio();
+  // await filesCreateText();
+  // await filesCreateVideo();
+  // await filesList();
+  // await filesGet();
+  // await filesDelete();
 }
 
 runAll();
