@@ -300,7 +300,7 @@ async function tokensTools() {
   // [END tokens_tools]
 }
 
-async function run() {
+async function runAll() {
   // Comment out or delete any sample cases you don't want to run.
   await tokensTextOnly();
   await tokensChat();
@@ -312,4 +312,4 @@ async function run() {
   await tokensTools();
 }
 
-run();
+runAll();
