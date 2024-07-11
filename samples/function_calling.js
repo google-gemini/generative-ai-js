@@ -19,6 +19,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 async function functionCalling() {
   // [START function_calling]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   async function setLightValues(brightness, colorTemperature) {
     // This mock API returns the requested lighting values
     return {

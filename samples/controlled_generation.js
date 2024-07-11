@@ -22,6 +22,8 @@ import {
 
 async function jsonControlledGeneration() {
   // [START json_controlled_generation]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
   const schema = {
@@ -57,6 +59,8 @@ async function jsonControlledGeneration() {
 
 async function jsonNoSchema() {
   // [START json_no_schema]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
   const model = genAI.getGenerativeModel({
