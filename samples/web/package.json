@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "node http-server.js",
+    "http-server": "node http-server.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "*"
+  }
+}
