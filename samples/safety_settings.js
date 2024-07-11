@@ -24,7 +24,7 @@ import {
 async function safetySettings() {
   // [START safety_settings]
   // Make sure to include these imports:
-  // import { GoogleGenerativeAI, HarmBlockThreshold } from "@google/generative-ai";
+  // import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
@@ -55,7 +55,7 @@ async function safetySettings() {
 async function safetySettingsMulti() {
   // [START safety_settings_multi]
   // Make sure to include these imports:
-  // import { GoogleGenerativeAI, HarmBlockThreshold } from "@google/generative-ai";
+  // import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",

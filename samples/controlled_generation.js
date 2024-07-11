@@ -23,7 +23,7 @@ import {
 async function jsonControlledGeneration() {
   // [START json_controlled_generation]
   // Make sure to include these imports:
-  // import { GoogleGenerativeAI } from "@google/generative-ai";
+  // import { GoogleGenerativeAI, FunctionDeclarationSchemaType } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
   const schema = {
