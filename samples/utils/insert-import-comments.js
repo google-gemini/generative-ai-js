@@ -17,24 +17,56 @@
 
 import { findFunctions, samplesDir } from "./common.js";
 import fs from "fs";
-import { join } from "path";
+import ts from "typescript";
+import { dirname, join } from "path";
+import { createRequire } from "module";
 
-const requiredImports = [
-  {
-    importPath: "@google/generative-ai",
-    symbols: ["GoogleGenerativeAI", "HarmBlockThreshold", "HarmBlockCategory"],
-  },
-  {
-    importPath: "@google/generative-ai/server",
-    symbols: ["GoogleAIFileManager", "GoogleAICacheManager", "FileState"],
-  },
-];
+const require = createRequire(import.meta.url);
+
+function getTopLevelSymbols(filePath) {
+  const typings = fs.readFileSync(filePath, "utf-8");
+
+  const sourceFile = ts.createSourceFile(
+    filePath,
+    typings,
+    ts.ScriptTarget.ES2015,
+  );
+  let symbols = [];
+  ts.forEachChild(sourceFile, (node) => {
+    if (node.name) {
+      symbols.push(node.name.text);
+    }
+  });
+  return symbols;
+}
+
+export function getAvailableSymbols() {
+  let packagePath = require.resolve('@google/generative-ai/package.json');
+  const pkg = require(packagePath);
+  const coreSymbols = getTopLevelSymbols(join(dirname(packagePath), pkg.exports["."].types));
+  const serverSymbolsRaw = getTopLevelSymbols(join(dirname(packagePath), pkg.exports["./server"].types));
+  const serverSymbols = serverSymbolsRaw.filter(
+    (serverSymbol) => !coreSymbols.includes(serverSymbol),
+  );
+  return [
+    {
+      importPath: "@google/generative-ai",
+      symbols: coreSymbols,
+    },
+    {
+      importPath: "@google/generative-ai/server",
+      symbols: serverSymbols,
+    },
+  ];
+}
+
+const requiredImports = getAvailableSymbols();
 
 function listRequiredImports(line) {
   const results = [];
   for (const requiredImport of requiredImports) {
     for (const symbol of requiredImport.symbols) {
-      if (line.includes(symbol)) {
+      if (line.match(new RegExp(`[^a-zA-Z0-9]${symbol}[^a-zA-Z0-9]`))) {
         if (!results[requiredImport.importPath]) {
           results[requiredImport.importPath] = [];
         }
