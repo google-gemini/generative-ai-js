@@ -1,9 +1,11 @@
-# Google Generative AI Sample for Node.js (Javascript)
+# Google Generative AI Samples for JavaScript
 
 These samples demonstrate how to use state-of-the-art
 generative AI models (like Gemini) to build AI-powered features and applications.
 
 To try out these samples, you'll need Node.js v18+.
+
+For some samples of how to adapt this to web, see the `web/` subdirectory.
 
 ## Requirements
 

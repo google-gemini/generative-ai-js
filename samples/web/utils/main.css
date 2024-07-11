@@ -1,0 +1,116 @@
+/**
+ * @license
+ * Copyright 2023 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+header {
+  border-bottom: 2px solid rgb(127, 127, 127, 0.5);
+  font-size: 24px;
+  padding: 16px;
+  text-align: center;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+}
+
+.loading::after {
+  content: "Loading...";
+  display: block;
+  font-size: 80%;
+  font-style: italic;
+  margin: 16px 0;
+}
+
+.loading {
+  opacity: 0.5;
+}
+
+.error {
+  color: red;
+}
+
+.container,
+header,
+.form-container {
+  margin: 0 auto;
+  max-width: 700px;
+}
+
+.form-container {
+  border-bottom: 2px solid rgb(127, 127, 127, 0.5);
+}
+
+img.thumb {
+  border: 1px solid grey;
+  border-radius: 8px;
+  height: 100px;
+  margin: 0px 16px 16px 0;
+  padding: 2px;
+  width: 100px;
+}
+
+#form,
+.history-item {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+}
+
+#file {
+  flex-grow: 0;
+}
+
+#prompt {
+  margin: 4px;
+  padding: 2px;
+  width: 100%;
+}
+
+button {
+  padding: 2px 16px;
+}
+
+.name {
+  flex-shrink: 0;
+  font-size: 80%;
+  margin: 16px 16px 16px 0;
+  opacity: 0.5;
+  text-align: right;
+  width: 50px;
+}
+
+blockquote {
+  margin: 0;
+}
+
+.history-item {
+  padding: 0 8px 0 0;
+}
+
+.history-item.model-role {
+  background: rgba(127, 127, 127, 0.1);
+}
+
+.history-item > blockquote {
+  flex-grow: 1;
+  margin: 0;
+}

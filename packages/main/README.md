@@ -41,7 +41,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 ```
 
 1.  Run a prompt
@@ -72,11 +72,14 @@ access and utilize the Gemini model for various use cases.
 1.  [Obtain an API key](https://makersuite.google.com/app/apikey) to use with
     the Google AI SDKs.
 
-1.  cd into the `samples/node` folder and run `npm install`.
+2.  cd into the `samples` folder and run `npm install`.
 
-1.  Assign your API key to an environment variable: `export API_KEY=MY_API_KEY`.
+3.  Assign your API key to an environment variable: `export API_KEY=MY_API_KEY`.
 
-1.  Run the sample file you're interested in. Example: `node simple-text.js`.
+4.  Open the sample file you're interested in. Example: `text_generation.js`.
+    In the `runAll()` function, comment out any samples you don't want to run.
+
+5.  Run the sample file. Example: `node text_generation.js`.
 
 ## Documentation
 
