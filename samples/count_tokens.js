@@ -45,13 +45,15 @@ async function tokensTextOnly() {
   console.log(countResult.totalTokens); // 11
   console.log(countResult.contentTokens[0]);
   // { partTokens: [ 10 ], roleTokens: 1 }
-  
 
-  // Retrieve token count data (including a count of tokens in response) after
-  // text generation.
   const generateResult = await model.generateContent(
     "The quick brown fox jumps over the lazy dog.",
   );
+
+  // On the response for `generateContent`, use `usageMetadata`
+  // to get separate input and output token counts
+  // (`promptTokenCount` and `candidatesTokenCount`, respectively),
+  // as well as the combined token count (`totalTokenCount`).
   console.log(generateResult.response.usageMetadata);
   // { promptTokenCount: 11, candidatesTokenCount: 131, totalTokenCount: 142 }
   // [END tokens_text_only]
@@ -65,10 +67,35 @@ async function tokensChat() {
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
   });
-  const chat = model.startChat();
-  const result = await chat.sendMessage("Hi, my name is Bob.");
-  console.log(result.response.usageMetadata);
-  // { promptTokenCount: 8, candidatesTokenCount: 20, totalTokenCount: 28 }
+
+  const chat = model.startChat({
+    history: [
+      {
+        role: "user",
+        parts: [{ text: "Hi my name is Bob" }],
+      },
+      {
+        role: "model",
+        parts: [{ text: "Hi Bob!" }],
+      },
+    ],
+  });
+
+  const countResult = await model.countTokens({
+    generateContentRequest: { contents: await chat.getHistory() },
+  });
+  console.log(countResult.totalTokens); // 10
+
+  const chatResult = await chat.sendMessage(
+    "In one sentence, explain how a computer works to a young child.",
+  );
+
+  // On the response for `sendMessage`, use `usageMetadata`
+  // to get separate input and output token counts
+  // (`promptTokenCount` and `candidatesTokenCount`, respectively),
+  // as well as the combined token count (`totalTokenCount`).
+  console.log(chatResult.response.usageMetadata);
+  // { promptTokenCount: 25, candidatesTokenCount: 22, totalTokenCount: 47 }
   // [END tokens_chat]
 }
 
@@ -95,11 +122,23 @@ async function tokensMultimodalImageInline() {
     "image/jpeg",
   );
 
-  const result = await model.countTokens([
-    "Tell me about this image.",
-    imagePart,
-  ]);
-  console.log(result.totalTokens);
+  const prompt = "Tell me about this image.";
+
+  // Call `countTokens` to get the input token count
+  // of the combined text and file (`totalTokens`).
+  // An image's display or file size does not affect its token count.
+  // Optionally, you can call `countTokens` for the text and file separately.
+  const countResult = await model.countTokens([prompt, imagePart]);
+  console.log(countResult.totalTokens); // 265
+
+  const generateResult = await model.generateContent([prompt, imagePart]);
+
+  // On the response for `generateContent`, use `usageMetadata`
+  // to get separate input and output token counts
+  // (`promptTokenCount` and `candidatesTokenCount`, respectively),
+  // as well as the combined token count (`totalTokenCount`).
+  console.log(generateResult.response.usageMetadata);
+  // { promptTokenCount: 265, candidatesTokenCount: 157, totalTokenCount: 422 }
   // [END tokens_multimodal_image_inline]
 }
 
@@ -127,13 +166,26 @@ async function tokensMultimodalImageFileApi() {
     model: "gemini-1.5-flash",
   });
 
-  const result = await model.countTokens([
-    "Tell me about this image.",
-    imagePart,
-  ]);
+  const prompt = "Tell me about this image.";
 
-  console.log(result.totalTokens);
+  // Call `countTokens` to get the input token count
+  // of the combined text and file (`totalTokens`).
+  // An image's display or file size does not affect its token count.
+  // Optionally, you can call `countTokens` for the text and file separately.
+  const countResult = await model.countTokens([prompt, imagePart]);
+
+  console.log(countResult.totalTokens); // 265
+
+  const generateResult = await model.generateContent([prompt, imagePart]);
+
+  // On the response for `generateContent`, use `usageMetadata`
+  // to get separate input and output token counts
+  // (`promptTokenCount` and `candidatesTokenCount`, respectively),
+  // as well as the combined token count (`totalTokenCount`).
+  console.log(generateResult.response.usageMetadata);
+  // { promptTokenCount: 265, candidatesTokenCount: 157, totalTokenCount: 422 }
   // [END tokens_multimodal_image_file_api]
+  await fileManager.deleteFile(uploadResult.file.name);
 }
 
 async function tokensMultimodalVideoAudioFileApi() {
@@ -143,45 +195,28 @@ async function tokensMultimodalVideoAudioFileApi() {
   // import { GoogleGenerativeAI } from "@google/generative-ai";
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
-  function waitForProcessing(fileName) {
-    return new Promise(async (resolve, reject) => {
-      let file = await fileManager.getFile(fileName);
-      while (file.state === FileState.PROCESSING) {
-        process.stdout.write(".");
-        // Sleep for 10 seconds
-        await new Promise((resolve) => setTimeout(resolve, 10_000));
-        // Fetch the file from the API again
-        file = await fileManager.getFile(fileName);
-      }
-
-      if (file.state === FileState.FAILED) {
-        reject(new Error("Video processing failed."));
-      }
-      resolve();
-    });
-  }
-
-  const uploadAudioResult = await fileManager.uploadFile(
-    `${mediaPath}/samplesmall.mp3`,
-    { mimeType: "audio/mp3" },
-  );
+  function waitForProcessing(fileName) {}
 
   const uploadVideoResult = await fileManager.uploadFile(
     `${mediaPath}/Big_Buck_Bunny.mp4`,
     { mimeType: "video/mp4" },
   );
 
-  await Promise.all([
-    waitForProcessing(uploadAudioResult.file.name),
-    waitForProcessing(uploadVideoResult.file.name),
-  ]);
+  let file = await fileManager.getFile(uploadVideoResult.file.name);
+  process.stdout.write("processing video");
+  while (file.state === FileState.PROCESSING) {
+    process.stdout.write(".");
+    // Sleep for 10 seconds
+    await new Promise((resolve) => setTimeout(resolve, 10_000));
+    // Fetch the file from the API again
+    file = await fileManager.getFile(uploadVideoResult.file.name);
+  }
 
-  const audioPart = {
-    fileData: {
-      fileUri: uploadAudioResult.file.uri,
-      mimeType: uploadAudioResult.file.mimeType,
-    },
-  };
+  if (file.state === FileState.FAILED) {
+    throw new Error("Video processing failed.");
+  } else {
+    process.stdout.write("\n");
+  }
 
   const videoPart = {
     fileData: {
@@ -195,14 +230,26 @@ async function tokensMultimodalVideoAudioFileApi() {
     model: "gemini-1.5-flash",
   });
 
-  const result = await model.countTokens([
-    "Tell me about this audio and video.",
-    audioPart,
-    videoPart,
-  ]);
+  const prompt = "Tell me about this video.";
 
-  console.log(result.totalTokens);
+  // Call `countTokens` to get the input token count
+  // of the combined text and file (`totalTokens`).
+  // An video or audio file's display or file size does not affect its token count.
+  // Optionally, you can call `countTokens` for the text and file separately.
+  const countResult = await model.countTokens([prompt, videoPart]);
+
+  console.log(countResult.totalTokens); // 302
+
+  const generateResult = await model.generateContent([prompt, videoPart]);
+
+  // On the response for `generateContent`, use `usageMetadata`
+  // to get separate input and output token counts
+  // (`promptTokenCount` and `candidatesTokenCount`, respectively),
+  // as well as the combined token count (`totalTokenCount`).
+  console.log(generateResult.response.usageMetadata);
+  // { promptTokenCount: 302, candidatesTokenCount: 46, totalTokenCount: 348 }
   // [END tokens_multimodal_video_audio_file_api]
+  await fileManager.deleteFile(uploadVideoResult.file.name);
 }
 
 async function tokensCachedContent() {
@@ -210,13 +257,14 @@ async function tokensCachedContent() {
   // Make sure to include these imports:
   // import { GoogleAICacheManager } from "@google/generative-ai/server";
   // import { GoogleGenerativeAI } from "@google/generative-ai";
-  // Generate a very long string
-  let longContentString = "";
-  for (let i = 0; i < 32001; i++) {
-    longContentString += "Purple cats drink lemonade.";
-    longContentString += i % 8 === 7 ? "\n" : " ";
-  }
 
+  // Upload large text file.
+  const fileManager = new GoogleAIFileManager(process.env.API_KEY);
+  const uploadResult = await fileManager.uploadFile(`${mediaPath}/a11.txt`, {
+    mimeType: "text/plain",
+  });
+
+  // Create a cache that uses the uploaded file.
   const cacheManager = new GoogleAICacheManager(process.env.API_KEY);
   const cacheResult = await cacheManager.create({
     ttlSeconds: 600,
@@ -224,7 +272,18 @@ async function tokensCachedContent() {
     contents: [
       {
         role: "user",
-        parts: [{ text: longContentString }],
+        parts: [{ text: "Here's the Apollo 11 transcript:" }],
+      },
+      {
+        role: "user",
+        parts: [
+          {
+            fileData: {
+              fileUri: uploadResult.file.uri,
+              mimeType: uploadResult.file.mimeType,
+            },
+          },
+        ],
       },
     ],
   });
@@ -234,16 +293,33 @@ async function tokensCachedContent() {
     model: "models/gemini-1.5-flash",
   });
 
+  // Call `countTokens` to get the input token count
+  // of the combined text and file (`totalTokens`).
   const result = await model.countTokens({
     generateContentRequest: {
       contents: [
-        { role: "user", parts: [{ text: "What do purple cats drink?" }] },
+        {
+          role: "user",
+          parts: [{ text: "Please give a short summary of this file." }],
+        },
       ],
       cachedContent: cacheResult.name,
     },
   });
 
-  console.log(result.totalTokens);
+  console.log(result.totalTokens); // 10
+
+  const generateResult = await model.generateContent(
+    "Please give a short summary of this file.",
+  );
+
+  // On the response for `generateContent`, use `usageMetadata`
+  // to get separate input and output token counts
+  // (`promptTokenCount` and `candidatesTokenCount`, respectively),
+  // as well as the combined token count (`totalTokenCount`).
+  console.log(generateResult.response.usageMetadata);
+  // { promptTokenCount: 10, candidatesTokenCount: 31, totalTokenCount: 41 }
+
   await cacheManager.delete(cacheResult.name);
   // [END tokens_cached_content]
 }
@@ -267,15 +343,15 @@ async function tokensSystemInstruction() {
       ],
       systemInstruction: {
         role: "system",
-        parts: [{ text: "Talk like a pirate!" }],
+        parts: [{ text: "You are a cat. Your name is Neko." }],
       },
     },
   });
 
   console.log(result);
   // {
-  //   totalTokens: 17,
-  //   systemInstructionsTokens: { partTokens: [ 5 ], roleTokens: 1 },
+  //   totalTokens: 23,
+  //   systemInstructionsTokens: { partTokens: [ 11 ], roleTokens: 1 },
   //   contentTokens: [ { partTokens: [Array], roleTokens: 1 } ]
   // }
   // [END tokens_system_instruction]
@@ -302,7 +378,11 @@ async function tokensTools() {
       contents: [
         {
           role: "user",
-          parts: [{ text: "The quick brown fox jumps over the lazy dog." }],
+          parts: [
+            {
+              text: "I have 57 cats, each owns 44 mittens, how many mittens is that in total?",
+            },
+          ],
         },
       ],
       tools: [{ functionDeclarations }],
@@ -311,7 +391,7 @@ async function tokensTools() {
 
   console.log(result);
   // {
-  //   totalTokens: 87,
+  //   totalTokens: 99,
   //   systemInstructionsTokens: {},
   //   contentTokens: [ { partTokens: [Array], roleTokens: 1 } ],
   //   toolTokens: [ { functionDeclarationTokens: [Array] } ]
