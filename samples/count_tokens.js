@@ -255,7 +255,7 @@ async function tokensMultimodalVideoAudioFileApi() {
 async function tokensCachedContent() {
   // [START tokens_cached_content]
   // Make sure to include these imports:
-  // import { GoogleAICacheManager } from "@google/generative-ai/server";
+  // import { GoogleAIFileManager, GoogleAICacheManager } from "@google/generative-ai/server";
   // import { GoogleGenerativeAI } from "@google/generative-ai";
 
   // Upload large text file.
