@@ -195,8 +195,6 @@ async function tokensMultimodalVideoAudioFileApi() {
   // import { GoogleGenerativeAI } from "@google/generative-ai";
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
-  function waitForProcessing(fileName) {}
-
   const uploadVideoResult = await fileManager.uploadFile(
     `${mediaPath}/Big_Buck_Bunny.mp4`,
     { mimeType: "video/mp4" },
