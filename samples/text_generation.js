@@ -26,6 +26,8 @@ const mediaPath = __dirname + "/media";
 
 async function textGenTextOnlyPrompt() {
   // [START text_gen_text_only_prompt]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -38,6 +40,8 @@ async function textGenTextOnlyPrompt() {
 
 async function textGenTextOnlyPromptStreaming() {
   // [START text_gen_text_only_prompt_streaming]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -55,6 +59,8 @@ async function textGenTextOnlyPromptStreaming() {
 
 async function textGenMultimodalOneImagePrompt() {
   // [START text_gen_multimodal_one_image_prompt]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -81,6 +87,8 @@ async function textGenMultimodalOneImagePrompt() {
 
 async function textGenMultimodalOneImagePromptStreaming() {
   // [START text_gen_multimodal_one_image_prompt_streaming]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -112,6 +120,8 @@ async function textGenMultimodalOneImagePromptStreaming() {
 
 async function textGenMultimodalMultiImagePrompt() {
   // [START text_gen_multimodal_multi_image_prompt]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -142,6 +152,8 @@ async function textGenMultimodalMultiImagePrompt() {
 
 async function textGenMultimodalMultiImagePromptStreaming() {
   // [START text_gen_multimodal_multi_image_prompt_streaming]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -177,6 +189,8 @@ async function textGenMultimodalMultiImagePromptStreaming() {
 
 async function textGenMultimodalAudio() {
   // [START text_gen_multimodal_audio]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -203,6 +217,9 @@ async function textGenMultimodalAudio() {
 
 async function textGenMultimodalVideoPrompt() {
   // [START text_gen_multimodal_video_prompt]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
+  // import { GoogleAIFileManager, FileState } from "@google/generative-ai/server";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -242,6 +259,9 @@ async function textGenMultimodalVideoPrompt() {
 
 async function textGenMultimodalVideoPromptStreaming() {
   // [START text_gen_multimodal_video_prompt_streaming]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
+  // import { GoogleAIFileManager, FileState } from "@google/generative-ai/server";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 

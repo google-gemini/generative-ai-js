@@ -19,6 +19,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 async function embedContent() {
   // [START embed_content]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
     model: "text-embedding-004",
@@ -32,6 +34,8 @@ async function embedContent() {
 
 async function batchEmbedContents() {
   // [START batch_embed_contents]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
     model: "text-embedding-004",
