@@ -240,6 +240,7 @@ describe("GenerativeModel", () => {
       "apiKey",
       {
         model: "my-model",
+        systemInstruction: "you are a cat",
       },
       {
         apiVersion: "v2000",
@@ -257,7 +258,9 @@ describe("GenerativeModel", () => {
       request.Task.COUNT_TOKENS,
       match.any,
       false,
-      match.any,
+      match((value: string) => {
+        return value.includes("hello") && value.includes("you are a cat");
+      }),
       match((value) => {
         return value.apiVersion === "v2000";
       }),

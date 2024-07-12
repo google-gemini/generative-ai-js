@@ -287,36 +287,30 @@ async function tokensCachedContent() {
   });
 
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-  const model = genAI.getGenerativeModel({
-    model: "models/gemini-1.5-flash",
-  });
+  const model = genAI.getGenerativeModelFromCachedContent(cacheResult);
+
+  const prompt = "Please give a short summary of this file.";
 
   // Call `countTokens` to get the input token count
   // of the combined text and file (`totalTokens`).
-  const result = await model.countTokens({
-    generateContentRequest: {
-      contents: [
-        {
-          role: "user",
-          parts: [{ text: "Please give a short summary of this file." }],
-        },
-      ],
-      cachedContent: cacheResult.name,
-    },
-  });
+  const result = await model.countTokens(prompt);
 
   console.log(result.totalTokens); // 10
 
-  const generateResult = await model.generateContent(
-    "Please give a short summary of this file.",
-  );
+  const generateResult = await model.generateContent(prompt);
 
   // On the response for `generateContent`, use `usageMetadata`
   // to get separate input and output token counts
   // (`promptTokenCount` and `candidatesTokenCount`, respectively),
-  // as well as the combined token count (`totalTokenCount`).
+  // as well as the cached content token count and the combined total
+  // token count.
   console.log(generateResult.response.usageMetadata);
-  // { promptTokenCount: 10, candidatesTokenCount: 31, totalTokenCount: 41 }
+  // {
+  //   promptTokenCount: 323396,
+  //   candidatesTokenCount: 113,
+  //   totalTokenCount: 323509,
+  //   cachedContentTokenCount: 323386
+  // }
 
   await cacheManager.delete(cacheResult.name);
   // [END tokens_cached_content]
@@ -329,22 +323,12 @@ async function tokensSystemInstruction() {
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
     model: "models/gemini-1.5-flash",
+    systemInstruction: "You are a cat. Your name is Neko.",
   });
 
-  const result = await model.countTokens({
-    generateContentRequest: {
-      contents: [
-        {
-          role: "user",
-          parts: [{ text: "The quick brown fox jumps over the lazy dog." }],
-        },
-      ],
-      systemInstruction: {
-        role: "system",
-        parts: [{ text: "You are a cat. Your name is Neko." }],
-      },
-    },
-  });
+  const result = await model.countTokens(
+    "The quick brown fox jumps over the lazy dog.",
+  );
 
   console.log(result);
   // {
@@ -360,9 +344,6 @@ async function tokensTools() {
   // Make sure to include these imports:
   // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-  const model = genAI.getGenerativeModel({
-    model: "models/gemini-1.5-flash",
-  });
 
   const functionDeclarations = [
     { name: "add" },
@@ -371,21 +352,14 @@ async function tokensTools() {
     { name: "divide" },
   ];
 
-  const result = await model.countTokens({
-    generateContentRequest: {
-      contents: [
-        {
-          role: "user",
-          parts: [
-            {
-              text: "I have 57 cats, each owns 44 mittens, how many mittens is that in total?",
-            },
-          ],
-        },
-      ],
-      tools: [{ functionDeclarations }],
-    },
+  const model = genAI.getGenerativeModel({
+    model: "models/gemini-1.5-flash",
+    tools: [{ functionDeclarations }],
   });
+
+  const result = await model.countTokens(
+    "I have 57 cats, each owns 44 mittens, how many mittens is that in total?",
+  );
 
   console.log(result);
   // {
