@@ -28,6 +28,9 @@ const mediaPath = __dirname + "/media";
 
 async function cacheCreate() {
   // [START cache_create]
+  // Make sure to include these imports:
+  // import { GoogleAICacheManager, GoogleAIFileManager } from "@google/generative-ai/server";
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const cacheManager = new GoogleAICacheManager(process.env.API_KEY);
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
@@ -66,6 +69,9 @@ async function cacheCreate() {
 
 async function cacheCreateFromName() {
   // [START cache_create_from_name]
+  // Make sure to include these imports:
+  // import { GoogleAICacheManager, GoogleAIFileManager } from "@google/generative-ai/server";
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const cacheManager = new GoogleAICacheManager(process.env.API_KEY);
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
@@ -102,6 +108,9 @@ async function cacheCreateFromName() {
 
 async function cacheCreateFromChat() {
   // [START cache_create_from_chat]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
+  // import { GoogleAICacheManager, GoogleAIFileManager } from "@google/generative-ai/server";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const cacheManager = new GoogleAICacheManager(process.env.API_KEY);
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
@@ -147,6 +156,8 @@ async function cacheCreateFromChat() {
 
 async function cacheDelete() {
   // [START cache_delete]
+  // Make sure to include these imports:
+  // import { GoogleAICacheManager, GoogleAIFileManager } from "@google/generative-ai/server";
   const cacheManager = new GoogleAICacheManager(process.env.API_KEY);
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
@@ -176,6 +187,8 @@ async function cacheDelete() {
 
 async function cacheGet() {
   // [START cache_get]
+  // Make sure to include these imports:
+  // import { GoogleAICacheManager, GoogleAIFileManager } from "@google/generative-ai/server";
   const cacheManager = new GoogleAICacheManager(process.env.API_KEY);
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
@@ -207,6 +220,8 @@ async function cacheGet() {
 
 async function cacheList() {
   // [START cache_list]
+  // Make sure to include these imports:
+  // import { GoogleAICacheManager, GoogleAIFileManager } from "@google/generative-ai/server";
   const cacheManager = new GoogleAICacheManager(process.env.API_KEY);
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
@@ -241,6 +256,8 @@ async function cacheList() {
 
 async function cacheUpdate() {
   // [START cache_update]
+  // Make sure to include these imports:
+  // import { GoogleAICacheManager, GoogleAIFileManager } from "@google/generative-ai/server";
   const cacheManager = new GoogleAICacheManager(process.env.API_KEY);
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 

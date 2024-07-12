@@ -30,6 +30,8 @@ const mediaPath = __dirname + "/media";
 
 async function tokensTextOnly() {
   // [START tokens_text_only]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
@@ -57,6 +59,8 @@ async function tokensTextOnly() {
 
 async function tokensChat() {
   // [START tokens_chat]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
@@ -70,6 +74,8 @@ async function tokensChat() {
 
 async function tokensMultimodalImageInline() {
   // [START tokens_multimodal_image_inline]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
@@ -99,6 +105,9 @@ async function tokensMultimodalImageInline() {
 
 async function tokensMultimodalImageFileApi() {
   // [START tokens_multimodal_image_file_api]
+  // Make sure to include these imports:
+  // import { GoogleAIFileManager } from "@google/generative-ai/server";
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
   const uploadResult = await fileManager.uploadFile(
@@ -129,6 +138,9 @@ async function tokensMultimodalImageFileApi() {
 
 async function tokensMultimodalVideoAudioFileApi() {
   // [START tokens_multimodal_video_audio_file_api]
+  // Make sure to include these imports:
+  // import { GoogleAIFileManager, FileState } from "@google/generative-ai/server";
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 
   function waitForProcessing(fileName) {
@@ -195,6 +207,9 @@ async function tokensMultimodalVideoAudioFileApi() {
 
 async function tokensCachedContent() {
   // [START tokens_cached_content]
+  // Make sure to include these imports:
+  // import { GoogleAICacheManager } from "@google/generative-ai/server";
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   // Generate a very long string
   let longContentString = "";
   for (let i = 0; i < 32001; i++) {
@@ -235,6 +250,8 @@ async function tokensCachedContent() {
 
 async function tokensSystemInstruction() {
   // [START tokens_system_instruction]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
     model: "models/gemini-1.5-flash",
@@ -266,6 +283,8 @@ async function tokensSystemInstruction() {
 
 async function tokensTools() {
   // [START tokens_tools]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({
     model: "models/gemini-1.5-flash",

@@ -25,6 +25,8 @@ const mediaPath = __dirname + "/media";
 
 async function chat() {
   // [START chat]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   const chat = model.startChat({
@@ -48,6 +50,8 @@ async function chat() {
 
 async function chatStreaming() {
   // [START chat_streaming]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   const chat = model.startChat({
@@ -77,6 +81,8 @@ async function chatStreaming() {
 
 async function chatStreamingWithImages() {
   // [START chat_streaming_with_images]
+  // Make sure to include these imports:
+  // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   const chat = model.startChat();
