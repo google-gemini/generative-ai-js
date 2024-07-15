@@ -43,8 +43,6 @@ async function tokensTextOnly() {
   );
 
   console.log(countResult.totalTokens); // 11
-  console.log(countResult.contentTokens[0]);
-  // { partTokens: [ 10 ], roleTokens: 1 }
 
   const generateResult = await model.generateContent(
     "The quick brown fox jumps over the lazy dog.",
