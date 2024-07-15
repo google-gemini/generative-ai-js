@@ -1,5 +1,15 @@
 # @google/generative-ai
 
+## 0.15.0
+
+### Minor Changes
+
+- 05b8631: Add FinishReason.LANGUAGE enum value.
+
+### Patch Changes
+
+- e87d5b0: Fix countTokens to include any params set on the model instance.
+
 ## 0.14.1
 
 ### Patch Changes
