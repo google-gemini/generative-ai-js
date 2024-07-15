@@ -182,8 +182,6 @@ describe("request formatting methods", () => {
       const result = formatCountTokensInput("some text content", {
         model: "gemini-1.5-flash",
       });
-      // expect(result.generateContentRequest.model).to.equal("gemini-1.5-flash");
-      // expect(result.generateContentRequest.contents).to.equal("gemini-1.5-flash");
       expect(result.generateContentRequest).to.deepEqualIgnoreUndefined({
         model: "gemini-1.5-flash",
         contents: [

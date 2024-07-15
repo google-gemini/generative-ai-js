@@ -125,18 +125,6 @@ export function formatCountTokensInput(
     cachedContent: modelParams?.cachedContent?.name,
     contents: [],
   };
-  // let formattedRequest: _CountTokensRequestInternal = {
-  //   generateContentRequest: {
-  //     model: modelParams?.model,
-  //     generationConfig: modelParams?.generationConfig,
-  //     safetySettings: modelParams?.safetySettings,
-  //     tools: modelParams?.tools,
-  //     toolConfig: modelParams?.toolConfig,
-  //     systemInstruction: modelParams?.systemInstruction,
-  //     cachedContent: modelParams?.cachedContent?.name,
-  //     contents: [],
-  //   },
-  // };
   const containsGenerateContentRequest =
     (params as CountTokensRequest).generateContentRequest != null;
   if ((params as CountTokensRequest).contents) {
