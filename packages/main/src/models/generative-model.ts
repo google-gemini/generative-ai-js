@@ -164,7 +164,15 @@ export class GenerativeModel {
   async countTokens(
     request: CountTokensRequest | string | Array<string | Part>,
   ): Promise<CountTokensResponse> {
-    const formattedParams = formatCountTokensInput(request, this.model);
+    const formattedParams = formatCountTokensInput(request, {
+      model: this.model,
+      generationConfig: this.generationConfig,
+      safetySettings: this.safetySettings,
+      tools: this.tools,
+      toolConfig: this.toolConfig,
+      systemInstruction: this.systemInstruction,
+      cachedContent: this.cachedContent,
+    });
     return countTokens(
       this.apiKey,
       this.model,

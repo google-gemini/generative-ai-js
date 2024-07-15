@@ -2389,6 +2389,11 @@ chai-as-promised@^7.1.1:
   dependencies:
     check-error "^1.0.2"
 
+chai-deep-equal-ignore-undefined@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/chai-deep-equal-ignore-undefined/-/chai-deep-equal-ignore-undefined-1.1.1.tgz#c9e3736fed06c83572f03c592c025cf2703fd1a1"
+  integrity sha512-BE4nUR2Jbqmmv8A0EuAydFRB/lXgXWAfa9TvO3YzHeGHAU7ZRwPZyu074oDl/CZtNXM7jXINpQxKBOe7N0P4bg==
+
 chai@^4.3.10:
   version "4.3.10"
   resolved "https://registry.yarnpkg.com/chai/-/chai-4.3.10.tgz#d784cec635e3b7e2ffb66446a63b4e33bd390384"

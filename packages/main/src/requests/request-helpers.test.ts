@@ -17,10 +17,15 @@
 
 import { expect, use } from "chai";
 import * as sinonChai from "sinon-chai";
+import chaiDeepEqualIgnoreUndefined from "chai-deep-equal-ignore-undefined";
 import { Content } from "../../types";
-import { formatGenerateContentInput } from "./request-helpers";
+import {
+  formatCountTokensInput,
+  formatGenerateContentInput,
+} from "./request-helpers";
 
 use(sinonChai);
+use(chaiDeepEqualIgnoreUndefined);
 
 describe("request formatting methods", () => {
   describe("formatGenerateContentInput", () => {
@@ -169,6 +174,104 @@ describe("request formatting methods", () => {
           },
         ],
         systemInstruction: { role: "system", parts: [{ text: "be excited" }] },
+      });
+    });
+  });
+  describe("formatCountTokensInput", () => {
+    it("formats a text string into a count request", () => {
+      const result = formatCountTokensInput("some text content", {
+        model: "gemini-1.5-flash",
+      });
+      expect(result.generateContentRequest).to.deepEqualIgnoreUndefined({
+        model: "gemini-1.5-flash",
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: "some text content" }],
+          },
+        ],
+      });
+    });
+    it("formats a text string into a count request, along with model params", () => {
+      const result = formatCountTokensInput("some text content", {
+        model: "gemini-1.5-flash",
+        systemInstruction: "hello",
+        tools: [{ codeExecution: {} }],
+        cachedContent: { name: "mycache", contents: [] },
+      });
+      expect(result.generateContentRequest).to.deepEqualIgnoreUndefined({
+        model: "gemini-1.5-flash",
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: "some text content" }],
+          },
+        ],
+        systemInstruction: "hello",
+        tools: [{ codeExecution: {} }],
+        cachedContent: "mycache",
+      });
+    });
+    it("formats a 'contents' style count request, along with model params", () => {
+      const result = formatCountTokensInput(
+        {
+          contents: [
+            {
+              role: "user",
+              parts: [{ text: "some text content" }],
+            },
+          ],
+        },
+        {
+          model: "gemini-1.5-flash",
+          systemInstruction: "hello",
+          tools: [{ codeExecution: {} }],
+          cachedContent: { name: "mycache", contents: [] },
+        },
+      );
+      expect(result.generateContentRequest).to.deepEqualIgnoreUndefined({
+        model: "gemini-1.5-flash",
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: "some text content" }],
+          },
+        ],
+        systemInstruction: "hello",
+        tools: [{ codeExecution: {} }],
+        cachedContent: "mycache",
+      });
+    });
+    it("formats a 'generateContentRequest' style count request, along with model params", () => {
+      const result = formatCountTokensInput(
+        {
+          generateContentRequest: {
+            contents: [
+              {
+                role: "user",
+                parts: [{ text: "some text content" }],
+              },
+            ],
+          },
+        },
+        {
+          model: "gemini-1.5-flash",
+          systemInstruction: "hello",
+          tools: [{ codeExecution: {} }],
+          cachedContent: { name: "mycache", contents: [] },
+        },
+      );
+      expect(result.generateContentRequest).to.deepEqualIgnoreUndefined({
+        model: "gemini-1.5-flash",
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: "some text content" }],
+          },
+        ],
+        systemInstruction: "hello",
+        tools: [{ codeExecution: {} }],
+        cachedContent: "mycache",
       });
     });
   });
