@@ -123,6 +123,16 @@ export function getText(response: GenerateContentResponse): string {
       if (part.text) {
         textStrings.push(part.text);
       }
+      if (part.executableCode) {
+        textStrings.push(
+          "\n```python\n" + part.executableCode.code + "\n```\n",
+        );
+      }
+      if (part.codeExecutionResult) {
+        textStrings.push(
+          "\n```\n" + part.codeExecutionResult.output + "\n```\n",
+        );
+      }
     }
   }
   if (textStrings.length > 0) {
@@ -153,7 +163,11 @@ export function getFunctionCalls(
   }
 }
 
-const badFinishReasons = [FinishReason.RECITATION, FinishReason.SAFETY];
+const badFinishReasons = [
+  FinishReason.RECITATION,
+  FinishReason.SAFETY,
+  FinishReason.LANGUAGE,
+];
 
 function hadBadFinishReason(candidate: GenerateContentCandidate): boolean {
   return (

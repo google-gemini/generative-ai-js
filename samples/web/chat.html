@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
  * @license
- * Copyright 2023 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,7 +60,7 @@
           event.preventDefault();
 
           if (!chat) {
-            const model = await getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+            const model = await getGenerativeModel({ model: "gemini-1.5-flash" });
             chat = model.startChat({
               generationConfig: {
                 maxOutputTokens: 100,

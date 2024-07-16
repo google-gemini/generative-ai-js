@@ -17,6 +17,7 @@ export declare enum FinishReason
 |  Member | Value | Description |
 |  --- | --- | --- |
 |  FINISH\_REASON\_UNSPECIFIED | <code>&quot;FINISH_REASON_UNSPECIFIED&quot;</code> |  |
+|  LANGUAGE | <code>&quot;LANGUAGE&quot;</code> |  |
 |  MAX\_TOKENS | <code>&quot;MAX_TOKENS&quot;</code> |  |
 |  OTHER | <code>&quot;OTHER&quot;</code> |  |
 |  RECITATION | <code>&quot;RECITATION&quot;</code> |  |

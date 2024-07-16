@@ -18,10 +18,12 @@
 import {
   Content,
   CountTokensRequest,
-  CountTokensRequestInternal,
   EmbedContentRequest,
   GenerateContentRequest,
+  ModelParams,
   Part,
+  _CountTokensRequestInternal,
+  _GenerateContentRequestInternal,
 } from "../../types";
 import {
   GoogleGenerativeAIError,
@@ -111,9 +113,18 @@ function assignRoleToPartsAndValidateSendMessageRequest(
 
 export function formatCountTokensInput(
   params: CountTokensRequest | string | Array<string | Part>,
-  model: string,
-): CountTokensRequestInternal {
-  let formattedRequest: CountTokensRequestInternal = {};
+  modelParams?: ModelParams,
+): _CountTokensRequestInternal {
+  let formattedGenerateContentRequest: _GenerateContentRequestInternal = {
+    model: modelParams?.model,
+    generationConfig: modelParams?.generationConfig,
+    safetySettings: modelParams?.safetySettings,
+    tools: modelParams?.tools,
+    toolConfig: modelParams?.toolConfig,
+    systemInstruction: modelParams?.systemInstruction,
+    cachedContent: modelParams?.cachedContent?.name,
+    contents: [],
+  };
   const containsGenerateContentRequest =
     (params as CountTokensRequest).generateContentRequest != null;
   if ((params as CountTokensRequest).contents) {
@@ -122,16 +133,20 @@ export function formatCountTokensInput(
         "CountTokensRequest must have one of contents or generateContentRequest, not both.",
       );
     }
-    formattedRequest = { ...(params as CountTokensRequest) };
+    formattedGenerateContentRequest.contents = (
+      params as CountTokensRequest
+    ).contents;
   } else if (containsGenerateContentRequest) {
-    formattedRequest = { ...(params as CountTokensRequest) };
-    formattedRequest.generateContentRequest.model = model;
+    formattedGenerateContentRequest = {
+      ...formattedGenerateContentRequest,
+      ...(params as CountTokensRequest).generateContentRequest,
+    };
   } else {
     // Array or string
     const content = formatNewContent(params as string | Array<string | Part>);
-    formattedRequest.contents = [content];
+    formattedGenerateContentRequest.contents = [content];
   }
-  return formattedRequest;
+  return { generateContentRequest: formattedGenerateContentRequest };
 }
 
 export function formatGenerateContentInput(

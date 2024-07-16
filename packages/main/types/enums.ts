@@ -95,6 +95,8 @@ export enum FinishReason {
   SAFETY = "SAFETY",
   // The candidate content was flagged for recitation reasons.
   RECITATION = "RECITATION",
+  // The candidate content was flagged for using an unsupported language.
+  LANGUAGE = "LANGUAGE",
   // Unknown reason.
   OTHER = "OTHER",
 }

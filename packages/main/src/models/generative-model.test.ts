@@ -100,7 +100,7 @@ describe("GenerativeModel", () => {
     const mockResponse = getMockResponse(
       "unary-success-basic-reply-short.json",
     );
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     await genModel.generateContent("hello");
@@ -134,7 +134,7 @@ describe("GenerativeModel", () => {
     const mockResponse = getMockResponse(
       "unary-success-basic-reply-short.json",
     );
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     await genModel.generateContent("hello");
@@ -184,7 +184,7 @@ describe("GenerativeModel", () => {
     const mockResponse = getMockResponse(
       "unary-success-basic-reply-short.json",
     );
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     await genModel.generateContent({
@@ -240,6 +240,7 @@ describe("GenerativeModel", () => {
       "apiKey",
       {
         model: "my-model",
+        systemInstruction: "you are a cat",
       },
       {
         apiVersion: "v2000",
@@ -248,7 +249,7 @@ describe("GenerativeModel", () => {
     const mockResponse = getMockResponse(
       "unary-success-basic-reply-short.json",
     );
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     await genModel.countTokens("hello");
@@ -257,7 +258,9 @@ describe("GenerativeModel", () => {
       request.Task.COUNT_TOKENS,
       match.any,
       false,
-      match.any,
+      match((value: string) => {
+        return value.includes("hello") && value.includes("you are a cat");
+      }),
       match((value) => {
         return value.apiVersion === "v2000";
       }),
@@ -279,7 +282,7 @@ describe("GenerativeModel", () => {
     const mockResponse = getMockResponse(
       "unary-success-basic-reply-short.json",
     );
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     await genModel.startChat().sendMessage("hello");
@@ -323,7 +326,7 @@ describe("GenerativeModel", () => {
     const mockResponse = getMockResponse(
       "unary-success-basic-reply-short.json",
     );
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     await genModel.startChat().sendMessage("hello");
@@ -369,7 +372,7 @@ describe("GenerativeModel", () => {
     const mockResponse = getMockResponse(
       "unary-success-basic-reply-short.json",
     );
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     await genModel
@@ -423,7 +426,7 @@ describe("GenerativeModel", () => {
     const mockResponse = getMockResponse(
       "unary-success-basic-reply-short.json",
     );
-    const makeRequestStub = stub(request, "makeRequest").resolves(
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
     const countTokensRequest: CountTokensRequest = {

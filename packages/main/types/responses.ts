@@ -98,6 +98,8 @@ export interface UsageMetadata {
   candidatesTokenCount: number;
   /** Total token count for the generation request (prompt + candidates). */
   totalTokenCount: number;
+  /** Total token count in the cached part of the prompt, i.e. in the cached content. */
+  cachedContentTokenCount?: number;
 }
 
 /**

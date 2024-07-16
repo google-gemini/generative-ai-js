@@ -22,7 +22,7 @@ import {
   EmbedContentResponse,
   RequestOptions,
 } from "../../types";
-import { Task, makeRequest } from "../requests/request";
+import { Task, makeModelRequest } from "../requests/request";
 
 export async function embedContent(
   apiKey: string,
@@ -30,7 +30,7 @@ export async function embedContent(
   params: EmbedContentRequest,
   requestOptions?: RequestOptions,
 ): Promise<EmbedContentResponse> {
-  const response = await makeRequest(
+  const response = await makeModelRequest(
     model,
     Task.EMBED_CONTENT,
     apiKey,
@@ -52,7 +52,7 @@ export async function batchEmbedContents(
       return { ...request, model };
     },
   );
-  const response = await makeRequest(
+  const response = await makeModelRequest(
     model,
     Task.BATCH_EMBED_CONTENTS,
     apiKey,

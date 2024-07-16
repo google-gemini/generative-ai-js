@@ -1,5 +1,40 @@
 # @google/generative-ai
 
+## 0.15.0
+
+### Minor Changes
+
+- 05b8631: Add FinishReason.LANGUAGE enum value.
+
+### Patch Changes
+
+- e87d5b0: Fix countTokens to include any params set on the model instance.
+
+## 0.14.1
+
+### Patch Changes
+
+- 0c23bb3: Add `CodeExecutionTool` to `Tool` type.
+
+## 0.14.0
+
+### Minor Changes
+
+- fb1c0f2: Add a `cachedContentTokenCount` field to the `UsageMetadata` interface returned by `generateContent` responses.
+- 06216be: Add code execution feature.
+
+## 0.13.0
+
+### Minor Changes
+
+- 83ec4ac: Expand the model's `countTokens` method to alternatively accept a `GenerateContentRequest`.
+- 5df61d1: Added `GoogleAICacheManager` utility to allow caching large content to be used in inference. This class is exported from the `@google/generative-ai/server` subpath. Breaking change: The `GoogleAIFileManager` class has been moved to be exported from this subpath as well instead of the `/files` subpath.
+
+### Patch Changes
+
+- 1440a05: Removed the `model` field from the internally formatted payload of `countToken` requests as it was unnecessary.
+- 03eb57b: Fix missing usageMetadata in streamed aggregated response (#174)
+
 ## 0.12.0
 
 ### Minor Changes

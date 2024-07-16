@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2023 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,7 +67,14 @@ img.thumb {
   width: 100px;
 }
 
-#form,
+#form { 
+  flex-direction: column;
+}
+
+#form > * {
+  margin: 10px 0;
+}
+
 .history-item {
   align-items: center;
   display: flex;
