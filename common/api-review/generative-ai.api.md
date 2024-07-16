@@ -668,6 +668,11 @@ export interface Schema {
 }
 
 // @public
+export interface SingleRequestOptions extends RequestOptions {
+    signal?: AbortSignal;
+}
+
+// @public
 export interface StartChatParams extends BaseParams {
     cachedContent?: string;
     // (undocumented)

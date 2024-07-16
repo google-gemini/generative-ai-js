@@ -18,7 +18,7 @@
 import { expect, use } from "chai";
 import * as chaiAsPromised from "chai-as-promised";
 import { SingleRequestOptions } from "../..";
-import { GoogleAIFileManager } from "../../dist/files";
+import { GoogleAIFileManager } from "../../dist/server";
 
 use(chaiAsPromised);
 

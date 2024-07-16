@@ -354,10 +354,11 @@ export class GoogleAIFileManager {
     constructor(apiKey: string, _requestOptions?: RequestOptions);
     // (undocumented)
     apiKey: string;
-    deleteFile(fileId: string): Promise<void>;
-    getFile(fileId: string): Promise<FileMetadataResponse>;
-    listFiles(listParams?: ListParams): Promise<ListFilesResponse>;
-    uploadFile(filePath: string, fileMetadata: FileMetadata): Promise<UploadFileResponse>;
+    deleteFile(fileId: string, requestOptions?: SingleRequestOptions): Promise<void>;
+    getFile(fileId: string, requestOptions?: SingleRequestOptions): Promise<FileMetadataResponse>;
+    listFiles(listParams?: ListParams, requestOptions?: SingleRequestOptions): Promise<ListFilesResponse>;
+    // Warning: (ae-forgotten-export) The symbol "SingleRequestOptions" needs to be exported by the entry point index.d.ts
+    uploadFile(filePath: string, fileMetadata: FileMetadata, requestOptions?: SingleRequestOptions): Promise<UploadFileResponse>;
 }
 
 // @public
