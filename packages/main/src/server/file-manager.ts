@@ -152,9 +152,7 @@ export class GoogleAIFileManager {
   /**
    * Delete file with given ID.
    */
-  async deleteFile(
-    fileId: string,
-  ): Promise<void> {
+  async deleteFile(fileId: string): Promise<void> {
     const url = new FilesRequestUrl(
       RpcTask.DELETE,
       this.apiKey,
