@@ -49,26 +49,16 @@ export class GoogleAIFileManager {
 
   /**
    * Upload a file.
-   *
-   * Any fields set in the optional {@link SingleRequestOptions} parameter will take
-   * precedence over the {@link RequestOptions} values provided at the time of the
-   * {@link GoogleAIFileManager} initialization.
    */
   async uploadFile(
     filePath: string,
     fileMetadata: FileMetadata,
-    requestOptions: SingleRequestOptions = {},
   ): Promise<UploadFileResponse> {
     const file = readFileSync(filePath);
-    const filesRequestOptions: SingleRequestOptions = {
-      ...this._requestOptions,
-      ...requestOptions,
-    };
-
     const url = new FilesRequestUrl(
       RpcTask.UPLOAD,
       this.apiKey,
-      filesRequestOptions,
+      this._requestOptions,
     );
 
     const uploadHeaders = getHeaders(url);
@@ -161,23 +151,14 @@ export class GoogleAIFileManager {
 
   /**
    * Delete file with given ID.
-   *
-   * Any fields set in the optional {@link SingleRequestOptions} parameter will take
-   * precedence over the {@link RequestOptions} values provided at the time of the
-   * {@link GoogleAIFileManager} initialization.
    */
   async deleteFile(
     fileId: string,
-    requestOptions: SingleRequestOptions = {},
   ): Promise<void> {
-    const filesRequestOptions: SingleRequestOptions = {
-      ...this._requestOptions,
-      ...requestOptions,
-    };
     const url = new FilesRequestUrl(
       RpcTask.DELETE,
       this.apiKey,
-      filesRequestOptions,
+      this._requestOptions,
     );
     url.appendPath(parseFileId(fileId));
     const uploadHeaders = getHeaders(url);
