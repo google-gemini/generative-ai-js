@@ -33,7 +33,7 @@ describe("signal", function () {
   this.timeout(60e3);
   this.slow(10e3);
   /* GoogleAIFileManager */
-  it("GoogleAIFileManager getFile() SingleRequestOption timeout", async () => {
+  it("GoogleAIFileManager getFile() SingleRequestOption.timeout", async () => {
     // Ensure SingleRequestOptions.timeout takes precendence over the value of
     // RequestOptions.timeout configured at construction. Also, a control test
     // to ensure that timeout still works without an AbortSignal present.
@@ -89,7 +89,7 @@ describe("signal", function () {
   });
 
   /* GenerativeModel */
-  it("GenerativeModel generateContent() SingleRequestOption timeout", async () => {
+  it("GenerativeModel generateContent() SingleRequestOption.timeout", async () => {
     // Ensure SingleRequestOptions.timeout takes precendence over the value of
     // RequestOptions.timeout configured at construction. Also, a control test
     // to ensure that timeout still works without an AbortSignal present.
@@ -183,7 +183,27 @@ describe("signal", function () {
   });
 
   /* ChatSessionManager */
-  it("ChatSession generateContent() aborted", async () => {
+  it("ChatSessionManager sendMessage() SingleRequestOption.timeout", async () => {
+    // Ensure SingleRequestOptions.timeout takes precendence over the value of
+    // RequestOptions.timeout configured at construction. Also, a control test
+    // to ensure that timeout still works without an AbortSignal present.
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const requestOptions: RequestOptions = {
+      timeout: 9000, // This is much longer than a generateContent request.
+    };
+    const model = genAI.getGenerativeModel(
+      {
+        model: "gemini-1.5-flash-latest",
+      },
+      requestOptions,
+    );
+    const question1 = "What is the capital of Oregon?";
+    const chat = model.startChat();
+    const singleRequestOptions: SingleRequestOptions = { timeout: 1 };
+    const promise = chat.sendMessage(question1, singleRequestOptions);
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+  it("ChatSession sendMessage() aborted", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel({
       model: "gemini-1.5-flash-latest",
@@ -193,6 +213,42 @@ describe("signal", function () {
     const signal = AbortSignal.timeout(1);
     const requestOptions: SingleRequestOptions = { signal };
     const promise = chat.sendMessage(question1, requestOptions);
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+  it("ChatSession sendMessage() timeout before signal aborts", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-latest",
+    });
+    const question1 = "What is the capital of Oregon?";
+    const chat = model.startChat();
+    const signal = AbortSignal.timeout(9000);
+    const requestOptions: SingleRequestOptions = { timeout: 1, signal };
+    const promise = chat.sendMessage(question1, requestOptions);
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+  it("ChatSession sendMessageStream() aborted", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-latest",
+    });
+    const question1 = "What is the capital of Oregon?";
+    const chat = model.startChat();
+    const signal = AbortSignal.timeout(1);
+    const requestOptions: SingleRequestOptions = { signal };
+    const promise = chat.sendMessageStream(question1, requestOptions);
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+  it("ChatSession sendMessageStream() timeout before signal aborts", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-latest",
+    });
+    const question1 = "What is the capital of Oregon?";
+    const chat = model.startChat();
+    const signal = AbortSignal.timeout(9000);
+    const requestOptions: SingleRequestOptions = { timeout: 1, signal };
+    const promise = chat.sendMessageStream(question1, requestOptions);
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });
 });
