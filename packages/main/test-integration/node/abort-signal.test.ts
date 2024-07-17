@@ -17,7 +17,11 @@
 
 import { expect, use } from "chai";
 import * as chaiAsPromised from "chai-as-promised";
-import { SingleRequestOptions } from "../..";
+import {
+  GoogleGenerativeAI,
+  RequestOptions,
+  SingleRequestOptions,
+} from "../..";
 import { GoogleAIFileManager } from "../../dist/server";
 
 use(chaiAsPromised);
@@ -28,78 +32,167 @@ use(chaiAsPromised);
 describe("signal", function () {
   this.timeout(60e3);
   this.slow(10e3);
-  it("file manager uploadFile abort test", async () => {
-    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
-    const filePathInService = "signal.jpg";
-
-    // This delete step should cleanup the state of the service for this and
-    // future executions.
+  /* GoogleAIFileManager */
+  it("GoogleAIFileManager getFile() SingleRequestOption timeout", async () => {
+    // Ensure SingleRequestOptions.timeout takes precendence over the value of
+    // RequestOptions.timeout configured at construction. Also, a control test
+    // to ensure that timeout still works without an AbortSignal present.
+    const requestOptions: RequestOptions = { timeout: 9000 };
+    const fileManager = new GoogleAIFileManager(
+      process.env.GEMINI_API_KEY,
+      requestOptions,
+    );
+    // Ensure the file isn't hosted on the service.
     try {
       await fileManager.deleteFile("files/signal");
     } catch (error) {}
-
-    const signal = AbortSignal.timeout(1);
-    const promise = fileManager.uploadFile(
-      "test-utils/cat.jpeg",
-      {
-        mimeType: "image/jpeg",
-        name: filePathInService,
-      },
-      {
-        signal,
-      },
-    );
+    const singleRequestOptions: SingleRequestOptions = { timeout: 1 };
+    // Use getFile, which should fail with a fetch error since the file
+    // doesn't exist. This should let us discern if the error was
+    // a timeout abort, or the fetch failure in our expect() below.
+    const promise = fileManager.getFile("signal.jpg", singleRequestOptions);
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });
-  it("file manager listFiles aborted", async () => {
+  it("GoogleAIFileManager getFile() aborted", async () => {
+    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
+    const signal = AbortSignal.timeout(1);
+    const requestOptions: SingleRequestOptions = { signal };
+    const promise = fileManager.getFile("signal.jpg", requestOptions);
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+  it("GoogleAIFileManager getFile() timeout before signal aborts", async () => {
+    // Ensure the manually configured timeout works in conjunction with the
+    // AbortSignal timeout.
+    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
+    // Ensure the file isn't hosted on the service.
+    try {
+      await fileManager.deleteFile("files/signal");
+    } catch (error) {}
+    const signal = AbortSignal.timeout(9000);
+    const requestOptions: SingleRequestOptions = { timeout: 1, signal };
+    const promise = fileManager.getFile("signal.jpg", requestOptions);
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+  it("GoogleAIFileManager listFiles() aborted", async () => {
     const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
     const signal = AbortSignal.timeout(1);
     const requestOptions: SingleRequestOptions = { signal };
     const promise = fileManager.listFiles(/* listParams= */ {}, requestOptions);
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });
-  it("file manager getFile aborted", async () => {
+  it("GoogleAIFileManager listFiles() timeout before signal aborts", async () => {
     const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
-    const signal = AbortSignal.timeout(1);
-    const requestOptions: SingleRequestOptions = { signal };
-    const promise = fileManager.getFile("signal.jpg", requestOptions);
-    await expect(promise).to.be.rejectedWith("This operation was aborted");
-  });
-  it("file manager deleteFile aborted", async () => {
-    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
-    const signal = AbortSignal.timeout(1);
-    const requestOptions: SingleRequestOptions = { signal };
-    const promise = fileManager.deleteFile("signal.jpg", requestOptions);
-    await expect(promise).to.be.rejectedWith("This operation was aborted");
-  });
-  it("file manager getFile timeout without abort signal", async () => {
-    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
-    // Ensure the file isn't hosted on the service.
-    try {
-      await fileManager.deleteFile("files/signal");
-    } catch (error) {}
-    const requestOptions: SingleRequestOptions = { timeout: 1 };
-    // Use getFile, which should fail with a fetch error since the file
-    // doesn't exist. This should let us discern if the error was
-    // a timeout abort, or the fetch failure in our expect() below.
-    const promise = fileManager.getFile("signal.jpg", requestOptions);
-    await expect(promise).to.be.rejectedWith("This operation was aborted");
-  });
-  it("file manager getFile timeout before singal aborts", async () => {
-    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
-    // Ensure the file isn't hosted on the service.
-    try {
-      await fileManager.deleteFile("files/signal");
-    } catch (error) {}
-    // The AbortSignal timeout is longer than the operation itself, so
-    // the expected abort should come from the timeout parameter of
-    // requestOptions. Additionally, regardless of timeouts, this operation
-    // would normally fail as the file should not be hosted in the service.
-    // If the timeouts don't work properly then we'd get a fetch error, not
-    // and abort error.
     const signal = AbortSignal.timeout(9000);
     const requestOptions: SingleRequestOptions = { timeout: 1, signal };
-    const promise = fileManager.getFile("signal.jpg", requestOptions);
+    const promise = fileManager.listFiles(/* listParams= */ {}, requestOptions);
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+
+  /* GenerativeModel */
+  it("GenerativeModel generateContent() SingleRequestOption timeout", async () => {
+    // Ensure SingleRequestOptions.timeout takes precendence over the value of
+    // RequestOptions.timeout configured at construction. Also, a control test
+    // to ensure that timeout still works without an AbortSignal present.
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const requestOptions: RequestOptions = {
+      timeout: 9000, // This is much longer than a generateContent request.
+    };
+    const model = genAI.getGenerativeModel(
+      {
+        model: "gemini-1.5-flash-latest",
+      },
+      requestOptions,
+    );
+    const singleRequestOptions: SingleRequestOptions = { timeout: 1 };
+    const promise = model.generateContent(
+      "This is not an image",
+      singleRequestOptions,
+    );
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+  it("GenerativeModel generateContent() aborted", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-latest",
+    });
+    const signal = AbortSignal.timeout(1);
+    const requestOptions: SingleRequestOptions = { signal };
+    const promise = model.generateContent(
+      "This is not an image",
+      requestOptions,
+    );
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+  it("GenerativeModel generateContent() timeout before signal aborts", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-latest",
+    });
+    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
+    const signal = AbortSignal.timeout(9000);
+    const requestOptions: SingleRequestOptions = { timeout: 1, signal };
+    const promise = model.generateContent(
+      "This is not an image",
+      requestOptions,
+    );
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+  it("GenerativeModel countTokens() aborted", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-latest",
+    });
+    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
+    const signal = AbortSignal.timeout(1);
+    const requestOptions: SingleRequestOptions = { signal };
+    const promise = model.countTokens("This is not an image", requestOptions);
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+  it("GenerativeModel embedContent() aborted", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-latest",
+    });
+    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
+    const signal = AbortSignal.timeout(1);
+    const requestOptions: SingleRequestOptions = { signal };
+    const promise = model.embedContent("This is not an image", requestOptions);
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+  it("GenerativeModel batchEmbedContent() aborted", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-latest",
+    });
+    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
+    const signal = AbortSignal.timeout(1);
+    const requestOptions: SingleRequestOptions = { signal };
+    const content1 = {
+      content: { role: "user", parts: [{ text: "embed me" }] },
+    };
+    const content2 = {
+      content: { role: "user", parts: [{ text: "embed me" }] },
+    };
+    const promise = model.batchEmbedContents(
+      {
+        requests: [content1, content2],
+      },
+      requestOptions,
+    );
+    await expect(promise).to.be.rejectedWith("This operation was aborted");
+  });
+
+  /* ChatSessionManager */
+  it("ChatSession generateContent() aborted", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash-latest",
+    });
+    const question1 = "What is the capital of Oregon?";
+    const chat = model.startChat();
+    const signal = AbortSignal.timeout(1);
+    const requestOptions: SingleRequestOptions = { signal };
+    const promise = chat.sendMessage(question1, requestOptions);
     await expect(promise).to.be.rejectedWith("This operation was aborted");
   });
 });
