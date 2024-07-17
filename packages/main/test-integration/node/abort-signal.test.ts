@@ -128,7 +128,6 @@ describe("signal", function () {
     const model = genAI.getGenerativeModel({
       model: "gemini-1.5-flash-latest",
     });
-    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
     const signal = AbortSignal.timeout(9000);
     const requestOptions: SingleRequestOptions = { timeout: 1, signal };
     const promise = model.generateContent(
@@ -142,7 +141,6 @@ describe("signal", function () {
     const model = genAI.getGenerativeModel({
       model: "gemini-1.5-flash-latest",
     });
-    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
     const signal = AbortSignal.timeout(1);
     const requestOptions: SingleRequestOptions = { signal };
     const promise = model.countTokens("This is not an image", requestOptions);
@@ -153,7 +151,6 @@ describe("signal", function () {
     const model = genAI.getGenerativeModel({
       model: "gemini-1.5-flash-latest",
     });
-    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
     const signal = AbortSignal.timeout(1);
     const requestOptions: SingleRequestOptions = { signal };
     const promise = model.embedContent("This is not an image", requestOptions);
@@ -164,7 +161,6 @@ describe("signal", function () {
     const model = genAI.getGenerativeModel({
       model: "gemini-1.5-flash-latest",
     });
-    const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
     const signal = AbortSignal.timeout(1);
     const requestOptions: SingleRequestOptions = { signal };
     const content1 = {
