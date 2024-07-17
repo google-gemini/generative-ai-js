@@ -36,6 +36,7 @@ import {
   Part,
   RequestOptions,
   SafetySetting,
+  SingleRequestOptions,
   StartChatParams,
   Tool,
   ToolConfig,
@@ -67,7 +68,7 @@ export class GenerativeModel {
   constructor(
     public apiKey: string,
     modelParams: ModelParams,
-    requestOptions?: RequestOptions,
+    private _requestOptions: RequestOptions = {},
   ) {
     if (modelParams.model.includes("/")) {
       // Models may be named "models/model-name" or "tunedModels/model-name"
@@ -84,17 +85,25 @@ export class GenerativeModel {
       modelParams.systemInstruction,
     );
     this.cachedContent = modelParams.cachedContent;
-    this.requestOptions = requestOptions || {};
   }
 
   /**
    * Makes a single non-streaming call to the model
    * and returns an object containing a single {@link GenerateContentResponse}.
+   *
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided at the
+   * time of the {@link GoogleAIFileManager} initialization.
    */
   async generateContent(
     request: GenerateContentRequest | string | Array<string | Part>,
+    requestOptions: SingleRequestOptions = {},
   ): Promise<GenerateContentResult> {
     const formattedParams = formatGenerateContentInput(request);
+    const generativeModelRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
     return generateContent(
       this.apiKey,
       this.model,
@@ -107,20 +116,29 @@ export class GenerativeModel {
         cachedContent: this.cachedContent?.name,
         ...formattedParams,
       },
-      this.requestOptions,
+      generativeModelRequestOptions,
     );
   }
 
   /**
-   * Makes a single streaming call to the model
-   * and returns an object containing an iterable stream that iterates
-   * over all chunks in the streaming response as well as
-   * a promise that returns the final aggregated response.
+   * Makes a single streaming call to the model and returns an object
+   * containing an iterable stream that iterates over all chunks in the
+   * streaming response as well as a promise that returns the final
+   * aggregated response.
+   *
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided at the
+   * time of the {@link GoogleAIFileManager} initialization.
    */
   async generateContentStream(
     request: GenerateContentRequest | string | Array<string | Part>,
+    requestOptions: SingleRequestOptions = {},
   ): Promise<GenerateContentStreamResult> {
     const formattedParams = formatGenerateContentInput(request);
+    const generativeModelRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
     return generateContentStream(
       this.apiKey,
       this.model,
@@ -133,7 +151,7 @@ export class GenerativeModel {
         cachedContent: this.cachedContent?.name,
         ...formattedParams,
       },
-      this.requestOptions,
+      generativeModelRequestOptions,
     );
   }
 
@@ -160,9 +178,14 @@ export class GenerativeModel {
 
   /**
    * Counts the tokens in the provided request.
+   *
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided at the
+   * time of the {@link GoogleAIFileManager} initialization.
    */
   async countTokens(
     request: CountTokensRequest | string | Array<string | Part>,
+    requestOptions: SingleRequestOptions = {},
   ): Promise<CountTokensResponse> {
     const formattedParams = formatCountTokensInput(request, {
       model: this.model,
@@ -173,40 +196,62 @@ export class GenerativeModel {
       systemInstruction: this.systemInstruction,
       cachedContent: this.cachedContent,
     });
+    const generativeModelRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
     return countTokens(
       this.apiKey,
       this.model,
       formattedParams,
-      this.requestOptions,
+      generativeModelRequestOptions,
     );
   }
 
   /**
    * Embeds the provided content.
+   *
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided at the
+   * time of the {@link GoogleAIFileManager} initialization.
    */
   async embedContent(
     request: EmbedContentRequest | string | Array<string | Part>,
+    requestOptions: SingleRequestOptions = {},
   ): Promise<EmbedContentResponse> {
     const formattedParams = formatEmbedContentInput(request);
+    const generativeModelRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
     return embedContent(
       this.apiKey,
       this.model,
       formattedParams,
-      this.requestOptions,
+      generativeModelRequestOptions,
     );
   }
 
   /**
    * Embeds an array of {@link EmbedContentRequest}s.
+   *
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided at the
+   * time of the {@link GoogleAIFileManager} initialization.
    */
   async batchEmbedContents(
     batchEmbedContentRequest: BatchEmbedContentsRequest,
+    requestOptions: SingleRequestOptions = {},
   ): Promise<BatchEmbedContentsResponse> {
+    const generativeModelRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
     return batchEmbedContents(
       this.apiKey,
       this.model,
       batchEmbedContentRequest,
-      this.requestOptions,
+      generativeModelRequestOptions,
     );
   }
 }
