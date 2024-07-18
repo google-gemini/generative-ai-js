@@ -6,10 +6,12 @@
 
 Makes a single non-streaming call to the model and returns an object containing a single [GenerateContentResponse](./generative-ai.generatecontentresponse.md)<!-- -->.
 
+Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the  initialization.
+
 **Signature:**
 
 ```typescript
-generateContent(request: GenerateContentRequest | string | Array<string | Part>): Promise<GenerateContentResult>;
+generateContent(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentResult>;
 ```
 
 ## Parameters
@@ -17,6 +19,7 @@ generateContent(request: GenerateContentRequest | string | Array<string | Part>)
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [GenerateContentRequest](./generative-ai.generatecontentrequest.md) \| string \| Array&lt;string \| [Part](./generative-ai.part.md)<!-- -->&gt; |  |
+|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

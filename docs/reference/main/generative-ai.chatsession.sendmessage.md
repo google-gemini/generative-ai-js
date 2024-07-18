@@ -4,12 +4,14 @@
 
 ## ChatSession.sendMessage() method
 
-Sends a chat message and receives a non-streaming [GenerateContentResult](./generative-ai.generatecontentresult.md)
+Sends a chat message and receives a non-streaming [GenerateContentResult](./generative-ai.generatecontentresult.md)<!-- -->.
+
+Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the  initialization.
 
 **Signature:**
 
 ```typescript
-sendMessage(request: string | Array<string | Part>): Promise<GenerateContentResult>;
+sendMessage(request: string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentResult>;
 ```
 
 ## Parameters
@@ -17,6 +19,7 @@ sendMessage(request: string | Array<string | Part>): Promise<GenerateContentResu
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | string \| Array&lt;string \| [Part](./generative-ai.part.md)<!-- -->&gt; |  |
+|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

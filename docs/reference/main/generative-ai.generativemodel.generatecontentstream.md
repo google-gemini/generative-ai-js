@@ -6,10 +6,12 @@
 
 Makes a single streaming call to the model and returns an object containing an iterable stream that iterates over all chunks in the streaming response as well as a promise that returns the final aggregated response.
 
+Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the  initialization.
+
 **Signature:**
 
 ```typescript
-generateContentStream(request: GenerateContentRequest | string | Array<string | Part>): Promise<GenerateContentStreamResult>;
+generateContentStream(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentStreamResult>;
 ```
 
 ## Parameters
@@ -17,6 +19,7 @@ generateContentStream(request: GenerateContentRequest | string | Array<string | 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [GenerateContentRequest](./generative-ai.generatecontentrequest.md) \| string \| Array&lt;string \| [Part](./generative-ai.part.md)<!-- -->&gt; |  |
+|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

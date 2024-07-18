@@ -6,10 +6,12 @@
 
 Embeds an array of [EmbedContentRequest](./generative-ai.embedcontentrequest.md)<!-- -->s.
 
+Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the  initialization.
+
 **Signature:**
 
 ```typescript
-batchEmbedContents(batchEmbedContentRequest: BatchEmbedContentsRequest): Promise<BatchEmbedContentsResponse>;
+batchEmbedContents(batchEmbedContentRequest: BatchEmbedContentsRequest, requestOptions?: SingleRequestOptions): Promise<BatchEmbedContentsResponse>;
 ```
 
 ## Parameters
@@ -17,6 +19,7 @@ batchEmbedContents(batchEmbedContentRequest: BatchEmbedContentsRequest): Promise
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  batchEmbedContentRequest | [BatchEmbedContentsRequest](./generative-ai.batchembedcontentsrequest.md) |  |
+|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

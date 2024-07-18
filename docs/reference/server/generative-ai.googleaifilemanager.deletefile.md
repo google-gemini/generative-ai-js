@@ -4,7 +4,7 @@
 
 ## GoogleAIFileManager.deleteFile() method
 
-Delete file with given ID
+Delete file with given ID.
 
 **Signature:**
 

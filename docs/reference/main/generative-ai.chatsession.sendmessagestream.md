@@ -6,10 +6,12 @@
 
 Sends a chat message and receives the response as a [GenerateContentStreamResult](./generative-ai.generatecontentstreamresult.md) containing an iterable stream and a response promise.
 
+Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the  initialization.
+
 **Signature:**
 
 ```typescript
-sendMessageStream(request: string | Array<string | Part>): Promise<GenerateContentStreamResult>;
+sendMessageStream(request: string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentStreamResult>;
 ```
 
 ## Parameters
@@ -17,6 +19,7 @@ sendMessageStream(request: string | Array<string | Part>): Promise<GenerateConte
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | string \| Array&lt;string \| [Part](./generative-ai.part.md)<!-- -->&gt; |  |
+|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

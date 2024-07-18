@@ -6,10 +6,12 @@
 
 Embeds the provided content.
 
+Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the  initialization.
+
 **Signature:**
 
 ```typescript
-embedContent(request: EmbedContentRequest | string | Array<string | Part>): Promise<EmbedContentResponse>;
+embedContent(request: EmbedContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<EmbedContentResponse>;
 ```
 
 ## Parameters
@@ -17,6 +19,7 @@ embedContent(request: EmbedContentRequest | string | Array<string | Part>): Prom
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  request | [EmbedContentRequest](./generative-ai.embedcontentrequest.md) \| string \| Array&lt;string \| [Part](./generative-ai.part.md)<!-- -->&gt; |  |
+|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
 
 **Returns:**
 
