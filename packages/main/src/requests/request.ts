@@ -219,15 +219,17 @@ async function handleResponseNotOk(
  */
 function buildFetchOptions(requestOptions?: SingleRequestOptions): RequestInit {
   const fetchOptions = {} as RequestInit;
-  const controller = new AbortController();
-  if (requestOptions?.timeout >= 0) {
-    setTimeout(() => controller.abort(), requestOptions.timeout);
+  if (requestOptions?.signal !== undefined || requestOptions?.timeout >= 0) {
+    const controller = new AbortController();
+    if (requestOptions?.timeout >= 0) {
+      setTimeout(() => controller.abort(), requestOptions.timeout);
+    }
+    if (requestOptions?.signal) {
+      requestOptions.signal.addEventListener("abort", () => {
+        controller.abort();
+      });
+    }
+    fetchOptions.signal = controller.signal;
   }
-  if (requestOptions?.signal) {
-    requestOptions.signal.addEventListener("abort", () => {
-      controller.abort();
-    });
-  }
-  fetchOptions.signal = controller.signal;
   return fetchOptions;
 }

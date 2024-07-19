@@ -225,7 +225,6 @@ describe("request methods", () => {
         method: "POST",
         headers: match.instanceOf(Headers),
         body: "",
-        signal: match.instanceOf(AbortSignal),
       });
       expect(response.ok).to.be.true;
     });
