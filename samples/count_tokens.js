@@ -230,7 +230,8 @@ async function tokensMultimodalVideoAudioFileApi() {
 
   // Call `countTokens` to get the input token count
   // of the combined text and file (`totalTokens`).
-  // An video or audio file's display or file size does not affect its token count.
+  // A video or audio file is converted to tokens at a fixed rate of tokens
+  // per second.
   // Optionally, you can call `countTokens` for the text and file separately.
   const countResult = await model.countTokens([prompt, videoPart]);
 
