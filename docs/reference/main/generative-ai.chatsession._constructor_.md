@@ -9,7 +9,7 @@ Constructs a new instance of the `ChatSession` class
 **Signature:**
 
 ```typescript
-constructor(apiKey: string, model: string, params?: StartChatParams, requestOptions?: RequestOptions);
+constructor(apiKey: string, model: string, params?: StartChatParams, _requestOptions?: RequestOptions);
 ```
 
 ## Parameters
@@ -19,5 +19,5 @@ constructor(apiKey: string, model: string, params?: StartChatParams, requestOpti
 |  apiKey | string |  |
 |  model | string |  |
 |  params | [StartChatParams](./generative-ai.startchatparams.md) | _(Optional)_ |
-|  requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
+|  \_requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
 

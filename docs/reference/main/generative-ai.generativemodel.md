@@ -16,7 +16,7 @@ export declare class GenerativeModel
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(apiKey, modelParams, requestOptions)](./generative-ai.generativemodel._constructor_.md) |  | Constructs a new instance of the <code>GenerativeModel</code> class |
+|  [(constructor)(apiKey, modelParams, \_requestOptions)](./generative-ai.generativemodel._constructor_.md) |  | Constructs a new instance of the <code>GenerativeModel</code> class |
 
 ## Properties
 
@@ -36,10 +36,10 @@ export declare class GenerativeModel
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [batchEmbedContents(batchEmbedContentRequest)](./generative-ai.generativemodel.batchembedcontents.md) |  | Embeds an array of [EmbedContentRequest](./generative-ai.embedcontentrequest.md)<!-- -->s. |
-|  [countTokens(request)](./generative-ai.generativemodel.counttokens.md) |  | Counts the tokens in the provided request. |
-|  [embedContent(request)](./generative-ai.generativemodel.embedcontent.md) |  | Embeds the provided content. |
-|  [generateContent(request)](./generative-ai.generativemodel.generatecontent.md) |  | Makes a single non-streaming call to the model and returns an object containing a single [GenerateContentResponse](./generative-ai.generatecontentresponse.md)<!-- -->. |
-|  [generateContentStream(request)](./generative-ai.generativemodel.generatecontentstream.md) |  | Makes a single streaming call to the model and returns an object containing an iterable stream that iterates over all chunks in the streaming response as well as a promise that returns the final aggregated response. |
+|  [batchEmbedContents(batchEmbedContentRequest, requestOptions)](./generative-ai.generativemodel.batchembedcontents.md) |  | <p>Embeds an array of [EmbedContentRequest](./generative-ai.embedcontentrequest.md)<!-- -->s.</p><p>Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the  initialization.</p> |
+|  [countTokens(request, requestOptions)](./generative-ai.generativemodel.counttokens.md) |  | <p>Counts the tokens in the provided request.</p><p>Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the  initialization.</p> |
+|  [embedContent(request, requestOptions)](./generative-ai.generativemodel.embedcontent.md) |  | <p>Embeds the provided content.</p><p>Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the  initialization.</p> |
+|  [generateContent(request, requestOptions)](./generative-ai.generativemodel.generatecontent.md) |  | <p>Makes a single non-streaming call to the model and returns an object containing a single [GenerateContentResponse](./generative-ai.generatecontentresponse.md)<!-- -->.</p><p>Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the  initialization.</p> |
+|  [generateContentStream(request, requestOptions)](./generative-ai.generativemodel.generatecontentstream.md) |  | <p>Makes a single streaming call to the model and returns an object containing an iterable stream that iterates over all chunks in the streaming response as well as a promise that returns the final aggregated response.</p><p>Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the  initialization.</p> |
 |  [startChat(startChatParams)](./generative-ai.generativemodel.startchat.md) |  | Gets a new [ChatSession](./generative-ai.chatsession.md) instance which can be used for multi-turn chats. |
 

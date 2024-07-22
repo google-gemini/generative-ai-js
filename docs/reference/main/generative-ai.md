@@ -81,6 +81,7 @@
 |  [SafetyRating](./generative-ai.safetyrating.md) | A safety rating associated with a [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md) |
 |  [SafetySetting](./generative-ai.safetysetting.md) | Safety setting that can be sent as part of request parameters. |
 |  [Schema](./generative-ai.schema.md) | Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed. |
+|  [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | Params passed to atomic asynchronous operations. |
 |  [StartChatParams](./generative-ai.startchatparams.md) | Params for [GenerativeModel.startChat()](./generative-ai.generativemodel.startchat.md)<!-- -->. |
 |  [TextPart](./generative-ai.textpart.md) | Content part interface if the part represents a text string. |
 |  [ToolConfig](./generative-ai.toolconfig.md) | Tool config. This config is shared for all tools provided in the request. |

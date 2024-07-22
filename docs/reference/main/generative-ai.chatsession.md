@@ -16,7 +16,7 @@ export declare class ChatSession
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(apiKey, model, params, requestOptions)](./generative-ai.chatsession._constructor_.md) |  | Constructs a new instance of the <code>ChatSession</code> class |
+|  [(constructor)(apiKey, model, params, \_requestOptions)](./generative-ai.chatsession._constructor_.md) |  | Constructs a new instance of the <code>ChatSession</code> class |
 
 ## Properties
 
@@ -24,13 +24,12 @@ export declare class ChatSession
 |  --- | --- | --- | --- |
 |  [model](./generative-ai.chatsession.model.md) |  | string |  |
 |  [params?](./generative-ai.chatsession.params.md) |  | [StartChatParams](./generative-ai.startchatparams.md) | _(Optional)_ |
-|  [requestOptions?](./generative-ai.chatsession.requestoptions.md) |  | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
 
 ## Methods
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [getHistory()](./generative-ai.chatsession.gethistory.md) |  | Gets the chat history so far. Blocked prompts are not added to history. Blocked candidates are not added to history, nor are the prompts that generated them. |
-|  [sendMessage(request)](./generative-ai.chatsession.sendmessage.md) |  | Sends a chat message and receives a non-streaming [GenerateContentResult](./generative-ai.generatecontentresult.md) |
-|  [sendMessageStream(request)](./generative-ai.chatsession.sendmessagestream.md) |  | Sends a chat message and receives the response as a [GenerateContentStreamResult](./generative-ai.generatecontentstreamresult.md) containing an iterable stream and a response promise. |
+|  [sendMessage(request, requestOptions)](./generative-ai.chatsession.sendmessage.md) |  | <p>Sends a chat message and receives a non-streaming [GenerateContentResult](./generative-ai.generatecontentresult.md)<!-- -->.</p><p>Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the  initialization.</p> |
+|  [sendMessageStream(request, requestOptions)](./generative-ai.chatsession.sendmessagestream.md) |  | <p>Sends a chat message and receives the response as a [GenerateContentStreamResult](./generative-ai.generatecontentstreamresult.md) containing an iterable stream and a response promise.</p><p>Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the  initialization.</p> |
 

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { RequestOptions } from "../../types";
+import { RequestOptions, SingleRequestOptions } from "../../types";
 import {
   GoogleGenerativeAIError,
   GoogleGenerativeAIFetchError,
@@ -116,7 +116,7 @@ export async function constructModelRequest(
   apiKey: string,
   stream: boolean,
   body: string,
-  requestOptions?: RequestOptions,
+  requestOptions: SingleRequestOptions,
 ): Promise<{ url: string; fetchOptions: RequestInit }> {
   const url = new RequestUrl(model, task, apiKey, stream, requestOptions);
   return {
@@ -136,7 +136,7 @@ export async function makeModelRequest(
   apiKey: string,
   stream: boolean,
   body: string,
-  requestOptions?: RequestOptions,
+  requestOptions: SingleRequestOptions = {},
   // Allows this to be stubbed for tests
   fetchFn = fetch,
 ): Promise<Response> {
@@ -217,13 +217,19 @@ async function handleResponseNotOk(
  * @param requestOptions - The user-defined request options.
  * @returns The generated request options.
  */
-function buildFetchOptions(requestOptions?: RequestOptions): RequestInit {
+function buildFetchOptions(requestOptions?: SingleRequestOptions): RequestInit {
   const fetchOptions = {} as RequestInit;
-  if (requestOptions?.timeout >= 0) {
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-    setTimeout(() => abortController.abort(), requestOptions.timeout);
-    fetchOptions.signal = signal;
+  if (requestOptions?.signal !== undefined || requestOptions?.timeout >= 0) {
+    const controller = new AbortController();
+    if (requestOptions?.timeout >= 0) {
+      setTimeout(() => controller.abort(), requestOptions.timeout);
+    }
+    if (requestOptions?.signal) {
+      requestOptions.signal.addEventListener("abort", () => {
+        controller.abort();
+      });
+    }
+    fetchOptions.signal = controller.signal;
   }
   return fetchOptions;
 }

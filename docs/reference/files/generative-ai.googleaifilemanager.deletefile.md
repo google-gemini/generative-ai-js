@@ -4,12 +4,14 @@
 
 ## GoogleAIFileManager.deleteFile() method
 
-Delete file with given ID
+Delete file with given ID.
+
+Any fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) initialization.
 
 **Signature:**
 
 ```typescript
-deleteFile(fileId: string): Promise<void>;
+deleteFile(fileId: string, requestOptions?: SingleRequestOptions): Promise<void>;
 ```
 
 ## Parameters
@@ -17,6 +19,7 @@ deleteFile(fileId: string): Promise<void>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  fileId | string |  |
+|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

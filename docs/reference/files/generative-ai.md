@@ -27,6 +27,7 @@
 |  [ListParams](./generative-ai.listparams.md) | Params to pass to [GoogleAIFileManager.listFiles()](./generative-ai.googleaifilemanager.listfiles.md) |
 |  [RequestOptions](./generative-ai.requestoptions.md) | Params passed to getGenerativeModel() or GoogleAIFileManager(). |
 |  [RpcStatus](./generative-ai.rpcstatus.md) | Standard RPC error status object. |
+|  [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | Params passed to atomic asynchronous operations. |
 |  [UploadFileResponse](./generative-ai.uploadfileresponse.md) | Response from calling [GoogleAIFileManager.uploadFile()](./generative-ai.googleaifilemanager.uploadfile.md) |
 |  [VideoMetadata](./generative-ai.videometadata.md) | Metadata populated when video has been processed. |
 

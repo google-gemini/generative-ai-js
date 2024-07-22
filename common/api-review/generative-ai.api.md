@@ -62,16 +62,14 @@ export interface CachedContentBase {
 
 // @public
 export class ChatSession {
-    constructor(apiKey: string, model: string, params?: StartChatParams, requestOptions?: RequestOptions);
+    constructor(apiKey: string, model: string, params?: StartChatParams, _requestOptions?: RequestOptions);
     getHistory(): Promise<Content[]>;
     // (undocumented)
     model: string;
     // (undocumented)
     params?: StartChatParams;
-    // (undocumented)
-    requestOptions?: RequestOptions;
-    sendMessage(request: string | Array<string | Part>): Promise<GenerateContentResult>;
-    sendMessageStream(request: string | Array<string | Part>): Promise<GenerateContentStreamResult>;
+    sendMessage(request: string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentResult>;
+    sendMessageStream(request: string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentStreamResult>;
 }
 
 // @public
@@ -462,16 +460,16 @@ export interface GenerativeContentBlob {
 
 // @public
 export class GenerativeModel {
-    constructor(apiKey: string, modelParams: ModelParams, requestOptions?: RequestOptions);
+    constructor(apiKey: string, modelParams: ModelParams, _requestOptions?: RequestOptions);
     // (undocumented)
     apiKey: string;
-    batchEmbedContents(batchEmbedContentRequest: BatchEmbedContentsRequest): Promise<BatchEmbedContentsResponse>;
+    batchEmbedContents(batchEmbedContentRequest: BatchEmbedContentsRequest, requestOptions?: SingleRequestOptions): Promise<BatchEmbedContentsResponse>;
     // (undocumented)
     cachedContent: CachedContent;
-    countTokens(request: CountTokensRequest | string | Array<string | Part>): Promise<CountTokensResponse>;
-    embedContent(request: EmbedContentRequest | string | Array<string | Part>): Promise<EmbedContentResponse>;
-    generateContent(request: GenerateContentRequest | string | Array<string | Part>): Promise<GenerateContentResult>;
-    generateContentStream(request: GenerateContentRequest | string | Array<string | Part>): Promise<GenerateContentStreamResult>;
+    countTokens(request: CountTokensRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<CountTokensResponse>;
+    embedContent(request: EmbedContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<EmbedContentResponse>;
+    generateContent(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentResult>;
+    generateContentStream(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentStreamResult>;
     // (undocumented)
     generationConfig: GenerationConfig;
     // (undocumented)
@@ -665,6 +663,11 @@ export interface Schema {
     };
     required?: string[];
     type?: FunctionDeclarationSchemaType;
+}
+
+// @public
+export interface SingleRequestOptions extends RequestOptions {
+    signal?: AbortSignal;
 }
 
 // @public

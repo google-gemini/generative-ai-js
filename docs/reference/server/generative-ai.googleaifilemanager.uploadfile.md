@@ -4,7 +4,7 @@
 
 ## GoogleAIFileManager.uploadFile() method
 
-Upload a file
+Upload a file.
 
 **Signature:**
 

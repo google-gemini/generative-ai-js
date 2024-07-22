@@ -4,12 +4,14 @@
 
 ## GoogleAIFileManager.getFile() method
 
-Get metadata for file with given ID
+Get metadata for file with given ID.
+
+Any fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) initialization.
 
 **Signature:**
 
 ```typescript
-getFile(fileId: string): Promise<FileMetadataResponse>;
+getFile(fileId: string, requestOptions?: SingleRequestOptions): Promise<FileMetadataResponse>;
 ```
 
 ## Parameters
@@ -17,6 +19,7 @@ getFile(fileId: string): Promise<FileMetadataResponse>;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  fileId | string |  |
+|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

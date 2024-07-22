@@ -21,7 +21,7 @@ import {
   getClientHeaders,
   makeRequest,
 } from "../requests/request";
-import { RequestOptions } from "../../types";
+import { RequestOptions, SingleRequestOptions } from "../../types";
 import { RpcTask } from "./constants";
 
 const taskToMethod = {
@@ -38,7 +38,7 @@ export class ServerRequestUrl {
   constructor(
     public task: RpcTask,
     public apiKey: string,
-    public requestOptions?: RequestOptions,
+    public requestOptions?: SingleRequestOptions,
   ) {}
 
   appendPath(path: string): void {
@@ -118,13 +118,20 @@ export async function makeServerRequest(
 }
 
 /**
- * Get AbortSignal if timeout is specified
+ * Create an AbortSignal based on the timeout and signal in the
+ * RequestOptions.
  */
-function getSignal(requestOptions?: RequestOptions): AbortSignal | null {
-  if (requestOptions?.timeout >= 0) {
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-    setTimeout(() => abortController.abort(), requestOptions.timeout);
-    return signal;
+function getSignal(requestOptions?: SingleRequestOptions): AbortSignal | null {
+  if (requestOptions?.signal !== undefined || requestOptions?.timeout >= 0) {
+    const controller = new AbortController();
+    if (requestOptions?.timeout >= 0) {
+      setTimeout(() => controller.abort(), requestOptions.timeout);
+    }
+    if (requestOptions.signal) {
+      requestOptions.signal.addEventListener("abort", () => {
+        controller.abort();
+      });
+    }
+    return controller.signal;
   }
 }

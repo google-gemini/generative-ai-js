@@ -9,7 +9,7 @@ Constructs a new instance of the `GenerativeModel` class
 **Signature:**
 
 ```typescript
-constructor(apiKey: string, modelParams: ModelParams, requestOptions?: RequestOptions);
+constructor(apiKey: string, modelParams: ModelParams, _requestOptions?: RequestOptions);
 ```
 
 ## Parameters
@@ -18,5 +18,5 @@ constructor(apiKey: string, modelParams: ModelParams, requestOptions?: RequestOp
 |  --- | --- | --- |
 |  apiKey | string |  |
 |  modelParams | [ModelParams](./generative-ai.modelparams.md) |  |
-|  requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
+|  \_requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
 
