@@ -53,7 +53,8 @@ async function tokensTextOnly() {
   // (`promptTokenCount` and `candidatesTokenCount`, respectively),
   // as well as the combined token count (`totalTokenCount`).
   console.log(generateResult.response.usageMetadata);
-  // { promptTokenCount: 11, candidatesTokenCount: 131, totalTokenCount: 142 }
+  // candidatesTokenCount and totalTokenCount depend on response, may vary
+  // { promptTokenCount: 11, candidatesTokenCount: 124, totalTokenCount: 135 }
   // [END tokens_text_only]
 }
 
@@ -93,7 +94,8 @@ async function tokensChat() {
   // (`promptTokenCount` and `candidatesTokenCount`, respectively),
   // as well as the combined token count (`totalTokenCount`).
   console.log(chatResult.response.usageMetadata);
-  // { promptTokenCount: 25, candidatesTokenCount: 22, totalTokenCount: 47 }
+  // candidatesTokenCount and totalTokenCount depend on response, may vary
+  // { promptTokenCount: 25, candidatesTokenCount: 25, totalTokenCount: 50 }
   // [END tokens_chat]
 }
 
@@ -136,6 +138,7 @@ async function tokensMultimodalImageInline() {
   // (`promptTokenCount` and `candidatesTokenCount`, respectively),
   // as well as the combined token count (`totalTokenCount`).
   console.log(generateResult.response.usageMetadata);
+  // candidatesTokenCount and totalTokenCount depend on response, may vary
   // { promptTokenCount: 265, candidatesTokenCount: 157, totalTokenCount: 422 }
   // [END tokens_multimodal_image_inline]
 }
@@ -181,6 +184,7 @@ async function tokensMultimodalImageFileApi() {
   // (`promptTokenCount` and `candidatesTokenCount`, respectively),
   // as well as the combined token count (`totalTokenCount`).
   console.log(generateResult.response.usageMetadata);
+  // candidatesTokenCount and totalTokenCount depend on response, may vary
   // { promptTokenCount: 265, candidatesTokenCount: 157, totalTokenCount: 422 }
   // [END tokens_multimodal_image_file_api]
   await fileManager.deleteFile(uploadResult.file.name);
@@ -230,7 +234,8 @@ async function tokensMultimodalVideoAudioFileApi() {
 
   // Call `countTokens` to get the input token count
   // of the combined text and file (`totalTokens`).
-  // An video or audio file's display or file size does not affect its token count.
+  // A video or audio file is converted to tokens at a fixed rate of tokens
+  // per second.
   // Optionally, you can call `countTokens` for the text and file separately.
   const countResult = await model.countTokens([prompt, videoPart]);
 
@@ -243,6 +248,7 @@ async function tokensMultimodalVideoAudioFileApi() {
   // (`promptTokenCount` and `candidatesTokenCount`, respectively),
   // as well as the combined token count (`totalTokenCount`).
   console.log(generateResult.response.usageMetadata);
+  // candidatesTokenCount and totalTokenCount depend on response, may vary
   // { promptTokenCount: 302, candidatesTokenCount: 46, totalTokenCount: 348 }
   // [END tokens_multimodal_video_audio_file_api]
   await fileManager.deleteFile(uploadVideoResult.file.name);
@@ -305,7 +311,7 @@ async function tokensCachedContent() {
   console.log(generateResult.response.usageMetadata);
   // {
   //   promptTokenCount: 323396,
-  //   candidatesTokenCount: 113,
+  //   candidatesTokenCount: 113, (depends on response, may vary)
   //   totalTokenCount: 323509,
   //   cachedContentTokenCount: 323386
   // }
@@ -319,21 +325,26 @@ async function tokensSystemInstruction() {
   // Make sure to include these imports:
   // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-  const model = genAI.getGenerativeModel({
+  const prompt = "The quick brown fox jumps over the lazy dog.";
+  const modelNoInstructions = genAI.getGenerativeModel({
+    model: "models/gemini-1.5-flash",
+  });
+
+  const resultNoInstructions = await modelNoInstructions.countTokens(prompt);
+
+  console.log(resultNoInstructions);
+  // { totalTokens: 11 }
+
+  const modelWithInstructions = genAI.getGenerativeModel({
     model: "models/gemini-1.5-flash",
     systemInstruction: "You are a cat. Your name is Neko.",
   });
 
-  const result = await model.countTokens(
-    "The quick brown fox jumps over the lazy dog.",
-  );
+  const resultWithInstructions =
+    await modelWithInstructions.countTokens(prompt);
 
-  console.log(result);
-  // {
-  //   totalTokens: 23,
-  //   systemInstructionsTokens: { partTokens: [ 11 ], roleTokens: 1 },
-  //   contentTokens: [ { partTokens: [Array], roleTokens: 1 } ]
-  // }
+  console.log(resultWithInstructions);
+  // { totalTokens: 23 }
   // [END tokens_system_instruction]
 }
 
@@ -342,6 +353,17 @@ async function tokensTools() {
   // Make sure to include these imports:
   // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+  const prompt =
+    "I have 57 cats, each owns 44 mittens, how many mittens is that in total?";
+
+  const modelNoTools = genAI.getGenerativeModel({
+    model: "models/gemini-1.5-flash",
+  });
+
+  const resultNoTools = await modelNoTools.countTokens(prompt);
+
+  console.log(resultNoTools);
+  // { totalTokens: 23 }
 
   const functionDeclarations = [
     { name: "add" },
@@ -350,22 +372,15 @@ async function tokensTools() {
     { name: "divide" },
   ];
 
-  const model = genAI.getGenerativeModel({
+  const modelWithTools = genAI.getGenerativeModel({
     model: "models/gemini-1.5-flash",
     tools: [{ functionDeclarations }],
   });
 
-  const result = await model.countTokens(
-    "I have 57 cats, each owns 44 mittens, how many mittens is that in total?",
-  );
+  const resultWithTools = await modelWithTools.countTokens(prompt);
 
-  console.log(result);
-  // {
-  //   totalTokens: 99,
-  //   systemInstructionsTokens: {},
-  //   contentTokens: [ { partTokens: [Array], roleTokens: 1 } ],
-  //   toolTokens: [ { functionDeclarationTokens: [Array] } ]
-  // }
+  console.log(resultWithTools);
+  // { totalTokens: 99 }
   // [END tokens_tools]
 }
 
