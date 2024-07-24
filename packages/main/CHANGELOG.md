@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.16.0
+
+### Minor Changes
+
+- d2d42ca: Adds `SingleRequestOptions` with `AbortSignal` support to most of the asynchronous methods of `GenerativeModel`, `GoogleAIFileManager` and `ChatSession`.
+
 ## 0.15.0
 
 ### Minor Changes
