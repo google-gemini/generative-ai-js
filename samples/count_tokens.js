@@ -343,6 +343,9 @@ async function tokensSystemInstruction() {
   const resultWithInstructions =
     await modelWithInstructions.countTokens(prompt);
 
+  // The total token count includes everything sent to the
+  // generateContent() request. When you use system instructions, the
+  // total token count increases.
   console.log(resultWithInstructions);
   // { totalTokens: 23 }
   // [END tokens_system_instruction]
@@ -379,6 +382,9 @@ async function tokensTools() {
 
   const resultWithTools = await modelWithTools.countTokens(prompt);
 
+  // The total token count includes everything sent to the
+  // generateContent() request. When you use tools (like function calling),
+  // the total token count increases.
   console.log(resultWithTools);
   // { totalTokens: 99 }
   // [END tokens_tools]
