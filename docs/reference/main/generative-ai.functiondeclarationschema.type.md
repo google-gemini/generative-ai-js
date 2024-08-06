@@ -9,5 +9,5 @@ The type of the parameter.
 **Signature:**
 
 ```typescript
-type: FunctionDeclarationSchemaType;
+type: SchemaType;
 ```

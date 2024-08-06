@@ -20,9 +20,9 @@ import * as sinonChai from "sinon-chai";
 import {
   CountTokensRequest,
   FunctionCallingMode,
-  FunctionDeclarationSchemaType,
   HarmBlockThreshold,
   HarmCategory,
+  SchemaType,
 } from "../../types";
 import { getMockResponse } from "../../test-utils/mock-response";
 import { match, restore, stub } from "sinon";
@@ -56,10 +56,10 @@ describe("GenerativeModel", () => {
           temperature: 0,
           responseMimeType: "application/json",
           responseSchema: {
-            type: FunctionDeclarationSchemaType.OBJECT,
+            type: SchemaType.OBJECT,
             properties: {
               testField: {
-                type: FunctionDeclarationSchemaType.STRING,
+                type: SchemaType.STRING,
                 properties: {},
               },
             },
@@ -86,11 +86,11 @@ describe("GenerativeModel", () => {
       "application/json",
     );
     expect(genModel.generationConfig?.responseSchema.type).to.equal(
-      FunctionDeclarationSchemaType.OBJECT,
+      SchemaType.OBJECT,
     );
     expect(
       genModel.generationConfig?.responseSchema.properties.testField.type,
-    ).to.equal(FunctionDeclarationSchemaType.STRING);
+    ).to.equal(SchemaType.STRING);
     expect(genModel.safetySettings?.length).to.equal(1);
     expect(genModel.tools?.length).to.equal(1);
     expect(genModel.toolConfig?.functionCallingConfig.mode).to.equal(
@@ -157,10 +157,10 @@ describe("GenerativeModel", () => {
         temperature: 0,
         responseMimeType: "application/json",
         responseSchema: {
-          type: FunctionDeclarationSchemaType.OBJECT,
+          type: SchemaType.OBJECT,
           properties: {
             testField: {
-              type: FunctionDeclarationSchemaType.STRING,
+              type: SchemaType.STRING,
               properties: {},
             },
           },
@@ -191,10 +191,10 @@ describe("GenerativeModel", () => {
       generationConfig: {
         topK: 1,
         responseSchema: {
-          type: FunctionDeclarationSchemaType.OBJECT,
+          type: SchemaType.OBJECT,
           properties: {
             newTestField: {
-              type: FunctionDeclarationSchemaType.STRING,
+              type: SchemaType.STRING,
               properties: {},
             },
           },
@@ -309,10 +309,10 @@ describe("GenerativeModel", () => {
         temperature: 0,
         responseMimeType: "application/json",
         responseSchema: {
-          type: FunctionDeclarationSchemaType.OBJECT,
+          type: SchemaType.OBJECT,
           properties: {
             testField: {
-              type: FunctionDeclarationSchemaType.STRING,
+              type: SchemaType.STRING,
               properties: {},
             },
           },
@@ -349,10 +349,10 @@ describe("GenerativeModel", () => {
         temperature: 0,
         responseMimeType: "application/json",
         responseSchema: {
-          type: FunctionDeclarationSchemaType.OBJECT,
+          type: SchemaType.OBJECT,
           properties: {
             testField: {
-              type: FunctionDeclarationSchemaType.STRING,
+              type: SchemaType.STRING,
               properties: {},
             },
           },
@@ -380,10 +380,10 @@ describe("GenerativeModel", () => {
         tools: [{ functionDeclarations: [{ name: "otherfunc" }] }],
         generationConfig: {
           responseSchema: {
-            type: FunctionDeclarationSchemaType.OBJECT,
+            type: SchemaType.OBJECT,
             properties: {
               newTestField: {
-                type: FunctionDeclarationSchemaType.STRING,
+                type: SchemaType.STRING,
                 properties: {},
               },
             },

@@ -93,7 +93,7 @@ export class GenerativeModel {
    *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
    * take precedence over the {@link RequestOptions} values provided at the
-   * time of the {@link GoogleAIFileManager} initialization.
+   * time of the `GoogleAIFileManager` initialization.
    */
   async generateContent(
     request: GenerateContentRequest | string | Array<string | Part>,
@@ -128,7 +128,7 @@ export class GenerativeModel {
    *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
    * take precedence over the {@link RequestOptions} values provided at the
-   * time of the {@link GoogleAIFileManager} initialization.
+   * time of the `GoogleAIFileManager` initialization.
    */
   async generateContentStream(
     request: GenerateContentRequest | string | Array<string | Part>,
@@ -181,7 +181,7 @@ export class GenerativeModel {
    *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
    * take precedence over the {@link RequestOptions} values provided at the
-   * time of the {@link GoogleAIFileManager} initialization.
+   * time of the `GoogleAIFileManager` initialization.
    */
   async countTokens(
     request: CountTokensRequest | string | Array<string | Part>,
@@ -213,7 +213,7 @@ export class GenerativeModel {
    *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
    * take precedence over the {@link RequestOptions} values provided at the
-   * time of the {@link GoogleAIFileManager} initialization.
+   * time of the `GoogleAIFileManager` initialization.
    */
   async embedContent(
     request: EmbedContentRequest | string | Array<string | Part>,
@@ -237,7 +237,7 @@ export class GenerativeModel {
    *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
    * take precedence over the {@link RequestOptions} values provided at the
-   * time of the {@link GoogleAIFileManager} initialization.
+   * time of the `GoogleAIFileManager` initialization.
    */
   async batchEmbedContents(
     batchEmbedContentRequest: BatchEmbedContentsRequest,

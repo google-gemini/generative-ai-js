@@ -4,12 +4,12 @@
 
 ## Schema.properties property
 
-Optional. Map of [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md)<!-- -->.
+Optional. Map of [Schema](./generative-ai.schema.md)<!-- -->.
 
 **Signature:**
 
 ```typescript
 properties?: {
-        [k: string]: FunctionDeclarationSchema;
+        [k: string]: Schema;
     };
 ```

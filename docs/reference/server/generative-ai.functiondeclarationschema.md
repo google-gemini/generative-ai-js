@@ -19,5 +19,5 @@ export interface FunctionDeclarationSchema
 |  [description?](./generative-ai.functiondeclarationschema.description.md) |  | string | _(Optional)_ Optional. Description of the parameter. |
 |  [properties](./generative-ai.functiondeclarationschema.properties.md) |  | { \[k: string\]: [FunctionDeclarationSchemaProperty](./generative-ai.functiondeclarationschemaproperty.md)<!-- -->; } | The format of the parameter. |
 |  [required?](./generative-ai.functiondeclarationschema.required.md) |  | string\[\] | _(Optional)_ Optional. Array of required parameters. |
-|  [type](./generative-ai.functiondeclarationschema.type.md) |  | [FunctionDeclarationSchemaType](./generative-ai.functiondeclarationschematype.md) | The type of the parameter. |
+|  [type](./generative-ai.functiondeclarationschema.type.md) |  | [SchemaType](./generative-ai.schematype.md) | The type of the parameter. |
 

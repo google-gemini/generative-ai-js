@@ -75,7 +75,7 @@ export class ChatSession {
    *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
    * take precedence over the {@link RequestOptions} values provided at the
-   * time of the {@link GoogleAIFileManager} initialization.
+   * time of the `GoogleAIFileManager` initialization.
    */
   async sendMessage(
     request: string | Array<string | Part>,
@@ -141,7 +141,7 @@ export class ChatSession {
    *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
    * take precedence over the {@link RequestOptions} values provided at the
-   * time of the {@link GoogleAIFileManager} initialization.
+   * time of the `GoogleAIFileManager` initialization.
    */
   async sendMessageStream(
     request: string | Array<string | Part>,

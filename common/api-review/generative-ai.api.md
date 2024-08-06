@@ -329,21 +329,11 @@ export interface FunctionDeclarationSchema {
         [k: string]: FunctionDeclarationSchemaProperty;
     };
     required?: string[];
-    type: FunctionDeclarationSchemaType;
+    type: SchemaType;
 }
 
 // @public
 export interface FunctionDeclarationSchemaProperty extends Schema {
-}
-
-// @public
-export enum FunctionDeclarationSchemaType {
-    ARRAY = "ARRAY",
-    BOOLEAN = "BOOLEAN",
-    INTEGER = "INTEGER",
-    NUMBER = "NUMBER",
-    OBJECT = "OBJECT",
-    STRING = "STRING"
 }
 
 // @public
@@ -656,13 +646,23 @@ export interface Schema {
     enum?: string[];
     example?: unknown;
     format?: string;
-    items?: FunctionDeclarationSchema;
+    items?: Schema;
     nullable?: boolean;
     properties?: {
-        [k: string]: FunctionDeclarationSchema;
+        [k: string]: Schema;
     };
     required?: string[];
-    type?: FunctionDeclarationSchemaType;
+    type?: SchemaType;
+}
+
+// @public
+export enum SchemaType {
+    ARRAY = "ARRAY",
+    BOOLEAN = "BOOLEAN",
+    INTEGER = "INTEGER",
+    NUMBER = "NUMBER",
+    OBJECT = "OBJECT",
+    STRING = "STRING"
 }
 
 // @public
