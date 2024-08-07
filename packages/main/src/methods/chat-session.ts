@@ -74,8 +74,8 @@ export class ChatSession {
    * {@link GenerateContentResult}.
    *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
-   * take precedence over the {@link RequestOptions} values provided at the
-   * time of the `GoogleAIFileManager` initialization.
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
    */
   async sendMessage(
     request: string | Array<string | Part>,
@@ -140,8 +140,8 @@ export class ChatSession {
    * and a response promise.
    *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
-   * take precedence over the {@link RequestOptions} values provided at the
-   * time of the `GoogleAIFileManager` initialization.
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
    */
   async sendMessageStream(
     request: string | Array<string | Part>,
