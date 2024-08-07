@@ -92,8 +92,8 @@ export class GenerativeModel {
    * and returns an object containing a single {@link GenerateContentResponse}.
    *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
-   * take precedence over the {@link RequestOptions} values provided at the
-   * time of the {@link GoogleAIFileManager} initialization.
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
    */
   async generateContent(
     request: GenerateContentRequest | string | Array<string | Part>,
@@ -127,8 +127,8 @@ export class GenerativeModel {
    * aggregated response.
    *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
-   * take precedence over the {@link RequestOptions} values provided at the
-   * time of the {@link GoogleAIFileManager} initialization.
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
    */
   async generateContentStream(
     request: GenerateContentRequest | string | Array<string | Part>,
@@ -180,8 +180,8 @@ export class GenerativeModel {
    * Counts the tokens in the provided request.
    *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
-   * take precedence over the {@link RequestOptions} values provided at the
-   * time of the {@link GoogleAIFileManager} initialization.
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
    */
   async countTokens(
     request: CountTokensRequest | string | Array<string | Part>,
@@ -212,8 +212,8 @@ export class GenerativeModel {
    * Embeds the provided content.
    *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
-   * take precedence over the {@link RequestOptions} values provided at the
-   * time of the {@link GoogleAIFileManager} initialization.
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
    */
   async embedContent(
     request: EmbedContentRequest | string | Array<string | Part>,
@@ -236,8 +236,8 @@ export class GenerativeModel {
    * Embeds an array of {@link EmbedContentRequest}s.
    *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
-   * take precedence over the {@link RequestOptions} values provided at the
-   * time of the {@link GoogleAIFileManager} initialization.
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
    */
   async batchEmbedContents(
     batchEmbedContentRequest: BatchEmbedContentsRequest,

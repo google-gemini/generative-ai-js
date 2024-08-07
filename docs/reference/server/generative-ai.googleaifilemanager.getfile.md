@@ -6,7 +6,7 @@
 
 Get metadata for file with given ID.
 
-Any fields set in the optional  parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) initialization.
+Any fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) initialization.
 
 **Signature:**
 
@@ -19,7 +19,7 @@ getFile(fileId: string, requestOptions?: SingleRequestOptions): Promise<FileMeta
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  fileId | string |  |
-|  requestOptions | SingleRequestOptions | _(Optional)_ |
+|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
 
 **Returns:**
 

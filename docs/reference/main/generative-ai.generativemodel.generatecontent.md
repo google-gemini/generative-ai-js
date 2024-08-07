@@ -6,7 +6,7 @@
 
 Makes a single non-streaming call to the model and returns an object containing a single [GenerateContentResponse](./generative-ai.generatecontentresponse.md)<!-- -->.
 
-Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the  initialization.
+Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.
 
 **Signature:**
 

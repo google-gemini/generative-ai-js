@@ -4,10 +4,10 @@
 
 ## Schema.items property
 
-Optional. The items of the property. [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md)
+Optional. The items of the property.
 
 **Signature:**
 
 ```typescript
-items?: FunctionDeclarationSchema;
+items?: Schema;
 ```

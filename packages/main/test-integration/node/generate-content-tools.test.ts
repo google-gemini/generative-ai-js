@@ -17,7 +17,7 @@
 
 import { expect, use } from "chai";
 import * as chaiAsPromised from "chai-as-promised";
-import { FunctionDeclarationSchemaType, GoogleGenerativeAI } from "../..";
+import { GoogleGenerativeAI, SchemaType } from "../..";
 import { Content } from "../../types";
 
 use(chaiAsPromised);
@@ -44,15 +44,15 @@ describe("generateContent - tools", function () {
                 description:
                   "find movie titles currently playing in theaters based on any description, genre, title words, etc.",
                 parameters: {
-                  type: FunctionDeclarationSchemaType.OBJECT,
+                  type: SchemaType.OBJECT,
                   properties: {
                     location: {
-                      type: FunctionDeclarationSchemaType.STRING,
+                      type: SchemaType.STRING,
                       description:
                         "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
                     },
                     description: {
-                      type: FunctionDeclarationSchemaType.STRING,
+                      type: SchemaType.STRING,
                       description:
                         "Any kind of description including category or genre, title words, attributes, etc.",
                     },
@@ -65,15 +65,15 @@ describe("generateContent - tools", function () {
                 description:
                   "find theaters based on location and optionally movie title which are is currently playing in theaters",
                 parameters: {
-                  type: FunctionDeclarationSchemaType.OBJECT,
+                  type: SchemaType.OBJECT,
                   properties: {
                     location: {
-                      type: FunctionDeclarationSchemaType.STRING,
+                      type: SchemaType.STRING,
                       description:
                         "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
                     },
                     movie: {
-                      type: FunctionDeclarationSchemaType.STRING,
+                      type: SchemaType.STRING,
                       description: "Any movie title",
                     },
                   },
@@ -85,23 +85,23 @@ describe("generateContent - tools", function () {
                 description:
                   "Find the start times for movies playing in a specific theater",
                 parameters: {
-                  type: FunctionDeclarationSchemaType.OBJECT,
+                  type: SchemaType.OBJECT,
                   properties: {
                     location: {
-                      type: FunctionDeclarationSchemaType.STRING,
+                      type: SchemaType.STRING,
                       description:
                         "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
                     },
                     movie: {
-                      type: FunctionDeclarationSchemaType.STRING,
+                      type: SchemaType.STRING,
                       description: "Any movie title",
                     },
                     theater: {
-                      type: FunctionDeclarationSchemaType.STRING,
+                      type: SchemaType.STRING,
                       description: "Name of the theater",
                     },
                     date: {
-                      type: FunctionDeclarationSchemaType.STRING,
+                      type: SchemaType.STRING,
                       description: "Date for requested showtime",
                     },
                   },
@@ -194,9 +194,9 @@ describe("generateContent - tools", function () {
                 description:
                   "Get current temperature in degrees Celsius in a given city",
                 parameters: {
-                  type: FunctionDeclarationSchemaType.OBJECT,
+                  type: SchemaType.OBJECT,
                   properties: {
-                    city: { type: FunctionDeclarationSchemaType.STRING },
+                    city: { type: SchemaType.STRING },
                   },
                   required: ["city"],
                 },

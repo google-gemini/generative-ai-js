@@ -18,10 +18,10 @@
 import { expect, use } from "chai";
 import * as chaiAsPromised from "chai-as-promised";
 import {
-  FunctionDeclarationSchemaType,
   GoogleGenerativeAI,
   HarmBlockThreshold,
   HarmCategory,
+  SchemaType,
   Tool,
 } from "../..";
 import { Part } from "../../types";
@@ -41,9 +41,9 @@ describe("startChat - tools", function () {
           description:
             "Get current temperature in degrees Celsius in a given city",
           parameters: {
-            type: FunctionDeclarationSchemaType.OBJECT,
+            type: SchemaType.OBJECT,
             properties: {
-              city: { type: FunctionDeclarationSchemaType.STRING },
+              city: { type: SchemaType.STRING },
             },
             required: ["city"],
           },

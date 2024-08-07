@@ -18,8 +18,8 @@
 |  [ExecutableCodeLanguage](./generative-ai.executablecodelanguage.md) |  |
 |  [FileState](./generative-ai.filestate.md) | Processing state of the <code>File</code>. |
 |  [FunctionCallingMode](./generative-ai.functioncallingmode.md) |  |
-|  [FunctionDeclarationSchemaType](./generative-ai.functiondeclarationschematype.md) | Contains the list of OpenAPI data types as defined by https://swagger.io/docs/specification/data-models/data-types/ |
 |  [Outcome](./generative-ai.outcome.md) | Possible outcomes of code execution. |
+|  [SchemaType](./generative-ai.schematype.md) | Contains the list of OpenAPI data types as defined by https://swagger.io/docs/specification/data-models/data-types/ |
 
 ## Interfaces
 
@@ -59,6 +59,7 @@
 |  [ResponseSchema](./generative-ai.responseschema.md) | Schema passed to <code>GenerationConfig.responseSchema</code> |
 |  [RpcStatus](./generative-ai.rpcstatus.md) | Standard RPC error status object. |
 |  [Schema](./generative-ai.schema.md) | Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed. |
+|  [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | Params passed to atomic asynchronous operations. |
 |  [TextPart](./generative-ai.textpart.md) | Content part interface if the part represents a text string. |
 |  [ToolConfig](./generative-ai.toolconfig.md) | Tool config. This config is shared for all tools provided in the request. |
 |  [UploadFileResponse](./generative-ai.uploadfileresponse.md) | Response from calling [GoogleAIFileManager.uploadFile()](./generative-ai.googleaifilemanager.uploadfile.md) |

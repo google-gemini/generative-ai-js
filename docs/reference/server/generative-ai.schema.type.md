@@ -4,10 +4,10 @@
 
 ## Schema.type property
 
-Optional. The type of the property. [FunctionDeclarationSchemaType](./generative-ai.functiondeclarationschematype.md)<!-- -->.
+Optional. The type of the property. [SchemaType](./generative-ai.schematype.md)<!-- -->.
 
 **Signature:**
 
 ```typescript
-type?: FunctionDeclarationSchemaType;
+type?: SchemaType;
 ```

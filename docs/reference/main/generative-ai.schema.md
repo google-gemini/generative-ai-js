@@ -20,9 +20,9 @@ export interface Schema
 |  [enum?](./generative-ai.schema.enum.md) |  | string\[\] | _(Optional)_ Optional. The enum of the property. |
 |  [example?](./generative-ai.schema.example.md) |  | unknown | _(Optional)_ Optional. The example of the property. |
 |  [format?](./generative-ai.schema.format.md) |  | string | _(Optional)_ Optional. The format of the property. |
-|  [items?](./generative-ai.schema.items.md) |  | [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md) | _(Optional)_ Optional. The items of the property. [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md) |
+|  [items?](./generative-ai.schema.items.md) |  | [Schema](./generative-ai.schema.md) | _(Optional)_ Optional. The items of the property. |
 |  [nullable?](./generative-ai.schema.nullable.md) |  | boolean | _(Optional)_ Optional. Whether the property is nullable. |
-|  [properties?](./generative-ai.schema.properties.md) |  | { \[k: string\]: [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md)<!-- -->; } | _(Optional)_ Optional. Map of [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md)<!-- -->. |
+|  [properties?](./generative-ai.schema.properties.md) |  | { \[k: string\]: [Schema](./generative-ai.schema.md)<!-- -->; } | _(Optional)_ Optional. Map of [Schema](./generative-ai.schema.md)<!-- -->. |
 |  [required?](./generative-ai.schema.required.md) |  | string\[\] | _(Optional)_ Optional. Array of required property. |
-|  [type?](./generative-ai.schema.type.md) |  | [FunctionDeclarationSchemaType](./generative-ai.functiondeclarationschematype.md) | _(Optional)_ Optional. The type of the property. [FunctionDeclarationSchemaType](./generative-ai.functiondeclarationschematype.md)<!-- -->. |
+|  [type?](./generative-ai.schema.type.md) |  | [SchemaType](./generative-ai.schematype.md) | _(Optional)_ Optional. The type of the property. [SchemaType](./generative-ai.schematype.md)<!-- -->. |
 

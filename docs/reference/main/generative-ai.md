@@ -24,11 +24,11 @@
 |  [ExecutableCodeLanguage](./generative-ai.executablecodelanguage.md) |  |
 |  [FinishReason](./generative-ai.finishreason.md) | Reason that a candidate finished. |
 |  [FunctionCallingMode](./generative-ai.functioncallingmode.md) |  |
-|  [FunctionDeclarationSchemaType](./generative-ai.functiondeclarationschematype.md) | Contains the list of OpenAPI data types as defined by https://swagger.io/docs/specification/data-models/data-types/ |
 |  [HarmBlockThreshold](./generative-ai.harmblockthreshold.md) | Threshold above which a prompt or candidate will be blocked. |
 |  [HarmCategory](./generative-ai.harmcategory.md) | Harm categories that would cause prompts or candidates to be blocked. |
 |  [HarmProbability](./generative-ai.harmprobability.md) | Probability that a prompt or candidate matches a harm category. |
 |  [Outcome](./generative-ai.outcome.md) | Possible outcomes of code execution. |
+|  [SchemaType](./generative-ai.schematype.md) | Contains the list of OpenAPI data types as defined by https://swagger.io/docs/specification/data-models/data-types/ |
 |  [TaskType](./generative-ai.tasktype.md) | Task type for embedding content. |
 
 ## Interfaces
