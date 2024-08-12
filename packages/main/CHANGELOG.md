@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.17.0
+
+### Minor Changes
+
+- 3b5daae: Fix `Schema` type to reference itself and not a derived type in its `items` array and `properties` map.
+
 ## 0.16.0
 
 ### Minor Changes
