@@ -16,24 +16,24 @@
  */
 
 import {
-  FunctionDeclarationSchemaType,
   GoogleGenerativeAI,
+  SchemaType,
 } from "@google/generative-ai";
 
 async function jsonControlledGeneration() {
   // [START json_controlled_generation]
   // Make sure to include these imports:
-  // import { GoogleGenerativeAI, FunctionDeclarationSchemaType } from "@google/generative-ai";
+  // import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
   const schema = {
     description: "List of recipes",
-    type: FunctionDeclarationSchemaType.ARRAY,
+    type: SchemaType.ARRAY,
     items: {
-      type: FunctionDeclarationSchemaType.OBJECT,
+      type: SchemaType.OBJECT,
       properties: {
         recipeName: {
-          type: FunctionDeclarationSchemaType.STRING,
+          type: SchemaType.STRING,
           description: "Name of the recipe",
           nullable: false,
         },

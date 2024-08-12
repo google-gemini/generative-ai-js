@@ -84,7 +84,7 @@ export declare interface FunctionDeclarationsTool {
  * as defined by https://swagger.io/docs/specification/data-models/data-types/
  * @public
  */
-export enum FunctionDeclarationSchemaType {
+export enum SchemaType {
   /** String type. */
   STRING = "STRING",
   /** Number type. */
@@ -108,21 +108,21 @@ export enum FunctionDeclarationSchemaType {
 export interface Schema {
   /**
    * Optional. The type of the property. {@link
-   * FunctionDeclarationSchemaType}.
+   * SchemaType}.
    */
-  type?: FunctionDeclarationSchemaType;
+  type?: SchemaType;
   /** Optional. The format of the property. */
   format?: string;
   /** Optional. The description of the property. */
   description?: string;
   /** Optional. Whether the property is nullable. */
   nullable?: boolean;
-  /** Optional. The items of the property. {@link FunctionDeclarationSchema} */
-  items?: FunctionDeclarationSchema;
+  /** Optional. The items of the property. */
+  items?: Schema;
   /** Optional. The enum of the property. */
   enum?: string[];
-  /** Optional. Map of {@link FunctionDeclarationSchema}. */
-  properties?: { [k: string]: FunctionDeclarationSchema };
+  /** Optional. Map of {@link Schema}. */
+  properties?: { [k: string]: Schema };
   /** Optional. Array of required property. */
   required?: string[];
   /** Optional. The example of the property. */
@@ -135,7 +135,7 @@ export interface Schema {
  */
 export interface FunctionDeclarationSchema {
   /** The type of the parameter. */
-  type: FunctionDeclarationSchemaType;
+  type: SchemaType;
   /** The format of the parameter. */
   properties: { [k: string]: FunctionDeclarationSchemaProperty };
   /** Optional. Description of the parameter. */

@@ -282,21 +282,11 @@ export interface FunctionDeclarationSchema {
         [k: string]: FunctionDeclarationSchemaProperty;
     };
     required?: string[];
-    type: FunctionDeclarationSchemaType;
+    type: SchemaType;
 }
 
 // @public
 export interface FunctionDeclarationSchemaProperty extends Schema {
-}
-
-// @public
-export enum FunctionDeclarationSchemaType {
-    ARRAY = "ARRAY",
-    BOOLEAN = "BOOLEAN",
-    INTEGER = "INTEGER",
-    NUMBER = "NUMBER",
-    OBJECT = "OBJECT",
-    STRING = "STRING"
 }
 
 // @public
@@ -356,7 +346,6 @@ export class GoogleAIFileManager {
     apiKey: string;
     deleteFile(fileId: string): Promise<void>;
     getFile(fileId: string, requestOptions?: SingleRequestOptions): Promise<FileMetadataResponse>;
-    // Warning: (ae-forgotten-export) The symbol "SingleRequestOptions" needs to be exported by the entry point index.d.ts
     listFiles(listParams?: ListParams, requestOptions?: SingleRequestOptions): Promise<ListFilesResponse>;
     uploadFile(filePath: string, fileMetadata: FileMetadata): Promise<UploadFileResponse>;
 }
@@ -440,13 +429,28 @@ export interface Schema {
     enum?: string[];
     example?: unknown;
     format?: string;
-    items?: FunctionDeclarationSchema;
+    items?: Schema;
     nullable?: boolean;
     properties?: {
-        [k: string]: FunctionDeclarationSchema;
+        [k: string]: Schema;
     };
     required?: string[];
-    type?: FunctionDeclarationSchemaType;
+    type?: SchemaType;
+}
+
+// @public
+export enum SchemaType {
+    ARRAY = "ARRAY",
+    BOOLEAN = "BOOLEAN",
+    INTEGER = "INTEGER",
+    NUMBER = "NUMBER",
+    OBJECT = "OBJECT",
+    STRING = "STRING"
+}
+
+// @public
+export interface SingleRequestOptions extends RequestOptions {
+    signal?: AbortSignal;
 }
 
 // @public
