@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2023 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,24 +15,19 @@
  * limitations under the License.
  */
 
-const path = require("path");
-
 module.exports = {
   env: {
     browser: true,
     es6: true,
     node: true,
   },
-  parser: "@typescript-eslint/parser",
   plugins: [
-    "@typescript-eslint",
-    "@typescript-eslint/tslint",
     "import",
     "unused-imports",
   ],
   parserOptions: {
     ecmaVersion: 2015,
-    sourceType: "module",
+    sourceType: "module"
   },
   overrides: [
     {
@@ -40,7 +35,6 @@ module.exports = {
       rules: {
         // TODO: Use https://www.npmjs.com/package/eslint-plugin-chai-friendly instead
         "no-unused-expressions": "off",
-        "@typescript-eslint/no-explicit-any": "off",
       },
     },
   ],
@@ -136,112 +130,8 @@ module.exports = {
     "import/no-extraneous-dependencies": [
       "error",
       {
-        // Check dependencies from both local package.json
-        // and from root package.json.
-        packageDir: [path.join(__dirname, "../"), "./"],
-        devDependencies: [
-          "**/*.test.ts",
-          "**/test/**/*.ts",
-          "**/testing/**/*.ts",
-          "*.config.*",
-        ],
+        packageDir: [__dirname],
         peerDependencies: true,
-      },
-    ],
-    "@typescript-eslint/array-type": [
-      "error",
-      {
-        default: "array-simple",
-      },
-    ],
-    "@typescript-eslint/ban-types": [
-      "error",
-      {
-        types: {
-          Object: "Use {} or 'object' instead.",
-          String: "Use 'string' instead.",
-          Number: "Use 'number' instead.",
-          Boolean: "Use 'boolean' instead.",
-          Function: `Avoid the Function type, as it provides little safety for the following reasons:
-                       It provides no type safety when calling the value, which means it's easy to provide the wrong arguments.
-                       It accepts class declarations, which will fail when called, as they are called without the new keyword.`,
-        },
-        extendDefaults: false,
-      },
-    ],
-    "@typescript-eslint/naming-convention": [
-      "error",
-      {
-        selector: "class",
-        format: ["PascalCase"],
-      },
-      {
-        selector: "interface",
-        format: ["PascalCase"],
-        custom: {
-          regex: "^I[A-Z]",
-          match: false,
-        },
-        leadingUnderscore: 'allow'
-      },
-    ],
-    "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
-    "@typescript-eslint/explicit-member-accessibility": [
-      "error",
-      {
-        accessibility: "no-public",
-        overrides: {
-          parameterProperties: "off",
-        },
-      },
-    ],
-    "@typescript-eslint/consistent-type-assertions": [
-      "error",
-      {
-        assertionStyle: "as",
-      },
-    ],
-    "@typescript-eslint/no-explicit-any": ["error", { ignoreRestArgs: true }],
-    "@typescript-eslint/no-namespace": [
-      "error",
-      {
-        allowDeclarations: true,
-      },
-    ],
-    "@typescript-eslint/triple-slash-reference": [
-      "error",
-      {
-        path: "never",
-        types: "never",
-        lib: "never",
-      },
-    ],
-    "@typescript-eslint/no-require-imports": "error",
-    "@typescript-eslint/no-useless-constructor": "error",
-    "@typescript-eslint/semi": "error",
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
-      {
-        allowExpressions: true,
-        allowTypedFunctionExpressions: true,
-        allowHigherOrderFunctions: true,
-      },
-    ],
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        varsIgnorePattern: "^_",
-        argsIgnorePattern: "^_",
-      },
-    ],
-    "@typescript-eslint/no-floating-promises": "error",
-    "@typescript-eslint/tslint/config": [
-      "error",
-      {
-        rules: {
-          "jsdoc-format": true,
-          "arrow-return-shorthand": true,
-        },
       },
     ],
   },

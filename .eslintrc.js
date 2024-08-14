@@ -14,21 +14,225 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const path = require("path");
 
 module.exports = {
-  extends: "./config/.eslintrc.js",
-  parserOptions: {
-    project: "tsconfig.json",
-    // to make vscode-eslint work with monorepo
-    // https://github.com/typescript-eslint/typescript-eslint/issues/251#issuecomment-463943250
-    tsconfigRootDir: __dirname,
+  env: {
+    browser: true,
+    es6: true,
+    node: true,
   },
+  parser: "@typescript-eslint/parser",
+  plugins: [
+    "@typescript-eslint",
+    "@typescript-eslint/tslint",
+    "import",
+    "unused-imports",
+  ],
+  parserOptions: {
+    ecmaVersion: 2015,
+    sourceType: "module",
+    project: "tsconfig.json",
+  },
+  overrides: [
+    {
+      files: ["**/*.test.ts", "**/{test,testing}/**/*.ts"],
+      rules: {
+        // TODO: Use https://www.npmjs.com/package/eslint-plugin-chai-friendly instead
+        "no-unused-expressions": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+      },
+    },
+  ],
+  ignorePatterns: ["dist/", ".eslintrc.js"],
   rules: {
+    curly: ["error", "all"],
+    "guard-for-in": "error",
+    "no-extra-label": "error",
+    "no-unused-labels": "error",
+    "new-parens": "error",
+    "no-new-wrappers": "error",
+    "no-debugger": "error",
+    "no-duplicate-case": "error",
+    "no-throw-literal": "error",
+    "no-return-await": "error",
+    "no-unsafe-finally": "error",
+    "no-unused-expressions": [
+      "error",
+      {
+        allowShortCircuit: true,
+      },
+    ],
+    "no-var": "error",
+    "object-shorthand": "error",
+    "prefer-arrow-callback": [
+      "error",
+      {
+        allowNamedFunctions: true,
+      },
+    ],
+    "prefer-const": [
+      "error",
+      {
+        destructuring: "all",
+      },
+    ],
+    radix: "error",
+    "unused-imports/no-unused-imports-ts": "error",
+    "default-case": "error",
+    eqeqeq: [
+      "error",
+      "always",
+      {
+        null: "ignore",
+      },
+    ],
+    "no-caller": "error",
+    "no-cond-assign": ["error", "always"],
+    "use-isnan": "error",
+    "constructor-super": "error",
+    "no-restricted-properties": [
+      "error",
+      {
+        object: "it",
+        property: "skip",
+      },
+      {
+        object: "it",
+        property: "only",
+      },
+      {
+        object: "describe",
+        property: "skip",
+      },
+      {
+        object: "describe",
+        property: "only",
+      },
+      {
+        object: "xit",
+      },
+    ],
+    "no-restricted-globals": [
+      "error",
+      { name: "xit" },
+      { name: "xdescribe" },
+      { name: "parseInt", message: "tsstyle#type-coercion" },
+      { name: "parseFloat", message: "tsstyle#type-coercion" },
+    ],
+    "no-array-constructor": "error",
+    "sort-imports": [
+      "error",
+      {
+        ignoreCase: false,
+        ignoreDeclarationSort: true, // don"t want to sort import lines, use eslint-plugin-import instead
+        ignoreMemberSort: false,
+        memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
+        allowSeparatedGroups: true,
+      },
+    ],
+    "import/no-default-export": "error",
+    "import/no-duplicates": "error",
     "import/no-extraneous-dependencies": [
       "error",
       {
         packageDir: [__dirname],
+        peerDependencies: true,
+      },
+    ],
+    "@typescript-eslint/array-type": [
+      "error",
+      {
+        default: "array-simple",
+      },
+    ],
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        types: {
+          Object: "Use {} or 'object' instead.",
+          String: "Use 'string' instead.",
+          Number: "Use 'number' instead.",
+          Boolean: "Use 'boolean' instead.",
+          Function: `Avoid the Function type, as it provides little safety for the following reasons:
+                       It provides no type safety when calling the value, which means it's easy to provide the wrong arguments.
+                       It accepts class declarations, which will fail when called, as they are called without the new keyword.`,
+        },
+        extendDefaults: false,
+      },
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        selector: "class",
+        format: ["PascalCase"],
+      },
+      {
+        selector: "interface",
+        format: ["PascalCase"],
+        custom: {
+          regex: "^I[A-Z]",
+          match: false,
+        },
+        leadingUnderscore: "allow",
+      },
+    ],
+    "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+    "@typescript-eslint/explicit-member-accessibility": [
+      "error",
+      {
+        accessibility: "no-public",
+        overrides: {
+          parameterProperties: "off",
+        },
+      },
+    ],
+    "@typescript-eslint/consistent-type-assertions": [
+      "error",
+      {
+        assertionStyle: "as",
+      },
+    ],
+    "@typescript-eslint/no-explicit-any": ["error", { ignoreRestArgs: true }],
+    "@typescript-eslint/no-namespace": [
+      "error",
+      {
+        allowDeclarations: true,
+      },
+    ],
+    "@typescript-eslint/triple-slash-reference": [
+      "error",
+      {
+        path: "never",
+        types: "never",
+        lib: "never",
+      },
+    ],
+    "@typescript-eslint/no-require-imports": "error",
+    "@typescript-eslint/no-useless-constructor": "error",
+    "@typescript-eslint/semi": "error",
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        allowExpressions: true,
+        allowTypedFunctionExpressions: true,
+        allowHigherOrderFunctions: true,
+      },
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        varsIgnorePattern: "^_",
+        argsIgnorePattern: "^_",
+      },
+    ],
+    "@typescript-eslint/no-floating-promises": "error",
+    "@typescript-eslint/tslint/config": [
+      "error",
+      {
+        rules: {
+          "jsdoc-format": true,
+          "arrow-return-shorthand": true,
+        },
       },
     ],
   },
