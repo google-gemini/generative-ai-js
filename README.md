@@ -7,13 +7,12 @@ build with the Gemini API. The Gemini API gives you access to Gemini
 Gemini models are built from the ground up to be multimodal, so you can reason
 seamlessly across text, images, and code.
 
-> [!CAUTION]
-> **Using the Google AI SDK for JavaScript directly from a client-side app is
-> recommended for prototyping only.** If you plan to enable billing, we strongly
-> recommend that you call the Google AI Gemini API only server-side to keep your
-> API key safe. You risk potentially exposing your API key to malicious actors
-> if you embed your API key directly in your JavaScript app or fetch it remotely
-> at runtime.
+> [!CAUTION] **Using the Google AI SDK for JavaScript directly from a
+> client-side app is recommended for prototyping only.** If you plan to enable
+> billing, we strongly recommend that you call the Google AI Gemini API only
+> server-side to keep your API key safe. You risk potentially exposing your API
+> key to malicious actors if you embed your API key directly in your JavaScript
+> app or fetch it remotely at runtime.
 
 ## Get started with the Gemini API
 
@@ -84,14 +83,9 @@ access and utilize the Gemini model for various use cases.
 
 ## Documentation
 
-Check out the docs for this SDK here in the repo and in particular
-[GoogleGenerativeAI](/docs/reference/main/generative-ai.md) and
-[GoogleAIFileManager](/docs/reference/files/generative-ai.googleaifilemanager.md).
-
-See also the
+See the
 [Gemini API Cookbook](https://github.com/google-gemini/gemini-api-cookbook/) or
-[ai.google.dev](https://ai.google.dev) for more generic documentation about the
-Gemini API.
+[ai.google.dev](https://ai.google.dev) for complete documentation.
 
 ## Contributing
 

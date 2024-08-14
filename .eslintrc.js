@@ -17,7 +17,7 @@
 const path = require("path");
 
 module.exports = {
-  extends: "../../config/.eslintrc.js",
+  extends: "./config/.eslintrc.js",
   parserOptions: {
     project: "tsconfig.json",
     // to make vscode-eslint work with monorepo
@@ -28,7 +28,7 @@ module.exports = {
     "import/no-extraneous-dependencies": [
       "error",
       {
-        packageDir: [path.resolve(__dirname, "../../"), __dirname],
+        packageDir: [__dirname],
       },
     ],
   },

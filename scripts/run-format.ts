@@ -17,11 +17,12 @@
 
 import { exec } from "child_process";
 import { doLicense } from "./license";
+import { getFormatPatternsString } from "./format-patterns";
 
-async function runFormat() {
+async function runFormat(): Promise<void> {
   const prettierPromise = new Promise<boolean>((resolve) => {
     exec(
-      'yarn prettier --write "packages/**/*.{js,ts,mjs,json}" "scripts/**/*.ts"',
+      `yarn prettier --write ${getFormatPatternsString()}`,
       (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
@@ -41,4 +42,7 @@ async function runFormat() {
   }
 }
 
-runFormat();
+runFormat().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

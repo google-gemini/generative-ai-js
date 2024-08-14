@@ -60,7 +60,7 @@ jobs:
     - name: run node iTests
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      run: yarn --cwd packages/main test:node:integration
+      run: yarn test:node:integration
 
   web-integration-test:
     runs-on: ubuntu-latest
@@ -81,4 +81,4 @@ jobs:
     - name: run web iTests
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      run: yarn --cwd packages/main test:web:integration
+      run: yarn test:web:integration
