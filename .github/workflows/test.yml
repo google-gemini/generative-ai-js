@@ -94,16 +94,18 @@ jobs:
         node-version: 20
         cache: 'yarn'
 
-    - name: yarn install
-      run: yarn
-
     - name: Get VertexAI repo
+      # Need to npm install inner repo first or there will be errors
       run: |
         git clone https://github.com/googleapis/nodejs-vertexai.git
         cd nodejs-vertexai
         npm install
+        cd ..
+        yarn
 
     - name: Run tests
+      env:
+        TEST_REPO: "generative-ai-js"
       run: |
         npx ts-node nodejs-vertexai/sdk_schema_test/vertex_ai/*test.ts
         npx ts-node nodejs-vertexai/sdk_schema_test/google_ai/*test.ts

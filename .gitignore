@@ -4,3 +4,4 @@ temp/
 *.tgz
 .DS_Store
 testfiles
+nodejs-vertexai/
