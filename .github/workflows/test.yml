@@ -82,3 +82,28 @@ jobs:
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       run: yarn test:web:integration
+
+  interface-alignment-test:
+    name: Interface Alignment Test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20
+        cache: 'yarn'
+
+    - name: yarn install
+      run: yarn
+
+    - name: Get VertexAI repo
+      run: |
+        git clone https://github.com/googleapis/nodejs-vertexai.git
+        cd nodejs-vertexai
+        npm install
+
+    - name: Run tests
+      run: |
+        npx ts-node nodejs-vertexai/sdk_schema_test/vertex_ai/*test.ts
+        npx ts-node nodejs-vertexai/sdk_schema_test/google_ai/*test.ts
