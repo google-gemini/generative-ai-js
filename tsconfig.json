@@ -5,6 +5,8 @@
     "target": "es2020",
     "allowJs": true,
     "moduleResolution": "node",
-    "declaration": true
+    "declaration": true,
+    "outDir": "dist",
+    "allowSyntheticDefaultImports": true
   }
 }

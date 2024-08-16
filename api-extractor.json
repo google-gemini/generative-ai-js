@@ -1,5 +1,5 @@
 {
-  "extends": "../../config/api-extractor.json",
+  "extends": "./config/api-extractor.json",
   "mainEntryPointFilePath": "<projectFolder>/dist/src/index.d.ts",
   "apiReport": {
     "reportFileName": "<unscopedPackageName>.api.md"

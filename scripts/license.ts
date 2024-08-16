@@ -25,9 +25,11 @@ const licenseHeader = fs.readFileSync(
 );
 
 const copyrightPattern = /Copyright \d{4} Google (Inc\.|LLC)/;
-const globPattern = "+(packages|scripts|samples)/**/*.+(ts|js)";
+const globPattern = "+(src|scripts|samples)/**/*.+(ts|js)";
 
-async function readFiles(paths: string[]) {
+async function readFiles(
+  paths: string[],
+): Promise<Array<{ contents: string; path: string }>> {
   const fileContents = paths.map((path) => fs.readFileSync(path, "utf-8"));
   return fileContents.map((text, idx) => ({
     contents: text,
@@ -35,9 +37,9 @@ async function readFiles(paths: string[]) {
   }));
 }
 
-function addLicenseTag(contents: string) {
+function addLicenseTag(contents: string): string {
   const lines = contents.split("\n");
-  let newLines: string[] = [];
+  const newLines: string[] = [];
   for (const line of lines) {
     if (line.match(copyrightPattern)) {
       const indent = line.split("*")[0]; // Get whitespace to match

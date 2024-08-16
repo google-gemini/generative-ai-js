@@ -14,22 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const path = require("path");
+export const formatPatterns = [
+  "src/**/*.{js,ts,mjs,json}",
+  "scripts/**/*.ts",
+  "./*.{js,mjs}",
+  "test-integration/**/*.ts",
+  "test-utils/**/*.ts",
+];
 
-module.exports = {
-  extends: "../../config/.eslintrc.js",
-  parserOptions: {
-    project: "tsconfig.json",
-    // to make vscode-eslint work with monorepo
-    // https://github.com/typescript-eslint/typescript-eslint/issues/251#issuecomment-463943250
-    tsconfigRootDir: __dirname,
-  },
-  rules: {
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        packageDir: [path.resolve(__dirname, "../../"), __dirname],
-      },
-    ],
-  },
-};
+export function getFormatPatternsString(): string {
+  return formatPatterns.map((pattern) => `"${pattern}"`).join(" ");
+}

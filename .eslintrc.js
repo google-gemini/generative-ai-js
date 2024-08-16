@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2023 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-const path = require("path");
 
 module.exports = {
   env: {
@@ -33,6 +31,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2015,
     sourceType: "module",
+    project: "tsconfig.json",
   },
   overrides: [
     {
@@ -125,7 +124,7 @@ module.exports = {
       "error",
       {
         ignoreCase: false,
-        ignoreDeclarationSort: true, // don"t want to sort import lines, use eslint-plugin-import instead
+        ignoreDeclarationSort: true, // don't want to sort import lines, use eslint-plugin-import instead
         ignoreMemberSort: false,
         memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
         allowSeparatedGroups: true,
@@ -136,15 +135,7 @@ module.exports = {
     "import/no-extraneous-dependencies": [
       "error",
       {
-        // Check dependencies from both local package.json
-        // and from root package.json.
-        packageDir: [path.join(__dirname, "../"), "./"],
-        devDependencies: [
-          "**/*.test.ts",
-          "**/test/**/*.ts",
-          "**/testing/**/*.ts",
-          "*.config.*",
-        ],
+        packageDir: [__dirname],
         peerDependencies: true,
       },
     ],
@@ -182,7 +173,7 @@ module.exports = {
           regex: "^I[A-Z]",
           match: false,
         },
-        leadingUnderscore: 'allow'
+        leadingUnderscore: "allow",
       },
     ],
     "@typescript-eslint/consistent-type-definitions": ["error", "interface"],

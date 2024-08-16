@@ -24,6 +24,6 @@ export {
   Tool,
   CodeExecutionTool,
   SingleRequestOptions,
-} from "../../types/requests";
-export * from "../../types/content";
-export { FunctionCallingMode } from "../../types/enums";
+} from "../requests";
+export * from "../content";
+export { FunctionCallingMode } from "../enums";
