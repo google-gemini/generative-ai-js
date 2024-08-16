@@ -59,7 +59,6 @@ export class GenerativeModel {
   model: string;
   generationConfig: GenerationConfig;
   safetySettings: SafetySetting[];
-  requestOptions: RequestOptions;
   tools?: Tool[];
   toolConfig?: ToolConfig;
   systemInstruction?: Content;
@@ -172,7 +171,7 @@ export class GenerativeModel {
         cachedContent: this.cachedContent?.name,
         ...startChatParams,
       },
-      this.requestOptions,
+      this._requestOptions,
     );
   }
 
