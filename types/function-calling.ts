@@ -86,17 +86,17 @@ export declare interface FunctionDeclarationsTool {
  */
 export enum SchemaType {
   /** String type. */
-  STRING = "STRING",
+  STRING = "string",
   /** Number type. */
-  NUMBER = "NUMBER",
+  NUMBER = "number",
   /** Integer type. */
-  INTEGER = "INTEGER",
+  INTEGER = "integer",
   /** Boolean type. */
-  BOOLEAN = "BOOLEAN",
+  BOOLEAN = "boolean",
   /** Array type. */
-  ARRAY = "ARRAY",
+  ARRAY = "array",
   /** Object type. */
-  OBJECT = "OBJECT",
+  OBJECT = "object",
 }
 
 /**

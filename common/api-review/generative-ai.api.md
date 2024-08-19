@@ -655,12 +655,12 @@ export interface Schema {
 
 // @public
 export enum SchemaType {
-    ARRAY = "ARRAY",
-    BOOLEAN = "BOOLEAN",
-    INTEGER = "INTEGER",
-    NUMBER = "NUMBER",
-    OBJECT = "OBJECT",
-    STRING = "STRING"
+    ARRAY = "array",
+    BOOLEAN = "boolean",
+    INTEGER = "integer",
+    NUMBER = "number",
+    OBJECT = "object",
+    STRING = "string"
 }
 
 // @public
