@@ -26,7 +26,6 @@ export declare class GenerativeModel
 |  [cachedContent](./generative-ai.generativemodel.cachedcontent.md) |  | [CachedContent](./generative-ai.cachedcontent.md) |  |
 |  [generationConfig](./generative-ai.generativemodel.generationconfig.md) |  | [GenerationConfig](./generative-ai.generationconfig.md) |  |
 |  [model](./generative-ai.generativemodel.model.md) |  | string |  |
-|  [requestOptions](./generative-ai.generativemodel.requestoptions.md) |  | [RequestOptions](./generative-ai.requestoptions.md) |  |
 |  [safetySettings](./generative-ai.generativemodel.safetysettings.md) |  | [SafetySetting](./generative-ai.safetysetting.md)<!-- -->\[\] |  |
 |  [systemInstruction?](./generative-ai.generativemodel.systeminstruction.md) |  | [Content](./generative-ai.content.md) | _(Optional)_ |
 |  [toolConfig?](./generative-ai.generativemodel.toolconfig.md) |  | [ToolConfig](./generative-ai.toolconfig.md) | _(Optional)_ |
