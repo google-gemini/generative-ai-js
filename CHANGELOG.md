@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.17.1
+
+### Patch Changes
+
+- fdfb5bd: Fix reference to `requestOptions` in `startChat`.
+
 ## 0.17.0
 
 ### Minor Changes
