@@ -475,8 +475,6 @@ export class GenerativeModel {
     // (undocumented)
     model: string;
     // (undocumented)
-    requestOptions: RequestOptions;
-    // (undocumented)
     safetySettings: SafetySetting[];
     startChat(startChatParams?: StartChatParams): ChatSession;
     // (undocumented)
