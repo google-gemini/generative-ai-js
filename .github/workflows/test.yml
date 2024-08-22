@@ -42,7 +42,6 @@ jobs:
       run: yarn test
 
   node-integration-test:
-    if: github.secret_source == 'Actions'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -56,15 +55,16 @@ jobs:
         cache: 'yarn'
 
     - name: yarn install
+      if: github.secret_source == 'Actions'
       run: yarn
 
     - name: run node iTests
+      if: github.secret_source == 'Actions'
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       run: yarn test:node:integration
 
   web-integration-test:
-    if: github.secret_source == 'Actions'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -78,9 +78,11 @@ jobs:
         cache: 'yarn'
 
     - name: yarn install
+      if: github.secret_source == 'Actions'
       run: yarn
 
     - name: run web iTests
+      if: github.secret_source == 'Actions'
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       run: yarn test:web:integration
