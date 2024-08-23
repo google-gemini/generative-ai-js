@@ -42,6 +42,7 @@ jobs:
       run: yarn test
 
   node-integration-test:
+    if: github.secret_source == 'Actions'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -63,6 +64,7 @@ jobs:
       run: yarn test:node:integration
 
   web-integration-test:
+    if: github.secret_source == 'Actions'
     runs-on: ubuntu-latest
     strategy:
       matrix:
