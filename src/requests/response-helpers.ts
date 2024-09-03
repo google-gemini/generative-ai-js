@@ -125,7 +125,11 @@ export function getText(response: GenerateContentResponse): string {
       }
       if (part.executableCode) {
         textStrings.push(
-          "\n```python\n" + part.executableCode.code + "\n```\n",
+          "\n```" +
+            part.executableCode.language +
+            "\n" +
+            part.executableCode.code +
+            "\n```\n",
         );
       }
       if (part.codeExecutionResult) {
