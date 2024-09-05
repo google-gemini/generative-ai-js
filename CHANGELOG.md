@@ -14,8 +14,7 @@
 
 ## 0.16.1
 
-This is a cherry-picked patch to fix an bug for users pinned to
-versions 0.16.x.
+This is a cherry-picked patch to fix an bug for users pinned to versions 0.16.x.
 
 ### Patch Changes
 
