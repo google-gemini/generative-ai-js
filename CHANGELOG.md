@@ -10,7 +10,16 @@
 
 ### Minor Changes
 
-- 3b5daae: Fix `Schema` type to reference itself and not a derived type in its `items` array and `properties` map.
+- 3b5daae: Fix `Schema` type to reference itself and not a derived type in its `items` array and `properties` map.## 0.16.1
+
+## 0.16.1
+
+This is a cherry-picked patch to fix an bug for users pinned to
+versions 0.16.x.
+
+### Patch Changes
+
+- fdfb5bd: Fix reference to `requestOptions` in `startChat`.
 
 ## 0.16.0
 
