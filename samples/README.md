@@ -30,3 +30,20 @@ to comment out cases you do not want to run.
 ## Documentation
 
 - [Quickstart: Get started with the Gemini API in Node.js applications](https://ai.google.dev/tutorials/node_quickstart)
+
+## Contents
+
+| File                                                     | Description |
+|----------------------------------------------------------| ----------- |
+| [cache.js](./cache.js)                                   | Context caching |
+| [chat.js](./chat.js)                                     | Multi-turn chat conversations |
+| [code_execution.js](./code_execution.js)                 | Executing code |
+| [model_configuration.js](./model_configuration.js) | Setting model parameters |
+| [controlled_generation.js](./controlled_generation.js)   | Generating content with output constraints (e.g. JSON mode) |
+| [count_tokens.js](./count_tokens.js)                     | Counting input and output tokens |
+| [embed.js](./embed.js)                                   | Generating embeddings |
+| [files.js](./files.js)                                   | Managing files with the File API |
+| [function_calling.js](./function_calling.js)             | Using function calling |
+| [safety_settings.js](./safety_settings.js)               | Setting and using safety controls |
+| [system_instruction.js](./system_instruction.js)         | Setting system instructions |
+| [text_generation.js](./text_generation.js)               | Generating text |
