@@ -29,5 +29,5 @@ export declare class GoogleGenerativeAI
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [getGenerativeModel(modelParams, requestOptions)](./generative-ai.googlegenerativeai.getgenerativemodel.md) |  | Gets a [GenerativeModel](./generative-ai.generativemodel.md) instance for the provided model name. |
-|  [getGenerativeModelFromCachedContent(cachedContent, requestOptions)](./generative-ai.googlegenerativeai.getgenerativemodelfromcachedcontent.md) |  | Creates a [GenerativeModel](./generative-ai.generativemodel.md) instance from provided content cache. |
+|  [getGenerativeModelFromCachedContent(cachedContent, modelParams, requestOptions)](./generative-ai.googlegenerativeai.getgenerativemodelfromcachedcontent.md) |  | Creates a [GenerativeModel](./generative-ai.generativemodel.md) instance from provided content cache. |
 
