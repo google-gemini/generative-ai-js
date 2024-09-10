@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.17.2
+
+### Patch Changes
+
+- d8f6b4f: Fix language marker in text helper for executable code results.
+
 ## 0.17.1
 
 ### Patch Changes
