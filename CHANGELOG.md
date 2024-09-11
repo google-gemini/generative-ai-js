@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.18.0
+
+### Minor Changes
+
+- fc008a1: Add ability to set modelParams (generationConfig, safetySettings) on getGenerativeModelFromCachedContent().
+
 ## 0.17.2
 
 ### Patch Changes
