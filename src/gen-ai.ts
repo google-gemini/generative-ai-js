@@ -53,6 +53,7 @@ export class GoogleGenerativeAI {
    */
   getGenerativeModelFromCachedContent(
     cachedContent: CachedContent,
+    modelParams?: Partial<ModelParams>,
     requestOptions?: RequestOptions,
   ): GenerativeModel {
     if (!cachedContent.name) {
@@ -65,7 +66,40 @@ export class GoogleGenerativeAI {
         "Cached content must contain a `model` field.",
       );
     }
+
+    /**
+     * Not checking tools and toolConfig for now as it would require a deep
+     * equality comparison and isn't likely to be a common case.
+     */
+    const disallowedDuplicates: Array<keyof ModelParams & keyof CachedContent> =
+      ["model", "systemInstruction"];
+
+    for (const key of disallowedDuplicates) {
+      if (
+        modelParams?.[key] &&
+        cachedContent[key] &&
+        modelParams?.[key] !== cachedContent[key]
+      ) {
+        if (key === "model") {
+          const modelParamsComp = modelParams.model.startsWith("models/")
+            ? modelParams.model.replace("models/", "")
+            : modelParams.model;
+          const cachedContentComp = cachedContent.model.startsWith("models/")
+            ? cachedContent.model.replace("models/", "")
+            : cachedContent.model;
+          if (modelParamsComp === cachedContentComp) {
+            continue;
+          }
+        }
+        throw new GoogleGenerativeAIRequestInputError(
+          `Different value for "${key}" specified in modelParams` +
+            ` (${modelParams[key]}) and cachedContent (${cachedContent[key]})`,
+        );
+      }
+    }
+
     const modelParamsFromCache: ModelParams = {
+      ...modelParams,
       model: cachedContent.model,
       tools: cachedContent.tools,
       toolConfig: cachedContent.toolConfig,

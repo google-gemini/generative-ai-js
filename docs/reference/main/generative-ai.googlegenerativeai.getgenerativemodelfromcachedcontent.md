@@ -9,7 +9,7 @@ Creates a [GenerativeModel](./generative-ai.generativemodel.md) instance from pr
 **Signature:**
 
 ```typescript
-getGenerativeModelFromCachedContent(cachedContent: CachedContent, requestOptions?: RequestOptions): GenerativeModel;
+getGenerativeModelFromCachedContent(cachedContent: CachedContent, modelParams?: Partial<ModelParams>, requestOptions?: RequestOptions): GenerativeModel;
 ```
 
 ## Parameters
@@ -17,6 +17,7 @@ getGenerativeModelFromCachedContent(cachedContent: CachedContent, requestOptions
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  cachedContent | [CachedContent](./generative-ai.cachedcontent.md) |  |
+|  modelParams | Partial&lt;[ModelParams](./generative-ai.modelparams.md)<!-- -->&gt; | _(Optional)_ |
 |  requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
 
 **Returns:**
