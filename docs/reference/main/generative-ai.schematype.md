@@ -16,10 +16,10 @@ export declare enum SchemaType
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  ARRAY | <code>&quot;ARRAY&quot;</code> | Array type. |
-|  BOOLEAN | <code>&quot;BOOLEAN&quot;</code> | Boolean type. |
-|  INTEGER | <code>&quot;INTEGER&quot;</code> | Integer type. |
-|  NUMBER | <code>&quot;NUMBER&quot;</code> | Number type. |
-|  OBJECT | <code>&quot;OBJECT&quot;</code> | Object type. |
-|  STRING | <code>&quot;STRING&quot;</code> | String type. |
+|  ARRAY | <code>&quot;array&quot;</code> | Array type. |
+|  BOOLEAN | <code>&quot;boolean&quot;</code> | Boolean type. |
+|  INTEGER | <code>&quot;integer&quot;</code> | Integer type. |
+|  NUMBER | <code>&quot;number&quot;</code> | Number type. |
+|  OBJECT | <code>&quot;object&quot;</code> | Object type. |
+|  STRING | <code>&quot;string&quot;</code> | String type. |
 
