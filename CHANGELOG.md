@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.19.0
+
+### Minor Changes
+
+- 00dc7a1: Use lowercase SchemaType enum values to match json-schema.
+
 ## 0.18.0
 
 ### Minor Changes
