@@ -110,7 +110,7 @@ export async function makeServerRequest(
 
   if (typeof body === "string" || body instanceof Blob) {
     requestInit.body = body;
-  } else if (body[Symbol.asyncIterator]) {
+  } else if (body?.[Symbol.asyncIterator]) {
     // Note that in later versions, the signature `fetch` is updated to accept any AsyncIterator,
     // and ReadableStream implements AsyncIterator. In this case, `body` can be passed exactly
     // as supplied, and the following can be removed:
