@@ -87,7 +87,7 @@ export class GenerativeModel {
     );
     this.cachedContent = modelParams.cachedContent;
     this.presencePenalty = modelParams.presencePenalty;
-    this.frequencyPenalty = modelParams.frequencePenalty;
+    this.frequencyPenalty = modelParams.frequencyPenalty;
   }
 
   /**
@@ -118,7 +118,7 @@ export class GenerativeModel {
         systemInstruction: this.systemInstruction,
         cachedContent: this.cachedContent?.name,
         presencePenalty: this.presencePenalty,
-        frequencePenalty: this.frequencyPenalty,
+        frequencyPenalty: this.frequencyPenalty,
         ...formattedParams,
       },
       generativeModelRequestOptions,
@@ -155,7 +155,7 @@ export class GenerativeModel {
         systemInstruction: this.systemInstruction,
         cachedContent: this.cachedContent?.name,
         presencePenalty: this.presencePenalty,
-        frequencePenalty: this.frequencyPenalty,
+        frequencyPenalty: this.frequencyPenalty,
         ...formattedParams,
       },
       generativeModelRequestOptions,
@@ -203,7 +203,7 @@ export class GenerativeModel {
       systemInstruction: this.systemInstruction,
       cachedContent: this.cachedContent,
       presencePenalty: this.presencePenalty,
-      frequencePenalty: this.frequencyPenalty,
+      frequencyPenalty: this.frequencyPenalty,
     });
     const generativeModelRequestOptions: SingleRequestOptions = {
       ...this._requestOptions,

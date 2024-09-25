@@ -7,7 +7,7 @@
 // @public
 export interface BaseParams {
     // (undocumented)
-    frequencePenalty?: number;
+    frequencyPenalty?: number;
     // (undocumented)
     generationConfig?: GenerationConfig;
     // (undocumented)

@@ -72,7 +72,7 @@ describe("GenerativeModel", () => {
           },
         ],
         presencePenalty: 0.6,
-        frequencePenalty: 0.5,
+        frequencyPenalty: 0.5,
         tools: [{ functionDeclarations: [{ name: "myfunc" }] }],
         toolConfig: {
           functionCallingConfig: { mode: FunctionCallingMode.NONE },
@@ -122,7 +122,7 @@ describe("GenerativeModel", () => {
           value.includes("testField") &&
           value.includes(HarmBlockThreshold.BLOCK_LOW_AND_ABOVE) &&
           value.includes("presencePenalty") &&
-          value.includes("frequencePenalty")
+          value.includes("frequencyPenalty")
         );
       }),
       match((value) => {
@@ -217,7 +217,7 @@ describe("GenerativeModel", () => {
         },
       ],
       presencePenalty: 0.6,
-      frequencePenalty: 0.5,
+      frequencyPenalty: 0.5,
       contents: [{ role: "user", parts: [{ text: "hello" }] }],
       tools: [{ functionDeclarations: [{ name: "otherfunc" }] }],
       toolConfig: { functionCallingConfig: { mode: FunctionCallingMode.AUTO } },
@@ -238,7 +238,7 @@ describe("GenerativeModel", () => {
           !value.includes("testField") &&
           value.includes(HarmCategory.HARM_CATEGORY_HARASSMENT) &&
           value.includes("presencePenalty") &&
-          value.includes("frequencePenalty")
+          value.includes("frequencyPenalty")
         );
       }),
       {},
