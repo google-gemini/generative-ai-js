@@ -43,7 +43,7 @@ const fakeRequestParams: GenerateContentRequest = {
     },
   ],
   presencePenalty: 0.5,
-  frequencePenalty: 0.1,
+  frequencyPenalty: 0.1,
 };
 
 describe("generateContent()", () => {
