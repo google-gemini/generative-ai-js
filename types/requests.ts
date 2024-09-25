@@ -34,12 +34,12 @@ export interface BaseParams {
   /**
    * Presence penalty applied to the next token's logprobs if the token has
    * already been seen in the response.
-  */
+   */
   presencePenalty?: number
   /**
    * Frequency penalty applied to the next token's logprobs, multiplied by the
    * number of times each token has been seen in the respponse so far.
-  */
+   */
   frequencyPenalty?: number
 }
 
