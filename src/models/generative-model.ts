@@ -63,6 +63,8 @@ export class GenerativeModel {
   toolConfig?: ToolConfig;
   systemInstruction?: Content;
   cachedContent: CachedContent;
+  presencePenalty?: number;
+  frequencyPenalty?: number;
 
   constructor(
     public apiKey: string,
@@ -84,6 +86,8 @@ export class GenerativeModel {
       modelParams.systemInstruction,
     );
     this.cachedContent = modelParams.cachedContent;
+    this.presencePenalty = modelParams.presencePenalty;
+    this.frequencyPenalty = modelParams.frequencyPenalty;
   }
 
   /**
@@ -113,6 +117,8 @@ export class GenerativeModel {
         toolConfig: this.toolConfig,
         systemInstruction: this.systemInstruction,
         cachedContent: this.cachedContent?.name,
+        presencePenalty: this.presencePenalty,
+        frequencyPenalty: this.frequencyPenalty,
         ...formattedParams,
       },
       generativeModelRequestOptions,
@@ -148,6 +154,8 @@ export class GenerativeModel {
         toolConfig: this.toolConfig,
         systemInstruction: this.systemInstruction,
         cachedContent: this.cachedContent?.name,
+        presencePenalty: this.presencePenalty,
+        frequencyPenalty: this.frequencyPenalty,
         ...formattedParams,
       },
       generativeModelRequestOptions,
@@ -194,6 +202,8 @@ export class GenerativeModel {
       toolConfig: this.toolConfig,
       systemInstruction: this.systemInstruction,
       cachedContent: this.cachedContent,
+      presencePenalty: this.presencePenalty,
+      frequencyPenalty: this.frequencyPenalty,
     });
     const generativeModelRequestOptions: SingleRequestOptions = {
       ...this._requestOptions,
