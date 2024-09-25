@@ -16,6 +16,8 @@ export interface BaseParams
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [frequencePenalty?](./generative-ai.baseparams.frequencepenalty.md) |  | number | _(Optional)_ |
 |  [generationConfig?](./generative-ai.baseparams.generationconfig.md) |  | [GenerationConfig](./generative-ai.generationconfig.md) | _(Optional)_ |
+|  [presencePenalty?](./generative-ai.baseparams.presencepenalty.md) |  | number | _(Optional)_ |
 |  [safetySettings?](./generative-ai.baseparams.safetysettings.md) |  | [SafetySetting](./generative-ai.safetysetting.md)<!-- -->\[\] | _(Optional)_ |
 

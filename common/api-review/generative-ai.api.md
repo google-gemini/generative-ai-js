@@ -7,7 +7,11 @@
 // @public
 export interface BaseParams {
     // (undocumented)
+    frequencePenalty?: number;
+    // (undocumented)
     generationConfig?: GenerationConfig;
+    // (undocumented)
+    presencePenalty?: number;
     // (undocumented)
     safetySettings?: SafetySetting[];
 }
@@ -458,12 +462,16 @@ export class GenerativeModel {
     cachedContent: CachedContent;
     countTokens(request: CountTokensRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<CountTokensResponse>;
     embedContent(request: EmbedContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<EmbedContentResponse>;
+    // (undocumented)
+    frequencyPenalty?: number;
     generateContent(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentResult>;
     generateContentStream(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentStreamResult>;
     // (undocumented)
     generationConfig: GenerationConfig;
     // (undocumented)
     model: string;
+    // (undocumented)
+    presencePenalty?: number;
     // (undocumented)
     safetySettings: SafetySetting[];
     startChat(startChatParams?: StartChatParams): ChatSession;

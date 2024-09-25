@@ -71,6 +71,8 @@ describe("GenerativeModel", () => {
             threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
           },
         ],
+        presencePenalty: 0.6,
+        frequencePenalty: 0.5,
         tools: [{ functionDeclarations: [{ name: "myfunc" }] }],
         toolConfig: {
           functionCallingConfig: { mode: FunctionCallingMode.NONE },
@@ -92,6 +94,8 @@ describe("GenerativeModel", () => {
       genModel.generationConfig?.responseSchema.properties.testField.type,
     ).to.equal(SchemaType.STRING);
     expect(genModel.safetySettings?.length).to.equal(1);
+    expect(genModel.presencePenalty).to.equal(0.6);
+    expect(genModel.frequencyPenalty).to.equal(0.5);
     expect(genModel.tools?.length).to.equal(1);
     expect(genModel.toolConfig?.functionCallingConfig.mode).to.equal(
       FunctionCallingMode.NONE,
@@ -116,7 +120,9 @@ describe("GenerativeModel", () => {
           value.includes("be friendly") &&
           value.includes("temperature") &&
           value.includes("testField") &&
-          value.includes(HarmBlockThreshold.BLOCK_LOW_AND_ABOVE)
+          value.includes(HarmBlockThreshold.BLOCK_LOW_AND_ABOVE) &&
+          value.includes("presencePenalty") &&
+          value.includes("frequencePenalty")
         );
       }),
       match((value) => {
@@ -210,6 +216,8 @@ describe("GenerativeModel", () => {
           threshold: HarmBlockThreshold.BLOCK_NONE,
         },
       ],
+      presencePenalty: 0.6,
+      frequencePenalty: 0.5,
       contents: [{ role: "user", parts: [{ text: "hello" }] }],
       tools: [{ functionDeclarations: [{ name: "otherfunc" }] }],
       toolConfig: { functionCallingConfig: { mode: FunctionCallingMode.AUTO } },
@@ -228,7 +236,9 @@ describe("GenerativeModel", () => {
           value.includes("topK") &&
           value.includes("newTestField") &&
           !value.includes("testField") &&
-          value.includes(HarmCategory.HARM_CATEGORY_HARASSMENT)
+          value.includes(HarmCategory.HARM_CATEGORY_HARASSMENT) &&
+          value.includes("presencePenalty") &&
+          value.includes("frequencePenalty")
         );
       }),
       {},

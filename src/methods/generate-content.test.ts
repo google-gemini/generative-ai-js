@@ -42,6 +42,8 @@ const fakeRequestParams: GenerateContentRequest = {
       threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
     },
   ],
+  presencePenalty: 0.5,
+  frequencePenalty: 0.1,
 };
 
 describe("generateContent()", () => {
