@@ -4,6 +4,8 @@
 
 ## BaseParams.frequencyPenalty property
 
+Frequency penalty applied to the next token's logprobs, multiplied by the number of times each token has been seen in the respponse so far.
+
 **Signature:**
 
 ```typescript

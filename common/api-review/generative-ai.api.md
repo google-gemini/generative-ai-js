@@ -6,11 +6,9 @@
 
 // @public
 export interface BaseParams {
-    // (undocumented)
     frequencyPenalty?: number;
     // (undocumented)
     generationConfig?: GenerationConfig;
-    // (undocumented)
     presencePenalty?: number;
     // (undocumented)
     safetySettings?: SafetySetting[];

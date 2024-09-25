@@ -4,6 +4,8 @@
 
 ## BaseParams.presencePenalty property
 
+Presence penalty applied to the next token's logprobs if the token has already been seen in the response.
+
 **Signature:**
 
 ```typescript
