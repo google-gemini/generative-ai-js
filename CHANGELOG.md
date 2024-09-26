@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.20.0
+
+### Minor Changes
+
+- dda0b5c: Add `frequencyPenalty`, `presencePenalty`, `responseLogprobs`, and `logProbs` parameters support for `generationConfig`. Added `avgLogprobs` and `logprobsResult` to `GenerateContentResponse`. Updated test cases.
+
 ## 0.19.0
 
 ### Minor Changes
