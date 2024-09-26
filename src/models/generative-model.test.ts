@@ -123,7 +123,11 @@ describe("GenerativeModel", () => {
           value.includes("be friendly") &&
           value.includes("temperature") &&
           value.includes("testField") &&
-          value.includes(HarmBlockThreshold.BLOCK_LOW_AND_ABOVE)
+          value.includes(HarmBlockThreshold.BLOCK_LOW_AND_ABOVE) &&
+          value.includes("presencePenalty") &&
+          value.includes("frequencyPenalty") &&
+          value.includes("responseLogprobs") &&
+          value.includes("logprobs")
         );
       }),
       match((value) => {
@@ -206,6 +210,10 @@ describe("GenerativeModel", () => {
             },
           },
         },
+        presencePenalty: 0.6,
+        frequencyPenalty: 0.5,
+        responseLogprobs: true,
+        logprobs: 2,
       },
       safetySettings: [
         {
@@ -235,7 +243,11 @@ describe("GenerativeModel", () => {
           value.includes("topK") &&
           value.includes("newTestField") &&
           !value.includes("testField") &&
-          value.includes(HarmCategory.HARM_CATEGORY_HARASSMENT)
+          value.includes(HarmCategory.HARM_CATEGORY_HARASSMENT) &&
+          value.includes("presencePenalty") &&
+          value.includes("frequencyPenalty") &&
+          value.includes("responseLogprobs") &&
+          value.includes("logprobs")
         );
       }),
       {},
