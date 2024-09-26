@@ -66,8 +66,8 @@ describe("GenerativeModel", () => {
           },
           presencePenalty: 0.6,
           frequencyPenalty: 0.5,
-          responseLogProbs: true,
-          logProbs: 2,
+          responseLogprobs: true,
+          logprobs: 2,
         },
         safetySettings: [
           {
@@ -97,8 +97,8 @@ describe("GenerativeModel", () => {
     ).to.equal(SchemaType.STRING);
     expect(genModel.generationConfig?.presencePenalty).to.equal(0.6);
     expect(genModel.generationConfig?.frequencyPenalty).to.equal(0.5);
-    expect(genModel.generationConfig?.responseLogProbs).to.equal(true);
-    expect(genModel.generationConfig?.logProbs).to.equal(2);
+    expect(genModel.generationConfig?.responseLogprobs).to.equal(true);
+    expect(genModel.generationConfig?.logprobs).to.equal(2);
     expect(genModel.safetySettings?.length).to.equal(1);
     expect(genModel.toolConfig?.functionCallingConfig.mode).to.equal(
       FunctionCallingMode.NONE,

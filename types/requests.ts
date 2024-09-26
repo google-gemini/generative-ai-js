@@ -115,12 +115,12 @@ export interface GenerationConfig {
   /**
    * If True, export the logprobs results in response.
    */
-  responseLogProbs?: boolean;
+  responseLogprobs?: boolean;
   /**
    * Valid if responseLogProbs is set to True. This will set the number of top
-   * logprobs to return at each decoding step in the logProbsResult.
+   * logprobs to return at each decoding step in the logprobsResult.
    */
-  logProbs?: number;
+  logprobs?: number;
 }
 
 /**

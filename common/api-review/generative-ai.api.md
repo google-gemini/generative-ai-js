@@ -430,11 +430,11 @@ export interface GenerationConfig {
     // (undocumented)
     candidateCount?: number;
     frequencyPenalty?: number;
-    logProbs?: number;
+    logprobs?: number;
     // (undocumented)
     maxOutputTokens?: number;
     presencePenalty?: number;
-    responseLogProbs?: boolean;
+    responseLogprobs?: boolean;
     responseMimeType?: string;
     responseSchema?: ResponseSchema;
     // (undocumented)
