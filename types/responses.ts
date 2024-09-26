@@ -88,6 +88,41 @@ export interface GenerateContentResponse {
 }
 
 /**
+ * Logprobs Result
+ * @public
+ */
+export interface LogprobsResult {
+  /** Length = total number of decoding steps. */
+  topCandidates: TopCandidates[];
+  /** 
+   * Length = total number of decoding steps. 
+   * The chosen candidates may or may not be in topCandidates.
+   */
+  chosenCandidates: Candidate[];
+}
+
+/**
+ * Candidate for the logprobs token and score.
+ * @public
+ */
+export interface Candidate {
+  /** The candidate's token string value. */
+  token: string;
+  /** The candidate's token id value. */
+  tokenID: number;
+  /** The candidate's log probability. */
+  logProbability: number;
+}
+
+/**
+ * Candidates with top log probabilities at each decoding step
+ */
+export interface TopCandidates {
+  /** Sorted by log probability in descending order. */
+  candidates: Candidate[];
+}
+
+/**
  * Metadata on the generation request's token usage.
  * @public
  */
@@ -124,6 +159,10 @@ export interface GenerateContentCandidate {
   finishMessage?: string;
   safetyRatings?: SafetyRating[];
   citationMetadata?: CitationMetadata;
+  /** Average log probability score of the candidate. */
+  avgLogProbs?: number;
+  /** Log-likelihood scores for the response tokens and top tokens. */
+  logProbsResult?: LogprobsResult;
 }
 
 /**

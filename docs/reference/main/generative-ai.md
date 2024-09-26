@@ -40,6 +40,7 @@
 |  [BatchEmbedContentsResponse](./generative-ai.batchembedcontentsresponse.md) | Response from calling [GenerativeModel.batchEmbedContents()](./generative-ai.generativemodel.batchembedcontents.md)<!-- -->. |
 |  [CachedContent](./generative-ai.cachedcontent.md) | Describes <code>CachedContent</code> interface for sending to the server (if creating) or received from the server (using getters or list methods). |
 |  [CachedContentBase](./generative-ai.cachedcontentbase.md) |  |
+|  [Candidate](./generative-ai.candidate.md) | Candidate for the logprobs token and score. |
 |  [CitationMetadata](./generative-ai.citationmetadata.md) | Citation metadata that may be found on a [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md)<!-- -->. |
 |  [CitationSource](./generative-ai.citationsource.md) | A single citation source. |
 |  [CodeExecutionResult](./generative-ai.codeexecutionresult.md) | Result of executing the <code>ExecutableCode</code>. Only generated when using code execution, and always follows a <code>Part</code> containing the <code>ExecutableCode</code>. |
@@ -74,6 +75,7 @@
 |  [GenerationConfig](./generative-ai.generationconfig.md) | Config options for content-related requests |
 |  [GenerativeContentBlob](./generative-ai.generativecontentblob.md) | Interface for sending an image. |
 |  [InlineDataPart](./generative-ai.inlinedatapart.md) | Content part interface if the part represents an image. |
+|  [LogprobsResult](./generative-ai.logprobsresult.md) | Logprobs Result |
 |  [ModelParams](./generative-ai.modelparams.md) | Params passed to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->. |
 |  [PromptFeedback](./generative-ai.promptfeedback.md) | If the prompt was blocked, this will be populated with <code>blockReason</code> and the relevant <code>safetyRatings</code>. |
 |  [RequestOptions](./generative-ai.requestoptions.md) | Params passed to getGenerativeModel() or GoogleAIFileManager(). |
@@ -85,6 +87,7 @@
 |  [StartChatParams](./generative-ai.startchatparams.md) | Params for [GenerativeModel.startChat()](./generative-ai.generativemodel.startchat.md)<!-- -->. |
 |  [TextPart](./generative-ai.textpart.md) | Content part interface if the part represents a text string. |
 |  [ToolConfig](./generative-ai.toolconfig.md) | Tool config. This config is shared for all tools provided in the request. |
+|  [TopCandidates](./generative-ai.topcandidates.md) | Candidates with top log probabilities at each decoding step |
 |  [UsageMetadata](./generative-ai.usagemetadata.md) | Metadata on the generation request's token usage. |
 
 ## Variables

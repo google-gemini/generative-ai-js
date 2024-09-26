@@ -65,6 +65,13 @@ export interface CachedContentBase {
 }
 
 // @public
+export interface Candidate {
+    logProbability: number;
+    token: string;
+    tokenID: number;
+}
+
+// @public
 export class ChatSession {
     constructor(apiKey: string, model: string, params?: StartChatParams, _requestOptions?: RequestOptions);
     getHistory(): Promise<Content[]>;
@@ -373,6 +380,7 @@ export interface FunctionResponsePart {
 
 // @public
 export interface GenerateContentCandidate {
+    avgLogProbs?: number;
     // (undocumented)
     citationMetadata?: CitationMetadata;
     // (undocumented)
@@ -383,6 +391,7 @@ export interface GenerateContentCandidate {
     finishReason?: FinishReason;
     // (undocumented)
     index: number;
+    logProbsResult?: LogprobsResult;
     // (undocumented)
     safetyRatings?: SafetyRating[];
 }
@@ -584,6 +593,12 @@ export interface InlineDataPart {
 }
 
 // @public
+export interface LogprobsResult {
+    chosenCandidates: Candidate[];
+    topCandidates: TopCandidates[];
+}
+
+// @public
 export interface ModelParams extends BaseParams {
     // (undocumented)
     cachedContent?: CachedContent;
@@ -734,6 +749,11 @@ export type Tool = FunctionDeclarationsTool | CodeExecutionTool;
 export interface ToolConfig {
     // (undocumented)
     functionCallingConfig: FunctionCallingConfig;
+}
+
+// @public
+export interface TopCandidates {
+    candidates: Candidate[];
 }
 
 // @public
