@@ -9,7 +9,9 @@ export interface BaseParams {
     frequencyPenalty?: number;
     // (undocumented)
     generationConfig?: GenerationConfig;
+    logProbs?: number;
     presencePenalty?: number;
+    responseLogProbs?: boolean;
     // (undocumented)
     safetySettings?: SafetySetting[];
 }
@@ -467,9 +469,13 @@ export class GenerativeModel {
     // (undocumented)
     generationConfig: GenerationConfig;
     // (undocumented)
+    logProbs?: number;
+    // (undocumented)
     model: string;
     // (undocumented)
     presencePenalty?: number;
+    // (undocumented)
+    responseLogProbs?: boolean;
     // (undocumented)
     safetySettings: SafetySetting[];
     startChat(startChatParams?: StartChatParams): ChatSession;

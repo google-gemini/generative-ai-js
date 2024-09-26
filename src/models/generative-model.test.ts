@@ -245,7 +245,7 @@ describe("GenerativeModel", () => {
           value.includes(HarmCategory.HARM_CATEGORY_HARASSMENT) &&
           value.includes("presencePenalty") &&
           value.includes("frequencyPenalty") &&
-          value.includes("responseLogProbs") && 
+          value.includes("responseLogProbs") &&
           value.includes("logProbs")
         );
       }),

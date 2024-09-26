@@ -18,6 +18,8 @@ export interface BaseParams
 |  --- | --- | --- | --- |
 |  [frequencyPenalty?](./generative-ai.baseparams.frequencypenalty.md) |  | number | _(Optional)_ Frequency penalty applied to the next token's logprobs, multiplied by the number of times each token has been seen in the respponse so far. |
 |  [generationConfig?](./generative-ai.baseparams.generationconfig.md) |  | [GenerationConfig](./generative-ai.generationconfig.md) | _(Optional)_ |
+|  [logProbs?](./generative-ai.baseparams.logprobs.md) |  | number | _(Optional)_ Valid if responseLogProbs is set to True. This will set the number of top logprobs to return at each decoding step in the logProbsResult. |
 |  [presencePenalty?](./generative-ai.baseparams.presencepenalty.md) |  | number | _(Optional)_ Presence penalty applied to the next token's logprobs if the token has already been seen in the response. |
+|  [responseLogProbs?](./generative-ai.baseparams.responselogprobs.md) |  | boolean | _(Optional)_ If True, export the logprobs results in response. |
 |  [safetySettings?](./generative-ai.baseparams.safetysettings.md) |  | [SafetySetting](./generative-ai.safetysetting.md)<!-- -->\[\] | _(Optional)_ |
 

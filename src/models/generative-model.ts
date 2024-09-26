@@ -214,7 +214,6 @@ export class GenerativeModel {
       frequencyPenalty: this.frequencyPenalty,
       responseLogProbs: this.responseLogProbs,
       logProbs: this.logProbs,
-      
     });
     const generativeModelRequestOptions: SingleRequestOptions = {
       ...this._requestOptions,
