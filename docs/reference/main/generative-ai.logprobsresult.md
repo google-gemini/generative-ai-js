@@ -16,6 +16,6 @@ export interface LogprobsResult
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [chosenCandidates](./generative-ai.logprobsresult.chosencandidates.md) |  | [Candidate](./generative-ai.candidate.md)<!-- -->\[\] | Length = total number of decoding steps. The chosen candidates may or may not be in topCandidates. |
+|  [chosenCandidates](./generative-ai.logprobsresult.chosencandidates.md) |  | [LogprobsCandidate](./generative-ai.logprobscandidate.md)<!-- -->\[\] | Length = total number of decoding steps. The chosen candidates may or may not be in topCandidates. |
 |  [topCandidates](./generative-ai.logprobsresult.topcandidates.md) |  | [TopCandidates](./generative-ai.topcandidates.md)<!-- -->\[\] | Length = total number of decoding steps. |
 

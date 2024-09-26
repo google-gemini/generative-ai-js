@@ -6,12 +6,8 @@
 
 // @public
 export interface BaseParams {
-    frequencyPenalty?: number;
     // (undocumented)
     generationConfig?: GenerationConfig;
-    logProbs?: number;
-    presencePenalty?: number;
-    responseLogProbs?: boolean;
     // (undocumented)
     safetySettings?: SafetySetting[];
 }
@@ -62,13 +58,6 @@ export interface CachedContentBase {
     toolConfig?: ToolConfig;
     // (undocumented)
     tools?: Tool[];
-}
-
-// @public
-export interface Candidate {
-    logProbability: number;
-    token: string;
-    tokenID: number;
 }
 
 // @public
@@ -380,7 +369,7 @@ export interface FunctionResponsePart {
 
 // @public
 export interface GenerateContentCandidate {
-    avgLogProbs?: number;
+    avgLogprobs?: number;
     // (undocumented)
     citationMetadata?: CitationMetadata;
     // (undocumented)
@@ -391,7 +380,7 @@ export interface GenerateContentCandidate {
     finishReason?: FinishReason;
     // (undocumented)
     index: number;
-    logProbsResult?: LogprobsResult;
+    logprobsResult?: LogprobsResult;
     // (undocumented)
     safetyRatings?: SafetyRating[];
 }
@@ -440,8 +429,12 @@ export interface GenerateContentStreamResult {
 export interface GenerationConfig {
     // (undocumented)
     candidateCount?: number;
+    frequencyPenalty?: number;
+    logProbs?: number;
     // (undocumented)
     maxOutputTokens?: number;
+    presencePenalty?: number;
+    responseLogProbs?: boolean;
     responseMimeType?: string;
     responseSchema?: ResponseSchema;
     // (undocumented)
@@ -471,20 +464,12 @@ export class GenerativeModel {
     cachedContent: CachedContent;
     countTokens(request: CountTokensRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<CountTokensResponse>;
     embedContent(request: EmbedContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<EmbedContentResponse>;
-    // (undocumented)
-    frequencyPenalty?: number;
     generateContent(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentResult>;
     generateContentStream(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentStreamResult>;
     // (undocumented)
     generationConfig: GenerationConfig;
     // (undocumented)
-    logProbs?: number;
-    // (undocumented)
     model: string;
-    // (undocumented)
-    presencePenalty?: number;
-    // (undocumented)
-    responseLogProbs?: boolean;
     // (undocumented)
     safetySettings: SafetySetting[];
     startChat(startChatParams?: StartChatParams): ChatSession;
@@ -593,8 +578,15 @@ export interface InlineDataPart {
 }
 
 // @public
+export interface LogprobsCandidate {
+    logProbability: number;
+    token: string;
+    tokenID: number;
+}
+
+// @public
 export interface LogprobsResult {
-    chosenCandidates: Candidate[];
+    chosenCandidates: LogprobsCandidate[];
     topCandidates: TopCandidates[];
 }
 
@@ -753,7 +745,7 @@ export interface ToolConfig {
 
 // @public
 export interface TopCandidates {
-    candidates: Candidate[];
+    candidates: LogprobsCandidate[];
 }
 
 // @public

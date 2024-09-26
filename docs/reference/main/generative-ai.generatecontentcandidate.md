@@ -16,12 +16,12 @@ export interface GenerateContentCandidate
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [avgLogProbs?](./generative-ai.generatecontentcandidate.avglogprobs.md) |  | number | _(Optional)_ Average log probability score of the candidate. |
+|  [avgLogprobs?](./generative-ai.generatecontentcandidate.avglogprobs.md) |  | number | _(Optional)_ Average log probability score of the candidate. |
 |  [citationMetadata?](./generative-ai.generatecontentcandidate.citationmetadata.md) |  | [CitationMetadata](./generative-ai.citationmetadata.md) | _(Optional)_ |
 |  [content](./generative-ai.generatecontentcandidate.content.md) |  | [Content](./generative-ai.content.md) |  |
 |  [finishMessage?](./generative-ai.generatecontentcandidate.finishmessage.md) |  | string | _(Optional)_ |
 |  [finishReason?](./generative-ai.generatecontentcandidate.finishreason.md) |  | [FinishReason](./generative-ai.finishreason.md) | _(Optional)_ |
 |  [index](./generative-ai.generatecontentcandidate.index.md) |  | number |  |
-|  [logProbsResult?](./generative-ai.generatecontentcandidate.logprobsresult.md) |  | [LogprobsResult](./generative-ai.logprobsresult.md) | _(Optional)_ Log-likelihood scores for the response tokens and top tokens. |
+|  [logprobsResult?](./generative-ai.generatecontentcandidate.logprobsresult.md) |  | [LogprobsResult](./generative-ai.logprobsresult.md) | _(Optional)_ Log-likelihood scores for the response tokens and top tokens. |
 |  [safetyRatings?](./generative-ai.generatecontentcandidate.safetyratings.md) |  | [SafetyRating](./generative-ai.safetyrating.md)<!-- -->\[\] | _(Optional)_ |
 

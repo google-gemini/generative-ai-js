@@ -95,18 +95,10 @@ describe("GenerativeModel", () => {
     expect(
       genModel.generationConfig?.responseSchema.properties.testField.type,
     ).to.equal(SchemaType.STRING);
-    expect(genModel.generationConfig?.presencePenalty).to.equal(
-      0.6,
-    );
-    expect(genModel.generationConfig?.frequencyPenalty).to.equal(
-      0.5,
-    );
-    expect(genModel.generationConfig?.responseLogProbs).to.equal(
-      true
-    );
-    expect(genModel.generationConfig?.logProbs).to.equal(
-      2
-    );
+    expect(genModel.generationConfig?.presencePenalty).to.equal(0.6);
+    expect(genModel.generationConfig?.frequencyPenalty).to.equal(0.5);
+    expect(genModel.generationConfig?.responseLogProbs).to.equal(true);
+    expect(genModel.generationConfig?.logProbs).to.equal(2);
     expect(genModel.safetySettings?.length).to.equal(1);
     expect(genModel.toolConfig?.functionCallingConfig.mode).to.equal(
       FunctionCallingMode.NONE,
@@ -243,7 +235,7 @@ describe("GenerativeModel", () => {
           value.includes("topK") &&
           value.includes("newTestField") &&
           !value.includes("testField") &&
-          value.includes(HarmCategory.HARM_CATEGORY_HARASSMENT) &&
+          value.includes(HarmCategory.HARM_CATEGORY_HARASSMENT)
         );
       }),
       {},

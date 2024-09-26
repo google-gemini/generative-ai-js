@@ -24,12 +24,8 @@ export declare class GenerativeModel
 |  --- | --- | --- | --- |
 |  [apiKey](./generative-ai.generativemodel.apikey.md) |  | string |  |
 |  [cachedContent](./generative-ai.generativemodel.cachedcontent.md) |  | [CachedContent](./generative-ai.cachedcontent.md) |  |
-|  [frequencyPenalty?](./generative-ai.generativemodel.frequencypenalty.md) |  | number | _(Optional)_ |
 |  [generationConfig](./generative-ai.generativemodel.generationconfig.md) |  | [GenerationConfig](./generative-ai.generationconfig.md) |  |
-|  [logProbs?](./generative-ai.generativemodel.logprobs.md) |  | number | _(Optional)_ |
 |  [model](./generative-ai.generativemodel.model.md) |  | string |  |
-|  [presencePenalty?](./generative-ai.generativemodel.presencepenalty.md) |  | number | _(Optional)_ |
-|  [responseLogProbs?](./generative-ai.generativemodel.responselogprobs.md) |  | boolean | _(Optional)_ |
 |  [safetySettings](./generative-ai.generativemodel.safetysettings.md) |  | [SafetySetting](./generative-ai.safetysetting.md)<!-- -->\[\] |  |
 |  [systemInstruction?](./generative-ai.generativemodel.systeminstruction.md) |  | [Content](./generative-ai.content.md) | _(Optional)_ |
 |  [toolConfig?](./generative-ai.generativemodel.toolconfig.md) |  | [ToolConfig](./generative-ai.toolconfig.md) | _(Optional)_ |

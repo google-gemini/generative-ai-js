@@ -9,5 +9,5 @@ Length = total number of decoding steps. The chosen candidates may or may not be
 **Signature:**
 
 ```typescript
-chosenCandidates: Candidate[];
+chosenCandidates: LogprobsCandidate[];
 ```

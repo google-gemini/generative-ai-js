@@ -9,5 +9,5 @@ Sorted by log probability in descending order.
 **Signature:**
 
 ```typescript
-candidates: Candidate[];
+candidates: LogprobsCandidate[];
 ```
