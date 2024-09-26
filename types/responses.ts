@@ -98,14 +98,14 @@ export interface LogprobsResult {
    * Length = total number of decoding steps. 
    * The chosen candidates may or may not be in topCandidates.
    */
-  chosenCandidates: Candidate[];
+  chosenCandidates: LogProbsCandidate[];
 }
 
 /**
  * Candidate for the logprobs token and score.
  * @public
  */
-export interface Candidate {
+export interface LogProbsCandidate {
   /** The candidate's token string value. */
   token: string;
   /** The candidate's token id value. */
@@ -119,7 +119,7 @@ export interface Candidate {
  */
 export interface TopCandidates {
   /** Sorted by log probability in descending order. */
-  candidates: Candidate[];
+  candidates: LogProbsCandidate[];
 }
 
 /**
@@ -160,9 +160,9 @@ export interface GenerateContentCandidate {
   safetyRatings?: SafetyRating[];
   citationMetadata?: CitationMetadata;
   /** Average log probability score of the candidate. */
-  avgLogProbs?: number;
+  avgLogprobs?: number;
   /** Log-likelihood scores for the response tokens and top tokens. */
-  logProbsResult?: LogprobsResult;
+  logprobsResult?: LogprobsResult;
 }
 
 /**
