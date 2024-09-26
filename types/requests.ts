@@ -35,12 +35,21 @@ export interface BaseParams {
    * Presence penalty applied to the next token's logprobs if the token has
    * already been seen in the response.
    */
-  presencePenalty?: number
+  presencePenalty?: number;
   /**
    * Frequency penalty applied to the next token's logprobs, multiplied by the
    * number of times each token has been seen in the respponse so far.
    */
-  frequencyPenalty?: number
+  frequencyPenalty?: number;
+  /**
+   * If True, export the logprobs results in response.
+   */
+  responseLogProbs?: boolean;
+  /**
+   * Valid if responseLogProbs is set to True. This will set the number of top
+   * logprobs to return at each decoding step in the logProbsResult.
+   */
+  logProbs?: number;
 }
 
 /**

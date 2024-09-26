@@ -44,6 +44,8 @@ const fakeRequestParams: GenerateContentRequest = {
   ],
   presencePenalty: 0.5,
   frequencyPenalty: 0.1,
+  responseLogProbs: true,
+  logProbs: 2,
 };
 
 describe("generateContent()", () => {
