@@ -16,8 +16,6 @@ export interface BaseParams
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [frequencyPenalty?](./generative-ai.baseparams.frequencypenalty.md) |  | number | _(Optional)_ Frequency penalty applied to the next token's logprobs, multiplied by the number of times each token has been seen in the respponse so far. |
 |  [generationConfig?](./generative-ai.baseparams.generationconfig.md) |  | [GenerationConfig](./generative-ai.generationconfig.md) | _(Optional)_ |
-|  [presencePenalty?](./generative-ai.baseparams.presencepenalty.md) |  | number | _(Optional)_ Presence penalty applied to the next token's logprobs if the token has already been seen in the response. |
 |  [safetySettings?](./generative-ai.baseparams.safetysettings.md) |  | [SafetySetting](./generative-ai.safetysetting.md)<!-- -->\[\] | _(Optional)_ |
 

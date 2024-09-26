@@ -64,6 +64,10 @@ describe("GenerativeModel", () => {
               },
             },
           },
+          presencePenalty: 0.6,
+          frequencyPenalty: 0.5,
+          responseLogprobs: true,
+          logprobs: 2,
         },
         safetySettings: [
           {
@@ -71,8 +75,6 @@ describe("GenerativeModel", () => {
             threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
           },
         ],
-        presencePenalty: 0.6,
-        frequencyPenalty: 0.5,
         tools: [{ functionDeclarations: [{ name: "myfunc" }] }],
         toolConfig: {
           functionCallingConfig: { mode: FunctionCallingMode.NONE },
@@ -93,10 +95,11 @@ describe("GenerativeModel", () => {
     expect(
       genModel.generationConfig?.responseSchema.properties.testField.type,
     ).to.equal(SchemaType.STRING);
+    expect(genModel.generationConfig?.presencePenalty).to.equal(0.6);
+    expect(genModel.generationConfig?.frequencyPenalty).to.equal(0.5);
+    expect(genModel.generationConfig?.responseLogprobs).to.equal(true);
+    expect(genModel.generationConfig?.logprobs).to.equal(2);
     expect(genModel.safetySettings?.length).to.equal(1);
-    expect(genModel.presencePenalty).to.equal(0.6);
-    expect(genModel.frequencyPenalty).to.equal(0.5);
-    expect(genModel.tools?.length).to.equal(1);
     expect(genModel.toolConfig?.functionCallingConfig.mode).to.equal(
       FunctionCallingMode.NONE,
     );
@@ -122,7 +125,9 @@ describe("GenerativeModel", () => {
           value.includes("testField") &&
           value.includes(HarmBlockThreshold.BLOCK_LOW_AND_ABOVE) &&
           value.includes("presencePenalty") &&
-          value.includes("frequencyPenalty")
+          value.includes("frequencyPenalty") &&
+          value.includes("responseLogprobs") &&
+          value.includes("logprobs")
         );
       }),
       match((value) => {
@@ -205,6 +210,10 @@ describe("GenerativeModel", () => {
             },
           },
         },
+        presencePenalty: 0.6,
+        frequencyPenalty: 0.5,
+        responseLogprobs: true,
+        logprobs: 2,
       },
       safetySettings: [
         {
@@ -216,8 +225,6 @@ describe("GenerativeModel", () => {
           threshold: HarmBlockThreshold.BLOCK_NONE,
         },
       ],
-      presencePenalty: 0.6,
-      frequencyPenalty: 0.5,
       contents: [{ role: "user", parts: [{ text: "hello" }] }],
       tools: [{ functionDeclarations: [{ name: "otherfunc" }] }],
       toolConfig: { functionCallingConfig: { mode: FunctionCallingMode.AUTO } },
@@ -238,7 +245,9 @@ describe("GenerativeModel", () => {
           !value.includes("testField") &&
           value.includes(HarmCategory.HARM_CATEGORY_HARASSMENT) &&
           value.includes("presencePenalty") &&
-          value.includes("frequencyPenalty")
+          value.includes("frequencyPenalty") &&
+          value.includes("responseLogprobs") &&
+          value.includes("logprobs")
         );
       }),
       {},

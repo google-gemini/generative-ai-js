@@ -6,10 +6,8 @@
 
 // @public
 export interface BaseParams {
-    frequencyPenalty?: number;
     // (undocumented)
     generationConfig?: GenerationConfig;
-    presencePenalty?: number;
     // (undocumented)
     safetySettings?: SafetySetting[];
 }
@@ -371,6 +369,7 @@ export interface FunctionResponsePart {
 
 // @public
 export interface GenerateContentCandidate {
+    avgLogprobs?: number;
     // (undocumented)
     citationMetadata?: CitationMetadata;
     // (undocumented)
@@ -381,6 +380,7 @@ export interface GenerateContentCandidate {
     finishReason?: FinishReason;
     // (undocumented)
     index: number;
+    logprobsResult?: LogprobsResult;
     // (undocumented)
     safetyRatings?: SafetyRating[];
 }
@@ -429,8 +429,12 @@ export interface GenerateContentStreamResult {
 export interface GenerationConfig {
     // (undocumented)
     candidateCount?: number;
+    frequencyPenalty?: number;
+    logprobs?: number;
     // (undocumented)
     maxOutputTokens?: number;
+    presencePenalty?: number;
+    responseLogprobs?: boolean;
     responseMimeType?: string;
     responseSchema?: ResponseSchema;
     // (undocumented)
@@ -460,16 +464,12 @@ export class GenerativeModel {
     cachedContent: CachedContent;
     countTokens(request: CountTokensRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<CountTokensResponse>;
     embedContent(request: EmbedContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<EmbedContentResponse>;
-    // (undocumented)
-    frequencyPenalty?: number;
     generateContent(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentResult>;
     generateContentStream(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentStreamResult>;
     // (undocumented)
     generationConfig: GenerationConfig;
     // (undocumented)
     model: string;
-    // (undocumented)
-    presencePenalty?: number;
     // (undocumented)
     safetySettings: SafetySetting[];
     startChat(startChatParams?: StartChatParams): ChatSession;
@@ -575,6 +575,19 @@ export interface InlineDataPart {
     inlineData: GenerativeContentBlob;
     // (undocumented)
     text?: never;
+}
+
+// @public
+export interface LogprobsCandidate {
+    logProbability: number;
+    token: string;
+    tokenID: number;
+}
+
+// @public
+export interface LogprobsResult {
+    chosenCandidates: LogprobsCandidate[];
+    topCandidates: TopCandidates[];
 }
 
 // @public
@@ -728,6 +741,11 @@ export type Tool = FunctionDeclarationsTool | CodeExecutionTool;
 export interface ToolConfig {
     // (undocumented)
     functionCallingConfig: FunctionCallingConfig;
+}
+
+// @public
+export interface TopCandidates {
+    candidates: LogprobsCandidate[];
 }
 
 // @public

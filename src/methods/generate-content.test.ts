@@ -42,8 +42,6 @@ const fakeRequestParams: GenerateContentRequest = {
       threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
     },
   ],
-  presencePenalty: 0.5,
-  frequencyPenalty: 0.1,
 };
 
 describe("generateContent()", () => {
@@ -92,6 +90,33 @@ describe("generateContent()", () => {
     );
     const result = await generateContent("key", "model", fakeRequestParams);
     expect(result.response.text()).to.include("Quantum mechanics is");
+    expect(
+      result.response.candidates[0].citationMetadata.citationSources.length,
+    ).to.equal(1);
+    expect(makeRequestStub).to.be.calledWith(
+      "model",
+      request.Task.GENERATE_CONTENT,
+      "key",
+      false,
+      match.any,
+    );
+  });
+  it("logprobs", async () => {
+    const mockResponse = getMockResponse("unary-success-logprobs.json");
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
+      mockResponse as Response,
+    );
+    const result = await generateContent("key", "model", fakeRequestParams);
+    expect(result.response.text()).to.include("Quantum mechanics is");
+    expect(result.response.candidates[0].avgLogprobs).to.equal(7.5);
+    expect(
+      result.response.candidates[0].logprobsResult.topCandidates[0].candidates
+        .length,
+    ).to.equal(1);
+    expect(
+      result.response.candidates[0].logprobsResult.chosenCandidates[0]
+        .logProbability,
+    ).to.equal(0.75);
     expect(
       result.response.candidates[0].citationMetadata.citationSources.length,
     ).to.equal(1);

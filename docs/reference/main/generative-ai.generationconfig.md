@@ -17,7 +17,11 @@ export interface GenerationConfig
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [candidateCount?](./generative-ai.generationconfig.candidatecount.md) |  | number | _(Optional)_ |
+|  [frequencyPenalty?](./generative-ai.generationconfig.frequencypenalty.md) |  | number | _(Optional)_ Frequency penalty applied to the next token's logprobs, multiplied by the number of times each token has been seen in the respponse so far. |
+|  [logprobs?](./generative-ai.generationconfig.logprobs.md) |  | number | _(Optional)_ Valid if responseLogProbs is set to True. This will set the number of top logprobs to return at each decoding step in the logprobsResult. |
 |  [maxOutputTokens?](./generative-ai.generationconfig.maxoutputtokens.md) |  | number | _(Optional)_ |
+|  [presencePenalty?](./generative-ai.generationconfig.presencepenalty.md) |  | number | _(Optional)_ Presence penalty applied to the next token's logprobs if the token has already been seen in the response. |
+|  [responseLogprobs?](./generative-ai.generationconfig.responselogprobs.md) |  | boolean | _(Optional)_ If True, export the logprobs results in response. |
 |  [responseMimeType?](./generative-ai.generationconfig.responsemimetype.md) |  | string | _(Optional)_ Output response mimetype of the generated candidate text. Supported mimetype: <code>text/plain</code>: (default) Text output. <code>application/json</code>: JSON response in the candidates. |
 |  [responseSchema?](./generative-ai.generationconfig.responseschema.md) |  | [ResponseSchema](./generative-ai.responseschema.md) | _(Optional)_ Output response schema of the generated candidate text. Note: This only applies when the specified <code>responseMIMEType</code> supports a schema; currently this is limited to <code>application/json</code>. |
 |  [stopSequences?](./generative-ai.generationconfig.stopsequences.md) |  | string\[\] | _(Optional)_ |
