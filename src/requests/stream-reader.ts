@@ -153,6 +153,8 @@ export function aggregateResponses(
         // Keep overwriting, the last one will be final
         aggregatedResponse.candidates[i].citationMetadata =
           candidate.citationMetadata;
+        aggregatedResponse.candidates[i].groundingMetadata =
+          candidate.groundingMetadata;
         aggregatedResponse.candidates[i].finishReason = candidate.finishReason;
         aggregatedResponse.candidates[i].finishMessage =
           candidate.finishMessage;

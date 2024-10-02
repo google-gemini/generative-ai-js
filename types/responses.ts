@@ -86,8 +86,6 @@ export interface GenerateContentResponse {
   promptFeedback?: PromptFeedback;
   /** Metadata on the generation request's token usage. */
   usageMetadata?: UsageMetadata;
-  /** This field is populated for `GenerateContent` calls. */
-  groudingMetadata?: GroundingMetadata;
 }
 
 /**
@@ -166,6 +164,8 @@ export interface GenerateContentCandidate {
   avgLogprobs?: number;
   /** Log-likelihood scores for the response tokens and top tokens. */
   logprobsResult?: LogprobsResult;
+  /** Search gounding metadata. */
+  groundingMetadata?: GroundingMetadata;
 }
 
 /**

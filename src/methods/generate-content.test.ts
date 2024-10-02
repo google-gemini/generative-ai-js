@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { expect, use } from "chai";
+import { assert, expect, use } from "chai";
 import { match, restore, stub } from "sinon";
 import * as sinonChai from "sinon-chai";
 import * as chaiAsPromised from "chai-as-promised";
@@ -202,5 +202,71 @@ describe("generateContent()", () => {
       generateContent("key", "model", fakeRequestParams),
     ).to.be.rejectedWith(/400.*invalid argument/);
     expect(makeRequestStub).to.be.called;
+  });
+  it("search-grounding", async () => {
+    const mockResponse = getMockResponse("unary-success-search-grounding.json");
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
+      mockResponse as Response,
+    );
+    const expectedGourdingMetadata = {
+      searchEntryPoint: {
+        renderedContent: "test_rendered_content",
+      },
+      groundingChunks: [
+        {
+          web: {
+            uri: "test_uri_1",
+            title: "test_title_1",
+          },
+        },
+        {
+          web: {
+            uri: "test_uri_2",
+            title: "test_title_2",
+          },
+        },
+      ],
+      groundingSupports: [
+        {
+          segment: {
+            endIndex: 76,
+            text: "The current stock price for Alphabet Inc (Google) Class C (GOOG) is $166.94.",
+          },
+          groundingChunkIndices: [0, 1],
+          confidenceScores: [0.9863024, 0.9863024],
+        },
+        {
+          segment: {
+            startIndex: 77,
+            endIndex: 135,
+            text: "This represents a decrease of -0.88% in the past 24 hours.",
+          },
+          groundingChunkIndices: [0, 1],
+          confidenceScores: [0.98734087, 0.98734087],
+        },
+        {
+          segment: {
+            startIndex: 136,
+            endIndex: 239,
+            text: "Please note that stock prices can fluctuate frequently and this price is valid as of October 2nd, 2024.",
+          },
+          groundingChunkIndices: [0],
+          confidenceScores: [0.6393517],
+        },
+      ],
+      webSearchQueries: ["what is the current google stock price"],
+    };
+    const result = await generateContent("key", "model", fakeRequestParams);
+    expect(makeRequestStub).to.be.calledWith(
+      "model",
+      request.Task.GENERATE_CONTENT,
+      "key",
+      false,
+      match.any,
+    );
+    assert.equal(
+      JSON.stringify(result.response.candidates[0].groundingMetadata),
+      JSON.stringify(expectedGourdingMetadata),
+    );
   });
 });

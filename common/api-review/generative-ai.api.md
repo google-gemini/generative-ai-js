@@ -386,6 +386,8 @@ export interface GenerateContentCandidate {
     finishMessage?: string;
     // (undocumented)
     finishReason?: FinishReason;
+    // Warning: (ae-forgotten-export) The symbol "GroundingMetadata" needs to be exported by the entry point index.d.ts
+    groundingMetadata?: GroundingMetadata;
     // (undocumented)
     index: number;
     logprobsResult?: LogprobsResult;
@@ -415,8 +417,6 @@ export interface _GenerateContentRequestInternal extends GenerateContentRequest 
 // @public
 export interface GenerateContentResponse {
     candidates?: GenerateContentCandidate[];
-    // Warning: (ae-forgotten-export) The symbol "GroundingMetadata" needs to be exported by the entry point index.d.ts
-    groudingMetadata?: GroundingMetadata;
     promptFeedback?: PromptFeedback;
     usageMetadata?: UsageMetadata;
 }
