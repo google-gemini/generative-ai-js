@@ -5,7 +5,6 @@
 ### Minor Changes
 
 - 8543716: Add search grounding feature to SDK.
-- 8543716: Add support for search grounding
 
 ## 0.20.0
 
