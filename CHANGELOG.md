@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.21.0
+
+### Minor Changes
+
+- 8543716: Add search grounding feature to SDK.
+
 ## 0.20.0
 
 ### Minor Changes
