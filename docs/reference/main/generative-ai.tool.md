@@ -11,5 +11,5 @@ Defines a tool that model can call to access external knowledge.
 ```typescript
 export declare type Tool = FunctionDeclarationsTool | CodeExecutionTool | GoogleSearchRetrievalTool;
 ```
-**References:** [FunctionDeclarationsTool](./generative-ai.functiondeclarationstool.md)<!-- -->, [CodeExecutionTool](./generative-ai.codeexecutiontool.md)
+**References:** [FunctionDeclarationsTool](./generative-ai.functiondeclarationstool.md)<!-- -->, [CodeExecutionTool](./generative-ai.codeexecutiontool.md)<!-- -->, [GoogleSearchRetrievalTool](./generative-ai.googlesearchretrievaltool.md)
 

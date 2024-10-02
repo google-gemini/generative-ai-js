@@ -23,13 +23,14 @@ import { DynamicRetrievalMode } from "./enums";
  */
 export declare interface GoogleSearchRetrievalTool {
   /**
-   * Google search retrival tool config.
+   * Google search retrieval tool config.
    */
   googleSearchRetrieval?: GoogleSearchRetrieval;
 }
 
 /**
  * Retrieval tool that is powered by Google search.
+ * @public
  */
 export declare interface GoogleSearchRetrieval {
   /**
@@ -40,6 +41,7 @@ export declare interface GoogleSearchRetrieval {
 
 /**
  * Specifies the dynamic retrieval configuration for the given source.
+ * @public
  */
 export declare interface DynamicRetrievalConfig {
   /**
@@ -47,13 +49,15 @@ export declare interface DynamicRetrievalConfig {
    */
   mode?: DynamicRetrievalMode;
   /**
-   * The threshold to be used in dynamic retrieval. If not set, a system default value is used.
+   * The threshold to be used in dynamic retrieval. If not set, a system default 
+   * value is used.
    */
   dynamicThreshold?: number;
 }
 
 /**
  * Metadata returned to client when grounding is enabled.
+ * @public
  */
 export declare interface GroundingMetadata {
   /**
@@ -80,6 +84,7 @@ export declare interface GroundingMetadata {
 
 /**
  * Google search entry point.
+ * @public
  */
 export declare interface SearchEntryPoint {
   /**
@@ -94,6 +99,7 @@ export declare interface SearchEntryPoint {
 
 /**
  * Grounding chunk.
+ * @public
  */
 export declare interface GroundingChunk {
   /**
@@ -103,7 +109,8 @@ export declare interface GroundingChunk {
 }
 
 /**
- *  Chunk from the web.
+ * Chunk from the web.
+ * @public
  */
 export declare interface GroundingChunkWeb {
   /**
@@ -117,7 +124,8 @@ export declare interface GroundingChunkWeb {
 }
 
 /**
- *  Grounding support.
+ * Grounding support.
+ * @public
  */
 export declare interface GroundingSupport {
   /**
@@ -125,16 +133,22 @@ export declare interface GroundingSupport {
    */
   segment?: string;
   /**
-   * A list of indices (into 'grounding_chunk') specifying the citations associated with the claim. For instance [1,3,4] means that grounding_chunk[1], grounding_chunk[3], grounding_chunk[4] are the retrieved content attributed to the claim.
+   * A list of indices (into 'grounding_chunk') specifying the citations 
+   * associated with the claim. For instance [1,3,4] means that 
+   * grounding_chunk[1], grounding_chunk[3], grounding_chunk[4] are the 
+   * retrieved content attributed to the claim.
    */
   groundingChunckIndices?: number[];
   /**
-   * Confidence score of the support references. Ranges from 0 to 1. 1 is the most confident. This list must have the same size as the grounding_chunk_indices.
+   * Confidence score of the support references. Ranges from 0 to 1. 1 is the 
+   * most confident. This list must have the same size as the 
+   * grounding_chunk_indices.
    */
   confidenceScores?: number[];
 }
 /**
- *  Segment of the content.
+ * Segment of the content.
+ * @public
  */
 export declare interface GroundingSupportSegment {
   /**
@@ -142,11 +156,13 @@ export declare interface GroundingSupportSegment {
    */
   partIndex?: number;
   /**
-   * Start index in the given Part, measured in bytes. Offset from the start of the Part, inclusive, starting at zero.
+   * Start index in the given Part, measured in bytes. Offset from the start of 
+   * the Part, inclusive, starting at zero.
    */
   startIndex?: number;
   /**
-   * End index in the given Part, measured in bytes. Offset from the start of the Part, exclusive, starting at zero.
+   * End index in the given Part, measured in bytes. Offset from the start of 
+   * the Part, exclusive, starting at zero.
    */
   endIndex?: number;
   /**
@@ -155,11 +171,16 @@ export declare interface GroundingSupportSegment {
   text?: string;
 }
 /**
- *  Metadata related to retrieval in the grounding flow.
+ * Metadata related to retrieval in the grounding flow.
+ * @public
  */
 export declare interface RetrievalMetadata {
   /**
-   * Score indicating how likely information from google search could help answer the prompt. The score is in the range [0, 1], where 0 is the least likely and 1 is the most likely. This score is only populated when google search grounding and dynamic retrieval is enabled. It will becompared to the threshold to determine whether to trigger google search..
+   * Score indicating how likely information from google search could help 
+   * answer the prompt. The score is in the range [0, 1], where 0 is the least 
+   * likely and 1 is the most likely. This score is only populated when google 
+   * search grounding and dynamic retrieval is enabled. It will becompared to 
+   * the threshold to determine whether to trigger google search.
    */
   googleSearchDynamicRetrievalScore?: number;
 }

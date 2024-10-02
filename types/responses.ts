@@ -164,7 +164,7 @@ export interface GenerateContentCandidate {
   avgLogprobs?: number;
   /** Log-likelihood scores for the response tokens and top tokens. */
   logprobsResult?: LogprobsResult;
-  /** Search gounding metadata. */
+  /** Search grounding metadata. */
   groundingMetadata?: GroundingMetadata;
 }
 

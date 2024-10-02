@@ -208,7 +208,7 @@ describe("generateContent()", () => {
     const makeRequestStub = stub(request, "makeModelRequest").resolves(
       mockResponse as Response,
     );
-    const expectedGourdingMetadata = {
+    const expectedGroundingMetadata = {
       searchEntryPoint: {
         renderedContent: "test_rendered_content",
       },
@@ -266,7 +266,7 @@ describe("generateContent()", () => {
     );
     assert.equal(
       JSON.stringify(result.response.candidates[0].groundingMetadata),
-      JSON.stringify(expectedGourdingMetadata),
+      JSON.stringify(expectedGroundingMetadata),
     );
   });
 });

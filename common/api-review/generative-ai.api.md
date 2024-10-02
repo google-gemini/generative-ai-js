@@ -156,6 +156,12 @@ export interface CountTokensResponse {
 }
 
 // @public
+export interface DynamicRetrievalConfig {
+    dynamicThreshold?: number;
+    mode?: DynamicRetrievalMode;
+}
+
+// @public
 export enum DynamicRetrievalMode {
     // (undocumented)
     MODE_DYNAMIC = "MODE_DYNAMIC",
@@ -386,7 +392,6 @@ export interface GenerateContentCandidate {
     finishMessage?: string;
     // (undocumented)
     finishReason?: FinishReason;
-    // Warning: (ae-forgotten-export) The symbol "GroundingMetadata" needs to be exported by the entry point index.d.ts
     groundingMetadata?: GroundingMetadata;
     // (undocumented)
     index: number;
@@ -528,6 +533,51 @@ export class GoogleGenerativeAIResponseError<T> extends GoogleGenerativeAIError 
 }
 
 // @public
+export interface GoogleSearchRetrieval {
+    dynamicRetrievalConfig?: DynamicRetrievalConfig;
+}
+
+// @public
+export interface GoogleSearchRetrievalTool {
+    googleSearchRetrieval?: GoogleSearchRetrieval;
+}
+
+// @public
+export interface GroundingChunk {
+    web?: GroundingChunkWeb;
+}
+
+// @public
+export interface GroundingChunkWeb {
+    title?: string;
+    uri?: string;
+}
+
+// @public
+export interface GroundingMetadata {
+    groundingChuncks?: GroundingChunk[];
+    groundingSupport?: GroundingSupport[];
+    retrievalMetadata?: RetrievalMetadata;
+    searchEntryPoint?: SearchEntryPoint;
+    webSearchQueries: string[];
+}
+
+// @public
+export interface GroundingSupport {
+    confidenceScores?: number[];
+    groundingChunckIndices?: number[];
+    segment?: string;
+}
+
+// @public
+export interface GroundingSupportSegment {
+    endIndex?: number;
+    partIndex?: number;
+    startIndex?: number;
+    text?: string;
+}
+
+// @public
 export enum HarmBlockThreshold {
     // (undocumented)
     BLOCK_LOW_AND_ABOVE = "BLOCK_LOW_AND_ABOVE",
@@ -652,6 +702,11 @@ export interface ResponseSchema extends Schema {
 }
 
 // @public
+export interface RetrievalMetadata {
+    googleSearchDynamicRetrievalScore?: number;
+}
+
+// @public
 export interface SafetyRating {
     // (undocumented)
     category: HarmCategory;
@@ -690,6 +745,12 @@ export enum SchemaType {
     NUMBER = "number",
     OBJECT = "object",
     STRING = "string"
+}
+
+// @public
+export interface SearchEntryPoint {
+    renderedContent?: string;
+    sdkBlob?: string;
 }
 
 // @public
@@ -744,8 +805,6 @@ export interface TextPart {
     text: string;
 }
 
-// Warning: (ae-forgotten-export) The symbol "GoogleSearchRetrievalTool" needs to be exported by the entry point index.d.ts
-//
 // @public
 export type Tool = FunctionDeclarationsTool | CodeExecutionTool | GoogleSearchRetrievalTool;
 

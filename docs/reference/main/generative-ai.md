@@ -50,6 +50,7 @@
 |  [ContentEmbedding](./generative-ai.contentembedding.md) | A single content embedding. |
 |  [CountTokensRequest](./generative-ai.counttokensrequest.md) | <p>Params for calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)<!-- -->.</p><p>The request must contain either a [Content](./generative-ai.content.md) array or a [GenerateContentRequest](./generative-ai.generatecontentrequest.md)<!-- -->, but not both. If both are provided then a [GoogleGenerativeAIRequestInputError](./generative-ai.googlegenerativeairequestinputerror.md) is thrown.</p> |
 |  [CountTokensResponse](./generative-ai.counttokensresponse.md) | Response from calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)<!-- -->. |
+|  [DynamicRetrievalConfig](./generative-ai.dynamicretrievalconfig.md) | Specifies the dynamic retrieval configuration for the given source. |
 |  [EmbedContentRequest](./generative-ai.embedcontentrequest.md) | Params for calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md) |
 |  [EmbedContentResponse](./generative-ai.embedcontentresponse.md) | Response from calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md)<!-- -->. |
 |  [EnhancedGenerateContentResponse](./generative-ai.enhancedgeneratecontentresponse.md) | Response object wrapped with helper methods. |
@@ -74,6 +75,13 @@
 |  [GenerateContentStreamResult](./generative-ai.generatecontentstreamresult.md) | Result object returned from generateContentStream() call. Iterate over <code>stream</code> to get chunks as they come in and/or use the <code>response</code> promise to get the aggregated response when the stream is done. |
 |  [GenerationConfig](./generative-ai.generationconfig.md) | Config options for content-related requests |
 |  [GenerativeContentBlob](./generative-ai.generativecontentblob.md) | Interface for sending an image. |
+|  [GoogleSearchRetrieval](./generative-ai.googlesearchretrieval.md) | Retrieval tool that is powered by Google search. |
+|  [GoogleSearchRetrievalTool](./generative-ai.googlesearchretrievaltool.md) | Retrieval tool that is powered by Google search. |
+|  [GroundingChunk](./generative-ai.groundingchunk.md) | Grounding chunk. |
+|  [GroundingChunkWeb](./generative-ai.groundingchunkweb.md) | Chunk from the web. |
+|  [GroundingMetadata](./generative-ai.groundingmetadata.md) | Metadata returned to client when grounding is enabled. |
+|  [GroundingSupport](./generative-ai.groundingsupport.md) | Grounding support. |
+|  [GroundingSupportSegment](./generative-ai.groundingsupportsegment.md) | Segment of the content. |
 |  [InlineDataPart](./generative-ai.inlinedatapart.md) | Content part interface if the part represents an image. |
 |  [LogprobsCandidate](./generative-ai.logprobscandidate.md) | Candidate for the logprobs token and score. |
 |  [LogprobsResult](./generative-ai.logprobsresult.md) | Logprobs Result |
@@ -81,9 +89,11 @@
 |  [PromptFeedback](./generative-ai.promptfeedback.md) | If the prompt was blocked, this will be populated with <code>blockReason</code> and the relevant <code>safetyRatings</code>. |
 |  [RequestOptions](./generative-ai.requestoptions.md) | Params passed to getGenerativeModel() or GoogleAIFileManager(). |
 |  [ResponseSchema](./generative-ai.responseschema.md) | Schema passed to <code>GenerationConfig.responseSchema</code> |
+|  [RetrievalMetadata](./generative-ai.retrievalmetadata.md) | Metadata related to retrieval in the grounding flow. |
 |  [SafetyRating](./generative-ai.safetyrating.md) | A safety rating associated with a [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md) |
 |  [SafetySetting](./generative-ai.safetysetting.md) | Safety setting that can be sent as part of request parameters. |
 |  [Schema](./generative-ai.schema.md) | Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed. |
+|  [SearchEntryPoint](./generative-ai.searchentrypoint.md) | Google search entry point. |
 |  [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | Params passed to atomic asynchronous operations. |
 |  [StartChatParams](./generative-ai.startchatparams.md) | Params for [GenerativeModel.startChat()](./generative-ai.generativemodel.startchat.md)<!-- -->. |
 |  [TextPart](./generative-ai.textpart.md) | Content part interface if the part represents a text string. |

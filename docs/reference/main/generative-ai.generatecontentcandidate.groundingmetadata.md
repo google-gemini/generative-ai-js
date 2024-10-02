@@ -4,7 +4,7 @@
 
 ## GenerateContentCandidate.groundingMetadata property
 
-Search gounding metadata.
+Search grounding metadata.
 
 **Signature:**
 
