@@ -22,6 +22,7 @@ import {
   HarmCategory,
   HarmProbability,
 } from "./enums";
+import { GroundingMetadata } from "./search-grounding";
 
 /**
  * Result object returned from generateContent() call.
@@ -85,6 +86,8 @@ export interface GenerateContentResponse {
   promptFeedback?: PromptFeedback;
   /** Metadata on the generation request's token usage. */
   usageMetadata?: UsageMetadata;
+  /** This field is populated for `GenerateContent` calls. */
+  groudingMetadata?: GroundingMetadata;
 }
 
 /**
@@ -94,8 +97,8 @@ export interface GenerateContentResponse {
 export interface LogprobsResult {
   /** Length = total number of decoding steps. */
   topCandidates: TopCandidates[];
-  /** 
-   * Length = total number of decoding steps. 
+  /**
+   * Length = total number of decoding steps.
    * The chosen candidates may or may not be in topCandidates.
    */
   chosenCandidates: LogprobsCandidate[];

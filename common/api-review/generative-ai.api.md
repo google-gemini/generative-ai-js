@@ -156,6 +156,14 @@ export interface CountTokensResponse {
 }
 
 // @public
+export enum DynamicRetrievalMode {
+    // (undocumented)
+    MODE_DYNAMIC = "MODE_DYNAMIC",
+    // (undocumented)
+    MODE_UNSPECIFIED = "MODE_UNSPECIFIED"
+}
+
+// @public
 export interface EmbedContentRequest {
     // (undocumented)
     content: Content;
@@ -407,6 +415,8 @@ export interface _GenerateContentRequestInternal extends GenerateContentRequest 
 // @public
 export interface GenerateContentResponse {
     candidates?: GenerateContentCandidate[];
+    // Warning: (ae-forgotten-export) The symbol "GroundingMetadata" needs to be exported by the entry point index.d.ts
+    groudingMetadata?: GroundingMetadata;
     promptFeedback?: PromptFeedback;
     usageMetadata?: UsageMetadata;
 }
@@ -734,8 +744,10 @@ export interface TextPart {
     text: string;
 }
 
+// Warning: (ae-forgotten-export) The symbol "GoogleSearchRetrievalTool" needs to be exported by the entry point index.d.ts
+//
 // @public
-export type Tool = FunctionDeclarationsTool | CodeExecutionTool;
+export type Tool = FunctionDeclarationsTool | CodeExecutionTool | GoogleSearchRetrievalTool;
 
 // @public
 export interface ToolConfig {
