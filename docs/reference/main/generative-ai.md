@@ -21,6 +21,7 @@
 |  Enumeration | Description |
 |  --- | --- |
 |  [BlockReason](./generative-ai.blockreason.md) | Reason that a prompt was blocked. |
+|  [DynamicRetrievalMode](./generative-ai.dynamicretrievalmode.md) | The mode of the predictor to be used in dynamic retrieval. |
 |  [ExecutableCodeLanguage](./generative-ai.executablecodelanguage.md) |  |
 |  [FinishReason](./generative-ai.finishreason.md) | Reason that a candidate finished. |
 |  [FunctionCallingMode](./generative-ai.functioncallingmode.md) |  |
