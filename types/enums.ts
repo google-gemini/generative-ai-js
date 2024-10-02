@@ -132,3 +132,14 @@ export enum FunctionCallingMode {
   // not passing any function declarations.
   NONE = "NONE",
 }
+
+/**
+ * The mode of the predictor to be used in dynamic retrieval.
+ * @public
+ */
+export enum DynamicRetrievalMode {
+  // Unspecified function calling mode. This value should not be used.
+  MODE_UNSPECIFIED = "MODE_UNSPECIFIED",
+  // Run retrieval only when system decides it is necessary.
+  MODE_DYNAMIC = "MODE_DYNAMIC",
+}

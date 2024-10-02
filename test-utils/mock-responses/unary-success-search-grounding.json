@@ -1,0 +1,105 @@
+{
+    "candidates": [
+        {
+            "content": {
+                "parts": [
+                    {
+                        "text": "The current stock price for Alphabet Inc (Google) Class C (GOOG) is $166.94. This represents a decrease of -0.88% in the past 24 hours. Please note that stock prices can fluctuate frequently and this price is valid as of October 2nd, 2024. \n"
+                    }
+                ],
+                "role": "model"
+            },
+            "finishReason": "STOP",
+            "index": 0,
+            "safetyRatings": [
+                {
+                    "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                    "probability": "NEGLIGIBLE"
+                },
+                {
+                    "category": "HARM_CATEGORY_HATE_SPEECH",
+                    "probability": "NEGLIGIBLE"
+                },
+                {
+                    "category": "HARM_CATEGORY_HARASSMENT",
+                    "probability": "NEGLIGIBLE"
+                },
+                {
+                    "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                    "probability": "NEGLIGIBLE"
+                }
+            ],
+            "groundingMetadata": {
+                "searchEntryPoint": {
+                    "renderedContent": "test_rendered_content"
+                },
+                "groundingChunks": [
+                    {
+                        "web": {
+                            "uri": "test_uri_1",
+                            "title": "test_title_1"
+                        }
+                    },
+                    {
+                        "web": {
+                            "uri": "test_uri_2",
+                            "title": "test_title_2"
+                        }
+                    }
+                ],
+                "groundingSupports": [
+                    {
+                        "segment": {
+                            "endIndex": 76,
+                            "text": "The current stock price for Alphabet Inc (Google) Class C (GOOG) is $166.94."
+                        },
+                        "groundingChunkIndices": [
+                            0,
+                            1
+                        ],
+                        "confidenceScores": [
+                            0.9863024,
+                            0.9863024
+                        ]
+                    },
+                    {
+                        "segment": {
+                            "startIndex": 77,
+                            "endIndex": 135,
+                            "text": "This represents a decrease of -0.88% in the past 24 hours."
+                        },
+                        "groundingChunkIndices": [
+                            0,
+                            1
+                        ],
+                        "confidenceScores": [
+                            0.98734087,
+                            0.98734087
+                        ]
+                    },
+                    {
+                        "segment": {
+                            "startIndex": 136,
+                            "endIndex": 239,
+                            "text": "Please note that stock prices can fluctuate frequently and this price is valid as of October 2nd, 2024."
+                        },
+                        "groundingChunkIndices": [
+                            0
+                        ],
+                        "confidenceScores": [
+                            0.6393517
+                        ]
+                    }
+                ],
+                "webSearchQueries": [
+                    "what is the current google stock price"
+                ]
+            }
+        }
+    ],
+    "usageMetadata": {
+        "promptTokenCount": 8,
+        "candidatesTokenCount": 70,
+        "totalTokenCount": 78
+    }
+}

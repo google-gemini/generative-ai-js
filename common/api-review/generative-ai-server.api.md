@@ -471,8 +471,10 @@ export interface TextPart {
     text: string;
 }
 
+// Warning: (ae-forgotten-export) The symbol "GoogleSearchRetrievalTool" needs to be exported by the entry point index.d.ts
+//
 // @public
-export type Tool = FunctionDeclarationsTool | CodeExecutionTool;
+export type Tool = FunctionDeclarationsTool | CodeExecutionTool | GoogleSearchRetrievalTool;
 
 // @public
 export interface ToolConfig {
