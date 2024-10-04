@@ -18,7 +18,7 @@
 import {GoogleGenerativeAI} from "@google/generative-ai";
 
 async function enableLogProb() {
-    // [START log probability]
+    // [START log_probs]
     const genAI = new GoogleGenerativeAI(process.env.API_KEY);
     const model = genAI.getGenerativeModel(
         {
@@ -32,8 +32,8 @@ async function enableLogProb() {
     );
     const prompt = "Hello!";
     const result = await model.generateContent(prompt);
-    console.log(result.response);
-    // [END log probability]
+    console.log(result.response.candidates[0].logprobsResult);
+    // [END log_probs]
 }
 async function runAll() {
     // Comment out or delete any sample cases you don't want to run.

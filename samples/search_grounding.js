@@ -21,12 +21,11 @@ import {
 } from "@google/generative-ai";
 
 async function searchGrounding() {
-  // [START search grounding]
+  // [START search_grounding]
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel(
     {
-      model: "gemini-1.5-pro",
-      generationConfig: {},
+      model: "gemini-1.5-flash",
       tools: [
         {
           googleSearchRetrieval: {
@@ -43,7 +42,7 @@ async function searchGrounding() {
 
   const prompt = "What is the price of Google stock today?";
   const result = await model.generateContent(prompt);
-  console.log(result.response);
+  console.log(result.response.candidates[0].groundingMetadata);
   // [END search_grounding]
 }
 async function runAll() {
