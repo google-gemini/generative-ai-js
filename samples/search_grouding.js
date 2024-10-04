@@ -41,11 +41,9 @@ async function searchGrounding() {
     { apiVersion: "v1beta" },
   );
 
-  const prompt =
-    "What is the Google stock today?";
-
+  const prompt = "What is the price of Google stock today?";
   const result = await model.generateContent(prompt);
-  console.log(JSON.stringify(result.response));
+  console.log(result.response);
   // [END search_grounding]
 }
 async function runAll() {

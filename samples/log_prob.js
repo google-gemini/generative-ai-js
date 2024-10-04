@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-import {
-    GoogleGenerativeAI,
-} from "@google/generative-ai";
+import {GoogleGenerativeAI} from "@google/generative-ai";
 
 async function enableLogProb() {
     // [START log probability]
@@ -32,10 +30,9 @@ async function enableLogProb() {
             },
         },
     );
-    const prompt =
-        "Hello!";
+    const prompt = "Hello!";
     const result = await model.generateContent(prompt);
-    console.log(JSON.stringify(result.response));
+    console.log(result.response);
     // [END log probability]
 }
 async function runAll() {
