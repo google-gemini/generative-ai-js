@@ -46,4 +46,6 @@ to comment out cases you do not want to run.
 | [function_calling.js](./function_calling.js)             | Using function calling |
 | [safety_settings.js](./safety_settings.js)               | Setting and using safety controls |
 | [system_instruction.js](./system_instruction.js)         | Setting system instructions |
+| [search_grounding.js](./search_grounding.js)             | Generate with google search grounding |
+| [log_prob.js](./log_prob.js)                             | Generate with log probability for each token |
 | [text_generation.js](./text_generation.js)               | Generating text |
