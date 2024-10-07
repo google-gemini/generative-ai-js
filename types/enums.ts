@@ -31,6 +31,7 @@ export enum HarmCategory {
   HARM_CATEGORY_SEXUALLY_EXPLICIT = "HARM_CATEGORY_SEXUALLY_EXPLICIT",
   HARM_CATEGORY_HARASSMENT = "HARM_CATEGORY_HARASSMENT",
   HARM_CATEGORY_DANGEROUS_CONTENT = "HARM_CATEGORY_DANGEROUS_CONTENT",
+  HARM_CATEGORY_CIVIC_INTEGRITY = "HARM_CATEGORY_CIVIC_INTEGRITY"
 }
 
 /**
@@ -38,15 +39,15 @@ export enum HarmCategory {
  * @public
  */
 export enum HarmBlockThreshold {
-  // Threshold is unspecified.
+  /** Threshold is unspecified. */
   HARM_BLOCK_THRESHOLD_UNSPECIFIED = "HARM_BLOCK_THRESHOLD_UNSPECIFIED",
-  // Content with NEGLIGIBLE will be allowed.
+  /** Content with NEGLIGIBLE will be allowed. */
   BLOCK_LOW_AND_ABOVE = "BLOCK_LOW_AND_ABOVE",
-  // Content with NEGLIGIBLE and LOW will be allowed.
+  /** Content with NEGLIGIBLE and LOW will be allowed. */
   BLOCK_MEDIUM_AND_ABOVE = "BLOCK_MEDIUM_AND_ABOVE",
-  // Content with NEGLIGIBLE, LOW, and MEDIUM will be allowed.
+  /** Content with NEGLIGIBLE, LOW, and MEDIUM will be allowed. */
   BLOCK_ONLY_HIGH = "BLOCK_ONLY_HIGH",
-  // All content will be allowed.
+  /** All content will be allowed. */
   BLOCK_NONE = "BLOCK_NONE",
 }
 
@@ -55,15 +56,15 @@ export enum HarmBlockThreshold {
  * @public
  */
 export enum HarmProbability {
-  // Probability is unspecified.
+  /** Probability is unspecified. */
   HARM_PROBABILITY_UNSPECIFIED = "HARM_PROBABILITY_UNSPECIFIED",
-  // Content has a negligible chance of being unsafe.
+  /** Content has a negligible chance of being unsafe. */
   NEGLIGIBLE = "NEGLIGIBLE",
-  // Content has a low chance of being unsafe.
+  /** Content has a low chance of being unsafe. */
   LOW = "LOW",
-  // Content has a medium chance of being unsafe.
+  /** Content has a medium chance of being unsafe. */
   MEDIUM = "MEDIUM",
-  // Content has a high chance of being unsafe.
+  /** Content has a high chance of being unsafe. */
   HIGH = "HIGH",
 }
 
