@@ -22,6 +22,11 @@ import {
 
 async function searchGrounding() {
   // [START search_grounding]
+  // Make sure to include these imports:
+  // import {
+  //  DynamicRetrievalMode,
+  //  GoogleGenerativeAI,
+  // } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel(
     {
