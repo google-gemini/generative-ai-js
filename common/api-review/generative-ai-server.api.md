@@ -4,6 +4,10 @@
 
 ```ts
 
+/// <reference types="node" />
+
+import { Readable } from 'node:stream';
+
 // @public
 export interface CachedContent extends CachedContentBase {
     createTime?: string;
@@ -347,7 +351,7 @@ export class GoogleAIFileManager {
     deleteFile(fileId: string): Promise<void>;
     getFile(fileId: string, requestOptions?: SingleRequestOptions): Promise<FileMetadataResponse>;
     listFiles(listParams?: ListParams, requestOptions?: SingleRequestOptions): Promise<ListFilesResponse>;
-    uploadFile(filePath: string, fileMetadata: FileMetadata): Promise<UploadFileResponse>;
+    uploadFile(filePathOrStream: string | Readable, fileMetadata: FileMetadata): Promise<UploadFileResponse>;
 }
 
 // @public
