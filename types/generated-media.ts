@@ -15,13 +15,29 @@
  * limitations under the License.
  */
 
-import { PredictServiceValueType } from "./predict";
-
-
 /**
- * Generated images. It will be returned in response.
+ * Generated media.
  * @public
  */
+export interface GeneratedMedia {
+  video?: GeneratedVideo;
+}
+
+/**
+ * Generated video.
+ * @public
+ */
+export interface GeneratedVideo {
+  /**
+   * Video bytes.
+   */
+  video?: string;
+  /**
+   * Specifies the dynamic retrieval configuration for the given source.
+   */
+  uri?: string;
+}
+
 export interface GeneratedImage {
   /**
    * Image bytes.
@@ -30,5 +46,5 @@ export interface GeneratedImage {
   /**
    * Generation parameters.
    */
-  generationParameters?: PredictServiceValueType; 
+  generationParameters?: { [key: string]: any }; 
 }

@@ -22,7 +22,9 @@ import {
   HarmCategory,
   HarmProbability,
 } from "./enums";
+import * as jspb from "google-protobuf";
 import { GroundingMetadata } from "./search-grounding";
+import { GeneratedImage } from "./generated-media";
 import { GeneratedImage } from "./generated-media";
 
 /**
@@ -239,6 +241,17 @@ export interface ErrorDetails {
   domain?: string;
   metadata?: Record<string, unknown>;
   [key: string]: unknown;
+}
+
+/**
+ * Response message for [PredictionService.Predict].
+ * @public
+ */
+export interface PredictResponse {
+  /**
+   * The outputs of the prediction call.
+   */
+  predictions?: jspb.FieldValue[];
 }
 
 /**

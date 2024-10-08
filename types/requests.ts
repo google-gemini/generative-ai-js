@@ -24,6 +24,7 @@ import {
   ToolConfig,
 } from "./function-calling";
 import { GoogleSearchRetrievalTool } from "./search-grounding";
+import * as jspb from "google-protobuf";
 
 /**
  * Base parameters for a number of methods.
@@ -247,79 +248,42 @@ export interface CodeExecutionTool {
 }
 
 /**
+ * Request message for [PredictionService.Predict][].
+ * @public
+ */
+export interface PredictRequest {
+  /**
+   * The name of the model for prediction.
+   */
+  model?: string;
+  /**
+   * The instances that are the input to the prediction call.
+   */
+  instances?: any[];
+  /**
+   * The parameters that govern the prediction call.
+   */
+  parameters?: any;
+}
+
+/**
  * Request message for generating image.
  * @public
  */
 export interface ImageGenerationRequest {
-  /**
-   * Text prompt for the image.
-   */
   prompt: string;
-  /**
-   * A description of what you want to omit in the generated images.
-   */
   negativePrompt?: string;
-  /**
-   * Number of images to generate. Range: 1..4.
-   */
   numberOfImages?: number;
-  /**
-   * Width of the image. One of the Width/Height sizes must be 256 or 1024.
-   */
   width?: number;
-  /**
-   * Height of the image. One of the Width/Height sizes must be 256 or 1024.
-   */
   height?: number;
-  /**
-   * Changes the aspect ratio of the generated image.
-   *  Supported values are:
-   * * "1:1" : 1:1 aspect ratio
-   * * "9:16" : 9:16 aspect ratio
-   * * "16:9" : 16:9 aspect ratio
-   * * "4:3" : 4:3 aspect ratio
-   * * "3:4" : 3:4 aspect_ratio
-   */
   aspectRatio?: "1:1" | "9:16" | "16:9" | "4:3" | "3:4";
-  /**
-   * Controls the strength of the prompt. Suggested values are:
-   * * 0-9 (low strength) 
-   * * 10-20 (medium strength) 
-   * * 21+ (high strength)
-   */
   guidanceScale?: number;
-  /**
-   * Which image format should the output be saved as. 
-   * Supported values: 
-   * * image/png: Save as a PNG image 
-   * * image/jpeg: Save as a JPEG image
-   */
   outputMimeType?: "image/png" | "image/jpeg";
-  /**
-   * Level of compression if the output mime type is selected to be image/jpeg. 
-   * Float between 0 to 100
-   */
   compressionQuality?: number;
-  /**
-   * Language of the text prompt for the image. Default: None. Supported values 
-   * are `"en"` for English, `"hi"` for Hindi, `"ja"` for Japanese, `"ko"` 
-   * for Korean, and `"auto"` for automatic language detection.
-   */
   language?: string;
-  /**
-   * Adds a filter level to Safety filtering. Supported values are:
-   * * "block_most" : Strongest filtering level, most strict blocking
-   * * "block_some" : Block some problematic prompts and responses
-   * * "block_few" : Block fewer problematic prompts and responses
-   */
   safetyFilterLevel?:
     | "block_low_and_above"
     | "block_medium_and_above"
     | "block_only_high";
-  /**
-   * Allow generation of people by the model Supported values are:
-   * * "dont_allow" : Block generation of people
-   * * "allow_adult" : Generate adults, but not children
-   */
   personGeneration?: "dont_allow" | "allow_adult";
 }

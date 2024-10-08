@@ -23,8 +23,6 @@ import {
   SingleRequestOptions,
 } from "../../types";
 import { generateImages } from "../methods/generate-images";
-import { formatGenerateImageInput } from "../requests/request-helpers";
-
 /**
  * Class for generative model APIs.
  * @public
@@ -45,19 +43,11 @@ export class ImageGenerationModel {
     }
   }
   /**
-   * Makes a single non-streaming call to the model
-   * and returns an object containing a single {@link ImageGenerationResponse}.
-   *
-   * Inside the response there will be generated pictures specified by
-   * numberOfImages in {@link ImageGenerationRequest}
-   *
-   * Fields set in the optional {@link SingleRequestOptions} parameter will
-   * take precedence over the {@link RequestOptions} values provided to
-   * {@link GoogleGenerativeAI.getImageGenerationModel }.
+   * Generates image based on the request.
    */
   async generateImages(
-    request: ImageGenerationRequest | string,
-    requestOptions: SingleRequestOptions = {},
+    request: ImageGenerationRequest,
+    requestOptions: SingleRequestOptions = {}
   ): Promise<ImageGenerationResponse> {
     const generativeModelRequestOptions: SingleRequestOptions = {
       ...this._requestOptions,
@@ -66,7 +56,7 @@ export class ImageGenerationModel {
     return generateImages(
       this.apiKey,
       this.model,
-      formatGenerateImageInput(request),
+      request,
       generativeModelRequestOptions,
     );
   }

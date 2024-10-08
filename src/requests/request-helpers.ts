@@ -21,12 +21,14 @@ import {
   EmbedContentRequest,
   GenerateContentRequest,
   ImageGenerationRequest,
+  ImageGenerationRequest,
   ModelParams,
   Part,
+  PredictRequest,
   _CountTokensRequestInternal,
   _GenerateContentRequestInternal,
 } from "../../types";
-import { PredictRequest } from "../../types/predict";
+import * as jspb from "google-protobuf";
 import {
   GoogleGenerativeAIError,
   GoogleGenerativeAIRequestInputError,
@@ -179,32 +181,28 @@ export function formatEmbedContentInput(
   return params;
 }
 
-export function formatGenerateImageInput(
-  params: ImageGenerationRequest | string,
-): ImageGenerationRequest {
-  let formattedRequest: ImageGenerationRequest;
-  if (typeof params === "string") {
-    formattedRequest = { prompt: params };
-  } else {
-    formattedRequest = params as ImageGenerationRequest;
-  }
-  return formattedRequest;
-}
-
 export function convertFromImageGenerationRequest(
-  model: string,
+  modelName: string,
   request: ImageGenerationRequest,
 ): PredictRequest {
   const instances = [{ prompt: request.prompt }];
-  const sampleImageSize = Math.max(request.width || 0, request.height || 0);
   const parameters = {
-    ...request,
-    sampleCount: request.numberOfImages || 1,
-    sampleImageSize: sampleImageSize === 0 ? undefined : sampleImageSize,
+    negativePrompt: request.negativePrompt,
+    numberOfImages: request.numberOfImages,
+    width: request.width,
+    height: request.height,
+    aspectRatio: request.aspectRatio,
+    guidanceScale: request.guidanceScale,
+    outputMimeType: request.outputMimeType,
+    compressionQuality: request.compressionQuality,
+    language: request.language,
+    safetyFilterLevel: request.safetyFilterLevel,
+    personGeneration: request.personGeneration,
   };
   return {
-    model,
-    instances,
-    parameters,
+    model: modelName,
+    instances: instances,
+    parameters: parameters,
   };
 }
+

@@ -22,6 +22,7 @@ import {
   GenerateContentCandidate,
   GenerateContentResponse,
   ImageGenerationResponse,
+  PredictResponse
 } from "../../types";
 import { GeneratedImage } from "../../types/generated-media";
 import {
@@ -214,15 +215,11 @@ export function formatBlockErrorMessage(
 }
 
 export function convertToImageGenerationResponse(
-  sharedParameters: PredictServiceValueType,
-  response: ImageGenerationPredictResponse,
+  response: PredictResponse
 ): ImageGenerationResponse {
-  const images: GeneratedImage[] = [];
-  for (const prediction of response!.predictions) {
-    images.push({
-      imageBytes: prediction.bytesBase64Encoded,
-      generationParameters: sharedParameters,
-    });
-  }
-  return { images };
+  console.log(response);
+  return {
+    images: []
+  };
 }
+
