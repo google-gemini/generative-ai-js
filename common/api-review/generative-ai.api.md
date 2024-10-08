@@ -4,6 +4,8 @@
 
 ```ts
 
+import * as jspb from 'google-protobuf';
+
 // @public
 export interface BaseParams {
     // (undocumented)
@@ -620,6 +622,42 @@ export enum HarmProbability {
 }
 
 // @public
+export interface ImageGenerationRequest {
+    // (undocumented)
+    aspectRatio?: "1:1" | "9:16" | "16:9" | "4:3" | "3:4";
+    // (undocumented)
+    compressionQuality?: number;
+    // (undocumented)
+    guidanceScale?: number;
+    // (undocumented)
+    height?: number;
+    // (undocumented)
+    language?: string;
+    // (undocumented)
+    negativePrompt?: string;
+    // (undocumented)
+    numberOfImages?: number;
+    // (undocumented)
+    outputMimeType?: "image/png" | "image/jpeg";
+    // (undocumented)
+    personGeneration?: "dont_allow" | "allow_adult";
+    // (undocumented)
+    prompt: string;
+    // (undocumented)
+    safetyFilterLevel?: "block_low_and_above" | "block_medium_and_above" | "block_only_high";
+    // (undocumented)
+    width?: number;
+}
+
+// @public
+export interface ImageGenerationResponse {
+    // Warning: (ae-forgotten-export) The symbol "GeneratedImage" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    images: GeneratedImage[];
+}
+
+// @public
 export interface InlineDataPart {
     // (undocumented)
     codeExecutionResult?: never;
@@ -677,6 +715,18 @@ export type Part = TextPart | InlineDataPart | FunctionCallPart | FunctionRespon
 
 // @public
 export const POSSIBLE_ROLES: readonly ["user", "model", "function", "system"];
+
+// @public
+export interface PredictRequest {
+    instances?: any[];
+    model?: string;
+    parameters?: any;
+}
+
+// @public
+export interface PredictResponse {
+    predictions?: jspb.FieldValue[];
+}
 
 // @public
 export interface PromptFeedback {

@@ -24,6 +24,7 @@ import {
   ToolConfig,
 } from "./function-calling";
 import { GoogleSearchRetrievalTool } from "./search-grounding";
+import * as jspb from "google-protobuf";
 
 /**
  * Base parameters for a number of methods.
@@ -244,4 +245,45 @@ export interface CodeExecutionTool {
    * subfields added in the future.
    */
   codeExecution: {};
+}
+
+/**
+ * Request message for [PredictionService.Predict][].
+ * @public
+ */
+export interface PredictRequest {
+  /**
+   * The name of the model for prediction.
+   */
+  model?: string;
+  /**
+   * The instances that are the input to the prediction call.
+   */
+  instances?: any[];
+  /**
+   * The parameters that govern the prediction call.
+   */
+  parameters?: any;
+}
+
+/**
+ * Request message for generating image.
+ * @public
+ */
+export interface ImageGenerationRequest {
+  prompt: string;
+  negativePrompt?: string;
+  numberOfImages?: number;
+  width?: number;
+  height?: number;
+  aspectRatio?: "1:1" | "9:16" | "16:9" | "4:3" | "3:4";
+  guidanceScale?: number;
+  outputMimeType?: "image/png" | "image/jpeg";
+  compressionQuality?: number;
+  language?: string;
+  safetyFilterLevel?:
+    | "block_low_and_above"
+    | "block_medium_and_above"
+    | "block_only_high";
+  personGeneration?: "dont_allow" | "allow_adult";
 }

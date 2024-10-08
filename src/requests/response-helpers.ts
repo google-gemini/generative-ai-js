@@ -21,6 +21,8 @@ import {
   FunctionCall,
   GenerateContentCandidate,
   GenerateContentResponse,
+  ImageGenerationResponse,
+  PredictResponse
 } from "../../types";
 import { GoogleGenerativeAIResponseError } from "../errors";
 
@@ -206,3 +208,13 @@ export function formatBlockErrorMessage(
   }
   return message;
 }
+
+export function convertToImageGenerationResponse(
+  response: PredictResponse
+): ImageGenerationResponse {
+  console.log(response);
+  return {
+    images: []
+  };
+}
+

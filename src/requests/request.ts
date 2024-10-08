@@ -39,6 +39,7 @@ export enum Task {
   COUNT_TOKENS = "countTokens",
   EMBED_CONTENT = "embedContent",
   BATCH_EMBED_CONTENTS = "batchEmbedContents",
+  PREDICT = "predict"
 }
 
 export class RequestUrl {

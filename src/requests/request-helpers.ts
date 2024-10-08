@@ -20,11 +20,14 @@ import {
   CountTokensRequest,
   EmbedContentRequest,
   GenerateContentRequest,
+  ImageGenerationRequest,
   ModelParams,
   Part,
+  PredictRequest,
   _CountTokensRequestInternal,
   _GenerateContentRequestInternal,
 } from "../../types";
+import * as jspb from "google-protobuf";
 import {
   GoogleGenerativeAIError,
   GoogleGenerativeAIRequestInputError,
@@ -177,3 +180,29 @@ export function formatEmbedContentInput(
   }
   return params;
 }
+
+export function convertFromImageGenerationRequest(
+  modelName: string,
+  request: ImageGenerationRequest,
+): PredictRequest {
+  const instances = [{ prompt: request.prompt }];
+  const parameters = {
+    negativePrompt: request.negativePrompt,
+    numberOfImages: request.numberOfImages,
+    width: request.width,
+    height: request.height,
+    aspectRatio: request.aspectRatio,
+    guidanceScale: request.guidanceScale,
+    outputMimeType: request.outputMimeType,
+    compressionQuality: request.compressionQuality,
+    language: request.language,
+    safetyFilterLevel: request.safetyFilterLevel,
+    personGeneration: request.personGeneration,
+  };
+  return {
+    model: modelName,
+    instances: instances,
+    parameters: parameters,
+  };
+}
+
