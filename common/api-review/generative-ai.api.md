@@ -645,29 +645,17 @@ export interface ImageGenerationPredictResponseImageData {
 
 // @public
 export interface ImageGenerationRequest {
-    // (undocumented)
     aspectRatio?: "1:1" | "9:16" | "16:9" | "4:3" | "3:4";
-    // (undocumented)
     compressionQuality?: number;
-    // (undocumented)
     guidanceScale?: number;
-    // (undocumented)
     height?: number;
-    // (undocumented)
     language?: string;
-    // (undocumented)
     negativePrompt?: string;
-    // (undocumented)
     numberOfImages?: number;
-    // (undocumented)
     outputMimeType?: "image/png" | "image/jpeg";
-    // (undocumented)
     personGeneration?: "dont_allow" | "allow_adult";
-    // (undocumented)
     prompt: string;
-    // (undocumented)
     safetyFilterLevel?: "block_low_and_above" | "block_medium_and_above" | "block_only_high";
-    // (undocumented)
     width?: number;
 }
 

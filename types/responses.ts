@@ -243,7 +243,7 @@ export interface ErrorDetails {
 
 /**
  * Each image data for response of [PredictionService.Predict].
- * @public
+ * This is an internal class. Please do not depend on it.
  */
 export interface ImageGenerationPredictResponseImageData {
   bytesBase64Encoded: string
@@ -252,7 +252,7 @@ export interface ImageGenerationPredictResponseImageData {
 
 /**
  * Response message for [PredictionService.Predict].
- * @public
+ * This is an internal class. Please do not depend on it.
  */
 export interface ImageGenerationPredictResponse {
   /**

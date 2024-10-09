@@ -45,11 +45,19 @@ export class ImageGenerationModel {
     }
   }
   /**
-   * Generates image based on the request.
+   * Makes a single non-streaming call to the model
+   * and returns an object containing a single {@link ImageGenerationResponse}.
+   *
+   * Inside the response there will be generated pictures specified by
+   * numberOfImages in {@link ImageGenerationRequest}
+   *
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getImageGenerationModel }.
    */
   async generateImages(
     request: ImageGenerationRequest | string,
-    requestOptions: SingleRequestOptions = {}
+    requestOptions: SingleRequestOptions = {},
   ): Promise<ImageGenerationResponse> {
     const generativeModelRequestOptions: SingleRequestOptions = {
       ...this._requestOptions,

@@ -15,7 +15,11 @@
  * limitations under the License.
  */
 import { ModelParams } from "../types";
-import { GenerativeModel, GoogleGenerativeAI, ImageGenerationModel } from "./gen-ai";
+import {
+  GenerativeModel,
+  GoogleGenerativeAI,
+  ImageGenerationModel,
+} from "./gen-ai";
 import { expect } from "chai";
 
 const fakeContents = [{ role: "user", parts: [{ text: "hello" }] }];

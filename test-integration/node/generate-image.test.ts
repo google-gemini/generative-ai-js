@@ -17,9 +17,7 @@
 
 import { expect, use } from "chai";
 import * as chaiAsPromised from "chai-as-promised";
-import {
-  GoogleGenerativeAI
-} from "../..";
+import { GoogleGenerativeAI } from "../..";
 
 use(chaiAsPromised);
 
@@ -32,8 +30,9 @@ describe("generateImage", function () {
   this.slow(20e3);
   it("non-streaming, simple interface", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
-    const model = genAI.getImageGenerationModel(
-        {model: "imagen-3.0-generate-001"});
+    const model = genAI.getImageGenerationModel({
+      model: "imagen-3.0-generate-001",
+    });
     const result = await model.generateImages("A fluffy cat");
     console.log(result);
     expect(result.images.length).equals(1);
