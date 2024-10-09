@@ -503,6 +503,7 @@ export class GoogleGenerativeAI {
     apiKey: string;
     getGenerativeModel(modelParams: ModelParams, requestOptions?: RequestOptions): GenerativeModel;
     getGenerativeModelFromCachedContent(cachedContent: CachedContent, modelParams?: Partial<ModelParams>, requestOptions?: RequestOptions): GenerativeModel;
+    getVideoGenerationModel(modelParams: ModelParmas, requestOptions?: RequestOptions): VideoGenerationModel;
 }
 
 // @public
