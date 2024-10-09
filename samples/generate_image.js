@@ -23,17 +23,13 @@ async function imageGeneration() {
   // [START image_generation]
   // Make sure to include these imports:
   // import {
-  //  DynamicRetrievalMode,
   //  GoogleGenerativeAI,
   // } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-  const model = genAI.getImageGenerationModel(
-    {
-      model: "gemini-1.5-flash",
-    },
-  );
-  const prompt = "What is the price of Google stock today?";
-  console.log(result.response.candidates[0].groundingMetadata);
+  const model = genAI.getImageGenerationModel({
+    model: "imagen-3.0-generate-001",
+  });
+  const result = await model.generateImages("A fluffy cat");
   // [END image_generation]
 }
 async function runAll() {

@@ -34,7 +34,6 @@ describe("generateImage", function () {
       model: "imagen-3.0-generate-001",
     });
     const result = await model.generateImages("A fluffy cat");
-    console.log(result);
     expect(result.images.length).equals(1);
   });
 });
