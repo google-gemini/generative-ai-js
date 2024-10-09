@@ -27,7 +27,6 @@ import {
   _CountTokensRequestInternal,
   _GenerateContentRequestInternal,
 } from "../../types";
-import * as jspb from "google-protobuf";
 import {
   GoogleGenerativeAIError,
   GoogleGenerativeAIRequestInputError,
@@ -182,7 +181,7 @@ export function formatEmbedContentInput(
 }
 
 export function convertFromImageGenerationRequest(
-  modelName: string,
+  model: string,
   request: ImageGenerationRequest,
 ): PredictRequest {
   const instances = [{ prompt: request.prompt }];
@@ -200,9 +199,9 @@ export function convertFromImageGenerationRequest(
     personGeneration: request.personGeneration,
   };
   return {
-    model: modelName,
-    instances: instances,
-    parameters: parameters,
+    model,
+    instances,
+    parameters,
   };
 }
 

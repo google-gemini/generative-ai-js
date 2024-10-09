@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+import { PredictServiceValueType } from "./predict";
+
 /**
  * Generated media.
  * @public
@@ -46,5 +48,5 @@ export interface GeneratedImage {
   /**
    * Generation parameters.
    */
-  generationParameters?: { [key: string]: any }; 
+  generationParameters?: PredictServiceValueType; 
 }

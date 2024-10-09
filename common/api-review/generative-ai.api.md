@@ -4,8 +4,6 @@
 
 ```ts
 
-import * as jspb from 'google-protobuf';
-
 // @public
 export interface BaseParams {
     // (undocumented)
@@ -505,6 +503,7 @@ export class GoogleGenerativeAI {
     apiKey: string;
     getGenerativeModel(modelParams: ModelParams, requestOptions?: RequestOptions): GenerativeModel;
     getGenerativeModelFromCachedContent(cachedContent: CachedContent, modelParams?: Partial<ModelParams>, requestOptions?: RequestOptions): GenerativeModel;
+    getImageGenerationModel(modelParams: ModelParams, requestOptions?: RequestOptions): ImageGenerationModel;
 }
 
 // @public
@@ -622,6 +621,16 @@ export enum HarmProbability {
 }
 
 // @public
+export class ImageGenerationModel {
+    constructor(apiKey: string, modelParams: ModelParams, _requestOptions?: RequestOptions);
+    // (undocumented)
+    apiKey: string;
+    generateImages(request: ImageGenerationRequest, requestOptions?: SingleRequestOptions): Promise<ImageGenerationResponse>;
+    // (undocumented)
+    model: string;
+}
+
+// @public
 export interface ImageGenerationRequest {
     // (undocumented)
     aspectRatio?: "1:1" | "9:16" | "16:9" | "4:3" | "3:4";
@@ -725,7 +734,7 @@ export interface PredictRequest {
 
 // @public
 export interface PredictResponse {
-    predictions?: jspb.FieldValue[];
+    predictions?: any;
 }
 
 // @public

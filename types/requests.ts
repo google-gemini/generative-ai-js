@@ -24,8 +24,7 @@ import {
   ToolConfig,
 } from "./function-calling";
 import { GoogleSearchRetrievalTool } from "./search-grounding";
-import * as jspb from "google-protobuf";
-
+import { PredictServiceValueType } from "./predict";
 /**
  * Base parameters for a number of methods.
  * @public
@@ -259,11 +258,11 @@ export interface PredictRequest {
   /**
    * The instances that are the input to the prediction call.
    */
-  instances?: any[];
+  instances?: PredictServiceValueType[];
   /**
    * The parameters that govern the prediction call.
    */
-  parameters?: any;
+  parameters?: PredictServiceValueType;
 }
 
 /**

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 import { ModelParams } from "../types";
-import { GenerativeModel, GoogleGenerativeAI } from "./gen-ai";
+import { GenerativeModel, GoogleGenerativeAI, ImageGenerationModel } from "./gen-ai";
 import { expect } from "chai";
 
 const fakeContents = [{ role: "user", parts: [{ text: "hello" }] }];
@@ -117,5 +117,17 @@ describe("GoogleGenerativeAI", () => {
     ).to.throw(
       `Different value for "systemInstruction" specified in modelParams (yo) and cachedContent (hi)`,
     );
+  });
+  it("getImageGenerationModel throws if no model is provided", () => {
+    const genAI = new GoogleGenerativeAI("apikey");
+    expect(() => genAI.getImageGenerationModel({} as ModelParams)).to.throw(
+      "Must provide a model name",
+    );
+  });
+  it("getImageGenerationModel gets a ImageGenerationModel", () => {
+    const genAI = new GoogleGenerativeAI("apikey");
+    const genModel = genAI.getImageGenerationModel({ model: "my-model" });
+    expect(genModel).to.be.an.instanceOf(ImageGenerationModel);
+    expect(genModel.model).to.equal("models/my-model");
   });
 });

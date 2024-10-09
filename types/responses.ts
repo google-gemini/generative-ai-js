@@ -22,9 +22,9 @@ import {
   HarmCategory,
   HarmProbability,
 } from "./enums";
-import * as jspb from "google-protobuf";
 import { GroundingMetadata } from "./search-grounding";
 import { GeneratedImage } from "./generated-media";
+import { PredictServiceValueType } from "./predict";
 
 /**
  * Result object returned from generateContent() call.
@@ -250,7 +250,7 @@ export interface PredictResponse {
   /**
    * The outputs of the prediction call.
    */
-  predictions?: jspb.FieldValue[];
+  predictions?: PredictServiceValueType;
 }
 
 /**
