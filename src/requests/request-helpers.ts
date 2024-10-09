@@ -180,23 +180,35 @@ export function formatEmbedContentInput(
   return params;
 }
 
+export function formatGenerateImageInput(
+  params: ImageGenerationRequest | string,
+): ImageGenerationRequest {
+  let formattedRequest: ImageGenerationRequest;
+  if (typeof params === "string") {
+    formattedRequest = { prompt: params };
+  } else {
+    formattedRequest = params as ImageGenerationRequest;
+  }
+  return formattedRequest;
+}
+
 export function convertFromImageGenerationRequest(
   model: string,
   request: ImageGenerationRequest,
 ): PredictRequest {
   const instances = [{ prompt: request.prompt }];
+  const sampleImageSize = Math.max(request.width || 0, request.height || 0);
   const parameters = {
     negativePrompt: request.negativePrompt,
-    numberOfImages: request.numberOfImages,
-    width: request.width,
-    height: request.height,
-    aspectRatio: request.aspectRatio,
+    sampleCount: request.numberOfImages || 1,
     guidanceScale: request.guidanceScale,
     outputMimeType: request.outputMimeType,
     compressionQuality: request.compressionQuality,
     language: request.language,
     safetyFilterLevel: request.safetyFilterLevel,
     personGeneration: request.personGeneration,
+    aspectRatio: request.aspectRatio,
+    sampleImageSize: sampleImageSize === 0 ? undefined : sampleImageSize,
   };
   return {
     model,
@@ -204,4 +216,3 @@ export function convertFromImageGenerationRequest(
     parameters,
   };
 }
-

@@ -625,9 +625,22 @@ export class ImageGenerationModel {
     constructor(apiKey: string, modelParams: ModelParams, _requestOptions?: RequestOptions);
     // (undocumented)
     apiKey: string;
-    generateImages(request: ImageGenerationRequest, requestOptions?: SingleRequestOptions): Promise<ImageGenerationResponse>;
+    generateImages(request: ImageGenerationRequest | string, requestOptions?: SingleRequestOptions): Promise<ImageGenerationResponse>;
     // (undocumented)
     model: string;
+}
+
+// @public
+export interface ImageGenerationPredictResponse {
+    predictions?: ImageGenerationPredictResponseImageData[];
+}
+
+// @public
+export interface ImageGenerationPredictResponseImageData {
+    // (undocumented)
+    bytesBase64Encoded: string;
+    // (undocumented)
+    mimeType: string;
 }
 
 // @public
@@ -727,14 +740,10 @@ export const POSSIBLE_ROLES: readonly ["user", "model", "function", "system"];
 
 // @public
 export interface PredictRequest {
-    instances?: any[];
+    // Warning: (ae-forgotten-export) The symbol "PredictServiceValueType" needs to be exported by the entry point index.d.ts
+    instances?: PredictServiceValueType[];
     model?: string;
-    parameters?: any;
-}
-
-// @public
-export interface PredictResponse {
-    predictions?: any;
+    parameters?: PredictServiceValueType;
 }
 
 // @public

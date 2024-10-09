@@ -23,6 +23,8 @@ import {
   SingleRequestOptions,
 } from "../../types";
 import { generateImages } from "../methods/generate-images";
+import { formatGenerateImageInput } from "../requests/request-helpers";
+
 /**
  * Class for generative model APIs.
  * @public
@@ -46,7 +48,7 @@ export class ImageGenerationModel {
    * Generates image based on the request.
    */
   async generateImages(
-    request: ImageGenerationRequest,
+    request: ImageGenerationRequest | string,
     requestOptions: SingleRequestOptions = {}
   ): Promise<ImageGenerationResponse> {
     const generativeModelRequestOptions: SingleRequestOptions = {
@@ -56,7 +58,7 @@ export class ImageGenerationModel {
     return generateImages(
       this.apiKey,
       this.model,
-      request,
+      formatGenerateImageInput(request),
       generativeModelRequestOptions,
     );
   }

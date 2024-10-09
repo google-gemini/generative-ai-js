@@ -24,7 +24,6 @@ import {
 } from "./enums";
 import { GroundingMetadata } from "./search-grounding";
 import { GeneratedImage } from "./generated-media";
-import { PredictServiceValueType } from "./predict";
 
 /**
  * Result object returned from generateContent() call.
@@ -243,14 +242,23 @@ export interface ErrorDetails {
 }
 
 /**
+ * Each image data for response of [PredictionService.Predict].
+ * @public
+ */
+export interface ImageGenerationPredictResponseImageData {
+  bytesBase64Encoded: string
+  mimeType: string
+}
+
+/**
  * Response message for [PredictionService.Predict].
  * @public
  */
-export interface PredictResponse {
+export interface ImageGenerationPredictResponse {
   /**
    * The outputs of the prediction call.
    */
-  predictions?: PredictServiceValueType;
+  predictions?: ImageGenerationPredictResponseImageData[];
 }
 
 /**

@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 import {
+  ImageGenerationPredictResponse,
   ImageGenerationRequest,
   ImageGenerationResponse,
-  PredictResponse,
   SingleRequestOptions,
 } from "../../types";
 import { Task, makeModelRequest } from "../requests/request";
@@ -31,14 +31,16 @@ export async function generateImages(
   params: ImageGenerationRequest,
   requestOptions: SingleRequestOptions,
 ): Promise<ImageGenerationResponse> {
+  const predictRequest = convertFromImageGenerationRequest(model, params);
   const response = await makeModelRequest(
     model,
     Task.PREDICT,
     apiKey,
     /* stream */ false,
-    JSON.stringify(convertFromImageGenerationRequest(model, params)),
+    JSON.stringify(predictRequest),
     requestOptions,
   );
-  const responseJson: PredictResponse = await response.json();
-  return convertToImageGenerationResponse(responseJson);
+  const responseJson: ImageGenerationPredictResponse = await response.json();
+  return convertToImageGenerationResponse(
+    predictRequest.parameters, responseJson);
 }
