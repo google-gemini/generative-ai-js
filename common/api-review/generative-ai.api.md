@@ -503,6 +503,7 @@ export class GoogleGenerativeAI {
     apiKey: string;
     getGenerativeModel(modelParams: ModelParams, requestOptions?: RequestOptions): GenerativeModel;
     getGenerativeModelFromCachedContent(cachedContent: CachedContent, modelParams?: Partial<ModelParams>, requestOptions?: RequestOptions): GenerativeModel;
+    getImageGenerationModel(modelParams: ModelParams, requestOptions?: RequestOptions): ImageGenerationModel;
 }
 
 // @public
@@ -620,6 +621,53 @@ export enum HarmProbability {
 }
 
 // @public
+export class ImageGenerationModel {
+    constructor(apiKey: string, modelParams: ModelParams, _requestOptions?: RequestOptions);
+    // (undocumented)
+    apiKey: string;
+    generateImages(request: ImageGenerationRequest | string, requestOptions?: SingleRequestOptions): Promise<ImageGenerationResponse>;
+    // (undocumented)
+    model: string;
+}
+
+// @public
+export interface ImageGenerationPredictResponse {
+    predictions?: ImageGenerationPredictResponseImageData[];
+}
+
+// @public
+export interface ImageGenerationPredictResponseImageData {
+    // (undocumented)
+    bytesBase64Encoded: string;
+    // (undocumented)
+    mimeType: string;
+}
+
+// @public
+export interface ImageGenerationRequest {
+    aspectRatio?: "1:1" | "9:16" | "16:9" | "4:3" | "3:4";
+    compressionQuality?: number;
+    guidanceScale?: number;
+    height?: number;
+    language?: string;
+    negativePrompt?: string;
+    numberOfImages?: number;
+    outputMimeType?: "image/png" | "image/jpeg";
+    personGeneration?: "dont_allow" | "allow_adult";
+    prompt: string;
+    safetyFilterLevel?: "block_low_and_above" | "block_medium_and_above" | "block_only_high";
+    width?: number;
+}
+
+// @public
+export interface ImageGenerationResponse {
+    // Warning: (ae-forgotten-export) The symbol "GeneratedImage" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    images: GeneratedImage[];
+}
+
+// @public
 export interface InlineDataPart {
     // (undocumented)
     codeExecutionResult?: never;
@@ -677,6 +725,14 @@ export type Part = TextPart | InlineDataPart | FunctionCallPart | FunctionRespon
 
 // @public
 export const POSSIBLE_ROLES: readonly ["user", "model", "function", "system"];
+
+// @public
+export interface PredictRequest {
+    // Warning: (ae-forgotten-export) The symbol "PredictServiceValueType" needs to be exported by the entry point index.d.ts
+    instances?: PredictServiceValueType[];
+    model?: string;
+    parameters?: PredictServiceValueType;
+}
 
 // @public
 export interface PromptFeedback {

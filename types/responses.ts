@@ -23,6 +23,7 @@ import {
   HarmProbability,
 } from "./enums";
 import { GroundingMetadata } from "./search-grounding";
+import { GeneratedImage } from "./generated-media";
 
 /**
  * Result object returned from generateContent() call.
@@ -238,4 +239,32 @@ export interface ErrorDetails {
   domain?: string;
   metadata?: Record<string, unknown>;
   [key: string]: unknown;
+}
+
+/**
+ * Each image data for response of [PredictionService.Predict].
+ * This is an internal class. Please do not depend on it.
+ */
+export interface ImageGenerationPredictResponseImageData {
+  bytesBase64Encoded: string
+  mimeType: string
+}
+
+/**
+ * Response message for [PredictionService.Predict].
+ * This is an internal class. Please do not depend on it.
+ */
+export interface ImageGenerationPredictResponse {
+  /**
+   * The outputs of the prediction call.
+   */
+  predictions?: ImageGenerationPredictResponseImageData[];
+}
+
+/**
+ * Response message for generating image.
+ * @public
+ */
+export interface ImageGenerationResponse {
+  images: GeneratedImage[];
 }

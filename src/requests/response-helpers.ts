@@ -21,7 +21,11 @@ import {
   FunctionCall,
   GenerateContentCandidate,
   GenerateContentResponse,
+  ImageGenerationPredictResponse,
+  ImageGenerationResponse,
 } from "../../types";
+import { GeneratedImage } from "../../types/generated-media";
+import { PredictServiceValueType } from "../../types/predict";
 import { GoogleGenerativeAIResponseError } from "../errors";
 
 /**
@@ -205,4 +209,18 @@ export function formatBlockErrorMessage(
     }
   }
   return message;
+}
+
+export function convertToImageGenerationResponse(
+  sharedParameters: PredictServiceValueType,
+  response: ImageGenerationPredictResponse,
+): ImageGenerationResponse {
+  const images: GeneratedImage[] = [];
+  for (const prediction of response!.predictions) {
+    images.push({
+      imageBytes: prediction.bytesBase64Encoded,
+      generationParameters: sharedParameters,
+    });
+  }
+  return { images };
 }
