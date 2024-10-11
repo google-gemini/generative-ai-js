@@ -242,26 +242,6 @@ export interface ErrorDetails {
 }
 
 /**
- * Each image data for response of [PredictionService.Predict].
- * This is an internal class. Please do not depend on it.
- */
-export interface ImageGenerationPredictResponseImageData {
-  bytesBase64Encoded: string
-  mimeType: string
-}
-
-/**
- * Response message for [PredictionService.Predict].
- * This is an internal class. Please do not depend on it.
- */
-export interface ImageGenerationPredictResponse {
-  /**
-   * The outputs of the prediction call.
-   */
-  predictions?: ImageGenerationPredictResponseImageData[];
-}
-
-/**
  * Response message for generating image.
  * @public
  */

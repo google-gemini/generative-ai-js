@@ -83,15 +83,12 @@
 |  [GroundingMetadata](./generative-ai.groundingmetadata.md) | Metadata returned to client when grounding is enabled. |
 |  [GroundingSupport](./generative-ai.groundingsupport.md) | Grounding support. |
 |  [GroundingSupportSegment](./generative-ai.groundingsupportsegment.md) | Segment of the content. |
-|  [ImageGenerationPredictResponse](./generative-ai.imagegenerationpredictresponse.md) | Response message for \[PredictionService.Predict\]. This is an internal class. Please do not depend on it. |
-|  [ImageGenerationPredictResponseImageData](./generative-ai.imagegenerationpredictresponseimagedata.md) | Each image data for response of \[PredictionService.Predict\]. This is an internal class. Please do not depend on it. |
 |  [ImageGenerationRequest](./generative-ai.imagegenerationrequest.md) | Request message for generating image. |
 |  [ImageGenerationResponse](./generative-ai.imagegenerationresponse.md) | Response message for generating image. |
 |  [InlineDataPart](./generative-ai.inlinedatapart.md) | Content part interface if the part represents an image. |
 |  [LogprobsCandidate](./generative-ai.logprobscandidate.md) | Candidate for the logprobs token and score. |
 |  [LogprobsResult](./generative-ai.logprobsresult.md) | Logprobs Result |
 |  [ModelParams](./generative-ai.modelparams.md) | Params passed to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->. |
-|  [PredictRequest](./generative-ai.predictrequest.md) | Request message for \[PredictionService.Predict\]\[\]. This is an internal class. Please do not depend on it. |
 |  [PromptFeedback](./generative-ai.promptfeedback.md) | If the prompt was blocked, this will be populated with <code>blockReason</code> and the relevant <code>safetyRatings</code>. |
 |  [RequestOptions](./generative-ai.requestoptions.md) | Params passed to getGenerativeModel() or GoogleAIFileManager(). |
 |  [ResponseSchema](./generative-ai.responseschema.md) | Schema passed to <code>GenerationConfig.responseSchema</code> |

@@ -631,19 +631,6 @@ export class ImageGenerationModel {
 }
 
 // @public
-export interface ImageGenerationPredictResponse {
-    predictions?: ImageGenerationPredictResponseImageData[];
-}
-
-// @public
-export interface ImageGenerationPredictResponseImageData {
-    // (undocumented)
-    bytesBase64Encoded: string;
-    // (undocumented)
-    mimeType: string;
-}
-
-// @public
 export interface ImageGenerationRequest {
     aspectRatio?: "1:1" | "9:16" | "16:9" | "4:3" | "3:4";
     compressionQuality?: number;
@@ -725,14 +712,6 @@ export type Part = TextPart | InlineDataPart | FunctionCallPart | FunctionRespon
 
 // @public
 export const POSSIBLE_ROLES: readonly ["user", "model", "function", "system"];
-
-// @public
-export interface PredictRequest {
-    // Warning: (ae-forgotten-export) The symbol "PredictServiceValueType" needs to be exported by the entry point index.d.ts
-    instances?: PredictServiceValueType[];
-    model?: string;
-    parameters?: PredictServiceValueType;
-}
 
 // @public
 export interface PromptFeedback {

@@ -15,14 +15,13 @@
  * limitations under the License.
  */
 import {
-  ImageGenerationPredictResponse,
   ImageGenerationRequest,
   ImageGenerationResponse,
   SingleRequestOptions,
 } from "../../types";
 import { Task, makeModelRequest } from "../requests/request";
 import { convertFromImageGenerationRequest } from "../requests/request-helpers";
-
+import { ImageGenerationPredictResponse } from "../../types/predict";
 import { convertToImageGenerationResponse } from "../requests/response-helpers";
 
 export async function generateImages(

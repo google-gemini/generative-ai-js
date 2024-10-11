@@ -24,7 +24,7 @@ import {
   ToolConfig,
 } from "./function-calling";
 import { GoogleSearchRetrievalTool } from "./search-grounding";
-import { PredictServiceValueType } from "./predict";
+
 /**
  * Base parameters for a number of methods.
  * @public
@@ -244,25 +244,6 @@ export interface CodeExecutionTool {
    * subfields added in the future.
    */
   codeExecution: {};
-}
-
-/**
- * Request message for [PredictionService.Predict][].
- * This is an internal class. Please do not depend on it.
- */
-export interface PredictRequest {
-  /**
-   * The name of the model for prediction.
-   */
-  model?: string;
-  /**
-   * The instances that are the input to the prediction call.
-   */
-  instances?: PredictServiceValueType[];
-  /**
-   * The parameters that govern the prediction call.
-   */
-  parameters?: PredictServiceValueType;
 }
 
 /**

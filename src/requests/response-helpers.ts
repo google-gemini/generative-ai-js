@@ -21,11 +21,13 @@ import {
   FunctionCall,
   GenerateContentCandidate,
   GenerateContentResponse,
-  ImageGenerationPredictResponse,
   ImageGenerationResponse,
 } from "../../types";
 import { GeneratedImage } from "../../types/generated-media";
-import { PredictServiceValueType } from "../../types/predict";
+import {
+  ImageGenerationPredictResponse,
+  PredictServiceValueType,
+} from "../../types/predict";
 import { GoogleGenerativeAIResponseError } from "../errors";
 
 /**

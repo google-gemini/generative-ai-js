@@ -23,15 +23,14 @@ import {
   ImageGenerationRequest,
   ModelParams,
   Part,
-  PredictRequest,
   _CountTokensRequestInternal,
   _GenerateContentRequestInternal,
 } from "../../types";
+import { PredictRequest } from "../../types/predict";
 import {
   GoogleGenerativeAIError,
   GoogleGenerativeAIRequestInputError,
 } from "../errors";
-
 export function formatSystemInstruction(
   input?: string | Part | Content,
 ): Content | undefined {
