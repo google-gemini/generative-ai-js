@@ -46,7 +46,6 @@
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "@esm-bundle/chai": "^4.3.4-fix.0",
-    "@google-cloud/asset": "^5.7.0",
     "@microsoft/api-documenter": "^7.23.12",
     "@microsoft/api-extractor": "^7.38.2",
     "@rollup/plugin-json": "^6.0.1",
@@ -89,9 +88,5 @@
   "bugs": {
     "url": "https://github.com/google/generative-ai-js/issues"
   },
-  "homepage": "https://github.com/google/generative-ai-js#readme",
-  "dependencies": {
-    "@types/google-protobuf": "^3.15.12",
-    "google-protobuf": "^3.21.4"
-  }
+  "homepage": "https://github.com/google/generative-ai-js#readme"
 }
