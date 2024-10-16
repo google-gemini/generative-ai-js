@@ -16,9 +16,9 @@ export interface ImageGenerationRequest
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [aspectRatio?](./generative-ai.imagegenerationrequest.aspectratio.md) |  | "1:1" \| "9:16" \| "16:9" \| "4:3" \| "3:4" | _(Optional)_ Changes the aspect ratio of the generated image Supported values are: \* "1:1" : 1:1 aspect ratio \* "9:16" : 9:16 aspect ratio \* "16:9" : 16:9 aspect ratio \* "4:3" : 4:3 aspect ratio \* "3:4" : 3:4 aspect\_ratio |
+|  [aspectRatio?](./generative-ai.imagegenerationrequest.aspectratio.md) |  | "1:1" \| "9:16" \| "16:9" \| "4:3" \| "3:4" | _(Optional)_ Changes the aspect ratio of the generated image. Supported values are: \* "1:1" : 1:1 aspect ratio \* "9:16" : 9:16 aspect ratio \* "16:9" : 16:9 aspect ratio \* "4:3" : 4:3 aspect ratio \* "3:4" : 3:4 aspect\_ratio |
 |  [compressionQuality?](./generative-ai.imagegenerationrequest.compressionquality.md) |  | number | _(Optional)_ Level of compression if the output mime type is selected to be image/jpeg. Float between 0 to 100 |
-|  [guidanceScale?](./generative-ai.imagegenerationrequest.guidancescale.md) |  | number | _(Optional)_ Controls the strength of the prompt. Suggested values are - \* 0-9 (low strength) \* 10-20 (medium strength) \* 21+ (high strength) |
+|  [guidanceScale?](./generative-ai.imagegenerationrequest.guidancescale.md) |  | number | _(Optional)_ Controls the strength of the prompt. Suggested values are: \* 0-9 (low strength) \* 10-20 (medium strength) \* 21+ (high strength) |
 |  [height?](./generative-ai.imagegenerationrequest.height.md) |  | number | _(Optional)_ Height of the image. One of the Width/Height sizes must be 256 or 1024. |
 |  [language?](./generative-ai.imagegenerationrequest.language.md) |  | string | _(Optional)_ Language of the text prompt for the image. Default: None. Supported values are <code>&quot;en&quot;</code> for English, <code>&quot;hi&quot;</code> for Hindi, <code>&quot;ja&quot;</code> for Japanese, <code>&quot;ko&quot;</code> for Korean, and <code>&quot;auto&quot;</code> for automatic language detection. |
 |  [negativePrompt?](./generative-ai.imagegenerationrequest.negativeprompt.md) |  | string | _(Optional)_ A description of what you want to omit in the generated images. |

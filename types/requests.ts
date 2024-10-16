@@ -272,8 +272,8 @@ export interface ImageGenerationRequest {
    */
   height?: number;
   /**
-   * Changes the aspect ratio of the generated image Supported
-   * values are:
+   * Changes the aspect ratio of the generated image.
+   *  Supported values are:
    * * "1:1" : 1:1 aspect ratio
    * * "9:16" : 9:16 aspect ratio
    * * "16:9" : 16:9 aspect ratio
@@ -282,14 +282,17 @@ export interface ImageGenerationRequest {
    */
   aspectRatio?: "1:1" | "9:16" | "16:9" | "4:3" | "3:4";
   /**
-   * Controls the strength of the prompt. Suggested values are - * 0-9 (low 
-   * strength) * 10-20 (medium strength) * 21+ (high strength)
+   * Controls the strength of the prompt. Suggested values are:
+   * * 0-9 (low strength) 
+   * * 10-20 (medium strength) 
+   * * 21+ (high strength)
    */
   guidanceScale?: number;
   /**
    * hich image format should the output be saved as. 
-   * Supported values: * image/png: Save as a PNG image * image/jpeg: Save as 
-   * a JPEG image
+   * Supported values: 
+   * * image/png: Save as a PNG image 
+   * * image/jpeg: Save as a JPEG image
    */
   outputMimeType?: "image/png" | "image/jpeg";
   /**

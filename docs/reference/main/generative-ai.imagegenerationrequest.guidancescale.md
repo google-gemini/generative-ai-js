@@ -4,7 +4,7 @@
 
 ## ImageGenerationRequest.guidanceScale property
 
-Controls the strength of the prompt. Suggested values are - \* 0-9 (low strength) \* 10-20 (medium strength) \* 21+ (high strength)
+Controls the strength of the prompt. Suggested values are: \* 0-9 (low strength) \* 10-20 (medium strength) \* 21+ (high strength)
 
 **Signature:**
 

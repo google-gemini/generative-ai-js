@@ -17,29 +17,11 @@
 
 import { PredictServiceValueType } from "./predict";
 
-/**
- * Generated media.
- * @public
- */
-export interface GeneratedMedia {
-  video?: GeneratedVideo;
-}
 
 /**
- * Generated video.
+ * Generated images. It will be returned in response.
  * @public
  */
-export interface GeneratedVideo {
-  /**
-   * Video bytes.
-   */
-  video?: string;
-  /**
-   * Specifies the dynamic retrieval configuration for the given source.
-   */
-  uri?: string;
-}
-
 export interface GeneratedImage {
   /**
    * Image bytes.

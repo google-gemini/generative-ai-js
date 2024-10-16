@@ -4,7 +4,7 @@
 
 ## ImageGenerationRequest.aspectRatio property
 
-Changes the aspect ratio of the generated image Supported values are: \* "1:1" : 1:1 aspect ratio \* "9:16" : 9:16 aspect ratio \* "16:9" : 16:9 aspect ratio \* "4:3" : 4:3 aspect ratio \* "3:4" : 3:4 aspect\_ratio
+Changes the aspect ratio of the generated image. Supported values are: \* "1:1" : 1:1 aspect ratio \* "9:16" : 9:16 aspect ratio \* "16:9" : 16:9 aspect ratio \* "4:3" : 4:3 aspect ratio \* "3:4" : 3:4 aspect\_ratio
 
 **Signature:**
 
