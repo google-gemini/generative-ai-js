@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.21.1
+
+### Patch Changes
+
+- 25d3a92: update FinishReason enum
+
 ## 0.21.0
 
 ### Minor Changes
