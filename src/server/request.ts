@@ -97,16 +97,36 @@ export function getHeaders(url: ServerRequestUrl): Headers {
 export async function makeServerRequest(
   url: FilesRequestUrl,
   headers: Headers,
-  body?: Blob | string,
+  body?: Blob | string | AsyncIterable<Uint8Array>,
   fetchFn: typeof fetch = fetch,
 ): Promise<Response> {
-  const requestInit: RequestInit = {
+  // Add the duplex option, which is required when streaming in newer versions of node.
+  // See: https://github.com/nodejs/node/issues/46221
+  const requestInit: RequestInit & { duplex?: "half" } = {
     method: taskToMethod[url.task],
     headers,
+    duplex: "half",
   };
 
-  if (body) {
+  if (typeof body === "string" || body instanceof Blob) {
     requestInit.body = body;
+  } else if (body?.[Symbol.asyncIterator]) {
+    // Note that in later versions, the signature `fetch` is updated to accept any AsyncIterator,
+    // and ReadableStream implements AsyncIterator. In this case, `body` can be passed exactly
+    // as supplied, and the following can be removed:
+    const iterator = body[Symbol.asyncIterator]();
+    requestInit.body = new ReadableStream({
+      type: "bytes",
+      async pull(controller) {
+        const { value, done } = await iterator.next();
+        if (done) {
+          controller.close();
+          return;
+        }
+
+        controller.enqueue(value);
+      },
+    });
   }
 
   const signal = getSignal(url.requestOptions);

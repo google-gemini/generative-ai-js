@@ -23,7 +23,7 @@ import * as request from "./request";
 import { RpcTask } from "./constants";
 import { DEFAULT_API_VERSION } from "../requests/request";
 import { FileMetadata } from "../../types/server";
-
+import { blob } from "node:stream/consumers";
 use(sinonChai);
 use(chaiAsPromised);
 
@@ -56,8 +56,10 @@ describe("GoogleAIFileManager", () => {
     expect(makeRequestStub.args[0][1].get("X-Goog-Upload-Protocol")).to.equal(
       "multipart",
     );
-    expect(makeRequestStub.args[0][2]).to.be.instanceOf(Blob);
-    const bodyBlob = makeRequestStub.args[0][2];
+    expect(makeRequestStub.args[0][2]).to.have.property("next");
+    const bodyBlob = await blob(
+      makeRequestStub.args[0][2] as any as NodeJS.ReadableStream,
+    );
     const blobText = await (bodyBlob as Blob).text();
     expect(blobText).to.include("Content-Type: image/png");
   });
@@ -73,8 +75,10 @@ describe("GoogleAIFileManager", () => {
       displayName: "mydisplayname",
     });
     expect(result.file.uri).to.equal(FAKE_URI);
-    expect(makeRequestStub.args[0][2]).to.be.instanceOf(Blob);
-    const bodyBlob = makeRequestStub.args[0][2];
+    expect(makeRequestStub.args[0][2]).to.have.property("next");
+    const bodyBlob = await blob(
+      makeRequestStub.args[0][2] as any as NodeJS.ReadableStream,
+    );
     const blobText = await (bodyBlob as Blob).text();
     expect(blobText).to.include("Content-Type: image/png");
     expect(blobText).to.include("files/customname");
@@ -91,7 +95,9 @@ describe("GoogleAIFileManager", () => {
       name: "customname",
       displayName: "mydisplayname",
     });
-    const bodyBlob = makeRequestStub.args[0][2];
+    const bodyBlob = await blob(
+      makeRequestStub.args[0][2] as any as NodeJS.ReadableStream,
+    );
     const blobText = await (bodyBlob as Blob).text();
     expect(blobText).to.include("files/customname");
   });
@@ -114,8 +120,10 @@ describe("GoogleAIFileManager", () => {
     expect(makeRequestStub.args[0][1].get("X-Goog-Upload-Protocol")).to.equal(
       "multipart",
     );
-    expect(makeRequestStub.args[0][2]).to.be.instanceOf(Blob);
-    const bodyBlob = makeRequestStub.args[0][2];
+    expect(makeRequestStub.args[0][2]).to.have.property("next");
+    const bodyBlob = await blob(
+      makeRequestStub.args[0][2] as any as NodeJS.ReadableStream,
+    );
     const blobText = await (bodyBlob as Blob).text();
     expect(blobText).to.include("Content-Type: image/png");
     expect(makeRequestStub.args[0][0].toString()).to.include("v3000/files");
