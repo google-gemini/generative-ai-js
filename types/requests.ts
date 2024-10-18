@@ -260,7 +260,7 @@ export interface ImageGenerationRequest {
    */
   negativePrompt?: string;
   /**
-   * Number of images to generate. Range: 1..8.
+   * Number of images to generate. Range: 1..4.
    */
   numberOfImages?: number;
   /**
@@ -289,7 +289,7 @@ export interface ImageGenerationRequest {
    */
   guidanceScale?: number;
   /**
-   * hich image format should the output be saved as. 
+   * Which image format should the output be saved as. 
    * Supported values: 
    * * image/png: Save as a PNG image 
    * * image/jpeg: Save as a JPEG image

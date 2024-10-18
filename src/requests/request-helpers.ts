@@ -198,15 +198,8 @@ export function convertFromImageGenerationRequest(
   const instances = [{ prompt: request.prompt }];
   const sampleImageSize = Math.max(request.width || 0, request.height || 0);
   const parameters = {
-    negativePrompt: request.negativePrompt,
+    ...request,
     sampleCount: request.numberOfImages || 1,
-    guidanceScale: request.guidanceScale,
-    outputMimeType: request.outputMimeType,
-    compressionQuality: request.compressionQuality,
-    language: request.language,
-    safetyFilterLevel: request.safetyFilterLevel,
-    personGeneration: request.personGeneration,
-    aspectRatio: request.aspectRatio,
     sampleImageSize: sampleImageSize === 0 ? undefined : sampleImageSize,
   };
   return {
