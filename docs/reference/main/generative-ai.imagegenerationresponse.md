@@ -16,5 +16,5 @@ export interface ImageGenerationResponse
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [images](./generative-ai.imagegenerationresponse.images.md) |  | GeneratedImage\[\] |  |
+|  [images](./generative-ai.imagegenerationresponse.images.md) |  | [GeneratedImage](./generative-ai.generatedimage.md)<!-- -->\[\] |  |
 

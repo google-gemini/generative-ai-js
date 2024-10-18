@@ -449,6 +449,13 @@ export interface GenerateContentStreamResult {
 }
 
 // @public
+export interface GeneratedImage {
+    // Warning: (ae-forgotten-export) The symbol "PredictServiceValueType" needs to be exported by the entry point index.d.ts
+    generationParameters?: PredictServiceValueType;
+    imageBytes?: string;
+}
+
+// @public
 export interface GenerationConfig {
     // (undocumented)
     candidateCount?: number;
@@ -656,8 +663,6 @@ export interface ImageGenerationRequest {
 
 // @public
 export interface ImageGenerationResponse {
-    // Warning: (ae-forgotten-export) The symbol "GeneratedImage" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     images: GeneratedImage[];
 }

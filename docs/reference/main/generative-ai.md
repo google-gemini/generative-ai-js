@@ -74,6 +74,7 @@
 |  [GenerateContentResponse](./generative-ai.generatecontentresponse.md) | Individual response from [GenerativeModel.generateContent()](./generative-ai.generativemodel.generatecontent.md) and [GenerativeModel.generateContentStream()](./generative-ai.generativemodel.generatecontentstream.md)<!-- -->. <code>generateContentStream()</code> will return one in each chunk until the stream is done. |
 |  [GenerateContentResult](./generative-ai.generatecontentresult.md) | Result object returned from generateContent() call. |
 |  [GenerateContentStreamResult](./generative-ai.generatecontentstreamresult.md) | Result object returned from generateContentStream() call. Iterate over <code>stream</code> to get chunks as they come in and/or use the <code>response</code> promise to get the aggregated response when the stream is done. |
+|  [GeneratedImage](./generative-ai.generatedimage.md) | Generated images. It will be returned in response. |
 |  [GenerationConfig](./generative-ai.generationconfig.md) | Config options for content-related requests |
 |  [GenerativeContentBlob](./generative-ai.generativecontentblob.md) | Interface for sending an image. |
 |  [GoogleSearchRetrieval](./generative-ai.googlesearchretrieval.md) | Retrieval tool that is powered by Google search. |
