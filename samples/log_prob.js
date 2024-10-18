@@ -15,12 +15,12 @@
  * limitations under the License.
  */
 
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import {GoogleGenerativeAI} from "@google/generative-ai";
 
-async function logProb() {
+async function enableLogProb() {
     // [START log_prob]
     // Make sure to include these imports:
-    // import { GoogleGenerativeAI } from "@google/generative-ai";
+    // import {GoogleGenerativeAI} from "@google/generative-ai";
     const genAI = new GoogleGenerativeAI(process.env.API_KEY);
     const model = genAI.getGenerativeModel(
         {
@@ -39,7 +39,7 @@ async function logProb() {
 }
 async function runAll() {
     // Comment out or delete any sample cases you don't want to run.
-    await logProb();
+    await enableLogProb();
 }
 
 runAll();

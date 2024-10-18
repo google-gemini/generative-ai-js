@@ -268,25 +268,17 @@ export interface FileDataPart {
 // @public
 export enum FinishReason {
     // (undocumented)
-    BLOCKLIST = "BLOCKLIST",
-    // (undocumented)
     FINISH_REASON_UNSPECIFIED = "FINISH_REASON_UNSPECIFIED",
     // (undocumented)
     LANGUAGE = "LANGUAGE",
-    // (undocumented)
-    MALFORMED_FUNCTION_CALL = "MALFORMED_FUNCTION_CALL",
     // (undocumented)
     MAX_TOKENS = "MAX_TOKENS",
     // (undocumented)
     OTHER = "OTHER",
     // (undocumented)
-    PROHIBITED_CONTENT = "PROHIBITED_CONTENT",
-    // (undocumented)
     RECITATION = "RECITATION",
     // (undocumented)
     SAFETY = "SAFETY",
-    // (undocumented)
-    SPII = "SPII",
     // (undocumented)
     STOP = "STOP"
 }
