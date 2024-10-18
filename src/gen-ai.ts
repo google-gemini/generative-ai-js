@@ -21,9 +21,10 @@ import {
 } from "./errors";
 import { CachedContent, ModelParams, RequestOptions } from "../types";
 import { GenerativeModel } from "./models/generative-model";
+import { ImageGenerationModel } from "./models/vision-model";
 
 export { ChatSession } from "./methods/chat-session";
-export { GenerativeModel };
+export { GenerativeModel, ImageGenerationModel };
 
 /**
  * Top-level class for this SDK
@@ -31,6 +32,21 @@ export { GenerativeModel };
  */
 export class GoogleGenerativeAI {
   constructor(public apiKey: string) {}
+  /**
+   * Gets a {@link ImageGenerationModel} instance for the provided model name.
+   */
+  getImageGenerationModel(
+    modelParams: ModelParams,
+    requestOptions?: RequestOptions,
+  ): ImageGenerationModel {
+    if (!modelParams.model) {
+      throw new GoogleGenerativeAIError(
+        `Must provide a model name. ` +
+          `Example: genai.getImageGenerationModel({ model: 'my-model-name' })`,
+      );
+    }
+    return new ImageGenerationModel(this.apiKey, modelParams, requestOptions);
+  }
 
   /**
    * Gets a {@link GenerativeModel} instance for the provided model name.
