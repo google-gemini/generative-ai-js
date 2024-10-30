@@ -24,10 +24,7 @@ import {
   ImageGenerationResponse,
 } from "../../types";
 import { GeneratedImage } from "../../types/generated-media";
-import {
-  ImageGenerationPredictResponse,
-  PredictServiceValueType,
-} from "../../types/predict";
+import { ImageGenerationPredictResponse } from "../../types/predict";
 import { GoogleGenerativeAIResponseError } from "../errors";
 
 /**
@@ -214,14 +211,12 @@ export function formatBlockErrorMessage(
 }
 
 export function convertToImageGenerationResponse(
-  sharedParameters: PredictServiceValueType,
   response: ImageGenerationPredictResponse,
 ): ImageGenerationResponse {
   const images: GeneratedImage[] = [];
   for (const prediction of response!.predictions) {
     images.push({
       imageBytes: prediction.bytesBase64Encoded,
-      generationParameters: sharedParameters,
     });
   }
   return { images };

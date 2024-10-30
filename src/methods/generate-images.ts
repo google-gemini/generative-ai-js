@@ -40,8 +40,5 @@ export async function generateImages(
     requestOptions,
   );
   const responseJson: ImageGenerationPredictResponse = await response.json();
-  return convertToImageGenerationResponse(
-    predictRequest.parameters,
-    responseJson,
-  );
+  return convertToImageGenerationResponse(responseJson);
 }

@@ -16,6 +16,5 @@ export interface GeneratedImage
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [generationParameters?](./generative-ai.generatedimage.generationparameters.md) |  | PredictServiceValueType | _(Optional)_ Generation parameters. |
 |  [imageBytes?](./generative-ai.generatedimage.imagebytes.md) |  | string | _(Optional)_ Image bytes. |
 

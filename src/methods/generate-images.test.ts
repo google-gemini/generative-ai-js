@@ -54,17 +54,6 @@ describe("generateImages()", () => {
       images: [
         {
           imageBytes: "test-content",
-          generationParameters: {
-            negativePrompt: "Not a dog",
-            sampleCount: 1,
-            guidanceScale: 5,
-            outputMimeType: "image/png",
-            compressionQuality: 12,
-            language: "ko",
-            safetyFilterLevel: "block_medium_and_above",
-            aspectRatio: "1:1",
-            sampleImageSize: 1024,
-          },
         },
       ],
     };

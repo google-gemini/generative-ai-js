@@ -15,8 +15,6 @@
  * limitations under the License.
  */
 
-import { PredictServiceValueType } from "./predict";
-
 
 /**
  * Generated images. It will be returned in response.
@@ -27,8 +25,4 @@ export interface GeneratedImage {
    * Image bytes.
    */
   imageBytes?: string;
-  /**
-   * Generation parameters.
-   */
-  generationParameters?: PredictServiceValueType; 
 }
