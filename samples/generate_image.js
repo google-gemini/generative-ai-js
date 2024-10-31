@@ -30,6 +30,14 @@ async function imageGeneration() {
     model: "imagen-3.0-generate-001",
   });
   const result = await model.generateImages("A fluffy cat");
+  console.log(result)
+  const watermarkModel = genAI.getImageWatermarkVerificationModel({
+    model: "image-verification-001",
+  });
+  const watermarkResult = await watermarkModel.verifyImage({
+    imageBytes: result.images[0].imageBytes,
+  });
+  console.log(watermarkResult);
   // [END image_generation]
 }
 async function runAll() {
