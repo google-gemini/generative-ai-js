@@ -21,30 +21,35 @@ import * as sinonChai from "sinon-chai";
 import * as chaiAsPromised from "chai-as-promised";
 import { getMockResponse } from "../../test-utils/mock-response";
 import * as request from "../requests/request";
-import { ImageGenerationRequest } from "../../types";
-import { generateImages } from "./generate-images";
+import {
+  ImageGenerationRequest,
+  ImageWatermarkVerificationRequest,
+  ImageWatermarkVerificationResponse,
+} from "../../types";
+import { generateImages, verifyImage } from "./generate-images";
 
 use(sinonChai);
 use(chaiAsPromised);
-
-const fakeRequestParams: ImageGenerationRequest = {
-  prompt: "Create a cat",
-  numberOfImages: 1,
-  negativePrompt: "Not a dog",
-  guidanceScale: 5,
-  outputMimeType: "image/png",
-  compressionQuality: 12,
-  language: "ko",
-  safetyFilterLevel: "block_medium_and_above",
-  aspectRatio: "1:1",
-  width: 512,
-  height: 1024,
-};
 
 describe("generateImages()", () => {
   afterEach(() => {
     restore();
   });
+
+  const fakeRequestParams: ImageGenerationRequest = {
+    prompt: "Create a cat",
+    numberOfImages: 1,
+    negativePrompt: "Not a dog",
+    guidanceScale: 5,
+    outputMimeType: "image/png",
+    compressionQuality: 12,
+    language: "ko",
+    safetyFilterLevel: "block_medium_and_above",
+    aspectRatio: "1:1",
+    width: 512,
+    height: 1024,
+  };
+
   it("Unary success", async () => {
     const mockResponse = getMockResponse("unary-generate-images-success.json");
     const makeRequestStub = stub(request, "makeModelRequest").resolves(
@@ -68,6 +73,39 @@ describe("generateImages()", () => {
     assert.equal(
       JSON.stringify(result),
       JSON.stringify(expectedImageGenerationResponse),
+    );
+  });
+});
+
+describe("verifyImage", () => {
+  afterEach(() => {
+    restore();
+  });
+  const fakeRequestParams: ImageWatermarkVerificationRequest = {
+    imageBytes: "123",
+  };
+  it("Accept", async () => {
+    const mockResponse = getMockResponse(
+      "unary-image-watermark-verification-accept.json",
+    );
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
+      mockResponse as Response,
+    );
+    const expectedWatermarkVerificationResponse: ImageWatermarkVerificationResponse =
+      {
+        decision: "ACCEPT",
+      };
+    const result = await verifyImage("key", "model", fakeRequestParams, {});
+    expect(makeRequestStub).to.be.calledWith(
+      "model",
+      request.Task.PREDICT,
+      "key",
+      false,
+      match.any,
+    );
+    assert.equal(
+      JSON.stringify(result),
+      JSON.stringify(expectedWatermarkVerificationResponse),
     );
   });
 });

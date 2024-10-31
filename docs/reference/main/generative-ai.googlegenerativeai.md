@@ -31,4 +31,5 @@ export declare class GoogleGenerativeAI
 |  [getGenerativeModel(modelParams, requestOptions)](./generative-ai.googlegenerativeai.getgenerativemodel.md) |  | Gets a [GenerativeModel](./generative-ai.generativemodel.md) instance for the provided model name. |
 |  [getGenerativeModelFromCachedContent(cachedContent, modelParams, requestOptions)](./generative-ai.googlegenerativeai.getgenerativemodelfromcachedcontent.md) |  | Creates a [GenerativeModel](./generative-ai.generativemodel.md) instance from provided content cache. |
 |  [getImageGenerationModel(modelParams, requestOptions)](./generative-ai.googlegenerativeai.getimagegenerationmodel.md) |  | Gets a [ImageGenerationModel](./generative-ai.imagegenerationmodel.md) instance for the provided model name. |
+|  [getImageWatermarkVerificationModel(modelParams, requestOptions)](./generative-ai.googlegenerativeai.getimagewatermarkverificationmodel.md) |  | Gets a [ImageWatermarkVerificationModel](./generative-ai.imagewatermarkverificationmodel.md) instance for the provided model name. |
 

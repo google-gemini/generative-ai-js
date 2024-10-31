@@ -517,6 +517,7 @@ export class GoogleGenerativeAI {
     getGenerativeModel(modelParams: ModelParams, requestOptions?: RequestOptions): GenerativeModel;
     getGenerativeModelFromCachedContent(cachedContent: CachedContent, modelParams?: Partial<ModelParams>, requestOptions?: RequestOptions): GenerativeModel;
     getImageGenerationModel(modelParams: ModelParams, requestOptions?: RequestOptions): ImageGenerationModel;
+    getImageWatermarkVerificationModel(modelParams: ModelParams, requestOptions?: RequestOptions): ImageWatermarkVerificationModel;
 }
 
 // @public
@@ -663,6 +664,26 @@ export interface ImageGenerationRequest {
 export interface ImageGenerationResponse {
     // (undocumented)
     images: GeneratedImage[];
+}
+
+// @public
+export class ImageWatermarkVerificationModel {
+    constructor(apiKey: string, modelParams: ModelParams, _requestOptions?: RequestOptions);
+    // (undocumented)
+    apiKey: string;
+    // (undocumented)
+    model: string;
+    verifyImage(request: ImageWatermarkVerificationRequest, requestOptions?: SingleRequestOptions): Promise<ImageWatermarkVerificationResponse>;
+}
+
+// @public
+export interface ImageWatermarkVerificationRequest {
+    imageBytes: string;
+}
+
+// @public
+export interface ImageWatermarkVerificationResponse {
+    decision?: "ACCEPT" | "REJECT";
 }
 
 // @public
