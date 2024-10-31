@@ -15,7 +15,8 @@
 |  [GoogleGenerativeAIFetchError](./generative-ai.googlegenerativeaifetcherror.md) | Error class covering HTTP errors when calling the server. Includes HTTP status, statusText, and optional details, if provided in the server response. |
 |  [GoogleGenerativeAIRequestInputError](./generative-ai.googlegenerativeairequestinputerror.md) | Errors in the contents of a request originating from user input. |
 |  [GoogleGenerativeAIResponseError](./generative-ai.googlegenerativeairesponseerror.md) | Errors in the contents of a response from the model. This includes parsing errors, or responses including a safety block reason. |
-|  [ImageGenerationModel](./generative-ai.imagegenerationmodel.md) | Class for generative model APIs. |
+|  [ImageGenerationModel](./generative-ai.imagegenerationmodel.md) | Class for image generative model APIs. |
+|  [ImageWatermarkVerificationModel](./generative-ai.imagewatermarkverificationmodel.md) | Image watermark verification model. |
 
 ## Enumerations
 
@@ -86,6 +87,8 @@
 |  [GroundingSupportSegment](./generative-ai.groundingsupportsegment.md) | Segment of the content. |
 |  [ImageGenerationRequest](./generative-ai.imagegenerationrequest.md) | Request message for generating image. |
 |  [ImageGenerationResponse](./generative-ai.imagegenerationresponse.md) | Response message for generating image. |
+|  [ImageWatermarkVerificationRequest](./generative-ai.imagewatermarkverificationrequest.md) | Request message for watermark verification. |
+|  [ImageWatermarkVerificationResponse](./generative-ai.imagewatermarkverificationresponse.md) | Response message for image watermark verification. |
 |  [InlineDataPart](./generative-ai.inlinedatapart.md) | Content part interface if the part represents an image. |
 |  [LogprobsCandidate](./generative-ai.logprobscandidate.md) | Candidate for the logprobs token and score. |
 |  [LogprobsResult](./generative-ai.logprobsresult.md) | Logprobs Result |

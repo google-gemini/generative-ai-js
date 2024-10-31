@@ -17,6 +17,8 @@
 import {
   ImageGenerationRequest,
   ImageGenerationResponse,
+  ImageWatermarkVerificationRequest,
+  ImageWatermarkVerificationResponse,
   SingleRequestOptions,
 } from "../../types";
 import { Task, makeModelRequest } from "../requests/request";
@@ -41,4 +43,36 @@ export async function generateImages(
   );
   const responseJson: ImageGenerationPredictResponse = await response.json();
   return convertToImageGenerationResponse(responseJson);
+}
+
+export async function verifyImage(
+  apiKey: string,
+  model: string,
+  params: ImageWatermarkVerificationRequest,
+  requestOptions: SingleRequestOptions,
+): Promise<ImageWatermarkVerificationResponse> {
+  const response = await makeModelRequest(
+    model,
+    Task.PREDICT,
+    apiKey,
+    /* stream */ false,
+    JSON.stringify({
+      model,
+      instances: [
+        {
+          image: {
+            bytesBase64Encoded: params.imageBytes,
+          },
+        },
+      ],
+      parameters: {
+        watermarkVerification: true,
+      },
+    }),
+    requestOptions,
+  );
+  const responseJson = await response.json();
+  return {
+    decision: responseJson!.predictions[0]!.decision,
+  } as ImageWatermarkVerificationResponse;
 }

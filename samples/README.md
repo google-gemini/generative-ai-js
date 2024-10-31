@@ -44,6 +44,7 @@ to comment out cases you do not want to run.
 | [embed.js](./embed.js)                                   | Generating embeddings |
 | [files.js](./files.js)                                   | Managing files with the File API |
 | [function_calling.js](./function_calling.js)             | Using function calling |
+| [generate_image.js](./generate_image.js)                 | Generating image from text |
 | [safety_settings.js](./safety_settings.js)               | Setting and using safety controls |
 | [system_instruction.js](./system_instruction.js)         | Setting system instructions |
 | [search_grounding.js](./search_grounding.js)             | Generate with google search grounding |

@@ -21,10 +21,17 @@ import {
 } from "./errors";
 import { CachedContent, ModelParams, RequestOptions } from "../types";
 import { GenerativeModel } from "./models/generative-model";
-import { ImageGenerationModel } from "./models/vision-model";
+import {
+  ImageGenerationModel,
+  ImageWatermarkVerificationModel,
+} from "./models/vision-model";
 
 export { ChatSession } from "./methods/chat-session";
-export { GenerativeModel, ImageGenerationModel };
+export {
+  GenerativeModel,
+  ImageGenerationModel,
+  ImageWatermarkVerificationModel,
+};
 
 /**
  * Top-level class for this SDK
@@ -46,6 +53,28 @@ export class GoogleGenerativeAI {
       );
     }
     return new ImageGenerationModel(this.apiKey, modelParams, requestOptions);
+  }
+
+  /**
+   * Gets a {@link ImageWatermarkVerificationModel} instance for the provided
+   * model name.
+   */
+  getImageWatermarkVerificationModel(
+    modelParams: ModelParams,
+    requestOptions?: RequestOptions,
+  ): ImageWatermarkVerificationModel {
+    if (!modelParams.model) {
+      throw new GoogleGenerativeAIError(
+        `Must provide a model name. ` +
+          `Example: genai.getImageWatermarkVerificationModel(
+              { model: 'my-model-name' })`,
+      );
+    }
+    return new ImageWatermarkVerificationModel(
+      this.apiKey,
+      modelParams,
+      requestOptions,
+    );
   }
 
   /**

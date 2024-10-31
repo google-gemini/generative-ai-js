@@ -28,12 +28,19 @@ use(chaiAsPromised);
 describe("generateImage", function () {
   this.timeout(60e3);
   this.slow(20e3);
-  it("non-streaming, simple interface", async () => {
+  it("non-streaming, generate and verify.", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getImageGenerationModel({
       model: "imagen-3.0-generate-001",
     });
     const result = await model.generateImages("A fluffy cat");
     expect(result.images.length).equals(1);
+    const watermarkModel = genAI.getImageWatermarkVerificationModel({
+      model: "image-verification-001",
+    });
+    const watermarkResult = await watermarkModel.verifyImage({
+      imageBytes: result.images[0].imageBytes,
+    });
+    expect(watermarkResult.decision).equals("ACCEPT");
   });
 });

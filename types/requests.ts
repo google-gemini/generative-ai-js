@@ -323,3 +323,14 @@ export interface ImageGenerationRequest {
    */
   personGeneration?: "dont_allow" | "allow_adult";
 }
+
+/**
+ * Request message for watermark verification. 
+ * @public
+ */
+export interface ImageWatermarkVerificationRequest {
+  /**
+   * Base64 encoded image bytes.
+   */
+  imageBytes: string
+}

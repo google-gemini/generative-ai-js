@@ -19,6 +19,7 @@ import {
   GenerativeModel,
   GoogleGenerativeAI,
   ImageGenerationModel,
+  ImageWatermarkVerificationModel,
 } from "./gen-ai";
 import { expect } from "chai";
 
@@ -132,6 +133,20 @@ describe("GoogleGenerativeAI", () => {
     const genAI = new GoogleGenerativeAI("apikey");
     const genModel = genAI.getImageGenerationModel({ model: "my-model" });
     expect(genModel).to.be.an.instanceOf(ImageGenerationModel);
+    expect(genModel.model).to.equal("models/my-model");
+  });
+  it("getImageWatermarkVerificationModel throws if no model is provided", () => {
+    const genAI = new GoogleGenerativeAI("apikey");
+    expect(() =>
+      genAI.getImageWatermarkVerificationModel({} as ModelParams),
+    ).to.throw("Must provide a model name");
+  });
+  it("getImageWatermarkVerificationModel gets a ImageGenerationModel", () => {
+    const genAI = new GoogleGenerativeAI("apikey");
+    const genModel = genAI.getImageWatermarkVerificationModel({
+      model: "my-model",
+    });
+    expect(genModel).to.be.an.instanceOf(ImageWatermarkVerificationModel);
     expect(genModel.model).to.equal("models/my-model");
   });
 });

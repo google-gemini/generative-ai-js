@@ -118,6 +118,7 @@ export interface LogprobsCandidate {
 
 /**
  * Candidates with top log probabilities at each decoding step
+ * @public
  */
 export interface TopCandidates {
   /** Sorted by log probability in descending order. */
@@ -247,4 +248,15 @@ export interface ErrorDetails {
  */
 export interface ImageGenerationResponse {
   images: GeneratedImage[];
+}
+
+/**
+ * Response message for image watermark verification. 
+ * @public
+ */
+export interface ImageWatermarkVerificationResponse {
+  /**
+   * Watermark verification decision string.
+   */
+  decision?: "ACCEPT" | "REJECT"
 }

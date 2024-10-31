@@ -4,7 +4,7 @@
 
 ## ImageGenerationModel class
 
-Class for generative model APIs.
+Class for image generative model APIs.
 
 **Signature:**
 
