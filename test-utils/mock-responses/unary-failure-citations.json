@@ -1,0 +1,13 @@
+{
+    "candidates": [
+        {
+            "finishReason": "RECITATION",
+            "index": 0
+        }
+    ],
+    "usageMetadata": {
+        "promptTokenCount": 18,
+        "totalTokenCount": 18
+    },
+    "modelVersion": "gemini-1.5-flash-001"
+}

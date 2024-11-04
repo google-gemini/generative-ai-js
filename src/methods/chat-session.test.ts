@@ -22,6 +22,8 @@ import * as chaiAsPromised from "chai-as-promised";
 import * as generateContentMethods from "./generate-content";
 import { GenerateContentStreamResult } from "../../types";
 import { ChatSession } from "./chat-session";
+import { getMockResponse } from "../../test-utils/mock-response";
+import * as request from "../requests/request";
 
 use(sinonChai);
 use(chaiAsPromised);
@@ -43,6 +45,15 @@ describe("ChatSession", () => {
         "a-model",
         match.any,
       );
+    });
+  });
+  describe("sendMessageRecitationErrorNotAddingResponseToHistory()", () => {
+    it("generateContent errors should be catchable", async () => {
+      const mockResponse = getMockResponse("unary-failure-citations.json");
+      stub(request, "makeModelRequest").resolves(mockResponse as Response);
+      const chatSession = new ChatSession("MY_API_KEY", "a-model");
+      await chatSession.sendMessage("hello");
+      expect((await chatSession.getHistory()).length).equals(0);
     });
   });
   describe("sendMessageStream()", () => {
