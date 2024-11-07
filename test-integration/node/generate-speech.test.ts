@@ -17,8 +17,8 @@
 
 import { expect, use } from "chai";
 import * as chaiAsPromised from "chai-as-promised";
-import { GoogleGenerativeAI } from "../..";
-
+import { GoogleGenerativeAI} from "../..";
+import {GoogleAIFileManager} from "../../server";
 use(chaiAsPromised);
 
 /**
@@ -35,5 +35,17 @@ describe("generateSpeech", function () {
     });
     const result = await model.generateSpeech("A fluffy cat");
     expect(result.inlineData.data.length).greaterThan(1);
+  });
+
+  it("non-streaming, generate and download", async () => {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getSpeechGenerationModel({
+      model: "imagen-3.0-generate-001",
+    });
+    const result = await model.generateSpeech("A fluffy cat");
+    const fileManager = new GoogleAIFileManager(
+        process.env.GEMINI_API_KEY || "");
+    const bytes = await fileManager.getFileBytes(result.fileData.fileUri)
+    expect(bytes).greaterThan(1);
   });
 });
