@@ -17,13 +17,14 @@
 
 import { CachedContent } from "./server/caching";
 import { Content, Part } from "./content";
-import { HarmBlockThreshold, HarmCategory, TaskType } from "./enums";
+import { AudioDeliveryMethod, HarmBlockThreshold, HarmCategory, TaskType } from "./enums";
 import {
   FunctionDeclarationsTool,
   ResponseSchema,
   ToolConfig,
 } from "./function-calling";
 import { GoogleSearchRetrievalTool } from "./search-grounding";
+import { AudioConfig, SpeechTurn } from "./speech";
 
 /**
  * Base parameters for a number of methods.
@@ -244,4 +245,28 @@ export interface CodeExecutionTool {
    * subfields added in the future.
    */
   codeExecution: {};
+}
+
+/**
+ * Request to generate a speech for the given transcript.
+ * @public
+ */
+export interface GenerateSpeechRequest {
+  /**
+   * Model name.
+   */
+  model?: string;
+  /**
+   * Speech turns.
+   */
+  turns?: SpeechTurn[];
+  /**
+   * Audio configuration.
+   */
+  audioConfig?: AudioConfig,
+  /**
+   * Specifies how the generated speech should be delivered. 
+   * If not specified, the default is `INLINE`.
+   */
+  audioDeliveryMethod?: AudioDeliveryMethod
 }

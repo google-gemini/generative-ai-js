@@ -289,4 +289,34 @@ describe("GoogleAIFileManager", () => {
       expect(uploadMetadata.name).to.equal("custom/path/filename");
     });
   });
+  describe("GeneratedFile Api", () => {
+    it("getGeneratedFileBytes use partial file uri", async () => {
+      const buffer = new ArrayBuffer(2); // Create a buffer of 2 bytes
+      const view = new Uint8Array(buffer);
+      view[0] = 1;
+      const makeRequestStub = stub(request, "makeServerRequest").resolves({
+        ok: true,
+        arrayBuffer: () => Promise.resolve(buffer),
+      } as Response);
+      const fileManager = new GoogleAIFileManager("apiKey");
+      const inputString = "generatedFiles/1a2b3c4d5e";
+      const result = await fileManager.getFileBytes(inputString);
+      expect(result).to.equal("\u0001\u0000");
+      expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.GET);
+      expect(makeRequestStub.args[0][0].toString()).to.include(
+        `${DEFAULT_API_VERSION}/generatedFiles/1a2b3c4d5e?alt=media`,
+      );
+    });
+    it("passes listGeneratedFiles request info", async () => {
+      const makeRequestStub = stub(request, "makeServerRequest").resolves({
+        ok: true,
+        json: () => Promise.resolve({ files: [{ uri: FAKE_URI }] }),
+      } as Response);
+      const fileManager = new GoogleAIFileManager("apiKey");
+      const result = await fileManager.listFiles();
+      expect(result.files[0].uri).to.equal(FAKE_URI);
+      expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.LIST);
+      expect(makeRequestStub.args[0][0].toString()).to.match(/\/files$/);
+    });
+  });
 });

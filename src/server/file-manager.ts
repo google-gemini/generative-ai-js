@@ -17,7 +17,12 @@
 
 import { RequestOptions, SingleRequestOptions } from "../../types";
 import { readFileSync } from "fs";
-import { FilesRequestUrl, getHeaders, makeServerRequest } from "./request";
+import {
+  FilesRequestUrl,
+  GeneratedFilesRequestUrl,
+  getHeaders,
+  makeServerRequest,
+} from "./request";
 import {
   FileMetadata,
   FileMetadataResponse,
@@ -124,6 +129,37 @@ export class GoogleAIFileManager {
   }
 
   /**
+   * List all generated files.
+   *
+   * Any fields set in the optional {@link SingleRequestOptions} parameter will take
+   * precedence over the {@link RequestOptions} values provided at the time of the
+   * {@link GoogleAIFileManager} initialization.
+   */
+  async listGeneratedFiles(
+    listParams?: ListParams,
+    requestOptions: SingleRequestOptions = {},
+  ): Promise<ListFilesResponse> {
+    const filesRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
+    const url = new GeneratedFilesRequestUrl(
+      RpcTask.LIST,
+      this.apiKey,
+      filesRequestOptions,
+    );
+    if (listParams?.pageSize) {
+      url.appendParam("pageSize", listParams.pageSize.toString());
+    }
+    if (listParams?.pageToken) {
+      url.appendParam("pageToken", listParams.pageToken);
+    }
+    const uploadHeaders = getHeaders(url);
+    const response = await makeServerRequest(url, uploadHeaders);
+    return response.json();
+  }
+
+  /**
    * Get metadata for file with given ID.
    *
    * Any fields set in the optional {@link SingleRequestOptions} parameter will take
@@ -150,6 +186,34 @@ export class GoogleAIFileManager {
   }
 
   /**
+   * Get generated file bytes.
+   *
+   * Any fields set in the optional {@link SingleRequestOptions} parameter will take
+   * precedence over the {@link RequestOptions} values provided at the time of the
+   * {@link GoogleAIFileManager} initialization.
+   */
+  async getFileBytes(
+    fileId: string,
+    requestOptions: SingleRequestOptions = {},
+  ): Promise<string> {
+    const filesRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
+    const url = new GeneratedFilesRequestUrl(
+      RpcTask.GET,
+      this.apiKey,
+      filesRequestOptions,
+    );
+    url.appendPath(parseGeneratedFileId(fileId));
+    url.appendParam("alt", "media");
+    const uploadHeaders = getHeaders(url);
+    const response = await makeServerRequest(url, uploadHeaders);
+    const fileBytes = Buffer.from(await response.arrayBuffer());
+    return fileBytes.toString();
+  }
+
+  /**
    * Delete file with given ID.
    */
   async deleteFile(fileId: string): Promise<void> {
@@ -165,6 +229,14 @@ export class GoogleAIFileManager {
 }
 
 /**
+ * If fileId is prepended with "generatedFiles/", remove prefix
+ */
+function parseGeneratedFileId(uri: string): string {
+  const match = uri.match(/generatedFiles\/([a-z1-9]+)(\?|$)/);
+  return match ? match[1] : "";
+}
+
+/**
  * If fileId is prepended with "files/", remove prefix
  */
 function parseFileId(fileId: string): string {
@@ -177,7 +249,6 @@ function parseFileId(fileId: string): string {
         `Must be in the format "files/filename" or "filename"`,
     );
   }
-
   return fileId;
 }
 

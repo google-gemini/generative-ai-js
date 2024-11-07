@@ -20,6 +20,7 @@ import {
   CountTokensRequest,
   EmbedContentRequest,
   GenerateContentRequest,
+  GenerateSpeechRequest,
   ModelParams,
   Part,
   _CountTokensRequestInternal,
@@ -176,4 +177,22 @@ export function formatEmbedContentInput(
     return { content };
   }
   return params;
+}
+
+export function formatGenerateSpeechInput(
+  params: GenerateSpeechRequest | string,
+): GenerateSpeechRequest {
+  let formattedRequest: GenerateSpeechRequest;
+  if (typeof params === "string") {
+    formattedRequest = {
+      turns: [
+        {
+          text: params
+        }
+      ]
+    };
+  } else {
+    formattedRequest = params as GenerateSpeechRequest;
+  }
+  return formattedRequest;
 }

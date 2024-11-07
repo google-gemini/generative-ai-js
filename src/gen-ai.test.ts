@@ -17,6 +17,7 @@
 import { ModelParams } from "../types";
 import { GenerativeModel, GoogleGenerativeAI } from "./gen-ai";
 import { expect } from "chai";
+import { SpeechGenerationModel } from "./models/audio-model";
 
 const fakeContents = [{ role: "user", parts: [{ text: "hello" }] }];
 
@@ -117,5 +118,17 @@ describe("GoogleGenerativeAI", () => {
     ).to.throw(
       `Different value for "systemInstruction" specified in modelParams (yo) and cachedContent (hi)`,
     );
+  });
+  it("getSpeechGenerationModel throws if no model is provided", () => {
+    const genAI = new GoogleGenerativeAI("apikey");
+    expect(() => genAI.getSpeechGenerationModel({} as ModelParams)).to.throw(
+      "Must provide a model name",
+    );
+  });
+  it("getSpeechGenerationModel  gets a SpeechGenerationModel ", () => {
+    const genAI = new GoogleGenerativeAI("apikey");
+    const genModel = genAI.getSpeechGenerationModel({ model: "my-model" });
+    expect(genModel).to.be.an.instanceOf(SpeechGenerationModel);
+    expect(genModel.model).to.equal("models/my-model");
   });
 });

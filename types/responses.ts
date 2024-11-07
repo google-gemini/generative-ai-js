@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { Content, FunctionCall } from "./content";
+import { Content, FileData, FunctionCall, GenerativeContentBlob } from "./content";
 import {
   BlockReason,
   FinishReason,
@@ -238,4 +238,19 @@ export interface ErrorDetails {
   domain?: string;
   metadata?: Record<string, unknown>;
   [key: string]: unknown;
+}
+
+/**
+ * A response from `GenerateSpeech`.
+ * @public
+ */
+export interface GenerateSpeechResponse {
+  /**
+   * Inline media bytes.
+   */
+  inlineData?: GenerativeContentBlob;
+  /**
+   * File data.
+   */
+  fileData?: FileData
 }

@@ -151,3 +151,15 @@ export enum DynamicRetrievalMode {
   // Run retrieval only when system decides it is necessary.
   MODE_DYNAMIC = "MODE_DYNAMIC",
 }
+
+/**
+ * Specifies how the generated speech should be delivered.
+ */
+export enum AudioDeliveryMethod {
+  // Default value. This value is unused.
+  AUDIO_DELIVERY_METHOD_UNSPECIFIED = "AUDIO_DELIVERY_METHOD_UNSPECIFIED",
+  // The audio will be returned as bytes inline.
+  INLINE = "INLINE",
+  // A download URI of the audio file will be returned.
+  DOWNLOAD_URI = "DOWNLOAD_URI"
+}

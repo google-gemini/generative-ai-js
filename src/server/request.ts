@@ -87,6 +87,21 @@ export class FilesRequestUrl extends ServerRequestUrl {
   }
 }
 
+export class GeneratedFilesRequestUrl extends ServerRequestUrl {
+  constructor(
+    public task: RpcTask,
+    public apiKey: string,
+    public requestOptions?: RequestOptions,
+  ) {
+    super(task, apiKey, requestOptions);
+    const apiVersion = this.requestOptions?.apiVersion || DEFAULT_API_VERSION;
+    const baseUrl = this.requestOptions?.baseUrl || DEFAULT_BASE_URL;
+    let initialUrl = baseUrl;
+    initialUrl += `/${apiVersion}/generatedFiles`;
+    this._url = new URL(initialUrl);
+  }
+}
+
 export function getHeaders(url: ServerRequestUrl): Headers {
   const headers = new Headers();
   headers.append("x-goog-api-client", getClientHeaders(url.requestOptions));

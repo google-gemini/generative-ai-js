@@ -346,7 +346,9 @@ export class GoogleAIFileManager {
     apiKey: string;
     deleteFile(fileId: string): Promise<void>;
     getFile(fileId: string, requestOptions?: SingleRequestOptions): Promise<FileMetadataResponse>;
+    getFileBytes(fileId: string, requestOptions?: SingleRequestOptions): Promise<string>;
     listFiles(listParams?: ListParams, requestOptions?: SingleRequestOptions): Promise<ListFilesResponse>;
+    listGeneratedFiles(listParams?: ListParams, requestOptions?: SingleRequestOptions): Promise<ListFilesResponse>;
     uploadFile(filePath: string, fileMetadata: FileMetadata): Promise<UploadFileResponse>;
 }
 

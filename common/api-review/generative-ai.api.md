@@ -5,6 +5,16 @@
 ```ts
 
 // @public
+export enum AudioDeliveryMethod {
+    // (undocumented)
+    AUDIO_DELIVERY_METHOD_UNSPECIFIED = "AUDIO_DELIVERY_METHOD_UNSPECIFIED",
+    // (undocumented)
+    DOWNLOAD_URI = "DOWNLOAD_URI",
+    // (undocumented)
+    INLINE = "INLINE"
+}
+
+// @public
 export interface BaseParams {
     // (undocumented)
     generationConfig?: GenerationConfig;
@@ -449,6 +459,22 @@ export interface GenerateContentStreamResult {
 }
 
 // @public
+export interface GenerateSpeechRequest {
+    // Warning: (ae-forgotten-export) The symbol "AudioConfig" needs to be exported by the entry point index.d.ts
+    audioConfig?: AudioConfig;
+    audioDeliveryMethod?: AudioDeliveryMethod;
+    model?: string;
+    // Warning: (ae-forgotten-export) The symbol "SpeechTurn" needs to be exported by the entry point index.d.ts
+    turns?: SpeechTurn[];
+}
+
+// @public
+export interface GenerateSpeechResponse {
+    fileData?: FileData;
+    inlineData?: GenerativeContentBlob;
+}
+
+// @public
 export interface GenerationConfig {
     // (undocumented)
     candidateCount?: number;
@@ -511,6 +537,8 @@ export class GoogleGenerativeAI {
     apiKey: string;
     getGenerativeModel(modelParams: ModelParams, requestOptions?: RequestOptions): GenerativeModel;
     getGenerativeModelFromCachedContent(cachedContent: CachedContent, modelParams?: Partial<ModelParams>, requestOptions?: RequestOptions): GenerativeModel;
+    // Warning: (ae-forgotten-export) The symbol "SpeechGenerationModel" needs to be exported by the entry point index.d.ts
+    getSpeechGenerationModel(modelParams: ModelParams, requestOptions?: RequestOptions): SpeechGenerationModel;
 }
 
 // @public

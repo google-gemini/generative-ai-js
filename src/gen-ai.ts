@@ -21,6 +21,7 @@ import {
 } from "./errors";
 import { CachedContent, ModelParams, RequestOptions } from "../types";
 import { GenerativeModel } from "./models/generative-model";
+import { SpeechGenerationModel } from "./models/audio-model";
 
 export { ChatSession } from "./methods/chat-session";
 export { GenerativeModel };
@@ -30,7 +31,23 @@ export { GenerativeModel };
  * @public
  */
 export class GoogleGenerativeAI {
-  constructor(public apiKey: string) {}
+  constructor(public apiKey: string) { }
+
+  /**
+   * Gets a {@link SpeechGenerationModel} instance for the provided model name.
+   */
+  getSpeechGenerationModel(
+    modelParams: ModelParams,
+    requestOptions?: RequestOptions,
+  ): SpeechGenerationModel {
+    if (!modelParams.model) {
+      throw new GoogleGenerativeAIError(
+        `Must provide a model name. ` +
+        `Example: genai.getSpeechGenerationModel({ model: 'my-model-name' })`,
+      );
+    }
+    return new SpeechGenerationModel(this.apiKey, modelParams, requestOptions);
+  }
 
   /**
    * Gets a {@link GenerativeModel} instance for the provided model name.
@@ -42,7 +59,7 @@ export class GoogleGenerativeAI {
     if (!modelParams.model) {
       throw new GoogleGenerativeAIError(
         `Must provide a model name. ` +
-          `Example: genai.getGenerativeModel({ model: 'my-model-name' })`,
+        `Example: genai.getGenerativeModel({ model: 'my-model-name' })`,
       );
     }
     return new GenerativeModel(this.apiKey, modelParams, requestOptions);
@@ -93,7 +110,7 @@ export class GoogleGenerativeAI {
         }
         throw new GoogleGenerativeAIRequestInputError(
           `Different value for "${key}" specified in modelParams` +
-            ` (${modelParams[key]}) and cachedContent (${cachedContent[key]})`,
+          ` (${modelParams[key]}) and cachedContent (${cachedContent[key]})`,
         );
       }
     }
