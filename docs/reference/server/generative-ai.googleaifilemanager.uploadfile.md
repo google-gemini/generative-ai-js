@@ -9,14 +9,14 @@ Upload a file.
 **Signature:**
 
 ```typescript
-uploadFile(filePath: string, fileMetadata: FileMetadata): Promise<UploadFileResponse>;
+uploadFile(filePathOrStream: string | Readable, fileMetadata: FileMetadata): Promise<UploadFileResponse>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  filePath | string |  |
+|  filePathOrStream | string \| Readable |  |
 |  fileMetadata | [FileMetadata](./generative-ai.filemetadata.md) |  |
 
 **Returns:**

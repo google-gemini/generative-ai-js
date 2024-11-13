@@ -16,7 +16,7 @@
  */
 
 import { RequestOptions, SingleRequestOptions } from "../../types";
-import { readFileSync } from "fs";
+import { createReadStream } from "node:fs";
 import { FilesRequestUrl, getHeaders, makeServerRequest } from "./request";
 import {
   FileMetadata,
@@ -30,6 +30,7 @@ import {
   GoogleGenerativeAIError,
   GoogleGenerativeAIRequestInputError,
 } from "../errors";
+import { Readable } from "node:stream";
 
 // Internal type, metadata sent in the upload
 export interface UploadMetadata {
@@ -51,10 +52,14 @@ export class GoogleAIFileManager {
    * Upload a file.
    */
   async uploadFile(
-    filePath: string,
+    filePathOrStream: string | Readable,
     fileMetadata: FileMetadata,
   ): Promise<UploadFileResponse> {
-    const file = readFileSync(filePath);
+    const file =
+      typeof filePathOrStream === "string"
+        ? createReadStream(filePathOrStream)
+        : filePathOrStream;
+
     const url = new FilesRequestUrl(
       RpcTask.UPLOAD,
       this.apiKey,
@@ -73,22 +78,28 @@ export class GoogleAIFileManager {
 
     // Multipart formatting code taken from @firebase/storage
     const metadataString = JSON.stringify({ file: uploadMetadata });
-    const preBlobPart =
+    const preBlobPart = new TextEncoder().encode(
       "--" +
-      boundary +
-      "\r\n" +
-      "Content-Type: application/json; charset=utf-8\r\n\r\n" +
-      metadataString +
-      "\r\n--" +
-      boundary +
-      "\r\n" +
-      "Content-Type: " +
-      fileMetadata.mimeType +
-      "\r\n\r\n";
-    const postBlobPart = "\r\n--" + boundary + "--";
-    const blob = new Blob([preBlobPart, file, postBlobPart]);
+        boundary +
+        "\r\n" +
+        "Content-Type: application/json; charset=utf-8\r\n\r\n" +
+        metadataString +
+        "\r\n--" +
+        boundary +
+        "\r\n" +
+        "Content-Type: " +
+        fileMetadata.mimeType +
+        "\r\n\r\n",
+    );
+    const postBlobPart = new TextEncoder().encode("\r\n--" + boundary + "--");
 
-    const response = await makeServerRequest(url, uploadHeaders, blob);
+    const stream = (async function* () {
+      yield preBlobPart;
+      yield* file;
+      yield postBlobPart;
+    })();
+
+    const response = await makeServerRequest(url, uploadHeaders, stream);
     return response.json();
   }
 

@@ -79,13 +79,14 @@ describe("Files API - request methods", () => {
       const response = await makeServerRequest(
         url,
         headers,
-        new Blob(),
+        (async function* () {})(),
         fetchStub as typeof fetch,
       );
       expect(fetchStub).to.be.calledWith(match.string, {
         method: "POST",
         headers: match.instanceOf(Headers),
-        body: match.instanceOf(Blob),
+        body: match.instanceOf(ReadableStream),
+        duplex: "half",
       });
       expect(response.ok).to.be.true;
     });
