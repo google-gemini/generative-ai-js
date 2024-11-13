@@ -105,28 +105,114 @@ export enum SchemaType {
  * More fields may be added in the future as needed.
  * @public
  */
-export interface Schema {
-  /**
-   * Optional. The type of the property. {@link
-   * SchemaType}.
-   */
-  type?: SchemaType;
-  /** Optional. The format of the property. */
-  format?: string;
-  /** Optional. The description of the property. */
+export type Schema =
+  | StringSchema
+  | NumberSchema
+  | IntegerSchema
+  | BooleanSchema
+  | ArraySchema
+  | ObjectSchema;
+
+/**
+ * Fields common to all Schema types.
+ *
+ * @internal
+ */
+export interface BaseSchema {
+  /** Optional. Description of the value. */
   description?: string;
-  /** Optional. Whether the property is nullable. */
+  /** If true, the value can be null. */
   nullable?: boolean;
-  /** Optional. The items of the property. */
-  items?: Schema;
-  /** Optional. The enum of the property. */
+
+  // The field 'example' is accepted, but in testing, it seems like it accepts
+  // any value of any type, even when that doesn't match the type that the
+  // schema describes, and it doesn't appear to affect the model's output.
+}
+
+/**
+ * Describes a JSON-encodable floating point number.
+ *
+ * @public
+ */
+export interface NumberSchema extends BaseSchema {
+  type: typeof SchemaType.NUMBER;
+  /** Optional. The format of the number. */
+  format?: "float" | "double";
+
+  // Note that the API accepts `minimum` and `maximum` fields here, as numbers,
+  // but when tested they had no effect.
+}
+
+/**
+ * Describes a JSON-encodable integer.
+ *
+ * @public
+ */
+export interface IntegerSchema extends BaseSchema {
+  type: typeof SchemaType.INTEGER;
+  /** Optional. The format of the number. */
+  format?: "int32" | "int64"; // server rejects int32 or int64
+
+  // Note that the API accepts minimum and maximum fields here, as numbers,
+  // but when tested they had no effect.
+}
+
+/**
+ * Describes a string.
+ *
+ * @public
+ */
+export interface StringSchema extends BaseSchema {
+  type: typeof SchemaType.STRING;
+  /** If present, limits the result to one of the given values. */
   enum?: string[];
-  /** Optional. Map of {@link Schema}. */
-  properties?: { [k: string]: Schema };
-  /** Optional. Array of required property. */
+  // Note that the API accepts the `pattern`, `minLength`, and `maxLength`
+  // fields, but they may only be advisory.
+  // The `format` field is not (at time of writing) supported on strings.
+}
+
+/**
+ * Describes a boolean, either 'true' or 'false'.
+ *
+ * @public
+ */
+export interface BooleanSchema extends BaseSchema {
+  type: typeof SchemaType.BOOLEAN;
+}
+
+/**
+ * Describes an array, an ordered list of values.
+ *
+ * @public
+ */
+export interface ArraySchema extends BaseSchema {
+  type: typeof SchemaType.ARRAY;
+  /** A schema describing the entries in the array. */
+  items: Schema;
+
+  /** The minimum number of items in the array. */
+  minItems?: number;
+  /** The maximum number of items in the array. */
+  maxItems?: number;
+}
+
+/**
+ * Describes a JSON object, a mapping of specific keys to values.
+ *
+ * @public
+ */
+export interface ObjectSchema extends BaseSchema {
+  type: typeof SchemaType.OBJECT;
+  /** Describes the properties of the JSON object. Must not be empty. */
+  properties: { [k: string]: Schema };
+  /**
+   * A list of keys declared in the properties object.
+   * Required properties will always be present in the generated object.
+   */
   required?: string[];
-  /** Optional. The example of the property. */
-  example?: unknown;
+
+  // Note that the API accepts the `minProperties`, and `maxProperties` fields,
+  // but they may only be advisory.
 }
 
 /**
@@ -148,13 +234,13 @@ export interface FunctionDeclarationSchema {
  * Schema for top-level function declaration
  * @public
  */
-export interface FunctionDeclarationSchemaProperty extends Schema {}
+export type FunctionDeclarationSchemaProperty = Schema;
 
 /**
  * Schema passed to `GenerationConfig.responseSchema`
  * @public
  */
-export interface ResponseSchema extends Schema {}
+export type ResponseSchema = Schema;
 
 /**
  * Tool config. This config is shared for all tools provided in the request.

@@ -4,12 +4,31 @@
 
 ```ts
 
+// Warning: (ae-incompatible-release-tags) The symbol "ArraySchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface ArraySchema extends BaseSchema {
+    items: Schema;
+    maxItems?: number;
+    minItems?: number;
+    // (undocumented)
+    type: typeof SchemaType.ARRAY;
+}
+
 // @public
 export interface BaseParams {
     // (undocumented)
     generationConfig?: GenerationConfig;
     // (undocumented)
     safetySettings?: SafetySetting[];
+}
+
+// Warning: (ae-internal-missing-underscore) The name "BaseSchema" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal
+export interface BaseSchema {
+    description?: string;
+    nullable?: boolean;
 }
 
 // @public
@@ -32,6 +51,14 @@ export enum BlockReason {
     OTHER = "OTHER",
     // (undocumented)
     SAFETY = "SAFETY"
+}
+
+// Warning: (ae-incompatible-release-tags) The symbol "BooleanSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface BooleanSchema extends BaseSchema {
+    // (undocumented)
+    type: typeof SchemaType.BOOLEAN;
 }
 
 // @public
@@ -355,8 +382,7 @@ export interface FunctionDeclarationSchema {
 }
 
 // @public
-export interface FunctionDeclarationSchemaProperty extends Schema {
-}
+export type FunctionDeclarationSchemaProperty = Schema;
 
 // @public
 export interface FunctionDeclarationsTool {
@@ -645,6 +671,15 @@ export interface InlineDataPart {
     text?: never;
 }
 
+// Warning: (ae-incompatible-release-tags) The symbol "IntegerSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface IntegerSchema extends BaseSchema {
+    format?: "int32" | "int64";
+    // (undocumented)
+    type: typeof SchemaType.INTEGER;
+}
+
 // @public
 export interface LogprobsCandidate {
     logProbability: number;
@@ -670,6 +705,27 @@ export interface ModelParams extends BaseParams {
     toolConfig?: ToolConfig;
     // (undocumented)
     tools?: Tool[];
+}
+
+// Warning: (ae-incompatible-release-tags) The symbol "NumberSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface NumberSchema extends BaseSchema {
+    format?: "float" | "double";
+    // (undocumented)
+    type: typeof SchemaType.NUMBER;
+}
+
+// Warning: (ae-incompatible-release-tags) The symbol "ObjectSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface ObjectSchema extends BaseSchema {
+    properties: {
+        [k: string]: Schema;
+    };
+    required?: string[];
+    // (undocumented)
+    type: typeof SchemaType.OBJECT;
 }
 
 // @public
@@ -706,8 +762,7 @@ export interface RequestOptions {
 }
 
 // @public
-export interface ResponseSchema extends Schema {
-}
+export type ResponseSchema = Schema;
 
 // @public
 export interface RetrievalMetadata {
@@ -731,19 +786,7 @@ export interface SafetySetting {
 }
 
 // @public
-export interface Schema {
-    description?: string;
-    enum?: string[];
-    example?: unknown;
-    format?: string;
-    items?: Schema;
-    nullable?: boolean;
-    properties?: {
-        [k: string]: Schema;
-    };
-    required?: string[];
-    type?: SchemaType;
-}
+export type Schema = StringSchema | NumberSchema | IntegerSchema | BooleanSchema | ArraySchema | ObjectSchema;
 
 // @public
 export enum SchemaType {
@@ -777,6 +820,15 @@ export interface StartChatParams extends BaseParams {
     toolConfig?: ToolConfig;
     // (undocumented)
     tools?: Tool[];
+}
+
+// Warning: (ae-incompatible-release-tags) The symbol "StringSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface StringSchema extends BaseSchema {
+    enum?: string[];
+    // (undocumented)
+    type: typeof SchemaType.STRING;
 }
 
 // @public
