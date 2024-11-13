@@ -19,7 +19,17 @@ import replace from "rollup-plugin-replace";
 import typescriptPlugin from "rollup-plugin-typescript2";
 import typescript from "typescript";
 import json from "@rollup/plugin-json";
-import pkg from "./package.json" assert { type: "json" };
+import * as fs from "node:fs";
+import * as path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Once we drop support for Node versions <22 we can replace this line with
+// just:
+// import pkg from './package.json' with {type: 'json'};
+const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, "package.json")));
 
 const es2017BuildPlugins = [
   typescriptPlugin({
