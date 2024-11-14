@@ -18,5 +18,5 @@ export interface IntegerSchema extends BaseSchema
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [format?](./generative-ai.integerschema.format.md) |  | "int32" \| "int64" | _(Optional)_ Optional. The format of the number. |
-|  [type](./generative-ai.integerschema.type.md) |  | typeof [SchemaType.INTEGER](./generative-ai.schematype.md) |  |
+|  [type](./generative-ai.integerschema.type.md) |  | typeof SchemaType.INTEGER |  |
 
