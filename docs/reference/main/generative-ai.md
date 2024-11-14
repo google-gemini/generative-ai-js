@@ -36,9 +36,11 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [ArraySchema](./generative-ai.arrayschema.md) | Describes an array, an ordered list of values. |
 |  [BaseParams](./generative-ai.baseparams.md) | Base parameters for a number of methods. |
 |  [BatchEmbedContentsRequest](./generative-ai.batchembedcontentsrequest.md) | Params for calling [GenerativeModel.batchEmbedContents()](./generative-ai.generativemodel.batchembedcontents.md) |
 |  [BatchEmbedContentsResponse](./generative-ai.batchembedcontentsresponse.md) | Response from calling [GenerativeModel.batchEmbedContents()](./generative-ai.generativemodel.batchembedcontents.md)<!-- -->. |
+|  [BooleanSchema](./generative-ai.booleanschema.md) | Describes a boolean, either 'true' or 'false'. |
 |  [CachedContent](./generative-ai.cachedcontent.md) | Describes <code>CachedContent</code> interface for sending to the server (if creating) or received from the server (using getters or list methods). |
 |  [CachedContentBase](./generative-ai.cachedcontentbase.md) |  |
 |  [CitationMetadata](./generative-ai.citationmetadata.md) | Citation metadata that may be found on a [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md)<!-- -->. |
@@ -64,7 +66,6 @@
 |  [FunctionCallPart](./generative-ai.functioncallpart.md) | Content part interface if the part represents a FunctionCall. |
 |  [FunctionDeclaration](./generative-ai.functiondeclaration.md) | Structured representation of a function declaration as defined by the \[OpenAPI 3.0 specification\](https://spec.openapis.org/oas/v3.0.3). Included in this declaration are the function name and parameters. This FunctionDeclaration is a representation of a block of code that can be used as a Tool by the model and executed by the client. |
 |  [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md) | Schema for parameters passed to [FunctionDeclaration.parameters](./generative-ai.functiondeclaration.parameters.md)<!-- -->. |
-|  [FunctionDeclarationSchemaProperty](./generative-ai.functiondeclarationschemaproperty.md) | Schema for top-level function declaration |
 |  [FunctionDeclarationsTool](./generative-ai.functiondeclarationstool.md) | A FunctionDeclarationsTool is a piece of code that enables the system to interact with external systems to perform an action, or set of actions, outside of knowledge and scope of the model. |
 |  [FunctionResponse](./generative-ai.functionresponse.md) | The result output from a \[FunctionCall\] that contains a string representing the \[FunctionDeclaration.name\] and a structured JSON object containing any output from the function is used as context to the model. This should contain the result of a \[FunctionCall\] made based on model prediction. |
 |  [FunctionResponsePart](./generative-ai.functionresponsepart.md) | Content part interface if the part represents FunctionResponse. |
@@ -83,19 +84,21 @@
 |  [GroundingSupport](./generative-ai.groundingsupport.md) | Grounding support. |
 |  [GroundingSupportSegment](./generative-ai.groundingsupportsegment.md) | Segment of the content. |
 |  [InlineDataPart](./generative-ai.inlinedatapart.md) | Content part interface if the part represents an image. |
+|  [IntegerSchema](./generative-ai.integerschema.md) | Describes a JSON-encodable integer. |
 |  [LogprobsCandidate](./generative-ai.logprobscandidate.md) | Candidate for the logprobs token and score. |
 |  [LogprobsResult](./generative-ai.logprobsresult.md) | Logprobs Result |
 |  [ModelParams](./generative-ai.modelparams.md) | Params passed to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->. |
+|  [NumberSchema](./generative-ai.numberschema.md) | Describes a JSON-encodable floating point number. |
+|  [ObjectSchema](./generative-ai.objectschema.md) | Describes a JSON object, a mapping of specific keys to values. |
 |  [PromptFeedback](./generative-ai.promptfeedback.md) | If the prompt was blocked, this will be populated with <code>blockReason</code> and the relevant <code>safetyRatings</code>. |
 |  [RequestOptions](./generative-ai.requestoptions.md) | Params passed to getGenerativeModel() or GoogleAIFileManager(). |
-|  [ResponseSchema](./generative-ai.responseschema.md) | Schema passed to <code>GenerationConfig.responseSchema</code> |
 |  [RetrievalMetadata](./generative-ai.retrievalmetadata.md) | Metadata related to retrieval in the grounding flow. |
 |  [SafetyRating](./generative-ai.safetyrating.md) | A safety rating associated with a [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md) |
 |  [SafetySetting](./generative-ai.safetysetting.md) | Safety setting that can be sent as part of request parameters. |
-|  [Schema](./generative-ai.schema.md) | Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed. |
 |  [SearchEntryPoint](./generative-ai.searchentrypoint.md) | Google search entry point. |
 |  [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | Params passed to atomic asynchronous operations. |
 |  [StartChatParams](./generative-ai.startchatparams.md) | Params for [GenerativeModel.startChat()](./generative-ai.generativemodel.startchat.md)<!-- -->. |
+|  [StringSchema](./generative-ai.stringschema.md) | Describes a string. |
 |  [TextPart](./generative-ai.textpart.md) | Content part interface if the part represents a text string. |
 |  [ToolConfig](./generative-ai.toolconfig.md) | Tool config. This config is shared for all tools provided in the request. |
 |  [TopCandidates](./generative-ai.topcandidates.md) | Candidates with top log probabilities at each decoding step |
@@ -111,6 +114,9 @@
 
 |  Type Alias | Description |
 |  --- | --- |
+|  [FunctionDeclarationSchemaProperty](./generative-ai.functiondeclarationschemaproperty.md) | Schema for top-level function declaration |
 |  [Part](./generative-ai.part.md) | Content part - includes text or image part types. |
+|  [ResponseSchema](./generative-ai.responseschema.md) | Schema passed to <code>GenerationConfig.responseSchema</code> |
+|  [Schema](./generative-ai.schema.md) | Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed. |
 |  [Tool](./generative-ai.tool.md) | Defines a tool that model can call to access external knowledge. |
 

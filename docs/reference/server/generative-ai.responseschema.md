@@ -2,14 +2,14 @@
 
 [Home](./index.md) &gt; [@google/generative-ai](./generative-ai.md) &gt; [ResponseSchema](./generative-ai.responseschema.md)
 
-## ResponseSchema interface
+## ResponseSchema type
 
 Schema passed to `GenerationConfig.responseSchema`
 
 **Signature:**
 
 ```typescript
-export interface ResponseSchema extends Schema 
+export type ResponseSchema = Schema;
 ```
-**Extends:** [Schema](./generative-ai.schema.md)
+**References:** [Schema](./generative-ai.schema.md)
 
