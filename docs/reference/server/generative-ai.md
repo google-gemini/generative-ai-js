@@ -25,6 +25,8 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [ArraySchema](./generative-ai.arrayschema.md) | Describes an array, an ordered list of values. |
+|  [BooleanSchema](./generative-ai.booleanschema.md) | Describes a boolean, either 'true' or 'false'. |
 |  [CachedContent](./generative-ai.cachedcontent.md) | Describes <code>CachedContent</code> interface for sending to the server (if creating) or received from the server (using getters or list methods). |
 |  [CachedContentBase](./generative-ai.cachedcontentbase.md) |  |
 |  [CachedContentCreateParams](./generative-ai.cachedcontentcreateparams.md) | Params to pass to [GoogleAICacheManager.create()](./generative-ai.googleaicachemanager.create.md)<!-- -->. |
@@ -46,20 +48,21 @@
 |  [FunctionCallPart](./generative-ai.functioncallpart.md) | Content part interface if the part represents a FunctionCall. |
 |  [FunctionDeclaration](./generative-ai.functiondeclaration.md) | Structured representation of a function declaration as defined by the \[OpenAPI 3.0 specification\](https://spec.openapis.org/oas/v3.0.3). Included in this declaration are the function name and parameters. This FunctionDeclaration is a representation of a block of code that can be used as a Tool by the model and executed by the client. |
 |  [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md) | Schema for parameters passed to [FunctionDeclaration.parameters](./generative-ai.functiondeclaration.parameters.md)<!-- -->. |
-|  [FunctionDeclarationSchemaProperty](./generative-ai.functiondeclarationschemaproperty.md) | Schema for top-level function declaration |
 |  [FunctionDeclarationsTool](./generative-ai.functiondeclarationstool.md) | A FunctionDeclarationsTool is a piece of code that enables the system to interact with external systems to perform an action, or set of actions, outside of knowledge and scope of the model. |
 |  [FunctionResponse](./generative-ai.functionresponse.md) | The result output from a \[FunctionCall\] that contains a string representing the \[FunctionDeclaration.name\] and a structured JSON object containing any output from the function is used as context to the model. This should contain the result of a \[FunctionCall\] made based on model prediction. |
 |  [FunctionResponsePart](./generative-ai.functionresponsepart.md) | Content part interface if the part represents FunctionResponse. |
 |  [GenerativeContentBlob](./generative-ai.generativecontentblob.md) | Interface for sending an image. |
 |  [InlineDataPart](./generative-ai.inlinedatapart.md) | Content part interface if the part represents an image. |
+|  [IntegerSchema](./generative-ai.integerschema.md) | Describes a JSON-encodable integer. |
 |  [ListCacheResponse](./generative-ai.listcacheresponse.md) |  |
 |  [ListFilesResponse](./generative-ai.listfilesresponse.md) | Response from calling [GoogleAIFileManager.listFiles()](./generative-ai.googleaifilemanager.listfiles.md) |
 |  [ListParams](./generative-ai.listparams.md) | Params to pass to [GoogleAIFileManager.listFiles()](./generative-ai.googleaifilemanager.listfiles.md) or [GoogleAICacheManager.list()](./generative-ai.googleaicachemanager.list.md) |
+|  [NumberSchema](./generative-ai.numberschema.md) | Describes a JSON-encodable floating point number. |
+|  [ObjectSchema](./generative-ai.objectschema.md) | Describes a JSON object, a mapping of specific keys to values. |
 |  [RequestOptions](./generative-ai.requestoptions.md) | Params passed to getGenerativeModel() or GoogleAIFileManager(). |
-|  [ResponseSchema](./generative-ai.responseschema.md) | Schema passed to <code>GenerationConfig.responseSchema</code> |
 |  [RpcStatus](./generative-ai.rpcstatus.md) | Standard RPC error status object. |
-|  [Schema](./generative-ai.schema.md) | Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed. |
 |  [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | Params passed to atomic asynchronous operations. |
+|  [StringSchema](./generative-ai.stringschema.md) | Describes a string. |
 |  [TextPart](./generative-ai.textpart.md) | Content part interface if the part represents a text string. |
 |  [ToolConfig](./generative-ai.toolconfig.md) | Tool config. This config is shared for all tools provided in the request. |
 |  [UploadFileResponse](./generative-ai.uploadfileresponse.md) | Response from calling [GoogleAIFileManager.uploadFile()](./generative-ai.googleaifilemanager.uploadfile.md) |
@@ -69,6 +72,9 @@
 
 |  Type Alias | Description |
 |  --- | --- |
+|  [FunctionDeclarationSchemaProperty](./generative-ai.functiondeclarationschemaproperty.md) | Schema for top-level function declaration |
 |  [Part](./generative-ai.part.md) | Content part - includes text or image part types. |
+|  [ResponseSchema](./generative-ai.responseschema.md) | Schema passed to <code>GenerationConfig.responseSchema</code> |
+|  [Schema](./generative-ai.schema.md) | Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed. |
 |  [Tool](./generative-ai.tool.md) | Defines a tool that model can call to access external knowledge. |
 

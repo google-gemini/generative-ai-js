@@ -2,14 +2,14 @@
 
 [Home](./index.md) &gt; [@google/generative-ai](./generative-ai.md) &gt; [FunctionDeclarationSchemaProperty](./generative-ai.functiondeclarationschemaproperty.md)
 
-## FunctionDeclarationSchemaProperty interface
+## FunctionDeclarationSchemaProperty type
 
 Schema for top-level function declaration
 
 **Signature:**
 
 ```typescript
-export interface FunctionDeclarationSchemaProperty extends Schema 
+export type FunctionDeclarationSchemaProperty = Schema;
 ```
-**Extends:** [Schema](./generative-ai.schema.md)
+**References:** [Schema](./generative-ai.schema.md)
 

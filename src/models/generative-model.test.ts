@@ -22,6 +22,7 @@ import {
   FunctionCallingMode,
   HarmBlockThreshold,
   HarmCategory,
+  ObjectSchema,
   SchemaType,
 } from "../../types";
 import { getMockResponse } from "../../test-utils/mock-response";
@@ -60,7 +61,6 @@ describe("GenerativeModel", () => {
             properties: {
               testField: {
                 type: SchemaType.STRING,
-                properties: {},
               },
             },
           },
@@ -93,7 +93,8 @@ describe("GenerativeModel", () => {
       SchemaType.OBJECT,
     );
     expect(
-      genModel.generationConfig?.responseSchema.properties.testField.type,
+      (genModel.generationConfig?.responseSchema as ObjectSchema).properties
+        .testField.type,
     ).to.equal(SchemaType.STRING);
     expect(genModel.generationConfig?.presencePenalty).to.equal(0.6);
     expect(genModel.generationConfig?.frequencyPenalty).to.equal(0.5);
@@ -172,7 +173,6 @@ describe("GenerativeModel", () => {
           properties: {
             testField: {
               type: SchemaType.STRING,
-              properties: {},
             },
           },
         },
@@ -206,7 +206,6 @@ describe("GenerativeModel", () => {
           properties: {
             newTestField: {
               type: SchemaType.STRING,
-              properties: {},
             },
           },
         },
@@ -332,7 +331,6 @@ describe("GenerativeModel", () => {
           properties: {
             testField: {
               type: SchemaType.STRING,
-              properties: {},
             },
           },
         },
@@ -340,8 +338,10 @@ describe("GenerativeModel", () => {
       systemInstruction: { role: "system", parts: [{ text: "be friendly" }] },
     });
     expect(genModel.systemInstruction?.parts[0].text).to.equal("be friendly");
-    expect(genModel.generationConfig.responseSchema.properties.testField).to
-      .exist;
+    expect(
+      (genModel.generationConfig.responseSchema as ObjectSchema).properties
+        .testField,
+    ).to.exist;
     const mockResponse = getMockResponse(
       "unary-success-basic-reply-short.json",
     );
@@ -372,7 +372,6 @@ describe("GenerativeModel", () => {
           properties: {
             testField: {
               type: SchemaType.STRING,
-              properties: {},
             },
           },
         },
@@ -381,8 +380,10 @@ describe("GenerativeModel", () => {
       toolConfig: { functionCallingConfig: { mode: FunctionCallingMode.NONE } },
       systemInstruction: { role: "system", parts: [{ text: "be friendly" }] },
     });
-    expect(genModel.generationConfig.responseSchema.properties.testField).to
-      .exist;
+    expect(
+      (genModel.generationConfig.responseSchema as ObjectSchema).properties
+        .testField,
+    ).to.exist;
     expect(genModel.tools?.length).to.equal(1);
     expect(genModel.toolConfig?.functionCallingConfig.mode).to.equal(
       FunctionCallingMode.NONE,
@@ -403,7 +404,6 @@ describe("GenerativeModel", () => {
             properties: {
               newTestField: {
                 type: SchemaType.STRING,
-                properties: {},
               },
             },
           },
