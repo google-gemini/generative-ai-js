@@ -84,20 +84,23 @@ export declare interface FunctionDeclarationsTool {
  * as defined by https://swagger.io/docs/specification/data-models/data-types/
  * @public
  */
-export enum SchemaType {
+export const SchemaType = {
   /** String type. */
-  STRING = "string",
+  STRING: "string",
   /** Number type. */
-  NUMBER = "number",
+  NUMBER: "number",
   /** Integer type. */
-  INTEGER = "integer",
+  INTEGER: "integer",
   /** Boolean type. */
-  BOOLEAN = "boolean",
+  BOOLEAN: "boolean",
   /** Array type. */
-  ARRAY = "array",
+  ARRAY: "array",
   /** Object type. */
-  OBJECT = "object",
-}
+  OBJECT: "object",
+} as const;
+export type SchemaType = typeof SchemaType extends Record<string, infer R>
+  ? R
+  : never;
 
 /**
  * Schema is used to define the format of input/output data.

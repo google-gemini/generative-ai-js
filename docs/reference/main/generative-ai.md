@@ -29,7 +29,6 @@
 |  [HarmCategory](./generative-ai.harmcategory.md) | Harm categories that would cause prompts or candidates to be blocked. |
 |  [HarmProbability](./generative-ai.harmprobability.md) | Probability that a prompt or candidate matches a harm category. |
 |  [Outcome](./generative-ai.outcome.md) | Possible outcomes of code execution. |
-|  [SchemaType](./generative-ai.schematype.md) | Contains the list of OpenAPI data types as defined by https://swagger.io/docs/specification/data-models/data-types/ |
 |  [TaskType](./generative-ai.tasktype.md) | Task type for embedding content. |
 
 ## Interfaces
@@ -109,6 +108,7 @@
 |  Variable | Description |
 |  --- | --- |
 |  [POSSIBLE\_ROLES](./generative-ai.possible_roles.md) | Possible roles. |
+|  [SchemaType](./generative-ai.schematype.md) | Contains the list of OpenAPI data types as defined by https://swagger.io/docs/specification/data-models/data-types/ |
 
 ## Type Aliases
 
@@ -118,5 +118,6 @@
 |  [Part](./generative-ai.part.md) | Content part - includes text or image part types. |
 |  [ResponseSchema](./generative-ai.responseschema.md) | Schema passed to <code>GenerationConfig.responseSchema</code> |
 |  [Schema](./generative-ai.schema.md) | Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed. |
+|  [SchemaType](./generative-ai.schematype.md) |  |
 |  [Tool](./generative-ai.tool.md) | Defines a tool that model can call to access external knowledge. |
 
