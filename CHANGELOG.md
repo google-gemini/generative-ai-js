@@ -1,5 +1,16 @@
 # @google/generative-ai
 
+## 0.22.0
+
+### Minor Changes
+
+- 3004d3b: The schema types are now more specific, using a [discriminated union](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions) based on the 'type' field to more accurately define which fields are allowed.
+
+### Patch Changes
+
+- 6a99ed8: Make sure chat api do not send empty text request after encounter any server error that returns empty response. This fixes issue #124 and issue #286.
+- 25d3a92: update FinishReason enum
+
 ## 0.21.0
 
 ### Minor Changes
