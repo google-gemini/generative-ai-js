@@ -48,13 +48,12 @@ export class GoogleAIFileManager {
   ) {}
 
   /**
-   * Upload a file.
+   * Upload a Blob.
    */
-  async uploadFile(
-    filePath: string,
+  async uploadBlob(
+    blobPart: BlobPart,
     fileMetadata: FileMetadata,
   ): Promise<UploadFileResponse> {
-    const file = readFileSync(filePath);
     const url = new FilesRequestUrl(
       RpcTask.UPLOAD,
       this.apiKey,
@@ -86,10 +85,23 @@ export class GoogleAIFileManager {
       fileMetadata.mimeType +
       "\r\n\r\n";
     const postBlobPart = "\r\n--" + boundary + "--";
-    const blob = new Blob([preBlobPart, file, postBlobPart]);
+    const blob = new Blob([preBlobPart, blobPart, postBlobPart]);
 
     const response = await makeServerRequest(url, uploadHeaders, blob);
     return response.json();
+  }
+
+  /**
+   * Upload a file.
+   */
+  async uploadFile(
+    filePath: string,
+    fileMetadata: FileMetadata,
+  ): Promise<UploadFileResponse> {
+    const file = readFileSync(filePath);
+
+    const response = await this.uploadBlob(file, fileMetadata);
+    return response;
   }
 
   /**
