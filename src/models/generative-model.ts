@@ -286,23 +286,25 @@ export class GenerativeModel {
    * ```
    */
   connectLive(config: Omit<LiveConfig, 'model'> = {}, connectionOptions: LiveConnectionOptions = {}): Promise<LiveClient> {
-    return connect({
-      requestOptions: this._requestOptions,
-      apiKey: this.apiKey,
-      setup: {
-        ...config,
-        generationConfig: {
-          ...(config.generationConfig ?? {}),
-          ...this.generationConfig
+    return connect(
+      {
+        requestOptions: this._requestOptions,
+        apiKey: this.apiKey,
+        setup: {
+          ...config,
+          generationConfig: {
+            ...config.generationConfig,
+            ...this.generationConfig,
+          },
+          model: this.model,
+          ...(config.tools || this.tools
+            ? {
+                tools: [...config.tools, ...this.tools],
+              }
+            : {}),
         },
-        model: this.model,
-        ...((config.tools || this.tools) ? {
-          tools: [
-            ...(config.tools ?? []),
-            ...(this.tools ?? [])
-          ]
-        } : {})
-      }
-    }, connectionOptions);
+      },
+      connectionOptions,
+    );
   }
 }
