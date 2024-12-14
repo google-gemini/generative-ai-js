@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Content, FunctionCall, FunctionResponse, GenerativeContentBlob, Part } from "./content";
+import { Content, FunctionCall, FunctionResponse, GenerativeContentBlob } from "./content";
 import type { GenerationConfig, Tool } from "./requests";
 
 /**

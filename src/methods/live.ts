@@ -16,8 +16,8 @@
  */
 
 import type {
-  LiveConnectionOptions,
   BidiGenerateContentSetup,
+  LiveConnectionOptions,
   LiveReceivingMessage,
   LiveSendingMessage,
 } from "../../types/live";
@@ -33,9 +33,9 @@ const getWebSocketUrl = (apiKey: string, baseUrl?: string | URL): URL => {
 };
 
 /**
- * Gemini Live Stream API Client.
+ * Gemini Live Stream API Session.
  */
-export class LiveClient {
+export class LiveSession {
   #ws: WebSocket;
 
   #responseReadable: ReadableStream<LiveReceivingMessage>;
@@ -113,7 +113,7 @@ export class LiveClient {
   }
 
   /**
-   * Disconnect the connection. WebSocket connection and {@link LiveClient.listen} will be closed.
+   * Disconnect the connection. WebSocket connection and {@link LiveSession.listen} will be closed.
    */
   async disconnect(): Promise<void> {
     await this.#responseWriter.close();
@@ -157,7 +157,7 @@ export interface ConnectOptions {
 /**
  * Connect to WebSocket server.
  */
-export const connect = async (options: ConnectOptions, connectionOptions: LiveConnectionOptions): Promise<LiveClient> => {
+export const connect = async (options: ConnectOptions, connectionOptions: LiveConnectionOptions): Promise<LiveSession> => {
   const createWebSocket = connectionOptions.createWebSocket ?? ((url) => {
     return new (globalThis.WebSocket ?? connectionOptions.WebSocket)(url);
   });
@@ -190,5 +190,5 @@ export const connect = async (options: ConnectOptions, connectionOptions: LiveCo
   ws.onmessage = null;
   ws.onclose = null;
 
-  return new LiveClient(ws);
+  return new LiveSession(ws);
 };

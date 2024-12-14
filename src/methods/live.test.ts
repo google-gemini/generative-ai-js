@@ -18,9 +18,9 @@
 import * as sinonChai from "sinon-chai";
 import { expect, use } from "chai";
 import { spy } from "sinon";
-import { LiveClient } from "./live";
+import { LiveSession } from "./live";
 import { GoogleGenerativeAIRequestInputError } from "../errors";
-import type { LiveReceivingMessage, LiveSendingMessage } from "../../types/live";
+import type { LiveReceivingMessage } from "../../types/live";
 
 use(sinonChai);
 
@@ -70,7 +70,7 @@ class WebSocketForTest extends EventTarget implements WebSocket {
 describe("LiveClient", () => {
   it("sendRealtimeContent can only send image/jpeg or audio/pcm", () => {
     const sendSpy = spy();
-    const client = new LiveClient(new WebSocketForTest({
+    const client = new LiveSession(new WebSocketForTest({
       send(data) {
         sendSpy(data);
       },
@@ -104,7 +104,7 @@ describe("LiveClient", () => {
       },
       close() {}
     });
-    const client = new LiveClient(ws);
+    const client = new LiveSession(ws);
     const generator = client.listen();
 
     const message: LiveReceivingMessage = {
@@ -126,7 +126,7 @@ describe("LiveClient", () => {
         closeSpy();
       }
     });
-    const client = new LiveClient(ws);
+    const client = new LiveSession(ws);
     const generator = client.listen();
     await client.disconnect();
     const { done } = await generator.next();

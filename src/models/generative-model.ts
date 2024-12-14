@@ -53,7 +53,7 @@ import {
   formatGenerateContentInput,
   formatSystemInstruction,
 } from "../requests/request-helpers";
-import { type LiveClient, connect } from "../methods/live";
+import { type LiveSession, connect } from "../methods/live";
 
 /**
  * Class for generative model APIs.
@@ -259,7 +259,7 @@ export class GenerativeModel {
   }
   
   /**
-   * Connect to live streaming server. Returns an promise which resolves {@link LiveClient}
+   * Connect to live streaming server. Returns an promise which resolves {@link LiveSession}
    * A promise resolves when WebSocket connection are connected and client sent a config.
    * @param [config={}] Live config.
    * @param [connectionOptions={}] Live connectiing options. You can use a custom WebSocket API.
@@ -287,7 +287,7 @@ export class GenerativeModel {
    * }
    * ```
    */
-  connectLive(config: Omit<BidiGenerateContentSetup, 'model'> = {}, connectionOptions: LiveConnectionOptions = {}): Promise<LiveClient> {
+  connectLive(config: Omit<BidiGenerateContentSetup, 'model'> = {}, connectionOptions: LiveConnectionOptions = {}): Promise<LiveSession> {
     return connect({
       requestOptions: this._requestOptions,
       apiKey: this.apiKey,
