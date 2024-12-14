@@ -462,4 +462,12 @@ describe("GenerativeModel", () => {
     expect(makeRequestStub).to.not.be.called;
     restore();
   });
+  it("connectLive returns LiveClient Promise", async () => {
+    const model = new GenerativeModel("apiKey", {
+      model: "my-model",
+    });
+
+    const connectionPromise = model.connectLive();
+    expect(connectionPromise).to.be.instanceOf(Promise);
+  });
 });

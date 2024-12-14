@@ -22,6 +22,7 @@ import {
 import {
   BatchEmbedContentsRequest,
   BatchEmbedContentsResponse,
+  BidiGenerateContentSetup,
   CachedContent,
   Content,
   CountTokensRequest,
@@ -32,6 +33,8 @@ import {
   GenerateContentResult,
   GenerateContentStreamResult,
   GenerationConfig,
+  LiveConnectionOptions,
+  LiveGenerationConfig,
   ModelParams,
   Part,
   RequestOptions,
@@ -50,6 +53,7 @@ import {
   formatGenerateContentInput,
   formatSystemInstruction,
 } from "../requests/request-helpers";
+import { type LiveSession, connect } from "../methods/live";
 
 /**
  * Class for generative model APIs.
@@ -251,6 +255,58 @@ export class GenerativeModel {
       this.model,
       batchEmbedContentRequest,
       generativeModelRequestOptions,
+    );
+  }
+  
+  /**
+   * Connect to live streaming server. Returns an promise which resolves {@link LiveSession}
+   * A promise resolves when WebSocket connection are connected and client sent a config.
+   * @param [config={}] Live config.
+   * @param [connectionOptions={}] Live connectiing options. You can use a custom WebSocket API.
+   * 
+   * @example
+   * ```ts
+   * import { GoogleGenerativeAI } from "@google/generative-ai";
+   * 
+   * const model = new GoogleGenerativeAI("apiKey")
+   *   .getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+   * 
+   * // Connect to live
+   * const live = await model.connectLive({
+   *   responseModalities: ["TEXT"]
+   * });
+   * 
+   * // Sending a text.
+   * live.send({
+   *   text: "Hi, what's your name?"
+   * });
+   * 
+   * for await (const event of live.listen()) {
+   *   // Handling a event.
+   *   console.log(event);
+   * }
+   * ```
+   */
+  connectLive(config: Omit<BidiGenerateContentSetup, 'model'> = {}, connectionOptions: LiveConnectionOptions = {}): Promise<LiveSession> {
+    return connect(
+      {
+        requestOptions: this._requestOptions,
+        apiKey: this.apiKey,
+        setup: {
+          ...config,
+          generationConfig: {
+            ...config.generationConfig,
+            ...(this.generationConfig as LiveGenerationConfig),
+          },
+          model: `models/${this.model}`,
+          ...(config.tools || this.tools
+            ? {
+                tools: [...config.tools, ...this.tools],
+              }
+            : {}),
+        },
+      },
+      connectionOptions,
     );
   }
 }
