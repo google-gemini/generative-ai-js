@@ -15,7 +15,12 @@
  * limitations under the License.
  */
 
-import type { LiveClientContentMessage, LiveConfig, LiveConnectionOptions, LiveReceivingMessage, LiveSendingMessage, LiveServerContentMessage, LiveSetupMessage } from "../../types/live";
+import type {
+  LiveConnectionOptions,
+  BidiGenerateContentSetup,
+  LiveReceivingMessage,
+  LiveSendingMessage,
+} from "../../types/live";
 import { GoogleGenerativeAIFetchError, GoogleGenerativeAIRequestInputError, GoogleGenerativeAIResponseError } from "../errors";
 import type { Content, GenerativeContentBlob, Part, RequestOptions } from "../server";
 
@@ -58,7 +63,7 @@ export class LiveClient {
    * Listens messages from server. You can call this function only once.
    * @returns AsyncGenerator that yields messages from server.
    */
-  async * listen(): AsyncGenerator<LiveServerContentMessage>{
+  async * listen(): AsyncGenerator<LiveReceivingMessage>{
     const reader = this.#responseReadable.getReader();
     while (true) {
       const read = await reader.read();
@@ -81,11 +86,11 @@ export class LiveClient {
       role: 'user',
       parts: Array.isArray(parts) ? parts : [parts]
     };
-    const message: LiveClientContentMessage = {
+    const message: LiveSendingMessage = {
       clientContent: {
         turns: [content],
         turnComplete: endOfTurn
-      }
+      },
     };
     this.#sendJSON(message);
   }
@@ -146,7 +151,7 @@ export class LiveClient {
 export interface ConnectOptions {
   requestOptions: RequestOptions
   apiKey: string
-  setup: LiveConfig
+  setup: BidiGenerateContentSetup
 }
 
 /**
@@ -173,7 +178,7 @@ export const connect = async (options: ConnectOptions, connectionOptions: LiveCo
   await new Promise((resolve, reject) => {
     ws.send(JSON.stringify({
       setup: options.setup
-    } satisfies LiveSetupMessage));
+    } satisfies LiveSendingMessage));
     ws.onclose = (evt) => reject(new GoogleGenerativeAIRequestInputError(`Live connection setup failed: ${evt.reason}`));
     ws.onmessage = (evt) => {
       const json = JSON.parse(evt.data);

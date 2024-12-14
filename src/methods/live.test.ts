@@ -20,7 +20,7 @@ import { expect, use } from "chai";
 import { spy } from "sinon";
 import { LiveClient } from "./live";
 import { GoogleGenerativeAIRequestInputError } from "../errors";
-import { LiveReceivingMessage } from "../../types/live";
+import type { LiveReceivingMessage, LiveSendingMessage } from "../../types/live";
 
 use(sinonChai);
 

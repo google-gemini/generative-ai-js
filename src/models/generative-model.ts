@@ -22,6 +22,7 @@ import {
 import {
   BatchEmbedContentsRequest,
   BatchEmbedContentsResponse,
+  BidiGenerateContentSetup,
   CachedContent,
   Content,
   CountTokensRequest,
@@ -32,6 +33,8 @@ import {
   GenerateContentResult,
   GenerateContentStreamResult,
   GenerationConfig,
+  LiveConnectionOptions,
+  LiveGenerationConfig,
   ModelParams,
   Part,
   RequestOptions,
@@ -51,7 +54,6 @@ import {
   formatSystemInstruction,
 } from "../requests/request-helpers";
 import { type LiveClient, connect } from "../methods/live";
-import type { LiveConfig, LiveConnectionOptions } from "../../types/live";
 
 /**
  * Class for generative model APIs.
@@ -285,7 +287,7 @@ export class GenerativeModel {
    * }
    * ```
    */
-  connectLive(config: Omit<LiveConfig, 'model'> = {}, connectionOptions: LiveConnectionOptions = {}): Promise<LiveClient> {
+  connectLive(config: Omit<BidiGenerateContentSetup, 'model'> = {}, connectionOptions: LiveConnectionOptions = {}): Promise<LiveClient> {
     return connect({
       requestOptions: this._requestOptions,
       apiKey: this.apiKey,
@@ -293,9 +295,9 @@ export class GenerativeModel {
         ...config,
         generationConfig: {
           ...(config.generationConfig ?? {}),
-          ...this.generationConfig
+          ...(this.generationConfig as LiveGenerationConfig)
         },
-        model: this.model,
+        model: `models/${this.model}`,
         ...((config.tools || this.tools) ? {
           tools: [
             ...(config.tools ?? []),
