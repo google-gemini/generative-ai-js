@@ -288,23 +288,25 @@ export class GenerativeModel {
    * ```
    */
   connectLive(config: Omit<BidiGenerateContentSetup, 'model'> = {}, connectionOptions: LiveConnectionOptions = {}): Promise<LiveSession> {
-    return connect({
-      requestOptions: this._requestOptions,
-      apiKey: this.apiKey,
-      setup: {
-        ...config,
-        generationConfig: {
-          ...(config.generationConfig ?? {}),
-          ...(this.generationConfig as LiveGenerationConfig)
+    return connect(
+      {
+        requestOptions: this._requestOptions,
+        apiKey: this.apiKey,
+        setup: {
+          ...config,
+          generationConfig: {
+            ...config.generationConfig,
+            ...(this.generationConfig as LiveGenerationConfig),
+          },
+          model: `models/${this.model}`,
+          ...(config.tools || this.tools
+            ? {
+                tools: [...config.tools, ...this.tools],
+              }
+            : {}),
         },
-        model: `models/${this.model}`,
-        ...((config.tools || this.tools) ? {
-          tools: [
-            ...(config.tools ?? []),
-            ...(this.tools ?? [])
-          ]
-        } : {})
-      }
-    }, connectionOptions);
+      },
+      connectionOptions,
+    );
   }
 }
