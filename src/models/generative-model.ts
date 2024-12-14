@@ -50,6 +50,8 @@ import {
   formatGenerateContentInput,
   formatSystemInstruction,
 } from "../requests/request-helpers";
+import { type LiveClient, connect } from "../methods/live";
+import type { LiveConfig, LiveConnectionOptions } from "../../types/live";
 
 /**
  * Class for generative model APIs.
@@ -252,5 +254,55 @@ export class GenerativeModel {
       batchEmbedContentRequest,
       generativeModelRequestOptions,
     );
+  }
+  
+  /**
+   * Connect to live streaming server. Returns an promise which resolves {@link LiveClient}
+   * A promise resolves when WebSocket connection are connected and client sent a config.
+   * @param [config={}] Live config.
+   * @param [connectionOptions={}] Live connectiing options. You can use a custom WebSocket API.
+   * 
+   * @example
+   * ```ts
+   * import { GoogleGenerativeAI } from "@google/generative-ai";
+   * 
+   * const model = new GoogleGenerativeAI("apiKey")
+   *   .getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+   * 
+   * // Connect to live
+   * const live = await model.connectLive({
+   *   responseModalities: ["TEXT"]
+   * });
+   * 
+   * // Sending a text.
+   * live.send({
+   *   text: "Hi, what's your name?"
+   * });
+   * 
+   * for await (const event of live.listen()) {
+   *   // Handling a event.
+   *   console.log(event);
+   * }
+   * ```
+   */
+  connectLive(config: Omit<LiveConfig, 'model'> = {}, connectionOptions: LiveConnectionOptions = {}): Promise<LiveClient> {
+    return connect({
+      requestOptions: this._requestOptions,
+      apiKey: this.apiKey,
+      setup: {
+        ...config,
+        generationConfig: {
+          ...(config.generationConfig ?? {}),
+          ...this.generationConfig
+        },
+        model: this.model,
+        ...((config.tools || this.tools) ? {
+          tools: [
+            ...(config.tools ?? []),
+            ...(this.tools ?? [])
+          ]
+        } : {})
+      }
+    }, connectionOptions);
   }
 }
