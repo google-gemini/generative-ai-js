@@ -32,6 +32,8 @@ const getWebSocketUrl = (apiKey: string, baseUrl?: string | URL): URL => {
   return url;
 };
 
+const parseReceivingJSON = (input: BodyInit): Promise<LiveReceivingMessage> => new Response(input).json();
+
 /**
  * Gemini Live Stream API Session.
  */
@@ -127,24 +129,8 @@ export class LiveSession {
     this.#ws.send(json);
   }
 
-  #receiveJSON(data: LiveReceivingMessage): Promise<void> {
-    return this.#responseWriter.write(data);
-  }
-  async #receiveBlob(blob: Blob): Promise<void> {
-    await this.#responseWriter.write(JSON.parse(await blob.text()));
-  }
   async #onMessage(evt: MessageEvent<string | ArrayBuffer | Blob>): Promise<void> {
-    if (evt.data instanceof Blob) {
-      // Blob data
-      // Process audio.
-      await this.#receiveBlob(evt.data);
-    } else if (evt.data instanceof ArrayBuffer) {
-      await this.#receiveBlob(new Blob([evt.data]));
-    } else {
-      // JSON data
-      const parsed = JSON.parse(evt.data);
-      await this.#receiveJSON(parsed);
-    }
+    await this.#responseWriter.write(await parseReceivingJSON(evt.data));
   }
 }
 
@@ -181,7 +167,7 @@ export const connect = async (options: ConnectOptions, connectionOptions: LiveCo
     } satisfies LiveSendingMessage));
     ws.onclose = (evt) => reject(new GoogleGenerativeAIRequestInputError(`Live connection setup failed: ${evt.reason}`));
     ws.onmessage = (evt) => {
-      const json = JSON.parse(evt.data);
+      const json = parseReceivingJSON(evt.data);
       if ((json !== null) && typeof json === 'object' && ('setupComplete' in json)) {
         resolve(null);
       }
