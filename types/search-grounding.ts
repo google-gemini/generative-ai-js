@@ -67,7 +67,7 @@ export declare interface GroundingMetadata {
   /**
    * List of supporting references retrieved from specified grounding source.
    */
-  groundingChuncks?: GroundingChunk[];
+  groundingChunks?: GroundingChunk[];
   /**
    * List of grounding support.
    */
