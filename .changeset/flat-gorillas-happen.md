@@ -2,4 +2,4 @@
 "@google/generative-ai": patch
 ---
 
-Fix undefined candidate index
+Fix undefined candidate index.
