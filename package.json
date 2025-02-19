@@ -32,14 +32,14 @@
     "server/package.json"
   ],
   "scripts": {
-    "build": "rollup -c && npm api-report",
-    "test": "npm lint && npm test:node:unit",
-    "test:web:integration": "npm build && npx web-test-runner",
+    "build": "rollup -c && npm run api-report",
+    "test": "npm run lint && npm run test:node:unit",
+    "test:web:integration": "npm run build && npx web-test-runner",
     "test:node:unit": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha \"src/**/*.test.ts\"",
-    "test:node:integration": "npm build && TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha \"test-integration/node/**/*.test.ts\"",
+    "test:node:integration": "npm run build && TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha \"test-integration/node/**/*.test.ts\"",
     "lint": "eslint -c .eslintrc.js '**/*.ts' --ignore-path './.gitignore'",
     "api-report": "api-extractor run -c api-extractor.json --local --verbose && api-extractor run -c api-extractor.server.json --local --verbose",
-    "docs": "npm build && npm api-documenter markdown -i ./temp/main -o ./docs/reference/main && npm api-documenter markdown -i ./temp/server -o ./docs/reference/server",
+    "docs": "npm run build && npx api-documenter markdown -i ./temp/main -o ./docs/reference/main && npx api-documenter markdown -i ./temp/server -o ./docs/reference/server",
     "format": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"nodenext\"}' npx ts-node scripts/run-format.ts",
     "format:check": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"nodenext\"}' npx ts-node scripts/check-format.ts"
   },
@@ -47,7 +47,7 @@
     "@changesets/cli": "^2.27.1",
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@microsoft/api-documenter": "^7.23.12",
-    "@microsoft/api-extractor": "^7.38.2",
+    "@microsoft/api-extractor": "^7.50.0",
     "@rollup/plugin-json": "^6.0.1",
     "@types/chai": "^4.3.9",
     "@types/chai-as-promised": "^7.1.8",
