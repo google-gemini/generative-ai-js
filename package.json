@@ -32,16 +32,16 @@
     "server/package.json"
   ],
   "scripts": {
-    "build": "rollup -c && yarn api-report",
-    "test": "yarn lint && yarn test:node:unit",
-    "test:web:integration": "yarn build && yarn web-test-runner",
+    "build": "rollup -c && npm api-report",
+    "test": "npm lint && npm test:node:unit",
+    "test:web:integration": "npm build && npx web-test-runner",
     "test:node:unit": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha \"src/**/*.test.ts\"",
-    "test:node:integration": "yarn build && TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha \"test-integration/node/**/*.test.ts\"",
+    "test:node:integration": "npm build && TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha \"test-integration/node/**/*.test.ts\"",
     "lint": "eslint -c .eslintrc.js '**/*.ts' --ignore-path './.gitignore'",
     "api-report": "api-extractor run -c api-extractor.json --local --verbose && api-extractor run -c api-extractor.server.json --local --verbose",
-    "docs": "yarn build && yarn api-documenter markdown -i ./temp/main -o ./docs/reference/main && yarn api-documenter markdown -i ./temp/server -o ./docs/reference/server",
-    "format": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"nodenext\"}' yarn ts-node scripts/run-format.ts",
-    "format:check": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"nodenext\"}' yarn ts-node scripts/check-format.ts"
+    "docs": "npm build && npm api-documenter markdown -i ./temp/main -o ./docs/reference/main && npm api-documenter markdown -i ./temp/server -o ./docs/reference/server",
+    "format": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"nodenext\"}' npx ts-node scripts/run-format.ts",
+    "format:check": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"nodenext\"}' npx ts-node scripts/check-format.ts"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
