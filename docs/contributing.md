@@ -31,13 +31,13 @@ Steps to build locally:
 
 1. clone this repo
 1. `cd generative-ai-js`
-1. Run `yarn` to install dependencies.
+1. Run `npm install` to install dependencies.
 1. Make changes as needed to source code.
-1. Run `yarn build` to build.
-1. Run `yarn test` to run unit tests.
-1. Run `yarn docs` to generate any changes to reference docs (destination dir is docs/reference).
-1. Run `yarn format` to fix formatting and add license headers as needed.
-1. Run `yarn changeset` to generate the changeset summary.
+1. Run `npm run build` to build.
+1. Run `npm run test` to run unit tests.
+1. Run `npm run docs` to generate any changes to reference docs (destination dir is docs/reference).
+1. Run `npm run format` to fix formatting and add license headers as needed.
+1. Run `npx @changeset/cli` to generate the changeset summary.
 
 ### Code Reviews
 
