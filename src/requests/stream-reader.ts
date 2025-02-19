@@ -140,25 +140,26 @@ export function aggregateResponses(
   };
   for (const response of responses) {
     if (response.candidates) {
+      let candidateIndex = 0;
       for (const candidate of response.candidates) {
-        const i = candidate.index;
         if (!aggregatedResponse.candidates) {
           aggregatedResponse.candidates = [];
         }
-        if (!aggregatedResponse.candidates[i]) {
-          aggregatedResponse.candidates[i] = {
-            index: candidate.index,
+        if (!aggregatedResponse.candidates[candidateIndex]) {
+          aggregatedResponse.candidates[candidateIndex] = {
+            index: candidateIndex,
           } as GenerateContentCandidate;
         }
         // Keep overwriting, the last one will be final
-        aggregatedResponse.candidates[i].citationMetadata =
+        aggregatedResponse.candidates[candidateIndex].citationMetadata =
           candidate.citationMetadata;
-        aggregatedResponse.candidates[i].groundingMetadata =
+        aggregatedResponse.candidates[candidateIndex].groundingMetadata =
           candidate.groundingMetadata;
-        aggregatedResponse.candidates[i].finishReason = candidate.finishReason;
-        aggregatedResponse.candidates[i].finishMessage =
+        aggregatedResponse.candidates[candidateIndex].finishReason =
+          candidate.finishReason;
+        aggregatedResponse.candidates[candidateIndex].finishMessage =
           candidate.finishMessage;
-        aggregatedResponse.candidates[i].safetyRatings =
+        aggregatedResponse.candidates[candidateIndex].safetyRatings =
           candidate.safetyRatings;
 
         /**
@@ -166,8 +167,8 @@ export function aggregateResponses(
          * possible malformed responses.
          */
         if (candidate.content && candidate.content.parts) {
-          if (!aggregatedResponse.candidates[i].content) {
-            aggregatedResponse.candidates[i].content = {
+          if (!aggregatedResponse.candidates[candidateIndex].content) {
+            aggregatedResponse.candidates[candidateIndex].content = {
               role: candidate.content.role || "user",
               parts: [],
             };
@@ -189,12 +190,13 @@ export function aggregateResponses(
             if (Object.keys(newPart).length === 0) {
               newPart.text = "";
             }
-            aggregatedResponse.candidates[i].content.parts.push(
+            aggregatedResponse.candidates[candidateIndex].content.parts.push(
               newPart as Part,
             );
           }
         }
       }
+      candidateIndex++;
     }
     if (response.usageMetadata) {
       aggregatedResponse.usageMetadata = response.usageMetadata;
