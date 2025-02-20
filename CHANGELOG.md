@@ -1,5 +1,20 @@
 # @google/generative-ai
 
+## 0.22.0
+
+### Minor Changes
+
+- b546cba: Breaking change: Fix typo of groundingChunks
+- 3004d3b: The schema types are now more specific, using a [discriminated union](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions) based on the 'type' field to more accurately define which fields are allowed.
+
+### Patch Changes
+
+- 864afb7: Swapped the package manager to npm, in order to take advantage of npm audit fix
+- 070bcdc: Fix undefined candidate index.
+- 6a99ed8: Make sure chat api do not send empty text request after encounter any server error that returns empty response. This fixes issue #124 and issue #286.
+- 25d3a92: update FinishReason enum
+- d87cf1d: Fix flaky integration test with tools
+
 ## 0.21.0
 
 ### Minor Changes
