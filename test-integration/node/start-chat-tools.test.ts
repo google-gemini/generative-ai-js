@@ -85,7 +85,6 @@ describe.only("startChat - tools", function () {
         ],
         tools,
       },
-      { apiVersion: "v1beta" },
     );
     const chat = model.startChat();
     const result1 = await chat.sendMessage([part1]);
