@@ -5,4 +5,4 @@ temp/
 .DS_Store
 testfiles
 nodejs-vertexai/
-samples/yarn.lock
+samples/package-lock.json

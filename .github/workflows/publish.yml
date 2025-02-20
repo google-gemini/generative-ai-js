@@ -38,7 +38,7 @@ jobs:
           node-version: 18
 
       - name: Install Dependencies & build
-        run: yarn && yarn build
+        run: npm install && npm run build
 
       - name: Create .npmrc
         run: |
@@ -55,7 +55,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: NPM publish
-        run: yarn changeset publish
+        run: npx @changesets/cli publish
 
       - name: Git tags
         # list tags then try to push them

@@ -22,7 +22,7 @@ import { getFormatPatternsString } from "./format-patterns";
 async function checkFormat(): Promise<void> {
   const prettierPromise = new Promise<boolean>((resolve) => {
     exec(
-      `yarn prettier -c ${getFormatPatternsString()}`,
+      `npx prettier -c ${getFormatPatternsString()}`,
       (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
@@ -38,12 +38,12 @@ async function checkFormat(): Promise<void> {
   let exitCode = 0;
   if (licensesUpdated) {
     console.error(
-      "License headers were changed. Make sure to run `yarn format`.",
+      "License headers were changed. Make sure to run `npm run format`.",
     );
     exitCode = 1;
   }
   if (prettierUpdated) {
-    console.error("Formatting needs fixes. Make sure to run `yarn format`.");
+    console.error("Formatting needs fixes. Make sure to run `npm run format`.");
     exitCode = 1;
   }
   process.exit(exitCode);

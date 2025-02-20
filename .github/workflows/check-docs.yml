@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Doc Change Check (Run "yarn docs" if this fails)
+name: Doc Change Check (Run "npm run docs" if this fails)
 
 on: pull_request
 
@@ -31,12 +31,12 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18
-    - name: Yarn install
-      run: yarn
+    - name: npm install
+      run: npm install
     - name: Run doc generation
-      run: yarn docs
+      run: npm run docs
     - name: Check for changes in docs-devsite dir (fail if so)
       run: git diff --exit-code docs/reference
     - name: Reference documentation needs to be updated. See message below.
       if: ${{ failure() }}
-      run: echo "Changes in this PR affect the reference docs. Run \`yarn docs\` locally to regenerate docs and add them to this PR."
+      run: echo "Changes in this PR affect the reference docs. Run \`npm run docs\` locally to regenerate docs and add them to this PR."
