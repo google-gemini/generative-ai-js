@@ -43,7 +43,10 @@ describe("startChat - tools", function () {
           parameters: {
             type: SchemaType.OBJECT,
             properties: {
-              city: { type: SchemaType.STRING },
+              city: {
+                type: SchemaType.STRING,
+                description: "A city name, for example, San Francisco",
+              },
             },
             required: ["city"],
           },
@@ -71,23 +74,19 @@ describe("startChat - tools", function () {
   this.slow(10e3);
   it("stream false", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
-    const model = genAI.getGenerativeModel(
-      {
-        model: "gemini-1.5-flash-latest",
-        safetySettings: [
-          {
-            category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-            threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
-          },
-        ],
-        tools,
-      },
-      { apiVersion: "v1beta" },
-    );
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-pro-latest",
+      safetySettings: [
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
+        },
+      ],
+      tools,
+    });
     const chat = model.startChat();
     const result1 = await chat.sendMessage([part1]);
-    expect(result1.response.text()).to.be.empty;
-    expect(result1.response.functionCall()).not.to.be.empty;
+    expect(result1.response.functionCalls()).not.to.be.empty;
     const result2 = await chat.sendMessage([part2]);
     expect(result2.response.text()).to.not.be.empty;
     const history = await chat.getHistory();

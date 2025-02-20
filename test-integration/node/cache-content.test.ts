@@ -29,14 +29,9 @@ use(chaiAsPromised);
 describe("cacheContent", function () {
   this.timeout(60e3);
   this.slow(10e3);
-  const model = "models/gemini-1.5-pro-001";
-  let text: string = "";
+  const model = "gemini-1.5-flash-002";
+  const text = "Purple cats drink chicken soup.";
 
-  // Minimum cache size is 32768 tokens.
-  for (let i = 0; i < 6554; i++) {
-    text += "Purple cats drink chicken soup.";
-    text += i % 8 === 7 ? "\n" : " ";
-  }
   it("createCache", async () => {
     // cacheManager create
     const ttlSeconds = 5;
