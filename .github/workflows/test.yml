@@ -42,9 +42,11 @@ jobs:
       run: npm run test
 
   node-integration-test:
+    timeout-minutes: 5
     if: github.secret_source == 'Actions'
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: False
       matrix:
         node-version: ['18.x', '20.x']
     steps:
