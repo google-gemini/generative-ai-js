@@ -49,7 +49,7 @@ describe("generateContent - tools", function () {
                     location: {
                       type: SchemaType.STRING,
                       description:
-                        "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
+                        "The city and state, e.g. San Francisco, CA",
                     },
                     description: {
                       type: SchemaType.STRING,
@@ -70,7 +70,7 @@ describe("generateContent - tools", function () {
                     location: {
                       type: SchemaType.STRING,
                       description:
-                        "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
+                        "The city and state, e.g. San Francisco, CA",
                     },
                     movie: {
                       type: SchemaType.STRING,
@@ -90,7 +90,7 @@ describe("generateContent - tools", function () {
                     location: {
                       type: SchemaType.STRING,
                       description:
-                        "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
+                        "The city and state, e.g. San Francisco, CA",
                     },
                     movie: {
                       type: SchemaType.STRING,
@@ -119,7 +119,7 @@ describe("generateContent - tools", function () {
       role: "user",
       parts: [
         {
-          text: "Which theaters in Mountain View show Barbie movie?",
+          text: "Which theaters in Mountain View (bay area) show Barbie movie?",
         },
       ],
     };
