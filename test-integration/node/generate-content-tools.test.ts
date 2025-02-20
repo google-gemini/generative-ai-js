@@ -118,7 +118,7 @@ describe("generateContent - tools", function () {
       role: "user",
       parts: [
         {
-          text: "Which theaters in Mountain View, CA show Barbie movie?",
+          text: "Which theaters in Mountain View show Barbie movie?",
         },
       ],
     };

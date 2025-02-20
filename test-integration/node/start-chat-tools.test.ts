@@ -32,14 +32,14 @@ use(chaiAsPromised);
  * Integration tests against live backend.
  */
 
-describe.only("startChat - tools", function () {
+describe("startChat - tools", function () {
   const tools: Tool[] = [
     {
       functionDeclarations: [
         {
-          name: "get_current_weather",
+          name: "getTemperature",
           description:
-            "Get the current weather in a given location",
+            "Get current temperature in degrees Celsius in a given city",
           parameters: {
             type: SchemaType.OBJECT,
             properties: {
@@ -56,13 +56,13 @@ describe.only("startChat - tools", function () {
   ];
 
   const part1: Part = {
-    text: "What is the current weather in New York?",
+    text: "What is the current temperature in New York?",
   };
   const part2: Part = {
     functionResponse: {
-      name: "get_current_weather",
+      name: "getTemperature",
       response: {
-        name: "get_current_weather",
+        name: "getTemperature",
         content: {
           temperature: "30",
         },
