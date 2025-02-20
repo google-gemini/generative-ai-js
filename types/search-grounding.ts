@@ -71,7 +71,7 @@ export declare interface GroundingMetadata {
   /**
    * List of grounding support.
    */
-  groundingSupport?: GroundingSupport[];
+  groundingSupports?: GroundingSupport[];
   /**
    * Metadata related to retrieval in the grounding flow.
    */
