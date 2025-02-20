@@ -43,9 +43,9 @@ describe("startChat - tools", function () {
           parameters: {
             type: SchemaType.OBJECT,
             properties: {
-              city: { 
+              city: {
                 type: SchemaType.STRING,
-                description: 'A city name, for example, San Francisco'
+                description: "A city name, for example, San Francisco",
               },
             },
             required: ["city"],
@@ -74,18 +74,16 @@ describe("startChat - tools", function () {
   this.slow(10e3);
   it("stream false", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
-    const model = genAI.getGenerativeModel(
-      {
-        model: "gemini-1.5-pro-latest",
-        safetySettings: [
-          {
-            category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-            threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
-          },
-        ],
-        tools,
-      },
-    );
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-pro-latest",
+      safetySettings: [
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
+        },
+      ],
+      tools,
+    });
     const chat = model.startChat();
     const result1 = await chat.sendMessage([part1]);
     expect(result1.response.functionCalls()).not.to.be.empty;
