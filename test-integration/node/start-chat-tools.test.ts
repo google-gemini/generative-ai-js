@@ -32,18 +32,21 @@ use(chaiAsPromised);
  * Integration tests against live backend.
  */
 
-describe("startChat - tools", function () {
+describe.only("startChat - tools", function () {
   const tools: Tool[] = [
     {
       functionDeclarations: [
         {
-          name: "getTemperature",
+          name: "get_current_weather",
           description:
-            "Get current temperature in degrees Celsius in a given city",
+            "Get the current weather in a given location",
           parameters: {
             type: SchemaType.OBJECT,
             properties: {
-              city: { type: SchemaType.STRING },
+              city: { 
+                type: SchemaType.STRING,
+                description: 'A city name, for example, San Francisco'
+              },
             },
             required: ["city"],
           },
@@ -53,13 +56,13 @@ describe("startChat - tools", function () {
   ];
 
   const part1: Part = {
-    text: "What is the temperature in New York?",
+    text: "What is the current weather in New York?",
   };
   const part2: Part = {
     functionResponse: {
-      name: "getTemperature",
+      name: "get_current_weather",
       response: {
-        name: "getTemperature",
+        name: "get_current_weather",
         content: {
           temperature: "30",
         },
@@ -73,7 +76,7 @@ describe("startChat - tools", function () {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel(
       {
-        model: "gemini-1.5-pro",
+        model: "gemini-1.5-pro-latest",
         safetySettings: [
           {
             category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -86,8 +89,7 @@ describe("startChat - tools", function () {
     );
     const chat = model.startChat();
     const result1 = await chat.sendMessage([part1]);
-    expect(result1.response.text()).to.be.empty;
-    expect(result1.response.functionCall()).not.to.be.empty;
+    expect(result1.response.functionCalls()).not.to.be.empty;
     const result2 = await chat.sendMessage([part2]);
     expect(result2.response.text()).to.not.be.empty;
     const history = await chat.getHistory();

@@ -35,7 +35,7 @@ describe("generateContent - tools", function () {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel(
       {
-        model: "gemini-1.5-flash-latest",
+        model: "gemini-1.5-pro-latest",
         tools: [
           {
             functionDeclarations: [
@@ -49,7 +49,7 @@ describe("generateContent - tools", function () {
                     location: {
                       type: SchemaType.STRING,
                       description:
-                        "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
+                        "The city and state, e.g. San Francisco, CA",
                     },
                     description: {
                       type: SchemaType.STRING,
@@ -70,7 +70,7 @@ describe("generateContent - tools", function () {
                     location: {
                       type: SchemaType.STRING,
                       description:
-                        "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
+                        "The city and state, e.g. San Francisco, CA",
                     },
                     movie: {
                       type: SchemaType.STRING,
@@ -90,7 +90,7 @@ describe("generateContent - tools", function () {
                     location: {
                       type: SchemaType.STRING,
                       description:
-                        "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
+                        "The city and state, e.g. San Francisco, CA",
                     },
                     movie: {
                       type: SchemaType.STRING,
@@ -111,15 +111,14 @@ describe("generateContent - tools", function () {
             ],
           },
         ],
-      },
-      { apiVersion: "v1beta" },
+      }
     );
 
     const src1 = {
       role: "user",
       parts: [
         {
-          text: "Which theaters in Mountain View show Barbie movie?",
+          text: "Which theaters in Mountain View, CA show Barbie movie?",
         },
       ],
     };
@@ -185,7 +184,7 @@ describe("generateContent - tools", function () {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel(
       {
-        model: "gemini-1.5-pro",
+        model: "gemini-1.5-pro-latest",
         tools: [
           {
             functionDeclarations: [
@@ -204,8 +203,7 @@ describe("generateContent - tools", function () {
             ],
           },
         ],
-      },
-      { apiVersion: "v1beta" },
+      }
     );
 
     const src1: Content = {
@@ -259,7 +257,6 @@ describe("generateContent - tools", function () {
       contents: [src1, src2, fn1, src3, fn1],
     });
     const response = await result.response;
-    console.log(response.text());
     expect(response.text()).to.match(/(\bsame\b|\byes\b)/i);
   });
 });
