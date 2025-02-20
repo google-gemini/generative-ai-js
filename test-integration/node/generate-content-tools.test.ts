@@ -33,87 +33,81 @@ describe("generateContent - tools", function () {
   // eslint-disable-next-line no-restricted-properties
   it("non-streaming, tools usage", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
-    const model = genAI.getGenerativeModel(
-      {
-        model: "gemini-1.5-flash-latest",
-        tools: [
-          {
-            functionDeclarations: [
-              {
-                name: "find_movies",
-                description:
-                  "find movie titles currently playing in theaters based on any description, genre, title words, etc.",
-                parameters: {
-                  type: SchemaType.OBJECT,
-                  properties: {
-                    location: {
-                      type: SchemaType.STRING,
-                      description:
-                        "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
-                    },
-                    description: {
-                      type: SchemaType.STRING,
-                      description:
-                        "Any kind of description including category or genre, title words, attributes, etc.",
-                    },
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-pro-latest",
+      tools: [
+        {
+          functionDeclarations: [
+            {
+              name: "find_movies",
+              description:
+                "find movie titles currently playing in theaters based on any description, genre, title words, etc.",
+              parameters: {
+                type: SchemaType.OBJECT,
+                properties: {
+                  location: {
+                    type: SchemaType.STRING,
+                    description: "The city and state, e.g. San Francisco, CA",
                   },
-                  required: ["description"],
-                },
-              },
-              {
-                name: "find_theaters",
-                description:
-                  "find theaters based on location and optionally movie title which are is currently playing in theaters",
-                parameters: {
-                  type: SchemaType.OBJECT,
-                  properties: {
-                    location: {
-                      type: SchemaType.STRING,
-                      description:
-                        "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
-                    },
-                    movie: {
-                      type: SchemaType.STRING,
-                      description: "Any movie title",
-                    },
+                  description: {
+                    type: SchemaType.STRING,
+                    description:
+                      "Any kind of description including category or genre, title words, attributes, etc.",
                   },
-                  required: ["location"],
                 },
+                required: ["description"],
               },
-              {
-                name: "get_showtimes",
-                description:
-                  "Find the start times for movies playing in a specific theater",
-                parameters: {
-                  type: SchemaType.OBJECT,
-                  properties: {
-                    location: {
-                      type: SchemaType.STRING,
-                      description:
-                        "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
-                    },
-                    movie: {
-                      type: SchemaType.STRING,
-                      description: "Any movie title",
-                    },
-                    theater: {
-                      type: SchemaType.STRING,
-                      description: "Name of the theater",
-                    },
-                    date: {
-                      type: SchemaType.STRING,
-                      description: "Date for requested showtime",
-                    },
+            },
+            {
+              name: "find_theaters",
+              description:
+                "find theaters based on location and optionally movie title which are is currently playing in theaters",
+              parameters: {
+                type: SchemaType.OBJECT,
+                properties: {
+                  location: {
+                    type: SchemaType.STRING,
+                    description: "The city and state, e.g. San Francisco, CA",
                   },
-                  required: ["location", "movie", "theater", "date"],
+                  movie: {
+                    type: SchemaType.STRING,
+                    description: "Any movie title",
+                  },
                 },
+                required: ["location"],
               },
-            ],
-          },
-        ],
-      },
-      { apiVersion: "v1beta" },
-    );
+            },
+            {
+              name: "get_showtimes",
+              description:
+                "Find the start times for movies playing in a specific theater",
+              parameters: {
+                type: SchemaType.OBJECT,
+                properties: {
+                  location: {
+                    type: SchemaType.STRING,
+                    description: "The city and state, e.g. San Francisco, CA",
+                  },
+                  movie: {
+                    type: SchemaType.STRING,
+                    description: "Any movie title",
+                  },
+                  theater: {
+                    type: SchemaType.STRING,
+                    description: "Name of the theater",
+                  },
+                  date: {
+                    type: SchemaType.STRING,
+                    description: "Date for requested showtime",
+                  },
+                },
+                required: ["location", "movie", "theater", "date"],
+              },
+            },
+          ],
+        },
+      ],
+    });
 
     const src1 = {
       role: "user",
@@ -183,30 +177,27 @@ describe("generateContent - tools", function () {
   });
   it("streaming, tools usage", async () => {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
-    const model = genAI.getGenerativeModel(
-      {
-        model: "gemini-1.5-flash-latest",
-        tools: [
-          {
-            functionDeclarations: [
-              {
-                name: "getTemperature",
-                description:
-                  "Get current temperature in degrees Celsius in a given city",
-                parameters: {
-                  type: SchemaType.OBJECT,
-                  properties: {
-                    city: { type: SchemaType.STRING },
-                  },
-                  required: ["city"],
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-pro-latest",
+      tools: [
+        {
+          functionDeclarations: [
+            {
+              name: "getTemperature",
+              description:
+                "Get current temperature in degrees Celsius in a given city",
+              parameters: {
+                type: SchemaType.OBJECT,
+                properties: {
+                  city: { type: SchemaType.STRING },
                 },
+                required: ["city"],
               },
-            ],
-          },
-        ],
-      },
-      { apiVersion: "v1beta" },
-    );
+            },
+          ],
+        },
+      ],
+    });
 
     const src1: Content = {
       role: "user",
@@ -259,7 +250,6 @@ describe("generateContent - tools", function () {
       contents: [src1, src2, fn1, src3, fn1],
     });
     const response = await result.response;
-    console.log(response.text());
     expect(response.text()).to.match(/(\bsame\b|\byes\b)/i);
   });
 });
