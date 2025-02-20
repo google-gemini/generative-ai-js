@@ -56,7 +56,7 @@ describe("startChat - tools", function () {
   ];
 
   const part1: Part = {
-    text: "What is the current temperature in New York?",
+    text: "What is the temperature in New York?",
   };
   const part2: Part = {
     functionResponse: {
