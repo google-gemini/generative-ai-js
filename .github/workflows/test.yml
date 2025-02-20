@@ -42,6 +42,7 @@ jobs:
       run: npm run test
 
   node-integration-test:
+    timeout-minutes: 5
     if: github.secret_source == 'Actions'
     runs-on: ubuntu-latest
     strategy:
@@ -64,6 +65,7 @@ jobs:
       run: npm run test:node:integration
 
   web-integration-test:
+    timeout-minutes: 5
     if: github.secret_source == 'Actions'
     runs-on: ubuntu-latest
     strategy:
