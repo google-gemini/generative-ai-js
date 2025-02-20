@@ -589,7 +589,7 @@ export interface GroundingChunkWeb {
 
 // @public
 export interface GroundingMetadata {
-    groundingChuncks?: GroundingChunk[];
+    groundingChunks?: GroundingChunk[];
     groundingSupports?: GroundingSupport[];
     retrievalMetadata?: RetrievalMetadata;
     searchEntryPoint?: SearchEntryPoint;

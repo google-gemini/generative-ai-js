@@ -16,7 +16,7 @@ export declare interface GroundingMetadata
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [groundingChuncks?](./generative-ai.groundingmetadata.groundingchuncks.md) |  | [GroundingChunk](./generative-ai.groundingchunk.md)<!-- -->\[\] | _(Optional)_ List of supporting references retrieved from specified grounding source. |
+|  [groundingChunks?](./generative-ai.groundingmetadata.groundingchunks.md) |  | [GroundingChunk](./generative-ai.groundingchunk.md)<!-- -->\[\] | _(Optional)_ List of supporting references retrieved from specified grounding source. |
 |  [groundingSupports?](./generative-ai.groundingmetadata.groundingsupports.md) |  | [GroundingSupport](./generative-ai.groundingsupport.md)<!-- -->\[\] | _(Optional)_ List of grounding support. |
 |  [retrievalMetadata?](./generative-ai.groundingmetadata.retrievalmetadata.md) |  | [RetrievalMetadata](./generative-ai.retrievalmetadata.md) | _(Optional)_ Metadata related to retrieval in the grounding flow. |
 |  [searchEntryPoint?](./generative-ai.groundingmetadata.searchentrypoint.md) |  | [SearchEntryPoint](./generative-ai.searchentrypoint.md) | _(Optional)_ Google search entry for the following-up web searches. |
