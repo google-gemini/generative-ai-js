@@ -27,7 +27,7 @@ use(chaiAsPromised);
  */
 
 describe("cacheContent", function () {
-  this.timeout(60e3);
+  this.timeout(120e3);
   this.slow(10e3);
   const model = "models/gemini-1.5-pro-001";
   let text: string = "";
