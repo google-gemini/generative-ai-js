@@ -49,7 +49,7 @@ describe("generateContent - tools", function () {
                     location: {
                       type: SchemaType.STRING,
                       description:
-                        "The city and state, e.g. San Francisco, CA",
+                        "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
                     },
                     description: {
                       type: SchemaType.STRING,
@@ -70,7 +70,7 @@ describe("generateContent - tools", function () {
                     location: {
                       type: SchemaType.STRING,
                       description:
-                        "The city and state, e.g. San Francisco, CA",
+                        "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
                     },
                     movie: {
                       type: SchemaType.STRING,
@@ -90,7 +90,7 @@ describe("generateContent - tools", function () {
                     location: {
                       type: SchemaType.STRING,
                       description:
-                        "The city and state, e.g. San Francisco, CA",
+                        "The city and state, e.g. San Francisco, CA or a zip code e.g. 95616",
                     },
                     movie: {
                       type: SchemaType.STRING,
@@ -119,7 +119,7 @@ describe("generateContent - tools", function () {
       role: "user",
       parts: [
         {
-          text: "Which theaters in Mountain View (bay area) show Barbie movie?",
+          text: "Which theaters in Mountain View show Barbie movie?",
         },
       ],
     };
@@ -185,7 +185,7 @@ describe("generateContent - tools", function () {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
     const model = genAI.getGenerativeModel(
       {
-        model: "gemini-1.5-flash-latest",
+        model: "gemini-1.5-pro",
         tools: [
           {
             functionDeclarations: [
