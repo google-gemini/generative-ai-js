@@ -15,6 +15,7 @@ seamlessly across text, images, and code.
 > app or fetch it remotely at runtime.
 
 ## Get started with the Gemini API
+[![Open Val Town Template](https://stevekrouse-badge.web.val.run/?3)](https://www.val.town/v/charmaine/googleGeminiAPI)
 
 1.  Go to [Google AI Studio](https://aistudio.google.com/).
 2.  Login with your Google account.
