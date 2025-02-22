@@ -2,24 +2,19 @@
 
 [Home](./index.md) &gt; [@google/generative-ai](./generative-ai.md) &gt; [SchemaType](./generative-ai.schematype.md)
 
-## SchemaType enum
+## SchemaType variable
 
 Contains the list of OpenAPI data types as defined by https://swagger.io/docs/specification/data-models/data-types/
 
 **Signature:**
 
 ```typescript
-export declare enum SchemaType 
+SchemaType: {
+    readonly STRING: "string";
+    readonly NUMBER: "number";
+    readonly INTEGER: "integer";
+    readonly BOOLEAN: "boolean";
+    readonly ARRAY: "array";
+    readonly OBJECT: "object";
+}
 ```
-
-## Enumeration Members
-
-|  Member | Value | Description |
-|  --- | --- | --- |
-|  ARRAY | <code>&quot;array&quot;</code> | Array type. |
-|  BOOLEAN | <code>&quot;boolean&quot;</code> | Boolean type. |
-|  INTEGER | <code>&quot;integer&quot;</code> | Integer type. |
-|  NUMBER | <code>&quot;number&quot;</code> | Number type. |
-|  OBJECT | <code>&quot;object&quot;</code> | Object type. |
-|  STRING | <code>&quot;string&quot;</code> | String type. |
-

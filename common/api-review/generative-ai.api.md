@@ -789,14 +789,17 @@ export interface SafetySetting {
 export type Schema = StringSchema | NumberSchema | IntegerSchema | BooleanSchema | ArraySchema | ObjectSchema;
 
 // @public
-export enum SchemaType {
-    ARRAY = "array",
-    BOOLEAN = "boolean",
-    INTEGER = "integer",
-    NUMBER = "number",
-    OBJECT = "object",
-    STRING = "string"
-}
+export const SchemaType: {
+    readonly STRING: "string";
+    readonly NUMBER: "number";
+    readonly INTEGER: "integer";
+    readonly BOOLEAN: "boolean";
+    readonly ARRAY: "array";
+    readonly OBJECT: "object";
+};
+
+// @public (undocumented)
+export type SchemaType = typeof SchemaType extends Record<string, infer R> ? R : never;
 
 // @public
 export interface SearchEntryPoint {
