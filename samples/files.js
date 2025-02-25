@@ -42,6 +42,19 @@ async function filesCreateImage() {
     `Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.file.uri}`,
   );
 
+  // Polling getFile to check processing complete
+  let file = await fileManager.getFile(uploadResult.file.name);
+  while (file.state === FileState.PROCESSING) {
+    process.stdout.write(".");
+    // Sleep for 10 seconds
+    await new Promise((resolve) => setTimeout(resolve, 10_000));
+    // Fetch the file from the API again
+    file = await fileManager.getFile(uploadResult.file.name);
+  }
+  if (file.state === FileState.FAILED) {
+    throw new Error("Audio processing failed.");
+  }
+
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   const result = await model.generateContent([
@@ -120,6 +133,19 @@ async function filesCreateText() {
   console.log(
     `Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.file.uri}`,
   );
+
+  // Polling getFile to check processing complete
+  let file = await fileManager.getFile(uploadResult.file.name);
+  while (file.state === FileState.PROCESSING) {
+    process.stdout.write(".");
+    // Sleep for 10 seconds
+    await new Promise((resolve) => setTimeout(resolve, 10_000));
+    // Fetch the file from the API again
+    file = await fileManager.getFile(uploadResult.file.name);
+  }
+  if (file.state === FileState.FAILED) {
+    throw new Error("Audio processing failed.");
+  }
 
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -213,6 +239,20 @@ async function filesCreatePDF() {
   console.log(
     `Uploaded file ${uploadResponse.file.displayName} as: ${uploadResponse.file.uri}`,
   );
+
+  // Polling getFile to check processing complete
+  let file = await fileManager.getFile(uploadResult.file.name);
+  while (file.state === FileState.PROCESSING) {
+    process.stdout.write(".");
+    // Sleep for 10 seconds
+    await new Promise((resolve) => setTimeout(resolve, 10_000));
+    // Fetch the file from the API again
+    file = await fileManager.getFile(uploadResult.file.name);
+  }
+  if (file.state === FileState.FAILED) {
+    throw new Error("Audio processing failed.");
+  }
+
   // Generate content using text and the URI reference for the uploaded file.
   const result = await model.generateContent([
     {
