@@ -43,7 +43,6 @@ async function searchGrounding() {
         },
       ],
     },
-    { apiVersion: "v1beta" },
   );
 
   const prompt = "What is the price of Google stock today?";

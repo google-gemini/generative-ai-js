@@ -49,3 +49,4 @@ to comment out cases you do not want to run.
 | [search_grounding.js](./search_grounding.js)             | Generate with google search grounding |
 | [log_prob.js](./log_prob.js)                             | Generate with log probability for each token |
 | [text_generation.js](./text_generation.js)               | Generating text |
+| [api_version.js](./api_version.js)                       | Setting api version|
