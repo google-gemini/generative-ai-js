@@ -16,9 +16,9 @@ export declare enum HarmBlockThreshold
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  BLOCK\_LOW\_AND\_ABOVE | <code>&quot;BLOCK_LOW_AND_ABOVE&quot;</code> |  |
-|  BLOCK\_MEDIUM\_AND\_ABOVE | <code>&quot;BLOCK_MEDIUM_AND_ABOVE&quot;</code> |  |
-|  BLOCK\_NONE | <code>&quot;BLOCK_NONE&quot;</code> |  |
-|  BLOCK\_ONLY\_HIGH | <code>&quot;BLOCK_ONLY_HIGH&quot;</code> |  |
-|  HARM\_BLOCK\_THRESHOLD\_UNSPECIFIED | <code>&quot;HARM_BLOCK_THRESHOLD_UNSPECIFIED&quot;</code> |  |
+|  BLOCK\_LOW\_AND\_ABOVE | <code>&quot;BLOCK_LOW_AND_ABOVE&quot;</code> | Content with NEGLIGIBLE will be allowed. |
+|  BLOCK\_MEDIUM\_AND\_ABOVE | <code>&quot;BLOCK_MEDIUM_AND_ABOVE&quot;</code> | Content with NEGLIGIBLE and LOW will be allowed. |
+|  BLOCK\_NONE | <code>&quot;BLOCK_NONE&quot;</code> | All content will be allowed. |
+|  BLOCK\_ONLY\_HIGH | <code>&quot;BLOCK_ONLY_HIGH&quot;</code> | Content with NEGLIGIBLE, LOW, and MEDIUM will be allowed. |
+|  HARM\_BLOCK\_THRESHOLD\_UNSPECIFIED | <code>&quot;HARM_BLOCK_THRESHOLD_UNSPECIFIED&quot;</code> | Threshold is unspecified. |
 

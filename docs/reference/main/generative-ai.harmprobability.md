@@ -16,9 +16,9 @@ export declare enum HarmProbability
 
 |  Member | Value | Description |
 |  --- | --- | --- |
-|  HARM\_PROBABILITY\_UNSPECIFIED | <code>&quot;HARM_PROBABILITY_UNSPECIFIED&quot;</code> |  |
-|  HIGH | <code>&quot;HIGH&quot;</code> |  |
-|  LOW | <code>&quot;LOW&quot;</code> |  |
-|  MEDIUM | <code>&quot;MEDIUM&quot;</code> |  |
-|  NEGLIGIBLE | <code>&quot;NEGLIGIBLE&quot;</code> |  |
+|  HARM\_PROBABILITY\_UNSPECIFIED | <code>&quot;HARM_PROBABILITY_UNSPECIFIED&quot;</code> | Probability is unspecified. |
+|  HIGH | <code>&quot;HIGH&quot;</code> | Content has a high chance of being unsafe. |
+|  LOW | <code>&quot;LOW&quot;</code> | Content has a low chance of being unsafe. |
+|  MEDIUM | <code>&quot;MEDIUM&quot;</code> | Content has a medium chance of being unsafe. |
+|  NEGLIGIBLE | <code>&quot;NEGLIGIBLE&quot;</code> | Content has a negligible chance of being unsafe. |
 

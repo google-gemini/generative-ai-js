@@ -16,6 +16,7 @@ export declare enum HarmCategory
 
 |  Member | Value | Description |
 |  --- | --- | --- |
+|  HARM\_CATEGORY\_CIVIC\_INTEGRITY | <code>&quot;HARM_CATEGORY_CIVIC_INTEGRITY&quot;</code> |  |
 |  HARM\_CATEGORY\_DANGEROUS\_CONTENT | <code>&quot;HARM_CATEGORY_DANGEROUS_CONTENT&quot;</code> |  |
 |  HARM\_CATEGORY\_HARASSMENT | <code>&quot;HARM_CATEGORY_HARASSMENT&quot;</code> |  |
 |  HARM\_CATEGORY\_HATE\_SPEECH | <code>&quot;HARM_CATEGORY_HATE_SPEECH&quot;</code> |  |

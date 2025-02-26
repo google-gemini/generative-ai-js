@@ -613,20 +613,17 @@ export interface GroundingSupportSegment {
 
 // @public
 export enum HarmBlockThreshold {
-    // (undocumented)
     BLOCK_LOW_AND_ABOVE = "BLOCK_LOW_AND_ABOVE",
-    // (undocumented)
     BLOCK_MEDIUM_AND_ABOVE = "BLOCK_MEDIUM_AND_ABOVE",
-    // (undocumented)
     BLOCK_NONE = "BLOCK_NONE",
-    // (undocumented)
     BLOCK_ONLY_HIGH = "BLOCK_ONLY_HIGH",
-    // (undocumented)
     HARM_BLOCK_THRESHOLD_UNSPECIFIED = "HARM_BLOCK_THRESHOLD_UNSPECIFIED"
 }
 
 // @public
 export enum HarmCategory {
+    // (undocumented)
+    HARM_CATEGORY_CIVIC_INTEGRITY = "HARM_CATEGORY_CIVIC_INTEGRITY",
     // (undocumented)
     HARM_CATEGORY_DANGEROUS_CONTENT = "HARM_CATEGORY_DANGEROUS_CONTENT",
     // (undocumented)
@@ -641,15 +638,10 @@ export enum HarmCategory {
 
 // @public
 export enum HarmProbability {
-    // (undocumented)
     HARM_PROBABILITY_UNSPECIFIED = "HARM_PROBABILITY_UNSPECIFIED",
-    // (undocumented)
     HIGH = "HIGH",
-    // (undocumented)
     LOW = "LOW",
-    // (undocumented)
     MEDIUM = "MEDIUM",
-    // (undocumented)
     NEGLIGIBLE = "NEGLIGIBLE"
 }
 
