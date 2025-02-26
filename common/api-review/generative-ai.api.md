@@ -4,12 +4,31 @@
 
 ```ts
 
+// Warning: (ae-incompatible-release-tags) The symbol "ArraySchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface ArraySchema extends BaseSchema {
+    items: Schema;
+    maxItems?: number;
+    minItems?: number;
+    // (undocumented)
+    type: typeof SchemaType.ARRAY;
+}
+
 // @public
 export interface BaseParams {
     // (undocumented)
     generationConfig?: GenerationConfig;
     // (undocumented)
     safetySettings?: SafetySetting[];
+}
+
+// Warning: (ae-internal-missing-underscore) The name "BaseSchema" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal
+export interface BaseSchema {
+    description?: string;
+    nullable?: boolean;
 }
 
 // @public
@@ -32,6 +51,14 @@ export enum BlockReason {
     OTHER = "OTHER",
     // (undocumented)
     SAFETY = "SAFETY"
+}
+
+// Warning: (ae-incompatible-release-tags) The symbol "BooleanSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface BooleanSchema extends BaseSchema {
+    // (undocumented)
+    type: typeof SchemaType.BOOLEAN;
 }
 
 // @public
@@ -156,6 +183,20 @@ export interface CountTokensResponse {
 }
 
 // @public
+export interface DynamicRetrievalConfig {
+    dynamicThreshold?: number;
+    mode?: DynamicRetrievalMode;
+}
+
+// @public
+export enum DynamicRetrievalMode {
+    // (undocumented)
+    MODE_DYNAMIC = "MODE_DYNAMIC",
+    // (undocumented)
+    MODE_UNSPECIFIED = "MODE_UNSPECIFIED"
+}
+
+// @public
 export interface EmbedContentRequest {
     // (undocumented)
     content: Content;
@@ -254,17 +295,25 @@ export interface FileDataPart {
 // @public
 export enum FinishReason {
     // (undocumented)
+    BLOCKLIST = "BLOCKLIST",
+    // (undocumented)
     FINISH_REASON_UNSPECIFIED = "FINISH_REASON_UNSPECIFIED",
     // (undocumented)
     LANGUAGE = "LANGUAGE",
+    // (undocumented)
+    MALFORMED_FUNCTION_CALL = "MALFORMED_FUNCTION_CALL",
     // (undocumented)
     MAX_TOKENS = "MAX_TOKENS",
     // (undocumented)
     OTHER = "OTHER",
     // (undocumented)
+    PROHIBITED_CONTENT = "PROHIBITED_CONTENT",
+    // (undocumented)
     RECITATION = "RECITATION",
     // (undocumented)
     SAFETY = "SAFETY",
+    // (undocumented)
+    SPII = "SPII",
     // (undocumented)
     STOP = "STOP"
 }
@@ -333,8 +382,7 @@ export interface FunctionDeclarationSchema {
 }
 
 // @public
-export interface FunctionDeclarationSchemaProperty extends Schema {
-}
+export type FunctionDeclarationSchemaProperty = Schema;
 
 // @public
 export interface FunctionDeclarationsTool {
@@ -378,6 +426,7 @@ export interface GenerateContentCandidate {
     finishMessage?: string;
     // (undocumented)
     finishReason?: FinishReason;
+    groundingMetadata?: GroundingMetadata;
     // (undocumented)
     index: number;
     logprobsResult?: LogprobsResult;
@@ -518,6 +567,51 @@ export class GoogleGenerativeAIResponseError<T> extends GoogleGenerativeAIError 
 }
 
 // @public
+export interface GoogleSearchRetrieval {
+    dynamicRetrievalConfig?: DynamicRetrievalConfig;
+}
+
+// @public
+export interface GoogleSearchRetrievalTool {
+    googleSearchRetrieval?: GoogleSearchRetrieval;
+}
+
+// @public
+export interface GroundingChunk {
+    web?: GroundingChunkWeb;
+}
+
+// @public
+export interface GroundingChunkWeb {
+    title?: string;
+    uri?: string;
+}
+
+// @public
+export interface GroundingMetadata {
+    groundingChunks?: GroundingChunk[];
+    groundingSupports?: GroundingSupport[];
+    retrievalMetadata?: RetrievalMetadata;
+    searchEntryPoint?: SearchEntryPoint;
+    webSearchQueries: string[];
+}
+
+// @public
+export interface GroundingSupport {
+    confidenceScores?: number[];
+    groundingChunckIndices?: number[];
+    segment?: string;
+}
+
+// @public
+export interface GroundingSupportSegment {
+    endIndex?: number;
+    partIndex?: number;
+    startIndex?: number;
+    text?: string;
+}
+
+// @public
 export enum HarmBlockThreshold {
     // (undocumented)
     BLOCK_LOW_AND_ABOVE = "BLOCK_LOW_AND_ABOVE",
@@ -577,6 +671,15 @@ export interface InlineDataPart {
     text?: never;
 }
 
+// Warning: (ae-incompatible-release-tags) The symbol "IntegerSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface IntegerSchema extends BaseSchema {
+    format?: "int32" | "int64";
+    // (undocumented)
+    type: typeof SchemaType.INTEGER;
+}
+
 // @public
 export interface LogprobsCandidate {
     logProbability: number;
@@ -602,6 +705,27 @@ export interface ModelParams extends BaseParams {
     toolConfig?: ToolConfig;
     // (undocumented)
     tools?: Tool[];
+}
+
+// Warning: (ae-incompatible-release-tags) The symbol "NumberSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface NumberSchema extends BaseSchema {
+    format?: "float" | "double";
+    // (undocumented)
+    type: typeof SchemaType.NUMBER;
+}
+
+// Warning: (ae-incompatible-release-tags) The symbol "ObjectSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface ObjectSchema extends BaseSchema {
+    properties: {
+        [k: string]: Schema;
+    };
+    required?: string[];
+    // (undocumented)
+    type: typeof SchemaType.OBJECT;
 }
 
 // @public
@@ -638,7 +762,11 @@ export interface RequestOptions {
 }
 
 // @public
-export interface ResponseSchema extends Schema {
+export type ResponseSchema = Schema;
+
+// @public
+export interface RetrievalMetadata {
+    googleSearchDynamicRetrievalScore?: number;
 }
 
 // @public
@@ -658,19 +786,7 @@ export interface SafetySetting {
 }
 
 // @public
-export interface Schema {
-    description?: string;
-    enum?: string[];
-    example?: unknown;
-    format?: string;
-    items?: Schema;
-    nullable?: boolean;
-    properties?: {
-        [k: string]: Schema;
-    };
-    required?: string[];
-    type?: SchemaType;
-}
+export type Schema = StringSchema | NumberSchema | IntegerSchema | BooleanSchema | ArraySchema | ObjectSchema;
 
 // @public
 export enum SchemaType {
@@ -680,6 +796,12 @@ export enum SchemaType {
     NUMBER = "number",
     OBJECT = "object",
     STRING = "string"
+}
+
+// @public
+export interface SearchEntryPoint {
+    renderedContent?: string;
+    sdkBlob?: string;
 }
 
 // @public
@@ -698,6 +820,15 @@ export interface StartChatParams extends BaseParams {
     toolConfig?: ToolConfig;
     // (undocumented)
     tools?: Tool[];
+}
+
+// Warning: (ae-incompatible-release-tags) The symbol "StringSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface StringSchema extends BaseSchema {
+    enum?: string[];
+    // (undocumented)
+    type: typeof SchemaType.STRING;
 }
 
 // @public
@@ -735,7 +866,7 @@ export interface TextPart {
 }
 
 // @public
-export type Tool = FunctionDeclarationsTool | CodeExecutionTool;
+export type Tool = FunctionDeclarationsTool | CodeExecutionTool | GoogleSearchRetrievalTool;
 
 // @public
 export interface ToolConfig {

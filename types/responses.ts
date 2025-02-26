@@ -22,6 +22,7 @@ import {
   HarmCategory,
   HarmProbability,
 } from "./enums";
+import { GroundingMetadata } from "./search-grounding";
 
 /**
  * Result object returned from generateContent() call.
@@ -94,8 +95,8 @@ export interface GenerateContentResponse {
 export interface LogprobsResult {
   /** Length = total number of decoding steps. */
   topCandidates: TopCandidates[];
-  /** 
-   * Length = total number of decoding steps. 
+  /**
+   * Length = total number of decoding steps.
    * The chosen candidates may or may not be in topCandidates.
    */
   chosenCandidates: LogprobsCandidate[];
@@ -163,6 +164,8 @@ export interface GenerateContentCandidate {
   avgLogprobs?: number;
   /** Log-likelihood scores for the response tokens and top tokens. */
   logprobsResult?: LogprobsResult;
+  /** Search grounding metadata. */
+  groundingMetadata?: GroundingMetadata;
 }
 
 /**

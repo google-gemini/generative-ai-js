@@ -2,27 +2,14 @@
 
 [Home](./index.md) &gt; [@google/generative-ai](./generative-ai.md) &gt; [Schema](./generative-ai.schema.md)
 
-## Schema interface
+## Schema type
 
 Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed.
 
 **Signature:**
 
 ```typescript
-export interface Schema 
+export type Schema = StringSchema | NumberSchema | IntegerSchema | BooleanSchema | ArraySchema | ObjectSchema;
 ```
-
-## Properties
-
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [description?](./generative-ai.schema.description.md) |  | string | _(Optional)_ Optional. The description of the property. |
-|  [enum?](./generative-ai.schema.enum.md) |  | string\[\] | _(Optional)_ Optional. The enum of the property. |
-|  [example?](./generative-ai.schema.example.md) |  | unknown | _(Optional)_ Optional. The example of the property. |
-|  [format?](./generative-ai.schema.format.md) |  | string | _(Optional)_ Optional. The format of the property. |
-|  [items?](./generative-ai.schema.items.md) |  | [Schema](./generative-ai.schema.md) | _(Optional)_ Optional. The items of the property. |
-|  [nullable?](./generative-ai.schema.nullable.md) |  | boolean | _(Optional)_ Optional. Whether the property is nullable. |
-|  [properties?](./generative-ai.schema.properties.md) |  | { \[k: string\]: [Schema](./generative-ai.schema.md)<!-- -->; } | _(Optional)_ Optional. Map of [Schema](./generative-ai.schema.md)<!-- -->. |
-|  [required?](./generative-ai.schema.required.md) |  | string\[\] | _(Optional)_ Optional. Array of required property. |
-|  [type?](./generative-ai.schema.type.md) |  | [SchemaType](./generative-ai.schematype.md) | _(Optional)_ Optional. The type of the property. [SchemaType](./generative-ai.schematype.md)<!-- -->. |
+**References:** [StringSchema](./generative-ai.stringschema.md)<!-- -->, [NumberSchema](./generative-ai.numberschema.md)<!-- -->, [IntegerSchema](./generative-ai.integerschema.md)<!-- -->, [BooleanSchema](./generative-ai.booleanschema.md)<!-- -->, [ArraySchema](./generative-ai.arrayschema.md)<!-- -->, [ObjectSchema](./generative-ai.objectschema.md)
 

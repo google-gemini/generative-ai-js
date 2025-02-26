@@ -132,6 +132,86 @@ describe("processStream", () => {
       args: { city: "San Jose" },
     });
   });
+
+  it("streaming response - searchGrounding", async () => {
+    const fakeResponse = getMockResponseStreaming(
+      "streaming-success-search-grounding.txt",
+    );
+    const result = processStream(fakeResponse as Response);
+    const aggregatedResponse = await result.response;
+    const expectedGroundingMetadata = {
+      searchEntryPoint: {
+        renderedContent: "test_rendered_content",
+      },
+      groundingChunks: [
+        {
+          web: {
+            uri: "test_uri_1",
+            title: "test_title_1",
+          },
+        },
+        {
+          web: {
+            uri: "test_uri_2",
+            title: "test_title_2",
+          },
+        },
+      ],
+      groundingSupports: [
+        {
+          segment: {
+            endIndex: 41,
+            text: "The current stock price for Alphabet Inc.",
+          },
+          groundingChunkIndices: [0],
+          confidenceScores: [0.68925554],
+        },
+        {
+          segment: {
+            startIndex: 42,
+            endIndex: 82,
+            text: "(Google) Class C (GOOG) is \\$166.79 USD.",
+          },
+          groundingChunkIndices: [1, 0],
+          confidenceScores: [0.92251855, 0.92251855],
+        },
+        {
+          segment: {
+            startIndex: 83,
+            endIndex: 147,
+            text: "This price reflects a decrease of -0.97% over the last 24 hours.",
+          },
+          groundingChunkIndices: [0],
+          confidenceScores: [0.9831334],
+        },
+        {
+          segment: {
+            startIndex: 150,
+            endIndex: 199,
+            text: "Please note that stock prices can change rapidly.",
+          },
+          groundingChunkIndices: [1],
+          confidenceScores: [0.6181941],
+        },
+        {
+          segment: {
+            startIndex: 201,
+            endIndex: 267,
+            text: "This information is current as of October 2, 2024, at 5:58 PM UTC.",
+          },
+          groundingChunkIndices: [1],
+          confidenceScores: [0.6107691],
+        },
+      ],
+      webSearchQueries: ["what is the current google stock price"],
+    };
+    expect(aggregatedResponse.text()).to.contains("$166.79 USD");
+    console.log(aggregatedResponse.candidates[0]);
+    expect(aggregatedResponse.candidates[0].groundingMetadata).to.be.deep.equal(
+      expectedGroundingMetadata,
+    );
+  });
+
   it("candidate had finishReason", async () => {
     const fakeResponse = getMockResponseStreaming(
       "streaming-failure-finish-reason-safety.txt",

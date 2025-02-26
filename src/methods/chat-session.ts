@@ -110,7 +110,8 @@ export class ChatSession {
       .then((result) => {
         if (
           result.response.candidates &&
-          result.response.candidates.length > 0
+          result.response.candidates.length > 0 &&
+          result.response.candidates[0]?.content !== undefined
         ) {
           this._history.push(newContent);
           const responseContent: Content = {
@@ -179,7 +180,11 @@ export class ChatSession {
       })
       .then((streamResult) => streamResult.response)
       .then((response) => {
-        if (response.candidates && response.candidates.length > 0) {
+        if (
+          response.candidates &&
+          response.candidates.length > 0 &&
+          response.candidates[0]?.content !== undefined
+        ) {
           this._history.push(newContent);
           const responseContent = { ...response.candidates[0].content };
           // Response seems to come back without a role set.

@@ -32,19 +32,21 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: yarn install
-      run: yarn
+    - name: npm install
+      run: npm install
 
     - name: run formatting and license check
-      run: yarn format:check
+      run: npm run format:check
 
     - name: run unit tests (includes lint)
-      run: yarn test
+      run: npm run test
 
   node-integration-test:
+    timeout-minutes: 5
     if: github.secret_source == 'Actions'
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: False
       matrix:
         node-version: ['18.x', '20.x']
     steps:
@@ -53,15 +55,15 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
+        cache: 'npm'
 
-    - name: yarn install
-      run: yarn
+    - name: npm install
+      run: npm install
 
     - name: run node iTests
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      run: yarn test:node:integration
+      run: npm run test:node:integration
 
   web-integration-test:
     if: github.secret_source == 'Actions'
@@ -75,15 +77,15 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
+        cache: 'npm'
 
-    - name: yarn install
-      run: yarn
+    - name: npm install
+      run: npm install
 
     - name: run web iTests
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      run: yarn test:web:integration
+      run: npm run test:web:integration
 
   interface-alignment-test:
     name: Interface Alignment Test
@@ -94,7 +96,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 20
-        cache: 'yarn'
+        cache: 'npm'
 
     - name: Get VertexAI repo
       # Need to npm install inner repo first or there will be errors
@@ -103,7 +105,7 @@ jobs:
         cd nodejs-vertexai
         npm install
         cd ..
-        yarn
+        npm install
 
     - name: Run tests
       env:

@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "@google/generative-ai": "*"
   },
@@ -9,6 +10,6 @@
   "scripts": {
     "check-samples": "node ./utils/check-samples.js",
     "import-comments": "node ./utils/insert-import-comments.js",
-    "test": "yarn check-samples"
+    "test": "npm run check-samples"
   }
 }

@@ -5,3 +5,4 @@ temp/
 .DS_Store
 testfiles
 nodejs-vertexai/
+samples/package-lock.json

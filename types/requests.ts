@@ -23,6 +23,7 @@ import {
   ResponseSchema,
   ToolConfig,
 } from "./function-calling";
+import { GoogleSearchRetrievalTool } from "./search-grounding";
 
 /**
  * Base parameters for a number of methods.
@@ -228,7 +229,10 @@ export interface SingleRequestOptions extends RequestOptions {
  * Defines a tool that model can call to access external knowledge.
  * @public
  */
-export declare type Tool = FunctionDeclarationsTool | CodeExecutionTool;
+export declare type Tool =
+  | FunctionDeclarationsTool
+  | CodeExecutionTool
+  | GoogleSearchRetrievalTool;
 
 /**
  * Enables the model to execute code as part of generation.

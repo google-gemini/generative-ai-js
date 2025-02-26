@@ -22,7 +22,7 @@ import { getFormatPatternsString } from "./format-patterns";
 async function runFormat(): Promise<void> {
   const prettierPromise = new Promise<boolean>((resolve) => {
     exec(
-      `yarn prettier --write ${getFormatPatternsString()}`,
+      `npx prettier --write ${getFormatPatternsString()}`,
       (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);

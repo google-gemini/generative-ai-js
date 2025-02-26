@@ -4,6 +4,33 @@
 
 ```ts
 
+// Warning: (ae-incompatible-release-tags) The symbol "ArraySchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface ArraySchema extends BaseSchema {
+    items: Schema;
+    maxItems?: number;
+    minItems?: number;
+    // (undocumented)
+    type: typeof SchemaType.ARRAY;
+}
+
+// Warning: (ae-internal-missing-underscore) The name "BaseSchema" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal
+export interface BaseSchema {
+    description?: string;
+    nullable?: boolean;
+}
+
+// Warning: (ae-incompatible-release-tags) The symbol "BooleanSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface BooleanSchema extends BaseSchema {
+    // (undocumented)
+    type: typeof SchemaType.BOOLEAN;
+}
+
 // @public
 export interface CachedContent extends CachedContentBase {
     createTime?: string;
@@ -286,8 +313,7 @@ export interface FunctionDeclarationSchema {
 }
 
 // @public
-export interface FunctionDeclarationSchemaProperty extends Schema {
-}
+export type FunctionDeclarationSchemaProperty = Schema;
 
 // @public
 export interface FunctionDeclarationsTool {
@@ -368,6 +394,15 @@ export interface InlineDataPart {
     text?: never;
 }
 
+// Warning: (ae-incompatible-release-tags) The symbol "IntegerSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface IntegerSchema extends BaseSchema {
+    format?: "int32" | "int64";
+    // (undocumented)
+    type: typeof SchemaType.INTEGER;
+}
+
 // @public (undocumented)
 export interface ListCacheResponse {
     // (undocumented)
@@ -392,6 +427,27 @@ export interface ListParams {
     pageToken?: string;
 }
 
+// Warning: (ae-incompatible-release-tags) The symbol "NumberSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface NumberSchema extends BaseSchema {
+    format?: "float" | "double";
+    // (undocumented)
+    type: typeof SchemaType.NUMBER;
+}
+
+// Warning: (ae-incompatible-release-tags) The symbol "ObjectSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface ObjectSchema extends BaseSchema {
+    properties: {
+        [k: string]: Schema;
+    };
+    required?: string[];
+    // (undocumented)
+    type: typeof SchemaType.OBJECT;
+}
+
 // @public
 export enum Outcome {
     OUTCOME_DEADLINE_EXCEEDED = "outcome_deadline_exceeded",
@@ -413,8 +469,7 @@ export interface RequestOptions {
 }
 
 // @public
-export interface ResponseSchema extends Schema {
-}
+export type ResponseSchema = Schema;
 
 // @public
 export interface RpcStatus {
@@ -424,19 +479,7 @@ export interface RpcStatus {
 }
 
 // @public
-export interface Schema {
-    description?: string;
-    enum?: string[];
-    example?: unknown;
-    format?: string;
-    items?: Schema;
-    nullable?: boolean;
-    properties?: {
-        [k: string]: Schema;
-    };
-    required?: string[];
-    type?: SchemaType;
-}
+export type Schema = StringSchema | NumberSchema | IntegerSchema | BooleanSchema | ArraySchema | ObjectSchema;
 
 // @public
 export enum SchemaType {
@@ -451,6 +494,15 @@ export enum SchemaType {
 // @public
 export interface SingleRequestOptions extends RequestOptions {
     signal?: AbortSignal;
+}
+
+// Warning: (ae-incompatible-release-tags) The symbol "StringSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface StringSchema extends BaseSchema {
+    enum?: string[];
+    // (undocumented)
+    type: typeof SchemaType.STRING;
 }
 
 // @public
@@ -471,8 +523,10 @@ export interface TextPart {
     text: string;
 }
 
+// Warning: (ae-forgotten-export) The symbol "GoogleSearchRetrievalTool" needs to be exported by the entry point index.d.ts
+//
 // @public
-export type Tool = FunctionDeclarationsTool | CodeExecutionTool;
+export type Tool = FunctionDeclarationsTool | CodeExecutionTool | GoogleSearchRetrievalTool;
 
 // @public
 export interface ToolConfig {
