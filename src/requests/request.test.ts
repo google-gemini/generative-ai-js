@@ -28,9 +28,9 @@ import {
   makeModelRequest,
 } from "./request";
 import {
+  GoogleGenerativeAIAbortError,
   GoogleGenerativeAIFetchError,
   GoogleGenerativeAIRequestInputError,
-  GoogleGenerativeAIAbortError,
 } from "../errors";
 
 use(sinonChai);

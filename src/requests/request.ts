@@ -17,10 +17,10 @@
 
 import { RequestOptions, SingleRequestOptions } from "../../types";
 import {
+  GoogleGenerativeAIAbortError,
   GoogleGenerativeAIError,
   GoogleGenerativeAIFetchError,
   GoogleGenerativeAIRequestInputError,
-  GoogleGenerativeAIAbortError,
 } from "../errors";
 
 export const DEFAULT_BASE_URL = "https://generativelanguage.googleapis.com";
