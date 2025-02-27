@@ -14,44 +14,7 @@ export declare interface GoogleSearchRetrievalTool
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [googleSearchRetrieval?](./generative-ai.googlesearchretrievaltool.googlesearchretrieval.md) |  | [GoogleSearchRetrieval](./generative-ai.googlesearchretrieval.md) | _(Optional)_ Google search retrieval tool config. |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[googleSearchRetrieval?](./generative-ai.googlesearchretrievaltool.googlesearchretrieval.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[GoogleSearchRetrieval](./generative-ai.googlesearchretrieval.md)
-
-
-</td><td>
-
-_(Optional)_ Google search retrieval tool config.
-
-
-</td></tr>
-</tbody></table>

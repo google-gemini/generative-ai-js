@@ -14,59 +14,8 @@ export interface Content
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [parts](./generative-ai.content.parts.md) |  | [Part](./generative-ai.part.md)<!-- -->\[\] |  |
+|  [role](./generative-ai.content.role.md) |  | string |  |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[parts](./generative-ai.content.parts.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[Part](./generative-ai.part.md)<!-- -->\[\]
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[role](./generative-ai.content.role.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>

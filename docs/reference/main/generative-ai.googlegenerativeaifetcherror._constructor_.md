@@ -14,82 +14,10 @@ constructor(message: string, status?: number, statusText?: string, errorDetails?
 
 ## Parameters
 
-<table><thead><tr><th>
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  message | string |  |
+|  status | number | _(Optional)_ |
+|  statusText | string | _(Optional)_ |
+|  errorDetails | [ErrorDetails](./generative-ai.errordetails.md)<!-- -->\[\] | _(Optional)_ |
 
-Parameter
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-message
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-status
-
-
-</td><td>
-
-number
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
-
-statusText
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
-
-errorDetails
-
-
-</td><td>
-
-[ErrorDetails](./generative-ai.errordetails.md)<!-- -->\[\]
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-</tbody></table>

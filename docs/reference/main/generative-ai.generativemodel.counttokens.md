@@ -16,53 +16,11 @@ countTokens(request: CountTokensRequest | string | Array<string | Part>, request
 
 ## Parameters
 
-<table><thead><tr><th>
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  request | [CountTokensRequest](./generative-ai.counttokensrequest.md) \| string \| Array&lt;string \| [Part](./generative-ai.part.md)<!-- -->&gt; |  |
+|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
 
-Parameter
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-request
-
-
-</td><td>
-
-[CountTokensRequest](./generative-ai.counttokensrequest.md) \| string \| Array&lt;string \| [Part](./generative-ai.part.md)<!-- -->&gt;
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-requestOptions
-
-
-</td><td>
-
-[SingleRequestOptions](./generative-ai.singlerequestoptions.md)
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-</tbody></table>
 **Returns:**
 
 Promise&lt;[CountTokensResponse](./generative-ai.counttokensresponse.md)<!-- -->&gt;

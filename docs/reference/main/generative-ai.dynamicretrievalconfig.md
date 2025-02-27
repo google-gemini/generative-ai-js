@@ -14,63 +14,8 @@ export declare interface DynamicRetrievalConfig
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [dynamicThreshold?](./generative-ai.dynamicretrievalconfig.dynamicthreshold.md) |  | number | _(Optional)_ The threshold to be used in dynamic retrieval. If not set, a system default value is used. |
+|  [mode?](./generative-ai.dynamicretrievalconfig.mode.md) |  | [DynamicRetrievalMode](./generative-ai.dynamicretrievalmode.md) | _(Optional)_ The mode of the predictor to be used in dynamic retrieval. |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[dynamicThreshold?](./generative-ai.dynamicretrievalconfig.dynamicthreshold.md)
-
-
-</td><td>
-
-
-</td><td>
-
-number
-
-
-</td><td>
-
-_(Optional)_ The threshold to be used in dynamic retrieval. If not set, a system default value is used.
-
-
-</td></tr>
-<tr><td>
-
-[mode?](./generative-ai.dynamicretrievalconfig.mode.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[DynamicRetrievalMode](./generative-ai.dynamicretrievalmode.md)
-
-
-</td><td>
-
-_(Optional)_ The mode of the predictor to be used in dynamic retrieval.
-
-
-</td></tr>
-</tbody></table>

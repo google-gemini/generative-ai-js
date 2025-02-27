@@ -14,78 +14,9 @@ export interface PromptFeedback
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [blockReason](./generative-ai.promptfeedback.blockreason.md) |  | [BlockReason](./generative-ai.blockreason.md) |  |
+|  [blockReasonMessage?](./generative-ai.promptfeedback.blockreasonmessage.md) |  | string | _(Optional)_ |
+|  [safetyRatings](./generative-ai.promptfeedback.safetyratings.md) |  | [SafetyRating](./generative-ai.safetyrating.md)<!-- -->\[\] |  |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[blockReason](./generative-ai.promptfeedback.blockreason.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[BlockReason](./generative-ai.blockreason.md)
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[blockReasonMessage?](./generative-ai.promptfeedback.blockreasonmessage.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
-
-[safetyRatings](./generative-ai.promptfeedback.safetyratings.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[SafetyRating](./generative-ai.safetyrating.md)<!-- -->\[\]
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>

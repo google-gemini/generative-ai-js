@@ -14,39 +14,10 @@ startChat(startChatParams?: StartChatParams): ChatSession;
 
 ## Parameters
 
-<table><thead><tr><th>
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  startChatParams | [StartChatParams](./generative-ai.startchatparams.md) | _(Optional)_ |
 
-Parameter
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-startChatParams
-
-
-</td><td>
-
-[StartChatParams](./generative-ai.startchatparams.md)
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-</tbody></table>
 **Returns:**
 
 [ChatSession](./generative-ai.chatsession.md)

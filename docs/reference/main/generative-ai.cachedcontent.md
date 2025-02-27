@@ -15,101 +15,10 @@ export interface CachedContent extends CachedContentBase
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [createTime?](./generative-ai.cachedcontent.createtime.md) |  | string | _(Optional)_ <code>CachedContent</code> creation time in ISO string format. |
+|  [name?](./generative-ai.cachedcontent.name.md) |  | string | _(Optional)_ |
+|  [ttl?](./generative-ai.cachedcontent.ttl.md) |  | string | _(Optional)_ protobuf.Duration format (ex. "3.0001s"). |
+|  [updateTime?](./generative-ai.cachedcontent.updatetime.md) |  | string | _(Optional)_ <code>CachedContent</code> update time in ISO string format. |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[createTime?](./generative-ai.cachedcontent.createtime.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_ `CachedContent` creation time in ISO string format.
-
-
-</td></tr>
-<tr><td>
-
-[name?](./generative-ai.cachedcontent.name.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
-
-[ttl?](./generative-ai.cachedcontent.ttl.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_ protobuf.Duration format (ex. "3.0001s").
-
-
-</td></tr>
-<tr><td>
-
-[updateTime?](./generative-ai.cachedcontent.updatetime.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_ `CachedContent` update time in ISO string format.
-
-
-</td></tr>
-</tbody></table>

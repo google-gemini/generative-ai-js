@@ -14,59 +14,8 @@ export interface SafetyRating
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [category](./generative-ai.safetyrating.category.md) |  | [HarmCategory](./generative-ai.harmcategory.md) |  |
+|  [probability](./generative-ai.safetyrating.probability.md) |  | [HarmProbability](./generative-ai.harmprobability.md) |  |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[category](./generative-ai.safetyrating.category.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[HarmCategory](./generative-ai.harmcategory.md)
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[probability](./generative-ai.safetyrating.probability.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[HarmProbability](./generative-ai.harmprobability.md)
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>

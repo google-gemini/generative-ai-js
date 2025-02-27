@@ -14,42 +14,7 @@ export interface ContentEmbedding
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [values](./generative-ai.contentembedding.values.md) |  | number\[\] |  |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[values](./generative-ai.contentembedding.values.md)
-
-
-</td><td>
-
-
-</td><td>
-
-number\[\]
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>

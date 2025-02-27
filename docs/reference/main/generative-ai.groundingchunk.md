@@ -14,44 +14,7 @@ export declare interface GroundingChunk
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [web?](./generative-ai.groundingchunk.web.md) |  | [GroundingChunkWeb](./generative-ai.groundingchunkweb.md) | _(Optional)_ Chunk from the web. |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[web?](./generative-ai.groundingchunk.web.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[GroundingChunkWeb](./generative-ai.groundingchunkweb.md)
-
-
-</td><td>
-
-_(Optional)_ Chunk from the web.
-
-
-</td></tr>
-</tbody></table>

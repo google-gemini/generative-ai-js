@@ -16,53 +16,11 @@ batchEmbedContents(batchEmbedContentRequest: BatchEmbedContentsRequest, requestO
 
 ## Parameters
 
-<table><thead><tr><th>
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  batchEmbedContentRequest | [BatchEmbedContentsRequest](./generative-ai.batchembedcontentsrequest.md) |  |
+|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
 
-Parameter
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-batchEmbedContentRequest
-
-
-</td><td>
-
-[BatchEmbedContentsRequest](./generative-ai.batchembedcontentsrequest.md)
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-requestOptions
-
-
-</td><td>
-
-[SingleRequestOptions](./generative-ai.singlerequestoptions.md)
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-</tbody></table>
 **Returns:**
 
 Promise&lt;[BatchEmbedContentsResponse](./generative-ai.batchembedcontentsresponse.md)<!-- -->&gt;

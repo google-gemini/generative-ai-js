@@ -14,59 +14,8 @@ export interface FunctionCall
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [args](./generative-ai.functioncall.args.md) |  | object |  |
+|  [name](./generative-ai.functioncall.name.md) |  | string |  |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[args](./generative-ai.functioncall.args.md)
-
-
-</td><td>
-
-
-</td><td>
-
-object
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[name](./generative-ai.functioncall.name.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>

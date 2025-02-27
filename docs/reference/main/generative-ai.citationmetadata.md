@@ -14,42 +14,7 @@ export interface CitationMetadata
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [citationSources](./generative-ai.citationmetadata.citationsources.md) |  | [CitationSource](./generative-ai.citationsource.md)<!-- -->\[\] |  |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[citationSources](./generative-ai.citationmetadata.citationsources.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[CitationSource](./generative-ai.citationsource.md)<!-- -->\[\]
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>

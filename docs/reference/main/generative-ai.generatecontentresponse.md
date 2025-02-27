@@ -14,82 +14,9 @@ export interface GenerateContentResponse
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [candidates?](./generative-ai.generatecontentresponse.candidates.md) |  | [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md)<!-- -->\[\] | _(Optional)_ Candidate responses from the model. |
+|  [promptFeedback?](./generative-ai.generatecontentresponse.promptfeedback.md) |  | [PromptFeedback](./generative-ai.promptfeedback.md) | _(Optional)_ The prompt's feedback related to the content filters. |
+|  [usageMetadata?](./generative-ai.generatecontentresponse.usagemetadata.md) |  | [UsageMetadata](./generative-ai.usagemetadata.md) | _(Optional)_ Metadata on the generation request's token usage. |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[candidates?](./generative-ai.generatecontentresponse.candidates.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[GenerateContentCandidate](./generative-ai.generatecontentcandidate.md)<!-- -->\[\]
-
-
-</td><td>
-
-_(Optional)_ Candidate responses from the model.
-
-
-</td></tr>
-<tr><td>
-
-[promptFeedback?](./generative-ai.generatecontentresponse.promptfeedback.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[PromptFeedback](./generative-ai.promptfeedback.md)
-
-
-</td><td>
-
-_(Optional)_ The prompt's feedback related to the content filters.
-
-
-</td></tr>
-<tr><td>
-
-[usageMetadata?](./generative-ai.generatecontentresponse.usagemetadata.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[UsageMetadata](./generative-ai.usagemetadata.md)
-
-
-</td><td>
-
-_(Optional)_ Metadata on the generation request's token usage.
-
-
-</td></tr>
-</tbody></table>

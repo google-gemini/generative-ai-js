@@ -13,76 +13,10 @@ export declare enum FunctionCallingMode
 
 ## Enumeration Members
 
-<table><thead><tr><th>
+|  Member | Value | Description |
+|  --- | --- | --- |
+|  ANY | <code>&quot;ANY&quot;</code> |  |
+|  AUTO | <code>&quot;AUTO&quot;</code> |  |
+|  MODE\_UNSPECIFIED | <code>&quot;MODE_UNSPECIFIED&quot;</code> |  |
+|  NONE | <code>&quot;NONE&quot;</code> |  |
 
-Member
-
-
-</th><th>
-
-Value
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-ANY
-
-
-</td><td>
-
-`"ANY"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-AUTO
-
-
-</td><td>
-
-`"AUTO"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-MODE\_UNSPECIFIED
-
-
-</td><td>
-
-`"MODE_UNSPECIFIED"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-NONE
-
-
-</td><td>
-
-`"NONE"`
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>

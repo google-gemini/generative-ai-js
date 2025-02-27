@@ -14,82 +14,9 @@ export declare interface GroundingSupport
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [confidenceScores?](./generative-ai.groundingsupport.confidencescores.md) |  | number\[\] | _(Optional)_ Confidence score of the support references. Ranges from 0 to 1. 1 is the most confident. This list must have the same size as the grounding\_chunk\_indices. |
+|  [groundingChunckIndices?](./generative-ai.groundingsupport.groundingchunckindices.md) |  | number\[\] | _(Optional)_ A list of indices (into 'grounding\_chunk') specifying the citations associated with the claim. For instance \[1,3,4\] means that grounding\_chunk\[1\], grounding\_chunk\[3\], grounding\_chunk\[4\] are the retrieved content attributed to the claim. |
+|  [segment?](./generative-ai.groundingsupport.segment.md) |  | string | _(Optional)_ URI reference of the chunk. |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[confidenceScores?](./generative-ai.groundingsupport.confidencescores.md)
-
-
-</td><td>
-
-
-</td><td>
-
-number\[\]
-
-
-</td><td>
-
-_(Optional)_ Confidence score of the support references. Ranges from 0 to 1. 1 is the most confident. This list must have the same size as the grounding\_chunk\_indices.
-
-
-</td></tr>
-<tr><td>
-
-[groundingChunckIndices?](./generative-ai.groundingsupport.groundingchunckindices.md)
-
-
-</td><td>
-
-
-</td><td>
-
-number\[\]
-
-
-</td><td>
-
-_(Optional)_ A list of indices (into 'grounding\_chunk') specifying the citations associated with the claim. For instance \[1,3,4\] means that grounding\_chunk\[1\], grounding\_chunk\[3\], grounding\_chunk\[4\] are the retrieved content attributed to the claim.
-
-
-</td></tr>
-<tr><td>
-
-[segment?](./generative-ai.groundingsupport.segment.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_ URI reference of the chunk.
-
-
-</td></tr>
-</tbody></table>

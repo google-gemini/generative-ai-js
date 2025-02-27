@@ -14,101 +14,10 @@ export interface ErrorDetails
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  ["@type"?](./generative-ai.errordetails.__type_.md) |  | string | _(Optional)_ |
+|  [domain?](./generative-ai.errordetails.domain.md) |  | string | _(Optional)_ |
+|  [metadata?](./generative-ai.errordetails.metadata.md) |  | Record&lt;string, unknown&gt; | _(Optional)_ |
+|  [reason?](./generative-ai.errordetails.reason.md) |  | string | _(Optional)_ |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-["@type"?](./generative-ai.errordetails.__type_.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
-
-[domain?](./generative-ai.errordetails.domain.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
-
-[metadata?](./generative-ai.errordetails.metadata.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Record&lt;string, unknown&gt;
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
-
-[reason?](./generative-ai.errordetails.reason.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-</tbody></table>

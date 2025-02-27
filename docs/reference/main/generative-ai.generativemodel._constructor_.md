@@ -14,64 +14,9 @@ constructor(apiKey: string, modelParams: ModelParams, _requestOptions?: RequestO
 
 ## Parameters
 
-<table><thead><tr><th>
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  apiKey | string |  |
+|  modelParams | [ModelParams](./generative-ai.modelparams.md) |  |
+|  \_requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
 
-Parameter
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-apiKey
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-modelParams
-
-
-</td><td>
-
-[ModelParams](./generative-ai.modelparams.md)
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-\_requestOptions
-
-
-</td><td>
-
-[RequestOptions](./generative-ai.requestoptions.md)
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-</tbody></table>

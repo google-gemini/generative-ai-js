@@ -14,116 +14,12 @@ export declare enum SchemaType
 
 ## Enumeration Members
 
-<table><thead><tr><th>
+|  Member | Value | Description |
+|  --- | --- | --- |
+|  ARRAY | <code>&quot;array&quot;</code> | Array type. |
+|  BOOLEAN | <code>&quot;boolean&quot;</code> | Boolean type. |
+|  INTEGER | <code>&quot;integer&quot;</code> | Integer type. |
+|  NUMBER | <code>&quot;number&quot;</code> | Number type. |
+|  OBJECT | <code>&quot;object&quot;</code> | Object type. |
+|  STRING | <code>&quot;string&quot;</code> | String type. |
 
-Member
-
-
-</th><th>
-
-Value
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-ARRAY
-
-
-</td><td>
-
-`"array"`
-
-
-</td><td>
-
-Array type.
-
-
-</td></tr>
-<tr><td>
-
-BOOLEAN
-
-
-</td><td>
-
-`"boolean"`
-
-
-</td><td>
-
-Boolean type.
-
-
-</td></tr>
-<tr><td>
-
-INTEGER
-
-
-</td><td>
-
-`"integer"`
-
-
-</td><td>
-
-Integer type.
-
-
-</td></tr>
-<tr><td>
-
-NUMBER
-
-
-</td><td>
-
-`"number"`
-
-
-</td><td>
-
-Number type.
-
-
-</td></tr>
-<tr><td>
-
-OBJECT
-
-
-</td><td>
-
-`"object"`
-
-
-</td><td>
-
-Object type.
-
-
-</td></tr>
-<tr><td>
-
-STRING
-
-
-</td><td>
-
-`"string"`
-
-
-</td><td>
-
-String type.
-
-
-</td></tr>
-</tbody></table>

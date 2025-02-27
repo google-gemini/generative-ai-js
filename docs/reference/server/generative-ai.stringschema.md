@@ -15,61 +15,8 @@ export interface StringSchema extends BaseSchema
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [enum?](./generative-ai.stringschema.enum.md) |  | string\[\] | _(Optional)_ If present, limits the result to one of the given values. |
+|  [type](./generative-ai.stringschema.type.md) |  | typeof [SchemaType.STRING](./generative-ai.schematype.md) |  |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[enum?](./generative-ai.stringschema.enum.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string\[\]
-
-
-</td><td>
-
-_(Optional)_ If present, limits the result to one of the given values.
-
-
-</td></tr>
-<tr><td>
-
-[type](./generative-ai.stringschema.type.md)
-
-
-</td><td>
-
-
-</td><td>
-
-typeof [SchemaType.STRING](./generative-ai.schematype.md)
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>

@@ -14,124 +14,20 @@ export declare class GoogleGenerativeAI
 
 ## Constructors
 
-<table><thead><tr><th>
-
-Constructor
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[(constructor)(apiKey)](./generative-ai.googlegenerativeai._constructor_.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Constructs a new instance of the `GoogleGenerativeAI` class
-
-
-</td></tr>
-</tbody></table>
+|  Constructor | Modifiers | Description |
+|  --- | --- | --- |
+|  [(constructor)(apiKey)](./generative-ai.googlegenerativeai._constructor_.md) |  | Constructs a new instance of the <code>GoogleGenerativeAI</code> class |
 
 ## Properties
 
-<table><thead><tr><th>
-
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[apiKey](./generative-ai.googlegenerativeai.apikey.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [apiKey](./generative-ai.googlegenerativeai.apikey.md) |  | string |  |
 
 ## Methods
 
-<table><thead><tr><th>
+|  Method | Modifiers | Description |
+|  --- | --- | --- |
+|  [getGenerativeModel(modelParams, requestOptions)](./generative-ai.googlegenerativeai.getgenerativemodel.md) |  | Gets a [GenerativeModel](./generative-ai.generativemodel.md) instance for the provided model name. |
+|  [getGenerativeModelFromCachedContent(cachedContent, modelParams, requestOptions)](./generative-ai.googlegenerativeai.getgenerativemodelfromcachedcontent.md) |  | Creates a [GenerativeModel](./generative-ai.generativemodel.md) instance from provided content cache. |
 
-Method
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[getGenerativeModel(modelParams, requestOptions)](./generative-ai.googlegenerativeai.getgenerativemodel.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Gets a [GenerativeModel](./generative-ai.generativemodel.md) instance for the provided model name.
-
-
-</td></tr>
-<tr><td>
-
-[getGenerativeModelFromCachedContent(cachedContent, modelParams, requestOptions)](./generative-ai.googlegenerativeai.getgenerativemodelfromcachedcontent.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Creates a [GenerativeModel](./generative-ai.generativemodel.md) instance from provided content cache.
-
-
-</td></tr>
-</tbody></table>

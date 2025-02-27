@@ -14,101 +14,10 @@ export interface CitationSource
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [endIndex?](./generative-ai.citationsource.endindex.md) |  | number | _(Optional)_ |
+|  [license?](./generative-ai.citationsource.license.md) |  | string | _(Optional)_ |
+|  [startIndex?](./generative-ai.citationsource.startindex.md) |  | number | _(Optional)_ |
+|  [uri?](./generative-ai.citationsource.uri.md) |  | string | _(Optional)_ |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[endIndex?](./generative-ai.citationsource.endindex.md)
-
-
-</td><td>
-
-
-</td><td>
-
-number
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
-
-[license?](./generative-ai.citationsource.license.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
-
-[startIndex?](./generative-ai.citationsource.startindex.md)
-
-
-</td><td>
-
-
-</td><td>
-
-number
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
-
-[uri?](./generative-ai.citationsource.uri.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-</tbody></table>

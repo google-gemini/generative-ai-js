@@ -6,24 +6,7 @@
 
 ## Packages
 
-<table><thead><tr><th>
+|  Package | Description |
+|  --- | --- |
+|  [@google/generative-ai](./generative-ai.md) |  |
 
-Package
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[@google/generative-ai](./generative-ai.md)
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>

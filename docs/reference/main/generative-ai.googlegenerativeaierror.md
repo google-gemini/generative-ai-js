@@ -15,34 +15,7 @@ export declare class GoogleGenerativeAIError extends Error
 
 ## Constructors
 
-<table><thead><tr><th>
+|  Constructor | Modifiers | Description |
+|  --- | --- | --- |
+|  [(constructor)(message)](./generative-ai.googlegenerativeaierror._constructor_.md) |  | Constructs a new instance of the <code>GoogleGenerativeAIError</code> class |
 
-Constructor
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[(constructor)(message)](./generative-ai.googlegenerativeaierror._constructor_.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Constructs a new instance of the `GoogleGenerativeAIError` class
-
-
-</td></tr>
-</tbody></table>

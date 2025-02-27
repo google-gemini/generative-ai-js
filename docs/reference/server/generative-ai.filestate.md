@@ -14,76 +14,10 @@ export declare enum FileState
 
 ## Enumeration Members
 
-<table><thead><tr><th>
+|  Member | Value | Description |
+|  --- | --- | --- |
+|  ACTIVE | <code>&quot;ACTIVE&quot;</code> |  |
+|  FAILED | <code>&quot;FAILED&quot;</code> |  |
+|  PROCESSING | <code>&quot;PROCESSING&quot;</code> |  |
+|  STATE\_UNSPECIFIED | <code>&quot;STATE_UNSPECIFIED&quot;</code> |  |
 
-Member
-
-
-</th><th>
-
-Value
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-ACTIVE
-
-
-</td><td>
-
-`"ACTIVE"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-FAILED
-
-
-</td><td>
-
-`"FAILED"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-PROCESSING
-
-
-</td><td>
-
-`"PROCESSING"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-STATE\_UNSPECIFIED
-
-
-</td><td>
-
-`"STATE_UNSPECIFIED"`
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>

@@ -14,42 +14,7 @@ export interface BatchEmbedContentsRequest
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [requests](./generative-ai.batchembedcontentsrequest.requests.md) |  | [EmbedContentRequest](./generative-ai.embedcontentrequest.md)<!-- -->\[\] |  |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[requests](./generative-ai.batchembedcontentsrequest.requests.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[EmbedContentRequest](./generative-ai.embedcontentrequest.md)<!-- -->\[\]
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>

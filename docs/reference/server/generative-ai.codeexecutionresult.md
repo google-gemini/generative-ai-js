@@ -14,63 +14,8 @@ export interface CodeExecutionResult
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [outcome](./generative-ai.codeexecutionresult.outcome.md) |  | [Outcome](./generative-ai.outcome.md) | Outcome of the code execution. |
+|  [output](./generative-ai.codeexecutionresult.output.md) |  | string | Contains stdout when code execution is successful, stderr or other description otherwise. |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[outcome](./generative-ai.codeexecutionresult.outcome.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[Outcome](./generative-ai.outcome.md)
-
-
-</td><td>
-
-Outcome of the code execution.
-
-
-</td></tr>
-<tr><td>
-
-[output](./generative-ai.codeexecutionresult.output.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-Contains stdout when code execution is successful, stderr or other description otherwise.
-
-
-</td></tr>
-</tbody></table>

@@ -14,104 +14,12 @@ export declare enum TaskType
 
 ## Enumeration Members
 
-<table><thead><tr><th>
+|  Member | Value | Description |
+|  --- | --- | --- |
+|  CLASSIFICATION | <code>&quot;CLASSIFICATION&quot;</code> |  |
+|  CLUSTERING | <code>&quot;CLUSTERING&quot;</code> |  |
+|  RETRIEVAL\_DOCUMENT | <code>&quot;RETRIEVAL_DOCUMENT&quot;</code> |  |
+|  RETRIEVAL\_QUERY | <code>&quot;RETRIEVAL_QUERY&quot;</code> |  |
+|  SEMANTIC\_SIMILARITY | <code>&quot;SEMANTIC_SIMILARITY&quot;</code> |  |
+|  TASK\_TYPE\_UNSPECIFIED | <code>&quot;TASK_TYPE_UNSPECIFIED&quot;</code> |  |
 
-Member
-
-
-</th><th>
-
-Value
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-CLASSIFICATION
-
-
-</td><td>
-
-`"CLASSIFICATION"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-CLUSTERING
-
-
-</td><td>
-
-`"CLUSTERING"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-RETRIEVAL\_DOCUMENT
-
-
-</td><td>
-
-`"RETRIEVAL_DOCUMENT"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-RETRIEVAL\_QUERY
-
-
-</td><td>
-
-`"RETRIEVAL_QUERY"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-SEMANTIC\_SIMILARITY
-
-
-</td><td>
-
-`"SEMANTIC_SIMILARITY"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-TASK\_TYPE\_UNSPECIFIED
-
-
-</td><td>
-
-`"TASK_TYPE_UNSPECIFIED"`
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>

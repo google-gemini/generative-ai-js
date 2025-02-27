@@ -14,62 +14,9 @@ export declare enum BlockReason
 
 ## Enumeration Members
 
-<table><thead><tr><th>
+|  Member | Value | Description |
+|  --- | --- | --- |
+|  BLOCKED\_REASON\_UNSPECIFIED | <code>&quot;BLOCKED_REASON_UNSPECIFIED&quot;</code> |  |
+|  OTHER | <code>&quot;OTHER&quot;</code> |  |
+|  SAFETY | <code>&quot;SAFETY&quot;</code> |  |
 
-Member
-
-
-</th><th>
-
-Value
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-BLOCKED\_REASON\_UNSPECIFIED
-
-
-</td><td>
-
-`"BLOCKED_REASON_UNSPECIFIED"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-OTHER
-
-
-</td><td>
-
-`"OTHER"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-SAFETY
-
-
-</td><td>
-
-`"SAFETY"`
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>

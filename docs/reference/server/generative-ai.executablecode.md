@@ -14,63 +14,8 @@ export interface ExecutableCode
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [code](./generative-ai.executablecode.code.md) |  | string | The code to be executed. |
+|  [language](./generative-ai.executablecode.language.md) |  | [ExecutableCodeLanguage](./generative-ai.executablecodelanguage.md) | Programming language of the <code>code</code>. |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[code](./generative-ai.executablecode.code.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-The code to be executed.
-
-
-</td></tr>
-<tr><td>
-
-[language](./generative-ai.executablecode.language.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[ExecutableCodeLanguage](./generative-ai.executablecodelanguage.md)
-
-
-</td><td>
-
-Programming language of the `code`<!-- -->.
-
-
-</td></tr>
-</tbody></table>

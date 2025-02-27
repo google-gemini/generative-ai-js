@@ -14,59 +14,8 @@ export interface SafetySetting
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [category](./generative-ai.safetysetting.category.md) |  | [HarmCategory](./generative-ai.harmcategory.md) |  |
+|  [threshold](./generative-ai.safetysetting.threshold.md) |  | [HarmBlockThreshold](./generative-ai.harmblockthreshold.md) |  |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[category](./generative-ai.safetysetting.category.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[HarmCategory](./generative-ai.harmcategory.md)
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[threshold](./generative-ai.safetysetting.threshold.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[HarmBlockThreshold](./generative-ai.harmblockthreshold.md)
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>

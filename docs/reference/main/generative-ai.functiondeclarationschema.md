@@ -14,101 +14,10 @@ export interface FunctionDeclarationSchema
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [description?](./generative-ai.functiondeclarationschema.description.md) |  | string | _(Optional)_ Optional. Description of the parameter. |
+|  [properties](./generative-ai.functiondeclarationschema.properties.md) |  | { \[k: string\]: [FunctionDeclarationSchemaProperty](./generative-ai.functiondeclarationschemaproperty.md)<!-- -->; } | The format of the parameter. |
+|  [required?](./generative-ai.functiondeclarationschema.required.md) |  | string\[\] | _(Optional)_ Optional. Array of required parameters. |
+|  [type](./generative-ai.functiondeclarationschema.type.md) |  | [SchemaType](./generative-ai.schematype.md) | The type of the parameter. |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[description?](./generative-ai.functiondeclarationschema.description.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_ Optional. Description of the parameter.
-
-
-</td></tr>
-<tr><td>
-
-[properties](./generative-ai.functiondeclarationschema.properties.md)
-
-
-</td><td>
-
-
-</td><td>
-
-{ \[k: string\]: [FunctionDeclarationSchemaProperty](./generative-ai.functiondeclarationschemaproperty.md)<!-- -->; }
-
-
-</td><td>
-
-The format of the parameter.
-
-
-</td></tr>
-<tr><td>
-
-[required?](./generative-ai.functiondeclarationschema.required.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string\[\]
-
-
-</td><td>
-
-_(Optional)_ Optional. Array of required parameters.
-
-
-</td></tr>
-<tr><td>
-
-[type](./generative-ai.functiondeclarationschema.type.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[SchemaType](./generative-ai.schematype.md)
-
-
-</td><td>
-
-The type of the parameter.
-
-
-</td></tr>
-</tbody></table>

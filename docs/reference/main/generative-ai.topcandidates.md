@@ -14,44 +14,7 @@ export interface TopCandidates
 
 ## Properties
 
-<table><thead><tr><th>
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [candidates](./generative-ai.topcandidates.candidates.md) |  | [LogprobsCandidate](./generative-ai.logprobscandidate.md)<!-- -->\[\] | Sorted by log probability in descending order. |
 
-Property
-
-
-</th><th>
-
-Modifiers
-
-
-</th><th>
-
-Type
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-[candidates](./generative-ai.topcandidates.candidates.md)
-
-
-</td><td>
-
-
-</td><td>
-
-[LogprobsCandidate](./generative-ai.logprobscandidate.md)<!-- -->\[\]
-
-
-</td><td>
-
-Sorted by log probability in descending order.
-
-
-</td></tr>
-</tbody></table>

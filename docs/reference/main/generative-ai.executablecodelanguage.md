@@ -13,48 +13,8 @@ export declare enum ExecutableCodeLanguage
 
 ## Enumeration Members
 
-<table><thead><tr><th>
+|  Member | Value | Description |
+|  --- | --- | --- |
+|  LANGUAGE\_UNSPECIFIED | <code>&quot;language_unspecified&quot;</code> |  |
+|  PYTHON | <code>&quot;python&quot;</code> |  |
 
-Member
-
-
-</th><th>
-
-Value
-
-
-</th><th>
-
-Description
-
-
-</th></tr></thead>
-<tbody><tr><td>
-
-LANGUAGE\_UNSPECIFIED
-
-
-</td><td>
-
-`"language_unspecified"`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-PYTHON
-
-
-</td><td>
-
-`"python"`
-
-
-</td><td>
-
-
-</td></tr>
-</tbody></table>
