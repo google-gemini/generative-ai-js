@@ -11,6 +11,7 @@
 |  [ChatSession](./generative-ai.chatsession.md) | ChatSession class that enables sending chat messages and stores history of sent and received messages so far. |
 |  [GenerativeModel](./generative-ai.generativemodel.md) | Class for generative model APIs. |
 |  [GoogleGenerativeAI](./generative-ai.googlegenerativeai.md) | Top-level class for this SDK |
+|  [GoogleGenerativeAIAbortError](./generative-ai.googlegenerativeaiaborterror.md) | Error thrown when a request is aborted, either due to a timeout or intentional cancellation by the user. |
 |  [GoogleGenerativeAIError](./generative-ai.googlegenerativeaierror.md) | Basic error type for this SDK. |
 |  [GoogleGenerativeAIFetchError](./generative-ai.googlegenerativeaifetcherror.md) | Error class covering HTTP errors when calling the server. Includes HTTP status, statusText, and optional details, if provided in the server response. |
 |  [GoogleGenerativeAIRequestInputError](./generative-ai.googlegenerativeairequestinputerror.md) | Errors in the contents of a request originating from user input. |
