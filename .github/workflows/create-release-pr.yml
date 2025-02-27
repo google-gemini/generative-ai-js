@@ -29,8 +29,8 @@ jobs:
     steps:
       - name: Setup Git
         run: |
-          git config --global user.name "GenAi SDK Bot"
-          git congig --global user.email "genai-sdk-bot@google.com"
+          git config --global user.name "GenAI SDK Bot"
+          git config --global user.email "genai-sdk-bot@google.com"
       - name: Checkout Repo
         uses: actions/checkout@v3
 
