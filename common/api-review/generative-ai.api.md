@@ -540,6 +540,10 @@ export class GoogleGenerativeAI {
 }
 
 // @public
+export class GoogleGenerativeAIAbortError extends GoogleGenerativeAIError {
+}
+
+// @public
 export class GoogleGenerativeAIError extends Error {
     constructor(message: string);
 }

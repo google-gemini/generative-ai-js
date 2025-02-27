@@ -20,6 +20,7 @@ import {
   GoogleGenerativeAIError,
   GoogleGenerativeAIFetchError,
   GoogleGenerativeAIRequestInputError,
+  GoogleGenerativeAIAbortError,
 } from "../errors";
 
 export const DEFAULT_BASE_URL = "https://generativelanguage.googleapis.com";
@@ -172,7 +173,12 @@ export async function makeRequest(
 
 function handleResponseError(e: Error, url: string): void {
   let err = e;
-  if (
+  if (err.name === "AbortError") {
+    err = new GoogleGenerativeAIAbortError(
+      `Request aborted when fetching ${url.toString()}: ${e.message}`,
+    );
+    err.stack = e.stack;
+  } else if (
     !(
       e instanceof GoogleGenerativeAIFetchError ||
       e instanceof GoogleGenerativeAIRequestInputError
