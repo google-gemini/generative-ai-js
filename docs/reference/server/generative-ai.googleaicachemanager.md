@@ -14,23 +14,166 @@ export declare class GoogleAICacheManager
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(apiKey, \_requestOptions)](./generative-ai.googleaicachemanager._constructor_.md) |  | Constructs a new instance of the <code>GoogleAICacheManager</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(apiKey, \_requestOptions)](./generative-ai.googleaicachemanager._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `GoogleAICacheManager` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [apiKey](./generative-ai.googleaicachemanager.apikey.md) |  | string |  |
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[apiKey](./generative-ai.googleaicachemanager.apikey.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 
 ## Methods
 
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [create(createOptions)](./generative-ai.googleaicachemanager.create.md) |  | Upload a new content cache |
-|  [delete(name)](./generative-ai.googleaicachemanager.delete.md) |  | Delete content cache with given name |
-|  [get(name)](./generative-ai.googleaicachemanager.get.md) |  | Get a content cache |
-|  [list(listParams)](./generative-ai.googleaicachemanager.list.md) |  | List all uploaded content caches |
-|  [update(name, updateParams)](./generative-ai.googleaicachemanager.update.md) |  | Update an existing content cache |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[create(createOptions)](./generative-ai.googleaicachemanager.create.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Upload a new content cache
+
+
+</td></tr>
+<tr><td>
+
+[delete(name)](./generative-ai.googleaicachemanager.delete.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Delete content cache with given name
+
+
+</td></tr>
+<tr><td>
+
+[get(name)](./generative-ai.googleaicachemanager.get.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Get a content cache
+
+
+</td></tr>
+<tr><td>
+
+[list(listParams)](./generative-ai.googleaicachemanager.list.md)
+
+
+</td><td>
+
+
+</td><td>
+
+List all uploaded content caches
+
+
+</td></tr>
+<tr><td>
+
+[update(name, updateParams)](./generative-ai.googleaicachemanager.update.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Update an existing content cache
+
+
+</td></tr>
+</tbody></table>

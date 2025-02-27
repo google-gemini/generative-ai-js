@@ -14,8 +14,59 @@ export interface GenerateContentStreamResult
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [response](./generative-ai.generatecontentstreamresult.response.md) |  | Promise&lt;[EnhancedGenerateContentResponse](./generative-ai.enhancedgeneratecontentresponse.md)<!-- -->&gt; |  |
-|  [stream](./generative-ai.generatecontentstreamresult.stream.md) |  | AsyncGenerator&lt;[EnhancedGenerateContentResponse](./generative-ai.enhancedgeneratecontentresponse.md)<!-- -->&gt; |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[response](./generative-ai.generatecontentstreamresult.response.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Promise&lt;[EnhancedGenerateContentResponse](./generative-ai.enhancedgeneratecontentresponse.md)<!-- -->&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[stream](./generative-ai.generatecontentstreamresult.stream.md)
+
+
+</td><td>
+
+
+</td><td>
+
+AsyncGenerator&lt;[EnhancedGenerateContentResponse](./generative-ai.enhancedgeneratecontentresponse.md)<!-- -->&gt;
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

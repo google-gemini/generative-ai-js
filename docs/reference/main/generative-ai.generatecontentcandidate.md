@@ -14,15 +14,192 @@ export interface GenerateContentCandidate
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [avgLogprobs?](./generative-ai.generatecontentcandidate.avglogprobs.md) |  | number | _(Optional)_ Average log probability score of the candidate. |
-|  [citationMetadata?](./generative-ai.generatecontentcandidate.citationmetadata.md) |  | [CitationMetadata](./generative-ai.citationmetadata.md) | _(Optional)_ |
-|  [content](./generative-ai.generatecontentcandidate.content.md) |  | [Content](./generative-ai.content.md) |  |
-|  [finishMessage?](./generative-ai.generatecontentcandidate.finishmessage.md) |  | string | _(Optional)_ |
-|  [finishReason?](./generative-ai.generatecontentcandidate.finishreason.md) |  | [FinishReason](./generative-ai.finishreason.md) | _(Optional)_ |
-|  [groundingMetadata?](./generative-ai.generatecontentcandidate.groundingmetadata.md) |  | [GroundingMetadata](./generative-ai.groundingmetadata.md) | _(Optional)_ Search grounding metadata. |
-|  [index](./generative-ai.generatecontentcandidate.index.md) |  | number |  |
-|  [logprobsResult?](./generative-ai.generatecontentcandidate.logprobsresult.md) |  | [LogprobsResult](./generative-ai.logprobsresult.md) | _(Optional)_ Log-likelihood scores for the response tokens and top tokens. |
-|  [safetyRatings?](./generative-ai.generatecontentcandidate.safetyratings.md) |  | [SafetyRating](./generative-ai.safetyrating.md)<!-- -->\[\] | _(Optional)_ |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[avgLogprobs?](./generative-ai.generatecontentcandidate.avglogprobs.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ Average log probability score of the candidate.
+
+
+</td></tr>
+<tr><td>
+
+[citationMetadata?](./generative-ai.generatecontentcandidate.citationmetadata.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[CitationMetadata](./generative-ai.citationmetadata.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[content](./generative-ai.generatecontentcandidate.content.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Content](./generative-ai.content.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[finishMessage?](./generative-ai.generatecontentcandidate.finishmessage.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[finishReason?](./generative-ai.generatecontentcandidate.finishreason.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[FinishReason](./generative-ai.finishreason.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[groundingMetadata?](./generative-ai.generatecontentcandidate.groundingmetadata.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[GroundingMetadata](./generative-ai.groundingmetadata.md)
+
+
+</td><td>
+
+_(Optional)_ Search grounding metadata.
+
+
+</td></tr>
+<tr><td>
+
+[index](./generative-ai.generatecontentcandidate.index.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[logprobsResult?](./generative-ai.generatecontentcandidate.logprobsresult.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[LogprobsResult](./generative-ai.logprobsresult.md)
+
+
+</td><td>
+
+_(Optional)_ Log-likelihood scores for the response tokens and top tokens.
+
+
+</td></tr>
+<tr><td>
+
+[safetyRatings?](./generative-ai.generatecontentcandidate.safetyratings.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SafetyRating](./generative-ai.safetyrating.md)<!-- -->\[\]
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

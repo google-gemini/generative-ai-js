@@ -15,15 +15,116 @@ export declare class GoogleGenerativeAIFetchError extends GoogleGenerativeAIErro
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(message, status, statusText, errorDetails)](./generative-ai.googlegenerativeaifetcherror._constructor_.md) |  | Constructs a new instance of the <code>GoogleGenerativeAIFetchError</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(message, status, statusText, errorDetails)](./generative-ai.googlegenerativeaifetcherror._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `GoogleGenerativeAIFetchError` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [errorDetails?](./generative-ai.googlegenerativeaifetcherror.errordetails.md) |  | [ErrorDetails](./generative-ai.errordetails.md)<!-- -->\[\] | _(Optional)_ |
-|  [status?](./generative-ai.googlegenerativeaifetcherror.status.md) |  | number | _(Optional)_ |
-|  [statusText?](./generative-ai.googlegenerativeaifetcherror.statustext.md) |  | string | _(Optional)_ |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[errorDetails?](./generative-ai.googlegenerativeaifetcherror.errordetails.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ErrorDetails](./generative-ai.errordetails.md)<!-- -->\[\]
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[status?](./generative-ai.googlegenerativeaifetcherror.status.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[statusText?](./generative-ai.googlegenerativeaifetcherror.statustext.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
