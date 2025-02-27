@@ -230,7 +230,7 @@ describe("request methods", () => {
       expect(response.ok).to.be.true;
     });
     it("error with local timeout", async () => {
-      const abortError = new DOMException('Request timeout.', 'AbortError');
+      const abortError = new DOMException("Request timeout.", "AbortError");
       const fetchStub = stub().rejects(abortError);
 
       try {
