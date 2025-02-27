@@ -127,7 +127,9 @@ describe("GoogleAICacheManager", () => {
     );
     expect(typeof makeRequestStub.args[0][2]).to.eq("string");
     const body = JSON.parse(makeRequestStub.args[0][2] as string);
-    expect(body.contents[0].parts[0].text).to.eq(FAKE_CONTENTS[0].parts[0].text);
+    expect(body.contents[0].parts[0].text).to.eq(
+      FAKE_CONTENTS[0].parts[0].text,
+    );
     expect(body.contents[0].role).to.eq(FAKE_CONTENTS[0].role);
   });
   it("passes update request info", async () => {
@@ -299,7 +301,7 @@ describe("GoogleAICacheManager", () => {
     const cacheManager = new GoogleAICacheManager("apiKey");
     await expect(cacheManager.delete("")).to.be.rejectedWith("Invalid name");
   });
-  it("passes system instructions", async() => {
+  it("passes system instructions", async () => {
     const makeRequestStub = stub(request, "makeServerRequest").resolves({
       ok: true,
       json: fakeResponseJson,
@@ -311,7 +313,7 @@ describe("GoogleAICacheManager", () => {
     await cacheManager.create({
       model,
       contents: FAKE_CONTENTS,
-      systemInstruction: SYSTEM_INSTRUCTION
+      systemInstruction: SYSTEM_INSTRUCTION,
     });
     expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.CREATE);
     expect(makeRequestStub.args[0][1]).to.be.instanceOf(Headers);
