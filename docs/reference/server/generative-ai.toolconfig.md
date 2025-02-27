@@ -14,7 +14,42 @@ export interface ToolConfig
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [functionCallingConfig](./generative-ai.toolconfig.functioncallingconfig.md) |  | [FunctionCallingConfig](./generative-ai.functioncallingconfig.md) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[functionCallingConfig](./generative-ai.toolconfig.functioncallingconfig.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[FunctionCallingConfig](./generative-ai.functioncallingconfig.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

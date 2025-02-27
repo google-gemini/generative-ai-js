@@ -14,10 +14,84 @@ export declare enum Outcome
 
 ## Enumeration Members
 
-|  Member | Value | Description |
-|  --- | --- | --- |
-|  OUTCOME\_DEADLINE\_EXCEEDED | <code>&quot;outcome_deadline_exceeded&quot;</code> | Code execution ran for too long, and was cancelled. There may or may not be a partial output present. |
-|  OUTCOME\_FAILED | <code>&quot;outcome_failed&quot;</code> | Code execution finished but with a failure. <code>stderr</code> should contain the reason. |
-|  OUTCOME\_OK | <code>&quot;outcome_ok&quot;</code> | Code execution completed successfully. |
-|  OUTCOME\_UNSPECIFIED | <code>&quot;outcome_unspecified&quot;</code> | Unspecified status. This value should not be used. |
+<table><thead><tr><th>
 
+Member
+
+
+</th><th>
+
+Value
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+OUTCOME\_DEADLINE\_EXCEEDED
+
+
+</td><td>
+
+`"outcome_deadline_exceeded"`
+
+
+</td><td>
+
+Code execution ran for too long, and was cancelled. There may or may not be a partial output present.
+
+
+</td></tr>
+<tr><td>
+
+OUTCOME\_FAILED
+
+
+</td><td>
+
+`"outcome_failed"`
+
+
+</td><td>
+
+Code execution finished but with a failure. `stderr` should contain the reason.
+
+
+</td></tr>
+<tr><td>
+
+OUTCOME\_OK
+
+
+</td><td>
+
+`"outcome_ok"`
+
+
+</td><td>
+
+Code execution completed successfully.
+
+
+</td></tr>
+<tr><td>
+
+OUTCOME\_UNSPECIFIED
+
+
+</td><td>
+
+`"outcome_unspecified"`
+
+
+</td><td>
+
+Unspecified status. This value should not be used.
+
+
+</td></tr>
+</tbody></table>

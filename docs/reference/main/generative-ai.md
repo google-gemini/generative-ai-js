@@ -6,117 +6,1085 @@
 
 ## Classes
 
-|  Class | Description |
-|  --- | --- |
-|  [ChatSession](./generative-ai.chatsession.md) | ChatSession class that enables sending chat messages and stores history of sent and received messages so far. |
-|  [GenerativeModel](./generative-ai.generativemodel.md) | Class for generative model APIs. |
-|  [GoogleGenerativeAI](./generative-ai.googlegenerativeai.md) | Top-level class for this SDK |
-|  [GoogleGenerativeAIError](./generative-ai.googlegenerativeaierror.md) | Basic error type for this SDK. |
-|  [GoogleGenerativeAIFetchError](./generative-ai.googlegenerativeaifetcherror.md) | Error class covering HTTP errors when calling the server. Includes HTTP status, statusText, and optional details, if provided in the server response. |
-|  [GoogleGenerativeAIRequestInputError](./generative-ai.googlegenerativeairequestinputerror.md) | Errors in the contents of a request originating from user input. |
-|  [GoogleGenerativeAIResponseError](./generative-ai.googlegenerativeairesponseerror.md) | Errors in the contents of a response from the model. This includes parsing errors, or responses including a safety block reason. |
+<table><thead><tr><th>
+
+Class
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[ChatSession](./generative-ai.chatsession.md)
+
+
+</td><td>
+
+ChatSession class that enables sending chat messages and stores history of sent and received messages so far.
+
+
+</td></tr>
+<tr><td>
+
+[GenerativeModel](./generative-ai.generativemodel.md)
+
+
+</td><td>
+
+Class for generative model APIs.
+
+
+</td></tr>
+<tr><td>
+
+[GoogleGenerativeAI](./generative-ai.googlegenerativeai.md)
+
+
+</td><td>
+
+Top-level class for this SDK
+
+
+</td></tr>
+<tr><td>
+
+[GoogleGenerativeAIAbortError](./generative-ai.googlegenerativeaiaborterror.md)
+
+
+</td><td>
+
+Error thrown when a request is aborted, either due to a timeout or intentional cancellation by the user.
+
+
+</td></tr>
+<tr><td>
+
+[GoogleGenerativeAIError](./generative-ai.googlegenerativeaierror.md)
+
+
+</td><td>
+
+Basic error type for this SDK.
+
+
+</td></tr>
+<tr><td>
+
+[GoogleGenerativeAIFetchError](./generative-ai.googlegenerativeaifetcherror.md)
+
+
+</td><td>
+
+Error class covering HTTP errors when calling the server. Includes HTTP status, statusText, and optional details, if provided in the server response.
+
+
+</td></tr>
+<tr><td>
+
+[GoogleGenerativeAIRequestInputError](./generative-ai.googlegenerativeairequestinputerror.md)
+
+
+</td><td>
+
+Errors in the contents of a request originating from user input.
+
+
+</td></tr>
+<tr><td>
+
+[GoogleGenerativeAIResponseError](./generative-ai.googlegenerativeairesponseerror.md)
+
+
+</td><td>
+
+Errors in the contents of a response from the model. This includes parsing errors, or responses including a safety block reason.
+
+
+</td></tr>
+</tbody></table>
 
 ## Enumerations
 
-|  Enumeration | Description |
-|  --- | --- |
-|  [BlockReason](./generative-ai.blockreason.md) | Reason that a prompt was blocked. |
-|  [DynamicRetrievalMode](./generative-ai.dynamicretrievalmode.md) | The mode of the predictor to be used in dynamic retrieval. |
-|  [ExecutableCodeLanguage](./generative-ai.executablecodelanguage.md) |  |
-|  [FinishReason](./generative-ai.finishreason.md) | Reason that a candidate finished. |
-|  [FunctionCallingMode](./generative-ai.functioncallingmode.md) |  |
-|  [HarmBlockThreshold](./generative-ai.harmblockthreshold.md) | Threshold above which a prompt or candidate will be blocked. |
-|  [HarmCategory](./generative-ai.harmcategory.md) | Harm categories that would cause prompts or candidates to be blocked. |
-|  [HarmProbability](./generative-ai.harmprobability.md) | Probability that a prompt or candidate matches a harm category. |
-|  [Outcome](./generative-ai.outcome.md) | Possible outcomes of code execution. |
-|  [SchemaType](./generative-ai.schematype.md) | Contains the list of OpenAPI data types as defined by https://swagger.io/docs/specification/data-models/data-types/ |
-|  [TaskType](./generative-ai.tasktype.md) | Task type for embedding content. |
+<table><thead><tr><th>
+
+Enumeration
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[BlockReason](./generative-ai.blockreason.md)
+
+
+</td><td>
+
+Reason that a prompt was blocked.
+
+
+</td></tr>
+<tr><td>
+
+[DynamicRetrievalMode](./generative-ai.dynamicretrievalmode.md)
+
+
+</td><td>
+
+The mode of the predictor to be used in dynamic retrieval.
+
+
+</td></tr>
+<tr><td>
+
+[ExecutableCodeLanguage](./generative-ai.executablecodelanguage.md)
+
+
+</td><td>
+
+
+
+</td></tr>
+<tr><td>
+
+[FinishReason](./generative-ai.finishreason.md)
+
+
+</td><td>
+
+Reason that a candidate finished.
+
+
+</td></tr>
+<tr><td>
+
+[FunctionCallingMode](./generative-ai.functioncallingmode.md)
+
+
+</td><td>
+
+
+
+</td></tr>
+<tr><td>
+
+[HarmBlockThreshold](./generative-ai.harmblockthreshold.md)
+
+
+</td><td>
+
+Threshold above which a prompt or candidate will be blocked.
+
+
+</td></tr>
+<tr><td>
+
+[HarmCategory](./generative-ai.harmcategory.md)
+
+
+</td><td>
+
+Harm categories that would cause prompts or candidates to be blocked.
+
+
+</td></tr>
+<tr><td>
+
+[HarmProbability](./generative-ai.harmprobability.md)
+
+
+</td><td>
+
+Probability that a prompt or candidate matches a harm category.
+
+
+</td></tr>
+<tr><td>
+
+[Outcome](./generative-ai.outcome.md)
+
+
+</td><td>
+
+Possible outcomes of code execution.
+
+
+</td></tr>
+<tr><td>
+
+[SchemaType](./generative-ai.schematype.md)
+
+
+</td><td>
+
+Contains the list of OpenAPI data types as defined by https://swagger.io/docs/specification/data-models/data-types/
+
+
+</td></tr>
+<tr><td>
+
+[TaskType](./generative-ai.tasktype.md)
+
+
+</td><td>
+
+Task type for embedding content.
+
+
+</td></tr>
+</tbody></table>
 
 ## Interfaces
 
-|  Interface | Description |
-|  --- | --- |
-|  [ArraySchema](./generative-ai.arrayschema.md) | Describes an array, an ordered list of values. |
-|  [BaseParams](./generative-ai.baseparams.md) | Base parameters for a number of methods. |
-|  [BatchEmbedContentsRequest](./generative-ai.batchembedcontentsrequest.md) | Params for calling [GenerativeModel.batchEmbedContents()](./generative-ai.generativemodel.batchembedcontents.md) |
-|  [BatchEmbedContentsResponse](./generative-ai.batchembedcontentsresponse.md) | Response from calling [GenerativeModel.batchEmbedContents()](./generative-ai.generativemodel.batchembedcontents.md)<!-- -->. |
-|  [BooleanSchema](./generative-ai.booleanschema.md) | Describes a boolean, either 'true' or 'false'. |
-|  [CachedContent](./generative-ai.cachedcontent.md) | Describes <code>CachedContent</code> interface for sending to the server (if creating) or received from the server (using getters or list methods). |
-|  [CachedContentBase](./generative-ai.cachedcontentbase.md) |  |
-|  [CitationMetadata](./generative-ai.citationmetadata.md) | Citation metadata that may be found on a [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md)<!-- -->. |
-|  [CitationSource](./generative-ai.citationsource.md) | A single citation source. |
-|  [CodeExecutionResult](./generative-ai.codeexecutionresult.md) | Result of executing the <code>ExecutableCode</code>. Only generated when using code execution, and always follows a <code>Part</code> containing the <code>ExecutableCode</code>. |
-|  [CodeExecutionResultPart](./generative-ai.codeexecutionresultpart.md) | Content part containing the result of executed code. |
-|  [CodeExecutionTool](./generative-ai.codeexecutiontool.md) | Enables the model to execute code as part of generation. |
-|  [Content](./generative-ai.content.md) | Content type for both prompts and response candidates. |
-|  [ContentEmbedding](./generative-ai.contentembedding.md) | A single content embedding. |
-|  [CountTokensRequest](./generative-ai.counttokensrequest.md) | <p>Params for calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)<!-- -->.</p><p>The request must contain either a [Content](./generative-ai.content.md) array or a [GenerateContentRequest](./generative-ai.generatecontentrequest.md)<!-- -->, but not both. If both are provided then a [GoogleGenerativeAIRequestInputError](./generative-ai.googlegenerativeairequestinputerror.md) is thrown.</p> |
-|  [CountTokensResponse](./generative-ai.counttokensresponse.md) | Response from calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)<!-- -->. |
-|  [DynamicRetrievalConfig](./generative-ai.dynamicretrievalconfig.md) | Specifies the dynamic retrieval configuration for the given source. |
-|  [EmbedContentRequest](./generative-ai.embedcontentrequest.md) | Params for calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md) |
-|  [EmbedContentResponse](./generative-ai.embedcontentresponse.md) | Response from calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md)<!-- -->. |
-|  [EnhancedGenerateContentResponse](./generative-ai.enhancedgeneratecontentresponse.md) | Response object wrapped with helper methods. |
-|  [ErrorDetails](./generative-ai.errordetails.md) | Details object that may be included in an error response. |
-|  [ExecutableCode](./generative-ai.executablecode.md) | Code generated by the model that is meant to be executed, where the result is returned to the model. Only generated when using the code execution tool, in which the code will be automatically executed, and a corresponding <code>CodeExecutionResult</code> will also be generated. |
-|  [ExecutableCodePart](./generative-ai.executablecodepart.md) | Content part containing executable code generated by the model. |
-|  [FileData](./generative-ai.filedata.md) | Data pointing to a file uploaded with the Files API. |
-|  [FileDataPart](./generative-ai.filedatapart.md) | Content part interface if the part represents FileData. |
-|  [FunctionCall](./generative-ai.functioncall.md) | A predicted \[FunctionCall\] returned from the model that contains a string representing the \[FunctionDeclaration.name\] and a structured JSON object containing the parameters and their values. |
-|  [FunctionCallingConfig](./generative-ai.functioncallingconfig.md) |  |
-|  [FunctionCallPart](./generative-ai.functioncallpart.md) | Content part interface if the part represents a FunctionCall. |
-|  [FunctionDeclaration](./generative-ai.functiondeclaration.md) | Structured representation of a function declaration as defined by the \[OpenAPI 3.0 specification\](https://spec.openapis.org/oas/v3.0.3). Included in this declaration are the function name and parameters. This FunctionDeclaration is a representation of a block of code that can be used as a Tool by the model and executed by the client. |
-|  [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md) | Schema for parameters passed to [FunctionDeclaration.parameters](./generative-ai.functiondeclaration.parameters.md)<!-- -->. |
-|  [FunctionDeclarationsTool](./generative-ai.functiondeclarationstool.md) | A FunctionDeclarationsTool is a piece of code that enables the system to interact with external systems to perform an action, or set of actions, outside of knowledge and scope of the model. |
-|  [FunctionResponse](./generative-ai.functionresponse.md) | The result output from a \[FunctionCall\] that contains a string representing the \[FunctionDeclaration.name\] and a structured JSON object containing any output from the function is used as context to the model. This should contain the result of a \[FunctionCall\] made based on model prediction. |
-|  [FunctionResponsePart](./generative-ai.functionresponsepart.md) | Content part interface if the part represents FunctionResponse. |
-|  [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md) | A candidate returned as part of a [GenerateContentResponse](./generative-ai.generatecontentresponse.md)<!-- -->. |
-|  [GenerateContentRequest](./generative-ai.generatecontentrequest.md) | Request sent to <code>generateContent</code> endpoint. |
-|  [GenerateContentResponse](./generative-ai.generatecontentresponse.md) | Individual response from [GenerativeModel.generateContent()](./generative-ai.generativemodel.generatecontent.md) and [GenerativeModel.generateContentStream()](./generative-ai.generativemodel.generatecontentstream.md)<!-- -->. <code>generateContentStream()</code> will return one in each chunk until the stream is done. |
-|  [GenerateContentResult](./generative-ai.generatecontentresult.md) | Result object returned from generateContent() call. |
-|  [GenerateContentStreamResult](./generative-ai.generatecontentstreamresult.md) | Result object returned from generateContentStream() call. Iterate over <code>stream</code> to get chunks as they come in and/or use the <code>response</code> promise to get the aggregated response when the stream is done. |
-|  [GenerationConfig](./generative-ai.generationconfig.md) | Config options for content-related requests |
-|  [GenerativeContentBlob](./generative-ai.generativecontentblob.md) | Interface for sending an image. |
-|  [GoogleSearchRetrieval](./generative-ai.googlesearchretrieval.md) | Retrieval tool that is powered by Google search. |
-|  [GoogleSearchRetrievalTool](./generative-ai.googlesearchretrievaltool.md) | Retrieval tool that is powered by Google search. |
-|  [GroundingChunk](./generative-ai.groundingchunk.md) | Grounding chunk. |
-|  [GroundingChunkWeb](./generative-ai.groundingchunkweb.md) | Chunk from the web. |
-|  [GroundingMetadata](./generative-ai.groundingmetadata.md) | Metadata returned to client when grounding is enabled. |
-|  [GroundingSupport](./generative-ai.groundingsupport.md) | Grounding support. |
-|  [GroundingSupportSegment](./generative-ai.groundingsupportsegment.md) | Segment of the content. |
-|  [InlineDataPart](./generative-ai.inlinedatapart.md) | Content part interface if the part represents an image. |
-|  [IntegerSchema](./generative-ai.integerschema.md) | Describes a JSON-encodable integer. |
-|  [LogprobsCandidate](./generative-ai.logprobscandidate.md) | Candidate for the logprobs token and score. |
-|  [LogprobsResult](./generative-ai.logprobsresult.md) | Logprobs Result |
-|  [ModelParams](./generative-ai.modelparams.md) | Params passed to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->. |
-|  [NumberSchema](./generative-ai.numberschema.md) | Describes a JSON-encodable floating point number. |
-|  [ObjectSchema](./generative-ai.objectschema.md) | Describes a JSON object, a mapping of specific keys to values. |
-|  [PromptFeedback](./generative-ai.promptfeedback.md) | If the prompt was blocked, this will be populated with <code>blockReason</code> and the relevant <code>safetyRatings</code>. |
-|  [RequestOptions](./generative-ai.requestoptions.md) | Params passed to getGenerativeModel() or GoogleAIFileManager(). |
-|  [RetrievalMetadata](./generative-ai.retrievalmetadata.md) | Metadata related to retrieval in the grounding flow. |
-|  [SafetyRating](./generative-ai.safetyrating.md) | A safety rating associated with a [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md) |
-|  [SafetySetting](./generative-ai.safetysetting.md) | Safety setting that can be sent as part of request parameters. |
-|  [SearchEntryPoint](./generative-ai.searchentrypoint.md) | Google search entry point. |
-|  [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | Params passed to atomic asynchronous operations. |
-|  [StartChatParams](./generative-ai.startchatparams.md) | Params for [GenerativeModel.startChat()](./generative-ai.generativemodel.startchat.md)<!-- -->. |
-|  [StringSchema](./generative-ai.stringschema.md) | Describes a string. |
-|  [TextPart](./generative-ai.textpart.md) | Content part interface if the part represents a text string. |
-|  [ToolConfig](./generative-ai.toolconfig.md) | Tool config. This config is shared for all tools provided in the request. |
-|  [TopCandidates](./generative-ai.topcandidates.md) | Candidates with top log probabilities at each decoding step |
-|  [UsageMetadata](./generative-ai.usagemetadata.md) | Metadata on the generation request's token usage. |
+<table><thead><tr><th>
+
+Interface
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[ArraySchema](./generative-ai.arrayschema.md)
+
+
+</td><td>
+
+Describes an array, an ordered list of values.
+
+
+</td></tr>
+<tr><td>
+
+[BaseParams](./generative-ai.baseparams.md)
+
+
+</td><td>
+
+Base parameters for a number of methods.
+
+
+</td></tr>
+<tr><td>
+
+[BatchEmbedContentsRequest](./generative-ai.batchembedcontentsrequest.md)
+
+
+</td><td>
+
+Params for calling [GenerativeModel.batchEmbedContents()](./generative-ai.generativemodel.batchembedcontents.md)
+
+
+</td></tr>
+<tr><td>
+
+[BatchEmbedContentsResponse](./generative-ai.batchembedcontentsresponse.md)
+
+
+</td><td>
+
+Response from calling [GenerativeModel.batchEmbedContents()](./generative-ai.generativemodel.batchembedcontents.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[BooleanSchema](./generative-ai.booleanschema.md)
+
+
+</td><td>
+
+Describes a boolean, either 'true' or 'false'.
+
+
+</td></tr>
+<tr><td>
+
+[CachedContent](./generative-ai.cachedcontent.md)
+
+
+</td><td>
+
+Describes `CachedContent` interface for sending to the server (if creating) or received from the server (using getters or list methods).
+
+
+</td></tr>
+<tr><td>
+
+[CachedContentBase](./generative-ai.cachedcontentbase.md)
+
+
+</td><td>
+
+
+
+</td></tr>
+<tr><td>
+
+[CitationMetadata](./generative-ai.citationmetadata.md)
+
+
+</td><td>
+
+Citation metadata that may be found on a [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[CitationSource](./generative-ai.citationsource.md)
+
+
+</td><td>
+
+A single citation source.
+
+
+</td></tr>
+<tr><td>
+
+[CodeExecutionResult](./generative-ai.codeexecutionresult.md)
+
+
+</td><td>
+
+Result of executing the `ExecutableCode`<!-- -->. Only generated when using code execution, and always follows a `Part` containing the `ExecutableCode`<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[CodeExecutionResultPart](./generative-ai.codeexecutionresultpart.md)
+
+
+</td><td>
+
+Content part containing the result of executed code.
+
+
+</td></tr>
+<tr><td>
+
+[CodeExecutionTool](./generative-ai.codeexecutiontool.md)
+
+
+</td><td>
+
+Enables the model to execute code as part of generation.
+
+
+</td></tr>
+<tr><td>
+
+[Content](./generative-ai.content.md)
+
+
+</td><td>
+
+Content type for both prompts and response candidates.
+
+
+</td></tr>
+<tr><td>
+
+[ContentEmbedding](./generative-ai.contentembedding.md)
+
+
+</td><td>
+
+A single content embedding.
+
+
+</td></tr>
+<tr><td>
+
+[CountTokensRequest](./generative-ai.counttokensrequest.md)
+
+
+</td><td>
+
+Params for calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)<!-- -->.
+
+The request must contain either a [Content](./generative-ai.content.md) array or a [GenerateContentRequest](./generative-ai.generatecontentrequest.md)<!-- -->, but not both. If both are provided then a [GoogleGenerativeAIRequestInputError](./generative-ai.googlegenerativeairequestinputerror.md) is thrown.
+
+
+</td></tr>
+<tr><td>
+
+[CountTokensResponse](./generative-ai.counttokensresponse.md)
+
+
+</td><td>
+
+Response from calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[DynamicRetrievalConfig](./generative-ai.dynamicretrievalconfig.md)
+
+
+</td><td>
+
+Specifies the dynamic retrieval configuration for the given source.
+
+
+</td></tr>
+<tr><td>
+
+[EmbedContentRequest](./generative-ai.embedcontentrequest.md)
+
+
+</td><td>
+
+Params for calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md)
+
+
+</td></tr>
+<tr><td>
+
+[EmbedContentResponse](./generative-ai.embedcontentresponse.md)
+
+
+</td><td>
+
+Response from calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[EnhancedGenerateContentResponse](./generative-ai.enhancedgeneratecontentresponse.md)
+
+
+</td><td>
+
+Response object wrapped with helper methods.
+
+
+</td></tr>
+<tr><td>
+
+[ErrorDetails](./generative-ai.errordetails.md)
+
+
+</td><td>
+
+Details object that may be included in an error response.
+
+
+</td></tr>
+<tr><td>
+
+[ExecutableCode](./generative-ai.executablecode.md)
+
+
+</td><td>
+
+Code generated by the model that is meant to be executed, where the result is returned to the model. Only generated when using the code execution tool, in which the code will be automatically executed, and a corresponding `CodeExecutionResult` will also be generated.
+
+
+</td></tr>
+<tr><td>
+
+[ExecutableCodePart](./generative-ai.executablecodepart.md)
+
+
+</td><td>
+
+Content part containing executable code generated by the model.
+
+
+</td></tr>
+<tr><td>
+
+[FileData](./generative-ai.filedata.md)
+
+
+</td><td>
+
+Data pointing to a file uploaded with the Files API.
+
+
+</td></tr>
+<tr><td>
+
+[FileDataPart](./generative-ai.filedatapart.md)
+
+
+</td><td>
+
+Content part interface if the part represents FileData.
+
+
+</td></tr>
+<tr><td>
+
+[FunctionCall](./generative-ai.functioncall.md)
+
+
+</td><td>
+
+A predicted \[FunctionCall\] returned from the model that contains a string representing the \[FunctionDeclaration.name\] and a structured JSON object containing the parameters and their values.
+
+
+</td></tr>
+<tr><td>
+
+[FunctionCallingConfig](./generative-ai.functioncallingconfig.md)
+
+
+</td><td>
+
+
+
+</td></tr>
+<tr><td>
+
+[FunctionCallPart](./generative-ai.functioncallpart.md)
+
+
+</td><td>
+
+Content part interface if the part represents a FunctionCall.
+
+
+</td></tr>
+<tr><td>
+
+[FunctionDeclaration](./generative-ai.functiondeclaration.md)
+
+
+</td><td>
+
+Structured representation of a function declaration as defined by the \[OpenAPI 3.0 specification\](https://spec.openapis.org/oas/v3.0.3). Included in this declaration are the function name and parameters. This FunctionDeclaration is a representation of a block of code that can be used as a Tool by the model and executed by the client.
+
+
+</td></tr>
+<tr><td>
+
+[FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md)
+
+
+</td><td>
+
+Schema for parameters passed to [FunctionDeclaration.parameters](./generative-ai.functiondeclaration.parameters.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[FunctionDeclarationsTool](./generative-ai.functiondeclarationstool.md)
+
+
+</td><td>
+
+A FunctionDeclarationsTool is a piece of code that enables the system to interact with external systems to perform an action, or set of actions, outside of knowledge and scope of the model.
+
+
+</td></tr>
+<tr><td>
+
+[FunctionResponse](./generative-ai.functionresponse.md)
+
+
+</td><td>
+
+The result output from a \[FunctionCall\] that contains a string representing the \[FunctionDeclaration.name\] and a structured JSON object containing any output from the function is used as context to the model. This should contain the result of a \[FunctionCall\] made based on model prediction.
+
+
+</td></tr>
+<tr><td>
+
+[FunctionResponsePart](./generative-ai.functionresponsepart.md)
+
+
+</td><td>
+
+Content part interface if the part represents FunctionResponse.
+
+
+</td></tr>
+<tr><td>
+
+[GenerateContentCandidate](./generative-ai.generatecontentcandidate.md)
+
+
+</td><td>
+
+A candidate returned as part of a [GenerateContentResponse](./generative-ai.generatecontentresponse.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[GenerateContentRequest](./generative-ai.generatecontentrequest.md)
+
+
+</td><td>
+
+Request sent to `generateContent` endpoint.
+
+
+</td></tr>
+<tr><td>
+
+[GenerateContentResponse](./generative-ai.generatecontentresponse.md)
+
+
+</td><td>
+
+Individual response from [GenerativeModel.generateContent()](./generative-ai.generativemodel.generatecontent.md) and [GenerativeModel.generateContentStream()](./generative-ai.generativemodel.generatecontentstream.md)<!-- -->. `generateContentStream()` will return one in each chunk until the stream is done.
+
+
+</td></tr>
+<tr><td>
+
+[GenerateContentResult](./generative-ai.generatecontentresult.md)
+
+
+</td><td>
+
+Result object returned from generateContent() call.
+
+
+</td></tr>
+<tr><td>
+
+[GenerateContentStreamResult](./generative-ai.generatecontentstreamresult.md)
+
+
+</td><td>
+
+Result object returned from generateContentStream() call. Iterate over `stream` to get chunks as they come in and/or use the `response` promise to get the aggregated response when the stream is done.
+
+
+</td></tr>
+<tr><td>
+
+[GenerationConfig](./generative-ai.generationconfig.md)
+
+
+</td><td>
+
+Config options for content-related requests
+
+
+</td></tr>
+<tr><td>
+
+[GenerativeContentBlob](./generative-ai.generativecontentblob.md)
+
+
+</td><td>
+
+Interface for sending an image.
+
+
+</td></tr>
+<tr><td>
+
+[GoogleSearchRetrieval](./generative-ai.googlesearchretrieval.md)
+
+
+</td><td>
+
+Retrieval tool that is powered by Google search.
+
+
+</td></tr>
+<tr><td>
+
+[GoogleSearchRetrievalTool](./generative-ai.googlesearchretrievaltool.md)
+
+
+</td><td>
+
+Retrieval tool that is powered by Google search.
+
+
+</td></tr>
+<tr><td>
+
+[GroundingChunk](./generative-ai.groundingchunk.md)
+
+
+</td><td>
+
+Grounding chunk.
+
+
+</td></tr>
+<tr><td>
+
+[GroundingChunkWeb](./generative-ai.groundingchunkweb.md)
+
+
+</td><td>
+
+Chunk from the web.
+
+
+</td></tr>
+<tr><td>
+
+[GroundingMetadata](./generative-ai.groundingmetadata.md)
+
+
+</td><td>
+
+Metadata returned to client when grounding is enabled.
+
+
+</td></tr>
+<tr><td>
+
+[GroundingSupport](./generative-ai.groundingsupport.md)
+
+
+</td><td>
+
+Grounding support.
+
+
+</td></tr>
+<tr><td>
+
+[GroundingSupportSegment](./generative-ai.groundingsupportsegment.md)
+
+
+</td><td>
+
+Segment of the content.
+
+
+</td></tr>
+<tr><td>
+
+[InlineDataPart](./generative-ai.inlinedatapart.md)
+
+
+</td><td>
+
+Content part interface if the part represents an image.
+
+
+</td></tr>
+<tr><td>
+
+[IntegerSchema](./generative-ai.integerschema.md)
+
+
+</td><td>
+
+Describes a JSON-encodable integer.
+
+
+</td></tr>
+<tr><td>
+
+[LogprobsCandidate](./generative-ai.logprobscandidate.md)
+
+
+</td><td>
+
+Candidate for the logprobs token and score.
+
+
+</td></tr>
+<tr><td>
+
+[LogprobsResult](./generative-ai.logprobsresult.md)
+
+
+</td><td>
+
+Logprobs Result
+
+
+</td></tr>
+<tr><td>
+
+[ModelParams](./generative-ai.modelparams.md)
+
+
+</td><td>
+
+Params passed to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[NumberSchema](./generative-ai.numberschema.md)
+
+
+</td><td>
+
+Describes a JSON-encodable floating point number.
+
+
+</td></tr>
+<tr><td>
+
+[ObjectSchema](./generative-ai.objectschema.md)
+
+
+</td><td>
+
+Describes a JSON object, a mapping of specific keys to values.
+
+
+</td></tr>
+<tr><td>
+
+[PromptFeedback](./generative-ai.promptfeedback.md)
+
+
+</td><td>
+
+If the prompt was blocked, this will be populated with `blockReason` and the relevant `safetyRatings`<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[RequestOptions](./generative-ai.requestoptions.md)
+
+
+</td><td>
+
+Params passed to getGenerativeModel() or GoogleAIFileManager().
+
+
+</td></tr>
+<tr><td>
+
+[RetrievalMetadata](./generative-ai.retrievalmetadata.md)
+
+
+</td><td>
+
+Metadata related to retrieval in the grounding flow.
+
+
+</td></tr>
+<tr><td>
+
+[SafetyRating](./generative-ai.safetyrating.md)
+
+
+</td><td>
+
+A safety rating associated with a [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md)
+
+
+</td></tr>
+<tr><td>
+
+[SafetySetting](./generative-ai.safetysetting.md)
+
+
+</td><td>
+
+Safety setting that can be sent as part of request parameters.
+
+
+</td></tr>
+<tr><td>
+
+[SearchEntryPoint](./generative-ai.searchentrypoint.md)
+
+
+</td><td>
+
+Google search entry point.
+
+
+</td></tr>
+<tr><td>
+
+[SingleRequestOptions](./generative-ai.singlerequestoptions.md)
+
+
+</td><td>
+
+Params passed to atomic asynchronous operations.
+
+
+</td></tr>
+<tr><td>
+
+[StartChatParams](./generative-ai.startchatparams.md)
+
+
+</td><td>
+
+Params for [GenerativeModel.startChat()](./generative-ai.generativemodel.startchat.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[StringSchema](./generative-ai.stringschema.md)
+
+
+</td><td>
+
+Describes a string.
+
+
+</td></tr>
+<tr><td>
+
+[TextPart](./generative-ai.textpart.md)
+
+
+</td><td>
+
+Content part interface if the part represents a text string.
+
+
+</td></tr>
+<tr><td>
+
+[ToolConfig](./generative-ai.toolconfig.md)
+
+
+</td><td>
+
+Tool config. This config is shared for all tools provided in the request.
+
+
+</td></tr>
+<tr><td>
+
+[TopCandidates](./generative-ai.topcandidates.md)
+
+
+</td><td>
+
+Candidates with top log probabilities at each decoding step
+
+
+</td></tr>
+<tr><td>
+
+[UsageMetadata](./generative-ai.usagemetadata.md)
+
+
+</td><td>
+
+Metadata on the generation request's token usage.
+
+
+</td></tr>
+</tbody></table>
 
 ## Variables
 
-|  Variable | Description |
-|  --- | --- |
-|  [POSSIBLE\_ROLES](./generative-ai.possible_roles.md) | Possible roles. |
+<table><thead><tr><th>
+
+Variable
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[POSSIBLE\_ROLES](./generative-ai.possible_roles.md)
+
+
+</td><td>
+
+Possible roles.
+
+
+</td></tr>
+</tbody></table>
 
 ## Type Aliases
 
-|  Type Alias | Description |
-|  --- | --- |
-|  [FunctionDeclarationSchemaProperty](./generative-ai.functiondeclarationschemaproperty.md) | Schema for top-level function declaration |
-|  [Part](./generative-ai.part.md) | Content part - includes text or image part types. |
-|  [ResponseSchema](./generative-ai.responseschema.md) | Schema passed to <code>GenerationConfig.responseSchema</code> |
-|  [Schema](./generative-ai.schema.md) | Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed. |
-|  [Tool](./generative-ai.tool.md) | Defines a tool that model can call to access external knowledge. |
+<table><thead><tr><th>
 
+Type Alias
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[FunctionDeclarationSchemaProperty](./generative-ai.functiondeclarationschemaproperty.md)
+
+
+</td><td>
+
+Schema for top-level function declaration
+
+
+</td></tr>
+<tr><td>
+
+[Part](./generative-ai.part.md)
+
+
+</td><td>
+
+Content part - includes text or image part types.
+
+
+</td></tr>
+<tr><td>
+
+[ResponseSchema](./generative-ai.responseschema.md)
+
+
+</td><td>
+
+Schema passed to `GenerationConfig.responseSchema`
+
+
+</td></tr>
+<tr><td>
+
+[Schema](./generative-ai.schema.md)
+
+
+</td><td>
+
+Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed.
+
+
+</td></tr>
+<tr><td>
+
+[Tool](./generative-ai.tool.md)
+
+
+</td><td>
+
+Defines a tool that model can call to access external knowledge.
+
+
+</td></tr>
+</tbody></table>

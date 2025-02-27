@@ -14,8 +14,63 @@ export declare interface SearchEntryPoint
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [renderedContent?](./generative-ai.searchentrypoint.renderedcontent.md) |  | string | _(Optional)_ Web content snippet that can be embedded in a web page or an app webview. |
-|  [sdkBlob?](./generative-ai.searchentrypoint.sdkblob.md) |  | string | _(Optional)_ Base64 encoded JSON representing array of &lt;<!-- -->search term, search url<!-- -->&gt; tuple. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[renderedContent?](./generative-ai.searchentrypoint.renderedcontent.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ Web content snippet that can be embedded in a web page or an app webview.
+
+
+</td></tr>
+<tr><td>
+
+[sdkBlob?](./generative-ai.searchentrypoint.sdkblob.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ Base64 encoded JSON representing array of &lt;<!-- -->search term, search url<!-- -->&gt; tuple.
+
+
+</td></tr>
+</tbody></table>

@@ -13,8 +13,63 @@ export interface FunctionCallingConfig
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [allowedFunctionNames?](./generative-ai.functioncallingconfig.allowedfunctionnames.md) |  | string\[\] | _(Optional)_ |
-|  [mode?](./generative-ai.functioncallingconfig.mode.md) |  | [FunctionCallingMode](./generative-ai.functioncallingmode.md) | _(Optional)_ |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[allowedFunctionNames?](./generative-ai.functioncallingconfig.allowedfunctionnames.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[mode?](./generative-ai.functioncallingconfig.mode.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[FunctionCallingMode](./generative-ai.functioncallingmode.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
