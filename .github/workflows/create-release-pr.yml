@@ -47,4 +47,4 @@ jobs:
         with:
           setupGitUser: false
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GENAI_SDK_BOT_PAT }}
