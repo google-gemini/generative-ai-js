@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.22.1
+
+### Patch Changes
+
+- 33c3c24: add HARM_CATEGORY_CIVIC_INTEGRITY
+
 ## 0.22.0
 
 ### Minor Changes
