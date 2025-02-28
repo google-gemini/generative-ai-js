@@ -22,7 +22,10 @@ import {
   GenerateContentStreamResult,
   Part,
 } from "../../types";
-import { GoogleGenerativeAIError } from "../errors";
+import {
+  GoogleGenerativeAIAbortError,
+  GoogleGenerativeAIError,
+} from "../errors";
 import { addHelpers } from "./response-helpers";
 
 const responseLineRE = /^data\: (.*)(?:\n\n|\r\r|\r\n\r\n)/;
@@ -89,38 +92,54 @@ export function getResponseStream<T>(
       let currentText = "";
       return pump();
       function pump(): Promise<(() => Promise<void>) | undefined> {
-        return reader.read().then(({ value, done }) => {
-          if (done) {
-            if (currentText.trim()) {
-              controller.error(
-                new GoogleGenerativeAIError("Failed to parse stream"),
-              );
+        return reader
+          .read()
+          .then(({ value, done }) => {
+            if (done) {
+              if (currentText.trim()) {
+                controller.error(
+                  new GoogleGenerativeAIError("Failed to parse stream"),
+                );
+                return;
+              }
+              controller.close();
               return;
             }
-            controller.close();
-            return;
-          }
 
-          currentText += value;
-          let match = currentText.match(responseLineRE);
-          let parsedResponse: T;
-          while (match) {
-            try {
-              parsedResponse = JSON.parse(match[1]);
-            } catch (e) {
-              controller.error(
-                new GoogleGenerativeAIError(
-                  `Error parsing JSON response: "${match[1]}"`,
-                ),
-              );
-              return;
+            currentText += value;
+            let match = currentText.match(responseLineRE);
+            let parsedResponse: T;
+            while (match) {
+              try {
+                parsedResponse = JSON.parse(match[1]);
+              } catch (e) {
+                controller.error(
+                  new GoogleGenerativeAIError(
+                    `Error parsing JSON response: "${match[1]}"`,
+                  ),
+                );
+                return;
+              }
+              controller.enqueue(parsedResponse);
+              currentText = currentText.substring(match[0].length);
+              match = currentText.match(responseLineRE);
             }
-            controller.enqueue(parsedResponse);
-            currentText = currentText.substring(match[0].length);
-            match = currentText.match(responseLineRE);
-          }
-          return pump();
-        });
+            return pump();
+          })
+          .catch((e: Error) => {
+            let err = e;
+            err.stack = e.stack;
+            if (err.name === "AbortError") {
+              err = new GoogleGenerativeAIAbortError(
+                "Request aborted when reading from the stream",
+              );
+            } else {
+              err = new GoogleGenerativeAIError(
+                "Error reading from the stream",
+              );
+            }
+            throw err;
+          });
       }
     },
   });
