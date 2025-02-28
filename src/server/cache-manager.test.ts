@@ -28,6 +28,7 @@ use(chaiAsPromised);
 
 const FAKE_CONTENTS = [{ role: "user", parts: [{ text: "some text" }] }];
 const FAKE_CACHE_NAME = "cachedContents/hash1234";
+const SYSTEM_INSTRUCTION = "You are a fish";
 const fakeResponseJson: () => Promise<{}> = () =>
   Promise.resolve({ name: FAKE_CACHE_NAME });
 const model = "models/gemini-1.5-pro-001";
@@ -124,6 +125,12 @@ describe("GoogleAICacheManager", () => {
     expect(makeRequestStub.args[0][0].toString()).to.match(
       /^http:\/\/mysite\.com/,
     );
+    expect(typeof makeRequestStub.args[0][2]).to.eq("string");
+    const body = JSON.parse(makeRequestStub.args[0][2] as string);
+    expect(body.contents[0].parts[0].text).to.eq(
+      FAKE_CONTENTS[0].parts[0].text,
+    );
+    expect(body.contents[0].role).to.eq(FAKE_CONTENTS[0].role);
   });
   it("passes update request info", async () => {
     const makeRequestStub = stub(request, "makeServerRequest").resolves({
@@ -293,5 +300,32 @@ describe("GoogleAICacheManager", () => {
     } as Response);
     const cacheManager = new GoogleAICacheManager("apiKey");
     await expect(cacheManager.delete("")).to.be.rejectedWith("Invalid name");
+  });
+  it("passes system instructions", async () => {
+    const makeRequestStub = stub(request, "makeServerRequest").resolves({
+      ok: true,
+      json: fakeResponseJson,
+    } as Response);
+    const cacheManager = new GoogleAICacheManager("apiKey", {
+      apiVersion: "v3000",
+      baseUrl: "http://mysite.com",
+    });
+    await cacheManager.create({
+      model,
+      contents: FAKE_CONTENTS,
+      systemInstruction: SYSTEM_INSTRUCTION,
+    });
+    expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.CREATE);
+    expect(makeRequestStub.args[0][1]).to.be.instanceOf(Headers);
+    expect(makeRequestStub.args[0][0].toString()).to.include(
+      "v3000/cachedContents",
+    );
+    expect(makeRequestStub.args[0][0].toString()).to.match(
+      /^http:\/\/mysite\.com/,
+    );
+    expect(typeof makeRequestStub.args[0][2]).to.eq("string");
+    const body = JSON.parse(makeRequestStub.args[0][2] as string);
+    expect(body.systemInstruction.parts[0].text).to.eq(SYSTEM_INSTRUCTION);
+    expect(body.systemInstruction.role).to.eq("system");
   });
 });

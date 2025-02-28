@@ -55,13 +55,13 @@ export class GoogleAICacheManager {
             " a content cache. You must choose one.",
         );
       }
-      if (createOptions.systemInstruction) {
-        newCachedContent.systemInstruction = formatSystemInstruction(
-          createOptions.systemInstruction,
-        );
-      }
       newCachedContent.ttl = createOptions.ttlSeconds.toString() + "s";
       delete (newCachedContent as CachedContentCreateParams).ttlSeconds;
+    }
+    if (createOptions.systemInstruction) {
+      newCachedContent.systemInstruction = formatSystemInstruction(
+        createOptions.systemInstruction,
+      );
     }
     if (!newCachedContent.model) {
       throw new GoogleGenerativeAIRequestInputError(
