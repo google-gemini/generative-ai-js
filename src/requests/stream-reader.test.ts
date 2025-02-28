@@ -42,7 +42,7 @@ import {
 
 use(sinonChai);
 
-describe.only("getResponseStream", () => {
+describe("getResponseStream", () => {
   afterEach(() => {
     restore();
   });
