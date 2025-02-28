@@ -17,9 +17,9 @@
 
 import {
   Content,
+  GenerateContentResponse,
   POSSIBLE_ROLES,
   Part,
-  GenerateContentResponse,
 } from "../../types";
 import { GoogleGenerativeAIError } from "../errors";
 
