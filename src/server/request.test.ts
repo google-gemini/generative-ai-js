@@ -20,9 +20,17 @@ import { match, restore, stub } from "sinon";
 import * as sinonChai from "sinon-chai";
 import * as chaiAsPromised from "chai-as-promised";
 import { DEFAULT_API_VERSION, DEFAULT_BASE_URL } from "../requests/request";
-import { FilesRequestUrl, makeServerRequest } from "./request";
+import {
+  FilesRequestUrl,
+  ServerRequestUrl,
+  getHeaders,
+  makeServerRequest,
+} from "./request";
 import { RpcTask } from "./constants";
-import { GoogleGenerativeAIFetchError } from "../errors";
+import {
+  GoogleGenerativeAIFetchError,
+  GoogleGenerativeAIRequestInputError,
+} from "../errors";
 
 use(sinonChai);
 use(chaiAsPromised);
@@ -210,6 +218,26 @@ describe("Files API - request methods", () => {
         ).to.include("generic::invalid_argument");
       }
       expect(fetchStub).to.be.calledOnce;
+    });
+  });
+  describe("getHeaders", () => {
+    it("passes custom headers", () => {
+      const url = new ServerRequestUrl(RpcTask.GET, "key", {
+        customHeaders: new Headers({ customHeader: "customHeaderValue" }),
+      });
+
+      const headers = getHeaders(url);
+
+      expect(headers.get("customHeader")).to.equal("customHeaderValue");
+    });
+    it("passes custom x-goog-api-client header", () => {
+      const url = new ServerRequestUrl(RpcTask.GET, "key", {
+        customHeaders: new Headers({ "x-goog-api-client": "client/version" }),
+      });
+
+      expect(() => getHeaders(url)).to.throw(
+        GoogleGenerativeAIRequestInputError,
+      );
     });
   });
 });

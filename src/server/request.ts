@@ -23,6 +23,7 @@ import {
 } from "../requests/request";
 import { RequestOptions, SingleRequestOptions } from "../../types";
 import { RpcTask } from "./constants";
+import { GoogleGenerativeAIRequestInputError } from "../errors";
 
 const taskToMethod = {
   [RpcTask.UPLOAD]: "POST",
@@ -91,6 +92,35 @@ export function getHeaders(url: ServerRequestUrl): Headers {
   const headers = new Headers();
   headers.append("x-goog-api-client", getClientHeaders(url.requestOptions));
   headers.append("x-goog-api-key", url.apiKey);
+
+  let customHeaders = url.requestOptions?.customHeaders;
+  if (customHeaders) {
+    if (!(customHeaders instanceof Headers)) {
+      try {
+        customHeaders = new Headers(customHeaders);
+      } catch (e) {
+        throw new GoogleGenerativeAIRequestInputError(
+          `unable to convert customHeaders value ${JSON.stringify(
+            customHeaders,
+          )} to Headers: ${e.message}`,
+        );
+      }
+    }
+
+    for (const [headerName, headerValue] of customHeaders.entries()) {
+      if (headerName === "x-goog-api-key") {
+        throw new GoogleGenerativeAIRequestInputError(
+          `Cannot set reserved header name ${headerName}`,
+        );
+      } else if (headerName === "x-goog-api-client") {
+        throw new GoogleGenerativeAIRequestInputError(
+          `Header name ${headerName} can only be set using the apiClient field`,
+        );
+      }
+
+      headers.append(headerName, headerValue);
+    }
+  }
   return headers;
 }
 
