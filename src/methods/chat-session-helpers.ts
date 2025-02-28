@@ -107,7 +107,7 @@ export function validateChatHistory(history: Content[]): void {
  * Returns true if the response is valid (could be appended to the history), flase otherwise.
  */
 export function isValidResponse(response: GenerateContentResponse): boolean {
-  if (response.candidates == undefined || response.candidates.length === 0) {
+  if (response.candidates === undefined || response.candidates.length === 0) {
     return false;
   }
   const content = response.candidates[0]?.content;
