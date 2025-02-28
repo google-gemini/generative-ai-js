@@ -35,7 +35,10 @@ import {
   HarmCategory,
   HarmProbability,
 } from "../../types";
-import { GoogleGenerativeAIAbortError, GoogleGenerativeAIError } from "../errors";
+import {
+  GoogleGenerativeAIAbortError,
+  GoogleGenerativeAIError,
+} from "../errors";
 
 use(sinonChai);
 
@@ -64,8 +67,9 @@ describe.only("getResponseStream", () => {
     expect(responses).to.deep.equal(src);
   });
   it("throw AbortError", async () => {
-    const inputStream = getErrorStream(new DOMException("Simulated AbortError", "AbortError"))
-    .pipeThrough(new TextDecoderStream("utf8", { fatal: true }));
+    const inputStream = getErrorStream(
+      new DOMException("Simulated AbortError", "AbortError"),
+    ).pipeThrough(new TextDecoderStream("utf8", { fatal: true }));
     const responseStream = getResponseStream<{ text: string }>(inputStream);
     const reader = responseStream.getReader();
     const responses: Array<{ text: string }> = [];
@@ -82,10 +86,11 @@ describe.only("getResponseStream", () => {
         "Request aborted",
       );
     }
-  }); 
+  });
   it("throw non AbortError", async () => {
-    const inputStream = getErrorStream(new DOMException("Simulated Error", "RandomError"))
-    .pipeThrough(new TextDecoderStream("utf8", { fatal: true }));
+    const inputStream = getErrorStream(
+      new DOMException("Simulated Error", "RandomError"),
+    ).pipeThrough(new TextDecoderStream("utf8", { fatal: true }));
     const responseStream = getResponseStream<{ text: string }>(inputStream);
     const reader = responseStream.getReader();
     const responses: Array<{ text: string }> = [];
