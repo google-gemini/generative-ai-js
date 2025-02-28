@@ -27,7 +27,7 @@ import {
 } from "../../types";
 import { formatNewContent } from "../requests/request-helpers";
 import { formatBlockErrorMessage } from "../requests/response-helpers";
-import { validateChatHistory } from "./chat-session-helpers";
+import { isValidResponse, validateChatHistory } from "./chat-session-helpers";
 import { generateContent, generateContentStream } from "./generate-content";
 
 /**
@@ -108,11 +108,7 @@ export class ChatSession {
         ),
       )
       .then((result) => {
-        if (
-          result.response.candidates &&
-          result.response.candidates.length > 0 &&
-          result.response.candidates[0]?.content !== undefined
-        ) {
+        if (isValidResponse(result.response)) {
           this._history.push(newContent);
           const responseContent: Content = {
             parts: [],
@@ -180,11 +176,7 @@ export class ChatSession {
       })
       .then((streamResult) => streamResult.response)
       .then((response) => {
-        if (
-          response.candidates &&
-          response.candidates.length > 0 &&
-          response.candidates[0]?.content !== undefined
-        ) {
+        if (isValidResponse(response)) {
           this._history.push(newContent);
           const responseContent = { ...response.candidates[0].content };
           // Response seems to come back without a role set.

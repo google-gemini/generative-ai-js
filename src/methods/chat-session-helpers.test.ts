@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-import { validateChatHistory } from "./chat-session-helpers";
+import { isValidResponse, validateChatHistory } from "./chat-session-helpers";
 import { expect } from "chai";
-import { Content } from "../../types";
+import { Content, GenerateContentResponse } from "../../types";
 import { GoogleGenerativeAIError } from "../errors";
 
 describe("chat-session-helpers", () => {
@@ -164,6 +164,95 @@ describe("chat-session-helpers", () => {
         } else {
           expect(fn).to.throw(GoogleGenerativeAIError);
         }
+      });
+    });
+  });
+  describe("isValidResponse", () => {
+    const testCases = [
+      { name: "default response", response: {}, isValid: false },
+      {
+        name: "empty candidates",
+        response: { candidates: [] } as GenerateContentResponse,
+        isValid: false,
+      },
+      {
+        name: "default candidates",
+        response: { candidates: [{}] } as GenerateContentResponse,
+        isValid: false,
+      },
+      {
+        name: "default content",
+        response: { candidates: [{ content: {} }] } as GenerateContentResponse,
+        isValid: false,
+      },
+      {
+        name: "empty parts",
+        response: {
+          candidates: [{ content: { parts: [] } }],
+        } as GenerateContentResponse,
+        isValid: false,
+      },
+      {
+        name: "default part",
+        response: {
+          candidates: [{ content: { parts: [{}] } }],
+        } as GenerateContentResponse,
+        isValid: false,
+      },
+      {
+        name: "part with empty text",
+        response: {
+          candidates: [{ content: { parts: [{ text: "" }] } }],
+        } as GenerateContentResponse,
+        isValid: false,
+      },
+      {
+        name: "part with text",
+        response: {
+          candidates: [{ content: { parts: [{ text: "hello" }] } }],
+        } as GenerateContentResponse,
+        isValid: true,
+      },
+      {
+        name: "part with function call",
+        response: {
+          candidates: [
+            {
+              content: {
+                parts: [
+                  { functionCall: { name: "foo", args: { input: "bar" } } },
+                ],
+              },
+            },
+          ],
+        } as GenerateContentResponse,
+        isValid: true,
+      },
+      {
+        name: "part with function response",
+        response: {
+          candidates: [
+            {
+              content: {
+                parts: [
+                  {
+                    functionResponse: {
+                      name: "foo",
+                      response: { output: "bar" },
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        } as GenerateContentResponse,
+        isValid: true,
+      },
+    ];
+
+    testCases.forEach((testCase) => {
+      it(testCase.name, () => {
+        expect(isValidResponse(testCase.response)).to.eq(testCase.isValid);
       });
     });
   });

@@ -15,7 +15,12 @@
  * limitations under the License.
  */
 
-import { Content, POSSIBLE_ROLES, Part } from "../../types";
+import {
+  Content,
+  GenerateContentResponse,
+  POSSIBLE_ROLES,
+  Part,
+} from "../../types";
 import { GoogleGenerativeAIError } from "../errors";
 
 type Role = (typeof POSSIBLE_ROLES)[number];
@@ -96,4 +101,29 @@ export function validateChatHistory(history: Content[]): void {
 
     prevContent = true;
   }
+}
+
+/**
+ * Returns true if the response is valid (could be appended to the history), flase otherwise.
+ */
+export function isValidResponse(response: GenerateContentResponse): boolean {
+  if (response.candidates === undefined || response.candidates.length === 0) {
+    return false;
+  }
+  const content = response.candidates[0]?.content;
+  if (content === undefined) {
+    return false;
+  }
+  if (content.parts === undefined || content.parts.length === 0) {
+    return false;
+  }
+  for (const part of content.parts) {
+    if (part === undefined || Object.keys(part).length === 0) {
+      return false;
+    }
+    if (part.text !== undefined && part.text === "") {
+      return false;
+    }
+  }
+  return true;
 }
