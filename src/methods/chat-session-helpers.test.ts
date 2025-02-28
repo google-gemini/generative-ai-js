@@ -213,6 +213,41 @@ describe("chat-session-helpers", () => {
         } as GenerateContentResponse,
         isValid: true,
       },
+      {
+        name: "part with function call",
+        response: {
+          candidates: [
+            {
+              content: {
+                parts: [
+                  { functionCall: { name: "foo", args: { input: "bar" } } },
+                ],
+              },
+            },
+          ],
+        } as GenerateContentResponse,
+        isValid: true,
+      },
+      {
+        name: "part with function response",
+        response: {
+          candidates: [
+            {
+              content: {
+                parts: [
+                  {
+                    functionResponse: {
+                      name: "foo",
+                      response: { output: "bar" },
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        } as GenerateContentResponse,
+        isValid: true,
+      },
     ];
 
     testCases.forEach((testCase) => {
