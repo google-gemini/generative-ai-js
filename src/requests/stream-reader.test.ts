@@ -24,8 +24,8 @@ import { expect, use } from "chai";
 import { restore } from "sinon";
 import * as sinonChai from "sinon-chai";
 import {
-  getErrorStream,
   getChunkedStream,
+  getErrorStream,
   getMockResponseStreaming,
 } from "../../test-utils/mock-response";
 import {
