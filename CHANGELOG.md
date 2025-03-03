@@ -1,5 +1,18 @@
 # @google/generative-ai
 
+## 0.23.0
+
+### Minor Changes
+
+- da7ed0e: Introduce a new error type to represent AbortError from SDK
+
+### Patch Changes
+
+- 16737d3: Fixes issue #218 by ensuring system instructions are formatted always, not just when TTL is specified
+- 9e95663: fix: Exclude content with empty parts from chat history
+- be83756: Added custom header support to the Server package, matching functionality on the client package
+- 33c3c24: add HARM_CATEGORY_CIVIC_INTEGRITY
+
 ## 0.22.0
 
 ### Minor Changes
