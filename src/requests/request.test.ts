@@ -28,6 +28,7 @@ import {
   makeModelRequest,
 } from "./request";
 import {
+  GoogleGenerativeAIAbortError,
   GoogleGenerativeAIFetchError,
   GoogleGenerativeAIRequestInputError,
 } from "../errors";
@@ -228,7 +229,30 @@ describe("request methods", () => {
       });
       expect(response.ok).to.be.true;
     });
-    it("error with timeout", async () => {
+    it("error with local timeout", async () => {
+      const abortError = new DOMException("Request timeout.", "AbortError");
+      const fetchStub = stub().rejects(abortError);
+
+      try {
+        await makeModelRequest(
+          "model-name",
+          Task.GENERATE_CONTENT,
+          "key",
+          true,
+          "",
+          {
+            timeout: 100,
+          },
+          fetchStub as typeof fetch,
+        );
+      } catch (e) {
+        expect((e as GoogleGenerativeAIAbortError).message).to.include(
+          "Request aborted",
+        );
+      }
+      expect(fetchStub).to.be.calledOnce;
+    });
+    it("error with server timeout", async () => {
       const fetchStub = stub().resolves({
         ok: false,
         status: 500,

@@ -64,3 +64,10 @@ export class GoogleGenerativeAIFetchError extends GoogleGenerativeAIError {
  * @public
  */
 export class GoogleGenerativeAIRequestInputError extends GoogleGenerativeAIError {}
+
+/**
+ * Error thrown when a request is aborted, either due to a timeout or
+ * intentional cancellation by the user.
+ * @public
+ */
+export class GoogleGenerativeAIAbortError extends GoogleGenerativeAIError {}

@@ -25,6 +25,7 @@ import { restore } from "sinon";
 import * as sinonChai from "sinon-chai";
 import {
   getChunkedStream,
+  getErrorStream,
   getMockResponseStreaming,
 } from "../../test-utils/mock-response";
 import {
@@ -34,6 +35,10 @@ import {
   HarmCategory,
   HarmProbability,
 } from "../../types";
+import {
+  GoogleGenerativeAIAbortError,
+  GoogleGenerativeAIError,
+} from "../errors";
 
 use(sinonChai);
 
@@ -60,6 +65,48 @@ describe("getResponseStream", () => {
       responses.push(value);
     }
     expect(responses).to.deep.equal(src);
+  });
+  it("throw AbortError", async () => {
+    const inputStream = getErrorStream(
+      new DOMException("Simulated AbortError", "AbortError"),
+    ).pipeThrough(new TextDecoderStream("utf8", { fatal: true }));
+    const responseStream = getResponseStream<{ text: string }>(inputStream);
+    const reader = responseStream.getReader();
+    const responses: Array<{ text: string }> = [];
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) {
+          break;
+        }
+        responses.push(value);
+      }
+    } catch (e) {
+      expect((e as GoogleGenerativeAIAbortError).message).to.include(
+        "Request aborted",
+      );
+    }
+  });
+  it("throw non AbortError", async () => {
+    const inputStream = getErrorStream(
+      new DOMException("Simulated Error", "RandomError"),
+    ).pipeThrough(new TextDecoderStream("utf8", { fatal: true }));
+    const responseStream = getResponseStream<{ text: string }>(inputStream);
+    const reader = responseStream.getReader();
+    const responses: Array<{ text: string }> = [];
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) {
+          break;
+        }
+        responses.push(value);
+      }
+    } catch (e) {
+      expect((e as GoogleGenerativeAIError).message).to.include(
+        "Error reading from the stream",
+      );
+    }
   });
 });
 

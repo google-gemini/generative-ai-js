@@ -48,6 +48,19 @@ export function getChunkedStream(
 
   return stream;
 }
+
+/**
+ * Returns a stream which would throw the given error.
+ */
+export function getErrorStream(err: Error): ReadableStream<Uint8Array> {
+  const stream = new ReadableStream<Uint8Array>({
+    start(controller) {
+      controller.error(err);
+    },
+  });
+  return stream;
+}
+
 export function getMockResponseStreaming(
   filename: string,
   chunkLength: number = 20,
