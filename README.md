@@ -85,7 +85,7 @@ access and utilize the Gemini model for various use cases.
 
 See the
 [Gemini API Cookbook](https://github.com/google-gemini/gemini-api-cookbook/) or
-[ai.google.dev](https://ai.google.dev) for complete documentation.
+[ai.google.dev](https://ai.google.dev) for complete documentation. For the API reference docs, please refer to [JavaScript SDK Reference](https://github.com/google-gemini/generative-ai-js/blob/main/docs/reference/main/index.md).
 
 ## Contributing
 
