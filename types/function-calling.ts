@@ -162,13 +162,53 @@ export interface IntegerSchema extends BaseSchema {
  *
  * @public
  */
-export interface StringSchema extends BaseSchema {
+export type StringSchema = 
+| SimpleStringSchema
+| EnumStringSchema
+| DateTimeStringSchema
+
+
+/**
+ * Describes a simple string with no format.
+ *
+ * @public
+ */
+export interface SimpleStringSchema extends BaseSchema {
   type: typeof SchemaType.STRING;
-  /** If present, limits the result to one of the given values. */
-  enum?: string[];
-  // Note that the API accepts the `pattern`, `minLength`, and `maxLength`
-  // fields, but they may only be advisory.
-  // The `format` field is not (at time of writing) supported on strings.
+
+  // Note: These undefined values are needed to help the type system, they won't,
+  // be passed to the API as they are undefined
+  format?: never;
+
+  enum?: never;
+}
+
+/**
+ * Describes a string date time
+ * 
+ * @public
+ */
+export interface DateTimeStringSchema extends BaseSchema {
+  type: typeof SchemaType.STRING
+
+  format: "date-time"
+
+  enum?: never;
+}
+
+
+/**
+ * Describes a string enum
+ * 
+ * @public
+ */
+export interface EnumStringSchema extends BaseSchema {
+  type: typeof SchemaType.STRING;
+  
+  format: "enum";
+
+  /** Possible values for this enum */
+  enum: string[];
 }
 
 /**
