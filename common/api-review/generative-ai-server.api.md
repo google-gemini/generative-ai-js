@@ -509,7 +509,7 @@ export interface SimpleStringSchema extends BaseSchema {
     // (undocumented)
     enum?: never;
     // (undocumented)
-    format?: "date-time" | never;
+    format?: "date-time" | undefined;
     // (undocumented)
     type: typeof SchemaType.STRING;
 }

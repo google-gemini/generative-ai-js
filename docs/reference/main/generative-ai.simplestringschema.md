@@ -18,6 +18,6 @@ export interface SimpleStringSchema extends BaseSchema
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [enum?](./generative-ai.simplestringschema.enum.md) |  | never | _(Optional)_ |
-|  [format?](./generative-ai.simplestringschema.format.md) |  | "date-time" \| never | _(Optional)_ |
+|  [format?](./generative-ai.simplestringschema.format.md) |  | "date-time" \| undefined | _(Optional)_ |
 |  [type](./generative-ai.simplestringschema.type.md) |  | typeof [SchemaType.STRING](./generative-ai.schematype.md) |  |
 

@@ -177,7 +177,7 @@ export interface SimpleStringSchema extends BaseSchema {
 
   // Note: These undefined values are needed to help the type system, they won't,
   // be passed to the API as they are undefined
-  format?: "date-time" | never;
+  format?: "date-time" | undefined;
 
   enum?: never;
 }

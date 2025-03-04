@@ -7,5 +7,5 @@
 **Signature:**
 
 ```typescript
-format?: "date-time" | never;
+format?: "date-time" | undefined;
 ```
