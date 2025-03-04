@@ -53,7 +53,6 @@
 |  [ContentEmbedding](./generative-ai.contentembedding.md) | A single content embedding. |
 |  [CountTokensRequest](./generative-ai.counttokensrequest.md) | <p>Params for calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)<!-- -->.</p><p>The request must contain either a [Content](./generative-ai.content.md) array or a [GenerateContentRequest](./generative-ai.generatecontentrequest.md)<!-- -->, but not both. If both are provided then a [GoogleGenerativeAIRequestInputError](./generative-ai.googlegenerativeairequestinputerror.md) is thrown.</p> |
 |  [CountTokensResponse](./generative-ai.counttokensresponse.md) | Response from calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)<!-- -->. |
-|  [DateTimeStringSchema](./generative-ai.datetimestringschema.md) | n Describes a string date time |
 |  [DynamicRetrievalConfig](./generative-ai.dynamicretrievalconfig.md) | Specifies the dynamic retrieval configuration for the given source. |
 |  [EmbedContentRequest](./generative-ai.embedcontentrequest.md) | Params for calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md) |
 |  [EmbedContentResponse](./generative-ai.embedcontentresponse.md) | Response from calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md)<!-- -->. |
@@ -99,7 +98,7 @@
 |  [SafetyRating](./generative-ai.safetyrating.md) | A safety rating associated with a [GenerateContentCandidate](./generative-ai.generatecontentcandidate.md) |
 |  [SafetySetting](./generative-ai.safetysetting.md) | Safety setting that can be sent as part of request parameters. |
 |  [SearchEntryPoint](./generative-ai.searchentrypoint.md) | Google search entry point. |
-|  [SimpleStringSchema](./generative-ai.simplestringschema.md) | Describes a simple string with no format. |
+|  [SimpleStringSchema](./generative-ai.simplestringschema.md) | Describes a simple string schema, with or without format |
 |  [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | Params passed to atomic asynchronous operations. |
 |  [StartChatParams](./generative-ai.startchatparams.md) | Params for [GenerativeModel.startChat()](./generative-ai.generativemodel.startchat.md)<!-- -->. |
 |  [TextPart](./generative-ai.textpart.md) | Content part interface if the part represents a text string. |

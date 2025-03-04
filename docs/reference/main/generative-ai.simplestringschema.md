@@ -4,7 +4,7 @@
 
 ## SimpleStringSchema interface
 
-Describes a simple string with no format.
+Describes a simple string schema, with or without format
 
 **Signature:**
 
@@ -18,6 +18,6 @@ export interface SimpleStringSchema extends BaseSchema
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
 |  [enum?](./generative-ai.simplestringschema.enum.md) |  | never | _(Optional)_ |
-|  [format?](./generative-ai.simplestringschema.format.md) |  | never | _(Optional)_ |
+|  [format?](./generative-ai.simplestringschema.format.md) |  | "date-time" \| never | _(Optional)_ |
 |  [type](./generative-ai.simplestringschema.type.md) |  | typeof [SchemaType.STRING](./generative-ai.schematype.md) |  |
 

@@ -129,18 +129,6 @@ export interface Content {
     role: string;
 }
 
-// Warning: (ae-incompatible-release-tags) The symbol "DateTimeStringSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
-//
-// @public
-export interface DateTimeStringSchema extends BaseSchema {
-    // (undocumented)
-    enum?: never;
-    // (undocumented)
-    format: "date-time";
-    // (undocumented)
-    type: typeof SchemaType.STRING;
-}
-
 // Warning: (ae-incompatible-release-tags) The symbol "EnumStringSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
 //
 // @public
@@ -521,7 +509,7 @@ export interface SimpleStringSchema extends BaseSchema {
     // (undocumented)
     enum?: never;
     // (undocumented)
-    format?: never;
+    format?: "date-time" | never;
     // (undocumented)
     type: typeof SchemaType.STRING;
 }
@@ -532,7 +520,7 @@ export interface SingleRequestOptions extends RequestOptions {
 }
 
 // @public
-export type StringSchema = SimpleStringSchema | EnumStringSchema | DateTimeStringSchema;
+export type StringSchema = SimpleStringSchema | EnumStringSchema;
 
 // @public
 export interface TextPart {

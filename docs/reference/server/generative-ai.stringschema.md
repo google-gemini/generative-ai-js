@@ -9,7 +9,7 @@ Describes a string.
 **Signature:**
 
 ```typescript
-export type StringSchema = SimpleStringSchema | EnumStringSchema | DateTimeStringSchema;
+export type StringSchema = SimpleStringSchema | EnumStringSchema;
 ```
-**References:** [SimpleStringSchema](./generative-ai.simplestringschema.md)<!-- -->, [EnumStringSchema](./generative-ai.enumstringschema.md)<!-- -->, [DateTimeStringSchema](./generative-ai.datetimestringschema.md)
+**References:** [SimpleStringSchema](./generative-ai.simplestringschema.md)<!-- -->, [EnumStringSchema](./generative-ai.enumstringschema.md)
 

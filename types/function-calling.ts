@@ -165,11 +165,10 @@ export interface IntegerSchema extends BaseSchema {
 export type StringSchema = 
 | SimpleStringSchema
 | EnumStringSchema
-| DateTimeStringSchema;
 
 
 /**
- * Describes a simple string with no format.
+ * Describes a simple string schema, with or without format
  *
  * @public
  */
@@ -178,20 +177,7 @@ export interface SimpleStringSchema extends BaseSchema {
 
   // Note: These undefined values are needed to help the type system, they won't,
   // be passed to the API as they are undefined
-  format?: never;
-
-  enum?: never;
-}
-
-/**n
- * Describes a string date time
- * 
- * @public
- */
-export interface DateTimeStringSchema extends BaseSchema {
-  type: typeof SchemaType.STRING
-
-  format: "date-time"
+  format?: "date-time" | never;
 
   enum?: never;
 }
@@ -210,6 +196,7 @@ export interface EnumStringSchema extends BaseSchema {
   /** Possible values for this enum */
   enum: string[];
 }
+
 
 /**
  * Describes a boolean, either 'true' or 'false'.
