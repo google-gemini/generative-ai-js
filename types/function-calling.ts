@@ -164,7 +164,7 @@ export interface IntegerSchema extends BaseSchema {
  */
 export type StringSchema = 
 | SimpleStringSchema
-| EnumStringSchema
+| EnumStringSchema;
 
 
 /**
