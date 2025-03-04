@@ -4,7 +4,7 @@
 
 ## DateTimeStringSchema interface
 
-Describes a string date time
+n Describes a string date time
 
 **Signature:**
 

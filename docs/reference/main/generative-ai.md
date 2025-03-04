@@ -53,7 +53,7 @@
 |  [ContentEmbedding](./generative-ai.contentembedding.md) | A single content embedding. |
 |  [CountTokensRequest](./generative-ai.counttokensrequest.md) | <p>Params for calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)<!-- -->.</p><p>The request must contain either a [Content](./generative-ai.content.md) array or a [GenerateContentRequest](./generative-ai.generatecontentrequest.md)<!-- -->, but not both. If both are provided then a [GoogleGenerativeAIRequestInputError](./generative-ai.googlegenerativeairequestinputerror.md) is thrown.</p> |
 |  [CountTokensResponse](./generative-ai.counttokensresponse.md) | Response from calling [GenerativeModel.countTokens()](./generative-ai.generativemodel.counttokens.md)<!-- -->. |
-|  [DateTimeStringSchema](./generative-ai.datetimestringschema.md) | Describes a string date time |
+|  [DateTimeStringSchema](./generative-ai.datetimestringschema.md) | n Describes a string date time |
 |  [DynamicRetrievalConfig](./generative-ai.dynamicretrievalconfig.md) | Specifies the dynamic retrieval configuration for the given source. |
 |  [EmbedContentRequest](./generative-ai.embedcontentrequest.md) | Params for calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md) |
 |  [EmbedContentResponse](./generative-ai.embedcontentresponse.md) | Response from calling [GenerativeModel.embedContent()](./generative-ai.generativemodel.embedcontent.md)<!-- -->. |
