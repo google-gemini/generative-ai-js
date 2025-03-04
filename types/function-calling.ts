@@ -165,7 +165,7 @@ export interface IntegerSchema extends BaseSchema {
 export type StringSchema = 
 | SimpleStringSchema
 | EnumStringSchema
-| DateTimeStringSchema
+| DateTimeStringSchema;
 
 
 /**
@@ -183,7 +183,7 @@ export interface SimpleStringSchema extends BaseSchema {
   enum?: never;
 }
 
-/**
+/**n
  * Describes a string date time
  * 
  * @public
