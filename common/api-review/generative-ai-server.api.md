@@ -31,6 +31,8 @@ export interface BooleanSchema extends BaseSchema {
     type: typeof SchemaType.BOOLEAN;
 }
 
+/// <reference types="node" />
+
 // @public
 export interface CachedContent extends CachedContentBase {
     createTime?: string;
@@ -373,7 +375,7 @@ export class GoogleAIFileManager {
     deleteFile(fileId: string): Promise<void>;
     getFile(fileId: string, requestOptions?: SingleRequestOptions): Promise<FileMetadataResponse>;
     listFiles(listParams?: ListParams, requestOptions?: SingleRequestOptions): Promise<ListFilesResponse>;
-    uploadFile(filePath: string, fileMetadata: FileMetadata): Promise<UploadFileResponse>;
+    uploadFile(fileData: string | Buffer, fileMetadata: FileMetadata): Promise<UploadFileResponse>;
 }
 
 // @public

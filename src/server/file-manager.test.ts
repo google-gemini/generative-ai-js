@@ -23,6 +23,7 @@ import * as request from "./request";
 import { RpcTask } from "./constants";
 import { DEFAULT_API_VERSION } from "../requests/request";
 import { FileMetadata } from "../../types/server";
+import { readFile } from "fs/promises";
 
 use(sinonChai);
 use(chaiAsPromised);
@@ -61,6 +62,28 @@ describe("GoogleAIFileManager", () => {
     const blobText = await (bodyBlob as Blob).text();
     expect(blobText).to.include("Content-Type: image/png");
   });
+  it("passes uploadFile request info reading from buffer", async () => {
+    const makeRequestStub = stub(request, "makeServerRequest").resolves({
+      ok: true,
+      json: fakeUploadJson,
+    } as Response);
+    const fileManager = new GoogleAIFileManager("apiKey");
+    const fileBuffer = await readFile("./test-utils/cat.png");
+    const result = await fileManager.uploadFile(fileBuffer, {
+      mimeType: "image/png",
+    });
+    expect(result.file.uri).to.equal(FAKE_URI);
+    expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.UPLOAD);
+    expect(makeRequestStub.args[0][0].toString()).to.include("/upload/");
+    expect(makeRequestStub.args[0][1]).to.be.instanceOf(Headers);
+    expect(makeRequestStub.args[0][1].get("X-Goog-Upload-Protocol")).to.equal(
+      "multipart",
+    );
+    expect(makeRequestStub.args[0][2]).to.be.instanceOf(Blob);
+    const bodyBlob = makeRequestStub.args[0][2];
+    const blobText = await (bodyBlob as Blob).text();
+    expect(blobText).to.include("Content-Type: image/png");
+  });
   it("passes uploadFile request info and metadata", async () => {
     const makeRequestStub = stub(request, "makeServerRequest").resolves({
       ok: true,
@@ -68,6 +91,26 @@ describe("GoogleAIFileManager", () => {
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey");
     const result = await fileManager.uploadFile("./test-utils/cat.png", {
+      mimeType: "image/png",
+      name: "files/customname",
+      displayName: "mydisplayname",
+    });
+    expect(result.file.uri).to.equal(FAKE_URI);
+    expect(makeRequestStub.args[0][2]).to.be.instanceOf(Blob);
+    const bodyBlob = makeRequestStub.args[0][2];
+    const blobText = await (bodyBlob as Blob).text();
+    expect(blobText).to.include("Content-Type: image/png");
+    expect(blobText).to.include("files/customname");
+    expect(blobText).to.include("mydisplayname");
+  });
+  it("passes uploadFile request info and metadata from buffer", async () => {
+    const makeRequestStub = stub(request, "makeServerRequest").resolves({
+      ok: true,
+      json: fakeUploadJson,
+    } as Response);
+    const fileManager = new GoogleAIFileManager("apiKey");
+    const fileBuffer = await readFile("./test-utils/cat.png");
+    const result = await fileManager.uploadFile(fileBuffer, {
       mimeType: "image/png",
       name: "files/customname",
       displayName: "mydisplayname",
@@ -95,6 +138,22 @@ describe("GoogleAIFileManager", () => {
     const blobText = await (bodyBlob as Blob).text();
     expect(blobText).to.include("files/customname");
   });
+  it("passes uploadFile metadata and formats file name from buffer", async () => {
+    const makeRequestStub = stub(request, "makeServerRequest").resolves({
+      ok: true,
+      json: fakeUploadJson,
+    } as Response);
+    const fileManager = new GoogleAIFileManager("apiKey");
+    const fileBuffer = await readFile("./test-utils/cat.png");
+    await fileManager.uploadFile(fileBuffer, {
+      mimeType: "image/png",
+      name: "customname",
+      displayName: "mydisplayname",
+    });
+    const bodyBlob = makeRequestStub.args[0][2];
+    const blobText = await (bodyBlob as Blob).text();
+    expect(blobText).to.include("files/customname");
+  });
   it("passes uploadFile request info (with options)", async () => {
     const makeRequestStub = stub(request, "makeServerRequest").resolves({
       ok: true,
@@ -105,6 +164,35 @@ describe("GoogleAIFileManager", () => {
       baseUrl: "http://mysite.com",
     });
     const result = await fileManager.uploadFile("./test-utils/cat.png", {
+      mimeType: "image/png",
+    });
+    expect(result.file.uri).to.equal(FAKE_URI);
+    expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.UPLOAD);
+    expect(makeRequestStub.args[0][0].toString()).to.include("/upload/");
+    expect(makeRequestStub.args[0][1]).to.be.instanceOf(Headers);
+    expect(makeRequestStub.args[0][1].get("X-Goog-Upload-Protocol")).to.equal(
+      "multipart",
+    );
+    expect(makeRequestStub.args[0][2]).to.be.instanceOf(Blob);
+    const bodyBlob = makeRequestStub.args[0][2];
+    const blobText = await (bodyBlob as Blob).text();
+    expect(blobText).to.include("Content-Type: image/png");
+    expect(makeRequestStub.args[0][0].toString()).to.include("v3000/files");
+    expect(makeRequestStub.args[0][0].toString()).to.match(
+      /^http:\/\/mysite\.com/,
+    );
+  });
+  it("passes uploadFile request info (with options) from buffer", async () => {
+    const makeRequestStub = stub(request, "makeServerRequest").resolves({
+      ok: true,
+      json: fakeUploadJson,
+    } as Response);
+    const fileManager = new GoogleAIFileManager("apiKey", {
+      apiVersion: "v3000",
+      baseUrl: "http://mysite.com",
+    });
+    const fileBuffer = await readFile("./test-utils/cat.png");
+    const result = await fileManager.uploadFile(fileBuffer, {
       mimeType: "image/png",
     });
     expect(result.file.uri).to.equal(FAKE_URI);
