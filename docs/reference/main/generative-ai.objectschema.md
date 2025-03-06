@@ -19,5 +19,5 @@ export interface ObjectSchema extends BaseSchema
 |  --- | --- | --- | --- |
 |  [properties](./generative-ai.objectschema.properties.md) |  | { \[k: string\]: [Schema](./generative-ai.schema.md)<!-- -->; } | Describes the properties of the JSON object. Must not be empty. |
 |  [required?](./generative-ai.objectschema.required.md) |  | string\[\] | _(Optional)_ A list of keys declared in the properties object. Required properties will always be present in the generated object. |
-|  [type](./generative-ai.objectschema.type.md) |  | typeof [SchemaType.OBJECT](./generative-ai.schematype.md) |  |
+|  [type](./generative-ai.objectschema.type.md) |  | typeof SchemaType.OBJECT |  |
 

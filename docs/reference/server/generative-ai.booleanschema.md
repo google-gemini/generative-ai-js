@@ -17,5 +17,5 @@ export interface BooleanSchema extends BaseSchema
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [type](./generative-ai.booleanschema.type.md) |  | typeof [SchemaType.BOOLEAN](./generative-ai.schematype.md) |  |
+|  [type](./generative-ai.booleanschema.type.md) |  | typeof SchemaType.BOOLEAN |  |
 

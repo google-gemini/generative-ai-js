@@ -20,5 +20,5 @@ export interface ArraySchema extends BaseSchema
 |  [items](./generative-ai.arrayschema.items.md) |  | [Schema](./generative-ai.schema.md) | A schema describing the entries in the array. |
 |  [maxItems?](./generative-ai.arrayschema.maxitems.md) |  | number | _(Optional)_ The maximum number of items in the array. |
 |  [minItems?](./generative-ai.arrayschema.minitems.md) |  | number | _(Optional)_ The minimum number of items in the array. |
-|  [type](./generative-ai.arrayschema.type.md) |  | typeof [SchemaType.ARRAY](./generative-ai.schematype.md) |  |
+|  [type](./generative-ai.arrayschema.type.md) |  | typeof SchemaType.ARRAY |  |
 

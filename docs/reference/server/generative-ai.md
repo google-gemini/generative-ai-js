@@ -19,7 +19,6 @@
 |  [FileState](./generative-ai.filestate.md) | Processing state of the <code>File</code>. |
 |  [FunctionCallingMode](./generative-ai.functioncallingmode.md) |  |
 |  [Outcome](./generative-ai.outcome.md) | Possible outcomes of code execution. |
-|  [SchemaType](./generative-ai.schematype.md) | Contains the list of OpenAPI data types as defined by https://swagger.io/docs/specification/data-models/data-types/ |
 
 ## Interfaces
 
@@ -68,6 +67,12 @@
 |  [UploadFileResponse](./generative-ai.uploadfileresponse.md) | Response from calling [GoogleAIFileManager.uploadFile()](./generative-ai.googleaifilemanager.uploadfile.md) |
 |  [VideoMetadata](./generative-ai.videometadata.md) | Metadata populated when video has been processed. |
 
+## Variables
+
+|  Variable | Description |
+|  --- | --- |
+|  [SchemaType](./generative-ai.schematype.md) | Contains the list of OpenAPI data types as defined by https://swagger.io/docs/specification/data-models/data-types/ |
+
 ## Type Aliases
 
 |  Type Alias | Description |
@@ -76,5 +81,6 @@
 |  [Part](./generative-ai.part.md) | Content part - includes text or image part types. |
 |  [ResponseSchema](./generative-ai.responseschema.md) | Schema passed to <code>GenerationConfig.responseSchema</code> |
 |  [Schema](./generative-ai.schema.md) | Schema is used to define the format of input/output data. Represents a select subset of an OpenAPI 3.0 schema object. More fields may be added in the future as needed. |
+|  [SchemaType](./generative-ai.schematype.md) |  |
 |  [Tool](./generative-ai.tool.md) | Defines a tool that model can call to access external knowledge. |
 
