@@ -221,9 +221,13 @@ export interface ObjectSchema extends BaseSchema {
  */
 export interface FunctionDeclarationSchema {
   /** The type of the parameter. */
-  type: SchemaType;
+  type?: SchemaType;
   /** The format of the parameter. */
-  properties: { [k: string]: FunctionDeclarationSchemaProperty };
+  properties: { [key: string]: FunctionDeclarationSchemaProperty };
+  /** Allows dynamic keys in objects */
+  additionalProperties?: boolean | Schema;
+  /** Supports multiple types (oneOf behavior) */
+  oneOf?: Schema[];
   /** Optional. Description of the parameter. */
   description?: string;
   /** Optional. Array of required parameters. */
