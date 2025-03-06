@@ -21,6 +21,7 @@ import {
 } from "./errors";
 import { CachedContent, ModelParams, RequestOptions } from "../types";
 import { GenerativeModel } from "./models/generative-model";
+import { List, makeListRequest } from "./requests/request-list";
 
 export { ChatSession } from "./methods/chat-session";
 export { GenerativeModel };
@@ -30,7 +31,7 @@ export { GenerativeModel };
  * @public
  */
 export class GoogleGenerativeAI {
-  constructor(public apiKey: string) {}
+  constructor(public apiKey: string) { }
 
   /**
    * Gets a {@link GenerativeModel} instance for the provided model name.
@@ -42,7 +43,7 @@ export class GoogleGenerativeAI {
     if (!modelParams.model) {
       throw new GoogleGenerativeAIError(
         `Must provide a model name. ` +
-          `Example: genai.getGenerativeModel({ model: 'my-model-name' })`,
+        `Example: genai.getGenerativeModel({ model: 'my-model-name' })`,
       );
     }
     return new GenerativeModel(this.apiKey, modelParams, requestOptions);
@@ -93,7 +94,7 @@ export class GoogleGenerativeAI {
         }
         throw new GoogleGenerativeAIRequestInputError(
           `Different value for "${key}" specified in modelParams` +
-            ` (${modelParams[key]}) and cachedContent (${cachedContent[key]})`,
+          ` (${modelParams[key]}) and cachedContent (${cachedContent[key]})`,
         );
       }
     }
@@ -112,4 +113,28 @@ export class GoogleGenerativeAI {
       requestOptions,
     );
   }
+
+  /**
+   * Gets a list of {@link GenerativeModel} available.
+   */
+  async listModels(
+    pageSize?: number,
+    pageToken?: string,
+    requestOptions?: RequestOptions,
+  ): Promise<Response> {
+
+    const params = Object.fromEntries(
+      Object.entries({ pageSize, pageToken }).filter(([_, v]) => v != null)
+    );
+
+    const response = await makeListRequest(
+      List.MODELS,
+      this.apiKey,
+      params,
+      requestOptions,
+    );
+
+    return response.json();
+  }
+
 }
