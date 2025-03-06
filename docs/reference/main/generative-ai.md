@@ -79,6 +79,7 @@
 |  [GenerativeContentBlob](./generative-ai.generativecontentblob.md) | Interface for sending an image. |
 |  [GoogleSearchRetrieval](./generative-ai.googlesearchretrieval.md) | Retrieval tool that is powered by Google search. |
 |  [GoogleSearchRetrievalTool](./generative-ai.googlesearchretrievaltool.md) | Retrieval tool that is powered by Google search. |
+|  [GoogleSearchTool](./generative-ai.googlesearchtool.md) |  |
 |  [GroundingChunk](./generative-ai.groundingchunk.md) | Grounding chunk. |
 |  [GroundingChunkWeb](./generative-ai.groundingchunkweb.md) | Chunk from the web. |
 |  [GroundingMetadata](./generative-ai.groundingmetadata.md) | Metadata returned to client when grounding is enabled. |

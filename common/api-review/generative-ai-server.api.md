@@ -4,6 +4,8 @@
 
 ```ts
 
+/// <reference types="node" />
+
 // Warning: (ae-incompatible-release-tags) The symbol "ArraySchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
 //
 // @public
@@ -30,8 +32,6 @@ export interface BooleanSchema extends BaseSchema {
     // (undocumented)
     type: typeof SchemaType.BOOLEAN;
 }
-
-/// <reference types="node" />
 
 // @public
 export interface CachedContent extends CachedContentBase {
@@ -526,9 +526,10 @@ export interface TextPart {
 }
 
 // Warning: (ae-forgotten-export) The symbol "GoogleSearchRetrievalTool" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "GoogleSearchTool" needs to be exported by the entry point index.d.ts
 //
 // @public
-export type Tool = FunctionDeclarationsTool | CodeExecutionTool | GoogleSearchRetrievalTool;
+export type Tool = FunctionDeclarationsTool | CodeExecutionTool | GoogleSearchRetrievalTool | GoogleSearchTool;
 
 // @public
 export interface ToolConfig {
