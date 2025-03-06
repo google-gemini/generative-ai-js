@@ -21,9 +21,11 @@ import {
 } from "./errors";
 import { CachedContent, ModelParams, RequestOptions } from "../types";
 import { GenerativeModel } from "./models/generative-model";
+import { FineTuning } from "./methods/fine-tuning";
 
 export { ChatSession } from "./methods/chat-session";
 export { GenerativeModel };
+export { FineTuning };
 
 /**
  * Top-level class for this SDK
@@ -81,9 +83,9 @@ export class GoogleGenerativeAI {
         modelParams?.[key] !== cachedContent[key]
       ) {
         if (key === "model") {
-          const modelParamsComp = modelParams.model.startsWith("models/")
-            ? modelParams.model.replace("models/", "")
-            : modelParams.model;
+          const modelParamsComp = modelParams.model?.startsWith("models/")
+            ? modelParams.model?.replace("models/", "")
+            : modelParams.model ?? "";
           const cachedContentComp = cachedContent.model.startsWith("models/")
             ? cachedContent.model.replace("models/", "")
             : cachedContent.model;
@@ -111,5 +113,12 @@ export class GoogleGenerativeAI {
       modelParamsFromCache,
       requestOptions,
     );
+  }
+
+  /**
+   * Gets a {@link FineTuning} instance for managing fine-tuning operations.
+   */
+  getFineTuning(requestOptions?: RequestOptions): FineTuning {
+    return new FineTuning(this.apiKey, requestOptions);
   }
 }

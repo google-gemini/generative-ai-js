@@ -20,4 +20,25 @@ export * from "./enums";
 export * from "./requests";
 export * from "./responses";
 export * from "./search-grounding";
-export { CachedContent, CachedContentBase } from "./server/caching";
+export { CachedContentBase } from "./server/caching";
+
+export interface CachedContent {
+  name: string;
+  model: string;
+  systemInstruction?: string;
+  tools?: any[];
+  toolConfig?: any;
+}
+
+export interface ModelParams {
+  model: string;
+  systemInstruction?: string;
+  tools?: any[];
+  toolConfig?: any;
+  cachedContent?: CachedContent;
+}
+
+export interface RequestOptions {
+  apiVersion?: string;
+  timeout?: number;
+}
