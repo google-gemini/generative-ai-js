@@ -1,5 +1,12 @@
 # @google/generative-ai
 
+## 0.24.0
+
+### Minor Changes
+
+- cae3e0b: added support for buffers in uploadFile
+- cae3e0b: BREAKING CHANGE: Enforce format safety when using string schemas
+
 ## 0.23.0
 
 ### Minor Changes
