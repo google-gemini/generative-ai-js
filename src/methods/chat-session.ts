@@ -142,6 +142,15 @@ export class ChatSession {
    */
   async sendMessageStream(
     request: string | Array<string | Part>,
+    {
+      onData,
+      onEnd,
+      onError,
+    }: {
+      onData?: (chunk: any) => void;
+      onEnd?: (response: any) => void;
+      onError?: (error: any) => void;
+    } = {},
     requestOptions: SingleRequestOptions = {},
   ): Promise<GenerateContentStreamResult> {
     await this._sendPromise;
@@ -203,6 +212,24 @@ export class ChatSession {
           console.error(e);
         }
       });
+
+    streamPromise
+      .then(async (result) => {
+        try {
+          for await (const chunk of result.stream) {
+            if (onData) onData(chunk);
+          }
+          if (onEnd) onEnd(await result.response);
+        } catch (error) {
+          if (onError) onError(error);
+          else throw error;
+        }
+      })
+      .catch((e) => {
+        if (onError) onError(e);
+        else throw e;
+      });
+
     return streamPromise;
   }
 }
