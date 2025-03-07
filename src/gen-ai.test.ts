@@ -17,6 +17,8 @@
 import { ModelParams } from "../types";
 import { GenerativeModel, GoogleGenerativeAI } from "./gen-ai";
 import { expect } from "chai";
+import * as sinon from "sinon";
+import * as fineTuningMethods from "./methods/fine-tuning";
 
 const fakeContents = [{ role: "user", parts: [{ text: "hello" }] }];
 
@@ -117,5 +119,65 @@ describe("GoogleGenerativeAI", () => {
     ).to.throw(
       `Different value for "systemInstruction" specified in modelParams (yo) and cachedContent (hi)`,
     );
+  });
+});
+
+// ------------------ Added Fine-Tuning Test Cases ------------------
+
+describe("GoogleGenerativeAI Fine-Tuning API Methods", () => {
+  let genAI: GoogleGenerativeAI;
+  let sandbox: sinon.SinonSandbox;
+
+  beforeEach(() => {
+    sandbox = sinon.createSandbox();
+    genAI = new GoogleGenerativeAI("apikey");
+  });
+
+  afterEach(() => {
+    sandbox.restore();
+  });
+
+  it("listTunedModels returns a list of tuned models", async () => {
+    const fakeResponse = { tunedModels: [{ name: "model-1" }, { name: "model-2" }] };
+    const listStub = sandbox
+      .stub(fineTuningMethods, "listTunedModels")
+      .resolves(fakeResponse);
+    const response = await genAI.listTunedModels(2);
+    expect(response).to.deep.equal(fakeResponse);
+    expect(listStub.calledOnceWith("apikey", 2)).to.be.true;
+  });
+
+  it("createTunedModel returns a tuned model creation response", async () => {
+    const displayName = "Test Model";
+    const trainingData = [{ input: "example", output: "response" }];
+    const fakeResponse = { name: "tuned-model-1" };
+    const createStub = sandbox
+      .stub(fineTuningMethods, "createTunedModel")
+      .resolves(fakeResponse);
+    const response = await genAI.createTunedModel(displayName, trainingData);
+    expect(response).to.deep.equal(fakeResponse);
+    expect(createStub.calledOnceWith("apikey", displayName, trainingData)).to.be.true;
+  });
+
+  it("checkTuningStatus returns the tuning status", async () => {
+    const operationName = "operation-123";
+    const fakeResponse = { metadata: { completedPercent: 50 } };
+    const checkStub = sandbox
+      .stub(fineTuningMethods, "checkTuningStatus")
+      .resolves(fakeResponse);
+    const response = await genAI.checkTuningStatus(operationName);
+    expect(response).to.deep.equal(fakeResponse);
+    expect(checkStub.calledOnceWith("apikey", operationName)).to.be.true;
+  });
+
+  it("deleteTunedModel returns the delete tuned model response", async () => {
+    const modelName = "tuned-model-1";
+    const fakeResponse = { success: true };
+    const deleteStub = sandbox
+      .stub(fineTuningMethods, "deleteTunedModel")
+      .resolves(fakeResponse);
+    const response = await genAI.deleteTunedModel(modelName);
+    expect(response).to.deep.equal(fakeResponse);
+    expect(deleteStub.calledOnceWith("apikey", modelName)).to.be.true;
   });
 });

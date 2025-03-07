@@ -51,17 +51,6 @@ import {
   formatSystemInstruction,
 } from "../requests/request-helpers";
 
-import {
-  CheckTuningStatusResponse,
-  CreateTunedModelResponse,
-  DeleteTunedModelResponse,
-  ListTunedModelsResponse,
-  checkTuningStatus,
-  createTunedModel,
-  deleteTunedModel,
-  listTunedModels,
-} from "../methods/fine-tuning";
-
 /**
  * Class for generative model APIs.
  * @public
@@ -75,13 +64,6 @@ export class GenerativeModel {
   systemInstruction?: Content;
   cachedContent: CachedContent;
 
-  /**
-   * Creates a new instance of GenerativeModel.
-   *
-   * @param apiKey - The API key.
-   * @param modelParams - Parameters for the model.
-   * @param _requestOptions - Optional request options.
-   */
   constructor(
     public apiKey: string,
     modelParams: ModelParams,
@@ -98,16 +80,19 @@ export class GenerativeModel {
     this.safetySettings = modelParams.safetySettings || [];
     this.tools = modelParams.tools;
     this.toolConfig = modelParams.toolConfig;
-    this.systemInstruction = formatSystemInstruction(modelParams.systemInstruction);
+    this.systemInstruction = formatSystemInstruction(
+      modelParams.systemInstruction,
+    );
     this.cachedContent = modelParams.cachedContent;
   }
 
   /**
-   * Makes a single non-streaming call to the model and returns an object
-   * containing a single {@link GenerateContentResponse}.
+   * Makes a single non-streaming call to the model
+   * and returns an object containing a single {@link GenerateContentResponse}.
    *
-   * Fields set in the optional {@link SingleRequestOptions} parameter will take
-   * precedence over the {@link RequestOptions} values provided.
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
    */
   async generateContent(
     request: GenerateContentRequest | string | Array<string | Part>,
@@ -136,11 +121,13 @@ export class GenerativeModel {
 
   /**
    * Makes a single streaming call to the model and returns an object
-   * containing an iterable stream over all chunks in the streaming response,
-   * as well as a promise that returns the final aggregated response.
+   * containing an iterable stream that iterates over all chunks in the
+   * streaming response as well as a promise that returns the final
+   * aggregated response.
    *
-   * Fields set in the optional {@link SingleRequestOptions} parameter will take
-   * precedence over the {@link RequestOptions} values provided.
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
    */
   async generateContentStream(
     request: GenerateContentRequest | string | Array<string | Part>,
@@ -168,7 +155,8 @@ export class GenerativeModel {
   }
 
   /**
-   * Gets a new {@link ChatSession} instance for multi-turn chats.
+   * Gets a new {@link ChatSession} instance which can be used for
+   * multi-turn chats.
    */
   startChat(startChatParams?: StartChatParams): ChatSession {
     return new ChatSession(
@@ -189,6 +177,10 @@ export class GenerativeModel {
 
   /**
    * Counts the tokens in the provided request.
+   *
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
    */
   async countTokens(
     request: CountTokensRequest | string | Array<string | Part>,
@@ -217,6 +209,10 @@ export class GenerativeModel {
 
   /**
    * Embeds the provided content.
+   *
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
    */
   async embedContent(
     request: EmbedContentRequest | string | Array<string | Part>,
@@ -237,6 +233,10 @@ export class GenerativeModel {
 
   /**
    * Embeds an array of {@link EmbedContentRequest}s.
+   *
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
    */
   async batchEmbedContents(
     batchEmbedContentRequest: BatchEmbedContentsRequest,
@@ -252,42 +252,5 @@ export class GenerativeModel {
       batchEmbedContentRequest,
       generativeModelRequestOptions,
     );
-  }
-
-  // ------------------ Fine-Tuning API Methods ------------------
-
-  /**
-   * Lists tuned models.
-   */
-  async listTunedModels(pageSize = 5): Promise<ListTunedModelsResponse> {
-    return listTunedModels(this.apiKey, pageSize);
-  }
-
-  /**
-   * Creates a tuned model with the specified display name and training data.
-   */
-  async createTunedModel(
-    displayName: string,
-    trainingData: unknown
-  ): Promise<CreateTunedModelResponse> {
-    return createTunedModel(this.apiKey, displayName, trainingData);
-  }
-
-  /**
-   * Checks the tuning status of a fine-tuning operation.
-   */
-  async checkTuningStatus(
-    operationName: string
-  ): Promise<CheckTuningStatusResponse> {
-    return checkTuningStatus(this.apiKey, operationName);
-  }
-
-  /**
-   * Deletes a tuned model by name.
-   */
-  async deleteTunedModel(
-    modelName: string
-  ): Promise<DeleteTunedModelResponse> {
-    return deleteTunedModel(this.apiKey, modelName);
   }
 }

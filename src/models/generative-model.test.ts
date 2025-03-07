@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import { expect, use } from "chai";
 import { GenerativeModel } from "./generative-model";
 import * as sinonChai from "sinon-chai";
@@ -29,9 +28,6 @@ import {
 import { getMockResponse } from "../../test-utils/mock-response";
 import { match, restore, stub } from "sinon";
 import * as request from "../requests/request";
-
-// Import the fine-tuning module so we can stub its functions
-import * as fineTuning from "../methods/fine-tuning";
 
 use(sinonChai);
 
@@ -324,7 +320,48 @@ describe("GenerativeModel", () => {
     );
     restore();
   });
-  it("passes params through to chat.sendMessage when overriding model values", async () => {
+  it("passes params through to chat.sendMessage", async () => {
+    const genModel = new GenerativeModel("apiKey", {
+      model: "my-model",
+      generationConfig: {
+        temperature: 0,
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: SchemaType.OBJECT,
+          properties: {
+            testField: {
+              type: SchemaType.STRING,
+            },
+          },
+        },
+      },
+      systemInstruction: { role: "system", parts: [{ text: "be friendly" }] },
+    });
+    expect(genModel.systemInstruction?.parts[0].text).to.equal("be friendly");
+    expect(
+      (genModel.generationConfig.responseSchema as ObjectSchema).properties
+        .testField,
+    ).to.exist;
+    const mockResponse = getMockResponse(
+      "unary-success-basic-reply-short.json",
+    );
+    const makeRequestStub = stub(request, "makeModelRequest").resolves(
+      mockResponse as Response,
+    );
+    await genModel.startChat().sendMessage("hello");
+    expect(makeRequestStub).to.be.calledWith(
+      "models/my-model",
+      request.Task.GENERATE_CONTENT,
+      match.any,
+      false,
+      match((value: string) => {
+        return value.includes("be friendly") && value.includes("testField");
+      }),
+      {},
+    );
+    restore();
+  });
+  it("startChat overrides model values", async () => {
     const genModel = new GenerativeModel("apiKey", {
       model: "my-model",
       generationConfig: {
@@ -424,65 +461,5 @@ describe("GenerativeModel", () => {
     );
     expect(makeRequestStub).to.not.be.called;
     restore();
-  });
-
-  // ---------------- Fine-Tuning API Methods Tests ----------------
-
-  describe("Fine-Tuning API Methods", () => {
-    afterEach(() => {
-      restore();
-    });
-
-    it("should list tuned models", async () => {
-      // Stub the function so we don't call the real API
-      stub(fineTuning, "listTunedModels").resolves({
-        tunedModels: [{ name: "tunedModels/test-model" }],
-      });
-    
-      const genModel = new GenerativeModel("apiKey", {
-        model: "gemini-1.5-flash-001-tuning",
-      });
-      const response = await genModel.listTunedModels(5);
-    
-      // No TS errors here, because `response` is ListTunedModelsResponse
-      expect(response.tunedModels[0].name).to.equal("tunedModels/test-model");
-    });
-    
-    
-
-    it("should create a tuned model", async () => {
-      const _createStub = stub(fineTuning, "createTunedModel").resolves({
-        name: "operations/tune-123",
-      });
-      const genModel = new GenerativeModel("apiKey", {
-        model: "gemini-1.5-flash-001-tuning",
-      });
-      const trainingData = [
-        { text_input: "1", output: "2" },
-        { text_input: "3", output: "4" },
-      ];
-      const result = await genModel.createTunedModel("test-model", trainingData);
-      expect(result.name).to.equal("operations/tune-123");
-    });
-
-    it("should check tuning status", async () => {
-      const _checkStub = stub(fineTuning, "checkTuningStatus").resolves({
-        metadata: { completedPercent: 50 },
-      });
-      const tunedStatus = await new GenerativeModel("apiKey", {
-        model: "gemini-1.5-flash-001-tuning",
-      }).checkTuningStatus("operations/tune-123");
-      expect(tunedStatus.metadata.completedPercent).to.equal(50);
-    });
-
-    it("should delete a tuned model", async () => {
-      const _deleteStub = stub(fineTuning, "deleteTunedModel").resolves({
-        success: true,
-      });
-      const deletionResult = await new GenerativeModel("apiKey", {
-        model: "gemini-1.5-flash-001-tuning",
-      }).deleteTunedModel("test-model");
-      expect(deletionResult.success).to.be.true;
-    });
   });
 });
