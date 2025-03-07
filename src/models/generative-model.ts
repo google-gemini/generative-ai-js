@@ -32,6 +32,7 @@ import {
   GenerateContentResult,
   GenerateContentStreamResult,
   GenerationConfig,
+  ListTunedModelsResponse,
   ModelParams,
   Part,
   RequestOptions,
@@ -50,6 +51,7 @@ import {
   formatGenerateContentInput,
   formatSystemInstruction,
 } from "../requests/request-helpers";
+import { listTunedModels } from "../methods/tuned-models";
 
 /**
  * Class for generative model APIs.
@@ -252,5 +254,11 @@ export class GenerativeModel {
       batchEmbedContentRequest,
       generativeModelRequestOptions,
     );
+  }
+
+  async listTunedModels(
+    pageSize: number,
+  ): Promise<ListTunedModelsResponse> {
+    return listTunedModels(this.apiKey, pageSize);
   }
 }

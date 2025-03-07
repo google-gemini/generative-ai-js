@@ -250,7 +250,3 @@ export interface CodeExecutionTool {
    */
   codeExecution: {};
 }
-
-export interface ListTunedModelRequest {
-  pageSize : number
-}
