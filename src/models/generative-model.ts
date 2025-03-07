@@ -256,6 +256,11 @@ export class GenerativeModel {
     );
   }
 
+  /**
+   * Lists the tuned models.
+   * @param pageSize - The number of tuned models to return.
+   * {@link GoogleGenerativeAI.getGenerativeModel }
+   */
   async listTunedModels(
     pageSize: number,
   ): Promise<ListTunedModelsResponse> {
