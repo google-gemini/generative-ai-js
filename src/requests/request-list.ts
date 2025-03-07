@@ -36,6 +36,7 @@ const PACKAGE_LOG_HEADER = "genai-js";
 
 export enum List {
     MODELS = "models",
+    TUNED_MODELS = "tunedModels",
 }
 
 export class RequestUrl {

@@ -136,4 +136,26 @@ export class GoogleGenerativeAI {
     return response.json();
   }
 
+  /**
+   * Gets a list of tuned {@link GenerativeModel} available.
+   */
+  async listTunedModels(
+    params: { pageSize?: number; pageToken?: string; filter?: string } = {},
+    requestOptions?: RequestOptions,
+  ): Promise<Response> {
+
+    const filteredParams = Object.fromEntries(
+      Object.entries({ params }).filter(([_, v]) => v != null)
+    );
+
+    const response = await makeListRequest(
+      List.TUNED_MODELS,
+      this.apiKey,
+      filteredParams,
+      requestOptions,
+    );
+
+    return response.json();
+  }
+
 }
