@@ -158,4 +158,70 @@ export class GoogleGenerativeAI {
     return response.json();
   }
 
+  /**
+   * Gets a list of CachedContent.
+   */
+  async listCachedContent(
+    params: { pageSize?: number; pageToken?: string } = {},
+    requestOptions?: RequestOptions,
+  ): Promise<Response> {
+
+    const filteredParams = Object.fromEntries(
+      Object.entries({ params }).filter(([_, v]) => v != null)
+    );
+
+    const response = await makeListRequest(
+      List.CASHED_CONTENTS,
+      this.apiKey,
+      filteredParams,
+      requestOptions,
+    );
+
+    return response.json();
+  }
+
+  /**
+   * Gets a list of all Corpora owned by the user.
+   */
+  async listCorpora(
+    params: { pageSize?: number; pageToken?: string } = {},
+    requestOptions?: RequestOptions,
+  ): Promise<Response> {
+
+    const filteredParams = Object.fromEntries(
+      Object.entries({ params }).filter(([_, v]) => v != null)
+    );
+
+    const response = await makeListRequest(
+      List.CORPORA,
+      this.apiKey,
+      filteredParams,
+      requestOptions,
+    );
+
+    return response.json();
+  }
+
+  /**
+   * Gets a list of the metadata for Files owned by the requesting project.
+   */
+  async listFiles(
+    params: { pageSize?: number; pageToken?: string } = {},
+    requestOptions?: RequestOptions,
+  ): Promise<Response> {
+
+    const filteredParams = Object.fromEntries(
+      Object.entries({ params }).filter(([_, v]) => v != null)
+    );
+
+    const response = await makeListRequest(
+      List.CORPORA,
+      this.apiKey,
+      filteredParams,
+      requestOptions,
+    );
+
+    return response.json();
+  }
+
 }
