@@ -24,6 +24,7 @@ import {
   ToolConfig,
 } from "./function-calling";
 import { GoogleSearchRetrievalTool } from "./search-grounding";
+import { Agent } from "https";
 
 /**
  * Base parameters for a number of methods.
@@ -207,6 +208,14 @@ export interface RequestOptions {
    * Custom HTTP request headers.
    */
   customHeaders?: Headers | Record<string, string>;
+  /**
+   * Custom fetch implementation
+   */
+  fetch?: typeof fetch;
+  /**
+   * Node.js HTTP agent for connection pooling
+   */
+  httpAgent?: Agent;
 }
 
 /**
