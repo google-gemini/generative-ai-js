@@ -30,6 +30,7 @@ import {
   GoogleGenerativeAIError,
   GoogleGenerativeAIRequestInputError,
 } from "../errors";
+import { basename } from "path";
 
 // Internal type, metadata sent in the upload
 export interface UploadMetadata {
@@ -49,12 +50,65 @@ export class GoogleAIFileManager {
 
   /**
    * Upload a file.
+   * @param fileData File path (Node.js), URL string, Buffer, ArrayBuffer, or Uint8Array
+   * @param fileMetadata File metadata including MIME type and optional name
+   * @returns Promise with the upload response
+   * @throws {GoogleGenerativeAIError} If file reading or URL fetching fails
+   * @throws {GoogleGenerativeAIRequestInputError} If required metadata is missing
    */
   async uploadFile(
-    fileData: string | Buffer,
+    fileData: string | Buffer | ArrayBuffer | Uint8Array,
     fileMetadata: FileMetadata,
   ): Promise<UploadFileResponse> {
-    const file = fileData instanceof Buffer ? fileData : readFileSync(fileData);
+    let file: Buffer | Uint8Array;
+
+    // Handle different input types
+    if (typeof fileData === "string") {
+      if (fileData.startsWith("http://") || fileData.startsWith("https://")) {
+        // Handle URL input
+        try {
+          const response = await fetch(fileData);
+          if (!response.ok) {
+            throw new GoogleGenerativeAIError(
+              `Failed to fetch file from URL: ${response.statusText}`,
+            );
+          }
+          const buffer = await response.arrayBuffer();
+          file = new Uint8Array(buffer);
+          if (!fileMetadata.name) {
+            fileMetadata.name = basename(new URL(fileData).pathname);
+          }
+        } catch (error) {
+          if (error instanceof GoogleGenerativeAIError) {
+            throw error;
+          }
+          throw new GoogleGenerativeAIError(
+            `Failed to fetch file from URL: ${error.message}`,
+          );
+        }
+      } else {
+        // Handle file path input (Node.js)
+        try {
+          file = readFileSync(fileData);
+          if (!fileMetadata.name) {
+            fileMetadata.name = basename(fileData);
+          }
+        } catch (error) {
+          throw new GoogleGenerativeAIError(
+            `Failed to read file: ${error.message}`,
+          );
+        }
+      }
+    } else {
+      // Handle ArrayBuffer/Uint8Array input
+      if (!fileMetadata.name) {
+        throw new GoogleGenerativeAIRequestInputError(
+          "File name is required when using ArrayBuffer or Uint8Array input",
+        );
+      }
+      file =
+        fileData instanceof Uint8Array ? fileData : new Uint8Array(fileData);
+    }
 
     const url = new FilesRequestUrl(
       RpcTask.UPLOAD,
