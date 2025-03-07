@@ -143,8 +143,21 @@ export async function constructModelRequest(
 }
 
 /**
+ * Constructs a string of query parameters from a record of query parameters.
+ * @param queryParams A record of query parameters to append to the URL.
+ * @returns A string of query parameters.
+ * 
+ */
+export function constructQueryParameters(queryParams: Record<string, string | number>): URLSearchParams {
+  const searchParams = new URLSearchParams();
+  Object.entries(queryParams).forEach(([key, value]) => {
+    searchParams.append(key, String(value));
+  });
+  return searchParams;
+}
+/**
  * Backward-compatible function to construct a request.
- * It accepts an optional model parameter and supports GET requests with query parameters.
+ * It accepts an optional model parameter and supports all requests with query parameters.
  *
  * @param task - The API task to be performed.
  * @param apiKey - The API key.
@@ -169,10 +182,7 @@ export async function constructBackwardCompatibleRequest(
   let url = model ? requestUrl.toString() : requestUrl.toStringWithoutModel();
   const method = requestOptions.method ? requestOptions.method.toUpperCase() : "POST";
   if (method === "GET" && queryParams) {
-    const searchParams = new URLSearchParams();
-    Object.entries(queryParams).forEach(([key, value]) => {
-      searchParams.append(key, String(value));
-    });
+    const searchParams = constructQueryParameters(queryParams);
     url += url.includes('?') ? '&' + searchParams.toString() : '?' + searchParams.toString();
   }
 
