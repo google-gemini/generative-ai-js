@@ -4,6 +4,10 @@
 
 ```ts
 
+/// <reference types="node" />
+
+import { Agent } from 'https';
+
 // Warning: (ae-incompatible-release-tags) The symbol "ArraySchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
 //
 // @public
@@ -516,7 +520,7 @@ export interface GenerativeContentBlob {
 
 // @public
 export class GenerativeModel {
-    constructor(apiKey: string, modelParams: ModelParams, _requestOptions?: RequestOptions);
+    constructor(apiKey: string, modelParams: ModelParams, requestOptions?: RequestOptions);
     // (undocumented)
     apiKey: string;
     batchEmbedContents(batchEmbedContentRequest: BatchEmbedContentsRequest, requestOptions?: SingleRequestOptions): Promise<BatchEmbedContentsResponse>;
@@ -765,6 +769,8 @@ export interface RequestOptions {
     apiVersion?: string;
     baseUrl?: string;
     customHeaders?: Headers | Record<string, string>;
+    fetch?: typeof fetch;
+    httpAgent?: Agent;
     timeout?: number;
 }
 
