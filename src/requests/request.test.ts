@@ -405,8 +405,8 @@ describe("request methods", () => {
       ).to.be.rejectedWith(GoogleGenerativeAIRequestInputError);
     });
   });
-  // eslint-disable-next-line no-restricted-properties
-  describe.only("constructBackwardCompatibleRequest", () => {
+
+  describe("constructBackwardCompatibleRequest", () => {
 
     it("should use toString() when model is provided", async () => {
       const task = Task.GENERATE_CONTENT;
