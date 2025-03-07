@@ -16,7 +16,6 @@
  */
 
 import { RequestOptions, SingleRequestOptions } from "../../types";
-import { readFileSync } from "fs";
 import { FilesRequestUrl, getHeaders, makeServerRequest } from "./request";
 import {
   FileMetadata,
@@ -31,6 +30,19 @@ import {
   GoogleGenerativeAIRequestInputError,
 } from "../errors";
 
+import * as fs from 'fs';
+let readFileSync: (path: string) => Buffer;
+try {
+  readFileSync = fs.readFileSync;
+} catch (e) {
+  // fs module not available in this environment (e.g., serverless)
+  readFileSync = (_: string) => {
+    throw new GoogleGenerativeAIError(
+      "File system operations are not supported in this environment. " +
+      "Please use uploadFileFromBuffer or uploadFileFromUrl instead."
+    );
+  };
+}
 // Internal type, metadata sent in the upload
 export interface UploadMetadata {
   name?: string;
@@ -48,14 +60,43 @@ export class GoogleAIFileManager {
   ) {}
 
   /**
-   * Upload a file.
+   * Upload a file from a local file path.
+   * Note: This method requires the fs module and will not work in serverless environments.
+   * For serverless environments, use uploadFileFromBuffer or uploadFileFromUrl instead.
    */
-  async uploadFile(
-    fileData: string | Buffer,
+async uploadFile(
+  fileData: string | Buffer,
+  fileMetadata: FileMetadata,
+): Promise<UploadFileResponse> {
+  // If fileData is already a Buffer, use it directly
+  if (Buffer.isBuffer(fileData)) {
+    return this.uploadFileFromBuffer(fileData, fileMetadata);
+  }
+  
+  // Otherwise, treat it as a file path and try to read it
+  try {
+    const fileBuffer = readFileSync(fileData);
+    return this.uploadFileFromBuffer(fileBuffer, fileMetadata);
+  } catch (error) {
+    if (error instanceof Error && 
+        (error.message.includes('fs') || error.message.includes('file system'))) {
+      throw new GoogleGenerativeAIError(
+        "File system operations are not supported in this environment. " +
+        "Please use uploadFileFromBuffer or uploadFileFromUrl instead."
+      );
+    }
+    throw error;
+  }
+}
+
+  /**
+   * Upload a file from a Buffer or ArrayBuffer.
+   * This method works in both Node.js and serverless environments.
+   */
+  async uploadFileFromBuffer(
+    fileBuffer: Buffer | ArrayBuffer,
     fileMetadata: FileMetadata,
   ): Promise<UploadFileResponse> {
-    const file = fileData instanceof Buffer ? fileData : readFileSync(fileData);
-
     const url = new FilesRequestUrl(
       RpcTask.UPLOAD,
       this.apiKey,
@@ -87,10 +128,41 @@ export class GoogleAIFileManager {
       fileMetadata.mimeType +
       "\r\n\r\n";
     const postBlobPart = "\r\n--" + boundary + "--";
-    const blob = new Blob([preBlobPart, file, postBlobPart]);
+    
+    const blob = new Blob([preBlobPart, fileBuffer, postBlobPart]);
 
     const response = await makeServerRequest(url, uploadHeaders, blob);
     return response.json();
+  }
+
+  /**
+   * Upload a file from a public URL.
+   * This method works in both Node.js and serverless environments.
+   */
+  async uploadFileFromUrl(
+    fileUrl: string,
+    fileMetadata: FileMetadata,
+  ): Promise<UploadFileResponse> {
+    try {
+      // Fetch the file from the provided URL
+      const response = await fetch(fileUrl);
+      
+      if (!response.ok) {
+        throw new GoogleGenerativeAIError(
+          `Failed to fetch file from URL: ${response.status} ${response.statusText}`
+        );
+      }
+      
+      // Get file as ArrayBuffer
+      const fileBuffer = await response.arrayBuffer();
+      
+      // Use the buffer upload method
+      return this.uploadFileFromBuffer(fileBuffer, fileMetadata);
+    } catch (error) {
+      throw new GoogleGenerativeAIError(
+        `Error uploading file from URL: ${error instanceof Error ? error.message : String(error)}`
+      );
+    }
   }
 
   /**
