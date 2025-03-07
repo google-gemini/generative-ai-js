@@ -9,7 +9,7 @@ Defines a tool that model can call to access external knowledge.
 **Signature:**
 
 ```typescript
-export declare type Tool = FunctionDeclarationsTool | CodeExecutionTool | GoogleSearchRetrievalTool;
+export declare type Tool = FunctionDeclarationsTool | CodeExecutionTool | GoogleSearchRetrievalTool | GoogleSearchTool;
 ```
-**References:** [FunctionDeclarationsTool](./generative-ai.functiondeclarationstool.md)<!-- -->, [CodeExecutionTool](./generative-ai.codeexecutiontool.md)<!-- -->, [GoogleSearchRetrievalTool](./generative-ai.googlesearchretrievaltool.md)
+**References:** [FunctionDeclarationsTool](./generative-ai.functiondeclarationstool.md)<!-- -->, [CodeExecutionTool](./generative-ai.codeexecutiontool.md)<!-- -->, [GoogleSearchRetrievalTool](./generative-ai.googlesearchretrievaltool.md)<!-- -->, [GoogleSearchTool](./generative-ai.googlesearchtool.md)
 
