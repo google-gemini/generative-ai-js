@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+import { GoogleAuth, JWT, OAuth2Client } from 'google-auth-library';
 import { DynamicRetrievalMode } from "./enums";
 
 /**
@@ -77,7 +78,7 @@ export declare interface GroundingMetadata {
    */
   retrievalMetadata?: RetrievalMetadata;
   /**
-   * * Web search queries for the following-up web search.
+   * Web search queries for the following-up web search.
    */
   webSearchQueries: string[];
 }
@@ -103,7 +104,7 @@ export declare interface SearchEntryPoint {
  */
 export declare interface GroundingChunk {
   /**
-   *  Chunk from the web.
+   * Chunk from the web.
    */
   web?: GroundingChunkWeb;
 }
@@ -146,6 +147,7 @@ export declare interface GroundingSupport {
    */
   confidenceScores?: number[];
 }
+
 /**
  * Segment of the content.
  * @public
@@ -170,6 +172,7 @@ export declare interface GroundingSupportSegment {
    */
   text?: string;
 }
+
 /**
  * Metadata related to retrieval in the grounding flow.
  * @public
@@ -179,8 +182,76 @@ export declare interface RetrievalMetadata {
    * Score indicating how likely information from google search could help 
    * answer the prompt. The score is in the range [0, 1], where 0 is the least 
    * likely and 1 is the most likely. This score is only populated when google 
-   * search grounding and dynamic retrieval is enabled. It will becompared to 
+   * search grounding and dynamic retrieval is enabled. It will be compared to 
    * the threshold to determine whether to trigger google search.
    */
   googleSearchDynamicRetrievalScore?: number;
+}
+
+/**
+ * Utility to fetch credentials using Application Default Credentials (ADC).
+ * @returns {Promise<JWT | OAuth2Client>} - Authenticated client.
+ */
+async function getAuthenticatedClient(): Promise<JWT | OAuth2Client> {
+  const auth = new GoogleAuth({
+    scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+  });
+
+  try {
+    // Attempt to use ADC
+    const client = await auth.getClient();
+    if (client instanceof JWT || client instanceof OAuth2Client) {
+      return client;
+    }
+    throw new Error('Unsupported client type');
+  } catch (error) {
+    console.warn('ADC not available. Falling back to environment variables or service account keys.');
+    // Create a new JWT client as a fallback
+    return new JWT({
+      email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      key: process.env.GOOGLE_PRIVATE_KEY,
+      scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+    });
+  }
+}
+
+/**
+ * Service to interact with Google Search Retrieval API.
+ */
+export class GoogleSearchRetrievalService {
+  private authClient: JWT | OAuth2Client | null = null;
+
+  constructor() {
+    // Initialize the authenticated client
+    this.initializeAuth().catch((error) => {
+      console.error('Failed to initialize authentication:', error);
+    });
+  }
+
+  private async initializeAuth(): Promise<void> {
+    this.authClient = await getAuthenticatedClient();
+  }
+
+  /**
+   * Fetch data using Google Search Retrieval.
+   * @param tool - GoogleSearchRetrievalTool configuration.
+   * @returns {Promise<ApiResponse>} - Response from the API.
+   */
+  async fetchData(tool: GoogleSearchRetrievalTool): Promise<{ data: unknown; status: number }> {
+    if (!this.authClient) {
+      throw new Error('Authentication client not initialized.');
+    }
+
+    // Use the authenticated client to make API calls
+    const response = await this.authClient.request({
+      url: 'https://your-google-search-api-endpoint',
+      method: 'POST',
+      data: tool,
+    });
+
+    return {
+      data: response.data,
+      status: response.status,
+    };
+  }
 }

@@ -90,6 +90,7 @@
   },
   "homepage": "https://github.com/google/generative-ai-js#readme",
   "dependencies": {
-    "@google/generative-ai": "^0.24.0"
+    "@google/generative-ai": "^0.24.0",
+    "google-auth-library": "^9.15.1"
   }
 }
