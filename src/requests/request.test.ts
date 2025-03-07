@@ -24,6 +24,7 @@ import {
   DEFAULT_BASE_URL,
   RequestUrl,
   Task,
+  constructBackwardCompatibleRequest,
   constructModelRequest,
   makeModelRequest,
 } from "./request";
@@ -32,6 +33,7 @@ import {
   GoogleGenerativeAIFetchError,
   GoogleGenerativeAIRequestInputError,
 } from "../errors";
+import { RequestMethodType } from "../../types";
 
 use(sinonChai);
 use(chaiAsPromised);
@@ -403,4 +405,176 @@ describe("request methods", () => {
       ).to.be.rejectedWith(GoogleGenerativeAIRequestInputError);
     });
   });
+
+  describe("constructBackwardCompatibleRequest", () => {
+
+    it("should use toString() when model is provided", async () => {
+      const task = Task.GENERATE_CONTENT;
+      const apiKey = "test-key";
+      const stream = true;
+      const body = '{"input": "test"}';
+      const requestOptions = {};
+      const queryParams = { q: "value" };
+      const model = "models/model-name";
+  
+      const { url, fetchOptions } = await constructBackwardCompatibleRequest(
+        task,
+        apiKey,
+        stream,
+        body,
+        requestOptions,
+        queryParams,
+        model
+      );
+  
+      // Since a model is provided, URL should include the model segment and task
+      expect(url).to.include("models/model-name:generateContent");
+  
+      // As method defaults to POST if not set, queryParams should not be appended.
+      expect(url).to.not.include("q=value");
+  
+      // The body is attached for non-GET (POST) requests.
+      expect(fetchOptions.body).to.equal(body);
+    });
+  
+    it("should use toStringWithoutModel() when model is omitted", async () => {
+      const task = Task.GENERATE_CONTENT;
+      const apiKey = "test-key";
+      const stream = false;
+      const body = '{"input": "test"}';
+      const requestOptions = {};
+      const queryParams = { foo: "bar" };
+  
+      // Call without a model.
+      const { url, fetchOptions } = await constructBackwardCompatibleRequest(
+        task,
+        apiKey,
+        stream,
+        body,
+        requestOptions,
+        queryParams,
+        undefined
+      );
+  
+      // The URL should not include a model segment.
+      expect(url).to.not.match(/\/models\//);
+      // But should include the API version and baseUrl.
+      expect(url).to.include("v1beta");
+      expect(url).to.include("https://generativelanguage.googleapis.com");
+  
+      // Since no method is provided, defaults to POST and thus query parameters are not appended.
+      expect(url).to.not.include("foo=bar");
+  
+      // The body should be attached.
+      expect(fetchOptions.body).to.equal(body);
+    });
+  
+    it("should append query parameters for GET requests", async () => {
+      const task = Task.COUNT_TOKENS;
+      const apiKey = "test-key";
+      const stream = false;
+      const body = '{"input": "test"}';
+      const requestOptions = { method:RequestMethodType.GET };
+      const queryParams = { limit: 10, offset: 0 };
+      const model = "models/count-model";
+  
+      const { url, fetchOptions } = await constructBackwardCompatibleRequest(
+        task,
+        apiKey,
+        stream,
+        body,
+        requestOptions,
+        queryParams,
+        model
+      );
+  
+      // For GET requests, query parameters should be appended to the URL.
+      console.log(url);
+      expect(url).to.include("limit=10");
+      expect(url).to.include("offset=0");
+      
+      // For GET requests, no body is attached.
+      expect(fetchOptions.body).to.be.undefined;
+      expect(fetchOptions.method).to.equal("GET");
+    });
+  
+    it("should not append query parameters if none are provided for GET", async () => {
+      const task = Task.EMBED_CONTENT;
+      const apiKey = "test-key";
+      const stream = false;
+      const body = '{"input": "test"}';
+      const requestOptions = { method: RequestMethodType.GET };
+      const model = "models/embed-model";
+  
+      const { url, fetchOptions } = await constructBackwardCompatibleRequest(
+        task,
+        apiKey,
+        stream,
+        body,
+        requestOptions,
+        undefined,
+        model
+      );
+  
+      // URL should not have a query string added beyond what toString() returns.
+      expect(url).to.not.include("?");
+      // GET request should not attach a body.
+      expect(fetchOptions.body).to.be.undefined;
+      expect(fetchOptions.method).to.equal("GET");
+    });
+  
+    it("should attach body for non-GET requests even if query parameters are provided", async () => {
+      const task = Task.EMBED_CONTENT;
+      const apiKey = "test-key";
+      const stream = false;
+      const body = '{"input": "test"}';
+      // Explicitly using POST method
+      const requestOptions = { method: RequestMethodType.POST };
+      const queryParams = { extra: "param" };
+      const model = "models/embed-model";
+  
+      const { url, fetchOptions } = await constructBackwardCompatibleRequest(
+        task,
+        apiKey,
+        stream,
+        body,
+        requestOptions,
+        queryParams,
+        model
+      );
+  
+      // For non-GET methods, query parameters should not be appended to the URL.
+      expect(url).to.not.include("extra=param");
+  
+      // The body should be attached.
+      expect(fetchOptions.body).to.equal(body);
+      expect(fetchOptions.method).to.equal("POST");
+    });
+  
+    it("should merge custom headers and standard headers", async () => {
+      const task = Task.GENERATE_CONTENT;
+      const apiKey = "test-key";
+      const stream = false;
+      const body = '{"input": "test"}';
+      const requestOptions = {
+        customHeaders: new Headers({ "custom-header": "customValue" }),
+      };
+      const model = "models/model-name";
+  
+      const { fetchOptions } = await constructBackwardCompatibleRequest(
+        task,
+        apiKey,
+        stream,
+        body,
+        requestOptions,
+        undefined,
+        model
+      );
+  
+      const headers = fetchOptions.headers as Headers;
+      expect(headers.get("Content-Type")).to.equal("application/json");
+      expect(headers.get("x-goog-api-key")).to.equal(apiKey);
+      expect(headers.get("custom-header")).to.equal("customValue");
+    });
+  });  
 });
