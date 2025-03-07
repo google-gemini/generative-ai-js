@@ -30,7 +30,7 @@ import {
   GoogleGenerativeAIRequestInputError,
 } from "../errors";
 
-import * as fs from 'fs';
+import * as fs from "fs";
 let readFileSync: (path: string) => Buffer;
 try {
   readFileSync = fs.readFileSync;
@@ -39,7 +39,7 @@ try {
   readFileSync = (_: string) => {
     throw new GoogleGenerativeAIError(
       "File system operations are not supported in this environment. " +
-      "Please use uploadFileFromBuffer or uploadFileFromUrl instead."
+        "Please use uploadFileFromBuffer or uploadFileFromUrl instead.",
     );
   };
 }
@@ -64,30 +64,32 @@ export class GoogleAIFileManager {
    * Note: This method requires the fs module and will not work in serverless environments.
    * For serverless environments, use uploadFileFromBuffer or uploadFileFromUrl instead.
    */
-async uploadFile(
-  fileData: string | Buffer,
-  fileMetadata: FileMetadata,
-): Promise<UploadFileResponse> {
-  // If fileData is already a Buffer, use it directly
-  if (Buffer.isBuffer(fileData)) {
-    return this.uploadFileFromBuffer(fileData, fileMetadata);
-  }
-  
-  // Otherwise, treat it as a file path and try to read it
-  try {
-    const fileBuffer = readFileSync(fileData);
-    return this.uploadFileFromBuffer(fileBuffer, fileMetadata);
-  } catch (error) {
-    if (error instanceof Error && 
-        (error.message.includes('fs') || error.message.includes('file system'))) {
-      throw new GoogleGenerativeAIError(
-        "File system operations are not supported in this environment. " +
-        "Please use uploadFileFromBuffer or uploadFileFromUrl instead."
-      );
+  async uploadFile(
+    fileData: string | Buffer,
+    fileMetadata: FileMetadata,
+  ): Promise<UploadFileResponse> {
+    // If fileData is already a Buffer, use it directly
+    if (Buffer.isBuffer(fileData)) {
+      return this.uploadFileFromBuffer(fileData, fileMetadata);
     }
-    throw error;
+
+    // Otherwise, treat it as a file path and try to read it
+    try {
+      const fileBuffer = readFileSync(fileData);
+      return this.uploadFileFromBuffer(fileBuffer, fileMetadata);
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        (error.message.includes("fs") || error.message.includes("file system"))
+      ) {
+        throw new GoogleGenerativeAIError(
+          "File system operations are not supported in this environment. " +
+            "Please use uploadFileFromBuffer or uploadFileFromUrl instead.",
+        );
+      }
+      throw error;
+    }
   }
-}
 
   /**
    * Upload a file from a Buffer or ArrayBuffer.
@@ -128,7 +130,7 @@ async uploadFile(
       fileMetadata.mimeType +
       "\r\n\r\n";
     const postBlobPart = "\r\n--" + boundary + "--";
-    
+
     const blob = new Blob([preBlobPart, fileBuffer, postBlobPart]);
 
     const response = await makeServerRequest(url, uploadHeaders, blob);
@@ -146,21 +148,23 @@ async uploadFile(
     try {
       // Fetch the file from the provided URL
       const response = await fetch(fileUrl);
-      
+
       if (!response.ok) {
         throw new GoogleGenerativeAIError(
-          `Failed to fetch file from URL: ${response.status} ${response.statusText}`
+          `Failed to fetch file from URL: ${response.status} ${response.statusText}`,
         );
       }
-      
+
       // Get file as ArrayBuffer
       const fileBuffer = await response.arrayBuffer();
-      
+
       // Use the buffer upload method
       return this.uploadFileFromBuffer(fileBuffer, fileMetadata);
     } catch (error) {
       throw new GoogleGenerativeAIError(
-        `Error uploading file from URL: ${error instanceof Error ? error.message : String(error)}`
+        `Error uploading file from URL: ${
+          error instanceof Error ? error.message : String(error)
+        }`,
       );
     }
   }
