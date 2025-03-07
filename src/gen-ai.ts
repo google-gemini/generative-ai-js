@@ -118,19 +118,18 @@ export class GoogleGenerativeAI {
    * Gets a list of {@link GenerativeModel} available.
    */
   async listModels(
-    pageSize?: number,
-    pageToken?: string,
+    params: { pageSize?: number; pageToken?: string } = {},
     requestOptions?: RequestOptions,
   ): Promise<Response> {
 
-    const params = Object.fromEntries(
-      Object.entries({ pageSize, pageToken }).filter(([_, v]) => v != null)
+    const filteredParams = Object.fromEntries(
+      Object.entries({ params }).filter(([_, v]) => v != null)
     );
 
     const response = await makeListRequest(
       List.MODELS,
       this.apiKey,
-      params,
+      filteredParams,
       requestOptions,
     );
 
