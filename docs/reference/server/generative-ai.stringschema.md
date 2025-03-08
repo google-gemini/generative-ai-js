@@ -2,21 +2,14 @@
 
 [Home](./index.md) &gt; [@google/generative-ai](./generative-ai.md) &gt; [StringSchema](./generative-ai.stringschema.md)
 
-## StringSchema interface
+## StringSchema type
 
 Describes a string.
 
 **Signature:**
 
 ```typescript
-export interface StringSchema extends BaseSchema 
+export type StringSchema = SimpleStringSchema | EnumStringSchema;
 ```
-**Extends:** BaseSchema
-
-## Properties
-
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [enum?](./generative-ai.stringschema.enum.md) |  | string\[\] | _(Optional)_ If present, limits the result to one of the given values. |
-|  [type](./generative-ai.stringschema.type.md) |  | typeof [SchemaType.STRING](./generative-ai.schematype.md) |  |
+**References:** [SimpleStringSchema](./generative-ai.simplestringschema.md)<!-- -->, [EnumStringSchema](./generative-ai.enumstringschema.md)
 
