@@ -15,9 +15,80 @@ export interface ObjectSchema extends BaseSchema
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [properties](./generative-ai.objectschema.properties.md) |  | { \[k: string\]: [Schema](./generative-ai.schema.md)<!-- -->; } | Describes the properties of the JSON object. Must not be empty. |
-|  [required?](./generative-ai.objectschema.required.md) |  | string\[\] | _(Optional)_ A list of keys declared in the properties object. Required properties will always be present in the generated object. |
-|  [type](./generative-ai.objectschema.type.md) |  | typeof [SchemaType.OBJECT](./generative-ai.schematype.md) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[properties](./generative-ai.objectschema.properties.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ \[k: string\]: [Schema](./generative-ai.schema.md)<!-- -->; }
+
+
+</td><td>
+
+Describes the properties of the JSON object. Must not be empty.
+
+
+</td></tr>
+<tr><td>
+
+[required?](./generative-ai.objectschema.required.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+_(Optional)_ A list of keys declared in the properties object. Required properties will always be present in the generated object.
+
+
+</td></tr>
+<tr><td>
+
+[type](./generative-ai.objectschema.type.md)
+
+
+</td><td>
+
+
+</td><td>
+
+typeof [SchemaType.OBJECT](./generative-ai.schematype.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

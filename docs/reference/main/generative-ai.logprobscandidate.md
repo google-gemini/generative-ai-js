@@ -14,9 +14,82 @@ export interface LogprobsCandidate
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [logProbability](./generative-ai.logprobscandidate.logprobability.md) |  | number | The candidate's log probability. |
-|  [token](./generative-ai.logprobscandidate.token.md) |  | string | The candidate's token string value. |
-|  [tokenID](./generative-ai.logprobscandidate.tokenid.md) |  | number | The candidate's token id value. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[logProbability](./generative-ai.logprobscandidate.logprobability.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+The candidate's log probability.
+
+
+</td></tr>
+<tr><td>
+
+[token](./generative-ai.logprobscandidate.token.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The candidate's token string value.
+
+
+</td></tr>
+<tr><td>
+
+[tokenID](./generative-ai.logprobscandidate.tokenid.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+The candidate's token id value.
+
+
+</td></tr>
+</tbody></table>

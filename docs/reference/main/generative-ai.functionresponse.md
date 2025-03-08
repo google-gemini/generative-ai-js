@@ -14,8 +14,59 @@ export interface FunctionResponse
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [name](./generative-ai.functionresponse.name.md) |  | string |  |
-|  [response](./generative-ai.functionresponse.response.md) |  | object |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[name](./generative-ai.functionresponse.name.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[response](./generative-ai.functionresponse.response.md)
+
+
+</td><td>
+
+
+</td><td>
+
+object
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
