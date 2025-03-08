@@ -22,6 +22,7 @@ import { Content } from "../../types";
 import {
   formatCountTokensInput,
   formatGenerateContentInput,
+  formatEmbedContentInput,
 } from "./request-helpers";
 
 use(sinonChai);
@@ -273,6 +274,39 @@ describe("request formatting methods", () => {
         tools: [{ codeExecution: {} }],
         cachedContent: "mycache",
       });
+    });
+  });
+  describe("formatEmbedContentInput", () => {
+    it("handles dimensions parameter", () => {
+      const result = formatEmbedContentInput({
+        content: { role: "user", parts: [{ text: "foo" }] },
+        dimensions: 128
+      });
+      expect(result).to.deep.equal({
+        content: { role: "user", parts: [{ text: "foo" }] },
+        dimensions: 128
+      });
+    });
+    it("validates dimensions with valid values", () => {
+      const validDimensions = [128, 256, 384, 512, 768];
+      
+      for (const dim of validDimensions) {
+        const result = formatEmbedContentInput({
+          content: { role: "user", parts: [{ text: "foo" }] },
+          dimensions: dim
+        });
+        expect(result.dimensions).to.equal(dim);
+      }
+    });
+    it("throws error for invalid dimensions", () => {
+      const invalidDimensions = [100, 200, 300, 400, 600, 800];
+      
+      for (const dim of invalidDimensions) {
+        expect(() => formatEmbedContentInput({
+          content: { role: "user", parts: [{ text: "foo" }] },
+          dimensions: dim
+        })).to.throw(/Invalid dimensions/);
+      }
     });
   });
 });
