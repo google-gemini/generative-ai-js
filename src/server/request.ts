@@ -25,13 +25,22 @@ import { RequestOptions, SingleRequestOptions } from "../../types";
 import { RpcTask } from "./constants";
 import { GoogleGenerativeAIRequestInputError } from "../errors";
 
-const taskToMethod = {
+const taskToMethod: Record<RpcTask, string> = {
   [RpcTask.UPLOAD]: "POST",
-  [RpcTask.LIST]: "GET",
   [RpcTask.GET]: "GET",
+  [RpcTask.GET_FILE]: "GET",
+  [RpcTask.LIST]: "GET",
+  [RpcTask.LIST_FILES]: "GET",
   [RpcTask.DELETE]: "DELETE",
+  [RpcTask.DELETE_FILE]: "DELETE",
   [RpcTask.UPDATE]: "PATCH",
+  [RpcTask.UPDATE_FILE]: "PATCH",
   [RpcTask.CREATE]: "POST",
+  [RpcTask.LIST_TUNED_MODELS]: "GET",
+  [RpcTask.GET_TUNED_MODEL]: "GET",
+  [RpcTask.CREATE_TUNED_MODEL]: "POST",
+  [RpcTask.DELETE_TUNED_MODEL]: "DELETE",
+  [RpcTask.GET_TUNING_OPERATION]: "GET",
 };
 
 export class ServerRequestUrl {
@@ -88,8 +97,39 @@ export class FilesRequestUrl extends ServerRequestUrl {
   }
 }
 
+export class TunedModelsUrl extends ServerRequestUrl {
+  constructor(
+    public task: RpcTask,
+    public apiKey: string,
+    public requestOptions?: RequestOptions,
+  ) {
+    super(task, apiKey, requestOptions);
+    const apiVersion = this.requestOptions?.apiVersion || DEFAULT_API_VERSION;
+    const baseUrl = this.requestOptions?.baseUrl || DEFAULT_BASE_URL;
+    let initialUrl = baseUrl;
+    initialUrl += `/${apiVersion}/tunedModels`;
+    this._url = new URL(initialUrl);
+  }
+}
+
+export class OperationsUrl extends ServerRequestUrl {
+  constructor(
+    public task: RpcTask,
+    public apiKey: string,
+    public requestOptions?: RequestOptions,
+  ) {
+    super(task, apiKey, requestOptions);
+    const apiVersion = this.requestOptions?.apiVersion || DEFAULT_API_VERSION;
+    const baseUrl = this.requestOptions?.baseUrl || DEFAULT_BASE_URL;
+    let initialUrl = baseUrl;
+    initialUrl += `/${apiVersion}`;
+    this._url = new URL(initialUrl);
+  }
+}
+
 export function getHeaders(url: ServerRequestUrl): Headers {
   const headers = new Headers();
+  headers.append("Content-Type", "application/json");
   headers.append("x-goog-api-client", getClientHeaders(url.requestOptions));
   headers.append("x-goog-api-key", url.apiKey);
 
@@ -125,7 +165,7 @@ export function getHeaders(url: ServerRequestUrl): Headers {
 }
 
 export async function makeServerRequest(
-  url: FilesRequestUrl,
+  url: ServerRequestUrl,
   headers: Headers,
   body?: Blob | string,
   fetchFn: typeof fetch = fetch,
@@ -152,16 +192,59 @@ export async function makeServerRequest(
  * RequestOptions.
  */
 function getSignal(requestOptions?: SingleRequestOptions): AbortSignal | null {
-  if (requestOptions?.signal !== undefined || requestOptions?.timeout >= 0) {
-    const controller = new AbortController();
-    if (requestOptions?.timeout >= 0) {
-      setTimeout(() => controller.abort(), requestOptions.timeout);
-    }
-    if (requestOptions.signal) {
-      requestOptions.signal.addEventListener("abort", () => {
-        controller.abort();
-      });
-    }
-    return controller.signal;
+  if (!requestOptions) {
+    return null;
   }
+
+  const { timeout, signal } = requestOptions;
+
+  if (timeout == null && !signal) {
+    return null;
+  }
+
+  if (timeout != null && (typeof timeout !== "number" || timeout <= 0)) {
+    throw new GoogleGenerativeAIRequestInputError(
+      `timeout must be a positive number, but got ${timeout}`,
+    );
+  }
+
+  // If the user-provided signal is already aborted, return early with it
+  if (signal && signal.aborted) {
+    return signal;
+  }
+
+  // If there's no timeout, just return the user-provided signal
+  if (timeout == null) {
+    return signal;
+  }
+
+  // At this point, we have a timeout and possibly a signal too. Create a composite AbortController
+  const timeoutController = new AbortController();
+  const timeoutId = setTimeout(() => {
+    timeoutController.abort();
+  }, timeout);
+
+  if (!signal) {
+    // Just clear the timeout on abort - nothing more to do
+    timeoutController.signal.addEventListener("abort", () => {
+      clearTimeout(timeoutId);
+    });
+    return timeoutController.signal;
+  }
+
+  // We have both a timeout and a signal.
+  const compositeController = new AbortController();
+
+  // If either the timeout happens or the user signal is triggered, abort our composite controller
+  timeoutController.signal.addEventListener("abort", () => {
+    clearTimeout(timeoutId);
+    compositeController.abort();
+  });
+
+  signal.addEventListener("abort", () => {
+    clearTimeout(timeoutId);
+    compositeController.abort();
+  });
+
+  return compositeController.signal;
 }
