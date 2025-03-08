@@ -55,7 +55,13 @@ import {
 import { ChatSession } from "../methods/chat-session";
 import { countTokens } from "../methods/count-tokens";
 import { batchEmbedContents, embedContent } from "../methods/embed-content";
-import { createTunedModel, deleteTunedModel, getTunedModel, getTuningOperation, listTunedModels } from "../methods/finetune";
+import {
+  createTunedModel,
+  deleteTunedModel,
+  getTunedModel,
+  getTuningOperation,
+  listTunedModels,
+} from "../methods/finetune";
 import {
   formatCountTokensInput,
   formatEmbedContentInput,
@@ -268,11 +274,11 @@ export class GenerativeModel {
 
   /**
    * Lists all tuned models.
-   * 
+   *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
    * take precedence over the {@link RequestOptions} values provided to
    * {@link GoogleGenerativeAI.getGenerativeModel }.
-   * 
+   *
    * @param listParams - Optional parameters for filtering and pagination
    * @param requestOptions - Optional request configuration
    * @returns A promise that resolves to the list of tuned models
@@ -294,11 +300,11 @@ export class GenerativeModel {
 
   /**
    * Gets details for a tuned model.
-   * 
+   *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
    * take precedence over the {@link RequestOptions} values provided to
    * {@link GoogleGenerativeAI.getGenerativeModel }.
-   * 
+   *
    * @param modelName - Name of the tuned model to retrieve
    * @param requestOptions - Optional request configuration
    * @returns A promise that resolves to the tuned model details
@@ -311,20 +317,16 @@ export class GenerativeModel {
       ...this._requestOptions,
       ...requestOptions,
     };
-    return getTunedModel(
-      this.apiKey,
-      modelName,
-      generativeModelRequestOptions,
-    );
+    return getTunedModel(this.apiKey, modelName, generativeModelRequestOptions);
   }
 
   /**
    * Creates a new tuned model.
-   * 
+   *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
    * take precedence over the {@link RequestOptions} values provided to
    * {@link GoogleGenerativeAI.getGenerativeModel }.
-   * 
+   *
    * @param params - Parameters for the tuned model creation
    * @param requestOptions - Optional request configuration
    * @returns A promise that resolves to the tuned model creation operation
@@ -337,20 +339,16 @@ export class GenerativeModel {
       ...this._requestOptions,
       ...requestOptions,
     };
-    return createTunedModel(
-      this.apiKey,
-      params,
-      generativeModelRequestOptions,
-    );
+    return createTunedModel(this.apiKey, params, generativeModelRequestOptions);
   }
 
   /**
    * Deletes a tuned model.
-   * 
+   *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
    * take precedence over the {@link RequestOptions} values provided to
    * {@link GoogleGenerativeAI.getGenerativeModel }.
-   * 
+   *
    * @param modelName - Name of the tuned model to delete
    * @param requestOptions - Optional request configuration
    * @returns A promise that resolves when the deletion is complete
@@ -372,11 +370,11 @@ export class GenerativeModel {
 
   /**
    * Gets the status of a tuning operation.
-   * 
+   *
    * Fields set in the optional {@link SingleRequestOptions} parameter will
    * take precedence over the {@link RequestOptions} values provided to
    * {@link GoogleGenerativeAI.getGenerativeModel }.
-   * 
+   *
    * @param operationName - Name of the operation to check
    * @param requestOptions - Optional request configuration
    * @returns A promise that resolves to the operation status

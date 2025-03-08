@@ -324,16 +324,16 @@ async function deleteTunedModel(tunedModelName) {
 
 async function runAll() {
   // Comment out or delete any sample cases you don't want to run.
-  //await listTunedModels();
+  await listTunedModels();
   
   // Creating a tuned model takes time and costs resources,
   // so you might want to keep this commented out until needed
   //const tunedModelName = await createTunedModel();
   
   // To use an existing tuned model, uncomment and replace with your model name:
-  const tunedModelName = "tunedModels/number-generator-model-m8og53lca8o3";
-  await getTunedModel(tunedModelName);
-  await tryTunedModel(tunedModelName);
+  //const tunedModelName = "tunedModels/number";
+  //await getTunedModel(tunedModelName);
+  //await tryTunedModel(tunedModelName);
   
   // Deleting is permanent, so be careful with this:
   //await deleteTunedModel(tunedModelName);

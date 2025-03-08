@@ -37,7 +37,7 @@ export enum RpcTask {
   DELETE = "delete",
   LIST = "list",
   UPDATE = "update",
-  
+
   /**
    * TunedModel tasks
    */

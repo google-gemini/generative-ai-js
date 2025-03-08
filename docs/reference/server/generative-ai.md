@@ -10,6 +10,7 @@
 |  --- | --- |
 |  [GoogleAICacheManager](./generative-ai.googleaicachemanager.md) | Class for managing GoogleAI content caches. |
 |  [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) | Class for managing GoogleAI file uploads. |
+|  [GoogleAITunedModelManager](./generative-ai.googleaitunedmodelmanager.md) | Class for managing GoogleAI tuned models. |
 
 ## Enumerations
 
