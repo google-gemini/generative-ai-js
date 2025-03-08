@@ -40,8 +40,8 @@
     "lint": "eslint -c .eslintrc.js \"**/*.ts\" --ignore-path .gitignore",
     "api-report": "api-extractor run -c api-extractor.json --local --verbose && api-extractor run -c api-extractor.server.json --local --verbose",
     "docs": "npm run build && npx api-documenter markdown -i ./temp/main -o ./docs/reference/main && npx api-documenter markdown -i ./temp/server -o ./docs/reference/server",
-    "format": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"nodenext\"}' npx ts-node scripts/run-format.ts",
-    "format:check": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"nodenext\"}' npx ts-node scripts/check-format.ts"
+    "format": "cross-env TS_NODE_COMPILER_OPTIONS=\"{\\\"module\\\":\\\"nodenext\\\"}\" npx ts-node scripts/run-format.ts",
+    "format:check": "cross-env TS_NODE_COMPILER_OPTIONS=\"{\\\"module\\\":\\\"nodenext\\\"}\" npx ts-node scripts/check-format.ts"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
