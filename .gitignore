@@ -3,6 +3,7 @@ dist/
 temp/
 *.tgz
 .DS_Store
+.eslintignore
 testfiles
 nodejs-vertexai/
 samples/package-lock.json
