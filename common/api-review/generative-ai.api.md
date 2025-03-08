@@ -201,6 +201,8 @@ export interface EmbedContentRequest {
     // (undocumented)
     content: Content;
     // (undocumented)
+    dimensions?: number;
+    // (undocumented)
     taskType?: TaskType;
     // (undocumented)
     title?: string;
@@ -525,7 +527,7 @@ export class GenerativeModel {
     countTokens(request: CountTokensRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<CountTokensResponse>;
     embedContent(request: EmbedContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<EmbedContentResponse>;
     generateContent(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentResult>;
-    generateContentStream(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentStreamResult>;
+    generateContentStream(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions, streamCallbacks?: StreamCallbacks): Promise<GenerateContentStreamResult>;
     // (undocumented)
     generationConfig: GenerationConfig;
     // (undocumented)
@@ -839,6 +841,12 @@ export interface StartChatParams extends BaseParams {
     toolConfig?: ToolConfig;
     // (undocumented)
     tools?: Tool[];
+}
+
+// @public
+export interface StreamCallbacks {
+    onData?: (chunk: string) => void;
+    onDone?: (fullText: string) => void;
 }
 
 // @public

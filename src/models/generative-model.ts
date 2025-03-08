@@ -40,6 +40,7 @@ import {
   StartChatParams,
   Tool,
   ToolConfig,
+  StreamCallbacks,
 } from "../../types";
 import { ChatSession } from "../methods/chat-session";
 import { countTokens } from "../methods/count-tokens";
@@ -128,17 +129,23 @@ export class GenerativeModel {
    * Fields set in the optional {@link SingleRequestOptions} parameter will
    * take precedence over the {@link RequestOptions} values provided to
    * {@link GoogleGenerativeAI.getGenerativeModel }.
+   * 
+   * The optional {@link StreamCallbacks} parameter allows receiving text
+   * chunks via callbacks without manually handling Node.js streams.
+   * - onData: Called with each chunk of text as it arrives
+   * - onDone: Called with the full text when streaming is complete
    */
   async generateContentStream(
     request: GenerateContentRequest | string | Array<string | Part>,
     requestOptions: SingleRequestOptions = {},
+    streamCallbacks?: StreamCallbacks
   ): Promise<GenerateContentStreamResult> {
     const formattedParams = formatGenerateContentInput(request);
     const generativeModelRequestOptions: SingleRequestOptions = {
       ...this._requestOptions,
       ...requestOptions,
     };
-    return generateContentStream(
+    const result = await generateContentStream(
       this.apiKey,
       this.model,
       {
@@ -152,6 +159,34 @@ export class GenerativeModel {
       },
       generativeModelRequestOptions,
     );
+
+    // If streamCallbacks are provided, set up the handlers
+    if (streamCallbacks?.onData || streamCallbacks?.onDone) {
+      // Handle onData callback for each chunk
+      if (streamCallbacks.onData) {
+        const originalStream = result.stream;
+        result.stream = (async function* () {
+          let fullText = '';
+          for await (const chunk of originalStream) {
+            const text = chunk.text();
+            fullText += text;
+            streamCallbacks.onData?.(text);
+            yield chunk;
+          }
+          // Call onDone with the full text when complete
+          if (streamCallbacks.onDone) {
+            streamCallbacks.onDone(fullText);
+          }
+        })();
+      } else if (streamCallbacks.onDone) {
+        // If only onDone is provided, collect the full text
+        result.response.then(response => {
+          streamCallbacks.onDone?.(response.text());
+        });
+      }
+    }
+
+    return result;
   }
 
   /**
