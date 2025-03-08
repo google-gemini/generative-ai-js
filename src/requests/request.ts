@@ -149,7 +149,9 @@ export async function makeModelRequest(
     body,
     requestOptions,
   );
-  return makeRequest(url, fetchOptions, fetchFn);
+  // Use custom fetch if provided in requestOptions
+  const customFetch = requestOptions.fetch || fetchFn;
+  return makeRequest(url, fetchOptions, customFetch);
 }
 
 export async function makeRequest(
@@ -160,12 +162,31 @@ export async function makeRequest(
   let response;
   try {
     response = await fetchFn(url, fetchOptions);
-  } catch (e) {
-    handleResponseError(e, url);
+  } catch (e: any) {
+    if (e.name === "AbortError") {
+      throw new GoogleGenerativeAIError(
+        `Request aborted when fetching ${url.toString()}: ${e.message}`,
+      );
+    }
+
+    // Rethrow errors we already identified
+    if (
+      e instanceof GoogleGenerativeAIFetchError ||
+      e instanceof GoogleGenerativeAIError
+    ) {
+      throw e;
+    }
+    throw new GoogleGenerativeAIError(
+      `Error fetching from ${url.toString()}: ${e.message}`,
+    );
   }
 
-  if (!response.ok) {
-    await handleResponseNotOk(response, url);
+  try {
+    if (!response.ok) {
+      await handleResponseNotOk(response, url);
+    }
+  } catch (e) {
+    throw e;
   }
 
   return response;
@@ -220,8 +241,8 @@ async function handleResponseNotOk(
 
 /**
  * Generates the request options to be passed to the fetch API.
- * @param requestOptions - The user-defined request options.
- * @returns The generated request options.
+ * @param requestOptions - The request options from the user.
+ * @returns The options to be passed to fetch.
  */
 function buildFetchOptions(requestOptions?: SingleRequestOptions): RequestInit {
   const fetchOptions = {} as RequestInit;
@@ -237,5 +258,12 @@ function buildFetchOptions(requestOptions?: SingleRequestOptions): RequestInit {
     }
     fetchOptions.signal = controller.signal;
   }
+  
+  // Add httpAgent for Node.js environments
+  if (requestOptions?.httpAgent) {
+    // Use type assertion since 'agent' is available in Node.js but not in standard RequestInit
+    (fetchOptions as any).agent = requestOptions.httpAgent;
+  }
+  
   return fetchOptions;
 }
