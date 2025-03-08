@@ -41,9 +41,21 @@ import {
   Tool,
   ToolConfig,
 } from "../../types";
+
+// Import fine-tuning related types directly from tune-model
+import {
+  CreateTunedModelParams,
+  CreateTunedModelResponse,
+  ListTunedModelsParams,
+  ListTunedModelsResponse,
+  TunedModelResponse,
+  TuningOperationResponse,
+} from "../../types/tune-model";
+
 import { ChatSession } from "../methods/chat-session";
 import { countTokens } from "../methods/count-tokens";
 import { batchEmbedContents, embedContent } from "../methods/embed-content";
+import { createTunedModel, deleteTunedModel, getTunedModel, getTuningOperation, listTunedModels } from "../methods/finetune";
 import {
   formatCountTokensInput,
   formatEmbedContentInput,
@@ -250,6 +262,136 @@ export class GenerativeModel {
       this.apiKey,
       this.model,
       batchEmbedContentRequest,
+      generativeModelRequestOptions,
+    );
+  }
+
+  /**
+   * Lists all tuned models.
+   * 
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
+   * 
+   * @param listParams - Optional parameters for filtering and pagination
+   * @param requestOptions - Optional request configuration
+   * @returns A promise that resolves to the list of tuned models
+   */
+  async listTunedModels(
+    listParams?: ListTunedModelsParams,
+    requestOptions: SingleRequestOptions = {},
+  ): Promise<ListTunedModelsResponse> {
+    const generativeModelRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
+    return listTunedModels(
+      this.apiKey,
+      listParams,
+      generativeModelRequestOptions,
+    );
+  }
+
+  /**
+   * Gets details for a tuned model.
+   * 
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
+   * 
+   * @param modelName - Name of the tuned model to retrieve
+   * @param requestOptions - Optional request configuration
+   * @returns A promise that resolves to the tuned model details
+   */
+  async getTunedModel(
+    modelName: string,
+    requestOptions: SingleRequestOptions = {},
+  ): Promise<TunedModelResponse> {
+    const generativeModelRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
+    return getTunedModel(
+      this.apiKey,
+      modelName,
+      generativeModelRequestOptions,
+    );
+  }
+
+  /**
+   * Creates a new tuned model.
+   * 
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
+   * 
+   * @param params - Parameters for the tuned model creation
+   * @param requestOptions - Optional request configuration
+   * @returns A promise that resolves to the tuned model creation operation
+   */
+  async createTunedModel(
+    params: CreateTunedModelParams,
+    requestOptions: SingleRequestOptions = {},
+  ): Promise<CreateTunedModelResponse> {
+    const generativeModelRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
+    return createTunedModel(
+      this.apiKey,
+      params,
+      generativeModelRequestOptions,
+    );
+  }
+
+  /**
+   * Deletes a tuned model.
+   * 
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
+   * 
+   * @param modelName - Name of the tuned model to delete
+   * @param requestOptions - Optional request configuration
+   * @returns A promise that resolves when the deletion is complete
+   */
+  async deleteTunedModel(
+    modelName: string,
+    requestOptions: SingleRequestOptions = {},
+  ): Promise<void> {
+    const generativeModelRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
+    return deleteTunedModel(
+      this.apiKey,
+      modelName,
+      generativeModelRequestOptions,
+    );
+  }
+
+  /**
+   * Gets the status of a tuning operation.
+   * 
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
+   * 
+   * @param operationName - Name of the operation to check
+   * @param requestOptions - Optional request configuration
+   * @returns A promise that resolves to the operation status
+   */
+  async getTuningOperation(
+    operationName: string,
+    requestOptions: SingleRequestOptions = {},
+  ): Promise<TuningOperationResponse> {
+    const generativeModelRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
+    return getTuningOperation(
+      this.apiKey,
+      operationName,
       generativeModelRequestOptions,
     );
   }

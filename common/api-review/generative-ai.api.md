@@ -4,6 +4,13 @@
 
 ```ts
 
+// @public
+export interface ApiTuningHyperparameters {
+    batchSize?: number;
+    epochCount?: number;
+    learningRate?: number;
+}
+
 // Warning: (ae-incompatible-release-tags) The symbol "ArraySchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
 //
 // @public
@@ -183,6 +190,23 @@ export interface CountTokensResponse {
 }
 
 // @public
+export interface CreateTunedModelParams {
+    base_model: string;
+    display_name: string;
+    tuning_task: TuningTaskConfig;
+}
+
+// @public
+export interface CreateTunedModelResponse {
+    done?: boolean;
+    metadata?: {
+        completedPercent?: number;
+        tunedModel?: string;
+    };
+    name: string;
+}
+
+// @public
 export interface DynamicRetrievalConfig {
     dynamicThreshold?: number;
     mode?: DynamicRetrievalMode;
@@ -221,6 +245,13 @@ export interface EnhancedGenerateContentResponse extends GenerateContentResponse
 }
 
 // @public
+export interface ErrorDetail {
+    [key: string]: unknown;
+    detail?: string;
+    type?: string;
+}
+
+// @public
 export interface ErrorDetails {
     // (undocumented)
     "@type"?: string;
@@ -232,6 +263,11 @@ export interface ErrorDetails {
     metadata?: Record<string, unknown>;
     // (undocumented)
     reason?: string;
+}
+
+// @public
+export interface ExamplesWrapper {
+    examples: TrainingExample[];
 }
 
 // @public
@@ -512,11 +548,16 @@ export class GenerativeModel {
     // (undocumented)
     cachedContent: CachedContent;
     countTokens(request: CountTokensRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<CountTokensResponse>;
+    createTunedModel(params: CreateTunedModelParams, requestOptions?: SingleRequestOptions): Promise<CreateTunedModelResponse>;
+    deleteTunedModel(modelName: string, requestOptions?: SingleRequestOptions): Promise<void>;
     embedContent(request: EmbedContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<EmbedContentResponse>;
     generateContent(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentResult>;
     generateContentStream(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentStreamResult>;
     // (undocumented)
     generationConfig: GenerationConfig;
+    getTunedModel(modelName: string, requestOptions?: SingleRequestOptions): Promise<TunedModelResponse>;
+    getTuningOperation(operationName: string, requestOptions?: SingleRequestOptions): Promise<TuningOperationResponse>;
+    listTunedModels(listParams?: ListTunedModelsParams, requestOptions?: SingleRequestOptions): Promise<ListTunedModelsResponse>;
     // (undocumented)
     model: string;
     // (undocumented)
@@ -677,6 +718,19 @@ export interface IntegerSchema extends BaseSchema {
 }
 
 // @public
+export interface ListTunedModelsParams {
+    filter?: string;
+    pageSize?: number;
+    pageToken?: string;
+}
+
+// @public
+export interface ListTunedModelsResponse {
+    nextPageToken?: string;
+    tunedModels: TunedModelResponse[];
+}
+
+// @public
 export interface LogprobsCandidate {
     logProbability: number;
     token: string;
@@ -806,6 +860,21 @@ export interface SingleRequestOptions extends RequestOptions {
 }
 
 // @public
+export interface SnakeCaseTuningTaskDetails {
+    complete_time?: string;
+    hyperparameters?: {
+        batch_size?: number;
+        learning_rate?: number;
+        epoch_count?: number;
+    };
+    snapshots?: TuningSnapshot[];
+    start_time?: string;
+}
+
+// @public
+export type SnapshotDetailValue = string | number | boolean | Record<string, unknown>;
+
+// @public
 export interface StartChatParams extends BaseParams {
     cachedContent?: string;
     // (undocumented)
@@ -873,6 +942,97 @@ export interface ToolConfig {
 // @public
 export interface TopCandidates {
     candidates: LogprobsCandidate[];
+}
+
+// @public
+export interface TrainingData {
+    examples: ExamplesWrapper;
+}
+
+// @public
+export interface TrainingExample {
+    output: string;
+    text_input: string;
+}
+
+// @public
+export interface TunedModelMetadata {
+    completedPercent?: number;
+    tunedModel?: string;
+}
+
+// @public
+export interface TunedModelResponse {
+    base_model?: string;
+    baseModel: string;
+    // (undocumented)
+    create_time?: string;
+    createTime: string;
+    // (undocumented)
+    display_name?: string;
+    displayName: string;
+    name: string;
+    state: TunedModelState;
+    temperature?: number;
+    // (undocumented)
+    topK?: number;
+    // (undocumented)
+    topP?: number;
+    // (undocumented)
+    tuning_task?: SnakeCaseTuningTaskDetails;
+    tuningTask?: TuningTaskDetails;
+    // (undocumented)
+    update_time?: string;
+    updateTime: string;
+}
+
+// @public
+export enum TunedModelState {
+    // (undocumented)
+    ACTIVE = "ACTIVE",
+    // (undocumented)
+    CREATING = "CREATING",
+    // (undocumented)
+    FAILED = "FAILED",
+    // (undocumented)
+    STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
+}
+
+// @public
+export interface TuningHyperparameters {
+    batch_size?: number;
+    epoch_count?: number;
+    learning_rate?: number;
+}
+
+// @public
+export interface TuningOperationResponse {
+    done: boolean;
+    error?: {
+        code: number;
+        message: string;
+        details?: ErrorDetail[];
+    };
+    metadata?: TunedModelMetadata;
+}
+
+// @public
+export interface TuningSnapshot {
+    [key: string]: SnapshotDetailValue;
+}
+
+// @public
+export interface TuningTaskConfig {
+    hyperparameters?: TuningHyperparameters;
+    training_data: TrainingData;
+}
+
+// @public
+export interface TuningTaskDetails {
+    completeTime?: string;
+    hyperparameters?: ApiTuningHyperparameters;
+    snapshots?: TuningSnapshot[];
+    startTime?: string;
 }
 
 // @public

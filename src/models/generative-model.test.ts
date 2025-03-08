@@ -25,10 +25,15 @@ import {
   ObjectSchema,
   SchemaType,
 } from "../../types";
+import {
+  CreateTunedModelParams,
+  ListTunedModelsParams,
+  TunedModelState,
+} from "../../types/tune-model";
 import { getMockResponse } from "../../test-utils/mock-response";
 import { match, restore, stub } from "sinon";
 import * as request from "../requests/request";
-
+import * as finetune from "../methods/finetune";
 use(sinonChai);
 
 describe("GenerativeModel", () => {
@@ -112,7 +117,7 @@ describe("GenerativeModel", () => {
       mockResponse as Response,
     );
     await genModel.generateContent("hello");
-    expect(makeRequestStub).to.be.calledWith(
+    expect(makeRequestStub).to.have.been.calledWith(
       "models/my-model",
       request.Task.GENERATE_CONTENT,
       match.any,
@@ -150,7 +155,7 @@ describe("GenerativeModel", () => {
       mockResponse as Response,
     );
     await genModel.generateContent("hello");
-    expect(makeRequestStub).to.be.calledWith(
+    expect(makeRequestStub).to.have.been.calledWith(
       "models/my-model",
       request.Task.GENERATE_CONTENT,
       match.any,
@@ -229,7 +234,7 @@ describe("GenerativeModel", () => {
       toolConfig: { functionCallingConfig: { mode: FunctionCallingMode.AUTO } },
       systemInstruction: { role: "system", parts: [{ text: "be formal" }] },
     });
-    expect(makeRequestStub).to.be.calledWith(
+    expect(makeRequestStub).to.have.been.calledWith(
       "models/my-model",
       request.Task.GENERATE_CONTENT,
       match.any,
@@ -271,7 +276,7 @@ describe("GenerativeModel", () => {
       mockResponse as Response,
     );
     await genModel.countTokens("hello");
-    expect(makeRequestStub).to.be.calledWith(
+    expect(makeRequestStub).to.have.been.calledWith(
       "models/my-model",
       request.Task.COUNT_TOKENS,
       match.any,
@@ -304,7 +309,7 @@ describe("GenerativeModel", () => {
       mockResponse as Response,
     );
     await genModel.startChat().sendMessage("hello");
-    expect(makeRequestStub).to.be.calledWith(
+    expect(makeRequestStub).to.have.been.calledWith(
       "models/my-model",
       request.Task.GENERATE_CONTENT,
       match.any,
@@ -349,7 +354,7 @@ describe("GenerativeModel", () => {
       mockResponse as Response,
     );
     await genModel.startChat().sendMessage("hello");
-    expect(makeRequestStub).to.be.calledWith(
+    expect(makeRequestStub).to.have.been.calledWith(
       "models/my-model",
       request.Task.GENERATE_CONTENT,
       match.any,
@@ -414,7 +419,7 @@ describe("GenerativeModel", () => {
         systemInstruction: { role: "system", parts: [{ text: "be formal" }] },
       })
       .sendMessage("hello");
-    expect(makeRequestStub).to.be.calledWith(
+    expect(makeRequestStub).to.have.been.calledWith(
       "models/my-model",
       request.Task.GENERATE_CONTENT,
       match.any,
@@ -459,7 +464,201 @@ describe("GenerativeModel", () => {
     ).to.eventually.be.rejectedWith(
       "CountTokensRequest must have one of contents or generateContentRequest, not both.",
     );
-    expect(makeRequestStub).to.not.be.called;
+    expect(makeRequestStub).to.not.have.been.called;
     restore();
+  });
+
+  // Tests for fine-tuning methods
+  describe("fine-tuning methods", () => {
+    const apiKey = "test-api-key";
+    
+    // Sample data for fine-tuning tests
+    const mockListResponse = {
+      tunedModels: [
+        { 
+          name: "tunedModels/model1", 
+          displayName: "Model 1", 
+          state: TunedModelState.ACTIVE,
+          baseModel: "gemini-1.5-flash-001",
+          createTime: "2023-01-01T00:00:00Z",
+          updateTime: "2023-01-02T00:00:00Z"
+        },
+        { 
+          name: "tunedModels/model2", 
+          displayName: "Model 2", 
+          state: TunedModelState.CREATING,
+          baseModel: "gemini-1.5-flash-001",
+          createTime: "2023-01-01T00:00:00Z",
+          updateTime: "2023-01-02T00:00:00Z"
+        }
+      ],
+      nextPageToken: "next-page-token"
+    };
+    
+    const mockModelResponse = {
+      name: "tunedModels/test-model",
+      displayName: "Test Model",
+      baseModel: "gemini-1.5-flash-001",
+      state: TunedModelState.ACTIVE,
+      createTime: "2023-01-01T00:00:00Z",
+      updateTime: "2023-01-02T00:00:00Z"
+    };
+    
+    const mockCreateResponse = {
+      name: "operations/test-operation",
+      metadata: {
+        completedPercent: 0,
+        tunedModel: "tunedModels/new-model"
+      },
+      done: false
+    };
+    
+    const mockOperationResponse = {
+      done: true,
+      metadata: {
+        completedPercent: 100,
+        tunedModel: "tunedModels/completed-model"
+      }
+    };
+    
+    it("listTunedModels calls the finetune method with correct parameters", async () => {
+      // Arrange
+      const genModel = new GenerativeModel("test-api-key", { model: "my-model" });
+      const listStub = stub(finetune, "listTunedModels").resolves(mockListResponse);
+      const listParams: ListTunedModelsParams = { pageSize: 10, pageToken: "token" };
+      const requestOptions = { timeout: 5000 };
+      
+      // Act
+      const result = await genModel.listTunedModels(listParams, requestOptions);
+      
+      // Assert
+      expect(listStub).to.have.been.calledWith(apiKey, listParams, requestOptions);
+      expect(result).to.equal(mockListResponse);
+      expect(result.tunedModels.length).to.equal(2);
+      expect(result.nextPageToken).to.equal("next-page-token");
+      restore();
+    });
+    
+    it("listTunedModels works with default parameters", async () => {
+      // Arrange
+      const genModel = new GenerativeModel("test-api-key", { model: "my-model" });
+      const listStub = stub(finetune, "listTunedModels").resolves(mockListResponse);
+      
+      // Act
+      const result = await genModel.listTunedModels();
+      
+      // Assert
+      expect(listStub).to.have.been.calledWith(apiKey, undefined, {});
+      expect(result).to.equal(mockListResponse);
+      restore();
+    });
+    
+    it("listTunedModels combines requestOptions correctly", async () => {
+      // Arrange
+      const genModel = new GenerativeModel(
+        "test-api-key", 
+        { model: "my-model" },
+        { apiVersion: "v2000" }
+      );
+      const listStub = stub(finetune, "listTunedModels").resolves(mockListResponse);
+      const requestOptions = { timeout: 5000 };
+      
+      // Act
+      await genModel.listTunedModels(undefined, requestOptions);
+      
+      // Assert
+      expect(listStub).to.have.been.calledWith(
+        apiKey, 
+        undefined, 
+        match((value) => {
+          return value.apiVersion === "v2000" && value.timeout === 5000;
+        })
+      );
+      restore();
+    });
+    
+    it("getTunedModel calls the finetune method with correct parameters", async () => {
+      // Arrange
+      const genModel = new GenerativeModel("test-api-key", { model: "my-model" });
+      const getStub = stub(finetune, "getTunedModel").resolves(mockModelResponse);
+      const modelName = "test-model";
+      const requestOptions = { timeout: 5000 };
+      
+      // Act
+      const result = await genModel.getTunedModel(modelName, requestOptions);
+      
+      // Assert
+      expect(getStub).to.have.been.calledWith(apiKey, modelName, requestOptions);
+      expect(result).to.equal(mockModelResponse);
+      expect(result.name).to.equal("tunedModels/test-model");
+      restore();
+    });
+    
+    it("createTunedModel calls the finetune method with correct parameters", async () => {
+      // Arrange
+      const genModel = new GenerativeModel("test-api-key", { model: "my-model" });
+      const createStub = stub(finetune, "createTunedModel").resolves(mockCreateResponse);
+      const requestOptions = { timeout: 15000 };
+      
+      const tunedModelParams: CreateTunedModelParams = {
+        display_name: "Test Model",
+        base_model: "models/gemini-1.5-flash-001",
+        tuning_task: {
+          hyperparameters: {
+            batch_size: 4,
+            learning_rate: 0.001,
+            epoch_count: 3
+          },
+          training_data: {
+            examples: {
+              examples: [
+                { text_input: "Hello", output: "Hi there" }
+              ]
+            }
+          }
+        }
+      };
+      
+      // Act
+      const result = await genModel.createTunedModel(tunedModelParams, requestOptions);
+      
+      // Assert
+      expect(createStub).to.have.been.calledWith(apiKey, tunedModelParams, requestOptions);
+      expect(result).to.equal(mockCreateResponse);
+      expect(result.name).to.equal("operations/test-operation");
+      restore();
+    });
+    
+    it("deleteTunedModel calls the finetune method with correct parameters", async () => {
+      // Arrange
+      const genModel = new GenerativeModel("test-api-key", { model: "my-model" });
+      const deleteStub = stub(finetune, "deleteTunedModel").resolves();
+      const modelName = "test-model";
+      const requestOptions = { timeout: 5000 };
+      
+      // Act
+      await genModel.deleteTunedModel(modelName, requestOptions);
+      
+      // Assert
+      expect(deleteStub).to.have.been.calledWith(apiKey, modelName, requestOptions);
+      restore();
+    });
+    
+    it("getTuningOperation calls the finetune method with correct parameters", async () => {
+      // Arrange
+      const genModel = new GenerativeModel("test-api-key", { model: "my-model" });
+      const getOpStub = stub(finetune, "getTuningOperation").resolves(mockOperationResponse);
+      const operationName = "test-operation";
+      const requestOptions = { timeout: 5000 };
+      
+      // Act
+      const result = await genModel.getTuningOperation(operationName, requestOptions);
+      
+      // Assert
+      expect(getOpStub).to.have.been.calledWith(apiKey, operationName, requestOptions);
+      expect(result).to.equal(mockOperationResponse);
+      expect(result.done).to.be.true;
+      restore();
+    });
   });
 });
