@@ -37,7 +37,7 @@ npm install @google/generative-ai
 1.  Initialize the model
 
 ```js
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
