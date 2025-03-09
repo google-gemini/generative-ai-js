@@ -26,6 +26,18 @@ import {
 import { GoogleSearchRetrievalTool } from "./search-grounding";
 
 /**
+ * Authentication options for GoogleGenerativeAI
+ * @public
+ */
+export interface AuthOptions {
+  /**
+   * Whether to use Application Default Credentials (ADC)
+   * If true, the SDK will attempt to use ADC for authentication
+   */
+  useAdc?: boolean;
+}
+
+/**
  * Base parameters for a number of methods.
  * @public
  */
@@ -207,6 +219,10 @@ export interface RequestOptions {
    * Custom HTTP request headers.
    */
   customHeaders?: Headers | Record<string, string>;
+  /**
+   * Authentication options for the request.
+   */
+  authOptions?: AuthOptions;
 }
 
 /**

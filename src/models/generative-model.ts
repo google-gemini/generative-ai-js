@@ -65,7 +65,7 @@ export class GenerativeModel {
   cachedContent: CachedContent;
 
   constructor(
-    public apiKey: string,
+    public apiKey: string | undefined,
     modelParams: ModelParams,
     private _requestOptions: RequestOptions = {},
   ) {
