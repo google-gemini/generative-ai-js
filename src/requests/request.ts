@@ -37,6 +37,7 @@ const PACKAGE_LOG_HEADER = "genai-js";
 export enum Task {
   GENERATE_CONTENT = "generateContent",
   STREAM_GENERATE_CONTENT = "streamGenerateContent",
+  GENERATE_ANSWER = "generateAnswer",
   COUNT_TOKENS = "countTokens",
   EMBED_CONTENT = "embedContent",
   BATCH_EMBED_CONTENTS = "batchEmbedContents",

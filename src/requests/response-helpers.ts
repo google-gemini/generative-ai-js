@@ -16,9 +16,11 @@
  */
 
 import {
+  AttributedPassage,
   EnhancedGenerateContentResponse,
   FinishReason,
   FunctionCall,
+  GenerateAnswerResponse,
   GenerateContentCandidate,
   GenerateContentResponse,
 } from "../../types";
@@ -206,3 +208,25 @@ export function formatBlockErrorMessage(
   }
   return message;
 }
+
+export function processAqaResponse(response: GenerateAnswerResponse): GenerateAnswerResponse {
+  if (!response.answer) {
+    throw new GoogleGenerativeAIResponseError<typeof response>(
+      "Invalid AQA response format - missing 'answer' field",
+      response
+    );
+  }
+  
+  return {
+    answer: response.answer,
+    attributedPassages: (response.attributedPassages || []).map((p: AttributedPassage) => ({
+      text: p.text,
+      source: {
+        title: p.source?.title || "Unknown",
+        url: p.source?.url || "",
+        content: p.source?.content || ""
+      }
+    })),
+    confidenceScore: response.confidenceScore ?? 0
+  };
+} 
