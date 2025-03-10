@@ -525,7 +525,7 @@ export class GenerativeModel {
     countTokens(request: CountTokensRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<CountTokensResponse>;
     embedContent(request: EmbedContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<EmbedContentResponse>;
     generateContent(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentResult>;
-    generateContentStream(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentStreamResult>;
+    generateContentStream(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions, callbacks?: StreamCallbacks): Promise<GenerateContentStreamResult>;
     // (undocumented)
     generationConfig: GenerationConfig;
     // (undocumented)
@@ -839,6 +839,16 @@ export interface StartChatParams extends BaseParams {
     toolConfig?: ToolConfig;
     // (undocumented)
     tools?: Tool[];
+}
+
+// @public (undocumented)
+export interface StreamCallbacks {
+    // (undocumented)
+    onData?: (chunk: string) => void;
+    // (undocumented)
+    onEnd?: (response: string) => void;
+    // (undocumented)
+    onError?: (error: Error) => void;
 }
 
 // @public
