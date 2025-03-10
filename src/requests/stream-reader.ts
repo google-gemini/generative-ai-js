@@ -62,8 +62,7 @@ async function getResponsePromise(
     while (true) {
       const { done, value } = await reader.read();
       if (done) {
-        const finalText = allResponses.reduce((acc, curr) => acc + addHelpers(curr).text(), "");
-        callbacks?.onEnd?.(finalText);
+        callbacks?.onEnd?.(allResponses.reduce((acc, curr) => acc + addHelpers(curr).text(), ""));
         return addHelpers(aggregateResponses(allResponses));
       }
       allResponses.push(value);
