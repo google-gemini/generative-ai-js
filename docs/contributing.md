@@ -37,7 +37,7 @@ Steps to build locally:
 1. Run `npm run test` to run unit tests.
 1. Run `npm run docs` to generate any changes to reference docs (destination dir is docs/reference).
 1. Run `npm run format` to fix formatting and add license headers as needed.
-1. Run `npx @changeset/cli` to generate the changeset summary.
+1. Run `npx @changesets/cli` to generate the changeset summary.
 
 ### Code Reviews
 
