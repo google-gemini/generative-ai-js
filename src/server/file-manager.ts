@@ -30,6 +30,8 @@ import {
   GoogleGenerativeAIError,
   GoogleGenerativeAIRequestInputError,
 } from "../errors";
+import got from "got";
+import { fileTypeFromBuffer } from "file-type";
 
 // Internal type, metadata sent in the upload
 export interface UploadMetadata {
@@ -45,7 +47,7 @@ export class GoogleAIFileManager {
   constructor(
     public apiKey: string,
     private _requestOptions: RequestOptions = {},
-  ) {}
+  ) { }
 
   /**
    * Upload a file.
@@ -91,6 +93,32 @@ export class GoogleAIFileManager {
 
     const response = await makeServerRequest(url, uploadHeaders, blob);
     return response.json();
+  }
+
+  /**
+   * Upload a remote file from a URL.
+   */
+  async uploadRemoteFile(
+    fileUrl: string,
+    fileName: string
+  ): Promise<UploadFileResponse> {
+    try {
+      const response = await got(fileUrl, { responseType: "buffer" });
+
+      const fileType = await fileTypeFromBuffer(response.body);
+
+      const fileMetadata = {
+        mimeType: fileType?.mime,
+        displayName: fileName,
+      };
+      const data = await this.uploadFile(response.body, fileMetadata);
+
+      return data;
+
+    } catch (error) {
+      console.error("Error uploading remote file:", error);
+      throw error;
+    }
   }
 
   /**
@@ -175,7 +203,7 @@ function parseFileId(fileId: string): string {
   if (!fileId) {
     throw new GoogleGenerativeAIError(
       `Invalid fileId ${fileId}. ` +
-        `Must be in the format "files/filename" or "filename"`,
+      `Must be in the format "files/filename" or "filename"`,
     );
   }
 
