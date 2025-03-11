@@ -47,7 +47,7 @@ export class GoogleAIFileManager {
   constructor(
     public apiKey: string,
     private _requestOptions: RequestOptions = {},
-  ) { }
+  ) {}
 
   /**
    * Upload a file.
@@ -100,7 +100,7 @@ export class GoogleAIFileManager {
    */
   async uploadRemoteFile(
     fileUrl: string,
-    fileName: string
+    fileName: string,
   ): Promise<UploadFileResponse> {
     try {
       const response = await got(fileUrl, { responseType: "buffer" });
@@ -114,7 +114,6 @@ export class GoogleAIFileManager {
       const data = await this.uploadFile(response.body, fileMetadata);
 
       return data;
-
     } catch (error) {
       console.error("Error uploading remote file:", error);
       throw error;
@@ -203,7 +202,7 @@ function parseFileId(fileId: string): string {
   if (!fileId) {
     throw new GoogleGenerativeAIError(
       `Invalid fileId ${fileId}. ` +
-      `Must be in the format "files/filename" or "filename"`,
+        `Must be in the format "files/filename" or "filename"`,
     );
   }
 

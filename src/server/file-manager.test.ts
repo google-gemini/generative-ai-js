@@ -217,9 +217,10 @@ describe("GoogleAIFileManager", () => {
       json: fakeUploadJson,
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey");
-    const fileUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJxo2NFiYcR35GzCk5T3nxA7rGlSsXvIfJwg&s";
+    const fileUrl =
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJxo2NFiYcR35GzCk5T3nxA7rGlSsXvIfJwg&s";
     const fileName = "pet";
-    const result = await fileManager.uploadRemoteFile(fileUrl,fileName );
+    const result = await fileManager.uploadRemoteFile(fileUrl, fileName);
     expect(result.file.uri).to.equal(FAKE_URI);
     expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.UPLOAD);
     expect(makeRequestStub.args[0][0].toString()).to.include("/upload/");
@@ -238,9 +239,10 @@ describe("GoogleAIFileManager", () => {
       json: fakeUploadJson,
     } as Response);
     const fileManager = new GoogleAIFileManager("apiKey");
-    const fileUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
+    const fileUrl =
+      "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
     const fileName = "my-docs";
-    const result = await fileManager.uploadRemoteFile(fileUrl,fileName );
+    const result = await fileManager.uploadRemoteFile(fileUrl, fileName);
     expect(result.file.uri).to.equal(FAKE_URI);
     expect(makeRequestStub.args[0][0].task).to.equal(RpcTask.UPLOAD);
     expect(makeRequestStub.args[0][0].toString()).to.include("/upload/");
