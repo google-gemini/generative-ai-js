@@ -14,8 +14,63 @@ export interface ListParams
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [pageSize?](./generative-ai.listparams.pagesize.md) |  | number | _(Optional)_ |
-|  [pageToken?](./generative-ai.listparams.pagetoken.md) |  | string | _(Optional)_ |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[pageSize?](./generative-ai.listparams.pagesize.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[pageToken?](./generative-ai.listparams.pagetoken.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

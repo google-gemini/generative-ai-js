@@ -14,8 +14,63 @@ export declare interface GroundingChunkWeb
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [title?](./generative-ai.groundingchunkweb.title.md) |  | string | _(Optional)_ Title of the chunk. |
-|  [uri?](./generative-ai.groundingchunkweb.uri.md) |  | string | _(Optional)_ URI reference of the chunk. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[title?](./generative-ai.groundingchunkweb.title.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ Title of the chunk.
+
+
+</td></tr>
+<tr><td>
+
+[uri?](./generative-ai.groundingchunkweb.uri.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ URI reference of the chunk.
+
+
+</td></tr>
+</tbody></table>
