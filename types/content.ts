@@ -37,7 +37,8 @@ export type Part =
   | FunctionResponsePart
   | FileDataPart
   | ExecutableCodePart
-  | CodeExecutionResultPart;
+  | CodeExecutionResultPart
+  | EncryptedTextPart;
 
 /**
  * Content part interface if the part represents a text string.
@@ -51,6 +52,23 @@ export interface TextPart {
   fileData?: never;
   executableCode?: never;
   codeExecutionResult?: never;
+  encryptedText?: never;
+}
+
+/**
+ * Content part interface if the part represents an encrypted text string.
+ * This allows for protecting intellectual property in prompts.
+ * @public
+ */
+export interface EncryptedTextPart {
+  text?: never;
+  inlineData?: never;
+  functionCall?: never;
+  functionResponse?: never;
+  fileData?: never;
+  executableCode?: never;
+  codeExecutionResult?: never;
+  encryptedText: string;
 }
 
 /**
@@ -65,6 +83,7 @@ export interface InlineDataPart {
   fileData?: never;
   executableCode?: never;
   codeExecutionResult?: never;
+  encryptedText?: never;
 }
 
 /**
@@ -79,6 +98,7 @@ export interface FunctionCallPart {
   fileData?: never;
   executableCode?: never;
   codeExecutionResult?: never;
+  encryptedText?: never;
 }
 
 /**
@@ -93,6 +113,7 @@ export interface FunctionResponsePart {
   fileData?: never;
   executableCode?: never;
   codeExecutionResult?: never;
+  encryptedText?: never;
 }
 
 /**
@@ -107,6 +128,7 @@ export interface FileDataPart {
   fileData: FileData;
   executableCode?: never;
   codeExecutionResult?: never;
+  encryptedText?: never;
 }
 
 /**
@@ -121,6 +143,7 @@ export interface ExecutableCodePart {
   fileData?: never;
   executableCode: ExecutableCode;
   codeExecutionResult?: never;
+  encryptedText?: never;
 }
 
 /**
@@ -135,6 +158,7 @@ export interface CodeExecutionResultPart {
   fileData?: never;
   executableCode?: never;
   codeExecutionResult: CodeExecutionResult;
+  encryptedText?: never;
 }
 
 /**
