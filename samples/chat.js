@@ -66,16 +66,36 @@ async function chatStreaming() {
       },
     ],
   });
-  let result = await chat.sendMessageStream("I have 2 dogs in my house.");
-  for await (const chunk of result.stream) {
-    const chunkText = chunk.text();
-    process.stdout.write(chunkText);
-  }
-  result = await chat.sendMessageStream("How many paws are in my house?");
-  for await (const chunk of result.stream) {
-    const chunkText = chunk.text();
-    process.stdout.write(chunkText);
-  }
+  let result = await chat.sendMessageStream(
+    "I have 2 dogs in my house.",
+    {
+      onData: (chunk) => {
+        const chunkText = chunk.text();
+        process.stdout.write(chunkText);
+      },
+      onEnd: (response) => {
+        console.log("\nStream ended. Final response:", response.text());
+      },
+      onError: (error) => {
+        console.error("Stream error:", error);
+      },
+    }
+  );
+  result = await chat.sendMessageStream(
+    "How many paws are in my house?",
+    {
+      onData: (chunk) => {
+        const chunkText = chunk.text();
+        process.stdout.write(chunkText);
+      },
+      onEnd: (response) => {
+        console.log("\nStream ended. Final response:", response.text());
+      },
+      onError: (error) => {
+        console.error("Stream error:", error);
+      },
+    }
+  );
   // [END chat_streaming]
 }
 
