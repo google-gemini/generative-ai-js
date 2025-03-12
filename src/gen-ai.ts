@@ -26,11 +26,43 @@ export { ChatSession } from "./methods/chat-session";
 export { GenerativeModel };
 
 /**
+ * Authentication options for GoogleGenerativeAI
+ * @public
+ */
+export interface AuthOptions {
+  /**
+   * Whether to use Application Default Credentials (ADC)
+   * If true, the SDK will attempt to use ADC for authentication
+   */
+  useAdc?: boolean;
+}
+
+/**
  * Top-level class for this SDK
  * @public
  */
 export class GoogleGenerativeAI {
-  constructor(public apiKey: string) {}
+  private apiKey?: string;
+  private useAdc: boolean;
+
+  /**
+   * Creates a new GoogleGenerativeAI instance
+   * @param apiKey - API key for authentication. If not provided and useAdc is true,
+   *                 Application Default Credentials will be used.
+   * @param authOptions - Optional authentication options
+   */
+  constructor(apiKey?: string, authOptions?: AuthOptions) {
+    this.apiKey = apiKey;
+    this.useAdc = authOptions?.useAdc ?? !apiKey;
+
+    // Validate that we have at least one authentication method
+    if (!this.apiKey && !this.useAdc) {
+      throw new GoogleGenerativeAIError(
+        "Must provide an API key or enable Application Default Credentials (ADC). " +
+        "Example: new GoogleGenerativeAI('my-api-key') or new GoogleGenerativeAI(undefined, { useAdc: true })"
+      );
+    }
+  }
 
   /**
    * Gets a {@link GenerativeModel} instance for the provided model name.
@@ -45,6 +77,16 @@ export class GoogleGenerativeAI {
           `Example: genai.getGenerativeModel({ model: 'my-model-name' })`,
       );
     }
+    
+    if (this.useAdc && !this.apiKey) {
+      const authOptions = { useAdc: true };
+      return new GenerativeModel(
+        undefined, 
+        modelParams, 
+        { ...requestOptions, authOptions }
+      );
+    }
+    
     return new GenerativeModel(this.apiKey, modelParams, requestOptions);
   }
 
@@ -106,6 +148,16 @@ export class GoogleGenerativeAI {
       systemInstruction: cachedContent.systemInstruction,
       cachedContent,
     };
+    
+    if (this.useAdc && !this.apiKey) {
+      const authOptions = { useAdc: true };
+      return new GenerativeModel(
+        undefined, 
+        modelParamsFromCache, 
+        { ...requestOptions, authOptions }
+      );
+    }
+    
     return new GenerativeModel(
       this.apiKey,
       modelParamsFromCache,
