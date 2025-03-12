@@ -1,0 +1,8 @@
+{
+  "predictions": [
+    {
+      "mimeType": "image/png",
+      "bytesBase64Encoded": "test-content"
+    }
+  ]
+}
