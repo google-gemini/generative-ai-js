@@ -62,7 +62,7 @@ export interface GenerateContentRequest extends BaseParams {
 }
 
 /**
- * Request sent to `generateContent` endpoint.
+ * Internal version of the request that includes a model name.
  * @internal
  */
 export interface _GenerateContentRequestInternal
@@ -169,7 +169,8 @@ export interface _CountTokensRequestInternal {
 export interface EmbedContentRequest {
   content: Content;
   taskType?: TaskType;
-  title?: string;
+  title?: string;  
+  dimensions?: number;
 }
 
 /**
@@ -223,6 +224,17 @@ export interface SingleRequestOptions extends RequestOptions {
    * be charged usage for any applicable operations.
    */
   signal?: AbortSignal;
+}
+
+/**
+ * Callbacks for handling streaming responses without managing Node.js streams directly.
+ * @public
+ */
+export interface StreamCallbacks {
+  /** Called for each chunk of text as it arrives */
+  onData?: (chunk: string) => void;
+  /** Called with the full text when streaming is complete */
+  onDone?: (fullText: string) => void;
 }
 
 /**

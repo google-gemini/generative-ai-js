@@ -168,12 +168,35 @@ export function formatGenerateContentInput(
   return formattedRequest;
 }
 
+/**
+ * 
+ * @param params 
+ * @returns 
+ */
 export function formatEmbedContentInput(
   params: EmbedContentRequest | string | Array<string | Part>,
 ): EmbedContentRequest {
-  if (typeof params === "string" || Array.isArray(params)) {
-    const content = formatNewContent(params);
-    return { content };
+  if (typeof params === "string") {
+    return {
+      content: formatNewContent(params),
+    };
+  } else if (Array.isArray(params)) {
+    return {
+      content: formatNewContent(params),
+    };
+  } else {
+    
+    const result = { ...params };
+    
+    if (result.dimensions !== undefined) {
+      const validDimensions = [128, 256, 384, 512, 768];
+      if (!validDimensions.includes(result.dimensions)) {
+        throw new GoogleGenerativeAIRequestInputError(
+          `Invalid dimensions value: ${result.dimensions}. Valid values are: 128, 256, 384, 512, and 768.`
+        );
+      }
+    }
+    
+    return result;
   }
-  return params;
 }
