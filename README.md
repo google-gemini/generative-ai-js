@@ -34,17 +34,17 @@ for complete code.
 npm install @google/generative-ai
 ```
 
-1.  Initialize the model
+2.  Initialize the model
 
 ```js
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 ```
 
-1.  Run a prompt
+3.  Run a prompt
 
 ```js
 const prompt = "Does this look store-bought or homemade?";
