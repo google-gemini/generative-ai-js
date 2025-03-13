@@ -15,9 +15,78 @@ export interface EnumStringSchema extends BaseSchema
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [enum](./generative-ai.enumstringschema.enum.md) |  | string\[\] | Possible values for this enum |
-|  [format](./generative-ai.enumstringschema.format.md) |  | "enum" |  |
-|  [type](./generative-ai.enumstringschema.type.md) |  | typeof [SchemaType.STRING](./generative-ai.schematype.md) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[enum](./generative-ai.enumstringschema.enum.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+Possible values for this enum
+
+
+</td></tr>
+<tr><td>
+
+[format](./generative-ai.enumstringschema.format.md)
+
+
+</td><td>
+
+
+</td><td>
+
+"enum"
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[type](./generative-ai.enumstringschema.type.md)
+
+
+</td><td>
+
+
+</td><td>
+
+typeof [SchemaType.STRING](./generative-ai.schematype.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

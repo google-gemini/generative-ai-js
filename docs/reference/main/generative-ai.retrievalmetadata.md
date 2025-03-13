@@ -14,7 +14,44 @@ export declare interface RetrievalMetadata
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [googleSearchDynamicRetrievalScore?](./generative-ai.retrievalmetadata.googlesearchdynamicretrievalscore.md) |  | number | _(Optional)_ Score indicating how likely information from google search could help answer the prompt. The score is in the range \[0, 1\], where 0 is the least likely and 1 is the most likely. This score is only populated when google search grounding and dynamic retrieval is enabled. It will becompared to the threshold to determine whether to trigger google search. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[googleSearchDynamicRetrievalScore?](./generative-ai.retrievalmetadata.googlesearchdynamicretrievalscore.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ Score indicating how likely information from google search could help answer the prompt. The score is in the range \[0, 1\], where 0 is the least likely and 1 is the most likely. This score is only populated when google search grounding and dynamic retrieval is enabled. It will becompared to the threshold to determine whether to trigger google search.
+
+
+</td></tr>
+</tbody></table>

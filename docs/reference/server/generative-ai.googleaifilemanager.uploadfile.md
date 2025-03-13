@@ -14,11 +14,51 @@ uploadFile(fileData: string | Buffer, fileMetadata: FileMetadata): Promise<Uploa
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  fileData | string \| Buffer |  |
-|  fileMetadata | [FileMetadata](./generative-ai.filemetadata.md) |  |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+fileData
+
+
+</td><td>
+
+string \| Buffer
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+fileMetadata
+
+
+</td><td>
+
+[FileMetadata](./generative-ai.filemetadata.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 Promise&lt;[UploadFileResponse](./generative-ai.uploadfileresponse.md)<!-- -->&gt;

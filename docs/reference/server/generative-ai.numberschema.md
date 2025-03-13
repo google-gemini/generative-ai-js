@@ -15,8 +15,61 @@ export interface NumberSchema extends BaseSchema
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [format?](./generative-ai.numberschema.format.md) |  | "float" \| "double" | _(Optional)_ Optional. The format of the number. |
-|  [type](./generative-ai.numberschema.type.md) |  | typeof [SchemaType.NUMBER](./generative-ai.schematype.md) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[format?](./generative-ai.numberschema.format.md)
+
+
+</td><td>
+
+
+</td><td>
+
+"float" \| "double"
+
+
+</td><td>
+
+_(Optional)_ Optional. The format of the number.
+
+
+</td></tr>
+<tr><td>
+
+[type](./generative-ai.numberschema.type.md)
+
+
+</td><td>
+
+
+</td><td>
+
+typeof [SchemaType.NUMBER](./generative-ai.schematype.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

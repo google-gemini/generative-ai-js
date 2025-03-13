@@ -14,8 +14,50 @@ constructor(message: string, response?: T);
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  message | string |  |
-|  response | T | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+message
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+response
+
+
+</td><td>
+
+T
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
