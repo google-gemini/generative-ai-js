@@ -587,6 +587,15 @@ export interface GoogleSearchRetrieval {
 }
 
 // @public
+export class GoogleSearchRetrievalService {
+    constructor();
+    fetchData(tool: GoogleSearchRetrievalTool): Promise<{
+        data: unknown;
+        status: number;
+    }>;
+}
+
+// @public
 export interface GoogleSearchRetrievalTool {
     googleSearchRetrieval?: GoogleSearchRetrieval;
 }
