@@ -29,6 +29,7 @@ import {
   GoogleGenerativeAIError,
   GoogleGenerativeAIRequestInputError,
 } from "../errors";
+import { generateImages } from "../methods/generate-image";
 
 export function formatSystemInstruction(
   input?: string | Part | Content,
