@@ -32,6 +32,7 @@ import {
   GenerateContentResult,
   GenerateContentStreamResult,
   GenerationConfig,
+  ImageModelParams,
   ModelParams,
   Part,
   RequestOptions,
@@ -85,7 +86,8 @@ export class GenerativeModel {
     );
     this.cachedContent = modelParams.cachedContent;
   }
-
+  
+ 
   /**
    * Makes a single non-streaming call to the model
    * and returns an object containing a single {@link GenerateContentResponse}.
