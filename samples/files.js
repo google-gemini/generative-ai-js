@@ -210,7 +210,7 @@ async function filesCreateVideo() {
   // [END files_create_video]
 }
 
-async function filesCreatePDF() {
+async function filesCreatePdf() {
   // [START files_create_pdf]
   // Make sure to include these imports:
   // import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -334,7 +334,7 @@ async function runAll() {
   await filesCreateAudio();
   await filesCreateText();
   await filesCreateVideo();
-  await filesCreatePDF();
+  await filesCreatePdf();
   await filesList();
   await filesGet();
   await filesDelete();
