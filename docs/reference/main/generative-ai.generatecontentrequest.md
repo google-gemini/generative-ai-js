@@ -15,11 +15,118 @@ export interface GenerateContentRequest extends BaseParams
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [cachedContent?](./generative-ai.generatecontentrequest.cachedcontent.md) |  | string | _(Optional)_ This is the name of a <code>CachedContent</code> and not the cache object itself. |
-|  [contents](./generative-ai.generatecontentrequest.contents.md) |  | [Content](./generative-ai.content.md)<!-- -->\[\] |  |
-|  [systemInstruction?](./generative-ai.generatecontentrequest.systeminstruction.md) |  | string \| [Part](./generative-ai.part.md) \| [Content](./generative-ai.content.md) | _(Optional)_ |
-|  [toolConfig?](./generative-ai.generatecontentrequest.toolconfig.md) |  | [ToolConfig](./generative-ai.toolconfig.md) | _(Optional)_ |
-|  [tools?](./generative-ai.generatecontentrequest.tools.md) |  | [Tool](./generative-ai.tool.md)<!-- -->\[\] | _(Optional)_ |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[cachedContent?](./generative-ai.generatecontentrequest.cachedcontent.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ This is the name of a `CachedContent` and not the cache object itself.
+
+
+</td></tr>
+<tr><td>
+
+[contents](./generative-ai.generatecontentrequest.contents.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Content](./generative-ai.content.md)<!-- -->\[\]
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[systemInstruction?](./generative-ai.generatecontentrequest.systeminstruction.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| [Part](./generative-ai.part.md) \| [Content](./generative-ai.content.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[toolConfig?](./generative-ai.generatecontentrequest.toolconfig.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ToolConfig](./generative-ai.toolconfig.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[tools?](./generative-ai.generatecontentrequest.tools.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Tool](./generative-ai.tool.md)<!-- -->\[\]
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

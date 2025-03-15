@@ -14,11 +14,53 @@ getGenerativeModel(modelParams: ModelParams, requestOptions?: RequestOptions): G
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  modelParams | [ModelParams](./generative-ai.modelparams.md) |  |
-|  requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+modelParams
+
+
+</td><td>
+
+[ModelParams](./generative-ai.modelparams.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+requestOptions
+
+
+</td><td>
+
+[RequestOptions](./generative-ai.requestoptions.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 [GenerativeModel](./generative-ai.generativemodel.md)

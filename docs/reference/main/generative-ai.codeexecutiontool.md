@@ -14,7 +14,44 @@ export interface CodeExecutionTool
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [codeExecution](./generative-ai.codeexecutiontool.codeexecution.md) |  | {} | Provide an empty object to enable code execution. This field may have subfields added in the future. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[codeExecution](./generative-ai.codeexecutiontool.codeexecution.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{}
+
+
+</td><td>
+
+Provide an empty object to enable code execution. This field may have subfields added in the future.
+
+
+</td></tr>
+</tbody></table>

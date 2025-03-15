@@ -14,7 +14,42 @@ export interface UploadFileResponse
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [file](./generative-ai.uploadfileresponse.file.md) |  | [FileMetadataResponse](./generative-ai.filemetadataresponse.md) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[file](./generative-ai.uploadfileresponse.file.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[FileMetadataResponse](./generative-ai.filemetadataresponse.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

@@ -15,9 +15,80 @@ export interface SimpleStringSchema extends BaseSchema
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [enum?](./generative-ai.simplestringschema.enum.md) |  | never | _(Optional)_ |
-|  [format?](./generative-ai.simplestringschema.format.md) |  | "date-time" \| undefined | _(Optional)_ |
-|  [type](./generative-ai.simplestringschema.type.md) |  | typeof [SchemaType.STRING](./generative-ai.schematype.md) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[enum?](./generative-ai.simplestringschema.enum.md)
+
+
+</td><td>
+
+
+</td><td>
+
+never
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[format?](./generative-ai.simplestringschema.format.md)
+
+
+</td><td>
+
+
+</td><td>
+
+"date-time" \| undefined
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[type](./generative-ai.simplestringschema.type.md)
+
+
+</td><td>
+
+
+</td><td>
+
+typeof [SchemaType.STRING](./generative-ai.schematype.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

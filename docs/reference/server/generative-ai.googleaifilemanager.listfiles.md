@@ -16,11 +16,55 @@ listFiles(listParams?: ListParams, requestOptions?: SingleRequestOptions): Promi
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  listParams | [ListParams](./generative-ai.listparams.md) | _(Optional)_ |
-|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+listParams
+
+
+</td><td>
+
+[ListParams](./generative-ai.listparams.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+requestOptions
+
+
+</td><td>
+
+[SingleRequestOptions](./generative-ai.singlerequestoptions.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 Promise&lt;[ListFilesResponse](./generative-ai.listfilesresponse.md)<!-- -->&gt;

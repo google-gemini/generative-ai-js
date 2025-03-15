@@ -16,6 +16,7 @@
  */
 
 import {
+  CallbacksRequestOptions,
   GenerateContentRequest,
   GenerateContentResponse,
   GenerateContentResult,
@@ -31,6 +32,7 @@ export async function generateContentStream(
   model: string,
   params: GenerateContentRequest,
   requestOptions: SingleRequestOptions,
+  callbacks: CallbacksRequestOptions,
 ): Promise<GenerateContentStreamResult> {
   const response = await makeModelRequest(
     model,
@@ -40,7 +42,7 @@ export async function generateContentStream(
     JSON.stringify(params),
     requestOptions,
   );
-  return processStream(response);
+  return processStream(response, callbacks);
 }
 
 export async function generateContent(

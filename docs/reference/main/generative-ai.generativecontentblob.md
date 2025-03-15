@@ -14,8 +14,61 @@ export interface GenerativeContentBlob
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [data](./generative-ai.generativecontentblob.data.md) |  | string | Image as a base64 string. |
-|  [mimeType](./generative-ai.generativecontentblob.mimetype.md) |  | string |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[data](./generative-ai.generativecontentblob.data.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+Image as a base64 string.
+
+
+</td></tr>
+<tr><td>
+
+[mimeType](./generative-ai.generativecontentblob.mimetype.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
