@@ -87,6 +87,18 @@ export interface CachedContentBase {
     tools?: Tool[];
 }
 
+// Warning: (ae-internal-missing-underscore) The name "CallbacksRequestOptions" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal
+export interface CallbacksRequestOptions {
+    // (undocumented)
+    onData?: (chunks: string) => void;
+    // (undocumented)
+    onEnd?: (response: string) => void;
+    // (undocumented)
+    onError?: (error: Error) => void;
+}
+
 // @public
 export class ChatSession {
     constructor(apiKey: string, model: string, params?: StartChatParams, _requestOptions?: RequestOptions);
@@ -96,7 +108,8 @@ export class ChatSession {
     // (undocumented)
     params?: StartChatParams;
     sendMessage(request: string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentResult>;
-    sendMessageStream(request: string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentStreamResult>;
+    // Warning: (ae-incompatible-release-tags) The symbol "sendMessageStream" is marked as @public, but its signature references "CallbacksRequestOptions" which is marked as @internal
+    sendMessageStream(request: string | Array<string | Part>, requestOptions?: SingleRequestOptions, callbacks?: CallbacksRequestOptions): Promise<GenerateContentStreamResult>;
 }
 
 // @public
@@ -525,7 +538,8 @@ export class GenerativeModel {
     countTokens(request: CountTokensRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<CountTokensResponse>;
     embedContent(request: EmbedContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<EmbedContentResponse>;
     generateContent(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentResult>;
-    generateContentStream(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentStreamResult>;
+    // Warning: (ae-incompatible-release-tags) The symbol "generateContentStream" is marked as @public, but its signature references "CallbacksRequestOptions" which is marked as @internal
+    generateContentStream(request: GenerateContentRequest | string | Array<string | Part>, requestOptions: SingleRequestOptions, callbacks: CallbacksRequestOptions): Promise<GenerateContentStreamResult>;
     // (undocumented)
     generationConfig: GenerationConfig;
     // (undocumented)

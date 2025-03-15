@@ -16,6 +16,7 @@
  */
 
 import {
+  CallbacksRequestOptions,
   Content,
   GenerateContentRequest,
   GenerateContentResult,
@@ -143,6 +144,7 @@ export class ChatSession {
   async sendMessageStream(
     request: string | Array<string | Part>,
     requestOptions: SingleRequestOptions = {},
+    callbacks?: CallbacksRequestOptions,
   ): Promise<GenerateContentStreamResult> {
     await this._sendPromise;
     const newContent = formatNewContent(request);
@@ -159,11 +161,13 @@ export class ChatSession {
       ...this._requestOptions,
       ...requestOptions,
     };
+
     const streamPromise = generateContentStream(
       this._apiKey,
       this.model,
       generateContentRequest,
       chatSessionRequestOptions,
+      callbacks,
     );
 
     // Add onto the chain.

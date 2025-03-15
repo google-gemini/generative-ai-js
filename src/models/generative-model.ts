@@ -23,6 +23,7 @@ import {
   BatchEmbedContentsRequest,
   BatchEmbedContentsResponse,
   CachedContent,
+  CallbacksRequestOptions,
   Content,
   CountTokensRequest,
   CountTokensResponse,
@@ -132,6 +133,7 @@ export class GenerativeModel {
   async generateContentStream(
     request: GenerateContentRequest | string | Array<string | Part>,
     requestOptions: SingleRequestOptions = {},
+    callbacks: CallbacksRequestOptions,
   ): Promise<GenerateContentStreamResult> {
     const formattedParams = formatGenerateContentInput(request);
     const generativeModelRequestOptions: SingleRequestOptions = {
@@ -151,6 +153,7 @@ export class GenerativeModel {
         ...formattedParams,
       },
       generativeModelRequestOptions,
+      callbacks,
     );
   }
 
