@@ -14,17 +14,174 @@ export declare enum FinishReason
 
 ## Enumeration Members
 
-|  Member | Value | Description |
-|  --- | --- | --- |
-|  BLOCKLIST | <code>&quot;BLOCKLIST&quot;</code> |  |
-|  FINISH\_REASON\_UNSPECIFIED | <code>&quot;FINISH_REASON_UNSPECIFIED&quot;</code> |  |
-|  LANGUAGE | <code>&quot;LANGUAGE&quot;</code> |  |
-|  MALFORMED\_FUNCTION\_CALL | <code>&quot;MALFORMED_FUNCTION_CALL&quot;</code> |  |
-|  MAX\_TOKENS | <code>&quot;MAX_TOKENS&quot;</code> |  |
-|  OTHER | <code>&quot;OTHER&quot;</code> |  |
-|  PROHIBITED\_CONTENT | <code>&quot;PROHIBITED_CONTENT&quot;</code> |  |
-|  RECITATION | <code>&quot;RECITATION&quot;</code> |  |
-|  SAFETY | <code>&quot;SAFETY&quot;</code> |  |
-|  SPII | <code>&quot;SPII&quot;</code> |  |
-|  STOP | <code>&quot;STOP&quot;</code> |  |
+<table><thead><tr><th>
 
+Member
+
+
+</th><th>
+
+Value
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+BLOCKLIST
+
+
+</td><td>
+
+`"BLOCKLIST"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+FINISH\_REASON\_UNSPECIFIED
+
+
+</td><td>
+
+`"FINISH_REASON_UNSPECIFIED"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+LANGUAGE
+
+
+</td><td>
+
+`"LANGUAGE"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+MALFORMED\_FUNCTION\_CALL
+
+
+</td><td>
+
+`"MALFORMED_FUNCTION_CALL"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+MAX\_TOKENS
+
+
+</td><td>
+
+`"MAX_TOKENS"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+OTHER
+
+
+</td><td>
+
+`"OTHER"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+PROHIBITED\_CONTENT
+
+
+</td><td>
+
+`"PROHIBITED_CONTENT"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+RECITATION
+
+
+</td><td>
+
+`"RECITATION"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SAFETY
+
+
+</td><td>
+
+`"SAFETY"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+SPII
+
+
+</td><td>
+
+`"SPII"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+STOP
+
+
+</td><td>
+
+`"STOP"`
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

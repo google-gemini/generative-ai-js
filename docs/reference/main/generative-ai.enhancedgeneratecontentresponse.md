@@ -15,9 +15,82 @@ export interface EnhancedGenerateContentResponse extends GenerateContentResponse
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [functionCall](./generative-ai.enhancedgeneratecontentresponse.functioncall.md) |  | () =&gt; [FunctionCall](./generative-ai.functioncall.md) \| undefined | Deprecated: use <code>functionCalls()</code> instead. |
-|  [functionCalls](./generative-ai.enhancedgeneratecontentresponse.functioncalls.md) |  | () =&gt; [FunctionCall](./generative-ai.functioncall.md)<!-- -->\[\] \| undefined | Returns function calls found in any <code>Part</code>s of the first candidate of the response, if available. Throws if the prompt or candidate was blocked. |
-|  [text](./generative-ai.enhancedgeneratecontentresponse.text.md) |  | () =&gt; string | Returns the text string assembled from all <code>Part</code>s of the first candidate of the response, if available. Throws if the prompt or candidate was blocked. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[functionCall](./generative-ai.enhancedgeneratecontentresponse.functioncall.md)
+
+
+</td><td>
+
+
+</td><td>
+
+() =&gt; [FunctionCall](./generative-ai.functioncall.md) \| undefined
+
+
+</td><td>
+
+Deprecated: use `functionCalls()` instead.
+
+
+</td></tr>
+<tr><td>
+
+[functionCalls](./generative-ai.enhancedgeneratecontentresponse.functioncalls.md)
+
+
+</td><td>
+
+
+</td><td>
+
+() =&gt; [FunctionCall](./generative-ai.functioncall.md)<!-- -->\[\] \| undefined
+
+
+</td><td>
+
+Returns function calls found in any `Part`<!-- -->s of the first candidate of the response, if available. Throws if the prompt or candidate was blocked.
+
+
+</td></tr>
+<tr><td>
+
+[text](./generative-ai.enhancedgeneratecontentresponse.text.md)
+
+
+</td><td>
+
+
+</td><td>
+
+() =&gt; string
+
+
+</td><td>
+
+Returns the text string assembled from all `Part`<!-- -->s of the first candidate of the response, if available. Throws if the prompt or candidate was blocked.
+
+
+</td></tr>
+</tbody></table>

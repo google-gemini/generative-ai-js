@@ -14,8 +14,61 @@ export interface CachedContentUpdateParams
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [cachedContent](./generative-ai.cachedcontentupdateparams.cachedcontent.md) |  | [CachedContentUpdateInputFields](./generative-ai.cachedcontentupdateinputfields.md) |  |
-|  [updateMask?](./generative-ai.cachedcontentupdateparams.updatemask.md) |  | string\[\] | _(Optional)_ protobuf FieldMask. If not specified, updates all provided fields. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[cachedContent](./generative-ai.cachedcontentupdateparams.cachedcontent.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[CachedContentUpdateInputFields](./generative-ai.cachedcontentupdateinputfields.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[updateMask?](./generative-ai.cachedcontentupdateparams.updatemask.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+_(Optional)_ protobuf FieldMask. If not specified, updates all provided fields.
+
+
+</td></tr>
+</tbody></table>

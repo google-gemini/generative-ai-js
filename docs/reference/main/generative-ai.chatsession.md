@@ -14,22 +14,161 @@ export declare class ChatSession
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(apiKey, model, params, \_requestOptions)](./generative-ai.chatsession._constructor_.md) |  | Constructs a new instance of the <code>ChatSession</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(apiKey, model, params, \_requestOptions)](./generative-ai.chatsession._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `ChatSession` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [model](./generative-ai.chatsession.model.md) |  | string |  |
-|  [params?](./generative-ai.chatsession.params.md) |  | [StartChatParams](./generative-ai.startchatparams.md) | _(Optional)_ |
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[model](./generative-ai.chatsession.model.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[params?](./generative-ai.chatsession.params.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[StartChatParams](./generative-ai.startchatparams.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
 
 ## Methods
 
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [getHistory()](./generative-ai.chatsession.gethistory.md) |  | Gets the chat history so far. Blocked prompts are not added to history. Blocked candidates are not added to history, nor are the prompts that generated them. |
-|  [sendMessage(request, requestOptions)](./generative-ai.chatsession.sendmessage.md) |  | <p>Sends a chat message and receives a non-streaming [GenerateContentResult](./generative-ai.generatecontentresult.md)<!-- -->.</p><p>Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.</p> |
-|  [sendMessageStream(request, requestOptions)](./generative-ai.chatsession.sendmessagestream.md) |  | <p>Sends a chat message and receives the response as a [GenerateContentStreamResult](./generative-ai.generatecontentstreamresult.md) containing an iterable stream and a response promise.</p><p>Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.</p> |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[getHistory()](./generative-ai.chatsession.gethistory.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Gets the chat history so far. Blocked prompts are not added to history. Blocked candidates are not added to history, nor are the prompts that generated them.
+
+
+</td></tr>
+<tr><td>
+
+[sendMessage(request, requestOptions)](./generative-ai.chatsession.sendmessage.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sends a chat message and receives a non-streaming [GenerateContentResult](./generative-ai.generatecontentresult.md)<!-- -->.
+
+Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[sendMessageStream(request, requestOptions, callbacks)](./generative-ai.chatsession.sendmessagestream.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Sends a chat message and receives the response as a [GenerateContentStreamResult](./generative-ai.generatecontentstreamresult.md) containing an iterable stream and a response promise.
+
+Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.
+
+
+</td></tr>
+</tbody></table>

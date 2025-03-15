@@ -14,31 +14,315 @@ export declare class GenerativeModel
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(apiKey, modelParams, \_requestOptions)](./generative-ai.generativemodel._constructor_.md) |  | Constructs a new instance of the <code>GenerativeModel</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(apiKey, modelParams, \_requestOptions)](./generative-ai.generativemodel._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `GenerativeModel` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [apiKey](./generative-ai.generativemodel.apikey.md) |  | string |  |
-|  [cachedContent](./generative-ai.generativemodel.cachedcontent.md) |  | [CachedContent](./generative-ai.cachedcontent.md) |  |
-|  [generationConfig](./generative-ai.generativemodel.generationconfig.md) |  | [GenerationConfig](./generative-ai.generationconfig.md) |  |
-|  [model](./generative-ai.generativemodel.model.md) |  | string |  |
-|  [safetySettings](./generative-ai.generativemodel.safetysettings.md) |  | [SafetySetting](./generative-ai.safetysetting.md)<!-- -->\[\] |  |
-|  [systemInstruction?](./generative-ai.generativemodel.systeminstruction.md) |  | [Content](./generative-ai.content.md) | _(Optional)_ |
-|  [toolConfig?](./generative-ai.generativemodel.toolconfig.md) |  | [ToolConfig](./generative-ai.toolconfig.md) | _(Optional)_ |
-|  [tools?](./generative-ai.generativemodel.tools.md) |  | [Tool](./generative-ai.tool.md)<!-- -->\[\] | _(Optional)_ |
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[apiKey](./generative-ai.generativemodel.apikey.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[cachedContent](./generative-ai.generativemodel.cachedcontent.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[CachedContent](./generative-ai.cachedcontent.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[generationConfig](./generative-ai.generativemodel.generationconfig.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[GenerationConfig](./generative-ai.generationconfig.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[model](./generative-ai.generativemodel.model.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[safetySettings](./generative-ai.generativemodel.safetysettings.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SafetySetting](./generative-ai.safetysetting.md)<!-- -->\[\]
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[systemInstruction?](./generative-ai.generativemodel.systeminstruction.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Content](./generative-ai.content.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[toolConfig?](./generative-ai.generativemodel.toolconfig.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ToolConfig](./generative-ai.toolconfig.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[tools?](./generative-ai.generativemodel.tools.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Tool](./generative-ai.tool.md)<!-- -->\[\]
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
 
 ## Methods
 
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [batchEmbedContents(batchEmbedContentRequest, requestOptions)](./generative-ai.generativemodel.batchembedcontents.md) |  | <p>Embeds an array of [EmbedContentRequest](./generative-ai.embedcontentrequest.md)<!-- -->s.</p><p>Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.</p> |
-|  [countTokens(request, requestOptions)](./generative-ai.generativemodel.counttokens.md) |  | <p>Counts the tokens in the provided request.</p><p>Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.</p> |
-|  [embedContent(request, requestOptions)](./generative-ai.generativemodel.embedcontent.md) |  | <p>Embeds the provided content.</p><p>Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.</p> |
-|  [generateContent(request, requestOptions)](./generative-ai.generativemodel.generatecontent.md) |  | <p>Makes a single non-streaming call to the model and returns an object containing a single [GenerateContentResponse](./generative-ai.generatecontentresponse.md)<!-- -->.</p><p>Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.</p> |
-|  [generateContentStream(request, requestOptions)](./generative-ai.generativemodel.generatecontentstream.md) |  | <p>Makes a single streaming call to the model and returns an object containing an iterable stream that iterates over all chunks in the streaming response as well as a promise that returns the final aggregated response.</p><p>Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.</p> |
-|  [startChat(startChatParams)](./generative-ai.generativemodel.startchat.md) |  | Gets a new [ChatSession](./generative-ai.chatsession.md) instance which can be used for multi-turn chats. |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[batchEmbedContents(batchEmbedContentRequest, requestOptions)](./generative-ai.generativemodel.batchembedcontents.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Embeds an array of [EmbedContentRequest](./generative-ai.embedcontentrequest.md)<!-- -->s.
+
+Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[countTokens(request, requestOptions)](./generative-ai.generativemodel.counttokens.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Counts the tokens in the provided request.
+
+Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[embedContent(request, requestOptions)](./generative-ai.generativemodel.embedcontent.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Embeds the provided content.
+
+Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[generateContent(request, requestOptions)](./generative-ai.generativemodel.generatecontent.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Makes a single non-streaming call to the model and returns an object containing a single [GenerateContentResponse](./generative-ai.generatecontentresponse.md)<!-- -->.
+
+Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[generateContentStream(request, requestOptions, callbacks)](./generative-ai.generativemodel.generatecontentstream.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Makes a single streaming call to the model and returns an object containing an iterable stream that iterates over all chunks in the streaming response as well as a promise that returns the final aggregated response.
+
+Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided to [GoogleGenerativeAI.getGenerativeModel()](./generative-ai.googlegenerativeai.getgenerativemodel.md)<!-- -->.
+
+
+</td></tr>
+<tr><td>
+
+[startChat(startChatParams)](./generative-ai.generativemodel.startchat.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Gets a new [ChatSession](./generative-ai.chatsession.md) instance which can be used for multi-turn chats.
+
+
+</td></tr>
+</tbody></table>

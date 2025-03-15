@@ -14,10 +14,101 @@ export declare interface GroundingSupportSegment
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [endIndex?](./generative-ai.groundingsupportsegment.endindex.md) |  | number | _(Optional)_ End index in the given Part, measured in bytes. Offset from the start of the Part, exclusive, starting at zero. |
-|  [partIndex?](./generative-ai.groundingsupportsegment.partindex.md) |  | number | _(Optional)_ The index of a Part object within its parent Content object. |
-|  [startIndex?](./generative-ai.groundingsupportsegment.startindex.md) |  | number | _(Optional)_ Start index in the given Part, measured in bytes. Offset from the start of the Part, inclusive, starting at zero. |
-|  [text?](./generative-ai.groundingsupportsegment.text.md) |  | string | _(Optional)_ The text corresponding to the segment from the response. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[endIndex?](./generative-ai.groundingsupportsegment.endindex.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ End index in the given Part, measured in bytes. Offset from the start of the Part, exclusive, starting at zero.
+
+
+</td></tr>
+<tr><td>
+
+[partIndex?](./generative-ai.groundingsupportsegment.partindex.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The index of a Part object within its parent Content object.
+
+
+</td></tr>
+<tr><td>
+
+[startIndex?](./generative-ai.groundingsupportsegment.startindex.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ Start index in the given Part, measured in bytes. Offset from the start of the Part, inclusive, starting at zero.
+
+
+</td></tr>
+<tr><td>
+
+[text?](./generative-ai.groundingsupportsegment.text.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ The text corresponding to the segment from the response.
+
+
+</td></tr>
+</tbody></table>

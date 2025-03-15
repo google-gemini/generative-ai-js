@@ -16,11 +16,53 @@ sendMessage(request: string | Array<string | Part>, requestOptions?: SingleReque
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  request | string \| Array&lt;string \| [Part](./generative-ai.part.md)<!-- -->&gt; |  |
-|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+request
+
+
+</td><td>
+
+string \| Array&lt;string \| [Part](./generative-ai.part.md)<!-- -->&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+requestOptions
+
+
+</td><td>
+
+[SingleRequestOptions](./generative-ai.singlerequestoptions.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 Promise&lt;[GenerateContentResult](./generative-ai.generatecontentresult.md)<!-- -->&gt;

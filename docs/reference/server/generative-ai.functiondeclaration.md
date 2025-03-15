@@ -14,9 +14,82 @@ export declare interface FunctionDeclaration
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [description?](./generative-ai.functiondeclaration.description.md) |  | string | _(Optional)_ Optional. Description and purpose of the function. Model uses it to decide how and whether to call the function. |
-|  [name](./generative-ai.functiondeclaration.name.md) |  | string | The name of the function to call. Must start with a letter or an underscore. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a max length of 64. |
-|  [parameters?](./generative-ai.functiondeclaration.parameters.md) |  | [FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md) | _(Optional)_ Optional. Describes the parameters to this function in JSON Schema Object format. Reflects the Open API 3.03 Parameter Object. string Key: the name of the parameter. Parameter names are case sensitive. Schema Value: the Schema defining the type used for the parameter. For function with no parameters, this can be left unset. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[description?](./generative-ai.functiondeclaration.description.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ Optional. Description and purpose of the function. Model uses it to decide how and whether to call the function.
+
+
+</td></tr>
+<tr><td>
+
+[name](./generative-ai.functiondeclaration.name.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+The name of the function to call. Must start with a letter or an underscore. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a max length of 64.
+
+
+</td></tr>
+<tr><td>
+
+[parameters?](./generative-ai.functiondeclaration.parameters.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[FunctionDeclarationSchema](./generative-ai.functiondeclarationschema.md)
+
+
+</td><td>
+
+_(Optional)_ Optional. Describes the parameters to this function in JSON Schema Object format. Reflects the Open API 3.03 Parameter Object. string Key: the name of the parameter. Parameter names are case sensitive. Schema Value: the Schema defining the type used for the parameter. For function with no parameters, this can be left unset.
+
+
+</td></tr>
+</tbody></table>

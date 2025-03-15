@@ -11,16 +11,70 @@ Fields set in the optional [SingleRequestOptions](./generative-ai.singlerequesto
 **Signature:**
 
 ```typescript
-generateContentStream(request: GenerateContentRequest | string | Array<string | Part>, requestOptions?: SingleRequestOptions): Promise<GenerateContentStreamResult>;
+generateContentStream(request: GenerateContentRequest | string | Array<string | Part>, requestOptions: SingleRequestOptions, callbacks: CallbacksRequestOptions): Promise<GenerateContentStreamResult>;
 ```
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  request | [GenerateContentRequest](./generative-ai.generatecontentrequest.md) \| string \| Array&lt;string \| [Part](./generative-ai.part.md)<!-- -->&gt; |  |
-|  requestOptions | [SingleRequestOptions](./generative-ai.singlerequestoptions.md) | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+request
+
+
+</td><td>
+
+[GenerateContentRequest](./generative-ai.generatecontentrequest.md) \| string \| Array&lt;string \| [Part](./generative-ai.part.md)<!-- -->&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+requestOptions
+
+
+</td><td>
+
+[SingleRequestOptions](./generative-ai.singlerequestoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+callbacks
+
+
+</td><td>
+
+CallbacksRequestOptions
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 Promise&lt;[GenerateContentStreamResult](./generative-ai.generatecontentstreamresult.md)<!-- -->&gt;

@@ -14,12 +14,104 @@ export declare enum HarmCategory
 
 ## Enumeration Members
 
-|  Member | Value | Description |
-|  --- | --- | --- |
-|  HARM\_CATEGORY\_CIVIC\_INTEGRITY | <code>&quot;HARM_CATEGORY_CIVIC_INTEGRITY&quot;</code> |  |
-|  HARM\_CATEGORY\_DANGEROUS\_CONTENT | <code>&quot;HARM_CATEGORY_DANGEROUS_CONTENT&quot;</code> |  |
-|  HARM\_CATEGORY\_HARASSMENT | <code>&quot;HARM_CATEGORY_HARASSMENT&quot;</code> |  |
-|  HARM\_CATEGORY\_HATE\_SPEECH | <code>&quot;HARM_CATEGORY_HATE_SPEECH&quot;</code> |  |
-|  HARM\_CATEGORY\_SEXUALLY\_EXPLICIT | <code>&quot;HARM_CATEGORY_SEXUALLY_EXPLICIT&quot;</code> |  |
-|  HARM\_CATEGORY\_UNSPECIFIED | <code>&quot;HARM_CATEGORY_UNSPECIFIED&quot;</code> |  |
+<table><thead><tr><th>
 
+Member
+
+
+</th><th>
+
+Value
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+HARM\_CATEGORY\_CIVIC\_INTEGRITY
+
+
+</td><td>
+
+`"HARM_CATEGORY_CIVIC_INTEGRITY"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+HARM\_CATEGORY\_DANGEROUS\_CONTENT
+
+
+</td><td>
+
+`"HARM_CATEGORY_DANGEROUS_CONTENT"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+HARM\_CATEGORY\_HARASSMENT
+
+
+</td><td>
+
+`"HARM_CATEGORY_HARASSMENT"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+HARM\_CATEGORY\_HATE\_SPEECH
+
+
+</td><td>
+
+`"HARM_CATEGORY_HATE_SPEECH"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+HARM\_CATEGORY\_SEXUALLY\_EXPLICIT
+
+
+</td><td>
+
+`"HARM_CATEGORY_SEXUALLY_EXPLICIT"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+HARM\_CATEGORY\_UNSPECIFIED
+
+
+</td><td>
+
+`"HARM_CATEGORY_UNSPECIFIED"`
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
