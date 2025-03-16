@@ -47,7 +47,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 3.  Run a prompt
 
 ```js
-const fs = require("fs");
+import * as fs from 'fs';
 const prompt = "Does this look store-bought or homemade?";
 const image = {
   inlineData: {
