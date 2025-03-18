@@ -1,0 +1,23 @@
+name: Manage awaiting user response
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  remove_label:
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.labels.*.name, 'status: awaiting user response')
+    steps:
+      - name: Remove Label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+
+            github.rest.issues.removeLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              name: 'status: awaiting user response',
+            });
