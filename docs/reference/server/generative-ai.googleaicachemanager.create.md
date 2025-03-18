@@ -14,10 +14,37 @@ create(createOptions: CachedContentCreateParams): Promise<CachedContent>;
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  createOptions | [CachedContentCreateParams](./generative-ai.cachedcontentcreateparams.md) |  |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+createOptions
+
+
+</td><td>
+
+[CachedContentCreateParams](./generative-ai.cachedcontentcreateparams.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 Promise&lt;[CachedContent](./generative-ai.cachedcontent.md)<!-- -->&gt;

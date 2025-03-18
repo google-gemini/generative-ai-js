@@ -14,8 +14,50 @@ constructor(apiKey: string, _requestOptions?: RequestOptions);
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  apiKey | string |  |
-|  \_requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+apiKey
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+\_requestOptions
+
+
+</td><td>
+
+[RequestOptions](./generative-ai.requestoptions.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

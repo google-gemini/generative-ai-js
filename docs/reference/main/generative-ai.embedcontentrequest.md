@@ -14,9 +14,80 @@ export interface EmbedContentRequest
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [content](./generative-ai.embedcontentrequest.content.md) |  | [Content](./generative-ai.content.md) |  |
-|  [taskType?](./generative-ai.embedcontentrequest.tasktype.md) |  | [TaskType](./generative-ai.tasktype.md) | _(Optional)_ |
-|  [title?](./generative-ai.embedcontentrequest.title.md) |  | string | _(Optional)_ |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[content](./generative-ai.embedcontentrequest.content.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Content](./generative-ai.content.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[taskType?](./generative-ai.embedcontentrequest.tasktype.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[TaskType](./generative-ai.tasktype.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[title?](./generative-ai.embedcontentrequest.title.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

@@ -14,8 +14,63 @@ export interface BaseParams
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [generationConfig?](./generative-ai.baseparams.generationconfig.md) |  | [GenerationConfig](./generative-ai.generationconfig.md) | _(Optional)_ |
-|  [safetySettings?](./generative-ai.baseparams.safetysettings.md) |  | [SafetySetting](./generative-ai.safetysetting.md)<!-- -->\[\] | _(Optional)_ |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[generationConfig?](./generative-ai.baseparams.generationconfig.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[GenerationConfig](./generative-ai.generationconfig.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[safetySettings?](./generative-ai.baseparams.safetysettings.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SafetySetting](./generative-ai.safetysetting.md)<!-- -->\[\]
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

@@ -14,7 +14,44 @@ export declare interface FunctionDeclarationsTool
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [functionDeclarations?](./generative-ai.functiondeclarationstool.functiondeclarations.md) |  | [FunctionDeclaration](./generative-ai.functiondeclaration.md)<!-- -->\[\] | _(Optional)_ Optional. One or more function declarations to be passed to the model along with the current user query. Model may decide to call a subset of these functions by populating \[FunctionCall\]\[content.part.functionCall\] in the response. User should provide a \[FunctionResponse\]\[content.part.functionResponse\] for each function call in the next turn. Based on the function responses, Model will generate the final response back to the user. Maximum 64 function declarations can be provided. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[functionDeclarations?](./generative-ai.functiondeclarationstool.functiondeclarations.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[FunctionDeclaration](./generative-ai.functiondeclaration.md)<!-- -->\[\]
+
+
+</td><td>
+
+_(Optional)_ Optional. One or more function declarations to be passed to the model along with the current user query. Model may decide to call a subset of these functions by populating \[FunctionCall\]\[content.part.functionCall\] in the response. User should provide a \[FunctionResponse\]\[content.part.functionResponse\] for each function call in the next turn. Based on the function responses, Model will generate the final response back to the user. Maximum 64 function declarations can be provided.
+
+
+</td></tr>
+</tbody></table>

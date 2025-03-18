@@ -71,6 +71,16 @@ export interface _GenerateContentRequestInternal
 }
 
 /**
+ * Request sent to `generateContentStream` endpoint.
+ * @internal
+ */
+export interface CallbacksRequestOptions {
+  onData?: (chunks: string) => void;
+  onEnd?: (response: string) => void;
+  onError?: (error: Error) => void;
+}
+
+/**
  * Safety setting that can be sent as part of request parameters.
  * @public
  */

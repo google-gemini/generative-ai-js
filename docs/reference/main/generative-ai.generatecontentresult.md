@@ -14,7 +14,42 @@ export interface GenerateContentResult
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [response](./generative-ai.generatecontentresult.response.md) |  | [EnhancedGenerateContentResponse](./generative-ai.enhancedgeneratecontentresponse.md) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[response](./generative-ai.generatecontentresult.response.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[EnhancedGenerateContentResponse](./generative-ai.enhancedgeneratecontentresponse.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
