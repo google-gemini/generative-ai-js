@@ -79,6 +79,8 @@ export interface SafetySetting {
   threshold: HarmBlockThreshold;
 }
 
+export type ResponseModality = 'TEXT' | 'IMAGE' | 'AUDIO';
+
 /**
  * Config options for content-related requests
  * @public
@@ -103,6 +105,17 @@ export interface GenerationConfig {
    * this is limited to `application/json`.
    */
   responseSchema?: ResponseSchema;
+  /**
+   * The requested modalities of the response. Represents the set of modalities that the model
+   * can return, and should be expected in the response. This is an exact match to the modalities
+   * of the response.
+   * 
+   * A model may have multiple combinations of supported modalities. If the requested modalities
+   * do not match any of the supported combinations, an error will be returned.
+   * 
+   * An empty list is equivalent to requesting only text.
+   */
+  responseModalities?: ResponseModality[];
   /**
    * Presence penalty applied to the next token's logprobs if the token has
    * already been seen in the response.
