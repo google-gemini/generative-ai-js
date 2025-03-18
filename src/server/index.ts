@@ -17,5 +17,6 @@
 
 export { GoogleAIFileManager } from "./file-manager";
 export { GoogleAICacheManager } from "./cache-manager";
+export { GoogleAITunedModelManager } from "./tuned-model-manager";
 
 export * from "../../types/server";
