@@ -21,6 +21,7 @@ import {
 } from "./errors";
 import { CachedContent, ModelParams, RequestOptions } from "../types";
 import { GenerativeModel } from "./models/generative-model";
+import { ImageModel } from "./models/image-model";
 
 export { ChatSession } from "./methods/chat-session";
 export { GenerativeModel };
@@ -47,6 +48,20 @@ export class GoogleGenerativeAI {
     }
     return new GenerativeModel(this.apiKey, modelParams, requestOptions);
   }
+
+  getImageModel(
+    modelParams: ModelParams,
+    requestOptions?: RequestOptions,
+  ): ImageModel {
+    if (!modelParams.model) {
+      throw new GoogleGenerativeAIError(
+        `Must provide a model name. ` +
+          `Example: genai.getGenerativeModel({ model: 'my-model-name' })`,
+      );
+    }
+    return new ImageModel(this.apiKey, modelParams, requestOptions);
+  }
+
 
   /**
    * Creates a {@link GenerativeModel} instance from provided content cache.
