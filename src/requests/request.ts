@@ -22,7 +22,7 @@ import {
   GoogleGenerativeAIFetchError,
   GoogleGenerativeAIRequestInputError,
 } from "../errors";
-
+import { Agent } from "https";
 export const DEFAULT_BASE_URL = "https://generativelanguage.googleapis.com";
 
 export const DEFAULT_API_VERSION = "v1beta";
@@ -138,8 +138,8 @@ export async function makeModelRequest(
   stream: boolean,
   body: string,
   requestOptions: SingleRequestOptions = {},
-  // Allows this to be stubbed for tests
-  fetchFn = fetch,
+  // Use custom fetch if provided
+  fetchFn = requestOptions.fetch || fetch,
 ): Promise<Response> {
   const { url, fetchOptions } = await constructModelRequest(
     model,
@@ -223,8 +223,15 @@ async function handleResponseNotOk(
  * @param requestOptions - The user-defined request options.
  * @returns The generated request options.
  */
-function buildFetchOptions(requestOptions?: SingleRequestOptions): RequestInit {
+export function buildFetchOptions(requestOptions?: SingleRequestOptions): RequestInit {
   const fetchOptions = {} as RequestInit;
+  
+  // Add HTTP agent support
+  if (requestOptions?.httpAgent) {
+    // Type assertion for Node.js specific extension
+    (fetchOptions as unknown as {agent?: Agent}).agent = requestOptions.httpAgent;
+  }
+
   if (requestOptions?.signal !== undefined || requestOptions?.timeout >= 0) {
     const controller = new AbortController();
     if (requestOptions?.timeout >= 0) {
