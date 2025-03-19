@@ -210,7 +210,7 @@ async function filesCreateVideo() {
   // [END files_create_video]
 }
 
-async function filesCreatePDF() {
+async function filesCreatePdf() {
   // [START files_create_pdf]
   // Make sure to include these imports:
   // import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -241,13 +241,13 @@ async function filesCreatePDF() {
   );
 
   // Polling getFile to check processing complete
-  let file = await fileManager.getFile(uploadResult.file.name);
+  let file = await fileManager.getFile(uploadResponse.file.name);
   while (file.state === FileState.PROCESSING) {
     process.stdout.write(".");
     // Sleep for 10 seconds
     await new Promise((resolve) => setTimeout(resolve, 10_000));
     // Fetch the file from the API again
-    file = await fileManager.getFile(uploadResult.file.name);
+    file = await fileManager.getFile(uploadResponse.file.name);
   }
   if (file.state === FileState.FAILED) {
     throw new Error("Audio processing failed.");
@@ -334,7 +334,7 @@ async function runAll() {
   await filesCreateAudio();
   await filesCreateText();
   await filesCreateVideo();
-  await filesCreatePDF();
+  await filesCreatePdf();
   await filesList();
   await filesGet();
   await filesDelete();
