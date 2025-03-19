@@ -15,13 +15,78 @@ export declare class GoogleGenerativeAIResponseError<T> extends GoogleGenerative
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(message, response)](./generative-ai.googlegenerativeairesponseerror._constructor_.md) |  | Constructs a new instance of the <code>GoogleGenerativeAIResponseError</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(message, response)](./generative-ai.googlegenerativeairesponseerror._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `GoogleGenerativeAIResponseError` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [response?](./generative-ai.googlegenerativeairesponseerror.response.md) |  | T | _(Optional)_ |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[response?](./generative-ai.googlegenerativeairesponseerror.response.md)
+
+
+</td><td>
+
+
+</td><td>
+
+T
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

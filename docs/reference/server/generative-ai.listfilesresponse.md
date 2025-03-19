@@ -14,8 +14,61 @@ export interface ListFilesResponse
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [files](./generative-ai.listfilesresponse.files.md) |  | [FileMetadataResponse](./generative-ai.filemetadataresponse.md)<!-- -->\[\] |  |
-|  [nextPageToken?](./generative-ai.listfilesresponse.nextpagetoken.md) |  | string | _(Optional)_ |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[files](./generative-ai.listfilesresponse.files.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[FileMetadataResponse](./generative-ai.filemetadataresponse.md)<!-- -->\[\]
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[nextPageToken?](./generative-ai.listfilesresponse.nextpagetoken.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

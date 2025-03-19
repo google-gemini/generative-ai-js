@@ -4,6 +4,8 @@
 
 ```ts
 
+/// <reference types="node" />
+
 // Warning: (ae-incompatible-release-tags) The symbol "ArraySchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
 //
 // @public
@@ -30,8 +32,6 @@ export interface BooleanSchema extends BaseSchema {
     // (undocumented)
     type: typeof SchemaType.BOOLEAN;
 }
-
-/// <reference types="node" />
 
 // @public
 export interface CachedContent extends CachedContentBase {
@@ -387,6 +387,7 @@ export class GoogleAIFileManager {
     getFile(fileId: string, requestOptions?: SingleRequestOptions): Promise<FileMetadataResponse>;
     listFiles(listParams?: ListParams, requestOptions?: SingleRequestOptions): Promise<ListFilesResponse>;
     uploadFile(fileData: string | Buffer, fileMetadata: FileMetadata): Promise<UploadFileResponse>;
+    uploadRemoteFile(fileUrl: string, fileName: string): Promise<UploadFileResponse>;
 }
 
 // @public

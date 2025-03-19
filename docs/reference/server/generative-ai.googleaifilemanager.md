@@ -14,22 +14,170 @@ export declare class GoogleAIFileManager
 
 ## Constructors
 
-|  Constructor | Modifiers | Description |
-|  --- | --- | --- |
-|  [(constructor)(apiKey, \_requestOptions)](./generative-ai.googleaifilemanager._constructor_.md) |  | Constructs a new instance of the <code>GoogleAIFileManager</code> class |
+<table><thead><tr><th>
+
+Constructor
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[(constructor)(apiKey, \_requestOptions)](./generative-ai.googleaifilemanager._constructor_.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Constructs a new instance of the `GoogleAIFileManager` class
+
+
+</td></tr>
+</tbody></table>
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [apiKey](./generative-ai.googleaifilemanager.apikey.md) |  | string |  |
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[apiKey](./generative-ai.googleaifilemanager.apikey.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
 
 ## Methods
 
-|  Method | Modifiers | Description |
-|  --- | --- | --- |
-|  [deleteFile(fileId)](./generative-ai.googleaifilemanager.deletefile.md) |  | Delete file with given ID. |
-|  [getFile(fileId, requestOptions)](./generative-ai.googleaifilemanager.getfile.md) |  | <p>Get metadata for file with given ID.</p><p>Any fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) initialization.</p> |
-|  [listFiles(listParams, requestOptions)](./generative-ai.googleaifilemanager.listfiles.md) |  | <p>List all uploaded files.</p><p>Any fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) initialization.</p> |
-|  [uploadFile(fileData, fileMetadata)](./generative-ai.googleaifilemanager.uploadfile.md) |  | Upload a file. |
+<table><thead><tr><th>
 
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[deleteFile(fileId)](./generative-ai.googleaifilemanager.deletefile.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Delete file with given ID.
+
+
+</td></tr>
+<tr><td>
+
+[getFile(fileId, requestOptions)](./generative-ai.googleaifilemanager.getfile.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Get metadata for file with given ID.
+
+Any fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) initialization.
+
+
+</td></tr>
+<tr><td>
+
+[listFiles(listParams, requestOptions)](./generative-ai.googleaifilemanager.listfiles.md)
+
+
+</td><td>
+
+
+</td><td>
+
+List all uploaded files.
+
+Any fields set in the optional [SingleRequestOptions](./generative-ai.singlerequestoptions.md) parameter will take precedence over the [RequestOptions](./generative-ai.requestoptions.md) values provided at the time of the [GoogleAIFileManager](./generative-ai.googleaifilemanager.md) initialization.
+
+
+</td></tr>
+<tr><td>
+
+[uploadFile(fileData, fileMetadata)](./generative-ai.googleaifilemanager.uploadfile.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Upload a file.
+
+
+</td></tr>
+<tr><td>
+
+[uploadRemoteFile(fileUrl, fileName)](./generative-ai.googleaifilemanager.uploadremotefile.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Upload a remote file from a URL.
+
+
+</td></tr>
+</tbody></table>

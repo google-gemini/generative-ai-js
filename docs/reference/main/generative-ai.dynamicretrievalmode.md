@@ -14,8 +14,48 @@ export declare enum DynamicRetrievalMode
 
 ## Enumeration Members
 
-|  Member | Value | Description |
-|  --- | --- | --- |
-|  MODE\_DYNAMIC | <code>&quot;MODE_DYNAMIC&quot;</code> |  |
-|  MODE\_UNSPECIFIED | <code>&quot;MODE_UNSPECIFIED&quot;</code> |  |
+<table><thead><tr><th>
 
+Member
+
+
+</th><th>
+
+Value
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+MODE\_DYNAMIC
+
+
+</td><td>
+
+`"MODE_DYNAMIC"`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+MODE\_UNSPECIFIED
+
+
+</td><td>
+
+`"MODE_UNSPECIFIED"`
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
