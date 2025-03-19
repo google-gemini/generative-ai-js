@@ -17,5 +17,6 @@
 
 export { GoogleAIFileManager } from "./file-manager";
 export { GoogleAICacheManager } from "./cache-manager";
+export { DecryptionMiddleware, DecryptionMiddlewareOptions } from "./decryption-middleware";
 
 export * from "../../types/server";
