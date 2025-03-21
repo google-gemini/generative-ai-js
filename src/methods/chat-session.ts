@@ -45,6 +45,7 @@ export class ChatSession {
   private _apiKey: string;
   private _history: Content[] = [];
   private _sendPromise: Promise<void> = Promise.resolve();
+  private _messageInProgress: boolean = false;
 
   constructor(
     apiKey: string,
@@ -81,6 +82,12 @@ export class ChatSession {
     request: string | Array<string | Part>,
     requestOptions: SingleRequestOptions = {},
   ): Promise<GenerateContentResult> {
+    if (this._messageInProgress) {
+      console.warn(
+        "sendMessage() was called while another message was in progress, this may lead to unexpected behavior. ",
+      );
+    }
+    this._messageInProgress = true;
     await this._sendPromise;
     const newContent = formatNewContent(request);
     const generateContentRequest: GenerateContentRequest = {
@@ -126,6 +133,7 @@ export class ChatSession {
           }
         }
         finalResult = result;
+        this._messageInProgress = false;
       });
     await this._sendPromise;
     return finalResult;
@@ -144,6 +152,12 @@ export class ChatSession {
     request: string | Array<string | Part>,
     requestOptions: SingleRequestOptions = {},
   ): Promise<GenerateContentStreamResult> {
+    if (this._messageInProgress) {
+      console.warn(
+        "sendMessage() was called while another message was in progress, this may lead to unexpected behavior. ",
+      );
+    }
+    this._messageInProgress = true;
     await this._sendPromise;
     const newContent = formatNewContent(request);
     const generateContentRequest: GenerateContentRequest = {
@@ -202,7 +216,9 @@ export class ChatSession {
           // downstream from streamPromise, so they should not throw.
           console.error(e);
         }
+        this._messageInProgress = false;
       });
+    this._messageInProgress = false;
     return streamPromise;
   }
 }
