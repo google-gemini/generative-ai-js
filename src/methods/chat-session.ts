@@ -83,8 +83,8 @@ export class ChatSession {
     requestOptions: SingleRequestOptions = {},
   ): Promise<GenerateContentResult> {
     if (this._messageInProgress) {
-      console.warn(
-        "sendMessage() was called while another message was in progress, this may lead to unexpected behavior. ",
+      throw new Error(
+        "sendMessage() was called while another message was in progress, this may lead to unexpected behavior.",
       );
     }
     this._messageInProgress = true;
@@ -133,6 +133,8 @@ export class ChatSession {
           }
         }
         finalResult = result;
+      })
+      .finally(() => {
         this._messageInProgress = false;
       });
     await this._sendPromise;
@@ -153,8 +155,8 @@ export class ChatSession {
     requestOptions: SingleRequestOptions = {},
   ): Promise<GenerateContentStreamResult> {
     if (this._messageInProgress) {
-      console.warn(
-        "sendMessage() was called while another message was in progress, this may lead to unexpected behavior. ",
+      throw new Error(
+        "sendMessageStream() was called while another message was in progress, this may lead to unexpected behavior.",
       );
     }
     this._messageInProgress = true;
@@ -216,7 +218,6 @@ export class ChatSession {
           // downstream from streamPromise, so they should not throw.
           console.error(e);
         }
-        this._messageInProgress = false;
       });
     this._messageInProgress = false;
     return streamPromise;

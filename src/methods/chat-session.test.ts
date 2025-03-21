@@ -91,7 +91,7 @@ describe("ChatSession", () => {
         "generateContentStream",
       ).resolves();
       const chatSession = new ChatSession("MY_API_KEY", "a-model");
-      await chatSession.sendMessageStream("hello");
+      await expect(chatSession.sendMessageStream("hello")).to.be.fulfilled;
       expect(generateContentStreamStub).to.be.calledWith(
         "MY_API_KEY",
         "a-model",
