@@ -62,7 +62,7 @@ export interface GenerateContentRequest extends BaseParams {
 }
 
 /**
- * Request sent to `generateContent` endpoint.
+ * Internal version of the request that includes a model name.
  * @internal
  */
 export interface _GenerateContentRequestInternal
@@ -170,6 +170,8 @@ export interface EmbedContentRequest {
   content: Content;
   taskType?: TaskType;
   title?: string;
+  
+  dimensions?: number;
 }
 
 /**
