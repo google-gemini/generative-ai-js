@@ -96,3 +96,10 @@ to the Google AI JavaScript SDK.
 
 The contents of this repository are licensed under the
 [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+
+
+## Here's a link to the new js-genai Google Gen AI Typescript/Javascript SDK
+
+Check out the new js-Google Gen AI TypeScript/JavaScript SDK 
+[https://github.com/googleapis/js-genai]—a unified
+SDK for Gemini Developer API and Vertex AI with enhanced features.
