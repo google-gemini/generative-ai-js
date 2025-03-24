@@ -127,7 +127,7 @@ export class ChatSession {
         }
         finalResult = result;
       });
-    
+
     try {
       await this._sendPromise;
     } catch (error) {
