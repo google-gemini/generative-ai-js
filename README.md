@@ -1,5 +1,10 @@
 # Google AI SDK for JavaScript
 
+> [!NOTE] A new Javascript/Typescript SDK, `google-genai`
+> ([github](https://github.com/googleapis/js-genai/tree/main)), is currently
+> available in a *preview launch* - designed to work with Gemini 2.0 features
+> and support both the Gemini API and the Vertex API.
+
 The Google AI JavaScript SDK is the easiest way for JavaScript developers to
 build with the Gemini API. The Gemini API gives you access to Gemini
 [models](https://ai.google.dev/models/gemini) created by
