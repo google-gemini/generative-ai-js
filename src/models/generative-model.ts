@@ -50,6 +50,8 @@ import {
   formatGenerateContentInput,
   formatSystemInstruction,
 } from "../requests/request-helpers";
+import { StreamCallbacks } from "../../types/requests";
+
 
 /**
  * Class for generative model APIs.
@@ -132,6 +134,8 @@ export class GenerativeModel {
   async generateContentStream(
     request: GenerateContentRequest | string | Array<string | Part>,
     requestOptions: SingleRequestOptions = {},
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    callbacks?: StreamCallbacks 
   ): Promise<GenerateContentStreamResult> {
     const formattedParams = formatGenerateContentInput(request);
     const generativeModelRequestOptions: SingleRequestOptions = {
@@ -151,6 +155,7 @@ export class GenerativeModel {
         ...formattedParams,
       },
       generativeModelRequestOptions,
+      
     );
   }
 
