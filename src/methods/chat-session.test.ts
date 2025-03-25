@@ -46,6 +46,15 @@ describe("ChatSession", () => {
         match.any,
       );
     });
+    it("sendMessage() should reset messageInProgress flag after resolving promise", async () => {
+      const mockResponse = getMockResponse(
+        "unary-success-basic-reply-short.json",
+      );
+      stub(request, "makeModelRequest").resolves(mockResponse as Response);
+      const chatSession = new ChatSession("MY_API_KEY", "a-model");
+      await chatSession.sendMessage("hello");
+      expect(chatSession["_messageInProgress"]).to.be.false;
+    });
   });
   describe("sendMessageRecitationErrorNotAddingResponseToHistory()", () => {
     it("generateContent errors should be catchable", async () => {
@@ -74,6 +83,22 @@ describe("ChatSession", () => {
       await clock.runAllAsync();
       expect(consoleStub).to.not.be.called;
       clock.restore();
+    });
+    it("sendMessageStream() should reset messageInProgress flag after resolving promise", async () => {
+      const consoleStub = stub(console, "error");
+      const generateContentStreamStub = stub(
+        generateContentMethods,
+        "generateContentStream",
+      ).resolves();
+      const chatSession = new ChatSession("MY_API_KEY", "a-model");
+      await expect(chatSession.sendMessageStream("hello")).to.be.fulfilled;
+      expect(generateContentStreamStub).to.be.calledWith(
+        "MY_API_KEY",
+        "a-model",
+        match.any,
+      );
+      expect(consoleStub).to.not.be.called;
+      expect(chatSession["_messageInProgress"]).to.be.false;
     });
     it("downstream sendPromise errors should log but not throw", async () => {
       const clock = useFakeTimers();
