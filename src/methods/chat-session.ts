@@ -128,12 +128,11 @@ export class ChatSession {
         finalResult = result;
       });
 
-    try {
-      await this._sendPromise;
-    } catch (error) {
+    await this._sendPromise.catch((e) => {
+      // Resets _sendPromise and re-throws the error if it fails
       this._sendPromise = Promise.resolve();
-      throw error;
-    }
+      throw e;
+    });
 
     return finalResult;
   }
