@@ -23,6 +23,14 @@ import {
   GoogleGenerativeAIRequestInputError,
 } from "../errors";
 
+let GoogleAuth: any;
+try {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  GoogleAuth = require('google-auth-library');
+} catch (e) {
+  // Auth library not available, will be handled gracefully when ADC is requested
+}
+
 export const DEFAULT_BASE_URL = "https://generativelanguage.googleapis.com";
 
 export const DEFAULT_API_VERSION = "v1beta";
@@ -46,7 +54,7 @@ export class RequestUrl {
   constructor(
     public model: string,
     public task: Task,
-    public apiKey: string,
+    public apiKey: string | undefined,
     public stream: boolean,
     public requestOptions: RequestOptions,
   ) {}
@@ -73,11 +81,47 @@ export function getClientHeaders(requestOptions: RequestOptions): string {
   return clientHeaders.join(" ");
 }
 
+/**
+ * Gets an OAuth token using Application Default Credentials
+ * @returns Promise that resolves to the OAuth token
+ */
+async function getAdcToken(): Promise<string> {
+  if (!GoogleAuth) {
+    throw new GoogleGenerativeAIError(
+      "Google Auth Library is required for ADC support. " +
+      "Please install it with: npm install google-auth-library"
+    );
+  }
+
+  try {
+    const auth = new GoogleAuth.GoogleAuth({
+      scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+    });
+    const client = await auth.getClient();
+    const token = await client.getAccessToken();
+    return token.token;
+  } catch (e) {
+    throw new GoogleGenerativeAIError(
+      `Failed to get ADC token: ${e.message}. ` +
+      "Make sure you have valid credentials configured. " +
+      "See https://cloud.google.com/docs/authentication/application-default-credentials"
+    );
+  }
+}
+
 export async function getHeaders(url: RequestUrl): Promise<Headers> {
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
   headers.append("x-goog-api-client", getClientHeaders(url.requestOptions));
-  headers.append("x-goog-api-key", url.apiKey);
+  
+  const useAdc = url.requestOptions?.authOptions?.useAdc;
+  
+  if (url.apiKey) {
+    headers.append("x-goog-api-key", url.apiKey);
+  } else if (useAdc) {
+    const token = await getAdcToken();
+    headers.append("Authorization", `Bearer ${token}`);
+  }
 
   let customHeaders = url.requestOptions?.customHeaders;
   if (customHeaders) {
@@ -94,16 +138,11 @@ export async function getHeaders(url: RequestUrl): Promise<Headers> {
     }
 
     for (const [headerName, headerValue] of customHeaders.entries()) {
-      if (headerName === "x-goog-api-key") {
+      if (headerName === "x-goog-api-key" || headerName === "Authorization") {
         throw new GoogleGenerativeAIRequestInputError(
           `Cannot set reserved header name ${headerName}`,
         );
-      } else if (headerName === "x-goog-api-client") {
-        throw new GoogleGenerativeAIRequestInputError(
-          `Header name ${headerName} can only be set using the apiClient field`,
-        );
       }
-
       headers.append(headerName, headerValue);
     }
   }

@@ -33,6 +33,8 @@ seamlessly across text, images, and code.
 See the [Node.js quickstart](https://ai.google.dev/tutorials/node_quickstart)
 for complete code.
 
+### Using API Key Authentication
+
 1.  Install the SDK package
 
 ```js
@@ -64,6 +66,30 @@ const image = {
 const result = await model.generateContent([prompt, image]);
 console.log(result.response.text());
 ```
+
+### Using Application Default Credentials (ADC)
+
+For improved security when running on Google Cloud environments (GKE, GCE, etc.) or for local development, you can use Application Default Credentials (ADC) instead of API keys:
+
+
+
+1. Initialize with ADC
+
+```js
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+// Initialize with ADC (no API key needed)
+const genAI = new GoogleGenerativeAI(undefined, { useAdc: true });
+
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+```
+
+3. Set up your credentials
+   - For local development: `gcloud auth application-default login`
+   - For GKE/GCE: Use service account credentials
+   - For more details, see [Application Default Credentials](https://cloud.google.com/docs/authentication/application-default-credentials)
+
+A complete sample is available in the [samples/adc_auth.js](./samples/adc_auth.js) file.
 
 ## Try out a sample app
 
