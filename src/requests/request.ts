@@ -15,7 +15,8 @@
  * limitations under the License.
  */
 
-import { RequestOptions, SingleRequestOptions } from "../../types";
+import { Agent } from "https"; // For httpAgent support in Node.js
+import { RequestOptions, SingleRequestOptions as ImportedSingleRequestOptions } from "../../types";
 import {
   GoogleGenerativeAIAbortError,
   GoogleGenerativeAIError,
@@ -40,6 +41,25 @@ export enum Task {
   COUNT_TOKENS = "countTokens",
   EMBED_CONTENT = "embedContent",
   BATCH_EMBED_CONTENTS = "batchEmbedContents",
+}
+
+/**
+ * Extended SingleRequestOptions to include httpAgent and fetch
+ */
+export interface SingleRequestOptions extends ImportedSingleRequestOptions {
+  timeout?: number;
+  signal?: AbortSignal;
+  customHeaders?: Headers | Record<string, string>;
+  apiVersion?: string;
+  baseUrl?: string;
+  apiClient?: string;
+  // New fields for feature request
+  httpAgent?: Agent; // For custom proxy agents in Node.js
+  fetch?: (input: RequestInfo, init?: RequestInit) => Promise<Response>; // Custom fetch implementation
+}
+
+interface NodeRequestInit extends RequestInit {
+  agent?: Agent;
 }
 
 export class RequestUrl {
@@ -149,13 +169,15 @@ export async function makeModelRequest(
     body,
     requestOptions,
   );
-  return makeRequest(url, fetchOptions, fetchFn);
+  // Use custom fetch from requestOptions if provided, otherwise fall back to fetchFn
+  const effectiveFetch = requestOptions.fetch || fetchFn;
+  return makeRequest(url, fetchOptions, effectiveFetch);
 }
 
 export async function makeRequest(
   url: string,
   fetchOptions: RequestInit,
-  fetchFn = fetch,
+  fetchFn: (input: RequestInfo, init?: RequestInit) => Promise<Response> = fetch,
 ): Promise<Response> {
   let response;
   try {
@@ -219,12 +241,12 @@ async function handleResponseNotOk(
 }
 
 /**
- * Generates the request options to be passed to the fetch API.
- * @param requestOptions - The user-defined request options.
+function buildFetchOptions(requestOptions?: SingleRequestOptions): NodeRequestInit {
+  const fetchOptions = {} as NodeRequestInit;
  * @returns The generated request options.
  */
-function buildFetchOptions(requestOptions?: SingleRequestOptions): RequestInit {
-  const fetchOptions = {} as RequestInit;
+function buildFetchOptions(requestOptions?: SingleRequestOptions): NodeRequestInit {
+  const fetchOptions = {} as NodeRequestInit;
   if (requestOptions?.signal !== undefined || requestOptions?.timeout >= 0) {
     const controller = new AbortController();
     if (requestOptions?.timeout >= 0) {
@@ -236,6 +258,10 @@ function buildFetchOptions(requestOptions?: SingleRequestOptions): RequestInit {
       });
     }
     fetchOptions.signal = controller.signal;
+  }
+  // Add httpAgent support for Node.js environments
+  if (requestOptions?.httpAgent) {
+    fetchOptions.agent = requestOptions.httpAgent;
   }
   return fetchOptions;
 }
