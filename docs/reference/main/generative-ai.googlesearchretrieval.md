@@ -14,7 +14,44 @@ export declare interface GoogleSearchRetrieval
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [dynamicRetrievalConfig?](./generative-ai.googlesearchretrieval.dynamicretrievalconfig.md) |  | [DynamicRetrievalConfig](./generative-ai.dynamicretrievalconfig.md) | _(Optional)_ Specifies the dynamic retrieval configuration for the given source. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[dynamicRetrievalConfig?](./generative-ai.googlesearchretrieval.dynamicretrievalconfig.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[DynamicRetrievalConfig](./generative-ai.dynamicretrievalconfig.md)
+
+
+</td><td>
+
+_(Optional)_ Specifies the dynamic retrieval configuration for the given source.
+
+
+</td></tr>
+</tbody></table>

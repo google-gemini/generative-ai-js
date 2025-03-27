@@ -14,12 +14,69 @@ getGenerativeModelFromCachedContent(cachedContent: CachedContent, modelParams?: 
 
 ## Parameters
 
-|  Parameter | Type | Description |
-|  --- | --- | --- |
-|  cachedContent | [CachedContent](./generative-ai.cachedcontent.md) |  |
-|  modelParams | Partial&lt;[ModelParams](./generative-ai.modelparams.md)<!-- -->&gt; | _(Optional)_ |
-|  requestOptions | [RequestOptions](./generative-ai.requestoptions.md) | _(Optional)_ |
+<table><thead><tr><th>
 
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+cachedContent
+
+
+</td><td>
+
+[CachedContent](./generative-ai.cachedcontent.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+modelParams
+
+
+</td><td>
+
+Partial&lt;[ModelParams](./generative-ai.modelparams.md)<!-- -->&gt;
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+requestOptions
+
+
+</td><td>
+
+[RequestOptions](./generative-ai.requestoptions.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>
 **Returns:**
 
 [GenerativeModel](./generative-ai.generativemodel.md)

@@ -14,7 +14,42 @@ export interface EmbedContentResponse
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [embedding](./generative-ai.embedcontentresponse.embedding.md) |  | [ContentEmbedding](./generative-ai.contentembedding.md) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[embedding](./generative-ai.embedcontentresponse.embedding.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ContentEmbedding](./generative-ai.contentembedding.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

@@ -15,11 +15,118 @@ export interface ModelParams extends BaseParams
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [cachedContent?](./generative-ai.modelparams.cachedcontent.md) |  | [CachedContent](./generative-ai.cachedcontent.md) | _(Optional)_ |
-|  [model](./generative-ai.modelparams.model.md) |  | string |  |
-|  [systemInstruction?](./generative-ai.modelparams.systeminstruction.md) |  | string \| [Part](./generative-ai.part.md) \| [Content](./generative-ai.content.md) | _(Optional)_ |
-|  [toolConfig?](./generative-ai.modelparams.toolconfig.md) |  | [ToolConfig](./generative-ai.toolconfig.md) | _(Optional)_ |
-|  [tools?](./generative-ai.modelparams.tools.md) |  | [Tool](./generative-ai.tool.md)<!-- -->\[\] | _(Optional)_ |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[cachedContent?](./generative-ai.modelparams.cachedcontent.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[CachedContent](./generative-ai.cachedcontent.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[model](./generative-ai.modelparams.model.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[systemInstruction?](./generative-ai.modelparams.systeminstruction.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| [Part](./generative-ai.part.md) \| [Content](./generative-ai.content.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[toolConfig?](./generative-ai.modelparams.toolconfig.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ToolConfig](./generative-ai.toolconfig.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[tools?](./generative-ai.modelparams.tools.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Tool](./generative-ai.tool.md)<!-- -->\[\]
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+</tbody></table>

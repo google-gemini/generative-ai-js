@@ -15,10 +15,99 @@ export interface ArraySchema extends BaseSchema
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [items](./generative-ai.arrayschema.items.md) |  | [Schema](./generative-ai.schema.md) | A schema describing the entries in the array. |
-|  [maxItems?](./generative-ai.arrayschema.maxitems.md) |  | number | _(Optional)_ The maximum number of items in the array. |
-|  [minItems?](./generative-ai.arrayschema.minitems.md) |  | number | _(Optional)_ The minimum number of items in the array. |
-|  [type](./generative-ai.arrayschema.type.md) |  | typeof [SchemaType.ARRAY](./generative-ai.schematype.md) |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[items](./generative-ai.arrayschema.items.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Schema](./generative-ai.schema.md)
+
+
+</td><td>
+
+A schema describing the entries in the array.
+
+
+</td></tr>
+<tr><td>
+
+[maxItems?](./generative-ai.arrayschema.maxitems.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The maximum number of items in the array.
+
+
+</td></tr>
+<tr><td>
+
+[minItems?](./generative-ai.arrayschema.minitems.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ The minimum number of items in the array.
+
+
+</td></tr>
+<tr><td>
+
+[type](./generative-ai.arrayschema.type.md)
+
+
+</td><td>
+
+
+</td><td>
+
+typeof [SchemaType.ARRAY](./generative-ai.schematype.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

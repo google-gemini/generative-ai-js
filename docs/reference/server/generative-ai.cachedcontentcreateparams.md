@@ -15,7 +15,44 @@ export interface CachedContentCreateParams extends CachedContentBase
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [ttlSeconds?](./generative-ai.cachedcontentcreateparams.ttlseconds.md) |  | number | _(Optional)_ <code>CachedContent</code> ttl in seconds. Specify either this or <code>expireTime</code> when creating a <code>CachedContent</code>. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[ttlSeconds?](./generative-ai.cachedcontentcreateparams.ttlseconds.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+_(Optional)_ `CachedContent` ttl in seconds. Specify either this or `expireTime` when creating a `CachedContent`<!-- -->.
+
+
+</td></tr>
+</tbody></table>
