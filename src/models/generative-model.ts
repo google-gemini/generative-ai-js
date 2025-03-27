@@ -28,6 +28,8 @@ import {
   CountTokensResponse,
   EmbedContentRequest,
   EmbedContentResponse,
+  GenerateAnswerRequest,
+  GenerateAnswerResponse,
   GenerateContentRequest,
   GenerateContentResult,
   GenerateContentStreamResult,
@@ -50,6 +52,9 @@ import {
   formatGenerateContentInput,
   formatSystemInstruction,
 } from "../requests/request-helpers";
+import { Task, makeModelRequest } from "../requests/request";
+import { processAqaResponse } from "../requests/response-helpers";
+import { GoogleGenerativeAIRequestInputError, GoogleGenerativeAIResponseError } from "../errors";
 
 /**
  * Class for generative model APIs.
@@ -173,6 +178,85 @@ export class GenerativeModel {
       },
       this._requestOptions,
     );
+  }
+
+  /**
+   * Generates an attributed answer based on provided sources and input question.
+   * 
+   * @public
+   * 
+   * @param request - The request parameters containing:
+   *  - `input`: Required. The question to be answered
+   *  - `sources`: Array of attributed sources to reference
+   *  - `temperature`: Optional. Controls randomness (0.0-1.0)
+   * 
+   * @param requestOptions - Optional. Overrides for request configuration
+   * 
+   * @returns Promise resolving to {@link GenerateAnswerResponse} containing:
+   *  - `answer`: The generated answer text
+   *  - `attributedPassages`: Array of source passages used
+   *  - `confidenceScore`: Model's confidence in the answer (0.0-1.0)
+   * 
+   * @throws {GoogleGenerativeAIRequestInputError} If invalid request format
+   * @throws {GoogleGenerativeAIResponseError} If API returns error
+   * 
+   * @example
+   * ```
+   * const model = genAI.getGenerativeModel({ model: 'models/aqa' });
+   * const request = {
+   *   input: "What's the capital of France?",
+   *   sources: [{
+   *     title: "World Factbook",
+   *     url: "https://example.com/factbook",
+   *     content: "Paris is the administrative and cultural center of France."
+   *   }]
+   * };
+   * 
+   * try {
+   *   const result = await model.generateAnswer(request);
+   *   console.log(result.answer); // "Paris"
+   *   console.log(result.attributedPassages[0].source.title); // "World Factbook"
+   * } catch (err) {
+   *   console.error(err);
+   * }
+   * ```
+   */
+  async generateAnswer(
+    request: GenerateAnswerRequest,
+    requestOptions: SingleRequestOptions = {},
+  ): Promise<GenerateAnswerResponse> {
+    const generativeModelRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
+    
+    if (!request.input) {
+      throw new GoogleGenerativeAIRequestInputError(
+        "GenerateAnswerRequest must contain 'input' field"
+      );
+    }
+
+    try {
+      const response = await makeModelRequest(
+        'models/aqa', // Hardcode AQA model path
+        Task.GENERATE_ANSWER,
+        this.apiKey,
+        false,
+        JSON.stringify(request),
+        generativeModelRequestOptions
+      );
+      
+      const responseJson = await response.json();
+      return processAqaResponse(responseJson);
+    } catch (e) {
+      if (e instanceof GoogleGenerativeAIResponseError) {
+        throw new GoogleGenerativeAIResponseError<GenerateAnswerResponse>(
+          `AQA API Error: ${e.message}`,
+          e.response
+        );
+      }
+      throw e;
+    }
   }
 
   /**
