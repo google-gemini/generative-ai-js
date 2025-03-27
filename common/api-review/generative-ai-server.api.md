@@ -4,6 +4,8 @@
 
 ```ts
 
+/// <reference types="node" />
+
 // Warning: (ae-incompatible-release-tags) The symbol "ArraySchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
 //
 // @public
@@ -30,8 +32,6 @@ export interface BooleanSchema extends BaseSchema {
     // (undocumented)
     type: typeof SchemaType.BOOLEAN;
 }
-
-/// <reference types="node" />
 
 // @public
 export interface CachedContent extends CachedContentBase {
@@ -387,6 +387,24 @@ export class GoogleAIFileManager {
     getFile(fileId: string, requestOptions?: SingleRequestOptions): Promise<FileMetadataResponse>;
     listFiles(listParams?: ListParams, requestOptions?: SingleRequestOptions): Promise<ListFilesResponse>;
     uploadFile(fileData: string | Buffer, fileMetadata: FileMetadata): Promise<UploadFileResponse>;
+}
+
+// @public
+export class GoogleAITunedModelManager {
+    constructor(apiKey: string, _requestOptions?: RequestOptions);
+    // (undocumented)
+    apiKey: string;
+    // Warning: (ae-forgotten-export) The symbol "CreateTunedModelParams" needs to be exported by the entry point index.d.ts
+    // Warning: (ae-forgotten-export) The symbol "CreateTunedModelResponse" needs to be exported by the entry point index.d.ts
+    createTunedModel(params: CreateTunedModelParams, requestOptions?: SingleRequestOptions): Promise<CreateTunedModelResponse>;
+    deleteTunedModel(modelName: string, requestOptions?: SingleRequestOptions): Promise<void>;
+    // Warning: (ae-forgotten-export) The symbol "TuningOperationResponse" needs to be exported by the entry point index.d.ts
+    getOperation(operationName: string, requestOptions?: SingleRequestOptions): Promise<TuningOperationResponse>;
+    // Warning: (ae-forgotten-export) The symbol "TunedModelResponse" needs to be exported by the entry point index.d.ts
+    getTunedModel(modelName: string, requestOptions?: SingleRequestOptions): Promise<TunedModelResponse>;
+    // Warning: (ae-forgotten-export) The symbol "ListTunedModelsParams" needs to be exported by the entry point index.d.ts
+    // Warning: (ae-forgotten-export) The symbol "ListTunedModelsResponse" needs to be exported by the entry point index.d.ts
+    listTunedModels(listParams?: ListTunedModelsParams, requestOptions?: SingleRequestOptions): Promise<ListTunedModelsResponse>;
 }
 
 // @public

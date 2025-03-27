@@ -14,11 +14,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * RPC task types for server requests.
+ * @public
+ */
 export enum RpcTask {
+  /**
+   * File tasks
+   */
   UPLOAD = "upload",
-  LIST = "list",
+  GET_FILE = "get_file",
+  LIST_FILES = "list_files",
+  DELETE_FILE = "delete_file",
+  UPDATE_FILE = "update_file",
+
+  /**
+   * CachedContent tasks
+   */
   GET = "get",
-  DELETE = "delete",
-  UPDATE = "update",
   CREATE = "create",
+  DELETE = "delete",
+  LIST = "list",
+  UPDATE = "update",
+
+  /**
+   * TunedModel tasks
+   */
+  LIST_TUNED_MODELS = "list_tuned_models",
+  GET_TUNED_MODEL = "get_tuned_model",
+  CREATE_TUNED_MODEL = "create_tuned_model",
+  DELETE_TUNED_MODEL = "delete_tuned_model",
+  GET_TUNING_OPERATION = "get_tuning_operation",
 }
