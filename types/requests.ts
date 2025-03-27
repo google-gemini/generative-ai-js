@@ -226,6 +226,15 @@ export interface SingleRequestOptions extends RequestOptions {
 }
 
 /**
+ * @public
+ */
+export interface StreamCallbacks {
+  onData?: (chunk: string) => void;
+  onEnd?: (response: string) => void;
+  onError?: (error: Error) => void;
+}
+
+/**
  * Defines a tool that model can call to access external knowledge.
  * @public
  */
