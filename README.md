@@ -93,6 +93,9 @@ See the
 [Gemini API Cookbook](https://github.com/google-gemini/gemini-api-cookbook/) or
 [ai.google.dev](https://ai.google.dev) for complete documentation. For the API reference docs, please refer to [JavaScript SDK Reference](https://github.com/google-gemini/generative-ai-js/blob/main/docs/reference/main/index.md).
 
+Visit [https://github.com/google-gemini/generative-ai-js/blob/main/docs/reference/main/index.md]
+to browse the SDK docs
+
 ## Contributing
 
 See [Contributing](/docs/contributing.md) for more information on contributing
