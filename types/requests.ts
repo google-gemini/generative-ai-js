@@ -210,6 +210,16 @@ export interface RequestOptions {
 }
 
 /**
+ * Callbacks for streaming responses.
+ * @public
+ */
+export interface StreamCallbacks {
+  onData?: (data: string) => void;
+  onEnd?: (data: string) => void;
+  onError?: (error: Error) => void;
+}
+
+/**
  * Params passed to atomic asynchronous operations.
  * @public
  */
