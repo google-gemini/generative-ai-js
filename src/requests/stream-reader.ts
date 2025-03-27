@@ -16,6 +16,7 @@
  */
 
 import {
+  CallbacksRequestOptions,
   EnhancedGenerateContentResponse,
   GenerateContentCandidate,
   GenerateContentResponse,
@@ -38,7 +39,10 @@ const responseLineRE = /^data\: (.*)(?:\n\n|\r\r|\r\n\r\n)/;
  *
  * @param response - Response from a fetch call
  */
-export function processStream(response: Response): GenerateContentStreamResult {
+export function processStream(
+  response: Response,
+  callbacks?: CallbacksRequestOptions,
+): GenerateContentStreamResult {
   const inputStream = response.body!.pipeThrough(
     new TextDecoderStream("utf8", { fatal: true }),
   );
@@ -46,7 +50,7 @@ export function processStream(response: Response): GenerateContentStreamResult {
     getResponseStream<GenerateContentResponse>(inputStream);
   const [stream1, stream2] = responseStream.tee();
   return {
-    stream: generateResponseSequence(stream1),
+    stream: generateResponseSequence(stream1, callbacks),
     response: getResponsePromise(stream2),
   };
 }
@@ -67,14 +71,32 @@ async function getResponsePromise(
 
 async function* generateResponseSequence(
   stream: ReadableStream<GenerateContentResponse>,
+  callbacks?: CallbacksRequestOptions,
 ): AsyncGenerator<EnhancedGenerateContentResponse> {
-  const reader = stream.getReader();
-  while (true) {
-    const { value, done } = await reader.read();
-    if (done) {
-      break;
+  try {
+    const reader = stream.getReader();
+    const allResponses: GenerateContentResponse[] = [];
+
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) {
+        const completeResponse = aggregateResponses(allResponses);
+        const enhancedCompleteResponse = addHelpers(completeResponse);
+        callbacks?.onEnd?.(enhancedCompleteResponse.text());
+        break;
+      }
+
+      allResponses.push(value);
+
+      const enhancedResponse = addHelpers(value);
+      const text = enhancedResponse.text();
+
+      callbacks?.onData?.(text);
+      yield enhancedResponse;
     }
-    yield addHelpers(value);
+  } catch (error) {
+    callbacks?.onError?.(error);
+    throw error;
   }
 }
 

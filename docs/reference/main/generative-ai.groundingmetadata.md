@@ -14,11 +14,120 @@ export declare interface GroundingMetadata
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [groundingChunks?](./generative-ai.groundingmetadata.groundingchunks.md) |  | [GroundingChunk](./generative-ai.groundingchunk.md)<!-- -->\[\] | _(Optional)_ List of supporting references retrieved from specified grounding source. |
-|  [groundingSupports?](./generative-ai.groundingmetadata.groundingsupports.md) |  | [GroundingSupport](./generative-ai.groundingsupport.md)<!-- -->\[\] | _(Optional)_ List of grounding support. |
-|  [retrievalMetadata?](./generative-ai.groundingmetadata.retrievalmetadata.md) |  | [RetrievalMetadata](./generative-ai.retrievalmetadata.md) | _(Optional)_ Metadata related to retrieval in the grounding flow. |
-|  [searchEntryPoint?](./generative-ai.groundingmetadata.searchentrypoint.md) |  | [SearchEntryPoint](./generative-ai.searchentrypoint.md) | _(Optional)_ Google search entry for the following-up web searches. |
-|  [webSearchQueries](./generative-ai.groundingmetadata.websearchqueries.md) |  | string\[\] | \* Web search queries for the following-up web search. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[groundingChunks?](./generative-ai.groundingmetadata.groundingchunks.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[GroundingChunk](./generative-ai.groundingchunk.md)<!-- -->\[\]
+
+
+</td><td>
+
+_(Optional)_ List of supporting references retrieved from specified grounding source.
+
+
+</td></tr>
+<tr><td>
+
+[groundingSupports?](./generative-ai.groundingmetadata.groundingsupports.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[GroundingSupport](./generative-ai.groundingsupport.md)<!-- -->\[\]
+
+
+</td><td>
+
+_(Optional)_ List of grounding support.
+
+
+</td></tr>
+<tr><td>
+
+[retrievalMetadata?](./generative-ai.groundingmetadata.retrievalmetadata.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[RetrievalMetadata](./generative-ai.retrievalmetadata.md)
+
+
+</td><td>
+
+_(Optional)_ Metadata related to retrieval in the grounding flow.
+
+
+</td></tr>
+<tr><td>
+
+[searchEntryPoint?](./generative-ai.groundingmetadata.searchentrypoint.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[SearchEntryPoint](./generative-ai.searchentrypoint.md)
+
+
+</td><td>
+
+_(Optional)_ Google search entry for the following-up web searches.
+
+
+</td></tr>
+<tr><td>
+
+[webSearchQueries](./generative-ai.groundingmetadata.websearchqueries.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string\[\]
+
+
+</td><td>
+
+\* Web search queries for the following-up web search.
+
+
+</td></tr>
+</tbody></table>

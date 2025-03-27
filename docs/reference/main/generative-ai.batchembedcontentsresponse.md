@@ -14,7 +14,42 @@ export interface BatchEmbedContentsResponse
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [embeddings](./generative-ai.batchembedcontentsresponse.embeddings.md) |  | [ContentEmbedding](./generative-ai.contentembedding.md)<!-- -->\[\] |  |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[embeddings](./generative-ai.batchembedcontentsresponse.embeddings.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ContentEmbedding](./generative-ai.contentembedding.md)<!-- -->\[\]
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

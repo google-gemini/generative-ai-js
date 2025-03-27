@@ -14,9 +14,82 @@ export interface RpcStatus
 
 ## Properties
 
-|  Property | Modifiers | Type | Description |
-|  --- | --- | --- | --- |
-|  [code](./generative-ai.rpcstatus.code.md) |  | number | Error status code |
-|  [details?](./generative-ai.rpcstatus.details.md) |  | [ErrorDetails](./generative-ai.errordetails.md)<!-- -->\[\] | _(Optional)_ A list of messages that carry the error details. |
-|  [message](./generative-ai.rpcstatus.message.md) |  | string | A developer-facing error message. |
+<table><thead><tr><th>
 
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[code](./generative-ai.rpcstatus.code.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+Error status code
+
+
+</td></tr>
+<tr><td>
+
+[details?](./generative-ai.rpcstatus.details.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[ErrorDetails](./generative-ai.errordetails.md)<!-- -->\[\]
+
+
+</td><td>
+
+_(Optional)_ A list of messages that carry the error details.
+
+
+</td></tr>
+<tr><td>
+
+[message](./generative-ai.rpcstatus.message.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+A developer-facing error message.
+
+
+</td></tr>
+</tbody></table>
