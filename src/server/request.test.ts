@@ -17,8 +17,8 @@
 
 import { expect, use } from "chai";
 import { match, restore, stub } from "sinon";
-import * as sinonChai from "sinon-chai";
-import * as chaiAsPromised from "chai-as-promised";
+import sinonChai from "sinon-chai";
+import chaiAsPromised from "chai-as-promised";
 import { DEFAULT_API_VERSION, DEFAULT_BASE_URL } from "../requests/request";
 import {
   FilesRequestUrl,
