@@ -496,6 +496,7 @@ export interface GenerationConfig {
     presencePenalty?: number;
     responseLogprobs?: boolean;
     responseMimeType?: string;
+    responseModalities?: string[];
     responseSchema?: ResponseSchema;
     // (undocumented)
     stopSequences?: string[];
