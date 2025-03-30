@@ -22,6 +22,17 @@ import {
 import { CachedContent, ModelParams, RequestOptions } from "../types";
 import { GenerativeModel } from "./models/generative-model";
 
+import {
+  CheckTuningStatusResponse,
+  CreateTunedModelResponse,
+  DeleteTunedModelResponse,
+  ListTunedModelsResponse,
+  checkTuningStatus,
+  createTunedModel,
+  deleteTunedModel,
+  listTunedModels,
+} from "./methods/fine-tuning";
+
 export { ChatSession } from "./methods/chat-session";
 export { GenerativeModel };
 
@@ -30,7 +41,7 @@ export { GenerativeModel };
  * @public
  */
 export class GoogleGenerativeAI {
-  constructor(public apiKey: string) {}
+  constructor(public apiKey: string) { }
 
   /**
    * Gets a {@link GenerativeModel} instance for the provided model name.
@@ -42,7 +53,7 @@ export class GoogleGenerativeAI {
     if (!modelParams.model) {
       throw new GoogleGenerativeAIError(
         `Must provide a model name. ` +
-          `Example: genai.getGenerativeModel({ model: 'my-model-name' })`,
+        `Example: genai.getGenerativeModel({ model: 'my-model-name' })`,
       );
     }
     return new GenerativeModel(this.apiKey, modelParams, requestOptions);
@@ -93,7 +104,7 @@ export class GoogleGenerativeAI {
         }
         throw new GoogleGenerativeAIRequestInputError(
           `Different value for "${key}" specified in modelParams` +
-            ` (${modelParams[key]}) and cachedContent (${cachedContent[key]})`,
+          ` (${modelParams[key]}) and cachedContent (${cachedContent[key]})`,
         );
       }
     }
@@ -112,4 +123,49 @@ export class GoogleGenerativeAI {
       requestOptions,
     );
   }
+
+  /**
+   * Lists tuned models.
+   * @param pageSize - Optional number of models to list. Default is 5.
+   * @returns A promise that resolves to a {@link ListTunedModelsResponse}.
+   */
+  async listTunedModels(pageSize = 5): Promise<ListTunedModelsResponse> {
+    return listTunedModels(this.apiKey, pageSize);
+  }
+
+  /**
+   * Creates a tuned model with the specified display name and training data.
+   * @param displayName - The name to display for the tuned model.
+   * @param trainingData - The training dataset.
+   * @returns A promise that resolves to a {@link CreateTunedModelResponse}.
+   */
+  async createTunedModel(
+    displayName: string,
+    trainingData: unknown
+  ): Promise<CreateTunedModelResponse> {
+    return createTunedModel(this.apiKey, displayName, trainingData);
+  }
+
+  /**
+   * Checks the tuning status of a fine-tuning operation.
+   * @param operationName - The operation ID to check.
+   * @returns A promise that resolves to a {@link CheckTuningStatusResponse}.
+   */
+  async checkTuningStatus(
+    operationName: string
+  ): Promise<CheckTuningStatusResponse> {
+    return checkTuningStatus(this.apiKey, operationName);
+  }
+
+  /**
+   * Deletes a tuned model by name.
+   * @param modelName - The name of the tuned model to delete.
+   * @returns A promise that resolves to a {@link DeleteTunedModelResponse}.
+   */
+  async deleteTunedModel(
+    modelName: string
+  ): Promise<DeleteTunedModelResponse> {
+    return deleteTunedModel(this.apiKey, modelName);
+  }
+
 }
