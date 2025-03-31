@@ -1,13 +1,9 @@
 import "dotenv/config"; // Load .env variables
 import readline from "readline"; // For terminal input
-import { model } from "./geminiClient.js";
-
-
-// Gemini SDK Setup
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai"; // Gemini SDK Setup
 
 // Initialize Gemini client with your API key
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
 // Export the generative model (Gemini Pro)
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -74,8 +70,8 @@ async function main() {
         try {
             // Ask Gemini to interpret the user's command
             const result = await model.generateContent(`
-This is a barista bot. The user said: "${input}". 
-Respond in lowercase with a simple command:
+                This is a barista bot. The user said: "${input}". 
+                Respond in lowercase with a simple command:
 - "add [drink] with [modifiers]" (e.g. add latte with oat milk)
 - "get order"
 - "clear"
