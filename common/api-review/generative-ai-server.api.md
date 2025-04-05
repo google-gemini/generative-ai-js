@@ -4,7 +4,6 @@
 
 ```ts
 
-/// <reference types="node" />
 
 // Warning: (ae-incompatible-release-tags) The symbol "ArraySchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
 //
@@ -32,6 +31,8 @@ export interface BooleanSchema extends BaseSchema {
     // (undocumented)
     type: typeof SchemaType.BOOLEAN;
 }
+
+/// <reference types="node" />
 
 // @public
 export interface CachedContent extends CachedContentBase {
