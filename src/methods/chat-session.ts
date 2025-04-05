@@ -126,6 +126,11 @@ export class ChatSession {
           }
         }
         finalResult = result;
+      })
+      .catch((e) => {
+        // Resets _sendPromise to avoid subsequent calls failing and throw error.
+        this._sendPromise = Promise.resolve();
+        throw e;
       });
     await this._sendPromise;
     return finalResult;
