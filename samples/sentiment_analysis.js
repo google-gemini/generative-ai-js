@@ -43,7 +43,7 @@ Text: "${text}"`;
   } catch (error) {
     console.error("Error performing sentiment analysis:", error);
   }
-  // [runSentimentAnalysis]
+  // [END runSentimentAnalysis]
 }
 
 // Example usage
