@@ -245,3 +245,8 @@ export interface CodeExecutionTool {
    */
   codeExecution: {};
 }
+
+export interface ArraySchema extends BaseSchema {
+  items: Schema;
+  type: typeof SchemaType.ARRAY;
+}
