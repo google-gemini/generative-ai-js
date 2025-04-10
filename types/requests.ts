@@ -17,7 +17,7 @@
 
 import { CachedContent } from "./server/caching";
 import { Content, Part } from "./content";
-import { HarmBlockThreshold, HarmCategory, TaskType } from "./enums";
+import { HarmBlockThreshold, HarmCategory, RequestMethodType, TaskType } from "./enums";
 import {
   FunctionDeclarationsTool,
   ResponseSchema,
@@ -207,6 +207,11 @@ export interface RequestOptions {
    * Custom HTTP request headers.
    */
   customHeaders?: Headers | Record<string, string>;
+
+  /**
+   * The method to use for the request
+   */
+  method?: RequestMethodType;
 }
 
 /**
