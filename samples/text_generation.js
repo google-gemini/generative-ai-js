@@ -47,13 +47,18 @@ async function textGenTextOnlyPromptStreaming() {
 
   const prompt = "Write a story about a magic backpack.";
 
-  const result = await model.generateContentStream(prompt);
-
-  // Print text as it comes in.
-  for await (const chunk of result.stream) {
-    const chunkText = chunk.text();
-    process.stdout.write(chunkText);
-  }
+  const result = await model.generateStreamedResponse(prompt, {
+    onData: (chunk) => {
+      const chunkText = chunk.text();
+      process.stdout.write(chunkText);
+    },
+    onEnd: (response) => {
+      console.log("\nStream ended. Final response:", response.text());
+    },
+    onError: (error) => {
+      console.error("Stream error:", error);
+    },
+  });
   // [END text_gen_text_only_prompt_streaming]
 }
 
@@ -108,13 +113,18 @@ async function textGenMultimodalOneImagePromptStreaming() {
     "image/jpeg",
   );
 
-  const result = await model.generateContentStream([prompt, imagePart]);
-
-  // Print text as it comes in.
-  for await (const chunk of result.stream) {
-    const chunkText = chunk.text();
-    process.stdout.write(chunkText);
-  }
+  const result = await model.generateStreamedResponse([prompt, imagePart], {
+    onData: (chunk) => {
+      const chunkText = chunk.text();
+      process.stdout.write(chunkText);
+    },
+    onEnd: (response) => {
+      console.log("\nStream ended. Final response:", response.text());
+    },
+    onError: (error) => {
+      console.error("Stream error:", error);
+    },
+  });
   // [END text_gen_multimodal_one_image_prompt_streaming]
 }
 
@@ -177,13 +187,18 @@ async function textGenMultimodalMultiImagePromptStreaming() {
     fileToGenerativePart(`${mediaPath}/firefighter.jpg`, "image/jpeg"),
   ];
 
-  const result = await model.generateContentStream([prompt, ...imageParts]);
-
-  // Print text as it comes in.
-  for await (const chunk of result.stream) {
-    const chunkText = chunk.text();
-    process.stdout.write(chunkText);
-  }
+  const result = await model.generateStreamedResponse([prompt, ...imageParts], {
+    onData: (chunk) => {
+      const chunkText = chunk.text();
+      process.stdout.write(chunkText);
+    },
+    onEnd: (response) => {
+      console.log("\nStream ended. Final response:", response.text());
+    },
+    onError: (error) => {
+      console.error("Stream error:", error);
+    },
+  });
   // [END text_gen_multimodal_multi_image_prompt_streaming]
 }
 
@@ -293,12 +308,18 @@ async function textGenMultimodalVideoPromptStreaming() {
     },
   };
 
-  const result = await model.generateContentStream([prompt, videoPart]);
-  // Print text as it comes in.
-  for await (const chunk of result.stream) {
-    const chunkText = chunk.text();
-    process.stdout.write(chunkText);
-  }
+  const result = await model.generateStreamedResponse([prompt, videoPart], {
+    onData: (chunk) => {
+      const chunkText = chunk.text();
+      process.stdout.write(chunkText);
+    },
+    onEnd: (response) => {
+      console.log("\nStream ended. Final response:", response.text());
+    },
+    onError: (error) => {
+      console.error("Stream error:", error);
+    },
+  });
   // [END text_gen_multimodal_video_prompt_streaming]
   await fileManager.deleteFile(uploadResult.file.name);
 }
