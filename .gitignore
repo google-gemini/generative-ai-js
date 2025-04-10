@@ -6,3 +6,4 @@ temp/
 testfiles
 nodejs-vertexai/
 samples/package-lock.json
+.env
