@@ -223,7 +223,7 @@ async function handleResponseNotOk(
   let isUnsupportedModelError = false;
   const newSdkUrl = "https://github.com/googleapis/js-genai";
   // Patterns for newer models likely requiring the new SDK
-  const unsupportedModelPatterns = [/gemini-2/, /gemini-pro-2.0/, /gemini-ultra-2.0/, /gemini-flash-2.5/, /gemini-pro-2.5/];
+  const unsupportedModelPatterns = [/gemini-2/, /gemini-pro-2.0/, /gemini-ultra-2.0/, /gemini-flash-2.5/, /gemini-pro-2.5/, /gemini-2.5-pro/, /gemini-2.5-pro-exp/, /gemini-2.0-flash/];
 
   // Extract model name from the URL
   let requestedModel = "unknown";
