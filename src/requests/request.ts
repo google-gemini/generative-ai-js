@@ -111,6 +111,28 @@ export async function getHeaders(url: RequestUrl): Promise<Headers> {
   return headers;
 }
 
+/**
+ * Generates the request options to be passed to the fetch API.
+ * @param requestOptions - The user-defined request options.
+ * @returns The generated request options.
+ */
+function buildFetchOptions(requestOptions?: SingleRequestOptions): RequestInit {
+  const fetchOptions = {} as RequestInit;
+  if (requestOptions?.signal !== undefined || requestOptions?.timeout >= 0) {
+    const controller = new AbortController();
+    if (requestOptions?.timeout >= 0) {
+      setTimeout(() => controller.abort(), requestOptions.timeout);
+    }
+    if (requestOptions?.signal) {
+      requestOptions.signal.addEventListener("abort", () => {
+        controller.abort();
+      });
+    }
+    fetchOptions.signal = controller.signal;
+  }
+  return fetchOptions;
+}
+
 export async function constructModelRequest(
   model: string,
   task: Task,
@@ -196,46 +218,54 @@ async function handleResponseNotOk(
   response: Response,
   url: string,
 ): Promise<void> {
-  let message = "";
+  let originalMessage = "";
   let errorDetails;
+  let isUnsupportedModelError = false;
+  const newSdkUrl = "https://github.com/googleapis/js-genai";
+  // Patterns for newer models likely requiring the new SDK
+  const unsupportedModelPatterns = [/gemini-2/, /gemini-pro-2.0/, /gemini-ultra-2.0/, /gemini-flash-2.5/, /gemini-pro-2.5/];
+
+  // Extract model name from the URL
+  let requestedModel = "unknown";
+  // Match /v.../models/model-name: or /v.../tunedModels/model-name:
+  const modelNameMatch = url.match(/\/(v\d+(?:beta)?\d*)\/(?:models|tunedModels)\/([^:]+):/);
+  if (modelNameMatch && modelNameMatch[2]) {
+      requestedModel = modelNameMatch[2];
+  }
+
   try {
     const json = await response.json();
-    message = json.error.message;
-    if (json.error.details) {
-      message += ` ${JSON.stringify(json.error.details)}`;
-      errorDetails = json.error.details;
+    originalMessage = json.error?.message || ""; // Safely access message
+    errorDetails = json.error?.details; // Safely access details
+
+    // Check 1: Explicit model name check
+    if (unsupportedModelPatterns.some(pattern => pattern.test(requestedModel))) {
+        // If the requested model *is* one of the new ones, assume this error is due to SDK incompatibility.
+        isUnsupportedModelError = true;
     }
+
+    // Append original details to message if they exist and aren't already in the message
+    if (errorDetails && !originalMessage.includes(JSON.stringify(errorDetails))) {
+      originalMessage += ` ${JSON.stringify(errorDetails)}`;
+    }
+
   } catch (e) {
-    // ignored
+    // Error parsing JSON is ignored, proceed with original status/text
   }
+
+  let finalMessage = `Error fetching from ${url.toString()}: [${response.status} ${response.statusText}] ${originalMessage || 'Server responded with an error.'}`; // Provide default if message is empty
+
+  if (isUnsupportedModelError) {
+      // Prepend the specific message for known unsupported models
+      finalMessage = `It looks like you're trying to use a newer Gemini model (${requestedModel}) with an older SDK. This model requires the latest SDK. Please upgrade to the latest SDK available at ${newSdkUrl}. Original error: ${finalMessage}`;
+  } else if ((response.status === 400 || response.status === 404) && (originalMessage.includes("Invalid model") || originalMessage.includes("not found") || originalMessage.includes("API key not valid"))) {
+      // Add a more general hint for other model-related or key errors that might be due to trying new models/regions
+      finalMessage += `\nHint: If you are trying to use a newer Gemini model (e.g., Gemini 2.0, 2.5 Pro) or a specific region, ensure your API key is valid for that model/region and consider upgrading to the latest SDK: ${newSdkUrl}`;
+  }
+
   throw new GoogleGenerativeAIFetchError(
-    `Error fetching from ${url.toString()}: [${response.status} ${
-      response.statusText
-    }] ${message}`,
+    finalMessage,
     response.status,
     response.statusText,
-    errorDetails,
   );
-}
-
-/**
- * Generates the request options to be passed to the fetch API.
- * @param requestOptions - The user-defined request options.
- * @returns The generated request options.
- */
-function buildFetchOptions(requestOptions?: SingleRequestOptions): RequestInit {
-  const fetchOptions = {} as RequestInit;
-  if (requestOptions?.signal !== undefined || requestOptions?.timeout >= 0) {
-    const controller = new AbortController();
-    if (requestOptions?.timeout >= 0) {
-      setTimeout(() => controller.abort(), requestOptions.timeout);
-    }
-    if (requestOptions?.signal) {
-      requestOptions.signal.addEventListener("abort", () => {
-        controller.abort();
-      });
-    }
-    fetchOptions.signal = controller.signal;
-  }
-  return fetchOptions;
 }
