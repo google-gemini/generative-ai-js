@@ -4,6 +4,8 @@
 
 ## GoogleSearchTool interface
 
+Google search tool for gemini v2+.
+
 **Signature:**
 
 ```typescript

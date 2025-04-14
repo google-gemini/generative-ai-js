@@ -591,7 +591,7 @@ export interface GoogleSearchRetrievalTool {
     googleSearchRetrieval?: GoogleSearchRetrieval;
 }
 
-// @public (undocumented)
+// @public
 export interface GoogleSearchTool {
     // (undocumented)
     googleSearch?: {};

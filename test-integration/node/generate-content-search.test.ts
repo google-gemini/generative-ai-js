@@ -18,7 +18,6 @@
 import { expect, use } from "chai";
 import * as chaiAsPromised from "chai-as-promised";
 import {
-  DynamicRetrievalMode,
   GoogleGenerativeAI,
   HarmBlockThreshold,
   HarmCategory,
