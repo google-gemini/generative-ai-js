@@ -4,6 +4,15 @@ With Gemini 2.0, we took the chance to create a single unified SDK for all devel
 
 The full migration guide from the old SDK to new SDK is available in the [Gemini API docs](https://ai.google.dev/gemini-api/docs/migrate).
 
-We won't be adding anything to this SDK or making any further changes. The Gemini API docs are fully updated to show examples of the new Google Gen AI SDK. We know how disruptive an SDK change can be and don't take this change lightly, but our goal is to create an extremely simple and clear path for developers to build with our models so it felt necessary to make this change.
+The Gemini API docs are fully updated to show examples of the new Google Gen AI SDK. We know how disruptive an SDK change can be and don't take this change lightly, but our goal is to create an extremely simple and clear path for developers to build with our models so it felt necessary to make this change.
 
 Thank you for building with Gemini and [let us know](https://discuss.ai.google.dev/c/gemini-api/4) if you need any help!
+
+**Support Plan for this Repository:**
+
+*   **Limited Maintenance:** Development is now restricted to **critical bug fixes only**. No new features will be added.
+*   **Purpose:** This limited support aims to provide stability for users while they transition to the new SDK.
+*   **End-of-Life Date:** All support for this repository (including bug fixes) will permanently end on **August 31st, 2025**.
+
+We encourage all users to begin planning their migration to the [Google Generative AI SDK](https://github.com/googleapis/js-genai) to ensure continued access to the latest capabilities and support.
+
