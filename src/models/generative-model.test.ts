@@ -462,4 +462,25 @@ describe("GenerativeModel", () => {
     expect(makeRequestStub).to.not.be.called;
     restore();
   });
+  it("throws error when using unsupported array schema properties", async () => {
+    const genModel = new GenerativeModel("apiKey", {
+      model: "my-model",
+      generationConfig: {
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: SchemaType.ARRAY,
+          items: {
+            type: SchemaType.STRING,
+          },
+          minItems: 1, // This should trigger error
+          maxItems: 3, // This should trigger error
+        },
+      },
+    });
+
+    await expect(genModel.generateContent("test")).to.be.rejectedWith(
+      GoogleGenerativeAIError,
+      "Properties 'minItems' and 'maxItems' are not supported in array schema"
+    );
+  });
 });
