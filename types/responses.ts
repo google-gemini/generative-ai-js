@@ -33,6 +33,24 @@ export interface GenerateContentResult {
   response: EnhancedGenerateContentResponse;
 }
 
+interface Image{
+  gcsUri?:string;
+  bytesBase64Encoded:string;
+  mimeType:string;
+}
+
+
+interface  GeneratedImage{
+  image?:Image[];
+  raiFilterReason?:string[];
+  enhancedPrompt?:string[];
+  
+}
+
+export interface GenerateImagesResult{
+  predictions?:GeneratedImage[]; 
+ }
+
 /**
  * Result object returned from generateContentStream() call.
  * Iterate over `stream` to get chunks as they come in and/or
