@@ -18,3 +18,5 @@
 export * from "../types";
 export * from "./gen-ai";
 export * from "./errors";
+export { createEncryptedTextPart } from "./requests/request-helpers";
+export { KeyPair } from "./encryption/crypto-utils";
