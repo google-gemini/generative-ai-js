@@ -592,6 +592,12 @@ export interface GoogleSearchRetrievalTool {
 }
 
 // @public
+export interface GoogleSearchTool {
+    // (undocumented)
+    googleSearch?: {};
+}
+
+// @public
 export interface GroundingChunk {
     web?: GroundingChunkWeb;
 }
@@ -879,7 +885,7 @@ export interface TextPart {
 }
 
 // @public
-export type Tool = FunctionDeclarationsTool | CodeExecutionTool | GoogleSearchRetrievalTool;
+export type Tool = FunctionDeclarationsTool | CodeExecutionTool | GoogleSearchRetrievalTool | GoogleSearchTool;
 
 // @public
 export interface ToolConfig {
