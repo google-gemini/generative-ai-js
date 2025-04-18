@@ -16,8 +16,8 @@
  */
 import { expect, use } from "chai";
 import { GoogleAICacheManager } from "./cache-manager";
-import * as sinonChai from "sinon-chai";
-import * as chaiAsPromised from "chai-as-promised";
+import  sinonChai from "sinon-chai";
+import chaiAsPromised from "chai-as-promised";
 import { restore, stub } from "sinon";
 import * as request from "./request";
 import { RpcTask } from "./constants";

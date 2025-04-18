@@ -22,7 +22,7 @@ import {
 } from "./stream-reader";
 import { expect, use } from "chai";
 import { restore } from "sinon";
-import * as sinonChai from "sinon-chai";
+import sinonChai from "sinon-chai";
 import {
   getChunkedStream,
   getErrorStream,
@@ -340,7 +340,73 @@ describe("processStream", () => {
     }
     expect(foundCitationMetadata).to.be.true;
   });
-});
+  
+    
+  describe("callbacks", () => {
+    it("chunk callback were called", (done) => {
+      const fakeResponse = getMockResponseStreaming(
+        "streaming-success-citations.txt",
+      );
+      let dataCount = 0;
+      processStream(fakeResponse as Response, {
+        onData: (data: string) => {
+          dataCount++;
+          expect(data).to.not.be.empty;
+        },
+        onEnd: () => {
+          expect(dataCount).to.be.greaterThan(0);
+          done();
+        },
+      });
+    });
+  
+    it("error callbacks were called", (done) => {
+      const fakeResponse = getMockResponseStreaming(
+        "streaming-failure-prompt-blocked-safety.txt",
+      );
+      processStream(fakeResponse as Response, {
+        onError: (error: Error) => {
+          expect(error).to.be.instanceOf(GoogleGenerativeAIError);
+          done();
+        },
+        onEnd:() => done(),
+      });
+    });
+  
+    it("end callbacks were called", (done) => {
+      const fakeResponse = getMockResponseStreaming(
+        "streaming-success-basic-reply-short.txt",
+      );
+      processStream(fakeResponse as Response, {
+        onEnd: (data) => {
+          expect(data).to.include("Cheyenne");
+          done();
+        },
+      });
+    });
+  
+    it("all callbacks were called", (done) => {
+      const fakeResponse = getMockResponseStreaming(
+        "streaming-success-basic-reply-long.txt", // Changed to long response
+      );
+      let dataCount = 0;
+      processStream(fakeResponse as Response, {
+        onData: (data: string) => {
+          dataCount++;
+          expect(data).to.not.be.empty;
+        },
+        onEnd: (data) => {
+          expect(data).to.include("**Cats:**");
+          expect(data).to.include("to their owners.");
+          expect(dataCount).to.be.greaterThan(0);
+          done();
+        },
+      });
+    });
+  });
+  });
+
+
 
 describe("aggregateResponses", () => {
   it("handles no candidates, and promptFeedback", () => {
