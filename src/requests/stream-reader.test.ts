@@ -340,6 +340,62 @@ describe("processStream", () => {
     }
     expect(foundCitationMetadata).to.be.true;
   });
+
+  describe("callbacks", () => {
+    it("chunk callbacks were called", (done) => {
+        const fakeResponse = getMockResponseStreaming(
+          "streaming-success-citations.txt",
+        );
+        processStream(fakeResponse as Response, {
+          onData: (data: string) => {
+            expect(data).to.not.be.empty;
+          },
+          onEnd: () => done(),
+        });
+    });
+
+    it("error callbacks were called", (done) => {
+        const fakeResponse = getMockResponseStreaming(
+          "streaming-failure-prompt-blocked-safety.txt",
+        );
+        processStream(fakeResponse as Response, {
+          onError: (error: Error) => {
+            expect(error).to.be.instanceOf(GoogleGenerativeAIError);
+            done();
+          },
+          onEnd: () => done(),
+        });
+    });
+
+    it("end callbacks were called", (done) => {
+        const fakeResponse = getMockResponseStreaming(
+          "streaming-success-basic-reply-short.txt",
+        );
+        processStream(fakeResponse as Response, {
+          onEnd: (data) => {
+            expect(data).to.include("Cheyenne");
+            done();
+          },
+        });
+    });
+
+    it("all callbacks were called", (done) => {
+        const fakeResponse = getMockResponseStreaming(
+          "streaming-success-basic-reply-long.txt",
+        );
+        processStream(fakeResponse as Response, {
+          onEnd: (data) => {
+            expect(data).to.include("**Cats:**");
+            expect(data).to.include("to their owners.");
+            done();
+          },
+          onData: (data: string) => {
+            expect(data).to.not.be.empty;
+          },
+        });
+    });
+  });
+
 });
 
 describe("aggregateResponses", () => {
