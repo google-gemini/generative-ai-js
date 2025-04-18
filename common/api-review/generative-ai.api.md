@@ -220,6 +220,17 @@ export interface EnhancedGenerateContentResponse extends GenerateContentResponse
     text: () => string;
 }
 
+// Warning: (ae-incompatible-release-tags) The symbol "EnumStringSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface EnumStringSchema extends BaseSchema {
+    enum: string[];
+    // (undocumented)
+    format: "enum";
+    // (undocumented)
+    type: typeof SchemaType.STRING;
+}
+
 // @public
 export interface ErrorDetails {
     // (undocumented)
@@ -800,6 +811,18 @@ export interface SearchEntryPoint {
     sdkBlob?: string;
 }
 
+// Warning: (ae-incompatible-release-tags) The symbol "SimpleStringSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
+//
+// @public
+export interface SimpleStringSchema extends BaseSchema {
+    // (undocumented)
+    enum?: never;
+    // (undocumented)
+    format?: "date-time" | undefined;
+    // (undocumented)
+    type: typeof SchemaType.STRING;
+}
+
 // @public
 export interface SingleRequestOptions extends RequestOptions {
     signal?: AbortSignal;
@@ -831,11 +854,7 @@ export interface StreamCallbacks {
 // Warning: (ae-incompatible-release-tags) The symbol "StringSchema" is marked as @public, but its signature references "BaseSchema" which is marked as @internal
 //
 // @public
-export interface StringSchema extends BaseSchema {
-    enum?: string[];
-    // (undocumented)
-    type: typeof SchemaType.STRING;
-}
+export type StringSchema = SimpleStringSchema | EnumStringSchema;
 
 // @public
 export enum TaskType {

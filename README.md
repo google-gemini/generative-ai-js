@@ -1,98 +1,20 @@
-# Google AI SDK for JavaScript
+# [Deprecated] Google AI JavaScript SDK for the Gemini API
 
-The Google AI JavaScript SDK is the easiest way for JavaScript developers to
-build with the Gemini API. The Gemini API gives you access to Gemini
-[models](https://ai.google.dev/models/gemini) created by
-[Google DeepMind](https://deepmind.google/technologies/gemini/#introduction).
-Gemini models are built from the ground up to be multimodal, so you can reason
-seamlessly across text, images, and code.
+With Gemini 2.0, we took the chance to create a single unified SDK for all developers who want to use Google's GenAI models (Gemini, Veo, Imagen, etc). As part of that process, we took all of the feedback from this SDK and what developers like about other SDKs in the ecosystem to create the [Google Gen AI SDK](https://github.com/googleapis/js-genai). 
 
-> [!CAUTION] **Using the Google AI SDK for JavaScript directly from a
-> client-side app is recommended for prototyping only.** If you plan to enable
-> billing, we strongly recommend that you call the Google AI Gemini API only
-> server-side to keep your API key safe. You risk potentially exposing your API
-> key to malicious actors if you embed your API key directly in your JavaScript
-> app or fetch it remotely at runtime.
+The full migration guide from the old SDK to new SDK is available in the [Gemini API docs](https://ai.google.dev/gemini-api/docs/migrate).
 
-## Get started with the Gemini API
+The Gemini API docs are fully updated to show examples of the new Google Gen AI SDK. We know how disruptive an SDK change can be and don't take this change lightly, but our goal is to create an extremely simple and clear path for developers to build with our models so it felt necessary to make this change.
 
-1.  Go to [Google AI Studio](https://aistudio.google.com/).
-2.  Login with your Google account.
-3.  [Create an API key](https://aistudio.google.com/app/apikey). Note that in
-    Europe the free tier is not available.
-4.  Try the
-    [Node.js quickstart](https://ai.google.dev/tutorials/node_quickstart)
+Thank you for building with Gemini and [let us know](https://discuss.ai.google.dev/c/gemini-api/4) if you need any help!
 
-## Usage example
+**Please be advised that this repository is now considered legacy.** For the latest features, performance improvements, and active development, we strongly recommend migrating to the official **[Google Generative AI SDK for JavaScript](https://github.com/googleapis/js-genai)**.
 
-See the [Node.js quickstart](https://ai.google.dev/tutorials/node_quickstart)
-for complete code.
+**Support Plan for this Repository:**
 
-1.  Install the SDK package
+*   **Limited Maintenance:** Development is now restricted to **critical bug fixes only**. No new features will be added.
+*   **Purpose:** This limited support aims to provide stability for users while they transition to the new SDK.
+*   **End-of-Life Date:** All support for this repository (including bug fixes) will permanently end on **August 31st, 2025**.
 
-```js
-npm install @google/generative-ai
-```
+We encourage all users to begin planning their migration to the [Google Generative AI SDK](https://github.com/googleapis/js-genai) to ensure continued access to the latest capabilities and support.
 
-1.  Initialize the model
-
-```js
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-```
-
-1.  Run a prompt
-
-```js
-const prompt = "Does this look store-bought or homemade?";
-const image = {
-  inlineData: {
-    data: Buffer.from(fs.readFileSync("cookie.png")).toString("base64"),
-    mimeType: "image/png",
-  },
-};
-
-const result = await model.generateContent([prompt, image]);
-console.log(result.response.text());
-```
-
-## Try out a sample app
-
-This repository contains sample Node and web apps demonstrating how the SDK can
-access and utilize the Gemini model for various use cases.
-
-**To try out the sample Node app, follow these steps:**
-
-1.  Check out this repository. \
-    `git clone https://github.com/google/generative-ai-js`
-
-1.  [Obtain an API key](https://makersuite.google.com/app/apikey) to use with
-    the Google AI SDKs.
-
-2.  cd into the `samples` folder and run `npm install`.
-
-3.  Assign your API key to an environment variable: `export API_KEY=MY_API_KEY`.
-
-4.  Open the sample file you're interested in. Example: `text_generation.js`.
-    In the `runAll()` function, comment out any samples you don't want to run.
-
-5.  Run the sample file. Example: `node text_generation.js`.
-
-## Documentation
-
-See the
-[Gemini API Cookbook](https://github.com/google-gemini/gemini-api-cookbook/) or
-[ai.google.dev](https://ai.google.dev) for complete documentation.
-
-## Contributing
-
-See [Contributing](/docs/contributing.md) for more information on contributing
-to the Google AI JavaScript SDK.
-
-## License
-
-The contents of this repository are licensed under the
-[Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).

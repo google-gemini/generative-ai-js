@@ -46,6 +46,27 @@ describe("ChatSession", () => {
         match.any,
       );
     });
+    it("generateContent errors should not persist", async () => {
+      const generateContentStub = stub(
+        generateContentMethods,
+        "generateContent",
+      ).rejects("generateContent failed");
+      const chatSession = new ChatSession("MY_API_KEY", "a-model");
+      await expect(chatSession.sendMessage("hello")).to.be.rejected;
+      expect(generateContentStub).to.be.calledWith(
+        "MY_API_KEY",
+        "a-model",
+        match.any,
+      );
+      restore();
+
+      // Subsequent call should succeed.
+      const mockResponse = getMockResponse(
+        "unary-success-basic-reply-short.json",
+      );
+      stub(request, "makeModelRequest").resolves(mockResponse as Response);
+      await expect(chatSession.sendMessage("hello")).to.not.be.rejected;
+    });
   });
   describe("sendMessageRecitationErrorNotAddingResponseToHistory()", () => {
     it("generateContent errors should be catchable", async () => {
