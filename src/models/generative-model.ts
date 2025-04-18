@@ -63,11 +63,12 @@ export class GenerativeModel {
   toolConfig?: ToolConfig;
   systemInstruction?: Content;
   cachedContent: CachedContent;
+  private _requestOptions: RequestOptions;
 
   constructor(
     public apiKey: string,
     modelParams: ModelParams,
-    private _requestOptions: RequestOptions = {},
+    requestOptions: RequestOptions = {},
   ) {
     if (modelParams.model.includes("/")) {
       // Models may be named "models/model-name" or "tunedModels/model-name"
@@ -84,6 +85,7 @@ export class GenerativeModel {
       modelParams.systemInstruction,
     );
     this.cachedContent = modelParams.cachedContent;
+    this._requestOptions = requestOptions;
   }
 
   /**
