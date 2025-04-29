@@ -21,7 +21,7 @@ permissions:
 on:
   push:
     branches:
-      - main
+      - MarkDaoust-patch-2
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
