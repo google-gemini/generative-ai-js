@@ -1,5 +1,11 @@
 # @google/generative-ai
 
+## 0.24.1
+
+### Patch Changes
+
+- 2a82804: Update package description to include deprecation notice.
+
 ## 0.24.0
 
 ### Minor Changes
