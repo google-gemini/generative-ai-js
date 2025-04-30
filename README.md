@@ -1,6 +1,9 @@
 # [Deprecated] Google AI JavaScript SDK for the Gemini API
 
-With Gemini 2.0, we took the chance to create a single unified SDK for all developers who want to use Google's GenAI models (Gemini, Veo, Imagen, etc). As part of that process, we took all of the feedback from this SDK and what developers like about other SDKs in the ecosystem to create the [Google Gen AI SDK](https://github.com/googleapis/js-genai). 
+> **IMPORTANT:** This SDK is intended for use with older Gemini models (e.g., Gemini 1.0 Pro, Gemini 1.5 Pro). For access to the latest models, including Gemini 2.0 and Gemini 2.5 Pro, please use the newer SDK available at [https://github.com/googleapis/js-genai](https://github.com/googleapis/js-genai).
+
+=======
+With Gemini 2.0, we took the chance to create a single unified SDK for all developers who want to use Google's GenAI models (Gemini, Veo, Imagen, etc). As part of that process, we took all of the feedback from this SDK and what developers like about other SDKs in the ecosystem to create the [Google Gen AI SDK](https://github.com/googleapis/js-genai).
 
 The full migration guide from the old SDK to new SDK is available in the [Gemini API docs](https://ai.google.dev/gemini-api/docs/migrate).
 
