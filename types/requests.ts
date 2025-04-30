@@ -245,3 +245,30 @@ export interface CodeExecutionTool {
    */
   codeExecution: {};
 }
+
+/**
+ * Request sent to `generateAnswer` endpoint.
+ * @public
+ */
+export interface GenerateAnswerRequest {
+  input: string;
+  sources?: AttributedSource[];
+  temperature?: number;
+}
+
+export interface AttributedSource {
+  title: string;
+  url: string;
+  content: string;
+}
+
+export interface GenerateAnswerResponse {
+  answer: string;
+  attributedPassages: AttributedPassage[];
+  confidenceScore: number;
+}
+
+export interface AttributedPassage {
+  text: string;
+  source: AttributedSource;
+}

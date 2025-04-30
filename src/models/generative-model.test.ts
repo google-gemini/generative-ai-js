@@ -28,6 +28,7 @@ import {
 import { getMockResponse } from "../../test-utils/mock-response";
 import { match, restore, stub } from "sinon";
 import * as request from "../requests/request";
+import { Task } from '../requests/request';
 
 use(sinonChai);
 
@@ -461,5 +462,122 @@ describe("GenerativeModel", () => {
     );
     expect(makeRequestStub).to.not.be.called;
     restore();
+  });
+});
+
+describe('GenerativeModel - generateAnswer()', () => {
+  const API_KEY = 'test-api-key';
+  const MODEL_NAME = 'models/aqa';
+  const TEST_REQUEST = {
+    input: "What's the capital of France?",
+    sources: [{
+      title: "World Facts",
+      url: "https://example.com",
+      content: "Paris is the capital of France."
+    }]
+  };
+
+  afterEach(() => {
+    restore();
+  });
+
+  it('should make correct API request', async () => {
+    const mockResponse = {
+      answer: "Paris",
+      attributedPassages: [{
+        text: "Paris is the capital of France.",
+        source: {
+          title: "World Facts",
+          url: "https://example.com",
+          content: "Paris is the capital of France."
+        }
+      }],
+      confidenceScore: 0.95
+    };
+
+    const makeRequestStub = stub(request, 'makeModelRequest')
+      .resolves({
+        json: () => Promise.resolve(mockResponse)
+      } as Response);
+
+    const model = new GenerativeModel(API_KEY, { model: MODEL_NAME });
+    const result = await model.generateAnswer(TEST_REQUEST);
+
+    expect(makeRequestStub).calledWith(
+      'models/aqa',
+      Task.GENERATE_ANSWER,
+      API_KEY,
+      false,
+      JSON.stringify(TEST_REQUEST),
+      {}
+    );
+
+    expect(result).to.deep.equal({
+      answer: "Paris",
+      attributedPassages: [{
+        text: "Paris is the capital of France.",
+        source: {
+          title: "World Facts",
+          url: "https://example.com",
+          content: "Paris is the capital of France."
+        }
+      }],
+      confidenceScore: 0.95
+    });
+  });
+
+  it('should handle API errors', async () => {
+    const errorResponse = {
+      error: {
+        message: "Invalid input format",
+        code: 400
+      }
+    };
+
+    stub(request, 'makeModelRequest').resolves({
+      json: () => Promise.resolve(errorResponse)
+    } as Response);
+
+    const model = new GenerativeModel(API_KEY, { model: MODEL_NAME });
+    
+    try {
+      await model.generateAnswer(TEST_REQUEST);
+      expect.fail('Should have thrown error');
+    } catch (e) {
+      expect(e.message).to.include('AQA API Error');
+      expect(e.response).to.deep.equal(errorResponse);
+    }
+  });
+
+  it('should validate required input field', async () => {
+    const model = new GenerativeModel(API_KEY, { model: MODEL_NAME });
+    
+    try {
+      // @ts-expect-error Testing invalid input
+      await model.generateAnswer({ sources: [] });
+      expect.fail('Should have thrown error');
+    } catch (e) {
+      expect(e.message).to.include("must contain 'input' field");
+    }
+  });
+
+  it('should handle partial response data', async () => {
+    const partialResponse = {
+      answer: "Paris",
+      // Missing attributedPassages and confidenceScore
+    };
+
+    stub(request, 'makeModelRequest').resolves({
+      json: () => Promise.resolve(partialResponse)
+    } as Response);
+
+    const model = new GenerativeModel(API_KEY, { model: MODEL_NAME });
+    const result = await model.generateAnswer(TEST_REQUEST);
+
+    expect(result).to.deep.equal({
+      answer: "Paris",
+      attributedPassages: [],
+      confidenceScore: 0
+    });
   });
 });
