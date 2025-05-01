@@ -239,3 +239,7 @@ export interface ErrorDetails {
   metadata?: Record<string, unknown>;
   [key: string]: unknown;
 }
+
+export interface ListTunedModelsResponse {
+  tunedModels: Array<{name: string}>
+} 
