@@ -21,6 +21,7 @@ import {
   GenerateContentResponse,
   GenerateContentStreamResult,
   Part,
+  StreamCallbacks,
 } from "../../types";
 import {
   GoogleGenerativeAIAbortError,
@@ -38,7 +39,7 @@ const responseLineRE = /^data\: (.*)(?:\n\n|\r\r|\r\n\r\n)/;
  *
  * @param response - Response from a fetch call
  */
-export function processStream(response: Response): GenerateContentStreamResult {
+export function processStream(response: Response, callbacks?: StreamCallbacks): GenerateContentStreamResult {
   const inputStream = response.body!.pipeThrough(
     new TextDecoderStream("utf8", { fatal: true }),
   );
@@ -47,21 +48,29 @@ export function processStream(response: Response): GenerateContentStreamResult {
   const [stream1, stream2] = responseStream.tee();
   return {
     stream: generateResponseSequence(stream1),
-    response: getResponsePromise(stream2),
+    response: getResponsePromise(stream2, callbacks),
   };
 }
 
 async function getResponsePromise(
   stream: ReadableStream<GenerateContentResponse>,
+  callbacks?: StreamCallbacks,
 ): Promise<EnhancedGenerateContentResponse> {
-  const allResponses: GenerateContentResponse[] = [];
-  const reader = stream.getReader();
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) {
-      return addHelpers(aggregateResponses(allResponses));
+  try {
+    const allResponses: GenerateContentResponse[] = [];
+    const reader = stream.getReader();
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) {
+        callbacks?.onEnd?.(allResponses.reduce((acc, curr) => acc + addHelpers(curr).text(), ""));
+        return addHelpers(aggregateResponses(allResponses));
+      }
+      allResponses.push(value);
+      callbacks?.onData?.(addHelpers(value).text());
     }
-    allResponses.push(value);
+  } catch (error) {
+    callbacks?.onError?.(error);
+    throw error;
   }
 }
 
