@@ -122,6 +122,10 @@ export interface GenerationConfig {
    * logprobs to return at each decoding step in the logprobsResult.
    */
   logprobs?: number;
+  /**
+   * Compatible with new response formats, supporting "Text", "Audio", "Image" arrays.
+   */
+  responseModalities?: string[];
 }
 
 /**
