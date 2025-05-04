@@ -170,6 +170,7 @@ export interface EmbedContentRequest {
   content: Content;
   taskType?: TaskType;
   title?: string;
+  outputDimensionality?: number;
 }
 
 /**
