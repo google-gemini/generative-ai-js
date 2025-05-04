@@ -18,6 +18,14 @@
 import { DynamicRetrievalMode } from "./enums";
 
 /**
+ * Google search tool for gemini v2+.
+ * @public
+ */
+export declare interface GoogleSearchTool {
+  googleSearch?: {};
+}
+
+/**
  * Retrieval tool that is powered by Google search.
  * @public
  */
