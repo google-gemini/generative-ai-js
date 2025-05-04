@@ -25,6 +25,7 @@ import {
 } from "./function-calling";
 import { GoogleSearchRetrievalTool } from "./search-grounding";
 
+
 /**
  * Base parameters for a number of methods.
  * @public
@@ -207,6 +208,15 @@ export interface RequestOptions {
    * Custom HTTP request headers.
    */
   customHeaders?: Headers | Record<string, string>;
+}
+/**
+ * Stream callbacks for streaming responses.
+ * @public
+ */
+export interface StreamCallbacks {
+  onData?: (data: string) => void;
+  onEnd?: (data: string) => void;
+  onError?: (error: Error) => void;
 }
 
 /**

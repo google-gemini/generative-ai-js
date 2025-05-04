@@ -18,7 +18,7 @@
 import { addHelpers, formatBlockErrorMessage } from "./response-helpers";
 import { expect, use } from "chai";
 import { restore } from "sinon";
-import * as sinonChai from "sinon-chai";
+import  sinonChai from "sinon-chai";
 import {
   BlockReason,
   Content,
