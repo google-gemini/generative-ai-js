@@ -377,4 +377,121 @@ describe("GoogleAIFileManager", () => {
       expect(uploadMetadata.name).to.equal("custom/path/filename");
     });
   });
+
+  it("handles URL-based file uploads", async () => {
+    const makeRequestStub = stub(request, "makeServerRequest").resolves({
+      ok: true,
+      json: fakeUploadJson,
+    } as Response);
+    const fetchStub = stub(global, "fetch").resolves({
+      ok: true,
+      arrayBuffer: () => Promise.resolve(new ArrayBuffer(8)),
+    } as Response);
+
+    const fileManager = new GoogleAIFileManager("apiKey");
+    const result = await fileManager.uploadFile(
+      "https://example.com/file.pdf",
+      {
+        mimeType: "application/pdf",
+      },
+    );
+
+    expect(result.file.uri).to.equal(FAKE_URI);
+    expect(fetchStub).to.have.been.calledWith("https://example.com/file.pdf");
+    expect(makeRequestStub.args[0][2]).to.be.instanceOf(Blob);
+    const bodyBlob = makeRequestStub.args[0][2];
+    const blobText = await (bodyBlob as Blob).text();
+    expect(blobText).to.include("Content-Type: application/pdf");
+    expect(blobText).to.include("file.pdf");
+  });
+
+  it("handles ArrayBuffer input", async () => {
+    const makeRequestStub = stub(request, "makeServerRequest").resolves({
+      ok: true,
+      json: fakeUploadJson,
+    } as Response);
+
+    const fileManager = new GoogleAIFileManager("apiKey");
+    const buffer = new ArrayBuffer(8);
+    const result = await fileManager.uploadFile(buffer, {
+      mimeType: "application/octet-stream",
+      name: "test.bin",
+    });
+
+    expect(result.file.uri).to.equal(FAKE_URI);
+    expect(makeRequestStub.args[0][2]).to.be.instanceOf(Blob);
+    const bodyBlob = makeRequestStub.args[0][2];
+    const blobText = await (bodyBlob as Blob).text();
+    expect(blobText).to.include("Content-Type: application/octet-stream");
+    expect(blobText).to.include("test.bin");
+  });
+
+  it("handles Uint8Array input", async () => {
+    const makeRequestStub = stub(request, "makeServerRequest").resolves({
+      ok: true,
+      json: fakeUploadJson,
+    } as Response);
+
+    const fileManager = new GoogleAIFileManager("apiKey");
+    const array = new Uint8Array([1, 2, 3, 4]);
+    const result = await fileManager.uploadFile(array, {
+      mimeType: "application/octet-stream",
+      name: "test.bin",
+    });
+
+    expect(result.file.uri).to.equal(FAKE_URI);
+    expect(makeRequestStub.args[0][2]).to.be.instanceOf(Blob);
+    const bodyBlob = makeRequestStub.args[0][2];
+    const blobText = await (bodyBlob as Blob).text();
+    expect(blobText).to.include("Content-Type: application/octet-stream");
+    expect(blobText).to.include("test.bin");
+  });
+
+  it("requires file name for binary inputs", async () => {
+    const fileManager = new GoogleAIFileManager("apiKey");
+    const buffer = new ArrayBuffer(8);
+
+    await expect(
+      fileManager.uploadFile(buffer, {
+        mimeType: "application/octet-stream",
+      }),
+    ).to.be.rejectedWith(
+      "File name is required when using ArrayBuffer or Uint8Array input",
+    );
+  });
+
+  it("handles URL fetch errors", async () => {
+    const fetchStub = stub(global, "fetch").resolves({
+      ok: false,
+      statusText: "Not Found",
+    } as Response);
+
+    const fileManager = new GoogleAIFileManager("apiKey");
+
+    await expect(
+      fileManager.uploadFile("https://example.com/missing.pdf", {
+        mimeType: "application/pdf",
+      }),
+    ).to.be.rejectedWith("Failed to fetch file from URL: Not Found");
+  });
+
+  it("extracts filename from URL if not provided", async () => {
+    const makeRequestStub = stub(request, "makeServerRequest").resolves({
+      ok: true,
+      json: fakeUploadJson,
+    } as Response);
+    stub(global, "fetch").resolves({
+      ok: true,
+      arrayBuffer: () => Promise.resolve(new ArrayBuffer(8)),
+    } as Response);
+
+    const fileManager = new GoogleAIFileManager("apiKey");
+    await fileManager.uploadFile("https://example.com/path/document.pdf", {
+      mimeType: "application/pdf",
+    });
+
+    const bodyBlob = makeRequestStub.args[0][2];
+    const blobText = await (bodyBlob as Blob).text();
+    expect(blobText).to.include("document.pdf");
+  });
 });
