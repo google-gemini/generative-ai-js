@@ -20,8 +20,10 @@ import * as sinonChai from "sinon-chai";
 import chaiDeepEqualIgnoreUndefined from "chai-deep-equal-ignore-undefined";
 import { Content } from "../../types";
 import {
+  convertFromImageGenerationRequest,
   formatCountTokensInput,
   formatGenerateContentInput,
+  formatGenerateImageInput,
 } from "./request-helpers";
 
 use(sinonChai);
@@ -272,6 +274,46 @@ describe("request formatting methods", () => {
         systemInstruction: "hello",
         tools: [{ codeExecution: {} }],
         cachedContent: "mycache",
+      });
+    });
+    it("formats a 'string' to ImageGenerationRequest", () => {
+      const result = formatGenerateImageInput("Create a cat");
+      expect(result).to.deepEqualIgnoreUndefined({
+        prompt: "Create a cat",
+      });
+    });
+    it("converts a ImageGenerationRequest to PredictRequest", () => {
+      const result = convertFromImageGenerationRequest("test_model", {
+        prompt: "Create a cat",
+        numberOfImages: 1,
+        negativePrompt: "Not a dog",
+        guidanceScale: 5,
+        outputMimeType: "image/png",
+        compressionQuality: 12,
+        language: "ko",
+        safetyFilterLevel: "block_medium_and_above",
+        aspectRatio: "1:1",
+        width: 512,
+        height: 1024,
+      });
+      expect(result).to.deepEqualIgnoreUndefined({
+        instances: [
+          {
+            prompt: "Create a cat",
+          },
+        ],
+        model: "test_model",
+        parameters: {
+          aspectRatio: "1:1",
+          compressionQuality: 12,
+          guidanceScale: 5,
+          language: "ko",
+          negativePrompt: "Not a dog",
+          outputMimeType: "image/png",
+          safetyFilterLevel: "block_medium_and_above",
+          sampleCount: 1,
+          sampleImageSize: 1024,
+        },
       });
     });
   });

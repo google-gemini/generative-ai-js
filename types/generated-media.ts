@@ -15,10 +15,14 @@
  * limitations under the License.
  */
 
-export * from "./content";
-export * from "./enums";
-export * from "./requests";
-export * from "./responses";
-export * from "./search-grounding";
-export * from "./generated-media";
-export { CachedContent, CachedContentBase } from "./server/caching";
+
+/**
+ * Generated images. It will be returned in response.
+ * @public
+ */
+export interface GeneratedImage {
+  /**
+   * Image bytes.
+   */
+  imageBytes?: string;
+}

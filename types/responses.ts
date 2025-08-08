@@ -23,6 +23,7 @@ import {
   HarmProbability,
 } from "./enums";
 import { GroundingMetadata } from "./search-grounding";
+import { GeneratedImage } from "./generated-media";
 
 /**
  * Result object returned from generateContent() call.
@@ -238,4 +239,12 @@ export interface ErrorDetails {
   domain?: string;
   metadata?: Record<string, unknown>;
   [key: string]: unknown;
+}
+
+/**
+ * Response message for generating image.
+ * @public
+ */
+export interface ImageGenerationResponse {
+  images: GeneratedImage[];
 }

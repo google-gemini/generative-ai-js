@@ -16,6 +16,7 @@
 |  [GoogleGenerativeAIFetchError](./generative-ai.googlegenerativeaifetcherror.md) | Error class covering HTTP errors when calling the server. Includes HTTP status, statusText, and optional details, if provided in the server response. |
 |  [GoogleGenerativeAIRequestInputError](./generative-ai.googlegenerativeairequestinputerror.md) | Errors in the contents of a request originating from user input. |
 |  [GoogleGenerativeAIResponseError](./generative-ai.googlegenerativeairesponseerror.md) | Errors in the contents of a response from the model. This includes parsing errors, or responses including a safety block reason. |
+|  [ImageGenerationModel](./generative-ai.imagegenerationmodel.md) | Class for generative model APIs. |
 
 ## Enumerations
 
@@ -76,6 +77,7 @@
 |  [GenerateContentResponse](./generative-ai.generatecontentresponse.md) | Individual response from [GenerativeModel.generateContent()](./generative-ai.generativemodel.generatecontent.md) and [GenerativeModel.generateContentStream()](./generative-ai.generativemodel.generatecontentstream.md)<!-- -->. <code>generateContentStream()</code> will return one in each chunk until the stream is done. |
 |  [GenerateContentResult](./generative-ai.generatecontentresult.md) | Result object returned from generateContent() call. |
 |  [GenerateContentStreamResult](./generative-ai.generatecontentstreamresult.md) | Result object returned from generateContentStream() call. Iterate over <code>stream</code> to get chunks as they come in and/or use the <code>response</code> promise to get the aggregated response when the stream is done. |
+|  [GeneratedImage](./generative-ai.generatedimage.md) | Generated images. It will be returned in response. |
 |  [GenerationConfig](./generative-ai.generationconfig.md) | Config options for content-related requests |
 |  [GenerativeContentBlob](./generative-ai.generativecontentblob.md) | Interface for sending an image. |
 |  [GoogleSearchRetrieval](./generative-ai.googlesearchretrieval.md) | Retrieval tool that is powered by Google search. |
@@ -85,6 +87,8 @@
 |  [GroundingMetadata](./generative-ai.groundingmetadata.md) | Metadata returned to client when grounding is enabled. |
 |  [GroundingSupport](./generative-ai.groundingsupport.md) | Grounding support. |
 |  [GroundingSupportSegment](./generative-ai.groundingsupportsegment.md) | Segment of the content. |
+|  [ImageGenerationRequest](./generative-ai.imagegenerationrequest.md) | Request message for generating image. |
+|  [ImageGenerationResponse](./generative-ai.imagegenerationresponse.md) | Response message for generating image. |
 |  [InlineDataPart](./generative-ai.inlinedatapart.md) | Content part interface if the part represents an image. |
 |  [IntegerSchema](./generative-ai.integerschema.md) | Describes a JSON-encodable integer. |
 |  [LogprobsCandidate](./generative-ai.logprobscandidate.md) | Candidate for the logprobs token and score. |
