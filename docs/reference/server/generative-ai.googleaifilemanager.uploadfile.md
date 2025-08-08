@@ -4,7 +4,7 @@
 
 ## GoogleAIFileManager.uploadFile() method
 
-Upload a file.
+Upload a file from a local file path. Note: This method requires the fs module and will not work in serverless environments. For serverless environments, use uploadFileFromBuffer or uploadFileFromUrl instead.
 
 **Signature:**
 
