@@ -152,3 +152,12 @@ export enum DynamicRetrievalMode {
   // Run retrieval only when system decides it is necessary.
   MODE_DYNAMIC = "MODE_DYNAMIC",
 }
+
+
+export enum RequestMethodType {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+  PATCH = "PATCH",
+}
