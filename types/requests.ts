@@ -34,6 +34,44 @@ export interface BaseParams {
   generationConfig?: GenerationConfig;
 }
 
+export interface BaseImageParams{
+  
+  guidanceScale?:number;
+  seed?:number;
+  safetyFilterLevel?:safetyFilterLevel;
+  personGeneration?:PersonGeneration;
+  includeSafetyAttributes?:boolean;
+  includeRaiReason?:boolean;
+  language?:ImagePromptLanguage;
+  outputMimeType?:string;
+  outputCompressionQuality?:number;
+  addWatermark?:boolean;
+  enhancePrompt?:boolean;
+}
+enum safetyFilterLevel{
+  BLOCK_LOW_AND_ABOVE='BLOCK_LOW_AND_ABOVE',
+  BLOCK_NONE='BLOCK_NONE',
+  BLOCK_ONLY_HIGH='BLOCK_ONLY_HIGH',
+  BLOCK_MEDIUM_AND_ABOVE='BLOCK_MEDIUM_AND_ABOVE'
+
+}
+
+enum PersonGeneration{
+  DONT_ALLOW='DONT_ALLOW',
+  ALLOW_ADULT='ALLOW_ADULT',
+  ALLOW_ALL='ALLOW_ALL'
+}
+enum ImagePromptLanguage{
+  auto ='auto',
+  en='en',
+  ja='ja',
+  ko='ko',
+  hi='hi'
+}
+
+export interface ImageModelParams extends BaseImageParams{
+  model: string;
+}
 /**
  * Params passed to {@link GoogleGenerativeAI.getGenerativeModel}.
  * @public
@@ -59,6 +97,16 @@ export interface GenerateContentRequest extends BaseParams {
    * This is the name of a `CachedContent` and not the cache object itself.
    */
   cachedContent?: string;
+}
+
+
+/**
+ * Request sent to `generateImage` endpoint.
+ * @public
+ */
+export interface GenerateImageRequest{
+  instances:Array<{prompt:string}>;
+    paramaters:BaseImageParams; 
 }
 
 /**
@@ -152,6 +200,12 @@ export interface CountTokensRequest {
   generateContentRequest?: GenerateContentRequest;
   contents?: Content[];
 }
+
+export interface ImageModelParams {
+  model: string;
+  aspectRatio?: string; 
+}
+
 
 /**
  * Params for calling {@link GenerativeModel.countTokens}
