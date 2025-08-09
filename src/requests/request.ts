@@ -53,10 +53,12 @@ export class RequestUrl {
   toString(): string {
     const apiVersion = this.requestOptions?.apiVersion || DEFAULT_API_VERSION;
     const baseUrl = this.requestOptions?.baseUrl || DEFAULT_BASE_URL;
-    let url = `${baseUrl}/${apiVersion}/${this.model}:${this.task}`;
+    let url = `${baseUrl}/${apiVersion}/${this.model}:${this.task}?key=${this.apiKey}`;
+    
     if (this.stream) {
-      url += "?alt=sse";
+      url += "&alt=sse";
     }
+    
     return url;
   }
 }
