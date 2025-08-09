@@ -207,6 +207,16 @@ export interface RequestOptions {
    * Custom HTTP request headers.
    */
   customHeaders?: Headers | Record<string, string>;
+  /**
+   * Custom fetch implementation. If provided, this will be used instead of the
+   * global fetch function. Useful for request logging, validation, or testing.
+   */
+  fetch?: typeof fetch;
+  /**
+   * HTTP(S) agent to use for Node.js environments. This allows for proxy configuration
+   * and custom SSL/TLS settings. Only applies to Node.js environments.
+   */
+  httpAgent?: any;
 }
 
 /**
