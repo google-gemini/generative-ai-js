@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "noImplicitAny": true,
-    "module": "es2020",
-    "target": "es2020",
+    "module": "NodeNext",
+    "target": "ES2020",
     "allowJs": true,
-    "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "declaration": true,
     "outDir": "dist",
+    "baseUrl": "./",
     "allowSyntheticDefaultImports": true
   }
 }

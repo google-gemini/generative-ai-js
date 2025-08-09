@@ -17,8 +17,8 @@
 
 import { expect, use } from "chai";
 import { match, restore, stub, useFakeTimers } from "sinon";
-import * as sinonChai from "sinon-chai";
-import * as chaiAsPromised from "chai-as-promised";
+import  sinonChai from "sinon-chai";
+import   chaiAsPromised from "chai-as-promised";
 import * as generateContentMethods from "./generate-content";
 import { GenerateContentStreamResult } from "../../types";
 import { ChatSession } from "./chat-session";

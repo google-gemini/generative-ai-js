@@ -16,7 +16,7 @@
  */
 
 import { expect, use } from "chai";
-import * as sinonChai from "sinon-chai";
+import  sinonChai from "sinon-chai";
 import chaiDeepEqualIgnoreUndefined from "chai-deep-equal-ignore-undefined";
 import { Content } from "../../types";
 import {

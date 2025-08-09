@@ -17,8 +17,8 @@
 
 import { assert, expect, use } from "chai";
 import { match, restore, stub } from "sinon";
-import * as sinonChai from "sinon-chai";
-import * as chaiAsPromised from "chai-as-promised";
+import  sinonChai from "sinon-chai";
+import  chaiAsPromised from "chai-as-promised";
 import { getMockResponse } from "../../test-utils/mock-response";
 import * as request from "../requests/request";
 import { generateContent } from "./generate-content";

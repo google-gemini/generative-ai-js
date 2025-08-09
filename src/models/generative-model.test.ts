@@ -16,7 +16,7 @@
  */
 import { expect, use } from "chai";
 import { GenerativeModel } from "./generative-model";
-import * as sinonChai from "sinon-chai";
+import  sinonChai from "sinon-chai";
 import {
   CountTokensRequest,
   FunctionCallingMode,
