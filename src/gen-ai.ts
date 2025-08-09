@@ -21,16 +21,96 @@ import {
 } from "./errors";
 import { CachedContent, ModelParams, RequestOptions } from "../types";
 import { GenerativeModel } from "./models/generative-model";
+import { EncryptionService } from "./encryption/encryption-service";
 
 export { ChatSession } from "./methods/chat-session";
 export { GenerativeModel };
+
+/**
+ * Options for initializing the GoogleGenerativeAI class
+ * @public
+ */
+export interface GoogleGenerativeAIOptions {
+  /**
+   * Whether to enable encryption for protecting prompts
+   */
+  enableEncryption?: boolean;
+}
 
 /**
  * Top-level class for this SDK
  * @public
  */
 export class GoogleGenerativeAI {
-  constructor(public apiKey: string) {}
+  private encryptionService: EncryptionService | null = null;
+
+  /**
+   * Creates a new GoogleGenerativeAI instance
+   * @param apiKey - The API key for authentication
+   * @param options - Optional configuration options
+   */
+  constructor(
+    public apiKey: string,
+    private options: GoogleGenerativeAIOptions = {}
+  ) {
+    if (options.enableEncryption) {
+      this.encryptionService = new EncryptionService();
+    }
+  }
+
+  /**
+   * Initialize the encryption service if it's enabled
+   * @returns A promise that resolves when initialization is complete
+   */
+  async initializeEncryption(): Promise<void> {
+    if (!this.encryptionService) {
+      throw new GoogleGenerativeAIError(
+        'Encryption is not enabled. Initialize with { enableEncryption: true } option.'
+      );
+    }
+    
+    await this.encryptionService.initialize();
+  }
+
+  /**
+   * Check if encryption is enabled and initialized
+   * @returns True if encryption is ready to use
+   */
+  isEncryptionReady(): boolean {
+    return !!this.encryptionService && this.encryptionService.isReady();
+  }
+
+  /**
+   * Get the public key for encryption
+   * @returns The public key in PEM format
+   * @throws Error if encryption is not enabled or initialized
+   */
+  getPublicKey(): string {
+    if (!this.encryptionService) {
+      throw new GoogleGenerativeAIError(
+        'Encryption is not enabled. Initialize with { enableEncryption: true } option.'
+      );
+    }
+    
+    return this.encryptionService.getPublicKey();
+  }
+
+  /**
+   * Encrypt text using the public key
+   * @param text - The text to encrypt
+   * @param publicKey - Optional public key to use (if not provided, uses the service's public key)
+   * @returns The encrypted text
+   * @throws Error if encryption is not enabled or initialized
+   */
+  encryptText(text: string, publicKey?: string): string {
+    if (!this.encryptionService) {
+      throw new GoogleGenerativeAIError(
+        'Encryption is not enabled. Initialize with { enableEncryption: true } option.'
+      );
+    }
+    
+    return this.encryptionService.encryptData(text, publicKey);
+  }
 
   /**
    * Gets a {@link GenerativeModel} instance for the provided model name.
@@ -45,7 +125,12 @@ export class GoogleGenerativeAI {
           `Example: genai.getGenerativeModel({ model: 'my-model-name' })`,
       );
     }
-    return new GenerativeModel(this.apiKey, modelParams, requestOptions);
+    return new GenerativeModel(
+      this.apiKey, 
+      modelParams, 
+      requestOptions,
+      this.encryptionService
+    );
   }
 
   /**
@@ -110,6 +195,7 @@ export class GoogleGenerativeAI {
       this.apiKey,
       modelParamsFromCache,
       requestOptions,
+      this.encryptionService
     );
   }
 }

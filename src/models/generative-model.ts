@@ -38,6 +38,7 @@ import {
   SafetySetting,
   SingleRequestOptions,
   StartChatParams,
+  StreamCallbacks,
   Tool,
   ToolConfig,
 } from "../../types";
@@ -50,6 +51,8 @@ import {
   formatGenerateContentInput,
   formatSystemInstruction,
 } from "../requests/request-helpers";
+import { GoogleGenerativeAIError } from "../errors";
+import { EncryptionService } from "../encryption/encryption-service";
 
 /**
  * Class for generative model APIs.
@@ -68,6 +71,7 @@ export class GenerativeModel {
     public apiKey: string,
     modelParams: ModelParams,
     private _requestOptions: RequestOptions = {},
+    public encryptionService: EncryptionService | null = null,
   ) {
     if (modelParams.model.includes("/")) {
       // Models may be named "models/model-name" or "tunedModels/model-name"
@@ -84,6 +88,36 @@ export class GenerativeModel {
       modelParams.systemInstruction,
     );
     this.cachedContent = modelParams.cachedContent;
+  }
+
+  /**
+   * Encrypt text for use in prompts
+   * @param text - The text to encrypt
+   * @returns The encrypted text
+   * @throws Error if encryption is not enabled or initialized
+   */
+  encryptText(text: string): string {
+    if (!this.encryptionService) {
+      throw new GoogleGenerativeAIError(
+        'Encryption is not enabled. Initialize GoogleGenerativeAI with { enableEncryption: true } option.'
+      );
+    }
+    
+    if (!this.encryptionService.isReady()) {
+      throw new GoogleGenerativeAIError(
+        'Encryption service is not initialized. Call initializeEncryption() first.'
+      );
+    }
+    
+    return this.encryptionService.encryptData(text);
+  }
+
+  /**
+   * Check if encryption is available for this model
+   * @returns True if encryption is available
+   */
+  isEncryptionAvailable(): boolean {
+    return !!this.encryptionService && this.encryptionService.isReady();
   }
 
   /**

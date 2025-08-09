@@ -19,6 +19,7 @@ import {
   Content,
   CountTokensRequest,
   EmbedContentRequest,
+  EncryptedTextPart,
   GenerateContentRequest,
   ModelParams,
   Part,
@@ -82,10 +83,17 @@ function assignRoleToPartsAndValidateSendMessageRequest(
   const functionContent: Content = { role: "function", parts: [] };
   let hasUserContent = false;
   let hasFunctionContent = false;
+  let hasEncryptedContent = false;
+  
   for (const part of parts) {
     if ("functionResponse" in part) {
       functionContent.parts.push(part);
       hasFunctionContent = true;
+    } else if ("encryptedText" in part) {
+      // Handle encrypted text parts
+      userContent.parts.push(part);
+      hasUserContent = true;
+      hasEncryptedContent = true;
     } else {
       userContent.parts.push(part);
       hasUserContent = true;
@@ -98,74 +106,57 @@ function assignRoleToPartsAndValidateSendMessageRequest(
     );
   }
 
-  if (!hasUserContent && !hasFunctionContent) {
-    throw new GoogleGenerativeAIError(
-      "No content is provided for sending chat message.",
-    );
-  }
+  return hasFunctionContent ? functionContent : userContent;
+}
 
-  if (hasUserContent) {
-    return userContent;
-  }
-
-  return functionContent;
+/**
+ * Create an encrypted text part from a plain text string
+ * @param text - The text to encrypt
+ * @param encryptedText - The encrypted text
+ * @returns An EncryptedTextPart object
+ */
+export function createEncryptedTextPart(encryptedText: string): EncryptedTextPart {
+  return { encryptedText };
 }
 
 export function formatCountTokensInput(
   params: CountTokensRequest | string | Array<string | Part>,
   modelParams?: ModelParams,
 ): _CountTokensRequestInternal {
-  let formattedGenerateContentRequest: _GenerateContentRequestInternal = {
-    model: modelParams?.model,
-    generationConfig: modelParams?.generationConfig,
-    safetySettings: modelParams?.safetySettings,
-    tools: modelParams?.tools,
-    toolConfig: modelParams?.toolConfig,
-    systemInstruction: modelParams?.systemInstruction,
-    cachedContent: modelParams?.cachedContent?.name,
-    contents: [],
-  };
-  const containsGenerateContentRequest =
-    (params as CountTokensRequest).generateContentRequest != null;
-  if ((params as CountTokensRequest).contents) {
-    if (containsGenerateContentRequest) {
-      throw new GoogleGenerativeAIRequestInputError(
-        "CountTokensRequest must have one of contents or generateContentRequest, not both.",
-      );
-    }
-    formattedGenerateContentRequest.contents = (
-      params as CountTokensRequest
-    ).contents;
-  } else if (containsGenerateContentRequest) {
-    formattedGenerateContentRequest = {
-      ...formattedGenerateContentRequest,
-      ...(params as CountTokensRequest).generateContentRequest,
+  if (typeof params === "string" || Array.isArray(params)) {
+    const content = formatNewContent(params);
+    return {
+      contents: [content],
+    };
+  } else if ("contents" in params) {
+    return {
+      contents: params.contents,
+    };
+  } else if ("generateContentRequest" in params) {
+    return {
+      generateContentRequest: {
+        ...params.generateContentRequest,
+        model: modelParams?.model,
+      },
     };
   } else {
-    // Array or string
-    const content = formatNewContent(params as string | Array<string | Part>);
-    formattedGenerateContentRequest.contents = [content];
+    throw new GoogleGenerativeAIRequestInputError(
+      `Invalid params for countTokens: ${JSON.stringify(params)}`,
+    );
   }
-  return { generateContentRequest: formattedGenerateContentRequest };
 }
 
 export function formatGenerateContentInput(
   params: GenerateContentRequest | string | Array<string | Part>,
 ): GenerateContentRequest {
-  let formattedRequest: GenerateContentRequest;
-  if ((params as GenerateContentRequest).contents) {
-    formattedRequest = params as GenerateContentRequest;
+  if (typeof params === "string" || Array.isArray(params)) {
+    const content = formatNewContent(params);
+    return {
+      contents: [content],
+    };
   } else {
-    // Array or string
-    const content = formatNewContent(params as string | Array<string | Part>);
-    formattedRequest = { contents: [content] };
+    return params;
   }
-  if ((params as GenerateContentRequest).systemInstruction) {
-    formattedRequest.systemInstruction = formatSystemInstruction(
-      (params as GenerateContentRequest).systemInstruction,
-    );
-  }
-  return formattedRequest;
 }
 
 export function formatEmbedContentInput(
@@ -173,7 +164,10 @@ export function formatEmbedContentInput(
 ): EmbedContentRequest {
   if (typeof params === "string" || Array.isArray(params)) {
     const content = formatNewContent(params);
-    return { content };
+    return {
+      content,
+    };
+  } else {
+    return params;
   }
-  return params;
 }

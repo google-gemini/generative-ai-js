@@ -21,6 +21,7 @@ import {
   GenerateContentResult,
   GenerateContentStreamResult,
   SingleRequestOptions,
+  StreamCallbacks,
 } from "../../types";
 import { Task, makeModelRequest } from "../requests/request";
 import { addHelpers } from "../requests/response-helpers";
@@ -31,6 +32,7 @@ export async function generateContentStream(
   model: string,
   params: GenerateContentRequest,
   requestOptions: SingleRequestOptions,
+  callbacks?: StreamCallbacks,
 ): Promise<GenerateContentStreamResult> {
   const response = await makeModelRequest(
     model,
@@ -40,7 +42,7 @@ export async function generateContentStream(
     JSON.stringify(params),
     requestOptions,
   );
-  return processStream(response);
+  return processStream(response, callbacks);
 }
 
 export async function generateContent(
