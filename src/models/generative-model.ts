@@ -38,6 +38,7 @@ import {
   SafetySetting,
   SingleRequestOptions,
   StartChatParams,
+  StreamCallbacks,
   Tool,
   ToolConfig,
 } from "../../types";
@@ -132,6 +133,7 @@ export class GenerativeModel {
   async generateContentStream(
     request: GenerateContentRequest | string | Array<string | Part>,
     requestOptions: SingleRequestOptions = {},
+    callbacks?: StreamCallbacks,
   ): Promise<GenerateContentStreamResult> {
     const formattedParams = formatGenerateContentInput(request);
     const generativeModelRequestOptions: SingleRequestOptions = {
@@ -151,6 +153,7 @@ export class GenerativeModel {
         ...formattedParams,
       },
       generativeModelRequestOptions,
+      callbacks,
     );
   }
 
