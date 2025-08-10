@@ -548,6 +548,7 @@ export class GoogleGenerativeAI {
     apiKey: string;
     getGenerativeModel(modelParams: ModelParams, requestOptions?: RequestOptions): GenerativeModel;
     getGenerativeModelFromCachedContent(cachedContent: CachedContent, modelParams?: Partial<ModelParams>, requestOptions?: RequestOptions): GenerativeModel;
+    listModels(pageSize?: number, pageToken?: string, requestOptions?: RequestOptions): Promise<Response>;
 }
 
 // @public

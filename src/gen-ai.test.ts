@@ -118,4 +118,26 @@ describe("GoogleGenerativeAI", () => {
       `Different value for "systemInstruction" specified in modelParams (yo) and cachedContent (hi)`,
     );
   });
+  it("listModels gets a Response without any params passed", () => {
+    const genAI = new GoogleGenerativeAI("apikey");
+    const genModel = genAI.listModels();
+    expect(genModel).to.be.an.instanceOf(Promise<Response>);
+  });
+  it("listModels gets a Response when passed only pageSize", async () => {
+    const genAI = new GoogleGenerativeAI("apikey");
+    const genModel = genAI.listModels({ pageSize: 10 });
+    expect(genModel).to.be.an.instanceOf(Promise<Response>);
+  });
+
+  it("listModels gets a Response when passed only pageToken", async () => {
+    const genAI = new GoogleGenerativeAI("apikey");
+    const genModel = genAI.listModels({ pageToken: "token" });
+    expect(genModel).to.be.an.instanceOf(Promise<Response>);
+  });
+
+  it("listModels gets a Response when passed both pageSize and pageToken", async () => {
+    const genAI = new GoogleGenerativeAI("apikey");
+    const genModel = genAI.listModels({ pageSize: 10, pageToken: "token" });
+    expect(genModel).to.be.an.instanceOf(Promise<Response>);
+  });
 });
