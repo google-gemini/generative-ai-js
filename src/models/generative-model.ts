@@ -86,6 +86,14 @@ export class GenerativeModel {
     this.cachedContent = modelParams.cachedContent;
   }
 
+  private validateArraySchema(schema: ArraySchema) {
+    if ('minItems' in schema || 'maxItems' in schema) {
+      throw new GoogleGenerativeAIError(
+        "Properties 'minItems' and 'maxItems' are not supported in array schema"
+      );
+    }
+  }
+
   /**
    * Makes a single non-streaming call to the model
    * and returns an object containing a single {@link GenerateContentResponse}.
@@ -95,14 +103,16 @@ export class GenerativeModel {
    * {@link GoogleGenerativeAI.getGenerativeModel }.
    */
   async generateContent(
-    request: GenerateContentRequest | string | Array<string | Part>,
-    requestOptions: SingleRequestOptions = {},
+    promptOrParams: string | GenerateContentRequest,
+    generativeModelRequestOptions?: RequestOptions,
   ): Promise<GenerateContentResult> {
-    const formattedParams = formatGenerateContentInput(request);
-    const generativeModelRequestOptions: SingleRequestOptions = {
-      ...this._requestOptions,
-      ...requestOptions,
-    };
+    const formattedParams = await this.formatGenerateContentInput(promptOrParams);
+    
+    // Add schema validation
+    if (formattedParams.generationConfig?.responseSchema?.type === SchemaType.ARRAY) {
+      this.validateArraySchema(formattedParams.generationConfig.responseSchema);
+    }
+
     return generateContent(
       this.apiKey,
       this.model,
