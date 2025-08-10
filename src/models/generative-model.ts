@@ -155,6 +155,62 @@ export class GenerativeModel {
   }
 
   /**
+   * Makes a single streaming call to the model and returns an object
+   * containing an iterable stream that iterates over all chunks in the
+   * streaming response as well as a promise that returns the final
+   * aggregated response. Supports callbacks for onData, onEnd, and onError.
+   *
+   * Fields set in the optional {@link SingleRequestOptions} parameter will
+   * take precedence over the {@link RequestOptions} values provided to
+   * {@link GoogleGenerativeAI.getGenerativeModel }.
+   */
+  async generateStreamedResponse(
+    request: GenerateContentRequest | string | Array<string | Part>,
+    {
+      onData,
+      onEnd,
+      onError,
+    }: {
+      onData?: (chunk: any) => void;
+      onEnd?: (response: any) => void;
+      onError?: (error: any) => void;
+    } = {},
+    requestOptions: SingleRequestOptions = {},
+  ): Promise<GenerateContentStreamResult> {
+    const formattedParams = formatGenerateContentInput(request);
+    const generativeModelRequestOptions: SingleRequestOptions = {
+      ...this._requestOptions,
+      ...requestOptions,
+    };
+    const result = await generateContentStream(
+      this.apiKey,
+      this.model,
+      {
+        generationConfig: this.generationConfig,
+        safetySettings: this.safetySettings,
+        tools: this.tools,
+        toolConfig: this.toolConfig,
+        systemInstruction: this.systemInstruction,
+        cachedContent: this.cachedContent?.name,
+        ...formattedParams,
+      },
+      generativeModelRequestOptions,
+    );
+
+    try {
+      for await (const chunk of result.stream) {
+        if (onData) onData(chunk);
+      }
+      if (onEnd) onEnd(await result.response);
+    } catch (error) {
+      if (onError) onError(error);
+      else throw error;
+    }
+
+    return result;
+  }
+
+  /**
    * Gets a new {@link ChatSession} instance which can be used for
    * multi-turn chats.
    */

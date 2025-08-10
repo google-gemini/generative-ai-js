@@ -37,18 +37,36 @@ const responseLineRE = /^data\: (.*)(?:\n\n|\r\r|\r\n\r\n)/;
  * GenerateContentResponse.
  *
  * @param response - Response from a fetch call
+ * @param callbacks - Optional callbacks for onData, onEnd, and onError
  */
-export function processStream(response: Response): GenerateContentStreamResult {
+export function processStream(
+  response: Response,
+  {
+    onData,
+    onEnd,
+    onError,
+  }: {
+    onData?: (chunk: any) => void;
+    onEnd?: (response: any) => void;
+    onError?: (error: any) => void;
+  } = {},
+): GenerateContentStreamResult {
   const inputStream = response.body!.pipeThrough(
     new TextDecoderStream("utf8", { fatal: true }),
   );
   const responseStream =
     getResponseStream<GenerateContentResponse>(inputStream);
   const [stream1, stream2] = responseStream.tee();
-  return {
+  const result = {
     stream: generateResponseSequence(stream1),
     response: getResponsePromise(stream2),
   };
+
+  if (onData || onEnd || onError) {
+    handleCallbacks(result, { onData, onEnd, onError });
+  }
+
+  return result;
 }
 
 async function getResponsePromise(
@@ -222,4 +240,30 @@ export function aggregateResponses(
     }
   }
   return aggregatedResponse;
+}
+
+/**
+ * Handles the callbacks for onData, onEnd, and onError during streaming.
+ */
+async function handleCallbacks(
+  result: GenerateContentStreamResult,
+  {
+    onData,
+    onEnd,
+    onError,
+  }: {
+    onData?: (chunk: any) => void;
+    onEnd?: (response: any) => void;
+    onError?: (error: any) => void;
+  },
+) {
+  try {
+    for await (const chunk of result.stream) {
+      if (onData) onData(chunk);
+    }
+    if (onEnd) onEnd(await result.response);
+  } catch (error) {
+    if (onError) onError(error);
+    else throw error;
+  }
 }
